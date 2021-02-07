@@ -12,7 +12,7 @@ published: false
 ## MariaDBのインストール (AppCentral上)
 
 1. Web上のAppCentralにアクセスします
-   ![AppCentral](images/screenshots/nas-appcentral-01.jpg)
+   ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
    
    
 
@@ -22,7 +22,6 @@ published: false
     
 3. [インストール]をクリックします。
     ![MariaDB](https://i.imgur.com/IGqDooM.jpg)
-    
 
 
 4. 以上でインストールは終了です。
