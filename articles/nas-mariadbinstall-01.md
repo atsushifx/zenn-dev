@@ -12,15 +12,22 @@ published: false
 ## MariaDBのインストール (AppCentral上)
 
 1. Web上のAppCentralにアクセスします
-   ![AppCentral](images/screenshots/nas-appcentral-01.jpg)
-
+   ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
+   
+   
+   
 2. AppCentralからMariaDBを探し、選択します。
-    ![MariaDB](images/screenshots/nas-mariadb-01.jpg) 
+    ![MariaDB](https://storage.googleapis.com/zenn-user-upload/52hhzcpnzboyk70r4155nbc0votm)
+
     
+
 3. [インストール]をクリックします。
-    ![MariaDB](images/screenshots/nas-mariadb-02.jpg)
+    ![MariaDB](https://storage.googleapis.com/zenn-user-upload/uwxiqe4cbg1lrq0vnfsnndvi3zr9)
+
+    
 
 4. 以上でインストールは終了です。
+
 
 
 ## MariaDBの起動/停止/再起動
@@ -28,15 +35,20 @@ published: false
 asustor nasでは、MariaDBの起動／停止をWeb上のAppCentralからおこないます。
 
 1. Web上のAppcentralにアクセスします
-    ![AppCentral](images/screenshots/nas-appcentral-01.jpg)
-
-
+    ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
+    
+    
+    
 2. 左サイドメニューの[インストール済み]を選択し、[MariaDB]を開きます。
-    ![MariaDB](images/screenshots/nas-mariadb-03.jpg)
-
-
+     ![MariaDB](https://storage.googleapis.com/zenn-user-upload/y7okgbbbztmjxxq55yv8ty72or5w)
+    
+    
+    
 3. [MariaDB]のロゴの下に、実行／終了スライドスイッチがあります。ここを使って、MariaDBを起動／停止します。
 
+     
 
 4. MariaDBの再起動は、上記のスイッチを使います。MariaDBを終了後、再度MariaDBを実行することで再起動します。
+
+
 
