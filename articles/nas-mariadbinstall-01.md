@@ -3,7 +3,7 @@ title: "NAS: asustor nasにMariaDBをインストールする"
 emoji: "💻"
 type: "tech" # tech: 技術記事
 topics: ["NAS","開発環境","MariaDB"]
-published: true
+published: false
 
 ---
 
@@ -12,21 +12,19 @@ published: true
 ## MariaDBのインストール (AppCentral上)
 
 1. Web上のAppCentralにアクセスします
-   ![AppCentral](https://i.imgur.com/agfnPIe.jpg)
+   ![AppCentral](images/screenshots/nas-appcentral-01.jpg)
    
    
 
 
 2. AppCentralからMariaDBを探し、選択します。
-    ![MariaDBペーン](https://i.imgur.com/RNG4KeD.jpg) 
-
-    
+    ![MariaDB](https://i.imgur.com/RNG4KeD.jpg) 
     
 3. [インストール]をクリックします。
-    ![MariaDBペーン](https://i.imgur.com/IGqDooM.jpg)
+    ![MariaDB](https://i.imgur.com/IGqDooM.jpg)
+    
 
-    
-    
+
 4. 以上でインストールは終了です。
 
 
