@@ -3,8 +3,7 @@ title: "NAS: asustor nasにMariaDBをインストールする"
 emoji: "💻"
 type: "tech" # tech: 技術記事
 topics: ["NAS","開発環境","MariaDB"]
-published: false
-
+published: true
 ---
 
 # MariaDBのインストール
@@ -41,9 +40,9 @@ asustor nasでは、MariaDBの起動／停止をWeb上のAppCentralからおこ�
     
 2. 左サイドメニューの[インストール済み]を選択し、[MariaDB]を開きます。
      ![MariaDB](https://storage.googleapis.com/zenn-user-upload/y7okgbbbztmjxxq55yv8ty72or5w)
-    
-    
-    
+
+
+​    
 3. [MariaDB]のロゴの下に、実行／終了スライドスイッチがあります。ここを使って、MariaDBを起動／停止します。
 
      
