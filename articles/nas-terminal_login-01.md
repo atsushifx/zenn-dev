@@ -7,7 +7,7 @@ topics: ["NAS", "terminal", "ssh", "開発環境"]
 published: true
 
 ---
-# asutor NAS: NASにログインする
+# asustor NAS: NASにログインする
 
 ## tl;dr
 
@@ -62,7 +62,7 @@ rloginにNASサーバーについて設定し、ログインできるように�
 
 2. サーバー選択画面を開く 
    [ファイル]-[サーバーに接続]として、[Server Select]画面を開きます。
-    
+   
     ![Server Select](https://i.imgur.com/FUCaiDH.jpg)
    
 3.  サーバーにログインする
