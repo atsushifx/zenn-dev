@@ -19,6 +19,7 @@ rloginにNASサーバーについて設定し、ログインできるように�
 
 1. rloginを起動する  
     Windowsの[スタートメニュー]からrloginを起動します。
+    
    ![rlogin](https://i.imgur.com/DdoEVa5l.jpg)
 
 2. サーバー選択画面を開く  
@@ -50,4 +51,24 @@ rloginにNASサーバーについて設定し、ログインできるように�
 
 5. 以上で、サーバの設定は終了です。
 
+## NASへのログイン
+つぎのようにして、rloginでNASにログインします。
+
+1. rloginを起動する  
+    Windowsの[スタートメニュー]からrloginを起動します。
+    
+   ![rlogin](https://i.imgur.com/DdoEVa5l.jpg)
+
+2. サーバー選択画面を開く 
+   [ファイル]-[サーバーに接続]として、[Server Select]画面を開きます。
+    
+    ![Server Select](https://i.imgur.com/FUCaiDH.jpg)
+   
+3.  サーバーにログインする
+   接続したいサーバ<sub>(ここでは'agartha')</sub>を選び[OK]をクリックします。
+   サーバーにログインします。
+   
+   ![agartha login](https://i.imgur.com/T3RbWzQ.jpg)
+
+4. 以上で、NASへのログインは終了です。
 
