@@ -1,6 +1,6 @@
 ---
 
-title: "asustor NAS : sshログインを設定する"
+title: "asustor NAS : NASにログインする"
 emoji: "🍆"
 type: "tech" # tech: 技術記事
 topics: ["NAS", "terminal", "ssh", "開発環境"]
