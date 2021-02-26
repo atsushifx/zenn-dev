@@ -9,7 +9,7 @@ published: true
 ---
 # asustor NAS: NASにログインする
 
-## tl;dr
+## TL;DR
 
 sshでNASにログインできるようになったので、ターミナルソフト"rlogin"を使ってNASにログインします
 
