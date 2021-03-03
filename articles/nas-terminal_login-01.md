@@ -68,6 +68,6 @@ rloginにNASサーバーについて設定し、ログインできるように�
    接続したいサーバ<sub>(ここでは'agartha')</sub>を選び[OK]をクリックします。
    サーバーにログインします。
    
-   ![agartha login](https://i.imgur.com/T3RbWzQ.jpg)
-
+   ![agartha login](https://i.imgur.com/T3RbWzQ.jpg =400x)
+  
 4. 以上で、NASへのログインは終了です。
