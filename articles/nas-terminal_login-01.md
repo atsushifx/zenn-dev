@@ -49,7 +49,6 @@ rloginにNASサーバーについて設定し、ログインできるように�
     
     ![サーバー設定](https://i.imgur.com/5SGHnIP.jpg)
 
-
 5. 以上で、サーバの設定は終了です。
 
 ## NASへのログイン
@@ -70,6 +69,5 @@ rloginにNASサーバーについて設定し、ログインできるように�
    サーバーにログインします。
    
    ![agartha login](https://i.imgur.com/T3RbWzQ.jpg)
-  
-4. 以上で、NASへのログインは終了です。
 
+4. 以上で、NASへのログインは終了です。
