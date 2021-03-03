@@ -70,6 +70,6 @@ rloginにNASサーバーについて設定し、ログインできるように�
    サーバーにログインします。
    
    ![agartha login](https://i.imgur.com/T3RbWzQ.jpg)
-
+  
 4. 以上で、NASへのログインは終了です。
 
