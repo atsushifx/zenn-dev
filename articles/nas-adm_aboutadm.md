@@ -1,10 +1,12 @@
+---
+
 title: "asustor NAS:  NAS用OS'ADM'を使う"
 emoji: "🍆"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["NAS", "ADM",  "OS", "shell"]
 published: false
 
-
+--
 
 # NAS用OS'adm'を使う
 
@@ -55,7 +57,7 @@ asustor NASは独自のOS'''ADM'''でアプリの管理を行っている。
    ![Imgur](https://i.imgur.com/dRw4lKM.jpg)
 
 3.  ADM画面が表示されます。
-   !
+   ![ADM](https://i.imgur.com/8rQ2dV6.jpg)
 
 
 
