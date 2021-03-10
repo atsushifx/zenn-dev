@@ -3,12 +3,12 @@
 title: "asustor NAS:  NAS用OS'ADM'を使う"
 emoji: "🍆"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["NAS", "ADM",  "shell", "システム管理"]
+topics: ["NAS", "ADM",  "shell", "個人開発", "開発環境" ]
 published: true
 
 ---
 
-# NAS用OS'adm'を使う
+# NAS用OS'ADM'を使う
 
 
 
@@ -39,13 +39,8 @@ asustor NASは独自のOS'''ADM'''でアプリの管理を行っている。
 
 
 
-## 基本的な使い方
-
-  ここではADMにログインする方法、および基本的な使い方を説明します。
-
-### ADMへのサインイン
-
-  以下の手順で、ADMにサインインします。
+## ADMへのサインイン
+  asustor NASでは、次の手順でADMにサインインします。
 
 1. ADMのWebにアクセスします。サインイン画面が表示されます。
    ![Imgur](https://i.imgur.com/u0gujYQ.jpg)
@@ -57,6 +52,7 @@ asustor NASは独自のOS'''ADM'''でアプリの管理を行っている。
 
 3.  ADM画面が表示されます。
    ![ADM](https://i.imgur.com/8rQ2dV6.jpg)
+  
 
 以上で、ADMへのサインインは終了です。  
 [サインインの状態を保つ]をチェックしているので、次回からはサインインせずにADMが使えるようになります。
