@@ -48,18 +48,16 @@ asustor NASは独自のOS'''ADM'''でアプリの管理を行っている。
   以下の手順で、ADMにサインインします。
 
 1. ADMのWebにアクセスします。サインイン画面が表示されます。
-
    ![Imgur](https://i.imgur.com/u0gujYQ.jpg)
-
-   
+  
 
 2. ユーザー名、パスワードを入力し、[サインイン]をクリックします。
    ![Imgur](https://i.imgur.com/dRw4lKM.jpg)
+  
 
 3.  ADM画面が表示されます。
    ![ADM](https://i.imgur.com/8rQ2dV6.jpg)
 
 以上で、ADMへのサインインは終了です。  
 [サインインの状態を保つ]をチェックしているので、次回からはサインインせずにADMが使えるようになります。
-
 
