@@ -3,8 +3,8 @@
 title: "asustor NAS:  NAS用OS'ADM'を使う"
 emoji: "🍆"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["NAS", "ADM",  "shell", "個人開発", "開発環境" ]
-published: true
+topics: ["NAS", "ADM",  "開発環境", "カスタマイズ" ]
+published: false
 
 ---
 
@@ -18,8 +18,10 @@ asustor NASは独自のOS'''ADM'''でアプリの管理を行っている。
 ここでは、ADMがどんなものかの説明と、ADMの基本的な使い方を説明する。
 
 ## ADMとは
+
 ### ADM <sub>(ASUSTOR Data Master)</sub>について
-  ADMとは、ASUSTOR NASのための専用OSです。Web上の画面でユーザー管理、ファイル共有の設定など、さまざまなNASの機能を管理できます。各種機能はWeb画面上に、アイコンとして表示されています。これらをクリックすることで、NASの管理を行います
+
+  ADMとは、ASUSTOR NASのための専用OSです。Web上の画面でユーザー管理、ファイル共有の設定など、さまざまなNASの機能を管理できます。各種機能はWeb画面上に、アイコンとして表示されています (ADMデスクトップと呼びます)。これらアイコンをクリックすることで、NASの管理を行います
   詳しいことは、[asustorのADMの概要のページ](https://www.asustor.com/admv2?type=1&subject=1&sub=101&lan=jpn) や[asustor ADM Introduction](https://www.asustor.com/materials/datasheet/ADM_introduction_JPN_20180824-edm.pdf)を参照してください。
 
 
@@ -32,28 +34,34 @@ asustor NASは独自のOS'''ADM'''でアプリの管理を行っている。
 
 
 ### ADMによる機能拡張
+
   ADMには基本的な機能に加え、さまざまな拡張機能を加えることが出来ます。たとえば、YouTubeの動画を見る機能、録画した動画を配信する機能などです。  
-これらの拡張機能はADMとしてパッケージ化されており、Web上の'App Central'を使うことでNAS上にインストール・アンインストールできます。
+これらの拡張機能はADMとしてパッケージ化されており、ADMデスクトップ上の'App Central'を使うことでNAS上にインストール・アンインストールできます。
 
 
 
 
 
-## ADMへのサインイン
-  asustor NASでは、次の手順でADMにサインインします。
+## ADMデスクトップへのサインイン
+
+  asustor NASでは、次の手順でADMデスクトップにサインインします。
 
 1. ADMのWebにアクセスします。サインイン画面が表示されます。
    ![Imgur](https://i.imgur.com/u0gujYQ.jpg)
-  
+
 
 2. ユーザー名、パスワードを入力し、[サインイン]をクリックします。
    ![Imgur](https://i.imgur.com/dRw4lKM.jpg)
-  
 
-3.  ADM画面が表示されます。
-   ![ADM](https://i.imgur.com/8rQ2dV6.jpg)
-  
 
-以上で、ADMへのサインインは終了です。  
+3.  ADMデスクトップ画面が表示されます。
+   ![ADMデスクトップ](https://i.imgur.com/8rQ2dV6.jpg)
+
+以上で、ADMデスクトップへのサインインは終了です。  
 [サインインの状態を保つ]をチェックしているので、次回からはサインインせずにADMが使えるようになります。
 
+
+
+## ADMデスクトップのカスタマイズ
+
+  ADMデスクトップでは、アイコンをドラッグ＆ドロップすることで好きなように並び替えることができます。また、複数のアイコンを一つのフォルダーにまとめられます。
