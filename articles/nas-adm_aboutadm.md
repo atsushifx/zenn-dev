@@ -4,7 +4,7 @@ title: "asustor NAS:  NAS用OS'ADM'を使う"
 emoji: "🍆"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["NAS", "ADM",  "開発環境", "カスタマイズ" ]
-published: false
+published: true
 
 ---
 
