@@ -1,4 +1,14 @@
+---
 
+title: "asustor NAS:  アプリのインストール"
+emoji: "🍆"
+type: "tech" # tech: 技術記事 / idea: アイデア
+topics: ["NAS", "ADM",  "開発環境", "カスタマイズ" ]
+published: false
+
+---
+
+# ADM: アプリのインストール
 
 ## TL;DR
 
@@ -33,7 +43,6 @@ App Centralでは、アイコンをクリックするだけでアプリがイン
      
 
 
-
 ### アプリのアンインストール
 
   同様に'App Central'から、アプリをアンインストールできます。
@@ -43,35 +52,22 @@ App Centralでは、アイコンをクリックするだけでアプリがイン
       ![App Central](https://i.imgur.com/o40UTZ2.jpg)
       
 
-      
   2.  [インストール済み]を選択します
       ![インストール済み](https://i.imgur.com/g6Zw1gu.jpg)
-
       
 
   3. 🚮アイコンをクリックし、[ASUSTOR Portal]をアンインストールします。
-
      ![アンインストール](https://i.imgur.com/KGegaqL.jpg)
-
      
 
   4.  アンインストールが終了しました。
       ![App Central](https://i.imgur.com/vrWU1MV.jpg)  
-
       
 
   5.  同様にして、関連するアプリ[Remote Center]・[Python]などをアンインストールします。
       ![App Central](https://i.imgur.com/T3iXAte.jpg)
 
   6.  以上で、アプリのアンインストールは終了です。
-
       
-
-
-
-
-
-
-
 
 
