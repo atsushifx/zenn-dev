@@ -1,5 +1,3 @@
-# アプリのインストール
-
 
 
 ## TL;DR
@@ -30,8 +28,7 @@ App Centralでは、アイコンをクリックするだけでアプリがイン
      
   5. [ASUSTOR Portal]をインストールします。
      ![ASUSTOR Portalのインストール](https://i.imgur.com/nY6J7Yt.jpg)
-
-
+     
   6. 以上で、アプリのインストールは終了です。
      
 
@@ -44,9 +41,37 @@ App Centralでは、アイコンをクリックするだけでアプリがイン
 
   1.  [App Central]を起動します。
       ![App Central](https://i.imgur.com/o40UTZ2.jpg)
-
       
 
+      
   2.  [インストール済み]を選択します
+      ![インストール済み](https://i.imgur.com/g6Zw1gu.jpg)
 
       
+
+  3. 🚮アイコンをクリックし、[ASUSTOR Portal]をアンインストールします。
+
+     ![アンインストール](https://i.imgur.com/KGegaqL.jpg)
+
+     
+
+  4.  アンインストールが終了しました。
+      ![App Central](https://i.imgur.com/vrWU1MV.jpg)  
+
+      
+
+  5.  同様にして、関連するアプリ[Remote Center]・[Python]などをアンインストールします。
+      ![App Central](https://i.imgur.com/T3iXAte.jpg)
+
+  6.  以上で、アプリのアンインストールは終了です。
+
+      
+
+
+
+
+
+
+
+
+
