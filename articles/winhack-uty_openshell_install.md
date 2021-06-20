@@ -12,7 +12,7 @@ published: false
 Open-Shellは、Windows 8,Windows 10などの環境でWindows XPやWindows 7スタイルのスタートメニューを追加するツールです。  
 
 元々は、Classic Shellというツールでしたが、Classic Shellは開発が止まったため、新たにOpen-Shellという名前でOSSとして開発されました、
-現在は、[Git]]hub](https://github.com/Open-Shell/Open-Shell-Menu)上で開発が続けられています。
+現在は、[GitHub](https://github.com/Open-Shell/Open-Shell-Menu)上で開発が続けられています。
 
 
 
