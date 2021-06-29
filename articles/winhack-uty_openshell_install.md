@@ -83,13 +83,5 @@ Open-ShellはOpen-Shell Menu settingsアプリでカスタマイズします。
 
 [Menu-Settings.xml](https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730)
 
-https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730
-
-
-
-
-
-
-
-
+<script src="https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730.js"></script>
 
