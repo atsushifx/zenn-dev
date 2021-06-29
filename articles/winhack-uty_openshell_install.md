@@ -76,12 +76,14 @@ Open-ShellはOpen-Shell Menu settingsアプリでカスタマイズします。
 4. [OK]をクリックし、設定を**"Open-Shell Menu"**に適用します。
 
 
-  
+
 以上で、Open-Shellのカスタマイズは終了です。設定した項目は、XMLファイルとしてバックアップできます。
 
 参考用に、自分の設定を下記に載せておきます。
 
 [Menu-Settings.xml](https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730)
 
-<script src="https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730.js"></script>
+https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730.js
+
+
 
