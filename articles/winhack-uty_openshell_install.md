@@ -51,3 +51,39 @@ Open-ShellはGitHubのOpen-Shell/Open-Shell-Menuからダウンロードでき�
 
    <sub>Windows 11ではアイコンをクリックしてもメニューは表示されません。**Windowsキー**を押下すると表示されます</sub>  
 
+
+
+## Open-Shellのカスタマイズ
+
+### Open-Shellをカスタマイズする
+
+
+
+Open-ShellはOpen-Shell Menu settingsアプリでカスタマイズします。
+
+次の手順で、Open-Shellをカスタマイズします。
+
+1. スタートメニューから、**[Open-Shell Menu Setting]**を開きます。
+
+   ![Settings for Open-Shell Menu](https://i.imgur.com/clJ0E71.jpg)
+
+2. [Start Menu Styke]では、***[Windows 7 Style]***を選びます。同様に、[Replace Start Button]をチェックします。
+
+   
+
+3. 必要であれば、そのほかの項目も設定します。[Show all settings]をチェックすると、さらに細かい設定も出来ます
+
+   
+
+4. [OK]をクリックし、設定を**"Open-Shell Menu"**に適用します。
+
+
+
+以上で、Open-Shellのカスタマイズは終了です。設定した項目は、XMLファイルとしてバックアップできます。
+
+参考用に、自分の設定を下記に載せておきます。
+
+[Menu-Settings.xml](https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730)
+
+<script src="https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730.js"></script>
+
