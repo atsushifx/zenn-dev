@@ -3,7 +3,7 @@ title: "wingetでのパッケージ指定方法"
 emoji: "🪆"
 type: "tech" 
 topics: ["SCM","winget","構成管理","CLI"]
-published: false
+published: true
 ---
 
 # wingetでのパッケージ指定方法
@@ -12,7 +12,6 @@ published: false
 
 wingetでは、キーワードを使ってパッケージ一覧からパッケージを検索します。これをqueryといいます。この記事では、さまざまなパッケージの検索方法を紹介します。
 詳しいことは、Microsoftのドキュメント https://docs.microsoft.com/ja-jp/windows/package-manager/winget/search を参照してください。
-
 
 ## パッケージ検索(基本編) : <sub>キーワードで検索する</sub>
 
@@ -257,5 +256,4 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
   Python 3.9    PythonSoftwareFoundation.Python.3.9 Latest
   
   ```
-
 
