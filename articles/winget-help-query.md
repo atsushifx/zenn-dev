@@ -214,13 +214,15 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
   
   英単語の大文字／小文字をふくめ、入力した文字列に完全一致するパッケージを検索します
   ```powershell
-  //workspaces > winget search 'Python 3' --exact
+  /workspaces > winget search 'Python 3' --exact
   
   名前     ID              バージョン ソース
   -------------------------------------------
   Python 3 Python.Python.3 3.9.6150.0 winget
   
   ```
+  
+  
 
 
 -  -n --count
@@ -239,6 +241,8 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
   <結果制限により、エントリがさらに切り捨てられました>
   
   ```
+  
+  
 
 
 - -s --source
