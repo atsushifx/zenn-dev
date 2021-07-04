@@ -212,3 +212,62 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
 
 
 
+## パッケージ検索(発展編 2): その他のオプション
+
+検索時にオプションを指定することで、さらに細かい検索が出来ます。いかに、オプションを指定した検索例を掲載します。
+
+
+
+-  -e --exact
+
+  英単語の大文字／小文字をふくめ、入力した文字列に完全一致するパッケージを検索します
+
+  ```powershell
+  //workspaces > winget search 'Python 3' --exact
+  
+  名前     ID              バージョン ソース
+  -------------------------------------------
+  Python 3 Python.Python.3 3.9.6150.0 winget
+  
+  ```
+
+  
+
+-  -n --count
+
+  検索結果の表示行数を制限します
+
+  ```powershell
+  /workspaces > winget search python -n 5
+  
+  名前          ID                           バージョン 一致            ソース
+  ----------------------------------------------------------------------------
+  Python 3      Python.Python.3              3.9.6150.0 Moniker: python winget
+  Python 2      Python.Python.2              2.7.18150  Command: python winget
+  winpython-dot winpython.winpython-dot      3.9.4.0    Tag: python     winget
+  winpython     winpython.winpython          3.9.4.0    Tag: python     winget
+  Orange        UniversityofLjubljana.Orange 3.29.3     Tag: Python     winget
+  <結果制限により、エントリがさらに切り捨てられました>
+  
+  ```
+
+  
+
+- -s --source
+
+  パッケージの検索を、指定したソースのパッケージのみで行います。現状、sourrceにはWindows Package Manager標準の`winget`とマイクロソフトストア`msstore`が指定できます。
+
+  ```powershell
+  /workspaces > winget search python --source msstore
+  
+  名前          ID                                  バージョン
+  ------------------------------------------------------------
+  InstantPython 13742StephanBrenner.InstantPython   Latest
+  Python 3.7    PythonSoftwareFoundation.Python.3.7 Latest
+  Python 3.8    PythonSoftwareFoundation.Python.3.8 Latest
+  Python 3.9    PythonSoftwareFoundation.Python.3.9 Latest
+  
+  ```
+
+  
+
