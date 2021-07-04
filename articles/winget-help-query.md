@@ -213,7 +213,6 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
 -  -e --exact
   
   英単語の大文字／小文字をふくめ、入力した文字列に完全一致するパッケージを検索します
-  
   ```powershell
   //workspaces > winget search 'Python 3' --exact
   
@@ -222,14 +221,11 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
   Python 3 Python.Python.3 3.9.6150.0 winget
   
   ```
-  
-  
 
 
 -  -n --count
   
   検索結果の表示行数を制限します
-  
   ```powershell
   /workspaces > winget search python -n 5
   
@@ -243,14 +239,11 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
   <結果制限により、エントリがさらに切り捨てられました>
   
   ```
-  
-  
 
 
 - -s --source
   
   パッケージの検索を、指定したソースのパッケージのみで行います。現状、sourrceにはWindows Package Manager標準の`winget`とマイクロソフトストア`msstore`が指定できます。
-  
   ```powershell
   /workspaces > winget search python --source msstore
   
@@ -262,5 +255,4 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
   Python 3.9    PythonSoftwareFoundation.Python.3.9 Latest
   
   ```
-  
-  
+
