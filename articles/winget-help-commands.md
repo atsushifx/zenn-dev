@@ -141,3 +141,48 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    .
   ```
 
+
+-- applistのファイル形式  
+  出力したファイルは、次の形式のjsonファイルになります。このファイルをimportすると、指定したパッケージをまとめてインストールします。
+  ``` applist.json
+{
+	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate" : "2021-07-07T02:53:18.991-00:00",
+	"Sources" : 
+	[
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "Bitwarden.Bitwarden"
+				},
+				{
+					"PackageIdentifier" : "vim.vim"
+				},
+				{
+					"PackageIdentifier" : "stack.stack"
+				},
+				{
+					"PackageIdentifier" : "Google.Chrome"
+				},
+				 .
+				 .
+				 .
+				{
+					"PackageIdentifier" : "Microsoft.PowerShell"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://winget.azureedge.net/cache",
+				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name" : "winget",
+				"Type" : "Microsoft.PreIndexed.Package"
+			}
+		}
+	],
+	"WinGetVersion" : "1.0.11694"
+}
+
+  ```
+
