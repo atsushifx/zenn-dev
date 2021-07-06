@@ -106,3 +106,53 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    ```
 
    
+
+### インポート／エクスポート
+
+- import
+
+  `winget import <applistfile>`
+
+  ファイルに指定されたパッケージをまとめて、Windowsにインストールします。インストール位置などの細かい指定は、選べません。
+
+  ```powershell
+  /workspaces > winget import .\winget-apps.json
+  適用可能な更新は見つかりませんでした。
+  パッケージは既にインストールされています: Google.Chrome
+  見つかりました  [vim.vim]
+  このアプリケーションは所有者からライセンス供与されます。
+  Microsoft はサードパーティのパッケージに対して責任を負わず、ライセンスも付与しません。
+  Downloading https://github.com/vim/vim-win32-installer/releases/download/v8.2.3113/gvim_8.2.3113_x64_signed.exe
+    ██████████████████████████████  9.22 MB / 9.22 MB
+  インストーラーハッシュが正常に検証されました
+  パッケージのインストールを開始しています...
+  インストールが完了しました
+  見つかりました  [stack.stack]
+  このアプリケーションは所有者からライセンス供与されます。
+  Microsoft はサードパーティのパッケージに対して責任を負わず、ライセンスも付与しません。
+  Downloading https://binaries.getstack.app/builds/prod/win/x64/Stack%20Setup%203.30.4-x64.exe
+    ██████████████████████████████  57.3 MB / 57.3 MB
+  インストーラーハッシュが正常に検証されました
+  パッケージのインストールを開始しています...
+  インストールが完了しました
+  
+  ```
+
+- export
+
+  `winget export <applist>`
+
+  指定したファイルに、インストールされているアプリの一覧をjson形式で書き出します。wingetからインストールできないアプリ、パッケージについてはアラートメッセージを出力します。
+
+  ``` powershell
+  /workspaces > winget export out
+  インストールされているパッケージのバージョンは、どのソースからも利用できません: sMedio TV Suite
+  インストールされているパッケージのバージョンは、どのソースからも利用できません: Doki Doki Mod Manager 4.3.0
+  インストールされているパッケージのバージョンは、どのソースからも利用できません: 7-Zip 21.00 alpha (x64)
+  インストールされているパッケージのバージョンは、どのソースからも利用できません: Adobe Photoshop Express : 画像エディター、調整、フィルター、効果、境界線
+   .
+   .
+   .
+  ```
+
+  
