@@ -27,7 +27,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 
 
 - upgrade  
-  `winget upgrade`
+  `winget upgrade`  
   アップグレードできるパッケージの一覧を表示します。
 
   ```powershell
@@ -49,7 +49,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 ### パッケージ関連
 
 - search  
-  `winget search <query>  
+  `winget search <query> `  
   指定したqueryに合致するパッケージの一覧を表示します。queryの詳しい書き方は、[wingetでのパッケージ指定方法](/atsushifx/articles/winget-help-query)を参照してください。
 
 
