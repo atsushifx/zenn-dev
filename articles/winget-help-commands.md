@@ -2,8 +2,8 @@
 title: "wingetでよく使うであろうコマンド一覧"
 emoji: "🪆"
 type: "tech" 
-topics: ["SCM","winget","構成管理","CLI","WINDOWS"]
-published: false
+topics: ["Windows",SCM","winget","構成管理","パッケージマネージャ"]
+published: true
 ---
 
 # 【Windows】wingetでよく使うコマンド
@@ -185,5 +185,4 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   "WinGetVersion" : "1.0.11694"
 }
 ```
-
 
