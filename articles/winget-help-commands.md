@@ -27,10 +27,8 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   `winget uninstall <package>`  
   指定したパッケージをアンインストールします。名称が正しければ、wingetでインストールしていないアプリもアンインストールできます。
   
-- upgrade
-
+- upgrade  
   `winget upgrade`
-
   アップグレードできるパッケージの一覧を表示します。
 
   ```powershell
@@ -42,28 +40,21 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   
   ```
 
-- upgrade <package>
-
-   `winget upgrade <package>`
-
+- upgrade <package>  
+   `winget upgrade <package>`  
    指定したパッケージをアップグレードします。
 
-   
 
-   ### パッケージ関連
+### パッケージ関連
 
-- search
-  
-  `winget search <query>
-  
+- search  
+  `winget search <query>  
   指定したqueryに合致するパッケージの一覧を表示します。queryの詳しい書き方は、[wingetでのパッケージ指定方法](/atsushifx/articles/winget-help-query)を参照してください。
   
-- list
 
-   `winget list <query>`
-
+- list  
+   `winget list <query>`  
    wingetでインストールしたパッケージもふくめ、Windows上にインストールされたアプリの一覧が表示されます。この一覧に表示されているアプリは、wingetでuninstallできます。
-
    ``` powershell
    /workspaces > winget list
    名前                                     ID                                        バージョン        利用可能    ソース
@@ -79,12 +70,9 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    
    ```
 
-- show
-
-   `winget show  <package>`
-
+- show  
+   `winget show  <package>`  
    指定されたパッケージの情報を出力します
-
    ``` powershell
    /workspaces > winget show python
    見つかりました Python 3 [Python.Python.3]
@@ -105,14 +93,11 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    
    ```
 
-   
 
 ### インポート／エクスポート
 
-- import
-
-  `winget import <applistfile>`
-
+- import  
+  `winget import <applistfile>`  
   ファイルに指定されたパッケージをまとめて、Windowsにインストールします。インストール位置などの細かい指定は、選べません。
 
   ```powershell
@@ -138,12 +123,9 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   
   ```
 
-- export
-
-  `winget export <applist>`
-
+- export  
+  `winget export <applist>`  
   指定したファイルに、インストールされているアプリの一覧をjson形式で書き出します。wingetからインストールできないアプリ、パッケージについてはアラートメッセージを出力します。
-
   ``` powershell
   /workspaces > winget export out
   インストールされているパッケージのバージョンは、どのソースからも利用できません: sMedio TV Suite
@@ -155,4 +137,3 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    .
   ```
 
-  
