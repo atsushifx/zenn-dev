@@ -140,10 +140,10 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    .
    .
   ```
+  
+- applistのファイル形式  
+    出力したファイルは、次の形式のjsonファイルになります。このファイルをimportすると、指定したパッケージをまとめてインストールします。
 
-
--- applistのファイル形式  
-  出力したファイルは、次の形式のjsonファイルになります。このファイルをimportすると、指定したパッケージをまとめてインストールします。
   ``` applist.json
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
