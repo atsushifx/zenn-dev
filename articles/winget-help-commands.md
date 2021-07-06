@@ -16,17 +16,16 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 
 ### インストール/アンインストール
 
-- install
-
+- install  
   `winget install <package>`  
   指定したパッケージをインストールします。パッケージは、名前、id,モニカーで指定できます
 
-- uninstall
 
-  
+- uninstall  
   `winget uninstall <package>`  
   指定したパッケージをアンインストールします。名称が正しければ、wingetでインストールしていないアプリもアンインストールできます。
-  
+
+
 - upgrade  
   `winget upgrade`
   アップグレードできるパッケージの一覧を表示します。
@@ -40,9 +39,11 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   
   ```
 
+
 - upgrade <package>  
    `winget upgrade <package>`  
    指定したパッケージをアップグレードします。
+
 
 
 ### パッケージ関連
@@ -50,7 +51,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 - search  
   `winget search <query>  
   指定したqueryに合致するパッケージの一覧を表示します。queryの詳しい書き方は、[wingetでのパッケージ指定方法](/atsushifx/articles/winget-help-query)を参照してください。
-  
+
 
 - list  
    `winget list <query>`  
@@ -69,6 +70,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
     .
    
    ```
+
 
 - show  
    `winget show  <package>`  
@@ -92,6 +94,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
      SHA256: 3924caa094f70fd3ea667a27ad494d57941a487aa72d8b6b79ce60e81f1e497c
    
    ```
+
 
 
 ### インポート／エクスポート
@@ -122,6 +125,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   インストールが完了しました
   
   ```
+
 
 - export  
   `winget export <applist>`  
