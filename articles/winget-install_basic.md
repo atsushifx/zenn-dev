@@ -1,5 +1,5 @@
 ---
-title: "wingetでのちょっとdeepなアプリのインストール方法"
+title: "wingetでの基本的なアプリのインストール方法"
 emoji: "🪆"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["SCM","Windows","wiget","構成管理"]
@@ -223,7 +223,6 @@ wingetでは、次のように入力します。
   インストールが完了しました
   
   ```
-  
 
 
 ## まとめ
