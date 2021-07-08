@@ -3,15 +3,13 @@ title: "wingetでの基本的なアプリのインストール方法"
 emoji: "🪆"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["SCM","Windows","wiget","構成管理"]
-published: false
+published: true
 ---
 # 【Windows】wingetで、アプリをインストールする
-
 
 ## はじめに
 
 wingetでは、パッケージを指定してアプリをインストールします。この記事では、パッケージのさまざまな指定方法を紹介します。
-
 
 ## helpとversion
 
@@ -89,7 +87,6 @@ wingetでは、次のように入力します。
   詳細については、次を参照してください。 https://aka.ms/winget-command-help
   
   ```
-
 
 ## 基本的なインストール
 
@@ -223,7 +220,6 @@ wingetでは、次のように入力します。
   インストールが完了しました
   
   ```
-
 
 ## まとめ
 
