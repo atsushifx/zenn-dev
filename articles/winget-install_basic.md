@@ -129,10 +129,10 @@ wingetでは、次のように入力します。
 
   名前を入力した場合、入力した名前を含むパッケージを検索します。2つ以上のパッケージが見つかった場合は**パッケージが見つからなかった**こととし、エラーメッセージを出力して終了します。
 
- ```powershell
-/workspaces > winget install --name python
-入力条件に一致するパッケージが見つかりませんでした
+  ```powershell
+  /workspaces > winget install --name python
+  入力条件に一致するパッケージが見つかりませんでした
 
- ```
-
+  ```
+  
 
