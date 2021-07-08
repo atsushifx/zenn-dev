@@ -8,15 +8,9 @@ published: false
 # 【Windows】wingetで、アプリをインストールする
 
 
-
 ## はじめに
 
 wingetでは、パッケージを指定してアプリをインストールします。この記事では、パッケージのさまざまな指定方法を紹介します。
-
-
-
-
-
 
 
 ## helpとversion
@@ -26,15 +20,21 @@ wingetでは、パッケージを指定してアプリをインストールし�
 wingetでは、次のように入力します。
 
 - version
-
+  
+  
   `winget --version` wingetのバージョンを表示します
-
-  `einget --info` バージョン以外に、Copyrightやドキュメントへのリンクなど、もう少し詳細な情報を表示します。
-
-  ``` powershell
+  
+  ```powershell
   /workspaces > winget --version
   v1.0.11694
   
+  ```
+  
+  
+  
+  `winget --info` バージョン以外に、Copyrightやドキュメントへのリンクなど、もう少し詳細な情報を表示します。
+  
+  ``` powershell
   /workspaces > winget --info
   Windows Package Manager v1.0.11694
   Copyright (c) Microsoft Corporation. All rights reserved.
@@ -52,11 +52,13 @@ wingetでは、次のように入力します。
   ホーム ページ               https://aka.ms/winget
   
   ```
-
+  
+  
+  
 - help
-
+  
   `winget --help`  wingetで使えるサブコマンドを一覧で表示します。*`winget`のみでも同じ結果を表示します*
-
+  
   ```powershell
   /workspaces > winget --help
   Windows Package Manager v1.0.11694
@@ -90,26 +92,23 @@ wingetでは、次のように入力します。
   詳細については、次を参照してください。 https://aka.ms/winget-command-help
   
   ```
-
   
-
-
+  
 
 ## アプリのインストール
 
-アプリをインストールするには、パッケージを指定してinstallコマンドを実行します。
-
+アプリをインストールするには、パッケージを指定してinstallコマンドを実行します。  
 `winget install <package>`で指定したパッケージをインストールします。
-
 
 
 ### 基本的なインストール
 
 - パッケージを指定してインストール
-
+  
+  
   パッケージの指定方法には、名前、id、モニカーの3種類があります。オプションで指定しない場合は、名前、id、モニカーのいずれかが合致したパッケージをインストールします。
 
-``` powershell
+ ``` powershell
 /workspaces > winget install python
 見つかりました Python 3 [Python.Python.3]
 このアプリケーションは所有者からライセンス供与されます。
@@ -120,29 +119,29 @@ Downloading https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe
 パッケージのインストールを開始しています...
 インストールが完了しました
 
-```
+ ```
 
 - パッケージが見つからない
+  
 
   指定した名前*あるいはid,モニカー*に合致するパッケージが見つからない場合は、エラーメッセージを出力して終了します。
-
+  
   ``` powershell
   /workspaces > winget install python4
   入力条件に一致するパッケージが見つかりませんでした。
   
   ```
-
+  
   
 
-  - 複数のパッケージが見つかった
 
+  - 複数のパッケージが見つかった
+    
+    
     名前を入力した場合、入力した名前を含むパッケージを検索します。2つ以上のパッケージが見つかった場合は**パッケージが見つからなかった**こととし、エラーメッセージを出力して終了します。
 
-    ``` powershell
-    /workspaces > winget install --name python
-    入力条件に一致するパッケージが見つかりませんでした。
-    ```
+  ``` powershell
+/workspaces > winget install --name python
+入力条件に一致するパッケージが見つかりませんでした。
+  ```
 
-    
-
-    
