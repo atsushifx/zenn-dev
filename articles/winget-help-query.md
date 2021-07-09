@@ -1,21 +1,19 @@
 ---
-title: "wingetでのパッケージ指定方法"
+title: "【windows】wingetでのパッケージ指定方法"
 emoji: "🪆"
 type: "tech" 
-topics: ["SCM","winget","構成管理","CLI"]
+topics: ["windows","SCM","winget","構成管理","CLI"]
 published: true
 ---
 
-# wingetでのパッケージ指定方法
-
-## TL;DR
+# TL;DR
 
 wingetでは、キーワードを使ってパッケージ一覧からパッケージを検索します。これをqueryといいます。この記事では、さまざまなパッケージの検索方法を紹介します。
 詳しいことは、Microsoftのドキュメント https://docs.microsoft.com/ja-jp/windows/package-manager/winget/search を参照してください。
 
-## パッケージ検索(基本編) : <sub>キーワードで検索する</sub>
+# パッケージ検索(基本編) : <sub>キーワードで検索する</sub>
 
-### キーワード検索
+## キーワード検索
 
 queryでは、入力したパッケージ名はキーワード検索されます。すなわち、入力した文字列がパッケージ名などに含まれていれば、一覧に表示されます。
 
@@ -54,7 +52,7 @@ Python 3.9                   PythonSoftwareFoundation.Python.3.9 Latest         
 
 
 
-### 空白文字入りのキーワード
+## 空白文字入りのキーワード
 
 パッケージ名に空白が入っている場合は、引用符(',")でくくります
 
@@ -73,15 +71,15 @@ Python 3.9   PythonSoftwareFoundation.Python.3.9 Latest     msstore
 
 
 
-## パッケージ検索(発展編): <sub>種別毎の検索</sub>
+# パッケージ検索(発展編): <sub>種別毎の検索</sub>
 
-### 名前、id、モニカー(別名)
+## 名前、id、モニカー(別名)
 
 キーワード検索では、パッケージのパッケージ名、パッケージid、モニカーからパッケージを検索します。
 
 
 
-#### 名前検索
+### 名前検索
 
 `--name`オプションをつけると、パッケージ名で検索を行います。
 
@@ -106,8 +104,7 @@ Python 3.9                   PythonSoftwareFoundation.Python.3.9 Latest      mss
 
 ```
 
-
-#### id検索
+### id検索
 
 `--id`オプションをつけると、パッケージidで検索を行います。
 
@@ -133,8 +130,7 @@ Python 3.9                   PythonSoftwareFoundation.Python.3.9 Latest      mss
 
 ```
 
-
-#### モニカー検索
+### モニカー検索
 
 モニカー(moniker)とは、パッケージにつけられる別名のことです。Pythonのようにバージョン毎にパッケージがある場合などに、使用されます。
 
@@ -152,9 +148,9 @@ Python 2 Python.Python.2 2.7.18150  Moniker: python2 winget
 
 
 
-### タグ検索とコマンド検索
+## タグ検索とコマンド検索
 
-#### タグ検索
+### タグ検索
 
 タグ検索は、パッケージにつけられたタグで一覧を検索します。
 
@@ -184,7 +180,7 @@ Anaconda Individual Edition  Anaconda.Anaconda3             2021.05     Tag: Pyt
 
 ```
 
-#### コマンド検索
+### コマンド検索
 
 パッケージには、タグと同じようにコマンド名がつけられたパッケージがあります。
 
@@ -204,7 +200,7 @@ Anaconda Individual Edition Anaconda.Anaconda3 2021.05    Command: python3 winge
 
 
 
-## パッケージ検索(発展編 2): その他のオプション
+# パッケージ検索(発展編 2): <sub>その他のオプション</sub>
 
 検索時にオプションを指定することで、さらに細かい検索が出来ます。いかに、オプションを指定した検索例を掲載します。
 

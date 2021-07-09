@@ -1,35 +1,40 @@
 ---
-title: "wingetでよく使うであろうコマンド一覧"
+title: "【windows】wingetでよく使うであろうコマンド一覧"
 emoji: "🪆"
 type: "tech" 
-topics: ["Windows",SCM","winget","構成管理","パッケージマネージャ"]
+topics: ["Windows",SCM","winget","構成管理","CLI"]
 published: true
 ---
 
-# 【Windows】wingetでよく使うコマンド
-
-## はじめに
+# はじめに
 
 wingetを色々試したので、wingetの各コマンドとオプションを備忘録的に解説します。
 
-## コマンド一覧
+# コマンド一覧
 
-### インストール/アンインストール
+## インストール/アンインストール
 
-- install  
-  `winget install <package>`  
+- install
+  
+  `winget install <package>`
+  
+  
   指定したパッケージをインストールします。パッケージは、名前、id,モニカーで指定できます
 
 
-- uninstall  
-  `winget uninstall <package>`  
+- uninstall
+  
+  `winget uninstall <package>` 
+  
   指定したパッケージをアンインストールします。名称が正しければ、wingetでインストールしていないアプリもアンインストールできます。
 
 
-- upgrade  
-  `winget upgrade`  
-  アップグレードできるパッケージの一覧を表示します。
+- upgrade
+  
+  `winget upgrade` 
 
+  アップグレードできるパッケージの一覧を表示します。
+  
   ```powershell
   winget upgrade
   
@@ -38,24 +43,42 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   Microsoft Edge Microsoft.Edge 91.0.864.59 91.0.864.64 winget
   
   ```
+  
+  
 
 
-- upgrade <package>  
-   `winget upgrade <package>`  
+- upgrade <package>
+   
+   `winget upgrade <package>`
+   
+   
    指定したパッケージをアップグレードします。
+   
+   
+   
+- upgrade --all
 
+   `winget upgrade --all`
 
+   アップグレードできるパッケージすべてを、アップグレードします
 
-### パッケージ関連
+## パッケージ関連
 
-- search  
-  `winget search <query> `  
+- search
+  
+  `winget search <query> `
+  
+  
   指定したqueryに合致するパッケージの一覧を表示します。queryの詳しい書き方は、[wingetでのパッケージ指定方法](/atsushifx/articles/winget-help-query)を参照してください。
 
 
-- list  
-   `winget list <query>`  
+- list
+   
+   `winget list <query>`
+   
+   
    wingetでインストールしたパッケージもふくめ、Windows上にインストールされたアプリの一覧が表示されます。この一覧に表示されているアプリは、wingetでuninstallできます。
+   
    ``` powershell
    /workspaces > winget list
    名前                                     ID                                        バージョン        利用可能    ソース
@@ -72,9 +95,13 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
    ```
 
 
-- show  
-   `winget show  <package>`  
+- show
+   
+   `winget show  <package>`
+   
+   
    指定されたパッケージの情報を出力します
+   
    ``` powershell
    /workspaces > winget show python
    見つかりました Python 3 [Python.Python.3]
@@ -94,15 +121,20 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
      SHA256: 3924caa094f70fd3ea667a27ad494d57941a487aa72d8b6b79ce60e81f1e497c
    
    ```
+   
+   
 
 
 
-### インポート／エクスポート
+## インポート／エクスポート
 
-- import  
-  `winget import <applistfile>`  
+- import
+  
+  `winget import <applistfile>`
+
+  
   ファイルに指定されたパッケージをまとめて、Windowsにインストールします。インストール位置などの細かい指定は、選べません。
-
+  
   ```powershell
   /workspaces > winget import .\winget-apps.json
   適用可能な更新は見つかりませんでした。
@@ -127,9 +159,13 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   ```
 
 
-- export  
-  `winget export <applist>`  
+- export
+  
+  `winget export <applist>`
+  
+  
   指定したファイルに、インストールされているアプリの一覧をjson形式で書き出します。wingetからインストールできないアプリ、パッケージについてはアラートメッセージを出力します。
+  
   ``` powershell
   /workspaces > winget export out
   インストールされているパッケージのバージョンは、どのソースからも利用できません: sMedio TV Suite
@@ -142,7 +178,9 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
   ```
 
 
-- applistのファイル形式  
+- applistのファイル形式
+    
+    
     出力したファイルは、次の形式のjsonファイルになります。このファイルをimportすると、指定したパッケージをまとめてインストールします。
 
 ``` applist.json
