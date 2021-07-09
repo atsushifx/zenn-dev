@@ -2,7 +2,7 @@
 title: "【windows】wingetでオプション付きで、アプリをインストールする"
 emoji: "🪆"
 type: "tech"
-topics: ["SCM","Windows","wiget","構成管理"]
+topics: ["SCM","Windows","wiget","構成管理", "PackageManager"]
 published: true
 ---
 # はじめに
