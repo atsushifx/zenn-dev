@@ -34,7 +34,6 @@ wingetは、次の構文でアプリをインストールします。
   ``` powershell
   winget install --help
   ```
-  
 
 
 - `-i`, `--interactive`
@@ -44,7 +43,6 @@ wingetは、次の構文でアプリをインストールします。
   ``` powershell
   winget install <package> --interactive
   ```
-  
 
 
 - `-h`, `--silent`
@@ -54,7 +52,6 @@ wingetは、次の構文でアプリをインストールします。
   ``` powersell
   winget install <package> --silent
   ```
-  
 
 
 - `-o`, `--log`
@@ -64,7 +61,6 @@ wingetは、次の構文でアプリをインストールします。
   ``` powershell
   winget install <packag> --log <logfile>
   ```
-  
 
 
 - `-e`, `--exact`
@@ -74,7 +70,6 @@ wingetは、次の構文でアプリをインストールします。
   ``` powershell
   winget install --exact <package>
   ```
-  
 
 
 - `-v`, `--version`
@@ -84,7 +79,6 @@ wingetは、次の構文でアプリをインストールします。
   ```powershell
   winget install <package> --version <version>
   ```
-  
 
 
 - `-l`, `--location`
@@ -96,7 +90,6 @@ wingetは、次の構文でアプリをインストールします。
   ``` powershell
   winget install <package> --location <installDir>
   ```
-  
 
 
 - `--override`
@@ -106,7 +99,6 @@ wingetは、次の構文でアプリをインストールします。
   ```powershell
   winget install <package> --override <installOption>
   ```
-  
 
 
 # リンク
@@ -114,5 +106,5 @@ wingetは、次の構文でアプリをインストールします。
 以下のリンクが参考になります。
 
 - [install コマンド (winget)](https://docs.microsoft.com/ja-jp/windows/package-manager/winget/install)
--- Microsoftの公式ドキュメント
+  - Microsoftの公式ドキュメント
 
