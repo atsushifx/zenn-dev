@@ -3,7 +3,7 @@ title: "【windows】wingetでオプション付きで、アプリをインス�
 emoji: "🪆"
 type: "tech"
 topics: ["SCM","Windows","wiget","構成管理"]
-published: false
+published: true
 ---
 # はじめに
 
