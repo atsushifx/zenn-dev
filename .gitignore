@@ -1,1 +1,9 @@
 # ignore files for git
+
+#  ignore patch
+*.diff
+
+# ignore node
+node_modules
+package*.json
+
