@@ -1,5 +1,5 @@
 ---
-title: "Windowsにopen-shellをインストールする"
+title: "Windows: open-shellをインストールする"
 emoji: "🪟"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [Windows,個人開発,開発環境,カスタマイズ,hack]
