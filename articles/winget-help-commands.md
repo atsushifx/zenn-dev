@@ -1,5 +1,5 @@
 ---
-title: "【windows】wingetでよく使うであろうコマンド一覧"
+title: "Windows: wingetでよく使うであろうコマンド一覧"
 emoji: "🪆"
 type: "tech" 
 topics: ["Windows",SCM","winget","構成管理","CLI"]
@@ -48,7 +48,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 
 
 - upgrade <package>
-   
+  
    `winget upgrade <package>`
    
    
@@ -73,7 +73,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 
 
 - list
-   
+  
    `winget list <query>`
    
    
@@ -96,7 +96,7 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 
 
 - show
-   
+  
    `winget show  <package>`
    
    
@@ -179,8 +179,8 @@ wingetを色々試したので、wingetの各コマンドとオプションを�
 
 
 - applistのファイル形式
-    
-    
+  
+  
     出力したファイルは、次の形式のjsonファイルになります。このファイルをimportすると、指定したパッケージをまとめてインストールします。
 
 ``` applist.json

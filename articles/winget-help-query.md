@@ -1,12 +1,12 @@
 ---
-title: "【windows】wingetでのパッケージ指定方法"
+title: "Windows: wingetでのパッケージ指定方法"
 emoji: "🪆"
 type: "tech" 
 topics: ["windows","SCM","winget","構成管理","CLI"]
 published: true
 ---
 
-# TL;DR
+# tl;dr
 
 wingetでは、キーワードを使ってパッケージ一覧からパッケージを検索します。これをqueryといいます。この記事では、さまざまなパッケージの検索方法を紹介します。
 詳しいことは、Microsoftのドキュメント https://docs.microsoft.com/ja-jp/windows/package-manager/winget/search を参照してください。

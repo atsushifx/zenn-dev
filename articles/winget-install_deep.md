@@ -1,5 +1,5 @@
 ---
-title: "【windows】wingetでオプション付きで、アプリをインストールする"
+title: "Windows: wingetでオプション付きで、アプリをインストールする"
 emoji: "🪆"
 type: "tech"
 topics: ["SCM","Windows","wiget","構成管理", "PackageManager"]

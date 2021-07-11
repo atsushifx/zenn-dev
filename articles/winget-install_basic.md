@@ -1,5 +1,5 @@
 ---
-title: "【windows】wingetでの基本的なアプリのインストール方法"
+title: "Windows: wingetでの基本的なアプリのインストール方法"
 emoji: "🪆"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["SCM","Windows","wiget","構成管理"]
