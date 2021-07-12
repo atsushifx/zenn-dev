@@ -4,7 +4,7 @@ title: "環境変数'HOME'を上書きして、オレオレ設定フォルダを
 emoji: "🪟"
 type: "tech"
 topics: [Windows,個人開発,開発環境,カスタマイズ,hack]
-published: true
+published: false
 
 ---
 
@@ -94,7 +94,8 @@ Windows環境で普通にbashやvimを使うと、`Users/xxxxx/`下に大量にd
 $sysEnv = [System.Environment]
 
 # HOME
-$newHOME="%USERPROFILE%/.config"
+$newHOME=$env:USERPROFILE + "/.config"
+$env:HOME = $newHOME
 $sysEnv::SetEnvironmentVariable("HOME", $newHOME, "USER")
 
 ```
