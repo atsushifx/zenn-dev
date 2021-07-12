@@ -22,11 +22,13 @@ Windows環境で普通にbashやvimを使うと、`Users/xxxxx/`下に大量にd
 
 ```shell
 .config
-  ├── .config
-  │   └── git
-  │        ignore ... globalな.
-  ├── .ssh
-  └── scoop
+  ├─ .config
+  │    └─ git
+  │        ignore ... globalな.gitignore
+  ├─ .ssh
+  └─ scoop
+  .git-crendicials
+  .gitconfig
 ```
 
 
