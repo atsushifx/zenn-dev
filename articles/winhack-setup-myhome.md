@@ -4,7 +4,7 @@ title: "環境変数'HOME'を上書きして、オレオレ設定フォルダを
 emoji: "🪟"
 type: "tech"
 topics: [Windows,個人開発,開発環境,カスタマイズ,hack]
-published: false
+published: true
 
 ---
 
