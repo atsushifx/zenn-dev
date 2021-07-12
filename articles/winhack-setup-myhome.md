@@ -72,10 +72,36 @@ Windows環境で普通にbashやvimを使うと、`Users/xxxxx/`下に大量にd
     
 
 6.  [OK]をクリックし、[環境変数]画面を閉じます。同様にして、[システムのプロパティ]画面を閉じます。
-  
+
   
 
 7.  以上で、環境変数`HOME`の設定は終了です。
 
 
+
+# 環境変数`HOME`を設定する: <sub>(スクリプト)</sub>
+
+環境変数の設定は、Powershellスクリプトでもできます。セットアップスクリプトのために、やり方を書いておきます。
+
+まずは、スクリプトから
+
+``` envSetup.ps1
+
+#
+# system variable refer
+$sysEnv = [System.Environment]
+
+# HOME
+$newHOME="%USERPROFILE%/.config"
+$sysEnv::SetEnvironmentVariable("HOME", $newHOME, "USER")
+
+```
+
+
+環境変数を設定するには、`setEnvironmentVariable`メソッドを使います。このとき、ユーザー環境変数かシステム環境変数かを指定する必要があります。
+ここではユーザー環境変数を設定するので第3引数に"USER"を指定しています。システム環境変数の場合は第3引数に"MACHINE"を指定します。
+
+環境変数は、システム環境に設定するので変数$sysEnvに`[System.Environment]`を代入しています。
+
+以後、Windowsのセットアップ時にこのスクリプトを実行すれば環境変数`HOME`を設定するようになります。
 
