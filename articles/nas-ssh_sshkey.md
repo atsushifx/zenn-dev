@@ -67,3 +67,40 @@ The key's randomart image is:
 
 
 
+# sshキーの作成 *(NAS側)*
+
+ログイン先のNAS側には、公開鍵をおきます。次の手順で、公開鍵ファイルを配置します。
+
+1. sshキーファイルを保存するディレクトリを作成します。標準では、自分のホームディレクトリ直下の`.ssh`フォルダになります。
+
+   `.ssh`内では鍵ファイルの読み込み行います。そのため、`chmod`を使い、他ユーザーは宇あ読み込み専用にしておきます。
+
+   ``` bash
+   atsushifx@agartha $ mkdir .ssh
+   atsushifx@agartha $ chmod 644 .ssh
+   atsushifx@agartha $ 
+   ```
+
+   
+
+2. ファイル共有機能を使い、`.ssh`下にPC側で作った`id_nas.pub`ファイルをコピーします。
+
+   
+
+3. コピーした`id_nas.pubファイルを読み込み専用にします。
+
+   ```bash
+   atsushifx@agartha $ chmod 444 .ssh/id_nas.pub
+   
+   ```
+
+   
+
+4. 以上で、公開鍵の接地は終了です
+
+   
+
+   
+
+   
+
