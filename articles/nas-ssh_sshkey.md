@@ -30,7 +30,8 @@ sshキーの作成は、sshキー作成ツール`ssh-keygen`を使います。�
 |            | -t ed25519   | 鍵を作成する暗号アルゴリズムを指定します。ここでは、現時点最強のed25519を使います |
 |            | -f id_nas    | 生成した鍵のファイル名を指定します。他の鍵との重複を避けるため、NAS用である`id_nas`を指定しています |
 |            | -C atsushifx | 公開鍵ファイルにつけるコメントです。ここでは、自身のアカウントである`atsushifx`を指定しています。 |
-|            |              |                                                              |
+
+
 
 上記のオプションを指定して、`ssh-keygen`を実行します。端末では、次のようになります。
 
@@ -63,7 +64,7 @@ The key's randomart image is:
 
 これで、ssh鍵ができました。フォルダ内に、`id_nas`, `id_nas.pub`の2つのファイルがあれば作成は成功です。
 
-作成した2つのファイルは、HOME下の`.ssh`フォルダに保存します。自分の環境は、(HOMEの上書き)[https://zenn.dev/atsushifx/articles/winhack-setup-myhome]をしているので、`=/.config/.ssh/`下にファイルを保存します。
+作成した2つのファイルは、HOME下の`.ssh`フォルダに保存します。自分の環境は、(HOMEの上書き)[winhack-setup-myhome]をしているので、`=/.config/.ssh/`下にファイルを保存します。
 
 
 
@@ -81,11 +82,10 @@ The key's randomart image is:
    atsushifx@agartha $ 
    ```
 
-   
+
 
 2. ファイル共有機能を使い、`.ssh`下にPC側で作った`id_nas.pub`ファイルをコピーします。
 
-   
 
 3. コピーした`id_nas.pubファイルを読み込み専用にします。
 
@@ -94,13 +94,7 @@ The key's randomart image is:
    
    ```
 
-   
+
 
 4. 以上で、公開鍵の接地は終了です
-
-   
-
-   
-
-   
 
