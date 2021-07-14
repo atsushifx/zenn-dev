@@ -110,43 +110,43 @@ sshキーの設置ができたので、ssh鍵でログインできるように�
 
    ![Server Select](https://i.imgur.com/ritfqWx.jpg)
 
-   
+
 
 2. NASサーバを選択し、[編集]をクリックして[Server Edit Entry]ダイアログを開きます。
 
    ![Server Edit Entry](https://i.imgur.com/cm76shE.jpg)
 
-   
+
 
 3. [SSH認証鍵]をクリックします。[ファイル選択]ダイアログが開くので、`id_nas`を選択します。
 
    ![ファイル選択](https://i.imgur.com/sW6LQei.jpg)
 
-   
+
 
 4. [開く]をクリックします。[Server Edit Entry]ダイアログに戻るので[OK]をクリックします。
 
    ![Server Edit Entry](https://i.imgur.com/cm76shE.jpg)
 
-   
+
 
 5. [Server Select]ダイアログに戻ります。[OK]をクリックします。
 
    ![Server Select](https://i.imgur.com/ritfqWx.jpg)
 
-   
+
 
 6. [サーバーログイン]ダイアログが表示されます。[OK]をクリックします。
 
    ![ログイン](https://i.imgur.com/JgPSRKd.jpg)
 
-   
+
 
 7. 端末画面が表示されます。
 
    ![端末](https://i.imgur.com/H42JOGZ.jpg)
 
-   
+
 
 以上で、rloginの設定は終了です。
 
