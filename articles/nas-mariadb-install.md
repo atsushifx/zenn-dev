@@ -1,7 +1,7 @@
 ---
-title: "NAS: asustor nasにMariaDBをインストールする"
+title: "asustor NAS: asustor nasにMariaDBをインストールする"
 emoji: "🍆"
-type: "tech" # tech: 技術記事
+type: "tech"
 topics: ["NAS","開発環境", "MySQL", MariaDB"]
 published: true
 
