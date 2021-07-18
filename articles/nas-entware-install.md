@@ -1,10 +1,8 @@
----
 title: "asustor NAS: NASにパッケージマネージャ'entware'を導入する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "カスタマイズ", "パッケージマネージャー", "opkg"]
 published: false
----
 
 
 
@@ -49,12 +47,11 @@ entwareをインストールすると、`/opt/`以下がentwareのものに置�
 なお、インストールしたツールや関連ファイルは`/opt/`下に配置されます。
 
 
-
 ## entwareでbashをインストールする
 
 次の手順で、`bash`をインストールします
 
-1.  opkgを使い、`bash`をインストールします
+1.  opkgを使い、`bash`をインストールします
 
 ``` bash
 atsushifx@agartha $ /opt/bin/opkg install bash
@@ -66,7 +63,7 @@ Configuring bash.
 
 
 
-2.  `sudo`を使い、ログインシェルを`/opt/bin/bash`に変更します
+2.  `sudo`を使い、ログインシェルを`/opt/bin/bash`に変更します
 
 ``` bash
 atsushifx@agartha $ sudo vi /etc/passwd
@@ -78,4 +75,24 @@ Password:
 
 3. rloginで新たにログインし、シェルが`bash`に変わっていれば成功です
 
-   
+
+
+# entwateの基本的なコマンド
+
+`/opt/bin/opkg`のみでコマンドのヘルプを表示します。ここでは、基本的なコマンドを紹介します。
+
+
+
+| entware | サブコマンド | コマンドの説明                                               |
+| ------- | ------------ | ------------------------------------------------------------ |
+| | update | パッケージ情報を最新の者に更新します |
+| | upgrade | インストール済みのパッケージを最新のものにアップグレードします |
+| | install <package> | 指定したパッケージをインストールします |
+| | remove <package> | 指定したパッケージをアンインストールします |
+| | list | パッケージ一覧を表示します |
+| | list <keyword> | キーワードを含むパッケージを表示します |
+| | list-installed | インストール済みのパッケージを表示します |
+| | list-upgradable | アップグレード可能なパッケージを表示します |
+| | info <package> | パッケージの情報を表示します |
+
+
