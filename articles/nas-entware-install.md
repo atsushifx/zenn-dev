@@ -24,16 +24,19 @@ entwareは、asustor NASのApp Central上からインストールできます。
 
 1.  NASの画面を開き、App Centralを開きます。
 
-   ![App Central](https://i.imgur.com/pZYP70A.png)
+    ![App Central](https://i.imgur.com/pZYP70A.png)
    
+
 2.  検索窓に'entware'と入力し、entwareを差がします。
 
-   ![AppCentral - entware](https://i.imgur.com/euUvXjp.png)
+    ![AppCentral - entware](https://i.imgur.com/euUvXjp.png)
    
+
 3.  [インストール]をクリックし、entwareをインストールします。
 
-   ![entwareのインストール](https://i.imgur.com/G0nqf8g.png)
+    ![entwareのインストール](https://i.imgur.com/G0nqf8g.png)
    
+
 4.   以上で、インストールは終了です。
 
 
