@@ -3,7 +3,7 @@ title: "asustor NAS: MariaDBを初期設定する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "MariaDB", "開発環境" ]
-published: false
+published: true
 ---
 
 # tl;dr
@@ -61,9 +61,9 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    
    MariaDB [mysql]>
    ```
-   
-   
-   
+
+  
+
 2. ログインできるユーザーを確認します。
 
    ``` bash
