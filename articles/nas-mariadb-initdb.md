@@ -109,7 +109,7 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
 
 4. `root@localhost`のパスワードを変更します。`alter user`が使えないので、`set password`を使います。
 
-   ```bash
+   ``` bash
    MariaDB [mysql]> alter user root@localhost identified by 'root';
    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'user root@localhost identified by 'root'' at line 1
    
@@ -187,6 +187,4 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    
 
 8. 以上で、MariaDBの初期設定は終了です。
-
-
 
