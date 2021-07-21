@@ -43,9 +43,7 @@ MariaDBの場合は、次のようになります
 
 asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installation`が使えません。そのため、手動で次のように設定します。
 
-1.  MariaDBにログインする
-   
-   `mysql`コマンドを使い。MariaDBにログインします。
+1.  `mysql`コマンドを使い。MariaDBにログインします。
    
    ``` bash
    root@agartha # mysql -u root -p mysql
