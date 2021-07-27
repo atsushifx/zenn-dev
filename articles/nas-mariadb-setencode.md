@@ -1,9 +1,9 @@
----
+﻿---
 title: "asustor NAS: MariaDBのエンコードに`UTF-8`を設定する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "MariaDB", "開発環境" ]
-published: true
+published: false
 ---
 
 # tl;dr
@@ -69,22 +69,22 @@ published: true
    
 
    以上で、エンコードの確認は終了です。
-
    
 
-   # 文字エンコードの変更
+# 文字エンコードの変更
 
    asustor NASでは、`/usr/local/AppCentral/mariadb/`下にスクリプトや設定ファイルがあります。そこに文字エンコード設定ファイルを追加して、文字エンコードを変更します
 
-   
-   
-   ## エンコード設定ファイルを作成する
-   
+
+## エンコード設定ファイルを作成する
+
+
    MariaDBでは、`/usr/local/AppCentral/`mariadb/data/conf/`下にあり、そのしたの`conf.d/`下の*.cnfファイルを読み込みます。
-   
+
    次の手順で、エンコード設定ファイルを作成します。*なお、作業は`root`で行っています*
-   
-   1. `/usr/local/AppCentral/mariadb/data/conf/conf.d`に移動します
+
+
+1. `/usr/local/AppCentral/mariadb/data/conf/conf.d`に移動します
    
       ``` bash
       atsushifx@agartha # cd /usr/local/AppCentral/mariadb/data/conf/conf.d/
@@ -93,10 +93,11 @@ published: true
       
       atsushifx@agartha # 
       ```
-   
       
-   
-   2. `conf.d`下にencode.cnfファイルを作成し、以下のようにMariaDBの変数を設定します。
+      
+
+
+2. `conf.d`下にencode.cnfファイルを作成し、以下のようにMariaDBの変数を設定します。
    
       ``` encode.cnf
       #
@@ -122,32 +123,33 @@ published: true
       ```
    
       *絵文字などにも対応するため`utf8mb4`を使っています*
-   
-      
-   
-   3. 以上で、設定ファイルの作成は終了です
-   
-   
-   
-   ### ## MariaDBに設定を反映させる
-   
-   作成した`encode.cnf`ファイルの設定をMariaDBに反映させるため、MariaDBのサーバーを再起動します。あわせて、`show variables`で設定が反映されているか確認します。
+
+
+
+3. 以上で、設定ファイルの作成は終了です
    
    
-   
-   1. `/usr/local/AppCentral/mariadb/CONTROL`に移動します
-   
-      ``` bash
-      root@agartha # cd /usr/local/AppCentral/mariadb/CONTROL/
-      root@agartha # pwd
-      /usr/local/AppCentral/mariadb/CONTROL
-      
-      root@agartha # 
-      ```
-   
-      
-   
-   2. `start-stop.sh`スクリプトを使い、MariaDBサーバを再起動します。
+
+
+
+## MariaDBに設定を反映させる
+
+
+  作成した`encode.cnf`ファイルの設定をMariaDBに反映させるため、MariaDBのサーバーを再起動します。あわせて、`show variables`で設定が反映されているか確認します。
+
+1. `/usr/local/AppCentral/mariadb/CONTROL`に移動します
+
+``` bash
+  root@agartha # cd /usr/local/AppCentral/mariadb/CONTROL/
+  root@agartha # pwd
+  /usr/local/AppCentral/mariadb/CONTROL
+  
+  root@agartha # 
+```
+
+
+
+2.  start-stop.sh`スクリプトを使い、MariaDBサーバを再起動します。
    
       ``` bash
       root@agartha # ./start-stop.sh stop; ./start-stop.sh start
@@ -157,10 +159,10 @@ published: true
       
       root@agartha # 
       ```
-   
       
-   
-   3. `show variables`を使い、設定を確認します。
+      
+
+3. `show variables`を使い、設定を確認します。
    
       ``` mysql
       MariaDB [mysql]> show variables like 'char%';
@@ -180,13 +182,12 @@ published: true
       
       
       ```
-   
       
+      
+
+
+4.  正常に`utf8mb4`と表示されていれば、文字エンコードの設定は終了です
    
-   4. 正常に`utf8mb4`と表示されていれば、文字エンコードの設定は終了です
-   
-   
-   
-   
-   
-   
+
+
+
