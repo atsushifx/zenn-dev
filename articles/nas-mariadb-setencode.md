@@ -1,9 +1,10 @@
-﻿---
-title: "asustor NAS: MariaDBのエンコードに`UTF-8`を設定する"
+---
+title: "asustor NAS: MaiaDBの文字コードを'UTF-8'に変更する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "MariaDB", "開発環境" ]
 published: false
+
 ---
 
 # tl;dr
@@ -22,13 +23,13 @@ published: false
 
    ![rlogin](https://i.imgur.com/H42JOGZ.jpg)
 
-   
+
 
 2. MariaDBクライアントにログインします。
 
    ``` bash
    root@agartha # mysql -u root -p mysql
-   Enter password: 
+   Enter password:
    Reading table information for completion of table and column names
    You can turn off this feature to get a quicker startup with -A
    
@@ -43,7 +44,7 @@ published: false
    MariaDB [mysql]>
    ```
 
-   
+
 
 3. `show variables`コマンドを発行し、設定を確認します。
 
@@ -63,13 +64,13 @@ published: false
    +--------------------------+-------------------------------------------------------------------------+
    8 rows in set (0.00 sec)
    
-   MariaDB [mysql]> 
+   MariaDB [mysql]>
    ```
 
-   
+
 
    以上で、エンコードの確認は終了です。
-   
+
 
 # 文字エンコードの変更
 
@@ -85,20 +86,20 @@ published: false
 
 
 1. `/usr/local/AppCentral/mariadb/data/conf/conf.d`に移動します
-   
+
       ``` bash
       atsushifx@agartha # cd /usr/local/AppCentral/mariadb/data/conf/conf.d/
       atsushifx@agartha # pwd
       /usr/local/AppCentral/mariadb/data/conf/conf.d
       
-      atsushifx@agartha # 
+      atsushifx@agartha #
       ```
-      
-      
+
+
 
 
 2. `conf.d`下にencode.cnfファイルを作成し、以下のようにMariaDBの変数を設定します。
-   
+
       ``` encode.cnf
       #
       # encode settings for Japanese characters
@@ -106,29 +107,29 @@ published: false
       
       [client]
       default-character-set = utf8mb4
-      
-      
+
+
       [mysql]
       default-character-set = utf8mb4
-      
-         
+
+
       [mysqld]
       # default-character-set = utf8mb4
-      
-      
+
+
       [server]
       character-set-server  = utf8mb4
       collation-server      = utf8mb4_general_ci
-      
+    
       ```
-   
+    
       *絵文字などにも対応するため`utf8mb4`を使っています*
 
 
 
 3. 以上で、設定ファイルの作成は終了です
-   
-   
+
+
 
 
 
@@ -143,27 +144,27 @@ published: false
   root@agartha # cd /usr/local/AppCentral/mariadb/CONTROL/
   root@agartha # pwd
   /usr/local/AppCentral/mariadb/CONTROL
-  
-  root@agartha # 
+
+  root@agartha #
 ```
 
 
 
 2.  start-stop.sh`スクリプトを使い、MariaDBサーバを再起動します。
-   
+
       ``` bash
       root@agartha # ./start-stop.sh stop; ./start-stop.sh start
       Shutting down MySQL
       Starting MySQL...
       210727 11:38:48 [Note] mysqld (mysqld 10.0.28-MariaDB) starting as process 5578 ...
-      
-      root@agartha # 
+    
+      root@agartha #
       ```
-      
-      
+
+
 
 3. `show variables`を使い、設定を確認します。
-   
+
       ``` mysql
       MariaDB [mysql]> show variables like 'char%';
       +--------------------------+-------------------------------------------------------------------------+
@@ -179,15 +180,14 @@ published: false
       | character_sets_dir       | /volume1/.@plugins/AppCentral/mariadb/data/binary/share/mysql/charsets/ |
       +--------------------------+-------------------------------------------------------------------------+
       8 rows in set (0.00 sec)
-      
-      
+
+
       ```
-      
-      
+
+
 
 
 4.  正常に`utf8mb4`と表示されていれば、文字エンコードの設定は終了です
-   
 
 
 
