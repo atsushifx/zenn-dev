@@ -72,8 +72,73 @@ published: true
 
    
 
-   
+   # 文字エンコードの変更
+
+   asustor NASでは、`/usr/local/AppCentral/mariadb/`下にスクリプトや設定ファイルがあります。そこに文字エンコード設定ファイルを追加して、文字エンコードを変更します
 
    
-
+   
+   ## エンコード設定ファイルを作成する
+   
+   MariaDBでは、`/usr/local/AppCentral/`mariadb/data/conf/`下にあり、そのしたの`conf.d/`下の*.cnfファイルを読み込みます。
+   
+   次の手順で、エンコード設定ファイルを作成します。*なお、作業は`root`で行っています*
+   
+   1. `/usr/local/AppCentral/mariadb/data/conf/conf.d`に移動します
+   
+      ``` bash
+      atsushifx@agartha # cd /usr/local/AppCentral/mariadb/data/conf/conf.d/
+      atsushifx@agartha # pwd
+      /usr/local/AppCentral/mariadb/data/conf/conf.d
+      
+      atsushifx@agartha # 
+      ```
+   
+      
+   
+   2. `conf.d`下にencode.cnfファイルを作成し、以下のようにMariaDBの変数を設定します。
+   
+      ``` encode.cnf
+      #
+      # encode settings for Japanese characters
+      #
+      
+      [client]
+      default-character-set = utf8mb4
+      
+      
+      [mysql]
+      default-character-set = utf8mb4
+      
+         
+      [mysqld]
+      # default-character-set = utf8mb4
+      
+      
+      [server]
+      character-set-server  = utf8mb4
+      collation-server      = utf8mb4_general_ci
+      
+      ```
+   
+      
+   
+   3. 以上で、設定ファイルの作成は終了です
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
