@@ -121,21 +121,69 @@ published: true
       
       ```
    
+      *絵文字などにも対応するため`utf8mb4`を使っています*
+   
       
    
    3. 以上で、設定ファイルの作成は終了です
    
    
    
+   ### ## MariaDBに設定を反映させる
+   
+   作成した`encode.cnf`ファイルの設定をMariaDBに反映させるため、MariaDBのサーバーを再起動します。あわせて、`show variables`で設定が反映されているか確認します。
    
    
    
+   1. `/usr/local/AppCentral/mariadb/CONTROL`に移動します
    
+      ``` bash
+      root@agartha # cd /usr/local/AppCentral/mariadb/CONTROL/
+      root@agartha # pwd
+      /usr/local/AppCentral/mariadb/CONTROL
+      
+      root@agartha # 
+      ```
    
+      
    
+   2. `start-stop.sh`スクリプトを使い、MariaDBサーバを再起動します。
    
+      ``` bash
+      root@agartha # ./start-stop.sh stop; ./start-stop.sh start
+      Shutting down MySQL
+      Starting MySQL...
+      210727 11:38:48 [Note] mysqld (mysqld 10.0.28-MariaDB) starting as process 5578 ...
+      
+      root@agartha # 
+      ```
    
+      
    
+   3. `show variables`を使い、設定を確認します。
+   
+      ``` mysql
+      MariaDB [mysql]> show variables like 'char%';
+      +--------------------------+-------------------------------------------------------------------------+
+      | Variable_name            | Value                                                                   |
+      +--------------------------+-------------------------------------------------------------------------+
+      | character_set_client     | utf8mb4                                                                 |
+      | character_set_connection | utf8mb4                                                                 |
+      | character_set_database   | utf8mb4                                                                 |
+      | character_set_filesystem | binary                                                                  |
+      | character_set_results    | utf8mb4                                                                 |
+      | character_set_server     | utf8mb4                                                                 |
+      | character_set_system     | utf8                                                                    |
+      | character_sets_dir       | /volume1/.@plugins/AppCentral/mariadb/data/binary/share/mysql/charsets/ |
+      +--------------------------+-------------------------------------------------------------------------+
+      8 rows in set (0.00 sec)
+      
+      
+      ```
+   
+      
+   
+   4. 正常に`utf8mb4`と表示されていれば、文字エンコードの設定は終了です
    
    
    
