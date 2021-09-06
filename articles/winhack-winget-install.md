@@ -3,7 +3,7 @@ title: "Windows: WinGetをインストールする"
 emoji: "🪆"
 type: "tech"
 topics: [Windows,SCM,WinGet,パッケージマネージャー,CLI]
-published: false
+published: true
 
 ---
 
@@ -34,7 +34,6 @@ published: false
 
 
 4. 以上で、``アプリ インストーラー``のインストールは終了です。これで、コマンドラインツール``WinGet``も使えるようになります
-
 
 
 
