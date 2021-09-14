@@ -37,5 +37,43 @@ published: false
 
 
 
+#  ``Android Studio``のインストール
+
+zipアーカイブの場合は、アーカイブを展開した後のディレクトリを適当なディレクトリに配置することで``Android Studio``をインストールします。
+
+次の手順で、``Android Studio``をインストールします。
+
+1.  7zを使い、zipアーカイブを展開します。
+
+   ```powershell
+   C: /Develop > 7z x .\android-studio-2020.3.1.24-windows.zip
+   
+   7-Zip 19.00 (x64) : Copyright (c) 1999-2018 Igor Pavlov : 2019-02-21
+   
+   Scanning the drive for archives:
+   1 file, 967558484 bytes (923 MiB)
+   
+   Extracting archive: .\android-studio-2020.3.1.24-windows.zip
+   --
+   Path = .\android-studio-2020.3.1.24-windows.zip
+   Type = zip
+   Physical Size = 967558484
+   
+   
+   ```
+
+   
+
+2.   展開したファイルの``android-studio``以下を``c:\apps\Develop\android\``に移動します。
+
+   ```powershell
+   C: /Develop > mv .\android-studio\ C:\apps\Develop\android\
+   
+   ```
+
+   
+
+3.   以上で、Android Studioのインストールは終了です。
+
 
 
