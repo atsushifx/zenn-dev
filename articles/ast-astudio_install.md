@@ -3,8 +3,7 @@ title: "Android Studio: WindowsにAndroid Studioをインストールする"
 emoji: "📱"
 type: "tech" 
 topics: ["Android", "AndroidStudio",  "開発環境"]
-published: false
-
+published: true
 ---
 
 # tl;dr
@@ -26,10 +25,10 @@ published: false
 
 
 1.  [Android Studioのダウンロード](https://developer.android.com/studio?hl=ja#downloads) ページにアクセスします。
-   
+
 
 2.   ``android-studio-yyyy.mm.dd.zz-windows.zip``ファイルを選択し、ファイルをダウンロードします。
-   
+
 
 3. 以上で、``Android Studio``のダウンロードは終了です。
 
@@ -60,7 +59,6 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    
    ```
    
-
 2.   展開したファイルの``android-studio``以下を``c:\apps\Develop\android\``に移動します。
 
    ```powershell
@@ -68,7 +66,6 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    
    ```
    
-
 3.   以上で、Android Studioのインストールは終了です。
 
 
@@ -89,16 +86,13 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    
    ```
    
-
 2. スプラッシュ画面が表示された後、Welcome画面が表示されます。
 
    ![Android Studio - welcome](https://i.imgur.com/E1cOese.jpg)
    
-
 3.   Cancelをクリックし、``Android Studio``を終了します。
 
 
 
 以上で、``Android Studio``の動作確認は終了です。
-
 
