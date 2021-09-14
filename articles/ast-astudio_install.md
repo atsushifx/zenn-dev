@@ -26,11 +26,9 @@ published: false
 
 
 1.  [Android Studioのダウンロード](https://developer.android.com/studio?hl=ja#downloads) ページにアクセスします。
-
    
 
 2.   ``android-studio-yyyy.mm.dd.zz-windows.zip``ファイルを選択し、ファイルをダウンロードします。
-
    
 
 3. 以上で、``Android Studio``のダウンロードは終了です。
@@ -61,7 +59,6 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    
    
    ```
-
    
 
 2.   展開したファイルの``android-studio``以下を``c:\apps\Develop\android\``に移動します。
@@ -70,11 +67,9 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    C: /Develop > mv .\android-studio\ C:\apps\Develop\android\
    
    ```
-
    
 
 3.   以上で、Android Studioのインストールは終了です。
-
 
 
 
@@ -93,13 +88,11 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    C: /workspaces >  C:\apps\Develop\android\android-studio\bin\studio64.exe
    
    ```
-
    
 
 2. スプラッシュ画面が表示された後、Welcome画面が表示されます。
 
    ![Android Studio - welcome](https://i.imgur.com/E1cOese.jpg)
-
    
 
 3.   Cancelをクリックし、``Android Studio``を終了します。
@@ -107,8 +100,5 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
 
 
 以上で、``Android Studio``の動作確認は終了です。
-
-
-
 
 
