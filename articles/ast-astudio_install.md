@@ -19,7 +19,7 @@ published: false
 
 # ``Android Studio``のダウンロード
 
-``Android Studio``は、``Android ディベロッパー``のサイト( https://developer.android.com/?hl=ja )からダウンロードできます。
+``Android Studio``は、``Android ディベロッパー``のサイト( [https://developer.android.com/?hl=ja](https://developer.android.com/?hl=ja) )からダウンロードできます。
 
 次の手順で、``Android Studio``をダウンロードします。
 
