@@ -25,4 +25,17 @@ published: false
 
 
 
-1. 
+1.  [Android Studioのダウンロード](https://developer.android.com/studio?hl=ja#downloads) ページにアクセスします。
+
+   
+
+2.   ``android-studio-yyyy.mm.dd.zz-windows.zip``ファイルを選択し、ファイルをダウンロードします。
+
+   
+
+3. 以上で、``Android Studio``のダウンロードは終了です。
+
+
+
+
+
