@@ -3,7 +3,7 @@ title: "Android Studio: 設定ファイルの位置を変更する"
 emoji: "📱"
 type: "tech" 
 topics: ["Android", "AndroidStudio",  "開発環境", "Windows"]
-published: false
+published: true
 ---
 
 # tl;dr
