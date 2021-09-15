@@ -34,7 +34,7 @@ published: false
 
 2.   コピーした``idea.properties``ファイルを開き、以下の記述を追加します。
 
-   ``` idea.properties
+   ```  idea.properties
    # androidStudio設定ファイルのホーム
    idea.rc=${user.home}/.config/.androidStudio
    
@@ -43,11 +43,11 @@ published: false
    
    
    ```
-   
-   
 
 
-3.       変更したファイルを保存し、エディタを終了します。
+
+
+3.   変更したファイルを保存し、エディタを終了します。
 
 
 
