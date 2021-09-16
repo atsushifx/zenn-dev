@@ -21,7 +21,7 @@ $SHELLには、``/bin/sh``のようにシェルがフルパスで入っていま
 atsushifx@agartha $ echo ` [ '/bin/sh/' =~ 'sh' ]` $?
 ash: =~: unknown operand
 0
-atsushifx@agartha $ 
+
 ```
 
 
@@ -70,8 +70,8 @@ sh
    ```
 
    ``local function``とか``function  getsh(lsh)``とかも試したのですが、使えませんでした
-
    
+
 
 2.   パラメータの処理
 
@@ -91,10 +91,8 @@ sh
      
    }
    ```
-
    
 
-   
 
 3.   シェルを取得
 
@@ -116,10 +114,8 @@ sh
      
    }
    ```
-
    
 
-   
 
 4.   文字列のリターン
 
@@ -142,7 +138,6 @@ sh
      echo $sh
    }
    ```
-
    
 
 
