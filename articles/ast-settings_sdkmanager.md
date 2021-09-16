@@ -1,5 +1,5 @@
 ---
-Aんｄろいｄtitle: "Android Studio: 設定ファイルの位置を変更する"
+title: "Android Studio: SDK <anagerを設定する"
 emoji: "📱"
 type: "tech" 
 topics: ["Android", "AndroidStudio",  "開発環境",]
@@ -22,7 +22,7 @@ published: false
 
      ![Android Studio](https://i.imgur.com/PaHfB84.jpg)
 
-     
+  
 
 
 2.   起動画面から、[More Actions]-[SDK Manager]とし、``SDK Manager``を起動します
@@ -34,13 +34,11 @@ published: false
 
    以上で、``SDK Manager``の起動は終了です
 
-   
+
 
 ## Android SDK Locationの設定
 
 次の手順で、``Android SDK``を配置するフォルダを設定します
-
-
 
 
 1.    [System Settings - Android SDK]画面で[Edit]をクリックします。
@@ -55,7 +53,6 @@ published: false
 
      
 
-     
 
 3.     コンポーネントをダウンロードします。
 
