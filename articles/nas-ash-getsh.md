@@ -3,7 +3,7 @@ title: "asustor NAS: shellscript : shell名を取得する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "shellscript", "開発環境" ]
-published: false
+published: true
 
 ---
 
