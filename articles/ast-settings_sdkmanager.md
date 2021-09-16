@@ -40,7 +40,7 @@ published: false
 次の手順で、Android SDKを配置するフォルダを設定します
 
 
-1.   [System Settings - Android SDK]画面で[Edit]をクリックします
+1.   [Android SDKの設定]画面で[Edit]をクリックします
 
     ![Android SDK](https://i.imgur.com/wgmqBmR.jpg)
   
