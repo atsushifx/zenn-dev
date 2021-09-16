@@ -41,7 +41,7 @@ published: false
 次の手順で、``Android SDK``を配置するフォルダを設定します
 
 
-1.    [System Settings - Android SDK]画面で[Edit]をクリックします。
+1.    [System Settings - Android SDK]画面で[Edit]をクリックします
 
     ![Android SDK](https://i.imgur.com/wgmqBmR.jpg)
 
@@ -54,7 +54,7 @@ published: false
      
 
 
-3.     コンポーネントをダウンロードします。
+3.       コンポーネントをダウンロードします。
 
      ![Download](https://i.imgur.com/DbS2fwM.jpg)
 
