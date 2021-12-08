@@ -2,8 +2,8 @@
 title: "powershell: powershell scriptにヘルプを追加する"
 emoji: "🐢"
 type: "tech" 
-topics: ["powershell", "script", "スクリプトレット" ]
-published: false
+topics: ["powershell", "script" ]
+published: true
 ---
 
 
