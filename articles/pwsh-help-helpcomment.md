@@ -6,7 +6,9 @@ topics: ["powershell", "script", "スクリプトレット" ]
 published: false
 ---
 
-# tl;dr
+
+
+# はじめに
 
 powershellは、ブロックコメントでGet-Help用のヘルプが書けます。
 
@@ -102,7 +104,7 @@ SYNTAX
     
       .SYNOPSIS
         test -help option script
-
+    
     ```
   
   - 正しい例  
@@ -157,3 +159,20 @@ SYNTAX
 
 正しい例の場合は、``Get-Help <スクリプト>``でコメントで記述したヘルプを表示します。
 
+それ以外の場合は、次のような簡単なヘルプを表示します。
+
+``` powershell
+> Get-Help ./help-function.ps1
+help-function.ps1 [-h] [-help]
+
+```
+
+
+
+
+
+# まとめ
+
+powershellスクリプトでのヘルプの書き方を、ざっと説明してきました。スクリプトにpathが通っていれば、`Get-Help`でヘルプが見られますし、補完も効きます。
+
+便利ですよ。
