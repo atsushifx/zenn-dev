@@ -3,7 +3,7 @@ title: "powershell: powershellスクリプトの関数にヘルプを追加す�
 emoji: "🐢"
 type: "tech" 
 topics: ["powershell", "script", "コメント"]
-published: false
+published: true
 ---
 
 
