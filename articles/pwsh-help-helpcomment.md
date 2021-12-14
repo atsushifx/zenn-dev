@@ -26,20 +26,19 @@ powershellでは、'<#','#>'を使うことでブロックコメント<sub>(複�
 
 
 
-- .SYNOPSIS  
-  スクリプトの簡単な説明。1～3行程度でスクリプトがなにをおこなうかを説明します。  
-  
-- .DESCRPTION  
-  スクリプトの詳細な説明。コマンドオプションや、オプションを指定したときの動作などを説明します。  
-
-- .PARAMETER  
-  コマンドレット呼び出し時に使うパラメータの説明。各パラメータ毎に複数記述します。  
 
 
-- .EXAMPLE  
-  実際にコマンドを使うときの例。複数記述することが、できます。  
+| キーワード         | キーワードの説明                                             |
+| ------------------ | ------------------------------------------------------------ |
+| .SYNOPSIS          | スクリプトの簡単な説明、1～3行程度でスクリプトがなにをするかを簡潔に説明します」 |
+| .DESCRIPTION       | スクリプトの詳細な説明、この項は1つのヘルプトピック内で1回だけ使用できます。 |
+| .PARAMETER <param> | スクリプトを呼び出すときの引数<sub>(パラメータ)</sub>の説明。キーワードに続けて引数を書き、ヘルプ本文で引数の説明を書きます。 |
+| .EXAMPLE           | 実際にスクリプトを使うときの例を、各例ごとに記述します。     |
+|                    |                                                              |
 
-  
+
+
+
 
 ## ヘルプコメントの書き方
 
@@ -66,15 +65,14 @@ powershellでは、'<#','#>'を使うことでブロックコメント<sub>(複�
 > Get-Help .\help-function.ps1
 
 NAME
-    C:\Users\atsushifx\workspaces\develop\sandbox\powershell\help-function\help-function.ps1
+    help-function\help-function.ps1
 
 SYNOPSIS
     test -help option script
 
 
 SYNTAX
-    C:\Users\atsushifx\workspaces\develop\sandbox\powershell\help-function\help-function.ps1 [-h] [-help] [<CommonParam
-    eters>]
+   help-function\help-function.ps1 [-h] [-help] [<CommonParameters>]
 .
 .
 .
