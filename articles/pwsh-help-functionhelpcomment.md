@@ -2,7 +2,7 @@
 title: "powershell: powershellスクリプトの関数にヘルプを追加する"
 emoji: "🐢"
 type: "tech" 
-topics: ["powershell", "script", ]
+topics: ["powershell", "script", "コメント"]
 published: false
 ---
 
@@ -22,12 +22,12 @@ powershellは、ブロックコメントでGet-Help用のヘルプが書けま�
 
 
 
-| キーワード         | キーワードの説明                                                                                                        |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| .SYNOPSIS          | 関数の説明を、1行程度で簡潔に書きます。                                                                                 |
+| キーワード         | キーワードの説明                                             |
+| ------------------ | ------------------------------------------------------------ |
+| .SYNOPSIS          | 関数の説明を、1行程度で簡潔に書きます。                      |
 | .PARAMETER <param> | 関数を呼び出すときの引数<sub>(パラメータ)</sub>の説明。キーワードに続けて引数を書き、ヘルプ本文で引数の説明を書きます。 |
-| .EXAMPLE           | 関数の呼び出し方を例を挙げて書きます。呼び出しかたにあわせて、複数の例を書くことができます。                            |
-| .NOTES             | 補足事項などを書きます。                                                                                                |
+| .EXAMPLE           | 関数の呼び出し方を例を挙げて書きます。呼び出しかたにあわせて、複数の例を書くことができます。 |
+| .NOTES             | 補足事項などを書きます。                                     |
 
 
 
@@ -48,13 +48,11 @@ powershellは、ブロックコメントでGet-Help用のヘルプが書けま�
 ``` powershell
 <#
   .SYNOPSIS
-   get path type (directory, file, link)
-
-  .DESCRIPTION
-   get attributes on parameter 'path'
+   get path attribute from parameter 'path'
 
   .PARAMETER path
    type get 'path'
+
 #>
 function getPathType([string] $path)
 {
@@ -70,8 +68,12 @@ Get-Help getPathType
 NAME
     getPathType
 
+SYNOPSIS
+    get path attribute from parameter 'path'
+
 SYNTAX
     getPathType [[-path] <string>]
+
 
 
 ALIASES
@@ -103,13 +105,11 @@ REMARKS
 ``` powershell
 <#
   .SYNOPSIS
-get path type (directory, file, link)
-
-  .DESCRIPTION
-   get attributes on parameter 'path'
+   get path attribute from parameter 'path'
 
   .PARAMETER path
    type get 'path'
+
 #>
 function global:getPathType([string] $path)
 {
@@ -144,4 +144,11 @@ function global:getPathType([string] $path)
   
 
 この記事では、最初の関数の直前にヘルプコメントを書いています。多分、これが一番見やすいと思います。
+  
 
+
+# 外部リンク
+Microsoft公式ドキュメントなどの外部資料をリンクします
+
+- [関数にコメント ベースのヘルプを配置する](https://docs.microsoft.com/ja-jp/powershell/scripting/developer/help/placing-comment-based-help-in-functions) 
+- [コメント ベースのヘルプの例](https://docs.microsoft.com/ja-jp/powershell/scripting/developer/help/examples-of-comment-based-help)
