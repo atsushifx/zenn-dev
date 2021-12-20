@@ -13,8 +13,8 @@ indent_style = tab
 
 ### rc files
 [*rc]
-tab_width = 2
-indent_style = space
+tab_width = 4
+indent_style = tab
 
 ### markdown
 [*.md]
