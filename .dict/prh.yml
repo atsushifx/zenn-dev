@@ -1,0 +1,5 @@
+# atsushifx's word dics
+rules:
+  - expected: Google
+    pattern: google
+

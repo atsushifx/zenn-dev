@@ -5,13 +5,19 @@
 # top-most EditorConfig file
 # root = true
 
-# Unix-style newlines with a newline ending every file
-[*]
 
-## markdown
+### json]
+[*.json]
+tab_width = 4
+indent_style = tab
+
+### rc files
+[*rc]
+tab_width = 2
+indent_style = space
+
+### markdown
 [*.md]
-
-# indent
-indent_size = 2
+tab_width = 2
 indent_style = space
 
