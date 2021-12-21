@@ -2,4 +2,8 @@
 rules:
   - expected: App Central
     pattern: /appcentral/i
-
+  - expected: shell
+    patterns:
+      - /Shell/
+      - /シェル/
+     
