@@ -6,17 +6,15 @@ topics: ["NAS", "MariaDB", "開発環境" ]
 published: true
 ---
 
-# tl;dr
+## tl;dr
 
-asustor NASでは、インストール後のスクリプトやコマンドの配置が異なります。ここでは、[MariaDBをインストール](nas-mariadb-install)した後にデータベースを初期設定する方法を説明します。
+asustor NAS では、インストール後のスクリプトやコマンドの配置が異なります。ここでは、[MariaDBをインストール](nas-mariadb-install)した後にデータベースを初期設定する方法を説明します。
 
+### MariaDBのディレクトリ構成
 
+App Central でインストールしたアプリやツールは、ディレクトリ`/usr/local/AppCentral/`下に配置されます。
 
-## MariaDBのディレクトリ構成
-
-App Centralでアプリやツールをインストールした場合は、ディレクトリ`/usr/local/AppCentral/`下に配置されます。
-
-MariaDBの場合は、次のようになります
+MariaDB の場合は、次のようになります。
 
 ``` bash
 /usr/local/AppCentral/
@@ -34,17 +32,15 @@ MariaDBの場合は、次のようになります
     |    +-conf.d    ... 各種設定ファイル(my.cnfにより読み込まれる)
     +-lib            ... MariaDBのライブラリモジュール
     +-mysql          ... MariaDBデータディレクトリ
-    +-webman　　　　　... Web UIモジュール (ADMで使用)
+    +-webman         ... Web UIモジュール (ADMで使用)
 ```
 
+## MariaDBの初期設定
 
+asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_installation`が使えません。そのため、手動で次のように設定します。
 
-# MariaDBの初期設定
-
-asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installation`が使えません。そのため、手動で次のように設定します。
-
-1.  `mysql`コマンドを使い。MariaDBにログインします。
-   
+1. `mysql`コマンドを使い。MariaDB にログインします
+  
    ``` bash
    root@agartha # mysql -u root -p mysql
    Enter password: 
@@ -62,11 +58,9 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    MariaDB [mysql]>
    ```
 
-  
+1. ログインできるユーザーを確認します
 
-2. ログインできるユーザーを確認します。
-
-   ``` bash
+  ``` bash
    MariaDB [mysql]> select user,host,password from user;
    +------+-----------+-------------------------------------------+
    | user | host      | password                                  |
@@ -83,11 +77,9 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    
    ```
 
-   
+1. `password`が空白のユーザーを削除します
 
-3. `password`が空白のユーザーを削除します。
-
-   ``` bash
+  ``` bash
    ariaDB [mysql]> delete from user where password='';
    Query OK, 5 rows affected (0.00 sec)
    
@@ -100,13 +92,11 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    1 row in set (0.00 sec)
    
    
-   ```
+  ```
 
-   
+1. `root@localhost`のパスワードを変更します。`alter user`が使えないので、`set password`を使います
 
-4. `root@localhost`のパスワードを変更します。`alter user`が使えないので、`set password`を使います。
-
-   ``` bash
+  ``` bash
    MariaDB [mysql]> alter user root@localhost identified by 'root';
    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'user root@localhost identified by 'root'' at line 1
    
@@ -124,24 +114,20 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    1 row in set (0.00 sec)
    
    MariaDB [mysql]>  
-   ```
+  ```
 
-   
+1. このとき password 関数を使わないと、平文パスワードを入れることになるためエラーが出ます
 
-5.  このときpassword関数を使わないと、平文パスワードを入れることになるためエラーが出ます
-
-   ``` bash
+  ``` bash
    MariaDB [mysql]> set password for root@localhost = 'root';
    ERROR 1372 (HY000): Password hash should be a 41-digit hexadecimal number
    
    MariaDB [mysql]>
-   ```
+  ```
 
-   
+1. `\q`として`mysql`を抜け、念のため MariaDB を再起動します
 
-6. `\q`として`mysql`を抜け、念のためMariaDBを再起動します。
-
-   ``` bash
+  ``` bash
    
    MariaDB [mysql]> \q
    Bye
@@ -154,13 +140,11 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    210721 12:45:20 [Note] mysqld (mysqld 10.0.28-MariaDB) starting as process 31273 ...
    
    root@agartha # 
-   ```
+  ```
+  
+1. 古いパスワードで MariaDB にログインしてみます。エラーがでてログインできません。新しいパスワードならログインできます
 
-   
-
-7. 古いパスワードでMariaDBにログインしてみます。エラーがでてログインできません。新しいパスワードならログインできます。
-
-   ``` bash
+  ``` bash
    root@agartha:/tmp # mysql -u root -p mysql
    Enter password: 
    ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
@@ -179,9 +163,6 @@ asustor NASのMariaDBでは、初期設定スクリプト`mysql_secure_installat
    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
    
    MariaDB [mysql]> 
-   ```
+  ```
 
-   
-
-8. 以上で、MariaDBの初期設定は終了です。
-
+1. 以上で、MariaDB の初期設定は終了です
