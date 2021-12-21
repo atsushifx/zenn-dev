@@ -1,2 +1,2 @@
 # textlint allow list
-- /==IGNORE==[\\s\\S]*?==/IGNORE==/m`
+- /\d+つ/

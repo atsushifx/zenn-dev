@@ -1,8 +1,8 @@
 ---
-title: "powershell: powershellスクリプトの関数にヘルプを追加する"
+title: "PowerShell: PowerShellスクリプトの関数にヘルプを追加する"
 emoji: "🐢"
 type: "tech" 
-topics: ["powershell", "script", "コメント"]
+topics: ["PowerShell", "script", "コメント"]
 published: true
 ---
 
@@ -10,7 +10,7 @@ published: true
 
 # はじめに
 
-powershell は、ブロックコメントで Get-Help 用のヘルプが書けます。この Get-Help 用のコメント<sub>(ヘルプコメント)</sub>は、PowerShell スクリプト内で作成した関数にも使用できます。
+PowerShell は、ブロックコメントで Get-Help 用のヘルプが書けます。この Get-Help 用のコメント<sub>(ヘルプコメント)</sub>は、PowerShell スクリプト内で作成した関数にも使用できます。
 
 
 
@@ -33,11 +33,11 @@ powershell は、ブロックコメントで Get-Help 用のヘルプが書け�
 
 ## ヘルプコメントの書き方
 
-[powershell scriptにヘルプを追加する](https://zenn.dev/atsushifx/articles/pwsh-help-helpcomment)と同じです。作成した関数にあわせてブロックコメントを作成し、ヘルプキーワードとヘルプ本文を記述します。
+[PowerShell scriptにヘルプを追加する](https://zenn.dev/atsushifx/articles/pwsh-help-helpcomment)と同じです。作成した関数にあわせてブロックコメントを作成し、ヘルプキーワードとヘルプ本文を記述します。
 
 ヘルプコメント内に他のコメントを書かない点や、ヘルプを記述するときにインデントをするのも同じです。
 
-詳しいことは、[Microsoft公式のヘルプ](https://docs.microsoft.com/ja-jp/powershell/scripting/developer/help/examples-of-comment-based-help)を参照してください。
+詳しいことは、[Microsoft公式のヘルプ](https://docs.microsoft.com/ja-jp/PowerShell/scripting/developer/help/examples-of-comment-based-help)を参照してください。
 
 
 
@@ -45,7 +45,7 @@ powershell は、ブロックコメントで Get-Help 用のヘルプが書け�
 
 実際のヘルプコメントは、つぎのようになります。
 
-``` powershell
+``` PowerShell
 <#
   .SYNOPSIS
    get path attribute from parameter 'path'
@@ -62,7 +62,7 @@ function getPathType([string] $path)
 
 この場合の Help は、次のようになります。
 
-``` powershell
+``` PowerShell
 Get-Help getPathType
 
 NAME
@@ -92,7 +92,7 @@ REMARKS
 ヘルプコメントは、つぎのようになります。
 
 
-``` :powershell
+``` :PowerShell
 <#
   .SYNOPSIS
    get path attribute from parameter 'path'
@@ -139,5 +139,5 @@ function global:getPathType([string] $path)
 # 外部リンク
 Microsoft 公式ドキュメントなどの外部資料をリンクします。
 
-- [関数にコメント ベースのヘルプを配置する](https://docs.microsoft.com/ja-jp/powershell/scripting/developer/help/placing-comment-based-help-in-functions) 
-- [コメント ベースのヘルプの例](https://docs.microsoft.com/ja-jp/powershell/scripting/developer/help/examples-of-comment-based-help)
+- [関数にコメント ベースのヘルプを配置する](https://docs.microsoft.com/ja-jp/PowerShell/scripting/developer/help/placing-comment-based-help-in-functions) 
+- [コメント ベースのヘルプの例](https://docs.microsoft.com/ja-jp/PowerShell/scripting/developer/help/examples-of-comment-based-help)

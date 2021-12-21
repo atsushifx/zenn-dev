@@ -9,7 +9,7 @@ published: false
 
 ## はじめに
 
-[powershell scriptにヘルプを追加する](pwsh-help-helpcomment.md)で、スクリプトにヘルプコメントを書く方法を説明しました。
+[powershell scriptにヘルプを追加する](pwsh-help-helpcomment)で、スクリプトにヘルプコメントを書く方法を説明しました。
 この記事では、ヘルプコメントにどのようなコメントを書くかを例を挙げて説明します。
   
 

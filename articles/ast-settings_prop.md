@@ -6,33 +6,31 @@ topics: ["Android", "AndroidStudio",  "開発環境", "Windows"]
 published: true
 ---
 
-# tl;dr
+## tl;dr
 
 プロパティファイル"``idea.properties``"を設定して、``Android Studio``の設定の位置を変更する。
 
 
 
-# はじめに
+## はじめに
 
-プロパティファイル``idea.properties``にプロパティを設定することでプラグインや各種設定ファイルを格納する位置を変更できます。
-
+プロパティファイル``idea.properties``にプロパティを設定することでプラグインや各種設定ファイルを格納する位置を変更できます。  
 ここでは``idea.properties``内にプロパティを設定することで、ユーザーホーム下に``Android Studio``の設定をまとめます。
 
 
+##  設定の位置の変更
 
-#  設定の位置の変更
-
-## プロパティの設定
+### プロパティの設定
 
 次に、プロパティファイル"``idea.properties``"を編集してプロパティを設定します。ファイル内の該当プロパティを設定することで、``Android Studio``の設定ファイルの位置を変更します。
 
 次の手順で、プロパティを設定します。
 
-1.   ``Android Studio``の``bin``下フォルダ内にある、``idea.properties``ファイルがあります。このファイルを適当なエディタで開きます。
-     
+1.  ``Android Studio``の``bin``下フォルダ内にある、``idea.properties``ファイルがあります。このファイルを適当なエディタで開きます。
+  
 
 
-2.   コピーした``idea.properties``ファイルを開き、以下の記述を追加します。
+2.  コピーした``idea.properties``ファイルを開き、以下の記述を追加します。  
 
    ```  idea.properties
    # androidStudio設定ファイルのホーム
@@ -41,16 +39,11 @@ published: true
    # IDEのconfigフォルダ
    idea.config.path=${idea.rcome}/config
    
-   
    ```
-
-
-
+  
 
 3.   変更したファイルを保存し、エディタを終了します。
 
 
-
-
-以上で、プロパティの設定は終了です
+以上で、プロパティの設定は終了です。
 

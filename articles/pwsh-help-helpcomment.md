@@ -1,26 +1,26 @@
 ---
-title: "powershell: powershell scriptにヘルプを追加する"
+title: "PowerShell: PowerShell scriptにヘルプを追加する"
 emoji: "🐢"
 type: "tech" 
-topics: ["powershell", "script" ]
+topics: ["PowerShell", "script" ]
 published: true
 ---
 
-# powershell scriptにヘルプを追加する
+# PowerShell scriptにヘルプを追加する
 
 ## はじめに
 
-powershell は、ブロックコメントで Get-Help 用のヘルプが書けます。
+PowerShell は、ブロックコメントで Get-Help 用のヘルプが書けます。
 
 作成したヘルプは、``Get-Help <スクリプトファイル>``で表示されます。
 
 
 ## コメントベースでヘルプを書く
 
-powershell では、'<#','#>'を使うことでブロックコメント<sub>(複数行にわたるコメント)</sub>を書くことが出来ます。  
+PowerShell では、'<#','#>'を使うことでブロックコメント<sub>(複数行にわたるコメント)</sub>を書くことが出来ます。  
 このとき、ヘルプキーワードで始まるコメントを書くと Get-Help でそのコメントが表示されます。
 
-詳しいことは、[コメント ベースのヘルプのキーワード](https://docs.microsoft.com/ja-jp/powershell/scripting/developer/help/comment-based-help-keywords)を参照してください。
+詳しいことは、[コメント ベースのヘルプのキーワード](https://docs.microsoft.com/ja-jp/PowerShell/scripting/developer/help/comment-based-help-keywords)を参照してください。
 したに主なヘルプキーワードを載せておきます。
 
 
@@ -38,7 +38,7 @@ powershell では、'<#','#>'を使うことでブロックコメント<sub>(複
 
 コメントベースのヘルプ、いわゆるヘルプコメントは、次のように書きます。
 
-``` powershell
+``` PowerShell
 <#
   .SYNOPSIS
     <簡単なヘルプ>
@@ -55,7 +55,7 @@ powershell では、'<#','#>'を使うことでブロックコメント<sub>(複
 
 作成したヘルプは``Get-Help``コマンドレットを使うと表示されます。出力は、次のようになります。
 
-``` powershell
+``` PowerShell
 > Get-Help .\help-function.ps1
 
 NAME
@@ -87,7 +87,7 @@ SYNTAX
 
   - ダメな例
 
-    ``` powershell
+    ``` PowerShell
     <#
      # <ヘッダコメント>
     
@@ -98,7 +98,7 @@ SYNTAX
   
   - 正しい例  
   
-    ``` powershell
+    ``` PowerShell
     ##
     # <ヘッダコメント>
     #
@@ -119,7 +119,7 @@ SYNTAX
 
   - インデント無し <sub>(ヘルプは表示されない)</sub>
 
-    ``` powershell
+    ``` PowerShell
     <#
     .SYNOPSIS
         test -help option script
@@ -128,7 +128,7 @@ SYNTAX
 
   - 本文インデント無し <sub>(ヘルプは表示される)</sub>
 
-    ``` powershell
+    ``` PowerShell
     <#
       .SYNOPSIS
     test -help option script
@@ -137,7 +137,7 @@ SYNTAX
 
   - インデントあり
 
-     ``` powershell
+     ``` PowerShell
      <#
        .SYNOPSIS
          test -help option script
@@ -150,7 +150,7 @@ SYNTAX
 
 それ以外の場合は、次のような簡単なヘルプを表示します。
 
-``` powershell
+``` PowerShell
 > Get-Help ./help-function.ps1
 help-function.ps1 [-h] [-help]
 
@@ -162,4 +162,4 @@ help-function.ps1 [-h] [-help]
 
 ## まとめ
 
-powershell スクリプトでのヘルプの書き方を、ざっと説明してきました。スクリプトに path が通っていれば、`Get-Help`でヘルプが見られますし、補完も効きます。
+PowerShell スクリプトでのヘルプの書き方を、ざっと説明してきました。スクリプトに path が通っていれば、`Get-Help`でヘルプが見られますし、補完も効きます。
