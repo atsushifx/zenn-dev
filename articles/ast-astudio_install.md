@@ -8,39 +8,38 @@ published: true
 
 # tl;dr
 
-``Android Studio``をzipアーカイブから展開して、インストールする
+``Android Studio``を zip アーカイブから展開して、インストールします。
 
 # はじめに
 
-``Android Studio``は、Androidアプリを開発するための統合開発環境<sub>(IDE)</sub>です。アプリ開発の他に、``Android SDK``の管理や``Android Emulator``といった機能も備えており、``Android Studio``一つで、複数のAndroid機器に対応したアプリを開発できます。
+``Android Studio``は、Android アプリを開発するための統合開発環境<sub>(IDE)</sub>です。
+アプリ開発の他に、``Android SDK``の管理や``Android Emulator``といった機能も備えており、``Android Studio``1 つで、複数の Android 機器に対応したアプリを開発できます。
 
 
 
 # ``Android Studio``のダウンロード
 
-``Android Studio``は、``Android ディベロッパー``のサイト( [https://developer.android.com/?hl=ja](https://developer.android.com/?hl=ja) )からダウンロードできます。
+`Android Studio`は、`Android ディベロッパー`のサイト([https://developer.android.com/?hl=ja](https://developer.android.com/?hl=ja))からダウンロードできます。
 
 次の手順で、``Android Studio``をダウンロードします。
-
 
 
 1.  [Android Studioのダウンロード](https://developer.android.com/studio?hl=ja#downloads) ページにアクセスします。
 
 
-2.   ``android-studio-yyyy.mm.dd.zz-windows.zip``ファイルを選択し、ファイルをダウンロードします。
+2.  ``android-studio-yyyy.mm.dd.zz-windows.zip``ファイルを選択し、ファイルをダウンロードします。
 
 
-3. 以上で、``Android Studio``のダウンロードは終了です。
-
+3.  以上で、``Android Studio``のダウンロードは終了です。
 
 
 #  ``Android Studio``のインストール
 
-zipアーカイブの場合は、アーカイブを展開した後のディレクトリを適当なディレクトリに配置することで``Android Studio``をインストールします。
+zip アーカイブの場合は、アーカイブを展開した後のディレクトリを適当なディレクトリに配置することで``Android Studio``をインストールします。
 
 次の手順で、``Android Studio``をインストールします。
 
-1.  7zを使い、zipアーカイブを展開します。
+1.  7z を使い、zip アーカイブを展開します。
 
    ```powershell
    C: /Develop > 7z x .\android-studio-2020.3.1.24-windows.zip
@@ -66,7 +65,7 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    
    ```
    
-3.   以上で、Android Studioのインストールは終了です。
+3.   以上で、Android Studio のインストールは終了です。
 
 
 
@@ -86,12 +85,11 @@ zipアーカイブの場合は、アーカイブを展開した後のディレ�
    
    ```
    
-2. スプラッシュ画面が表示された後、Welcome画面が表示されます。
+2.  スプラッシュ画面が表示された後、Welcome 画面が表示されます。  
+  ![Android Studio - welcome](https://i.imgur.com/E1cOese.jpg)
 
-   ![Android Studio - welcome](https://i.imgur.com/E1cOese.jpg)
-   
-3.   Cancelをクリックし、``Android Studio``を終了します。
-
+  
+3.   Cancel をクリックし、``Android Studio``を終了します。
 
 
 以上で、``Android Studio``の動作確認は終了です。
