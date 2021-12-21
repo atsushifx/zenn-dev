@@ -1,5 +1,5 @@
 ---
-title: "asustor NAS: asustor nasにMariaDBをインストールする"
+title: "NAS: asustor nasにMariaDBをインストールする"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS","開発環境", "MySQL", MariaDB"]
@@ -7,64 +7,40 @@ published: true
 
 ---
 
-# はじめに
+## はじめに
 
-asustor製のNASには、各種アプリ用のデータベースとしてMariaDBが提供されています。この記事では、NASの管理用アプリであるAppCentral上でMariaDBをインストールして、DBの起動／停止までを行います。 
+asustor 製の NAS には、各種アプリ用のデータベースとして MariaDB が提供されています。この記事では、NAS の管理用アプリである App Central 上で MariaDB をインストールして、DB の起動／停止までを行います。
 
-# MariaDBのインストール (AppCentral上)
+## MariaDBのインストール
 
-1. Web上のAppCentralにアクセスします
-   
-   ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
-   
-   
+App Central　
 
+1. Web 上の App Central にアクセスします
 
-2. AppCentralからMariaDBを探し、選択します。
-   
-   
-    ![MariaDB](https://storage.googleapis.com/zenn-user-upload/52hhzcpnzboyk70r4155nbc0votm)
-    
-    
+  ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
 
+1. App Central から MariaDB を探し、選択します。
 
-3. [インストール]をクリックします。
-   
-   
-    ![MariaDB](https://storage.googleapis.com/zenn-user-upload/uwxiqe4cbg1lrq0vnfsnndvi3zr9)
-    
-    
+  ![MariaDB](https://storage.googleapis.com/zenn-user-upload/52hhzcpnzboyk70r4155nbc0votm)
 
+1. [インストール]をクリックします。
+  
+  ![MariaDB](https://storage.googleapis.com/zenn-user-upload/uwxiqe4cbg1lrq0vnfsnndvi3zr9)
 
-4. 以上でインストールは終了です。
+1. 以上でインストールは終了です。
 
-# MariaDBの起動/停止/再起動
+## MariaDBの起動/停止/再起動
 
-asustor nasでは、MariaDBの起動／停止をWeb上のAppCentralからおこないます。
+asustor nas では、MariaDB の起動／停止を Web 上の App Central からおこないます。
 
+1. Web 上の App Central にアクセスします。
+  
+  ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
 
+1. 左サイドメニューの[インストール済み]を選択し、[MariaDB]を開きます。
 
-1. Web上のAppcentralにアクセスします
-   
-   
-    ![AppCentral](https://storage.googleapis.com/zenn-user-upload/v4c4y3aq0yd0jhb1g9397h3keijz)
-    
-    
+  ![MariaDB](https://storage.googleapis.com/zenn-user-upload/y7okgbbbztmjxxq55yv8ty72or5w)
 
+1. [MariaDB]のロゴの下に、実行／終了スライドスイッチがあります。ここを使って、MariaDB を起動／停止します。
 
-2. 左サイドメニューの[インストール済み]を選択し、[MariaDB]を開きます。
-   
-     ![MariaDB](https://storage.googleapis.com/zenn-user-upload/y7okgbbbztmjxxq55yv8ty72or5w)
-     
-     
-
-
-3. [MariaDB]のロゴの下に、実行／終了スライドスイッチがあります。ここを使って、MariaDBを起動／停止します。
-
-   
-
-
-4. MariaDBの再起動は、上記のスイッチを使います。MariaDBを終了後、再度MariaDBを実行することで再起動します。
-
-
-
+1. MariaDB の再起動は、上記のスイッチを使います。MariaDB を終了後、再度 MariaDB を実行することで再起動します。
