@@ -32,9 +32,9 @@ rules:
     pattern: /フッタ([^ー])/
   - expected: マネージャー$1
     pattern: /マネージャ([^ー])/
-  - expected: サーバー$1
+  - expected: サーバ$1
     pattern: /サーバ([^ー])/
-  - expected: サーバー$1
+  - expected: サーバ
     pattern: /サーバ([^ー])/
   - expected: ブラウザ
     pattern: /ブラウザー?/

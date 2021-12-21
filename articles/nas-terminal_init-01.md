@@ -1,38 +1,27 @@
 ---
-title: "asustor NAS : sshサービスを有効化する"
+title: "NAS : sshサービスを有効化する"
 emoji: "🍆"
-type: "tech" # tech: 技術記事 / idea: アイデア
+type: "tech"
 topics: ["NAS", "terminal", "ssh", "開発環境"]
 published: true
 
 ---
 
-# TL;DR
+## TL;DR
 
-asustor NASにはsshサーバがついている。そこで、sshサービスを有効化してターミナルソフトでログインできるようにする。
+asustor NAS には ssh サーバがついています。ここでは、ssh サービスを有効化してターミナルソフトでログインできるようにします。
 
+## sshサービスの有効化
 
-# sshサービスの有効化
+以下の手順で ssh サービスを有効化します。
 
-以下の手順でsshサービスを有効化します
-
-1. NASのWebコンソールを開きます。
-
-   ![Webコンソール](https://i.imgur.com/GIKo3df.jpg)
-
-   
+1. NAS の Web コンソールを開きます。
+  ![Webコンソール](https://i.imgur.com/GIKo3df.jpg)
 
 2. [システム管理]-[サービス]として、[サービス]ペーンを開きます。
+  ![サービス](https://i.imgur.com/lyttOnR.jpg)
 
-   ![サービス](https://i.imgur.com/lyttOnR.jpg)
+3. [端末]を選択して[端末]ペーンを開きます。その後、[ssh サービスを有効にする]をチェックして[適用]をクリックします。
+  ![端末](https://i.imgur.com/JhhlAAL.jpg)
 
-   
-
-3. [端末]を選択して[端末]ペーンを開きます。その後、[sshサービスを有効にする]をチェックして、[適用]をクリックします。
-
-   ![端末](https://i.imgur.com/JhhlAAL.jpg)
-
-   
-
-4. 以上で、sshサービスの有効化は完了です。
-
+4. 以上で、ssh サービスの有効化は完了です。
