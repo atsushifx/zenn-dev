@@ -9,13 +9,13 @@
 	"rules": {
 		"preset-ja-technical-writing": {
 			"sentence-length": {
-				max: 110,
-			},
+				"max": 110
+			}
 		},
 		"preset-jtf-style": {
 			"3.1.1.全角文字と半角文字の間": false,
 			"4.3.1.丸かっこ（）": false,
-			"4.3.2.大かっこ［］": false,
+			"4.3.2.大かっこ［］": false
 		},
 		"preset-ja-spacing": {
 			"ja-space-between-half-and-full-width": {
@@ -25,9 +25,16 @@
 		"@proofdict/proofdict": {
 			"dictURL": "https://atsushifx.github.io/proof-dictionary/"
 		},
+		"prh": {
+			"rulePaths": [
+				".textlint/smarthr-basic.yml",
+				".textlint/smarthr-tech-word.yml",
+				".textlint/proof.yml"
+			]
+		},
 		"ja-hiragana-hojodoushi": true,
 		"ja-hiragana-fukushi": true,
 		"ja-hiragana-daimeishi": true,
-		"ja-keishikimeishi": true,
+		"ja-keishikimeishi": true
 	}
 }

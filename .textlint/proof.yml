@@ -1,0 +1,5 @@
+### atsushifx's word dics
+rules:
+  - expected: App Central
+    pattern: /appcentral/i
+
