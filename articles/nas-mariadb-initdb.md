@@ -60,7 +60,7 @@ asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_instal
 
 1. ログインできるユーザーを確認します
 
-  ``` bash
+   ``` bash
    MariaDB [mysql]> select user,host,password from user;
    +------+-----------+-------------------------------------------+
    | user | host      | password                                  |
@@ -79,7 +79,7 @@ asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_instal
 
 1. `password`が空白のユーザーを削除します
 
-  ``` bash
+   ``` bash
    ariaDB [mysql]> delete from user where password='';
    Query OK, 5 rows affected (0.00 sec)
    
@@ -90,13 +90,12 @@ asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_instal
    | root | localhost | *4ACFE3202A5FF5CF467898FC58AAB1D615029441 |
    +------+-----------+-------------------------------------------+
    1 row in set (0.00 sec)
-   
-   
-  ```
+
+    ```
 
 1. `root@localhost`のパスワードを変更します。`alter user`が使えないので、`set password`を使います
 
-  ``` bash
+   ``` bash
    MariaDB [mysql]> alter user root@localhost identified by 'root';
    ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'user root@localhost identified by 'root'' at line 1
    
@@ -114,20 +113,20 @@ asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_instal
    1 row in set (0.00 sec)
    
    MariaDB [mysql]>  
-  ```
+   ```
 
 1. このとき password 関数を使わないと、平文パスワードを入れることになるためエラーが出ます
 
-  ``` bash
+   ``` bash
    MariaDB [mysql]> set password for root@localhost = 'root';
    ERROR 1372 (HY000): Password hash should be a 41-digit hexadecimal number
    
    MariaDB [mysql]>
-  ```
+   ```
 
 1. `\q`として`mysql`を抜け、念のため MariaDB を再起動します
 
-  ``` bash
+   ``` bash
    
    MariaDB [mysql]> \q
    Bye
@@ -140,11 +139,11 @@ asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_instal
    210721 12:45:20 [Note] mysqld (mysqld 10.0.28-MariaDB) starting as process 31273 ...
    
    root@agartha # 
-  ```
+   ```
   
 1. 古いパスワードで MariaDB にログインしてみます。エラーがでてログインできません。新しいパスワードならログインできます
 
-  ``` bash
+   ``` bash
    root@agartha:/tmp # mysql -u root -p mysql
    Enter password: 
    ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
@@ -163,6 +162,6 @@ asustor NAS の MariaDB では、初期設定スクリプト`mysql_secure_instal
    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
    
    MariaDB [mysql]> 
-  ```
+   ```
 
 1. 以上で、MariaDB の初期設定は終了です
