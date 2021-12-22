@@ -2,9 +2,8 @@
 rules:
   - expected: App Central
     pattern: /appcentral/i
-  - expected: shell
-    patterns:
-      - /Shell/
-      - /シェル/
   - expected: ssh鍵
     pattern: /ssh[ ]*キー/i   
+  - expected: PowerShell
+    patterns: /powershell/
+

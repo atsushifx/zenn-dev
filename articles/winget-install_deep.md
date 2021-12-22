@@ -1,110 +1,103 @@
 ---
-title: "Windows: wingetでオプション付きで、アプリをインストールする"
+title: "Windows: winget: wingetでオプション付きで、アプリをインストールする"
 emoji: "🪆"
 type: "tech"
-topics: ["SCM","Windows","wiget","構成管理", "PackageManager"]
+topics: ["Windows","構成管理", "SCM", "winget", "PackageManager"]
 published: true
+
 ---
-# はじめに
 
-wingetでは、インストール時にオプションを指定することができます。とはいえ、まだ開発プレビューなので、すべてがうまく動いているわけではありません。
+## はじめに
 
-この記事では、知っていると便利であろうオプションの解説をします。 *`winget v1.0.11694`で試した結果に基づいています*
+winget では、インストール時にオプションを指定できます。とはいえ、まだ開発プレビューなので、すべてがうまく動いているわけではありません。
 
-# 基本的なインストール構文
+この記事では、知っていると便利なオプションの解説をします。 *`winget v1.0.11694`で試した結果に基づいています*
 
-wingetは、次の構文でアプリをインストールします。
+## 基本的なインストール構文
+
+winget は、次の構文でアプリをインストールします。
 
 `winget install <package> [<オプション>]`
 
-<package>は、インストールするアプリのパッケージを指定します。指定の仕方は、[wingetでの基本的なアプリのインストール方法](/atsushifx/articles/winget-install_basic)を参照してください。
+\<package\>は、インストールするアプリのパッケージを指定します。指定の仕方は、[wingetでの基本的なアプリのインストール方法](winget-install_basic)を参照してください。
 
-<オプション>は、インストーラの細かな動作を指定します。よく使うであろうオプションは、この記事で解説します。
+\<オプション\>は、インストーラの細かな動作を指定します。よく使うオプションは、この記事で解説します。
 
+## よく使うオプション
 
-# よく使うオプション
-
-よく使うであろうオプションを、以下で解説します。
-
+よく使うオプションを解説します。
 
 - `--help`
-  
   install コマンドで使える各オプションについて出力します
 
-  ``` powershell
-  winget install --help
-  ```
-
+   ``` :PowerShell
+   winget install --help
+   
+   ```
 
 - `-i`, `--interactive`
-
   対話式のインストールを行います。ユーザーの入力が必要となる場合があります。
 
-  ``` powershell
-  winget install <package> --interactive
-  ```
-
+   ``` :PowerShell
+   winget install <package> --interactive
+   
+   ```
 
 - `-h`, `--silent`
 
   サイレントインストールを行います。*パッケージが対応している場合*
 
-  ``` powersell
-  winget install <package> --silent
-  ```
-
+   ``` :PowerInstall
+   winget install <package> --silent
+   
+   ```
 
 - `-o`, `--log`
-
   指定したログファイルにインストールログを出力します。
 
-  ``` powershell
-  winget install <packag> --log <logfile>
-  ```
-
+   ``` powershell
+   winget install <packag> --log <logfile>
+  
+   ```
 
 - `-e`, `--exact`
-
   英語の大文字小文字もふくめ、入力したキーワードに完全一致するパッケージをインストールします。*主にidでパッケージを指定します*
 
-  ``` powershell
-  winget install --exact <package>
-  ```
-
+   ``` :PowerShell
+   winget install --exact <package>
+  
+   ```
 
 - `-v`, `--version`
+  指定したバージョンのパッケージをインストールします。~(このオプションを指定しない場合は、最新バージョンをインストールします)~
 
-  指定したバージョンのパッケージをインストールします。このオプションを指定しない場合、最新バージョンをインストールします
-
-  ```powershell
-  winget install <package> --version <version>
-  ```
-
+   ``` :PowerShell
+   winget install <package> --version <version>
+  
+   ```
 
 - `-l`, `--location`
-
   オプションで指定された場所に、アプリをインストールします。*パッケージが対応している場合*
+  **現在、空白をふくむフォルダには対応していません**
 
-  **現在、空白をふくむフォルダーには対応していません**
-
-  ``` powershell
-  winget install <package> --location <installDir>
-  ```
-
+   ``` :PowerShell
+   winget install <package> --location <installDir>
+   
+   ```
 
 - `--override`
+  パッケージのインストーラに対して、オプションを指定します。
+  インストール先の変更など、アプリ毎の細かい指定にこのオプションを使います。
+  **複数のオプションを指定したい場合は、引用符で括ります**
 
-  パッケージのインストーラにオプションを指定します。**複数のオプションを指定したい場合は、引用符で括ります**
+   ``` :PowerShell
+   winget install <package> --override <installOption>
+   
+   ```
 
-  ```powershell
-  winget install <package> --override <installOption>
-  ```
-
-
-# リンク
+## リンク
 
 以下のリンクが参考になります。
 
 - [install コマンド (winget)](https://docs.microsoft.com/ja-jp/windows/package-manager/winget/install)
-  - Microsoftの公式ドキュメント
-
+  - Microsoft の公式ドキュメント
