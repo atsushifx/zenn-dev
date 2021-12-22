@@ -1,2 +1,4 @@
 # textlint allow list
 - /\d+つ/
+- ssh鍵
+

@@ -6,4 +6,5 @@ rules:
     patterns:
       - /Shell/
       - /シェル/
-     
+  - expected: ssh鍵
+    pattern: /ssh[ ]*キー/i   

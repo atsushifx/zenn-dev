@@ -1,5 +1,5 @@
 ---
-title: "NAS: アプリのインストール"
+title: "asustor NAS: アプリのインストール"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "ADM", "開発環境", "カスタマイズ" ]

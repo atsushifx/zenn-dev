@@ -1,5 +1,5 @@
 ---
-title: "NAS : sshサービスを有効化する"
+title: "asustor NAS : sshサービスを有効化する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "terminal", "ssh", "開発環境"]

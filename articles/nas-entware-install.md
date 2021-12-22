@@ -1,5 +1,5 @@
 ---
-title: "NAS: NASにパッケージマネージャ'entware'を導入する"
+title: "asustor NAS: NASにパッケージマネージャ'entware'を導入する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "カスタマイズ", "パッケージマネージャー", "entware"]
@@ -55,7 +55,7 @@ entware の例として、`bash` をインストールします。
 
    ``` bash
    atsushifx@agartha $ sudo vi /etc/passwd
-   Password:]
+   Password:
 
    ```
 

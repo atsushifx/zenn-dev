@@ -1,5 +1,5 @@
 ---
-title: "NAS: shellscript : shell名を取得する"
+title: "asustor NAS: shellscript : shell名を取得する"
 emoji: "🍆"
 type: "tech"
 topics: ["NAS", "ash", "script", "開発環境" ]
