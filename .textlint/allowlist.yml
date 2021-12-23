@@ -1,5 +1,9 @@
 # textlint allow list
 - /\d+つ/
+- /第\d+/
+- /\d+[年月日]/
 - ssh鍵
+- /[A-Z]+ドライブ/
+
 
 
