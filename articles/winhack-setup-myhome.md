@@ -19,8 +19,8 @@ published: true
 
 ## はじめに
 
-Windows 環境で bash や vim を使うと、$USERPROFILE ~(通常なら、`(C:\Users\<ユーザ名>\`))~下に大量に dotfile がつくられます。
-例えば`.bash_history`や`.lesshst'のようなヒストリーファイル、`.bashrc`のような設定ファイルといった具合です。
+Windows 環境で bash や vim を使うと、$USERPROFILE ~(通常なら、`C:\Users\<ユーザ名>\`)~下に大量に dotfile がつくられます。
+例えば`.bash_history`や`.lesshst`のようなヒストリーファイル、`.bashrc`のような設定ファイルといった具合です。
 
 これらの各種 dotfile は、ホームディレクトリ下に置かれます。
 しかし、Windows の場合はすでに Documents や Downloads のような各種フォルダがおかれていますし、各種のシステムファイルもおかれています。
