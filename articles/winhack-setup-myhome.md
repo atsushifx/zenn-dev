@@ -3,7 +3,7 @@ title: "Windows: hacks: 環境変数'HOME'を上書きして、オレオレ設�
 emoji: "🪟"
 type: "tech"
 topics: [Windows,開発環境,カスタマイズ,hack]
-published: false
+published: true
 
 ---
 
