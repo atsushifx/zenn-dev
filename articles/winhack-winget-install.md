@@ -1,39 +1,43 @@
 ---
-title: "Windows: WinGetをインストールする"
+title: "Windows: winget: wingetをインストールする"
 emoji: "🪆"
 type: "tech"
-topics: [Windows,SCM,WinGet,パッケージマネージャー,CLI]
+topics: [Windows, 開発環境, SCM, winget, パッケージマネージャ, CLI ]
 published: true
 
 ---
 
-# tl;dr
+## tl;dr
 
-``WinGet``の正式版は、Windowsの公式ビルドには提供されていません。そのため、手動で``WinGet``パッケージマネージャーをインストールします。
+`winget`は、2021年に安定版となりました。Windows 11 では、はじめから使えるようになっています。
+winget 経由での winget のバージョンアップはまだできません。この記事では、手動で`winget`をインストールします。
 
-# ``WinGet``のインストール
+## はじめに
 
-``WinGet``は、Microsoftの``アプリ インストーラー``に含まれています。次の手ストア順で、``アプリ インストーラー``をインストールします。
+`winget`は`Windows`のコマンドライン、いわゆる CLI で実行するアプリインストーラです。
+`Windows Terminal`上で`winget install <パッケージ>`とすることで、簡単にアプリをインストールできます。
 
-1.  Microsoftストアを開きます。
+### `winget`のインストール
+
+`winget`は、Microsoft のアプリ インストーラー~(`Microsoft.DesktopAppInstaller`)~に含まれています。
+アプリインストーラは Microsoft ストアで提供されているので、ストア経由でアプリインストーラーをインストールします。
+
+次の手順で、`アプリ インストーラー`をインストールします。
+
+1. Microsoft ストアへのアクセス
+   Microsoft ストアを開きます。
 
    ![Microsoftストア](https://i.imgur.com/A2IURwg.jpg)
 
-
-
-2.  検索窓に'アプリインストーラー'と入力して、検索します。
+2. アプリの検索
+   検索窓に'アプリインストーラー'と入力して、検索します。
 
    ![Microsoftストア](https://i.imgur.com/EYErtsw.jpg)
 
-
-
-3. ``アプリ インストーラー``をインストールします
+3. アプリのインストール
+  [入手]をクリックし、`アプリ インストーラー`をインストールします。
 
    ![Microsoftストア](https://i.imgur.com/VJOOa95.jpg)
 
-
-
-4. 以上で、``アプリ インストーラー``のインストールは終了です。これで、コマンドラインツール``WinGet``も使えるようになります
-
-
-
+以上で、`アプリ インストーラー`のインストールは終了です。
+これで、コマンドラインツール`winget`も使えます。

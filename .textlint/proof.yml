@@ -5,5 +5,12 @@ rules:
   - expected: ssh鍵
     pattern: /ssh[ ]*キー/i   
   - expected: PowerShell
-    patterns: /powershell/
+    patterns:
+      - /powershell/
+  - expected: winget
+    patterns: 
+      - WinGet
+      - winGet
+      - Winget
+
 

@@ -1,108 +1,101 @@
 ---
-title: "Windows: open-shellをインストールする"
+title: "Windows: uty: open-shellをインストールする"
 emoji: "🪟"
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [Windows,個人開発,開発環境,カスタマイズ,hack]
+type: "tech"
+topics: ["Windows", "開発環境", "hack", ]
 published: true
 
 ---
 
-# Open-Shellについて
+## tl;dr
 
-Open-Shellは、Windows 8,Windows 10などの環境でWindows XPやWindows 7スタイルのスタートメニューを追加するツールです。  
+Windows に open-shell をインストールして、Windows 7 時代のスタートメニューを復活させる。
 
-元々は、Classic Shellというツールでしたが、Classic Shellは開発が止まったため、新たにOpen-Shellという名前でOSSとして開発されました、
+## はじめに
+
+Windows も 11 までバージョンが上がりましたが、スタートメニューは Windows 7 のころのが使いやすいです。
+そこで、open-shell をインストールして Windows 7 のときのスタートメニューを復活させます。
+
+### Open-Shellについて
+
+Open-Shell は、Windows 8 以降の環境で Windows XP や Windows 7 スタイルのスタートメニューを追加するツールです。  
+
+もともとは"Classic Shell"というツールでしたが、Classic Shell は開発が止まってしまいました。
+そのため、Classic Shell から fork して、新たに Open-Shell という名前で OSS として開発されました、
 現在は、[GitHub](https://github.com/Open-Shell/Open-Shell-Menu)上で開発が続けられています。
 
-# Open-Shellのインストール
+## Open-Shellのインストール
 
-## Open-Shellをダウンロードする
+### Open-Shellをダウンロードする
 
-Open-ShellはGitHubのOpen-Shell/Open-Shell-Menuからダウンロードできます。次の手順で、Open-Shellをダウンロードします。
+Open-Shell は GitHub の Open-Shell/Open-Shell-Menu からダウンロードできます。次の手順で、Open-Shell をダウンロードします。
 
-1. [GitHub/Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu)にアクセスします。
+1. Web サイトへのアクセス
+   [GitHub/Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu)にアクセスします
 
-    ![Open-Shell](https://i.imgur.com/cEeOFaP.jpg)
+   ![Open-Shell](https://i.imgur.com/cEeOFaP.jpg)
 
+2. release ファイルへのアクセス
+   Download の項の[Downloadボタン](https://github.com/Open-Shell/Open-Shell-Menu/releases)をクリックします。Open-Shell インストーラのリンクが表示されます
 
-2. ![Downloads](https://i.imgur.com/EEKgI1h.png)をクリックし、Open-Shellをダウンロードします。
+3. Open-Shell のダウンロード
+   release 中の Open-Shell のリンクをクリックします。Open-Shell をダウンロードします
 
+以上で、Open-Shell のダウンロードは終了です。
 
-3. 以上で、Open-Shellのダウンロードは終了です。
+### Open-Shellをインストールする
 
+次の手順で Open-Shell をインストールします。
 
-## Open-Shellをインストールする
-
-次の手順でOpen-Shellをインストールします。
-
-1. Open-Shellインストーラを起動します
+1. インストラーの起動
+   Open-Shell インストーラを起動します
 
    ![Open-Shell Setup](https://i.imgur.com/GO8GBZS.jpg)
-   
-   
 
-
-2. ライセンスを下までスクロールし、**License Agreement**に同意します。
+2. ライセンスの同意
+   ライセンスを下までスクロールし、**License Agreement**に同意します
 
    ![End-User License Agreement](https://i.imgur.com/eNpzGOu.jpg)
-   
-   
 
-
-3. Custom Setupを選択し、Classic IEのチェックを外します。また、インストール先を"C:\Program Files\Apps\Open-Shell"に変更します。
+3. セットアップオプション
+   Custom Setup を選択し、Classic IE のチェックを外します。また、インストール先を"C:\Program Files\System\Open-Shell"に変更します
 
    ![Custom Setup](https://i.imgur.com/rrBGHen.jpg)
-   
-   
 
-
-4. Open-Shellをインストールします。終了ダイアログが表示されるので、**Finish**をクリックします
+4. Open-Shell のインストール
+   Open-Shell をインストールします
+   終了ダイアログが表示されるので、**Finish**をクリックします
 
    ![Open-Shellセットアップ](https://i.imgur.com/GO8GBZS.jpg)
-   
-   
 
+以上でインストールは終了です。
+以後、**Windows**アイコンをクリックすると Windows 7 スタイルのメニューを表示します。~(Windows 11 ではアイコンをクリックしてもメニューは表示されません。`Replace Start Button`をチェックすると左下にボタンを表示します)~
 
-5. 以上でインストールは終了です。以後、**Windows**アイコンをクリックするとWindows 7スタイルのメニューを表示します。
+## Open-Shellのカスタマイズ
 
-   <sub>Windows 11ではアイコンをクリックしてもメニューは表示されません。**Windowsキー**を押下すると表示されます</sub>
+### Open-Shellをカスタマイズする
 
+Open-Shell は Open-Shell Menu settings アプリでカスタマイズします。
+次の手順で、Open-Shell をカスタマイズします。
 
-
-# Open-Shellのカスタマイズ
-
-## Open-Shellをカスタマイズする
-
-
-Open-ShellはOpen-Shell Menu settingsアプリでカスタマイズします。
-次の手順で、Open-Shellをカスタマイズします。
-
-1. スタートメニューから、**[Open-Shell Menu Setting]**を開きます。
+1. Settings アプリの起動
+   スタートメニューから、*[Open-Shell Menu Setting]*を開きます
 
    ![Settings for Open-Shell Menu](https://i.imgur.com/clJ0E71.jpg)
-   
-   
 
+2. Open-Shell のカスタマイズ
+  [Start Menu Style]では、*[Windows 7 Style]*を選びます。同様に、[Replace Start Button]をチェックして、[スタート]ボタンを表示します
 
-2. [Start Menu Styke]では、**[Windows 7 Style]**を選びます。同様に、[Replace Start Button]をチェックします。
+3. そのほかの設定
+   必要ならそのほかの項目も設定します。[Show all settings]をチェックすると、さらに細かい設定もできます
 
-   
+4. 設定の終了
+  [OK]をクリックして、設定を*"Open-Shell Menu"*に適用します
 
+以上で、Open-Shell のカスタマイズは終了です。設定した項目は、XML ファイルとしてバックアップできます。
 
-3. 必要であれば、そのほかの項目も設定します。[Show all settings]をチェックすると、さらに細かい設定も出来ます
-
-   
-
-
-4. [OK]をクリックし、設定を**"Open-Shell Menu"**に適用します。
-
-
-
-以上で、Open-Shellのカスタマイズは終了です。設定した項目は、XMLファイルとしてバックアップできます。
-
-参考用に、自分の設定を下記に載せておきます。
+参考として、自分の設定を載せておきます。
 
 [Menu-Settings.xml](https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730)
 
 @[gist](https://gist.github.com/atsushifx/a58d47175ee91a0d9375b2ab179cd730)
-
