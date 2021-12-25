@@ -2,7 +2,7 @@
 title: "Windows: hacks: 環境変数'HOME'を上書きして、オレオレ設定フォルダをつくる"
 emoji: "🪟"
 type: "tech"
-topics: [Windows,開発環境,カスタマイズ,hack]
+topics: [Windows,環境構築,カスタマイズ,hack]
 published: true
 
 ---

@@ -2,7 +2,7 @@
 title: "Windows: wsl: wsl2をインストールする"
 emoji: "🐧"
 type: "tech"
-topics: [Windows, Linux, wsl, 開発環境, カスタマイズ]
+topics: [Windows, Linux, wsl, 環境構築, カスタマイズ]
 published: true
 
 ---

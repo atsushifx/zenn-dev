@@ -2,7 +2,7 @@
 title: "Windows: uty: open-shellをインストールする"
 emoji: "🪟"
 type: "tech"
-topics: ["Windows", "開発環境", "hack", ]
+topics: ["Windows", "環境構築", "hack", ]
 published: true
 
 ---

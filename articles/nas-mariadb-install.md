@@ -2,7 +2,7 @@
 title: "asustor NAS: NASにMariaDBをインストールする"
 emoji: "🍆"
 type: "tech"
-topics: ["NAS","開発環境", "MySQL", "MariaDB"]
+topics: ["NAS","環境構築", "MySQL", "MariaDB"]
 published: true
 
 ---

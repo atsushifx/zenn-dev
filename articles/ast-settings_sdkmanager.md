@@ -2,7 +2,7 @@
 title: "Android Studio: SDK Managerを設定する"
 emoji: "📱"
 type: "tech" 
-topics: ["Android", "AndroidStudio",  "開発環境",]
+topics: ["Android", "AndroidStudio",  "環境構築",]
 published: false
 
 ---

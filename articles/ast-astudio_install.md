@@ -2,7 +2,7 @@
 title: "Android Studio: WindowsにAndroid Studioをインストールする"
 emoji: "📱"
 type: "tech" 
-topics: ["Android", "AndroidStudio",  "開発環境"]
+topics: ["Android", "AndroidStudio",  "環境構築"]
 published: true
 ---
 

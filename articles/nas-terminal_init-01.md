@@ -2,7 +2,7 @@
 title: "asustor NAS : sshサービスを有効化する"
 emoji: "🍆"
 type: "tech"
-topics: ["NAS", "terminal", "ssh", "開発環境"]
+topics: ["NAS", "terminal", "ssh", "環境構築"]
 published: true
 
 ---

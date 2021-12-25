@@ -2,7 +2,7 @@
 title: "Windows: winget: wingetをインストールする"
 emoji: "🪆"
 type: "tech"
-topics: [Windows, 開発環境, SCM, winget, パッケージマネージャ, CLI ]
+topics: [Windows, 環境構築, SCM, winget, パッケージマネージャ, CLI ]
 published: true
 
 ---

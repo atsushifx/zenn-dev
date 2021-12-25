@@ -2,7 +2,7 @@
 title: "asustor NAS: MariaDBを初期設定する"
 emoji: "🍆"
 type: "tech"
-topics: ["NAS", "MariaDB", "開発環境" ]
+topics: ["NAS", "MariaDB", "環境構築" ]
 published: true
 ---
 
