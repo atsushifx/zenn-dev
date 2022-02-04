@@ -29,15 +29,18 @@
 			}
 		},
 		"@proofdict/proofdict": {
-			"dictURL": "https://atsushifx.github.io/proof-dictionary/"
+			"dictURL": "https://atsushifx.github.io/proof-dictionary/",
 		},
 		"prh": {
 			"rulePaths": [
 				".textlint/smarthr-basic.yml",
 				".textlint/smarthr-tech-word.yml",
-				".textlint/proof.yml"
+				".textlint/atsushifx-proof.yml"
 			]
 		},
+		"@textlint-rule/no-unmatched-pair": true,
+		"no-mixed-zenkaku-and-hankaku-alphabet": true,
+		"ja-unnatural-alphabet": true,
 		"ja-hiragana-hojodoushi": true,
 		"ja-hiragana-fukushi": true,
 		"ja-hiragana-daimeishi": true,
