@@ -1,0 +1,7 @@
+{
+  "name": "zenn-cli",
+  "description": "artcles, books manager for zenn.dev with github",
+  "version": "1.0.0",
+  "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
+  "license": MIT"
+}
