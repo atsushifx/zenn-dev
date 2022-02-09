@@ -1,7 +1,11 @@
 {
   "name": "zenn-cli",
   "description": "artcles, books manager for zenn.dev with github",
-  "version": "1.0.0",
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
-  "license": MIT"
+  "packageManager": "pnpm@6.30.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "zenn-cli": "^0.1.106"
+  }
 }
