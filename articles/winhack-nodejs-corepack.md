@@ -3,7 +3,7 @@ title: "nodejs : Windowsでcorepackを使う"
 emoji: "💭"
 type: "tech"
 topics: ["Windows", "nodejs", "npm", "corepack"]
-published: false
+published: true
 ---
 
 ## tl;dr
