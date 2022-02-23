@@ -1,10 +1,15 @@
 {
   "name": "zenn-cli",
   "description": "artcles, books manager for zenn.dev with github",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atsushifx/zenn-cli.git"
+  },
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "zenn-cli": "^0.1.106"
+    "zenn-cli": "^0.1.107"
   }
 }
