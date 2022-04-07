@@ -80,6 +80,8 @@ web_modules/
 
 # Optional npm cache directory
 .npm
+*-lock.*
+
 
 # Optional eslint cache
 .eslintcache

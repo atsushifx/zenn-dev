@@ -9,7 +9,14 @@
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
   "version": "1.0.0",
   "license": "MIT",
-  "dependencies": {
-    "zenn-cli": "^0.1.107"
+  "bugs": {
+    "url": "https://github.com/atsushifx/zenn-cli/issues"
+  },
+  "homepage": "https://github.com/atsushifx/zenn-cli#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "zenn-cli": "^0.1.108"
   }
 }

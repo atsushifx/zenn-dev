@@ -2,5 +2,5 @@
 	"workbench.colorTheme": "Iceberg Light",
 	// textlint config
 	"textlint.autoFixOnSave": true,
-	"textlint.configPath": ".textlintrc",
+	"textlint.languages": [],
 }
