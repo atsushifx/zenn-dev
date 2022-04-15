@@ -2,8 +2,8 @@
 title: "wsl2: debianをインストールする"
 emoji: "📚"
 type: "tech"
-topics: ["wsl2", "Debian", "インストール"]
-published: false
+topics: ["wsl", "Linux", "Debian", "インストール"]
+published: true
 ---
 
 ## wsl2にDebianをインストールする
@@ -18,7 +18,7 @@ wsl~(Windonws-Subsystem-for-Linux)~には、CLI で使える wsl コマンドが
 1. wslコマンドで、kernelバージョンを指定します。
     コマンドラインで、`wsl --set-default-version 2`を実行します。
 
-   ``` :PowerShell
+   ``` :Windows Terminal
    C: /atsushifx # `wsl --set-default-version 2'
    WSL 2 との主な違いについては、https://aka.ms/wsl2
    を参照してください
@@ -40,7 +40,7 @@ wsl~(Windonws-Subsystem-for-Linux)~には、CLI で使える wsl コマンドが
 3. `Debian`コンソールが表示されるので、ユーザーとパスワードを設定します。
    コンソールで`<ユーザー名>`と`<パスワード>`を設定します。
 
-   ``` :bash
+   ``` :コンソール
    Installing, this may take a few minutes...
    Please create a default UNIX user account. The username does not need to match your Windows username.
    For more information visit: https://aka.ms/wslusers
@@ -76,7 +76,7 @@ wsl~(Windonws-Subsystem-for-Linux)~には、CLI で使える wsl コマンドが
 3. ターミナルで`Debian`を起動する
   作成したプロフィールで｀Debian`を起動します。
 
-   ``` :Debian
+   ``` :Windows Terminal
    atsushifx@ys:/mnt/c/Users/atsushifx$
    
    ```
