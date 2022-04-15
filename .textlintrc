@@ -48,13 +48,13 @@
 				"space": "always"
 			}
 		},
-		"@proofdict/proofdict": {
-			"dictURL": "https://atsushifx.github.io/proof-dictionary/"
-		},
 		"prh": {
 			"rulePaths": [
 				".textlint/prh.yml"
 			]
+		},
+		"@proofdict/proofdict": {
+			"dictURL": "https://atsushifx.github.io/proof-dictionary/"
 		},
 		"@textlint-rule/no-unmatched-pair": true,
 		"no-mixed-zenkaku-and-hankaku-alphabet": true,
