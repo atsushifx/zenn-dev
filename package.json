@@ -1,22 +1,23 @@
 {
   "name": "zenn-cli",
-  "description": "artcles, books manager for zenn.dev with github",
+  "version": "0.1.0",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atsushifx/zenn-cli.git"
   },
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
-  "version": "1.0.0",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/atsushifx/zenn-cli/issues"
   },
   "homepage": "https://github.com/atsushifx/zenn-cli#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "pnpm": {},
+  "description": "",
   "devDependencies": {
-    "zenn-cli": "^0.1.108"
+    "zenn-cli": "^0.1.109"
   }
 }
