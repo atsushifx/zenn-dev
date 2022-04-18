@@ -2,22 +2,17 @@
   "name": "zenn-cli",
   "version": "0.1.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "zenn.dev 記事作成リポジトリ",
+  "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atsushifx/zenn-cli.git"
   },
-  "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/atsushifx/zenn-cli/issues"
-  },
-  "homepage": "https://github.com/atsushifx/zenn-cli#readme",
-  "pnpm": {},
-  "description": "",
   "devDependencies": {
     "zenn-cli": "^0.1.109"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
