@@ -2,17 +2,20 @@
   "name": "zenn-cli",
   "version": "0.1.0",
   "main": "index.js",
-  "description": "zenn.dev 記事作成リポジトリ",
+  "description": "zenn.dev articles repo",
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atsushifx/zenn-cli.git"
   },
-  "devDependencies": {
-    "zenn-cli": "^0.1.109"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "volta": {
+    "node": "18.0.0"
+  },
+  "devDependencies": {
+    "zenn-cli": "^0.1.109"
   }
 }
