@@ -3,7 +3,7 @@ title: "wsl2: aptを使ってDebianをアップグレードする"
 emoji: "🐧"
 type: "tech"
 topics: ["wsl", "Debian", "apt", "パッケージマネージャー" ]
-published: false
+published: true
 ---
 
 ## はじめに
