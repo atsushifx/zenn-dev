@@ -40,6 +40,8 @@ apt は、このほかに`/etc/apt/sources.list.d`下の`*.list`ファイルも�
   # deb http://cdn-fastly.deb.debian.org/debian-security stable/updates main  
   ```
 
+なお、4行目の`debian-security`はエラーがでるのでコメントアウトしています。
+
 日本の cdn ミラーは、[Debian JP Project - CDNミラー](https://www.debian.or.jp/community/push-mirror.html)に載っています。ここの source も書き写します。
 
   ```  /etc/apt/sources.list.d/ja-jp.list

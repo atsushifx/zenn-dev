@@ -1,5 +1,6 @@
 # textlint allow list
-- /\d+つ/
+- /\d+つ/g
+- /\d+行/g
 - /第\d+/
 - /\d+[年月日]/
 - ssh鍵
