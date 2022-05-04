@@ -57,6 +57,7 @@
 			"dictURL": "https://atsushifx.github.io/proof-dictionary/"
 		},
 		"@textlint-rule/no-unmatched-pair": true,
+    "no-surrogate-pair": true,
 		"no-mixed-zenkaku-and-hankaku-alphabet": true,
 		"ja-unnatural-alphabet": true,
 		"ja-hiragana-hojodoushi": true,

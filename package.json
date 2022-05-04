@@ -9,10 +9,8 @@
     "type": "git",
     "url": "git+https://github.com/atsushifx/zenn-cli.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "devDependencies": {
+  "dependencies": {
+    "textlint": "^12.1.1",
     "zenn-cli": "^0.1.110"
   }
 }
