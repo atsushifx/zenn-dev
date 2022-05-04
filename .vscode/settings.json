@@ -1,6 +1,4 @@
 {
-	"workbench.colorTheme": "Iceberg",
 	// textlint config
 	"textlint.autoFixOnSave": true,
-	"textlint.nodePath": "C:\\Users\\atsushifx\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm"
 }

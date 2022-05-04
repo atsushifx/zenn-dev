@@ -8,12 +8,17 @@ published: false
 
 ## はじめに
 
-nodejs 用の SCMツール`volta`を使ってみたので、いろいろと試してみました。
+nodejs用のSCMツール`volta`を使ってみたので、いろいろと試してみました。
 
 ## voltaの動作
 
 ### voltaのインストール
 
-`volta`は、各種ツールを自分の管理しているディレクトリに保存します。ツールの実行には、指定したディレクトリ内の shims ファイル~(いわゆるショートカット)~を通しておこないます。
+  voltaは、パッケージマネージャー`winget`および`scoop`に対応しています。
+  scoopでは、
 
-ディレクトリの指定は、環境変数'`VOLTA_HOME`'を使用します。デフォルトのディレクトリは、macOS/Linux では`~/.volta`、Windows では`%LOCALAPPDATA%\\Volta\`となります~(インストーラーを使用した場合)~。
+  ``` :powershell
+  PS > scoop install volta
+  ```
+
+  でインストールできます。
