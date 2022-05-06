@@ -10,7 +10,6 @@
     "url": "git+https://github.com/atsushifx/zenn-cli.git"
   },
   "dependencies": {
-    "textlint": "^12.1.1",
     "zenn-cli": "^0.1.110"
   }
 }

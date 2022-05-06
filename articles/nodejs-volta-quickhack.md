@@ -8,14 +8,14 @@ published: false
 
 ## はじめに
 
-nodejs用のSCMツール`volta`を使ってみたので、いろいろと試してみました。
+nodejs 用の SCM ツール`volta`を使ってみたので、いろいろと試してみました。
 
 ## voltaの動作
 
 ### voltaのインストール
 
-  voltaは、パッケージマネージャー`winget`および`scoop`に対応しています。
-  scoopでは、
+  volta は、パッケージマネージャー`winget`および`scoop`に対応しています。
+  scoop では、
 
   ``` :powershell
   PS > scoop install volta
