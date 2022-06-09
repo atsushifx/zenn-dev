@@ -33,11 +33,11 @@ published: true
 ### コマンドの実行
 
   表示されたヒストリーを peco で選択すれば、実行するコマンドラインが取得できます。実行するだけなら`Invoke-Expression`コマンドレットで実行するだけです。
-  しかし、ここではコマンドの引数などを編集することもあります。そのため、`PSReadline`の機能を使い、コマンドラインに選択したコマンドを入力します。
+  しかし、ここではコマンドの引数などを編集することもあります。`SendKeys`の機能を使い、選択したコマンドをキー入力します。
 
   ``` PowerShell
   [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
-  [Microsoft.PowerShell.PSConsoleReadLine]::Insert(<選択したコマンド>)
+  [System.Windows.Forms.SendKeys]::SendWait(<選択したコマンド>)
   
   ```
 
@@ -63,9 +63,7 @@ published: true
      $selectCmd = (tail -20 (Get-PSReadLineOption).HistorySavePath)|peco --select-1 --on-cancel error
      if ($?) {
         [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert($selectCmd)
-        # [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
-        # [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+        [System.Windows.Forms.SendKeys]::SendWait($selectCmd)
      } else {
         [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
      }
