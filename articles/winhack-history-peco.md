@@ -3,7 +3,7 @@ title: "Windows: pecoを使ってWindowsのhistoryを使いこなす"
 emoji: "⚒️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Windows", "開発環境", "PowerShell", "peco" ]
-published: false
+published: true
 ---
 
 ## TL;DR
