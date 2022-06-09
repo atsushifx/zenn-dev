@@ -35,7 +35,7 @@ published: false
   表示されたヒストリーを peco で選択すれば、実行するコマンドラインが取得できます。実行するだけなら`Invoke-Expression`コマンドレットで実行するだけです。
   しかし、ここではコマンドの引数などを編集することもあります。そのため、`PSReadline`の機能を使い、コマンドラインに選択したコマンドを入力します。
 
-  ``` powershell
+  ``` PowerShell
   [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
   [Microsoft.PowerShell.PSConsoleReadLine]::Insert(<選択したコマンド>)
   
@@ -45,7 +45,35 @@ published: false
 
   そのほか、peco で ESC でキャンセルしたときの処理などをいれた関数は、つぎのようになります。
 
-  @[gist](https://gist.github.com/atsushifx/a9ae10e2d0cbab8df899aa9b410aa2ce)
+  ``` PowerShell: SelectandExecHistory.ps1
+  <#
+    .SYNOPSIS
+      select command from history and execute
+
+    .DESCRIPTION
+      select history wuth peco and set command line to execute this.
+
+    .EXAMPLE
+      Set-PSReadLineKeyHandler -chord Ctrl+p -scriptBlock { SelectandExecHistory }
+      using above that hit ctrl+p to use this.
+
+  #>
+  function global:SelectandExecHistory()
+  {
+     $selectCmd = (tail -20 (Get-PSReadLineOption).HistorySavePath)|peco --select-1 --on-cancel error
+     if ($?) {
+        [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert($selectCmd)
+        # [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+        # [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+     } else {
+        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+     }
+  }
+  ```
+  
+  一応、gist にもあげています。
+  [gist](https://gist.github.com/atsushifx/a9ae10e2d0cbab8df899aa9b410aa2ce)
 
 ### キーへのバインディング
 
