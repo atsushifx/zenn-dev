@@ -1,4 +1,5 @@
 {
 	// textlint config
 	"textlint.autoFixOnSave": true,
+	"textlint.nodePath": "C:\\Users\\atsushifx\\.local\\share\\pnpm\\global\\5",
 }
