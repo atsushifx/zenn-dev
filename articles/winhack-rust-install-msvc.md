@@ -3,7 +3,7 @@ title: "WindowsにMSVC版Rustをインストールする"
 emoji: "🦾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Windows", "開発環境", "Rust", "Tips" ]
-published: false
+published: true
 ---
 
 ## tl;dr
