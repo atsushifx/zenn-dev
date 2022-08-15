@@ -3,7 +3,7 @@ title: "wsl2: wsl上のDebianを日本語化する"
 emoji: "🐧"
 type: "tech"
 topics: ["wsl", "Debian", "apt", "日本語", "開発環境" ]
-published: false
+published: true
 ---
 
 ## はじめに
