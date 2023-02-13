@@ -3,7 +3,7 @@ title: "VS Code: プロファイルが実装されたので、既定のプロフ
 emoji: "🧪"
 type: "tech"
 topics: ["VSCode", "VisualStudioCode", "プロファイル", "開発環境"]
-published: false
+published: true
 ---
 
 ## tl;dr
