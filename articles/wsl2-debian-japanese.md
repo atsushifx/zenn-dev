@@ -72,37 +72,35 @@ wsl を再起動しないと変更が反映されません。一度、wsl のコ
   `sudo vim /etc/locale.gen\`として`/etc/locale.gen`を編集し、`ja_JP.UTF-8`をコメントアウトから外す。
 
 2. locale の再作成
-
   `/usr/sbin/locale-gen`コマンドを実行し。`ja_JP.UTF-8`も含めた locale を再作成する。
-
+  
   ``` bash: Debian
   atsushifx@ys:~$ sudo /usr/sbin/locale-gen
   Generating locales (this might take a while)...
   en_US.UTF-8... done
   ja_JP.UTF-8... done
   Generation complete.
-
+  
   atsushifx@ys:~$ /usr/bin/localectl list-locales
   C.UTF-8
   en_US.UTF-8
   ja_JP.UTF-8
-
+  
   atsushifx@ys:~$
   ```
-
+  
   上記のように、locale に`ja_JP.UTF-8`が含まれていれば成功です。
 
 3. デフォルトロケールを日本語に設定
-
   `update-locale`でデフォルトロケールを変更します。
+  
+  ``` bash: Debian
+  atsushifx@ys:~$ sudo /usr/bin/update-locale LANG=ja_JP.UTF-8
+  
+  atsushifx@ys:~$
+  ```
 
-``` bash: Debian
-atsushifx@ys:~$ sudo /usr/bin/update-locale LANG=ja_JP.UTF-8
-
-atsushifx@ys:~$
-```
-
- 以上で、日本語 locale の設定は終了です。以後、エラーメッセージなどが日本語で表示されます。
+以上で、日本語 locale の設定は終了です。以後、エラーメッセージなどが日本語で表示されます。
 
 ### TimeZoneの設定
 
@@ -113,22 +111,21 @@ atsushifx@ys:~$
 次の手順で、TimeZone を設定します。
 
 1. `dpkg-reconfigure`コマンドを起動する
+  bash から、次のコマンドを実行します。
 
-``` bash: Debian
-atsushifx@ys:~$ sudo dpkg-reconfigure tzdata
+  ``` bash: Debian
+  atsushifx@ys:~$ sudo dpkg-reconfigure tzdata
+  ```
 
-```
+  と入力し、`tzdataを設定しています`ダイアログを表示します。
 
-と入力し、`tzdataを設定しています`ダイアログを表示します。
-
-2. tzdata の設定
-
-ダイアログで`Asia`、`Tokyo`を選択し、`OK`で設定します。
+2. `tzdata`の設定
+  
+  ダイアログで`Asia`、`Tokyo`を選択し、`OK`で設定します。
 
 3. Debian の再起動
-
-設定を反映させるため、Debian コンソールから`exit`で抜けます。その後、PowerShell 側で、`wsl --shutdown Debian`として wsl 上の Debian をシャットダウンします。
-再度、Debian コンソールを起動すると、Debian が日本語化されています。
+  設定を反映させるため、Debian コンソールから`exit`で抜けます。その後、PowerShell 側で、`wsl --shutdown Debian`として wsl 上の Debian をシャットダウンします。
+  再度、Debian コンソールを起動すると、Debian が日本語化されています。
 
 #### TimeZoneの設定 (コマンドライン)
 

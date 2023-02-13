@@ -42,7 +42,7 @@ apt は、このほかに`/etc/apt/sources.list.d`下の`*.list`ファイルも�
 
 なお、4行目の`debian-security`はエラーがでるのでコメントアウトしています。
 
-日本の cdn ミラーは、[Debian JP Project - CDNミラー](https://www.debian.or.jp/community/push-mirror.html)に載っています。ここの source も書き写します。
+日本の CDNミラーは、[Debian JP Project - CDNミラー](https://www.debian.or.jp/community/push-mirror.html)に載っています。ここの source も書き写します。
 
   ```  /etc/apt/sources.list.d/ja-jp.list
   # cdn mirror from Debian JP
@@ -90,7 +90,7 @@ apt は、このほかに`/etc/apt/sources.list.d`下の`*.list`ファイルも�
 
 ## おわりに
 
-ここまでで、wsl下の Debian を最新 Version にできました。
+ここまでで、wsl 下の Debian を最新 Version にできました。
 このあと、日本語化と GUI 化すれば本格的に Debian を使えるようになります。
 
 それでは、Happy Hacking.

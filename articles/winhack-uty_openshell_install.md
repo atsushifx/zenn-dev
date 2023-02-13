@@ -36,7 +36,7 @@ Open-Shell は GitHub の Open-Shell/Open-Shell-Menu からダウンロードで
    ![Open-Shell](https://i.imgur.com/cEeOFaP.jpg)
 
 2. release ファイルへのアクセス
-   Download の項の[Downloadボタン](https://github.com/Open-Shell/Open-Shell-Menu/releases)をクリックします。Open-Shell インストーラのリンクが表示されます
+   Download の項の[Downloadボタン](https://github.com/Open-Shell/Open-Shell-Menu/releases)をクリックします。Open-Shell インストーラーのリンクが表示されます
 
 3. Open-Shell のダウンロード
    release 中の Open-Shell のリンクをクリックします。Open-Shell をダウンロードします
@@ -48,7 +48,7 @@ Open-Shell は GitHub の Open-Shell/Open-Shell-Menu からダウンロードで
 次の手順で Open-Shell をインストールします。
 
 1. インストラーの起動
-   Open-Shell インストーラを起動します
+   Open-Shell インストーラーを起動します
 
    ![Open-Shell Setup](https://i.imgur.com/GO8GBZS.jpg)
 

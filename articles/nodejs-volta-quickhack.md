@@ -8,7 +8,7 @@ published: false
 
 ## はじめに
 
-nodejs 用の SCM ツール`volta`を使ってみたので、いろいろと試してみました。
+Node.js 用の SCM ツール`volta`を使ってみたので、いろいろと試してみました。
 
 ## voltaの動作
 

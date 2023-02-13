@@ -7,12 +7,6 @@ published: true
 
 ---
 
-:::message
-
-2021年12月24日 改訂。
-
-:::
-
 ## tl;dr
 
 環境変数"`HOME`"を設定すると、UNIX 系ツールの設定ファイルが Windows とは別のディレクトリに保存できます。
@@ -20,7 +14,7 @@ published: true
 ## はじめに
 
 Windows 環境で bash や vim を使うと、$USERPROFILE ~(通常なら、`C:\Users\<ユーザ名>\`)~下に大量に dotfile がつくられます。
-例えば`.bash_history`や`.lesshst`のようなヒストリーファイル、`.bashrc`のような設定ファイルといった具合です。
+たとえば`.bash_history`や`.lesshst`のようなヒストリーファイル、`.bashrc`のような設定ファイルといった具合です。
 
 これらの各種 dotfile は、ホームディレクトリ下に置かれます。
 しかし、Windows の場合はすでに Documents や Downloads のような各種フォルダがおかれていますし、各種のシステムファイルもおかれています。
@@ -31,7 +25,7 @@ Windows 環境で bash や vim を使うと、$USERPROFILE ~(通常なら、`C:\
 
 ### ホームディレクトリとは
 
-ホームディレクトリは、ユーザーがコンピュータを使ううえで基準になるディレクトリです。Windows では、通常`C:\Users\<ユーザ名>`となります。
+ホームディレクトリは、ユーザーがコンピューターを使ううえで基準になるディレクトリです。Windows では、通常`C:\Users\<ユーザ名>`となります。
 `Windows Terminal`では、`~`でホームディレクトリを示します。Terminal 上で、`cd ~`とすればホームディレクトリに移動します。
 
 ### 環境変数"`HOME`"と"`USERPROFILE`"

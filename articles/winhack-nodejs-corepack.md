@@ -21,7 +21,7 @@ published: true
   COREPACK_HOME=%USERPROFILE%/app/corepack
 ```
 
-### corepackを使う
+### corepackを使う (実践)
 
 ``` powershell
 # Windowsでは、nodeのインストールにscoopを使う
@@ -44,7 +44,7 @@ published: true
 
 後は、元記事のように`package.json`に`packageManager`の記述を書けば OK です。
 
-例えば、zenn-cli 用だと次のようになります。
+たとえば、zenn-cli 用だと次のようになります。
 
 ``` package.json
 {

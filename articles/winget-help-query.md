@@ -69,7 +69,7 @@ Python 3.9   PythonSoftwareFoundation.Python.3.9 Latest     msstore
 
 ### 名前、id、モニカー(別名)
 
-パッケージには、パッケージ名やパッケージ id のほかに、タグやモニカーといった別名がついています。
+パッケージには、パッケージ名やパッケージ ID のほかに、タグやモニカーといった別名がついています。
 通常はこれらすべてを検索しますが、種別を指定した検索もできます。
 
 ### 名前検索
@@ -99,7 +99,7 @@ Python 3.9                   PythonSoftwareFoundation.Python.3.9 Latest      mss
 
 ### id検索
 
-`--id`オプションをつけると、パッケージ id で検索します。
+`--id`オプションをつけると、パッケージID で検索します。
 
 ``` :PowerShell
 /workspaces > winget search --id python

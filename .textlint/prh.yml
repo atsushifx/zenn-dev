@@ -28,7 +28,7 @@ imports:
   - ./icsmedia/prh_duplicate.yml
 
   # 外来語カタカナ表記
-  - ./icsmedia/prh_cho_on.yml
+  #- ./icsmedia/prh_cho_on.yml
 
   # 固有名詞
   - ./icsmedia/prh_corporation.yml

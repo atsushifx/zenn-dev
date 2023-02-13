@@ -8,14 +8,14 @@ published: true
 
 ## wsl2にDebianをインストールする
 
-wsl~(Windonws-Subsystem-for-Linux)~には、CLI で使える wsl コマンドがあります。
+wsl _(Windonws-Subsystem-for-Linux)_ には、CLI で使える wsl コマンドがあります。
 ここでは、上記の`wsl`コマンドを使って`Debian`をインストールします。
 
 ### wslコマンドでDebianをインストールする
 
 次の手順で、Debian をインストールします。
 
-1. wslコマンドで、kernelバージョンを指定します。
+1. wsl コマンドで、kernel バージョンを指定します。
     コマンドラインで、`wsl --set-default-version 2`を実行します。
 
    ``` :Windows Terminal
@@ -27,7 +27,7 @@ wsl~(Windonws-Subsystem-for-Linux)~には、CLI で使える wsl コマンドが
    C: /atsusifx # 
    ```
 
-2. wslコマンドで、`Debian`をインストールします。
+2. wsl コマンドで、`Debian`をインストールします。
     コマンドラインで、`wsl --install Debian`を実行します。
 
    ``` :Windows Terminmal
