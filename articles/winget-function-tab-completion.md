@@ -3,7 +3,7 @@ title: "Windows: winget: wingetでtab補完機能を使う"
 emoji: "🪆"
 type: "tech"
 topics: ["winget", "パッケージマネージャー", "SCM", "構成管理", "PowerShell" ]
-published: false
+published: true
 ---
 
 ## tl;dr
