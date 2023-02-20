@@ -3,7 +3,7 @@ title: "PowerShell: Powershellの予測機能を使う"
 emoji: "🐢"
 type: "tech"
 topics: ["PowerShell", "予測機能", "intelisense" ]
-published: false
+published: true
 ---
 
 ## tl;dr
