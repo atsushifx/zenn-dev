@@ -3,7 +3,7 @@ title: "PowerShell: Powershellのintelisenseで補完機能を使う"
 emoji: "🐢"
 type: "tech"
 topics: ["PowerShell", "予測機能", "intelisense","補完" ]
-published: false
+published: true
 ---
 
 ## tl;dr
