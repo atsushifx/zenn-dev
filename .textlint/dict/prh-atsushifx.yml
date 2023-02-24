@@ -3,14 +3,6 @@ rules:
   - expected: App Central
     pattern: /appcentral/i
   - expected: ssh鍵
-    pattern: /ssh[ ]*キー/i   
-  - expected: PowerShell
-    patterns:
-      - /powershell/
-  - expected: winget
-    patterns: 
-      - WinGet
-      - winGet
-      - Winget
+    pattern: /ssh[ ]*キー/i
 
 
