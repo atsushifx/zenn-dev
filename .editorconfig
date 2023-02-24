@@ -3,8 +3,27 @@
 # default editorconfig set ~/ to symlink
 
 # top-most EditorConfig file
-# root = true
+root = true
 
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# default character-set
+charset = utf-8
+
+# indent style
+indent_size = tab
+indent_style = tab
+tab_width=4
+
+# ext type settings
+
+# script executable
+[**.]
+indent_style = space
+indent_size = 2
+tab_width = 2
 
 ### markdown
 [*.md]
