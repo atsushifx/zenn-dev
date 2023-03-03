@@ -1,8 +1,8 @@
 {
     "recommendations": [
-        "negokaz.zenn-editor",
-        "taichi.vscode-textlint",
-        "bat67.markdown-extension-pack",
         "fnando.linter",
+        "DavidAnson.vscode-markdownlint",
+        "taichi.vscode-textlint",
+        "negokaz.zenn-editor",
     ]
 }
