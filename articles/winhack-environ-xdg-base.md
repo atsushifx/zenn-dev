@@ -3,7 +3,7 @@ title: "Windows: Windowsに'XDG Base Directory'を導入する"
 emoji: "🪟"
 type: "tech"
 topics: [ Windows,環境構築,環境変数, XDG]
-published: false
+published: true
 ---
 
 ## はじめに
@@ -83,7 +83,7 @@ Windows 用パッケージマネージャ`Scoop`は`XDG Base Directory`に対応
 ## さいごに
 
 このように`$XDG_CONFIG_HOME`下に各ツールの設定ファイルを保存すると、設定ファイルのリビジョン管理が楽になります。
-実際、自分はGitHubで各種設定ファイルを管理しています。
+実際、自分は GitHub で各種設定ファイルを管理しています。
 
 各ツールの対応状況や、設定の方法は"[XDG Base Directory - ArchLinux wiki](https://wiki.archlinux.jp/index.php/XDG_Base_Directory#.E4.BB.95.E6.A7.98)"に載っていますので、参考にしてください。
 
