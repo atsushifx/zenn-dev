@@ -1,5 +1,5 @@
 ---
-title: "Education: Racket: `Visual Studio Code`で'Racket'を使う"
+title: "Education: Racket: Visual Studio Codeで'Racket'を使う"
 emoji: "🎾"
 type: "tech"
 topics: ["Racket", "環境構築", "勉強", "vscode" ]
@@ -81,7 +81,7 @@ Id     Name            PSJobTypeName   State         HasMoreData     Location   
 C: /scheme >
 
 >
-``` Windows Terminal
+``
 
 racket用lspを起動しておくと、コード補完などの機能が使えます
 
