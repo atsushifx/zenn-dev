@@ -17,3 +17,4 @@ Racketには、`DrRacket`という統合開発環境があり教育用に十分�
 
 なお、自分は`VSCode`に`Racket`用のプロファイルを作成して開発をしています。
 
+@[CodeSandbox](https://replit.com/@atsushifx/hellowithdatatype?embed=true)
