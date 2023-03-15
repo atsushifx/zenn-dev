@@ -1,5 +1,5 @@
 ---
-title: Education: Racket: `Racket`で"Hello World"を出力する
+title: "Education: Racket: `Racket`で\"Hello World\"を出力する"
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "学習", "helloworld" ]
