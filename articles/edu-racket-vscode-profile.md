@@ -81,13 +81,13 @@ Id     Name            PSJobTypeName   State         HasMoreData     Location   
 C: /scheme >
 
 >
-``
+```
 
-racket用lspを起動しておくと、コード補完などの機能が使えます
+racket 用 lsp を起動しておくと、コード補完などの機能が使えます
 
 ## さいごに
 
 これで VS Code で`Racket`が使えるようになりました。
-Racketを覚えて、一段上のソフトウェアエンジニアを目指しましょう。
+Racket を覚えて、一段上のソフトウェアエンジニアを目指しましょう。
 
 それでは、Happy hacking!
