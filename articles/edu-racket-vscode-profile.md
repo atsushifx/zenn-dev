@@ -3,7 +3,7 @@ title: "Education: Racket: Visual Studio Codeで'Racket'を使う"
 emoji: "🎾"
 type: "tech"
 topics: ["Racket", "環境構築", "勉強", "vscode" ]
-published: false
+published: true
 ---
 
 ## はじめに
