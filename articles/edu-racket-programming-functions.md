@@ -3,7 +3,7 @@ title: "Education: Racket: Racketで関数を使う"
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "SCHEME", "学習", "Education" ]
-published: false
+published: true
 ---
 
 ## はじめに
