@@ -2,7 +2,7 @@
 title: "Education: Racket: Racketプログラムの基本"
 emoji: "🎾"
 type: "idea"
-topics: ["プログラミング言語", "Racket", "学習", "Hello_World", "Education" ]
+topics: ["プログラミング言語", "Racket", "scheme", "HelloWorld", "Education" ]
 published: true
 ---
 

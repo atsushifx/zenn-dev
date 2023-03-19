@@ -2,7 +2,7 @@
 title: "Education: Racket: Racketプログラムでの変数とシンボル"
 emoji: "🎾"
 type: "idea"
-topics: ["プログラミング言語", "Racket", "学習", "HelloWorld", "Education" ]
+topics: ["プログラミング言語", "Racket", "scheme", "HelloWorld", "Education" ]
 published: true
 ---
 
