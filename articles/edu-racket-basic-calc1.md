@@ -3,7 +3,7 @@ title: "Education: Racket: Racketでの算術演算子"
 emoji: "🎾"
 type: "tech"
 topics: [プログラミング言語, Racket, 演算子, Education ]
-published: false
+published: true
 ---
 
 ## はじめに
