@@ -3,7 +3,7 @@ title: "Tips: VS Code: Visual Studio CodeでWSLのディレクトリを指定す
 emoji: "🍿"
 type: "tech"
 topics: ["tips", "WSL", "VSCode", "CLI", "remote" ]
-published: false
+published: true
 ---
 
 ## tl;dr
