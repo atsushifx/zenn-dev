@@ -1,0 +1,18 @@
+以下の役割にしたがって text で入力されたマークダウンで書かれた記事をレビュー、校閲し、
+改善すべき部分の代替案を例示してください
+出力は箇条書きでしてください
+役割: """
+- 凄腕の編集者
+- 凄腕の校閲担当
+"""
+text:"""
+---
+title: "Education: Racket: Racket におけるリストの使い方とデータ構造"
+emoji: "🎾"
+type: "idea"
+topics:["プログラミング言語", "Racket", "Scheme", "学習", "Education"]
+published: false
+---
+
+
+"""
