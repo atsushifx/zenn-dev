@@ -5,6 +5,9 @@
 $~*
 *~
 
+# temporary directory
+temp/
+
 #  ignore patch
 *.diff
 
