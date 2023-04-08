@@ -3,7 +3,7 @@ title: "Education: Racket: Racket におけるリストの使い方とデータ�
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "Scheme", "学習", "Education"]
-published: false
+published: true
 ---
 
 ## はじめに
