@@ -1,6 +1,6 @@
 ---
 title: "Spike: Genie AIがでたのでAIにZennの記事を書かせてみた"
-emoji: "🧞"
+emoji: "👟"
 type: "idea"
 topics: [ "spike", "VSCode", "GenieAI", "ChatGPT"]
 published: true
