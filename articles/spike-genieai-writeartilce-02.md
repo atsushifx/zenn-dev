@@ -1,8 +1,8 @@
 ---
-title: "Spike: Blog: プロンプトを改良して、こんどこそ Genie AIに公開できるレベルの記事を書かせる (リベンジ編)"
+title: "Spike: Blog: Genie AIに公開できるレベルの記事を書かせるためのプロンプト"
 emoji: "👟"
 type: "idea"
-topics: [ "Spike", "zenn", "VS Code", "GenieAI", "ChatGPT" ]
+topics: [ "Spike", "zenn", "VS Code", "GenieAI", "ChatGPT","Prompt" ]
 published: false
 ---
 
