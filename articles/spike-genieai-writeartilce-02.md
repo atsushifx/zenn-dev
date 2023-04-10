@@ -3,7 +3,7 @@ title: "Spike: Blog: Genie AIに公開できるレベルの記事を書かせる
 emoji: "👟"
 type: "idea"
 topics: [ "Spike", "zenn", "VS Code", "GenieAI", "ChatGPT","Prompt" ]
-published: false
+published: true
 ---
 
 ## はじめに
