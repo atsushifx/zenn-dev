@@ -2,7 +2,7 @@
 title: "Spike: Blog: Genie AIに公開できるレベルの記事を書かせるためのプロンプト"
 emoji: "👟"
 type: "idea"
-topics: [ "Spike", "zenn", "VS Code", "GenieAI", "ChatGPT","Prompt" ]
+topics: [ "Spike", "zenn", "VSCode", "ChatGPT","Prompt" ]
 published: true
 ---
 
