@@ -206,4 +206,5 @@ role,goal,target などは、このプロンプトの直後に定義していま
 
 - [Chat GPT](https://chat.openai.com/chat)
 - [Prompt Engineering Guide (日本語版)](https://www.promptingguide.ai/jp)
+- [The MIT License](https://opensource.org/license/mit/)
 - [Gist : first prompt](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e)
