@@ -106,7 +106,7 @@ ChatGPT を使うと、改善点だけでなく代替案も提示してきます
 
 ChatGPT を使うのですから、そのためのプロンプトが必要です。今回は、下記のプロンプトを使用しました
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-prompt-for-make-prompt)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-prompt-for-make-prompt)
 
 このプロンプトは、指定した目的にあわせて適切なプロンプトを作成するものです。
 プロンプトに書かれていることを解説すると、
@@ -128,7 +128,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 最初に、もととなるプロンプトを作成します。
 プロンプトは、
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-first-prompt)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-first-prompt)
 
 です。
 
@@ -140,7 +140,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 上記の最初のプロンプトはシンプルすぎるので、手動でちょっと改善します。
 改善したプロンプトは、
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-prompt2)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-prompt2)
 
 です。
 
@@ -151,7 +151,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 
 上記のプロンプトを、ChatGPT に入力すると
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-res1-chatgpt)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-res1-chatgpt)
 
 といった改善点が返ってきました。
 これを参考に、プロンプトを改善します。
@@ -161,7 +161,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 [ChatGPTによる改善点](#ChatGPTによる改善点)を参考にプロンプトを改善します。
 改善したプロンプトは、
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-prompt3-chatgpt)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-prompt3-chatgpt)
 
 となります。
 
@@ -177,7 +177,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 
 次に改善したプロンプトの改善点を振り返り、より精度を高めます。以下が ChatGPT による改善点 (その 2) です。
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-res2-chatgpt-2)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file-file-res2-chatgpt-2)
 
 この改善点を参考に、プロンプトの精度を高めていきます。
 
@@ -185,7 +185,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 
 最終的なプロンプトは以下のとおりです。
 
-@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e#file-prompt)
+@[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-prompt)
 
 このプロンプトを使って ChatGPT に質問すると改善点が返ってくるので、それを参考にブログ記事を書き直します。
 
