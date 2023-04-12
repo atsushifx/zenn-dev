@@ -3,7 +3,7 @@ title: "Hacks: ChatGPT: ChatGPT を使ったプロンプトエンジニアリン
 emoji: "🧞"
 type: "tech"
 topics: [ "ChatGPT", "Prompt", "PromptEngineering", "hacks", "Blog" ]
-published: false
+published: true
 ---
 
 ## はじめに
