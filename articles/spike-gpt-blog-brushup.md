@@ -2,8 +2,8 @@
 title: "ChatGPT: 「ChatGPTを使った技術記事の改善方法"
 emoji: "👟"
 type: "idea"
-topics: [ "Spike", "ChatGPT", "Prompt", "推敲"  ]
-published: false
+topics: [ "ChatGPT", "Prompt", "推敲", ”技術ブログ"  ]
+published: true
 ---
 
 ## はじめに
@@ -228,5 +228,5 @@ ChatGPT をつかった記事のレビュー、推敲の流れは、
 
 ## 参考資料
 
-- [GitHub Gist](https://gist.github.com/atsushifx/81ed082caa12e0a3a15734ac41e08862))
+- [GitHub Gist](https://gist.github.com/atsushifx/81ed082caa12e0a3a15734ac41e08862)
 - [ChatGPT](https://chat.openai.com/chat)
