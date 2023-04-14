@@ -2,7 +2,7 @@
 title: "ChatGPT: 「ChatGPTを使った技術記事の改善方法"
 emoji: "👟"
 type: "idea"
-topics: [ "ChatGPT", "Prompt", "推敲", ”技術ブログ"  ]
+topics: [ "ChatGPT", "Prompt", "推敲", "技術ブログ" ]
 published: true
 ---
 
