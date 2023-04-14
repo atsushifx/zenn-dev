@@ -3,7 +3,7 @@ title: "Education: Racket 言語初心者向けの基本データ型ガイド"
 emoji: "🎾"
 type: "idea"
 topics: ["Racket","Scheme", "関数型言語","データ型" ]
-published: false
+published: true
 ---
 
 ## はじめに
