@@ -3,7 +3,7 @@ title: "Education: Racket言語における比較演算子: 数値型と文字�
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "演算子", "勉強", "学習" ]
-published: false
+published: true
 ---
 
 ## はじめに
