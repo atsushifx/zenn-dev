@@ -10,7 +10,7 @@ published: false
 
 今回の記事では、いままで習ったことを活かして、実際に Racket でプログラムをします。
 
-題材には、[AtCoder](https://atcoder.jp/)[^1]]の[AtCoder Beginners Selection](https://atcoder.jp/contests/abs)を選びました。
+題材には、[AtCoder](https://atcoder.jp/)[^1]の[AtCoder Beginners Selection](https://atcoder.jp/contests/abs)を選びました。
 
 [^1]: 日本語で公開されている競技プログラミングサイト
 
@@ -45,9 +45,11 @@ AtCoder Beginners Selection の[PracticeA - Welcome to AtCoder](https://atcoder.
 >
 > 入力は以下の形式で与えられる。
 >
+> ``` stdin
 > a
 > b c
 > s
+> ```
 >
 > **出力**
 > a + b + c と s を空白区切りで 1行目に出力せよ。
@@ -55,7 +57,7 @@ AtCoder Beginners Selection の[PracticeA - Welcome to AtCoder](https://atcoder.
 与えられた入力は標準入力で、出力は標準出力に出力します。
 ポイントは、
 
-- 使用する言語の標準入出力についてしる
+- 使用する言語の標準入出力について調べる
 - 入力`a`,`b`,`c`については、あとで計算できるよう数値に変換する
 - 入力'a'で 1行が終わっている。単純な 1行入力ではうまくいかない
 
@@ -64,7 +66,7 @@ AtCoder Beginners Selection の[PracticeA - Welcome to AtCoder](https://atcoder.
 
 ### 回答例1
 
-Racket の場合。
+Racket の場合、
 
 - Racket では、関数'read'で標準入力を読み込む。このとき、空白や開業について Racket 側が面倒を見てくれる。また、読み込んだデータを適当な型に変換してくれる
 - ただし、文字列ではなくシンボルで読み込む
@@ -108,6 +110,8 @@ Racket の場合。
   ( [処理]))
 
 ```
+
+です。
 
 `let`を使った回答例は、
 
