@@ -3,7 +3,7 @@ title: "Education: Racket言語でAtCoderに挑戦する (PracticeA)"
 emoji: "🎾"
 type: "tech"
 topics: ["Racket", "学習", "AtCoder", "競技プログラミング", "WelcometoAtCoder" ]
-published: false
+published: true
 ---
 
 ## はじめに
