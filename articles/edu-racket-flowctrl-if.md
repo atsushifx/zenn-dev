@@ -3,7 +3,7 @@ title: "Education: Racket制御構文の基礎: if式とbegin式"
 emoji: "🎾"
 type: "idea"
 topics: ["学習", "Racket", "制御構文", "if式", "begin式" ]
-published: false
+published: true
 ---
 
 ## はじめに
