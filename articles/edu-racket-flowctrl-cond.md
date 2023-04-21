@@ -3,7 +3,7 @@ title: "Education: Racket言語入門: 複数の条件分岐を扱うcond式の�
 emoji: "🎾"
 type: "idea"
 topics: ["学習", "Racket", "制御構文", "cond式", "特殊形式" ]
-published: false
+published: true
 ---
 
 ## はじめに
