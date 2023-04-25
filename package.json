@@ -1,15 +1,15 @@
 {
-  "name": "zenn-cli",
-  "version": "1.0.0",
-  "main": "index.js",
-  "description": "zenn.dev articles repo",
-  "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/atsushifx/zenn-cli.git"
-  },
-  "dependencies": {
-    "zenn-cli": "^0.1.142"
-  }
+    "name": "zenn-cli",
+    "version": "1.0.0",
+    "main": "index.js",
+    "description": "zenn.dev articles repo",
+    "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/atsushifx/zenn-cli.git"
+    },
+    "dependencies": {
+        "zenn-cli": "^0.1.142"
+    }
 }
