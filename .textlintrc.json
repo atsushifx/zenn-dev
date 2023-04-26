@@ -10,9 +10,7 @@
             },
             "unify-kuten-and-touten": false
         },
-        "preset-ja-technical-writing": {
-            "no-exclamation-question-mark": false
-        },
+        "preset-ja-technical-writing": true,
         "preset-japanese": {
             "sentence-length": {
                 "max": 150
@@ -20,15 +18,7 @@
             "max-ten": {
                 "max": 4
             },
-            "no-doubled-joshi": {
-                "strict": true,
-                "min_interval": 3,
-                "allow": [
-                    "も",
-                    "や",
-                    "か"
-                ]
-            }
+            "no-doubled-joshi": false
         },
         "preset-ja-spacing": {
             "ja-space-between-half-and-full-width": {
