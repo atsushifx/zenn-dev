@@ -10,7 +10,9 @@
             },
             "unify-kuten-and-touten": false
         },
-        "preset-ja-technical-writing": true,
+        "preset-ja-technical-writing": {
+            "no-exclamation-question-mark": false
+        },
         "preset-japanese": {
             "sentence-length": {
                 "max": 150
@@ -19,8 +21,8 @@
                 "max": 4
             },
             "no-doubled-joshi": {
+                "strict": true,
                 "min_interval": 3,
-                "strict": false,
                 "allow": [
                     "も",
                     "や",
