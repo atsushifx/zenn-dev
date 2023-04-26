@@ -3,7 +3,7 @@ title: 'VS Code: "設定の同期"ができないときの対処方法'
 emoji: "🔧"
 type: "tech"
 topics: ["VSCode", "troubleshooting", "Settings Sync", "同期" ]
-published: false
+published: true
 ---
 
 ## 概要
