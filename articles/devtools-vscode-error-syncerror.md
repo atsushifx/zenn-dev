@@ -1,22 +1,26 @@
 ---
-title: 'VS Code: "設定の同期"をおこなえないときのトラブルシューティング'
+title: 'VS Code: "設定の同期"ができないときの対処方法'
 emoji: "🔧"
 type: "tech"
-topics: ["VSCode", "troubleshooting", "settings", "sync" ]
+topics: ["VSCode", "troubleshooting", "Settings Sync", "同期" ]
 published: false
 ---
 
 ## 概要
 
-`Visual Studio Code`__(以下、`VS Code`)__で設定を同期しようとするときに、サインインに成功してもアクセストークンの取得に失敗し、同期ができなくなる場合があります。
+`Visual Studio Code` (以下、__`VS Code`__)で"設定の同期"[^1]をする場合、サインインには成功しても、認証トークン[^2]の取得に失敗することがあります
+この場合は、同期ができなくなります。
 
-この記事では、アクセストークンが間違っている場合に認証情報を削除して、再度、設定を同期する方法を説明します。
+この記事では、アクセストークンの取得に失敗した場合、認証情報を削除し、再度、設定を同期する方法を説明します。
+
+[^1]: 設定の同期__(Settings Sync)__: `Visual Studio Code`の機能で、複数のデバイス間で`VS Code`の設定や拡張機能を同期する機能
+[^2]: アクセストークン: : API やウェブサービスへアクセスするための認証情報で、ユーザーやアプリケーションがサービスを利用する権限を証明する
 
 ## トラブルシューティングの要約
 
 認証情報を削除して、再度、設定を同期する手順は以下のとおりです。
 
-1. `--sync on`オプションで`code`を実行
+1. `--sync on`オプションつきで`code`コマンドを実行
 
 2. アカウントからサインアウトして認証情報を削除
 
@@ -28,7 +32,7 @@ published: false
 
 - 'VS Code`で設定の同期ができない
 
-- 同期のためのアカウントには、サインイン済み __(サインインし直すことができない)__
+- 同期のためのアカウントには、サインイン済み __(サインインしなおすことができない)__
 
 ## 問題の解決方法
 
@@ -63,7 +67,19 @@ published: false
 
 ## まとめ
 
-本記事では、`Visual Studio Code`で"設定の同期"がうまくいかない場合の対処法を紹介しました。
-読者のプログラミングライフに役立てば幸いです。
+本記事では、`Visual Studio Code`で"設定の同期"がうまくいかない場合の解決方法を手順にそって紹介しました。
+この方法を活用し、スムーズなプログラミング環境を整えましょう。
 
 Happy Hacking!
+
+## 参考資料
+
+### 公式
+
+- [公式ドキュメント - Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync)
+- [GitHubリポジトリ - Visual Studio Code](https://github.com/microsoft/vscode)
+
+### その他
+
+- [Issues - VS Code](https://github.com/microsoft/vscode/issues)
+- [スタック・オーバーフロー](https://ja.stackoverflow.com/)
