@@ -1,8 +1,15 @@
 {
     "plugins": {},
-    "filters": {},
+    "filters": {
+        "allowlist": {
+            "allowlistConfigPaths": [
+                "./.textlint/allowlist.yml"
+            ]
+        }
+    },
     "rules": {
         "preset-ja-engineering-paper": {
+            "use-si-units": false,
             "prh": {
                 "rulePaths": [
                     "~/.local/share/pnpm/5/node_modules\\textlint-rule-preset-ja-engineering-paper/src/dict/prh-rules.yml"
@@ -43,7 +50,10 @@
         },
         "preset-ja-spacing": {
             "ja-space-between-half-and-full-width": {
-                "space": "always"
+                "space": [
+                    "alphabets",
+                    "numbers"
+                ]
             }
         },
         "no-mixed-zenkaku-and-hankaku-alphabet": true,

@@ -1,9 +1,11 @@
 {
     "default:": true,
-    "MD013": {
-        "line_length": 100
+    "line-length": {
+        "line_length": 120
     },
-    "MD051": false,
+    "ol-prefix": false,
+    "strong-style": false,
+    "link-fragments": false,
     "no-hard-tabs": true,
     "whitespace": false
 }
