@@ -5,12 +5,26 @@
         "preset-ja-engineering-paper": {
             "prh": {
                 "rulePaths": [
-                    "C:/Users/atsushifx/.local/share\/pnpm/5/node_modules/textlint-rule-preset-ja-engineering-paper/src/dict/prh-rules.yml"
+                    "~/.local/share/pnpm/5/node_modules\\textlint-rule-preset-ja-engineering-paper/src/dict/prh-rules.yml"
                 ]
             },
             "unify-kuten-and-touten": false
         },
         "preset-ja-technical-writing": {
+            "sentence-length": 100,
+            "max-kanji-continuous-len": {
+                "max": 6,
+                "allow": [
+                    "自然言語処理技術"
+                ]
+            },
+            "ja-no-mixed-period": {
+                "periodMark": "。",
+                "allowPeriodMarks": [
+                    "、",
+                    ":"
+                ]
+            },
             "no-exclamation-question-mark": false,
             "no-doubled-joshi": {
                 "strict": false
@@ -18,7 +32,7 @@
         },
         "preset-japanese": {
             "sentence-length": {
-                "max": 150
+                "max": 100
             },
             "max-ten": {
                 "max": 4
