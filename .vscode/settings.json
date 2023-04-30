@@ -7,6 +7,7 @@
     "textlint.nodePath": "C:\\Users\\atsushifx\\.local\\share\\pnpm\\5",
     "markdownlint.config": {
         "default": true,
+        "MD041": true,
         "MD051": false
-    }
+    },
 }

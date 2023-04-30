@@ -11,6 +11,14 @@
             "unify-kuten-and-touten": false
         },
         "preset-ja-technical-writing": {
+            "sentence-length": 100,
+            "ja-no-mixed-period": {
+                "periodMark": "。",
+                "allowPeriodMarks": [
+                    "、",
+                    ":"
+                ]
+            },
             "no-exclamation-question-mark": false,
             "no-doubled-joshi": {
                 "strict": false
@@ -18,7 +26,7 @@
         },
         "preset-japanese": {
             "sentence-length": {
-                "max": 150
+                "max": 100
             },
             "max-ten": {
                 "max": 4
