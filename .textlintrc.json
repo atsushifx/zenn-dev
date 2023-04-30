@@ -12,6 +12,12 @@
         },
         "preset-ja-technical-writing": {
             "sentence-length": 100,
+            "max-kanji-continuous-len": {
+                "max": 6,
+                "allow": [
+                    "自然言語処理技術"
+                ]
+            },
             "ja-no-mixed-period": {
                 "periodMark": "。",
                 "allowPeriodMarks": [
