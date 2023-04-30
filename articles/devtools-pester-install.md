@@ -8,30 +8,32 @@ published: false
 
 ## はじめに
 
-Pester は BDD(振る舞い駆動開発)のために使用されるユニットテストフレームワークです。
-この記事では、Pester のインストール方法について紹介します。
-Pester の基本的な使い方については、別記事で紹介します。
+この記事では、PowerShell における BDD フレームワークである Pester を紹介します。
+記事を読むことで習得できます。
+
+- Pester のインストール方法
+- Pester の基本的な使い方
 
 ## Pesterとは
 
 Pester は、PowerShell における BDD のためのフレームワークであり、It、Should 関数から成り立っています。
 TDD(テスト駆動開発)とは異なり、BDD は**コードがどのように振る舞うべきか**という視点でをテストします。
 
-## Pesrterで使えるコマンドレット
+## Pesrterのコマンドレット
 
-Pester では、以下のコマンドレットが使えます。
+Pester ではいくつかのコマンドレットが使えます。以下は、その一例です。
 
 | コマンドレット | 意味 | 使用例 |
 | --- | --- | --- |
 | New-Fixture | ユニットテストのひな形の作成 | New-Fixture sampleFunc1 |
 | Invoke-Pester | ユニットテストの実行 | Invoke-Pester |
-|
+
 
 各コマンドレットの詳しい説明は、[公式サイト](https://pester.dev/)を参照してください。
 
-### Pesterの基本的な使い方
+## Pesterの基本的な使い方
 
-以下のように、コマンドを使って BDD を実践します。
+Pester では、いかのようにコードを作成します。
 
 1. テストの作成
   `New-Fixture`コマンドを用いて、コードおよびテストのひな形を作成します。
@@ -41,6 +43,7 @@ Pester では、以下のコマンドレットが使えます。
   ```
 
 2. ファイルの確認
+
   コード用とテスト用の 2 種類のスクリプトファイルができていることを確認します。
 
   ``` PowerShell
@@ -49,6 +52,7 @@ Pester では、以下のコマンドレットが使えます。
   ```
 
 3. テストの実行
+
   `Invoke-Pester`を実行し、`Fail`が出力されることを確認します。
 
   ``` PowerShell
@@ -56,11 +60,12 @@ Pester では、以下のコマンドレットが使えます。
   ```
 
 4. コードの実装
+
   テストが通るように、コードを実装します。
 
   ``` PowerShell: samplefunc.ps1
   function sampleFunc {
-    return "YOUR_EXPECTED_VALUE"
+    return "sample"
   }
   ```
 
@@ -71,6 +76,8 @@ Pester では、以下のコマンドレットが使えます。
 
 ## Pesterのインストール手順
 
+Pester は、[PowerShell Gallery](https://www.powershellgallery.com/)からインストールできます。
+
 ### 前提条件
 
 - PowerShell 7 以降がインストールされていること
@@ -80,13 +87,19 @@ Pester では、以下のコマンドレットが使えます。
 以下の手順で、組み込み済みの旧 Pester を削除します。
 (**管理者権限でPowerShellを実行する必要があります**)。
 
+1. 以下のコマンドを実行し、Pester の各ファイルの登録を外す
+
 ``` PowerShell
 $module = "C:\Program Files\WindowsPowerShell\Modules\Pester"
 takeown /F $module /A /R
 icacls $module /reset
 icacls $module /grant "*S-1-5-32-544:F" /inheritance:d /T
-Remove-Item -Path $module -Recurse -Force -Confirm:$false
+```
 
+2. 以下のコマンドを実行し、Pester の各ファイルを削除する
+
+``` PowerShell
+Remove-Item -Path $module -Recurse -Force -Confirm:$false
 ```
 
 以上で、旧 Pester の削除は終了です。
@@ -122,7 +135,7 @@ Install-Module Pester -Force
 Get-Module -ListAvailable -Name Pester
 ```
 
-上記のように`5.x.x`の Version が表示されていれば、インストールは成功です。
+`5.x.x`の Version が表示されていれば、インストールは成功です。
 
 ## さいごに
 
