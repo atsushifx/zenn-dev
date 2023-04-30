@@ -5,7 +5,7 @@
         "preset-ja-engineering-paper": {
             "prh": {
                 "rulePaths": [
-                    "C:/Users/atsushifx/.local/share\/pnpm/5/node_modules/textlint-rule-preset-ja-engineering-paper/src/dict/prh-rules.yml"
+                    "~/.local/share/pnpm/5/node_modules\\textlint-rule-preset-ja-engineering-paper/src/dict/prh-rules.yml"
                 ]
             },
             "unify-kuten-and-touten": false
