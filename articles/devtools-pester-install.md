@@ -70,7 +70,6 @@ Pester は[PowerShell Gallery](https://www.powershellgallery.com/)からイン�
 WARNING: Module 'Pester' version '3.4.0' published by 'CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US' will be superceded by version '5.4.1' published by 'CN=Jakub Jareš, O=Jakub Jareš, L=Praha, C=CZ'. If you do not trust the new publisher, uninstall the module.
 
 #
-
 ```
 
 上記のインストールは、すべてのユーザーに対してインストールするため管理者権限が必要です。

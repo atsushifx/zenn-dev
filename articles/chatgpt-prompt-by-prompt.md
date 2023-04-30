@@ -16,7 +16,8 @@ ChatGPT は、GPT[^2]という大規模言語モデルを利用したチャッ�
 本記事では ChatGPT の概要について説明し、ChatGPT を利用してプロンプトを作成する方法を紹介します。
 
 本記事のプロンプトは MIT ライセンス[^3]で配布しています。プロンプトを自由に利用できますが、再配布する場合は出典を明記してください。
-MIT ライセンスは、コピーや改変、再配布が自由に行えるオープンソースのライセンスです。詳細については、[The MIT License](https://opensource.org/license/mit/) をご覧ください。
+MIT ライセンスは、コピーや改変、再配布が自由に行えるオープンソースのライセンスです。
+詳細については、[The MIT License](https://opensource.org/license/mit/) をご覧ください。
 
 [^1]:この記事では、ChatGPT に入力する質問のこと
 [^2]:GPT__(Generative Pre-trained Transformer)__ : OpenAI が開発した自然言語を処理する言語モデル
@@ -147,7 +148,7 @@ role,goal,target などは、このプロンプトの直後に定義していま
 
 ### ChatGPTによる改善点
 
-上記のプロンプトを、ChatGPT に入力すると
+上記のプロンプトを ChatGPT に入力すると、
 
 @[gist](https://gist.github.com/atsushifx/814f18d4be5b976d3b17acb77021c00e?file=file-res1-chatgpt)
 
