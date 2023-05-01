@@ -3,7 +3,7 @@ title: "PowerShell: Pesterのインストール手順"
 emoji: "🚀"
 type: "tech"
 topics: ["PowerShell", "Pester", "BDD", "ユニットテスト", "開発環境" ]
-published: false
+published: true
 ---
 
 ## はじめに
