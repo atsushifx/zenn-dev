@@ -2,7 +2,7 @@
 line-length:
   line_length: 120
 # ol-prefix: false
-# strong-style: false
+  strong-style: true
 # link-fragments: false
 no-hard-tabs: true
 whitespace: true
