@@ -60,74 +60,22 @@ published: false
 
 このときのコードは以下のようになります。
 
-``` PowerShell: remove-Comments.Tests.ps1
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments.Tests-1.ps1)
 
-# load tests function script
-#
-BeforeAll {
-  $scriptDir = (Split-Path -Parent $PSScriptRoot)
-  $script = (Split-Path -Leaf $PSCommandPath).Replace('.Tests', '')
-  $script = $scriptDir + "\" + $script
-  # Write-Host "Script :" , $script
-  . $script
-}
+作成する関数は、以下のようになります。
 
-Describe "remove comment from source" {
-  context "check implementation" {
-    it "can call function" {
-      Remove-Comments | Should -BeTrue
-    }
-  }
-}
-```
-
-``` PowerShell : remove-Comments.ps1
-<#
-  .SYNOPSIS
-  remove comments from input
-
-#>
-function Remove-Comments() {
-  throw "Not Implemented"
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=file-remove-Comments-1-ps1)
 
 上記のコードで`Invoke-Pester`として`Pester`を実行すると、
 
-``` PowerShell
-> Invoke-Pester
-
-Starting discovery in 1 files.
-Discovery found 1 tests in 15ms.
-Running tests.
-[-] remove comment from source.check implementation.can call function 4ms (2ms|2ms)
- RuntimeException: Not Implemented
- at Remove-Comments, \powershell\remove-Comments\remove-Comments.ps1:16
- at <ScriptBlock>, \powershell\remove-Comments\Tests\remove-Comments.Tests.ps1:15
-Tests completed in 525ms
-Tests Passed: 0, Failed: 1, Skipped: 0 NotRun: 0
-
->
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=output)
 
 と、`RuntimeException: Not Implemented`が出力されて、`Failed: 1`となります。
 これは関数`Remove-Comments`が、未実装として`Not Implemented`を`Throw`しているためで正常な結果です。
 
 これが、
 
-``` PowerSHell
-> Invoke-Pester
-
-Starting discovery in 1 files.
-Discovery found 1 tests in 12ms.
-Running tests.
-[-] \powershell\remove-Comments\Tests\remove-Comments.Tests.ps1 failed with:
-CommandNotFoundException: The term '\Powershell\remove-Comments\remove-Comments.ps1' is not recognized as
-a name of a cmdlet, function, script file, or executable program.
-Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=output-illegal)
 
 のように、`CommandNotFoundException:`が出力される場合は、テストする関数が正常に読み込めていません。
 
@@ -136,27 +84,11 @@ Check the spelling of the name, or if a path was included, verify that the path 
 
 次に、テストを通るようにコードを変更します。
 
-``` PowerShell: remove-Comments.ps1
-function Remove-Comments() {
-  return $true
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments-2.ps1)
 
 テスト結果は、
 
-``` PowerShell
-> Invoke-Pester
-
-Starting discovery in 1 files.
-Discovery found 1 tests in 179ms.
-Running tests.
-[+] \powershell\remove-Comments\Tests\remove-Comments.Tests.ps1 715ms (114ms|448ms)
-Tests completed in 733ms
-Tests Passed: 1, Failed: 0, Skipped: 0 NotRun: 0
-
->
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=output-passed-2)
 
 と、`Tests Passed 1`となります。
 関数`Remove-Comments`が正常に動いていることが確認できました。
@@ -169,120 +101,30 @@ Tests Passed: 1, Failed: 0, Skipped: 0 NotRun: 0
 
 #### 1. ユニットテスト (行コメント)
 
-``` PowerShell: remove-Comments.Tests.ps1
-# load tests function script
-#
-BeforeAll {
-  $scriptDir = (Split-Path -Parent $PSScriptRoot)
-  $script = (Split-Path -Leaf $PSCommandPath).Replace('.Tests', '')
-  $script = $scriptDir + "\" + $script
-  # Write-Host "Script :" , $script
-  . $script
-}
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments.Tests-3.ps1)
 
-Describe "remove comment from source" {
-  context "line comment" {
-    it "line is all comment" {
-      "# line comment" | remove-Comments | Should -BeNullOrEmpty
-    }
-    it "add comment to line end" {
-      "this is code. # this is comment" | remove-Comments | Should -Be "this is code."
-    }
-}
-
-```
 
 `Should`コマンドレットでコメント削除後の文字列と一致するかチェックします。
 
 上記のコードを通るように、コードを実装します。
 "removeComments.ps1"のコードは、
 
-``` PowerShell: remove-Comments.ps1
-
-function Remove-Comments() {
-  param(
-    # Source code text
-    [Parameter(ValueFromPipeline = $true)]
-    [String[]]
-    $text
-  )
-
-  process {
-    foreach ($line in $text) {
-      $line = ($line -replace '#[^.]*$', '').Trim()
-      $line
-    }
-  }
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments-3.ps1)
 
 となります。
 
-#### 2, ユニットテスト (文字列内のコメント文字)
+#### 2.  ユニットテスト (文字列内のコメント文字)
 
 文字列内に'#'がある場合のテストケースを追加します。
 テストコードは、
 
-``` PowerShell: remove-Comments.Tests.ps1
-
-# load tests function script
-#
-BeforeAll {
-  $scriptDir = (Split-Path -Parent $PSScriptRoot)
-  $script = (Split-Path -Leaf $PSCommandPath).Replace('.Tests', '')
-  $script = $scriptDir + "\" + $script
-  # Write-Host "Script :" , $script
-  . $script
-}
-
-Describe "remove comment from source" {
-  context "line comment" {
-    it "line is all comment" {
-      "# line comment" | remove-Comments | Should -BeNullOrEmpty
-    }
-    it "add comment to line end" {
-      "this is code. # this is comment" | remove-Comments | Should -Be "this is code."
-    }
-    it "in string" {
-      '" # in string " is code # is comment' | remove-Comments | Should -Be '" # in string " is code'
-    }
-  }
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments.Tests-4.ps1)
 
 となります。
 そして、すべてのテストケースが通るように`removeComments.ps1`を修正します。
 修正したコードは、
 
-``` PowerShell: remove-Comments.ps1
-<#
-  .SYNOPSIS
-  remove comments from input
- #>
-function Remove-Comments() {
-  param(
-    # Source code text
-    [Parameter(ValueFromPipeline = $true)]
-    [String[]]
-    $text
-  )
-
-  process {
-    foreach ($line in $text) {
-      if ($line -match '("[^.]*#[^.]*"[^.]*)') {
-        $line = ($line -replace '("[^.]*#[^.]*"[^.]*)#[^.]*$', "`$1").Trim()
-      }
-      else {
-        $line = ($line -replace '#[^.]*$', '').Trim()
-      }
-      return $line
-    }
-  }
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments-4.ps1)
 
 となります。
 
@@ -294,122 +136,12 @@ function Remove-Comments() {
 
 最終的なテストコードは、
 
-``` PowerShell: remove-Comments.Tests.ps1
-# load tests function script
-
-#
-
-BeforeAll {
-  $scriptDir = (Split-Path -Parent $PSScriptRoot)
-  $script = (Split-Path -Leaf $PSCommandPath).Replace('.Tests', '')
-  $script = $scriptDir + "\" + $script
-
-# Write-Host "Script :" , $script
-
-  . $script
-}
-
-Describe "remove comment from source" {
-  Context "line comment" {
-    it "line is all comment" {
-      "# line comment" | remove-Comments | Should -BeNullOrEmpty
-    }
-    it "add comment to line end" {
-      "this is code. # this is comment" | remove-Comments | Should -Be "this is code."
-    }
-    it "in string" {
-      '" # in string " is code # is comment' | remove-Comments | Should -Be '" # in string " is code'
-    }
-  }
-
-  Context "inline comment" {
-    It "only inline comment" {
-      "this <# cooment #> is a code." | remove-Comments | Should -Be "this is a code."
-    }
-    It "ignore # in comment" {
-      "this is <# # is ignored #> a code." | remove-Comments | Should -Be "this is a code."
-    }
-    It "ignore # in string" {
-      'this is <# ignore "#" #> a code.' | remove-Comments | Should -Be "this is a code."
-    }
-
-    Context "multi-line comment" {
-      It "remove multi line comment" {
-        @(
-          "start comment",
-          "<#### start",
-          " # skip this line",
-          ' "also skip thisline "',
-          " end ###>",
-          "end comment" | remove-Comments | Should -Be @("start comment", "end comment")
-        )
-      }
-    }
-  }
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments.Tests-5.ps1)
 
 となりました。
 すべてのテストケースにパスするように修正したコードは、
 
-``` PowerShell: remove-Comments.ps1
-<#
-
-.REMARK
-# Copyright (c) 2023 Furukawa, Atsushi <atsushifx@aglabo.com>
-#
-# This software is released under the MIT License.
-# https://opensource.org/licenses/MIT
-#>
-
-<#
-  .SYNOPSIS
-  remove comments from input
- #>
-function Remove-Comments() {
-  param(
-    # Source code text
-    [Parameter(ValueFromPipeline = $true)]
-    [String[]]
-    $text
-  )
-
-  begin {
-    $isSkipLine = false
-  }
-
-  process {
-    foreach ($line in $text) {
-      $line = $line.Trim()
-
-      if (!$isSkipLine -and ($line -match "^<#[^.]*(?!#>)$")) {
-        $isSkipLine = $true
-      }
-      elseif ( $isSkipLine -and ($line -match "[^.]*#>$")) {
-        $isSkipLine = $false
-      }
-      elseif ($isSkipLine) {
-        # do nothing
-      }
-      else {
-        # remove in-line commeny
-        $line = $line -replace '<#[^.]*#>\s*', ''
-
-        # remove line comment
-        if ($line -match '("[^.]*#[^.]*"[^.]*)') {
-          $line = ($line -replace '("[^.]*#[^.]*"[^.]*)#[^.]*$', "`$1").Trim()
-        }
-        else {
-          $line = ($line -replace '#[^.]*$', '').Trim()
-        }
-        return $line
-      }
-    }
-  }
-}
-
-```
+@[gist](https://gist.github.com/atsushifx/caa148eaffd5de7f3af5fbcd82286fec?file=remove-Comments-5.ps1)
 
 となりました。
 
