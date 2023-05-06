@@ -3,7 +3,7 @@ title: "PowerShell: Pesterを使ったBDDの実践方法"
 emoji: "🚀"
 type: "tech"
 topics: [ "PowerShell", "Pester", "BDD", "ユニットテスト", "コーディング" ]
-published: false
+published: true
 ---
 
 ## 1. はじめに
