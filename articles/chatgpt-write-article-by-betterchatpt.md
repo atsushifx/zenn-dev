@@ -3,7 +3,7 @@ title: "Zenn: Better ChatGPT を活用した実践的な記事執筆方法"
 emoji: "🧙‍♀️"
 type: "idea"
 topics: [ "Zenn", "ChatGPT", "writing", "BetterChatGPT","プロンプトエンジニアリング" ]
-published: false
+published: true
 ---
 
 ## 1. はじめに
