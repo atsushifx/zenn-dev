@@ -2,7 +2,7 @@
 title: "Zenn: Better ChatGPTを活用した実践的な記事執筆方法"
 emoji: "🧙‍♀️"
 type: "idea"
-topics: [ "zenn", "ChatGPT", "writing", "BetterChatGPT","プロンプトエンジニアリング" ]
+topics: [ "Zenn", "ChatGPT", "writing", "BetterChatGPT","プロンプトエンジニアリング" ]
 published: false
 ---
 
@@ -11,7 +11,7 @@ published: false
 この記事では、OpenAI が開発した`ChatGPT`と、非公式のデスクトップクライアントである`Better ChatGPT`を使って Zenn の記事を書く方法を紹介します。
 また、筆者が使用しているさまざまな記事執筆用プロンプトについても紹介します。
 
-ChatGPT の無料プランでは`GPT 3.5 Turbo`モデルを使用しています。GPT-3.5 Turbo はトークン認識が 4096 トークンと少ないですが、高速かつ柔軟な性能があります。
+ChatGPT の無料プランでは`GPT-3.5 Turbo`モデルを使用しています。GPT-3.5 Turbo はトークン認識が 4096 トークンと少ないですが、高速かつ柔軟な性能があります。
 有料プランにアップグレードすることで、より大規模な言語モデルである次世代の`GPT-4`が利用でき、認識できるトークン数も増加します。
 GPT-3.5 Turbo よりも高度な性能を提供する次世代の GPT-4 が利用できると、より効率的に実用的な記事の執筆ができるようになります。
 
