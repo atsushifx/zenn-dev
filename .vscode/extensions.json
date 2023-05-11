@@ -1,8 +1,9 @@
 {
     "recommendations": [
         "fnando.linter",
-        "DavidAnson.vscode-markdownlint",
+        "davidanson.vscode-markdownlint",
         "taichi.vscode-textlint",
         "negokaz.zenn-editor",
+        "waddy.zenn-style-markdown-preview"
     ]
 }
