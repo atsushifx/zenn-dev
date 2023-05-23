@@ -1,8 +1,7 @@
-'default': true
-line-length:
-  line_length: 120
-# ol-prefix: false
-  strong-style: true
+default: true
+line_length: 120
+ol-prefix: true
+strong-style: true
 # link-fragments: false
 no-hard-tabs: true
 whitespace: true
