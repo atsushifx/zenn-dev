@@ -1,5 +1,5 @@
 ---
-title: "WSL2: WSLで開発環境構築用にカスタムディストリビューションを作成する"
+title: "WSL2: wslを使用して開発環境の構築用にカスタムディストリビューションを作成する方法"
 emoji: "🐧"
 type: "tech"
 topics: [ "wsl", "開発環境", "環境構築", "wslconf", "ディストリビューション" ]
@@ -8,125 +8,166 @@ published: false
 
 ## はじめに
 
-WSL（Windows Subsystem for Linux）は、Windows 上で Linux ディストリビューションを実行する機能です。・
+WSL（Windows Subsystem for Linux）は、Windows 上で Linux ディストリビューションを実行する機能です。
 WSL を使うことで、開発者は Linux 上のツールやコマンドを使用でき、Web 開発やバックエンド開発がスムーズに行えます。
 
-ここでは、既存のディストリビューションをもとに開発環境用にカスタムディストリビューションを作成することで、既存の開発環境などに影響を受けない開発環境の作成方法を説明します。
+ここでは、既存ディストリビューションを元に、開発環境用のカスタムディストリビューションを作成する方法を説明します。
+これにより、既存の環境などに影響を受けない独自の開発環境を構築できます。
 
-## WSLのディストリビューション管理
+## 1. WSLのディストリビューション管理
 
-### WSLにおけるディストリビューションとは
+### 1.1. WSLで使用できるディストリビューション
 
-WSL では、`Debian`、`Ubuntu`、`Oracle Linux`などのさまざまな Linux ディストリビューションが利用できます。
+WSL では、以下のような Linux ディストリビューションが利用できます:
+
+- Ubuntu
+- Debian
+- Oracle Linux (パッケージ名 OracleLinux_9_1)
+
 これらのディストリビューションは、`Microsoft Store` で提供されています。
 
-また、[ArchWSL](https://github.com/yuk7/ArchWSL)や[wsldl](https://github.com/yuk7/wsldl)などのツールを使うことで、任意の Linux ディシトリビューションを利用することもできます。
+### 1.2. WSLにおけるディストリビューション
 
-## 開発用ディシトリビューションの作成
+WSL では、実行する Linux 環境をディストリビューションというラベルで管理しています。
+通常では、WSL のディストリビューションは`Debian`のような Linux ディストリビューションと一致しています。
 
-開発用ディストリビューション作成の流れは、次のようになります。
+WSL のディストリビューションは、Linux ディストリビューションとは別の名前を設定できます。
+たとえば、ディストリビューション`Debian`に`dev-debian`という名前をつけてインポートします。
+このディストリビューションは`Debian`のままですが、WSL は`dev-debian`というディストリビューションだと認識します。
+
+## 2. 開発ディストリビューションの作成手順
+
+開発ディストリビューション作成の手順は以下の通りです。
 
 1. wsl.conf を設定し、各ディストリビューション共通の動作を設定する
 
-2. 元ディストリビューションから開発用ディストリビューションを複製する
+2. 元ディストリビューションから開発ディストリビューションを複製する
 
-3.  Windows Terminal に開発ディストリビューションの設定を追加する
+3. Windows Terminal に開発ディストリビューションの設定を追加する
 
-4.  開発用ディストリビューション特有の設定を行なう 
+4. 開発ディストリビューション特有の設定を行なう
 
-上記の手順で、開発用ディストリビューションを作成します。
+上記の手順で、開発ディストリビューションを作成します。
 
-### wsl.confの設定
+### 2.1. wsl.confの設定
 
 WSL では`/etc/wsl.conf`ファイルを使用することで、ディストリビューションの動作を細かく設定できます。
 ここでは、ディストリビューション複製時に使うであろう設定を下記の表に載せています。
 
-| セクション | 設定項目 | 適用 |
-| --- | --- | --- |
-| boot | systemd | true: WSL 起動時に`systemd`デーモンも起動 |
-| network | hostname | WSL ディストリビューションのホスト名 |
-| interop | appendWindowsPath | false: 通常のパスのあとに、Windows 上のパス設定を追加しない |
-| user | default | WSL 起動時にログインするユーザー名 |
+| セクション | 設定項目名 | 設定項目 | 適用 |
+| --- | --- | --- | --- |
+| boot | systemd | true | WSL 起動時に`systemd`デーモンも起動 |
+| network | hostname | <ホスト名> | WSL ディストリビューションのホスト名 |
+| interop | appendWindowsPath | false | 通常のパスのあとに、Windows 上のパス設定を追加しない |
+| user | default | <ユーザー名> | WSL 起動時にログインするユーザー名 |
 
 これらの設定を各ディストリビューションで同じにすることで、設定の一貫性を保つことができます。
 
-### wsl.confの設定方法
+#### wsl.confの設定方法
 
-以下の内容で、`/etc/wsl.conf`ファイルを作成します。
-wsl.conf では `#` によるコメントが可能です。
+次の手順で、`/etc/wsl.conf`を設定します。
 
-``` :wsl.conf
-# Boot with systemd daemon 
-[boot]
-systemd = true
+1. `/etc/wsl.conf`ファイルを作成する
+   下記の内容で、`/etc/wsl.cong`を作成します。`#`以降はコメントです。
 
-[network]
-# hostname changed by distribution
-hostname = <my_custom_hostname>
+   ``` :wsl.conf
+   # Boot with systemd daemon
+   [boot]
+   systemd = true
+   
+   [network]
+   # hostname changed by distribution
+   hostname = <my_custom_hostname>
+   
+   [interop]
+   # do not add Windows path
+   appendWindowsPath = false
+   
+   [user]
+   default = <defaultUserName>
 
-[interop]
-# do not add Windows path
-appendWindowsPath = false
+   ```
 
-[user]
-default = <defaultUserName>
+   `<my_custom_hostname>`の部分を開発ディストリビューションのホスト名に、`<defaultUserName>`の部分を WSL 起動時のログインユーザー名に置き換えてください。
 
-```
+2. WSL を再起動する
+   コマンドラインで`wsl --shutdown`と入力し、WSL を再起動します。
 
-デォストリビューションを再起動すると、`/etc/wsl.conf`が適用された状態で Linux が起動します。
+   ``` powershell
+   wsl --shutdown
+   ```
 
-### ディストリビューションの複製
+以降、`/etc/wsl.conf`が適用された状態で WSL が起動します。
+
+### 2.2. ディストリビューションの複製
 
 ディストリビューションの作成には、WSL の`export`、`import`機能を使用します。
 export で元ディストリビューションの tar アーカイブを作成後、開発ディストリビューション側で作成した tar アーカイブを import します。
 
-### ディストリビューションの複製方法
+#### ディストリビューションの複製方法
 
 以下の手順で、ディストリビューションを複製します。
 
 1. 指定したディストリビューションを tar アーカイブに保存する
-  
+
    ``` powershell
    wsl --export Debian debian.tar
    ```
+
    上記のコマンドで、`debian.tar`に元ディストリビューションがアーカイブされます
-  
 
 2. 開発ディストリビューション側で、1. で作成した tar アーカイブを import する
-   
+
    ``` powershell
-   wsl --import dev-debian ~/.local/share/wsl/dev-debian ./debian.tar
+   wsl --import <開発ディストリビューション> <仮想ディスクディレクトリ> debian.tar
    ```
+
+   `<開発ディストリビューション>`は、`dev-debian`などの開発ディストリビューション名をいれます。
+   `<仮想ディスクディレクトリ>`は、`~/.local/share/wsl/dev-debian'のような tar アーカイブを展開するディレクトリを指定します。
 
 以上で、ディストリビューションの複製は終了です。
 
-### Windows Terminalの設定
+### 2.3. Windows Terminalの設定
 
 作成した開発ディストリビューション上で作業ができるように、windows Terminal に設定を追加します。
 
 設定の手順は、次のようになります。
 
-1. Windows Terminal を開く
-2. `Ctrl+,`として設定画面を開き、[新しいプロファイルを追加します]を選択します。
+1. Windows Terminal を開き、`Ctrl+,`として設定画面を開く
+   ![設定画面](https://i.imgur.com/yNNSU3A.png)
 
-   rプロファイルを複製するで、元のプロファイル (今回は`Debian`)を複製します。
+2. [新しいプロファイルを追加]を選択し、元のプロファイル(今回は`Debian`)を選択して複製する
+   ![新しいプロファイル](https://i.imgur.com/PgdQtHW.png)
 
-3. 複製したプロファイルのコマンドラインを書き換え、開発用ディストリビューションを指定します
+3. 複製したプロファイルの名前を開発ディストリビューションの名前に変更する
+   ![開発ディストリビューション](https://i.imgur.com/YZocMaz.png)
 
-4. 複製したプロファイルを保存し、Windows Terminal をとじる
+4. コマンドラインを変更し、起動するプロファイルを開発ディストリビューションに変更する
 
-以上で、設定の追加は終了です。次からは、Windows Terminal で開発ディストリビューションが選べるようになりなす。
+   ``` powershell
+   wsl.exe -D <開発ディストリビューション>
+   ```
 
-### 開発ディストリビューションの設定を行なう
+   `<開発ディストリビューション>`には、ディストリビューション複製時に入力したディストリビューションを入れる
 
-LinuxBrew や Node.js など、開発に必要な環境を設定します。
-それぞれの開発環境によって詳細は異なるので、ここでは説明しません。
-それぞれの公式サイトなどを参照してください。
+5. 複製したプロファイルを保存し、Windows Terminal をとじる
+
+以上で、Windows Terminal から開発ディストリビューションを選択できるようになりなす。
+
+### 2.4. 開発ディストリビューションの設定
+
+開発環境ごとに必要なプログラミング言語やライブラリのインストール、開発ツールのセットアップを行います。
+具体的には、開発言語のランタイムやライブラリのインストール、開発ツールのセットアップなどが含まれます。詳細はそれぞれの公式サイトなどを参照してください。
+
+これらの方法は多岐にわたるため、詳細は各言語や開発ツールの公式サイトを参照してください。
 
 ## さいごに
 
-`/etc/wsl.conf`によって、均一な設定で複数のディストリビューションを管理できます。
-これにより、設定の手間が減り、効率的な開発が可能となります。
+元ディストリビューションを tar アーカイブにエキスポートして、そこから開発ディストリビューションを作成する方法を説明しました。
+作成した tar アーカイブからは複数の開発ディストリビューションが作成できます。
+カスタムディストリビューションの利用により、各プロジェクトに特化したクリーンで使いやすい開発環境が構築できます。
+
+それでは、Happy Hacking!
 
 ## 技術用語と注釈
 
@@ -138,6 +179,4 @@ LinuxBrew や Node.js など、開発に必要な環境を設定します。
 
 ### Webサイト
 
-- [WSL での詳細設定の構成](https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config)
-- [ArchWSL](https://github.com/yuk7/ArchWSL)
-- [wsldl](https://github.com/yuk7/wsldl)
+- WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
