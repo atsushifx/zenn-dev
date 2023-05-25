@@ -3,7 +3,7 @@ title: "WindowsにGo言語をインストールする方法"
 emoji: "👟"
 type: "tech"
 topics: [ "go", "インストール", "開発環境", "環境構築", "XDG" ]
-published: false
+published: true
 ---
 
 ## はじめに
