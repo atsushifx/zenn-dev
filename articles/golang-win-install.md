@@ -2,7 +2,7 @@
 title: "WindowsにGo言語をインストールする方法"
 emoji: "👟"
 type: "tech"
-Topics: [ "go", "インストール", "開発環境", "環境構築", "XDG" ]
+topics: [ "go", "インストール", "開発環境", "環境構築", "XDG" ]
 published: false
 ---
 
@@ -16,13 +16,13 @@ Go言語のインストール自体は容易ですが、インストール先や
 また、`GOPATH`によりホームディレクトリ直下に設定ファイルやパッケージファイルが保存されますが、すでにいくつかのディレクトリが存在しているため、ディレクトリの管理が煩雑になります。
 
 このようにデフォルトの設定では不便なため、今回は Go 言語を「`C:\lang\go`」にインストールします。`
-GOPATH`も`XDG Base Directory`に準じて「`c:/Users/<ユーザー名>/.local/share/go`」に設定します。
+GOPATH`も`XDG Base Directory`に準じて「`C:/Users/<ユーザー名>/.local/share/go`」に設定します。
 
 ## 1. 環境の準備
 
 ### 1.1. Goのインストール先
 
-プログラミング言語は基本的に`c:\lang\`下にインストールします。今回は Go 言語をインストールするので、`c:\lang\go`となります。
+プログラミング言語は基本的に`C:\lang\`下にインストールします。今回は Go 言語をインストールするので、`C:\lang\go`となります。
 
 `C:\lang`は、Windows の一般的なインストール先である`C:\Program Files`とは異なり、ディレクトリ名に空白が含まれていません。
 空白を含むディレクトリ名は、一部のツールで予期しない動作を引き起こす可能性があるため、空白を避けることが推奨されます。空白のないディレクトリ名を使用することで、問題を回避できます。
@@ -48,7 +48,7 @@ Go言語は、Windows 用のパッケージマネージャー`winget`に対応�
 次のコマンドで、Go 言語をインストールします。
 
 ``` powershell
-winget install GoLang.Go --override "INSTALLDIR=c:\\lang\\go"
+winget install GoLang.Go --override "INSTALLDIR=C:\\lang\\go"
 
 ```
 
@@ -59,7 +59,7 @@ Go 言語を使用するためには、一部の環境変数を設定する必�
 | 環境変数 | 設定値 | 説明 |
 | --- | --- | --- |
 | GOPATH | `C:/Users/<ユーザー名>/.local/share/go` | Go 言語のワークスペースのパスです。 XDG_DATA_HOME 下に設定します。|
-| PATH | `...;c:\lang\go\bin;%GOPATH%\bin` | `c:\lang\go\bin`と`%GOPATH%bin`を`Path`に追加 |
+| PATH | `...;C:\lang\go\bin;%GOPATH%\bin` | `C:\lang\go\bin`と`%GOPATH%bin`を`Path`に追加 |
 
 <!-- markdownlint-disable MD036 -->
 **注**
