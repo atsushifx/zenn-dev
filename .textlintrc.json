@@ -63,8 +63,31 @@
         "common-misspellings": {
             "ignore": []
         },
-        "en-spell": {
-            "personalDictionry":[
+        "spelling": {
+            "language": "en",
+            "skipPatterns": [
+                "/WebLio/ig",
+                "/Eigo/ig",
+                "/Quora/ig",
+                "/Zenn/ig",
+                "/https?/ig",
+                "/html?/g",
+                "/ejje\\./g",
+                "/www/g",
+                "/jp/g",
+                "/dev/g",
+                "/PowerShell/i",
+                "/CoreUtils/i",
+                "/BusyBox/ig",
+                "/gnuwin/g",
+                "/Utils/ig",
+                "/sourceforge/i",
+                "/GitHub/i",
+                "/indstate/g",
+                "/uutils/g",
+                "/BusyBox/gi",
+                "/edu/g",
+                "/greenwood/g"
             ]
         },
         "@proofdict/proofdict": {
