@@ -1,5 +1,5 @@
 ---
-title: "Windows: WindowsへのUNIX系ツールのインストール方法"
+title: "WindowsでUNIX系ツールを使うためのインストールガイド"
 emoji: "🪟"
 type: "tech"
 topics: ["Windows", "CLI", "coreutils", "Scoop", "コマンドライン" ]
@@ -8,20 +8,21 @@ published: false
 
 ## はじめに
 
-Windows の PowerShell コマンドライン環境は強力ですが、PowerShell に標準搭載されたコマンドしか使用できないことが制約になることがあります。
-このような場合、UNIX/Linux 環境で使われるツール類を Windows にインストールすることで、PowerShell の機能の制限を解消できます。
-本記事では、Windows に UNIX/Linux 環境で利用されるツール類をインストールする手順について解説します。
+Windows の PowerShell コマンドライン環境は強力ですが、プログラム開発時においては、標準的に提供されているコマンドでは不足する場合があります。
+そんなとき、`UNIX/Linux`環境で使われるツール類を Windows にインストールすることで、より柔軟で強力な操作が可能になります。
+
+この記事では、Windows上で使用できるようになる UNIX系ツールのインストール方法を紹介します。
 
 ## UNIX系ツールとは
 
-ここでいう UNIX 系ツールは、GNU CoreUtils などの UNIX/Linux のコマンドライン環境の中心となるコマンド群、ツールチェインです。
+ここでいう UNIX 系ツールは、'sh'.'bash'などのシェルや`GNU CoreUtils`などの`UNIX/Linux`のコマンドライン環境の中心となるコマンド群のことを示します。
 これらのツールをインストールすることで、Windows上でも Linux と同じ操作が可能です。
 
 ### BusyBox
 
-`BusyBox`は、Linux の主要コマンドをまとめて１つのパッケージにしたプログラムで、`cat`,`sh`,`cd`,`mv`などのコマンドをふくんでいます。
-それぞれのコマンドは `BusyBox`のサブコマンドとして呼びだすことができます。
-また、`BusyBox`が主要コマンド名で実行されたときは、BusyBox 自身が主要コマンドを実行します。
+`BusyBox`は、Linux の主要コマンドをまとめて１つのパッケージにしたプログラムです。 'sh','bash'といったシェルも含まれているため、シェルの代わりにもなります。
+それぞれのコマンドは `BusyBox`のサブコマンドとして呼びだすほかに、`BusyBox`の別名として呼びだすこともできます。
+`BusyBox`が`ls`,`mv`のようなコマンド名で実行されたときは、BusyBox 自身がコマンドを実行します。
 
 ``` PowerShell
 busybox ls .    # ls .
@@ -29,14 +30,14 @@ ls .            # busybox .を実行するが、動作は ls .
 
 ```
 
-### coreutils
+### Core Utils
 
-`CoreUtils`（GNU Core Utilities）は、U`NIX/Linux`系`OS`で中核となる`ls`,`cat`,`rm`などの一群のコマンドをまとめて提供しているツールチェインです。
-BusyBox はツールチェインの中でも主要なコマンドだけを提供していますが、Core Utils はツールチェインすべててのコマンドを提供しています。
+`Core Utils`（GNU Core Utilities）は、`UNIX/Linux`系`OS`で中核となる`ls`,`cat`,`rm`などの一群のコマンドをまとめて提供しているパッケージです。
+BusyBox はパッケージの中でも主要なコマンドだけを提供していますが、Core Utils はすべてのコマンドを提供しています。
 
 ### less,grep
 
-`less`, `grep` は UNIX/Linux 環境で頻繁に使用されるコマンドです。ツールチェインには含まれていませんが、Linux ディストリビューションとの互換性を考えると、インストールしておくと便利です。
+`less`, `grep` は UNIX/Linux 環境で頻繁に使用されるコマンドです。`Core Utils`には含まれていませんが、Linux ディストリビューションとの互換性を考えると、インストールしておくと便利です。
 
 ### tree
 
@@ -54,22 +55,16 @@ Windows 側は、以下のようにディレクトリを構成しています。
 c:\
  |-- app
  |   |-- develop   # 開発ツール
- |   |-- devices   # ハードウェア関連ツール
  |   |-- launnch   # アプリショートカット用
- |   |-- media     # ビデオ、グラフィックスエディタなど
- |   |-- net       # ネットワーク関連
- |   |-- scoop     # Scoop Global
- |   |-- system    # システムツール
- |   |-- utils     # 各種ツール、ユーティリティ
- |   `-- web       # Web関連ツール
+ |   \- scoop     # Scoop Global
  |
  \-- bin
-     |-- 7zip      # 7zip アーカイバ
      |-- Wz        # Wzエディタ
      |-- init      # 初期化用
      |-- neovim    # NeoVIM エディタ
      |-- scripts   # 各種スクリプト
      `-- tools     # UNIX系ツール、コマンドラインツール
+
 ```
 
 Scoop を使ってインストールしたコマンドは、`c:\app\scoop\`下に配置します。
@@ -87,7 +82,7 @@ Scoop を使ってインストールしたコマンドは、`c:\app\scoop\`下�
 
 2. `BusyBox`をインストールする
 
-   ``` PowerShell
+   ``` powershell
    scoop install busybox -g
    ```
 
@@ -103,7 +98,7 @@ Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
 
 2. `coreutils`をインストールする
 
-   ``` PowerShell
+   ``` powershell
    scoop install uutils-coreutils -g
    ```
 
@@ -136,14 +131,14 @@ Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
 `tree`は`Scoop`ではインストールできません。そのため、手動でパッケージをダウンロードしてインストールします。
 次の手順で、'tree'をインストールします。
 
-1. Tree for Windows: <https://gnuwin32.sourceforge.net/packages/tree.htm> にアクセスします。
-   ![Tree for Windows](https://i.imgur.com/FhehnD0m.png)
+1. [Tree for Windows](https://gnuwin32.sourceforge.net/packages/tree.htm): <https://gnuwin32.sourceforge.net/packages/tree.htm> にアクセスします。
+   [![Tree for Windows](https://i.imgur.com/FhehnD0m.png)](https://gnuwin32.sourceforge.net/packages/tree.htm)
 
 2. [Binariesのリンク](http://downloads.sourceforge.net/gnuwin32/tree-1.5.2.2-bin.zip)をクリックし、アーカイブをダウンロードする
 
 3. ダウンロードしたアーカイブを展開する
 
-4. 展開して出てきた`tree.exe`を`c:\bin\tools`にコピーする
+4. 展開して出てきた"`tree.exe`"を"`c:\bin\tools`"にコピーする
 
    ``` powershell
    cp .\tree-1.5.2.2-bin\bin\tree.exe c:\bin\tools\
@@ -157,16 +152,23 @@ Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
 この記事では、Windows に UNIX系のツールをインストールする方法を紹介しました。
 UNIX系ツールを使うことにより、Windows上でも柔軟な操作が可能になります。
 
-ツールを使いこなすには公式ドキュメントや各種チュートリアルを読んで、使い方を理解する必要があります。
+他に必要なツールがある場合は、`winget`や`Scoop`などのパッケージ管理ツールを利用することで、簡単にインストールできます。
+また、`Windows 10/11`環境では、`WSL`　(`Windows Subsystem for Linux`) を使用して `Linux` をネイティブに動かすこともできます。
+
+以上で、Windows で UNIX 系ツールをインストールする方法についての解説を終わります。
+
+それでは、Happy Hacking!
+
+## 技術用語と注釈
 
 ## 参考資料
 
 ### Webサイト
 
-- GNU core utilities: <https://www.gnu.org/software/coreutils/>
-- uutils coreutils: <https://github.com/uutils/coreutils>
-- Busybox for Windows: <https://frippery.org/busybox/>
-- less: <https://www.greenwoodsoftware.com/less/>
-- GNU grep: <https://www.gnu.org/software/grep/>
-- Tree for Linux: <http://mama.indstate.edu/users/ice/tree/>
-- Tree for Windows: <https://gnuwin32.sourceforge.net/packages/tree.htm>
+1. GNU core utilities: <https://www.gnu.org/software/coreutils/>
+2. uutils coreutils: <https://github.com/uutils/coreutils>
+3. Busybox for Windows: <https://frippery.org/busybox/>
+4. less: <https://www.greenwoodsoftware.com/less/>
+5. GNU grep: <https://www.gnu.org/software/grep/>
+6. Tree for Linux: <http://mama.indstate.edu/users/ice/tree/>
+7. Tree for Windows: <https://gnuwin32.sourceforge.net/packages/tree.htm>
