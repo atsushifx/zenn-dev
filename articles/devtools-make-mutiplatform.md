@@ -3,7 +3,7 @@ title: "Makefileを使用してOSを判定し、OSごとに適切なビルドを
 emoji: "🔧"
 type: "tech"
 topics: [ "Makefile", "ビルドツール", "make", "OS判定" ]
-published: false
+published: true
 ---
 
 ## はじめに
