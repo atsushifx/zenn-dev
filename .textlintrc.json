@@ -89,7 +89,8 @@
                 "/uutils/g",
                 "/BusyBox/gi",
                 "/edu/g",
-                "/greenwood/g"
+                "/greenwood/g",
+                "/Makefile/g"
             ]
         },
         "@proofdict/proofdict": {
