@@ -3,7 +3,7 @@ title: "WindowsにUNIX系ツールをインストールする方法"
 emoji: "🪟"
 type: "tech"
 topics: ["Windows", "CLI", "Coreutils", "開発環境", "環境構築" ]
-published: false
+published: true
 ---
 
 ## はじめに
