@@ -78,6 +78,7 @@
                 "/www/g",
                 "/jp/g",
                 "/dev/g",
+                "/exe/ig",
                 "/winget/",
                 "/cli/",
                 "/PowerShell/i",

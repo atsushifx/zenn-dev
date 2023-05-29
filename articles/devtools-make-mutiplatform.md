@@ -1,70 +1,75 @@
 ---
-title: "make: MakefileでOSを判定してOS別のビルドを行う方法"
+title: "MakefileでOSを判定してOS別のビルドを行う方法"
 emoji: "🔧"
 type: "tech"
-topics: [ "Makefile", "ビルド", "OS", "Go" ]
+topics: [ "Makefile", "ビルドツール", "make", "OS判定" ]
 published: false
 ---
 
 ## はじめに
 
-プログラムをビルドするときに、OS によってコンパイラオプションや実行ファイルの名前を変更する必要があります。
-手動でこれらを切り替えるのは手間がかかる作業です。
+プログラムをコンパイル・ビルドするときに、OS によってコンパイラオプションや出力ファイルが異なります。
+これらを、毎回手動で切り替えるのは手間がかかり、誤りの可能性があります。
 
-この記事では、ビルドツール"make"で OS と CPU を判定し、OS 別にプログラムをビルドする方法を紹介します。
+開発ツールにこの処理を任せることで、手間を減らしエラーを防止できます。
 
-## 前提環境
+この記事では、ビルドツール"make"を使って OS 別にビルドさせる方法を紹介します。
+自動的に判定されるので、ファイルの書き換えや問題が発生しません。
+
+## 1. 前提環境
 
 この記事では、以下の環境を前提としています。
 
-- `GNU Make`を使用する
+- ``GNU Make``を使用する
 - `uname`コマンドが使用できる
 
+`uname`コマンドはシステムの動作環境を取得するコマンドですが、UNIX系のツールなの Windows には入っていません。
 Windows 環境の場合は、[WindowsにUNIX系ツールをインストールする方法](https://zenn.dev/atsushifx/articles/winhack-unixutils-install)を参照してツールをインストールする必要があります。
 
-## make について
+## 2. makeとは
 
-### makeとは
+### 2.1. makeとはなにか
 
 "`make`"はビルドツールの 1つで、`Makefile`に基づいてビルドを行います。
 `Makefile`はビルドを自動化するために、ソースファイルなどの依存関係やコンパイルオプションなどを記述したテキストファイルです。
 
 make を実行すると、まず`Makefile`を読み込みます。その後、ファイルの依存関係から新しくなったソースファイルをコンパイルし、最終的に実行ファイルを作製します。
 
-### makeとMakefile
+### 2.2. makeとMakefile
 
-Makefile は、メタデータの一種で、ビルドプロセスの一部を表現するファイルです。Makefile には、ビルドするソースコードのファイル名、コンパイルするコマンド、コンパイル時のオプションなどが定義されています。Makefile を作成すると、ビルド時の手作業の作業を自動化できます。
+Makefile はビルドを自動化するために使用されるテキストファイルであり、ソースファイルや依存関係、コンパイルオプションなどが記述されます。
+依存関係は、ビルドに必要なソースファイル間の関係を示し、コンパイルオプションはコンパイラへの指示を表します。これらの詳細な設定は Makefile に記述され、ビルドプロセスを自動化し、ヒューマンエラーを防ぐことができます。
 
-Makefile は、以下のようなルールで構成されています。
-
-``` Makefile
-ターゲット: 依存ファイル
-    コマンド
-```
-
-- ターゲット：生成するファイル名やルール名などを指定します。
-- 依存ファイル：ターゲットを作る際に必要なファイル名を指定します。
-- コマンド：ビルドの際に実行されるコマンドを指定します。
-
-たとえば、`Go`で"Hello,World!"プログラムをビルドするには:
+たとえば、`Go`で"Hello,World!"を出力するプログラムの場合、
+Makefile は、つぎのようになります。
 
 ``` Makefile
 hello.exe: hello.go
-    go build .
+    go build hello.go
 
-``
+```
 
-のように書けます。
+この Makefile について説明すると:
 
-## Makefileの作成
+- hello.exe: ターゲット: 作成するファイルを記述します
+- hello.go: 依存関係: ターゲットである`hello.exe`の作成元となるファイルの一覧です
+- go build hello.go: コマンド: 依存関係のファイルからターゲットを作成するコマンドを記述します
+
+make ではターゲットと依存関係の作成日時を比較します。依存関係のファイルの方が新しいときにコマンドを実行し、ターゲットを作成します。
+ターゲットの方が新しいときには。コマンドによるコンパイル・ビルドは行いません。
+これにより、効率的にビルドできます。
+
+## 3. Makefileの作成
 
 この記事での`Makefile`は、OS/アーキテクチャの判定とそれによる振り分けを行います。
-実際のビルド方法は OS 別の Makefile に記述します。
+実際のビルド方法は OS ごとに別の Makefile に記述します。
 
-### OSの判定
+### 3.1. OSの判定
 
-Make では、実行した OS が自動変数"$(OS)"に記録されます。`uname -s`コマンドで OS が取得できます。
-これらから OS を判定する`Makefile`のスクリプトは、以下のようになります。
+Windows 環境では、環境変数 OS に起動した OS が記録され、`Windows_NT` となります。
+一方、Linux/Mac 環境では OS 環境変数は利用できません。その代わり、name -s コマンドを使って実行中の OS を取得します。このコマンドは、`POSIX`標準にしたがって OS の名前を返すため、OS の種類を一貫性を持って判定することが可能となります。
+また、`uname -s`は、多くの Unix系OS でサポートされており、その普遍性から採用しています。
+これらをもとに、以下のような`Makefile`のスクリプトで OS を判定します。
 
 ``` Makefile
 # set system envrion for Windows
@@ -76,21 +81,24 @@ else
     ifeq ($(UNAME_OS),Linux)
         GOOS := linux
         GOMAKEFILE := make-linux.mk
-    endif
-    ifeq ($(UNAME_OS),Darwin)
-        GOOS := darwin
+    else ifeq ($(UNAME_OS),Darwin)
+    GOOS := darwin
         GOMAKEFILE := make-mac.mk
+    else
+        GOOS := unknown
+        GOMAKEFILE := make-unknown.mk
     endif
 endif
+
 
 ```
 
 このスクリプトを実行すると、`GOOS`に`windows`,`linux`,`darwin`などの OS 名が入ります。
-また、`GOMAKEFILE`に OS ごとの`Makefile`のファイル名がはいります。
+また、`GOMAKEFILE`に OS ごとの`Makefile`のファイル名が入ります。
 
-### アーキテクチャの判定
+### 3.2. アーキテクチャの判定
 
-`uanme -m`コマンドで実行している CPU が取得できます。
+`uanme -m`コマンドで実行している CPU のアーキテクチャが取得できます。
 これをもとに、アーキテクチャを設定します。
 `Makefile`のスクリプトは、以下のようになります。
 
@@ -109,14 +117,14 @@ endif
 
 ```
 
-上記のスクリプトでは、`GOARCH`に判定したアーキテクチャを記録しています。
+上記のスクリプトでは、`GOARCH`に判定したアーキテクチャが設定されます。
 
-### 環境の引き継ぎ
+### 3.3. 環境の引き継ぎ
 
-取得した OS、アーキテクチャは、環境変数として OS 別の Makefile に引き継ぎます。
+取得した OS、アーキテクチャは、環境変数として各 OS ごとの Makefile に引き継ぎます。
 そのため、ファイルの先頭に`export`を記述します。
 
-### 最終的なMakefile
+### 3.4. 最終的なMakefile
 
 上記のセクションをもとに`Makefile`を作成します。
 最終的な`Makefile`は、つぎのようになります。
@@ -151,10 +159,12 @@ else
     ifeq ($(UNAME_OS),Linux)
         GOOS := linux
         GOMAKEFILE := make-linux.mk
-    endif
-    ifeq ($(UNAME_OS),Darwin)
-        GOOS := darwin
+    else ifeq ($(UNAME_OS),Darwin)
+    GOOS := darwin
         GOMAKEFILE := make-mac.mk
+    else
+        GOOS := unknown
+        GOMAKEFILE := make-unknown.mk
     endif
 endif
 
@@ -187,29 +197,29 @@ build:
 
 ```
 
-上記の`Makefile`は、`Go`プロジェクトの基本的なものです。
-実際には、`Makefile`に記述を追加しています。
+上記の Makefile は、`Go`プロジェクトの基本的なテンプレートです。プロジェクトに応じて適宜追加や修正をしてください。
 
 <!-- markdownlint-disable -->
 **注意**
 <!-- markdownlint-enable -->
 
-- `Zenn`用に空白でインデントしています。実際に使うには、空白をタブに置き換える必要があります。
+- ここでは見やすさを考慮し、インデントには空白を使用しています。しかし、実際の`Makefile`ではインデントにタブを使用する必要があります。したがって、この`Makefile`を使用する場合は、インデントをタブに変更してください。
 
 ## さいごに
 
-この記事では、OS 別の`Makefile`を自動的に起動する方法を紹介しました。
-マルチプラットフォームのプロジェクトだと、このような OS 別のビルドが役に立つでしょう。
+この記事を通じて、Makefile を使って OS を自動的に判定し、それに応じて OS 別のビルドを行なう方法を学びました。
+この技術は、複数のプラットフォームを対象としたプロジェクトにおいてとくに有用です。
+これらの知識を活用して、ビルドプロセスの自動化を進め、効率的な開発を実現しましょう。
 
 それでは、Happy Hacking!
 
 ## 技術用語と注釈
 
-- GNU Make：ビルドツール
+- `GNU Make`：ビルドツール
 - Makefile：`make`コマンドで、ビルドプロセスを記述するファイル
 
 ## 参考資料
 
 ### Webサイト
 
-- GNU Make: <https://www.gnu.org/software/make/>
+- `GNU Make`: <https://www.gnu.org/software/make/>
