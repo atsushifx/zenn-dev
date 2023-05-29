@@ -11,22 +11,22 @@ published: false
 この記事では、Windows 環境で使用できる`UNIX`系ツールのインストール方法を紹介します。
 
 `less`,`grep`など`Linux`環境でよく使われているツールは、Windows にも移植されています。
-これらの`UNIX`系ツールを Windows にインストールすることで、`Linux`と同様の操作ができるようになり、コンソールでの生産性が大きく上昇します。
+これらの`UNIX`系ツールを Windows にインストールすることで、`Linux`と同様の操作ができるようになり、コンソール操作の効率が向上します。
 
 ## 1. UNIX系ツールとは
 
-ここでいう UNIX 系ツールは、`sh`、`bash`などのシェルや`Coreutils`などで、`UNIX`/`Linux`の中心となるコマンド群をまとめて提供しています。
+ここでは、`sh`、`bash`などのシェルや`Coreutils`などのツールを示しています。
 
 `Windows 10/11`では標準で`PowerShell`が使用でき、エイリアスで`rm`、`ls`のような UNIX コマンドも使用できます。
 ただし、オプションは`PowerShell`のままなので注意が必要です。
 
-Windows 上でも、`BusyBox`、`Coreutils`といった UNIX系ツールのパッケージをインストールすることで、`Linux`と同じ操作ができるようになります。
+Windows 上でも、`BusyBox`、`Coreutils`といった UNIX系ツールのパッケージをインストールすることで、`Linux`と同様の操作が可能になります。
 
 ### 1.1. BusyBox
 
 `BusyBox` は、`Linux`環境で使用するシェルと主要コマンドをまとめて１つのパッケージにしたプログラムです。
 `sh`、`bash`といったシェルも含まれているため、シェルの代わりにもなります。
-`BusyBox`をインストールすると、Windows 上でもシェルを含んだ Linux 環境がひととおりそろいます。
+`BusyBox`をインストールすると、Windows 上でもシェルを含む Linux 環境の一文が提供されます。
 
 `BusyBox`には`ls`コマンドのほか、`rm`や`cat`など、多数のコマンドが含まれています。これらのコマンドは、`BusyBox`のサブコマンドとして呼び出せるほか、それぞれ独立したコマンドとしても機能します。
 `BusyBox`内のそれぞれのコマンドを実行するには、シンボリックリンクを利用してそれぞれのコマンド名で`BusyBox`を呼びだす必要があります。
@@ -42,23 +42,23 @@ ls .            # シンボリックリンクにより、busyboxがを実行さ�
 
 ### 1.2. Coreutils
 
-`Coreutils`（GNU Core Utilities）は、`UNIX/Linux`系`OS`で中核となる`ls`,`cat`,`rm`などの一群のコマンドをまとめて提供しているパッケージです。
-BusyBox はパッケージの中でも主要なコマンドだけを提供していますが、Coreutils はすべてのコマンドを提供しています。
+`Coreutils`（GNU Core Utilities）は、`ls`,`cat`などの`UNIX/Linux`系`OS`で基本的なコマンドをまとめて提供しているパッケージです。
+BusyBox はパッケージの中でも主要なコマンドだけを提供していますが、Coreutils はより多くのコマンドを提供しています。
 
 ### 1.3. less (ページャー)
 
 less はファイルの内容を画面に表示するページャーの一種です。
-`Linux`環境下で頻繁に使用されるため、インストールしておくと便利です。
+`Linux`環境でよく使用されるため、インストールしておくと便利です。
 
 ### 1.4. grep (検索ツール)
 
-`grep` (`GNU grep`)は、ファイル内にキーワードが存在するかをチェックする検索ツールです。
-Linux ディストリビューションとの互換性を考えると、インストールしておくと便利です。
+`grep` (`GNU grep`)は、ファイル内に特定のパターンのテキストが存在するかをチェックする検索ツールです。
+Linux ディストリビューションとの互換性を考慮してインストールします。
 
 ### 1.5. tree
 
 tree は、ファイルやディレクトリをツリー表示するコマンドです。
-Windows にも tree コマンドがありますが、Linux に移植されたほうが機能豊富です。
+Windows にも tree コマンドがありますが、Linux に移植されたバージョンのほうが機能豊富です。
 機能の豊富さのために、Linux版の`tree`コマンドをインストールします。
 
 ## 2. UNIX系ツールのインストール
@@ -85,13 +85,13 @@ c:\
 
 ```
 
-Scoop を使ってインストールしたコマンドは、`Scoop`コマンドによって`c:\app\scoop\`下の適切なディレクトリに配置されます。
+Scoop を使ってインストールしたコマンドは、自動的に"c:\app\scoop"下の適切なディレクトリに配置されます。
 そのほかのコマンドは、Windows のコマンドライン用コマンドを配置するディレクトリ`c:\bin\tools`下にインストールします。
 
 #### 環境変数`Path`
 
 ディレクトリ構成に従い、`Path`を設定しておきます。
-Path は、つぎのようになります。
+Path は、以下のようになります。
 
 ``` powershell
 c:\bin;C:\bin\scripts;c:\bin\tools;c:\bin\wz;C:\bin\neovim\bin;C:\app\develop\ide\VSCode\bin;c:\app;c:\app\launch;C:\app\scoop\shims;C:\app\develop\scm\github\gitlfs;C:\app\develop\scm\github\cli\;...
@@ -116,12 +116,12 @@ c:\bin;C:\bin\scripts;c:\bin\tools;c:\bin\wz;C:\bin\neovim\bin;C:\app\develop\id
    scoop install busybox --global
    ```
 
-以上で、BusyBox のインストールは終了です。
+これにより、BusyBox のインストールは終了です。
 
 ### 2.3. CoreUtilsのインストール
 
 Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
-今回は、`uutils`をインストールします。
+今回は、`Rust`製のため高速な`uutils`をインストールします。
 
 1. `coreutils`をインストールする
 
@@ -129,7 +129,7 @@ Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
    scoop install uutils-coreutils --global
    ```
 
-以上で、`Core Utils`のインストールは終了です。
+これにより、`Core Utils`のインストールは終了です。
 
 ### 2.4. less, grep のインストール
 
@@ -148,11 +148,11 @@ Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
    scoop install grep --global
    ```
 
-以上で、`less`,`grep`のインストールは終了です。
+これにより、`less`,`grep`のインストールは終了です。
 
 ### 2.5. treeのインストール
 
-`tree`は`Scoop`ではインストールできません。そのため、手動でパッケージをダウンロードしてインストールします。
+`tree`は`Scoop`ではインストールできないてめ、手動でパッケージをダウンロードしてインストールします。
 次の手順で、'tree'をインストールします。
 
 1. [Tree for Windows](https://gnuwin32.sourceforge.net/packages/tree.htm)にアクセスする
@@ -169,14 +169,14 @@ Scoop には、通常の`coreutils`と`Rust`製の`uutils`があります。
 
    ```
 
-以上で、`tree`のインストールは終了です。
+これにより、`tree`のインストールは終了です。
 
 ## さいごに
 
-この記事では、Windows に UNIX系のツールをインストールする方法を紹介しました。
+以上が Windows に UNIX系のツールをインストールする方法の紹介となります。
 UNIX系ツールを使うことにより、Windows上でも柔軟な操作が可能になります。
 
-他に必要なツールがある場合は、`winget`や`Scoop`などのパッケージマネージャーから簡単にインストールできます。
+さらに必要なツールがある場合は、`winget`や`Scoop`などのパッケージマネージャーから簡単にインストールが可能です。
 
 それでは、Happy Hacking!
 
