@@ -73,6 +73,8 @@
                 "/https?/ig",
                 "/html?/g",
                 "/ejje\\./g",
+                "/js/g",
+                "/svg/g",
                 "/www/g",
                 "/jp/g",
                 "/dev/g",
