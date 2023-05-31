@@ -93,7 +93,13 @@
                 "/BusyBox/gi",
                 "/edu/g",
                 "/greenwood/g",
-                "/Makefile/g"
+                "/Makefile/g",
+                "ScoopDir",
+                "ScoopGlobalDir",
+                "ScoopCacheDir",
+                "/ScoopInstaller/i",
+                "shims",
+                "_path"
             ]
         },
         "@proofdict/proofdict": {
