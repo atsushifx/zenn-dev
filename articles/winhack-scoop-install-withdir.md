@@ -8,12 +8,13 @@ published: false
 
 ## はじめに
 
-この記事では、Scoop インストーラーにオプションを指定して、特定のディレクトリにインストールする方法について解説します。
+この記事では、`Scoop`をディレクトリ指定付きでインストールする方法について解説します。
 
 [Scoop公式サイト](https://scoop.sh)などの解説では、インストール先がデフォルトのディレクトリで固定されています。
 しかし、一度インストーラーをダウンロードしてからオプションを指定してインストールすることで、指定したディレクトリにインストールできます。
+このときに、グローバルインストール時のインストール先やパッケージをキャッシュするディレクトリも指定できます。
 
-ここでは、オプション付きのインストール方法を詳しく解説します。
+ここでは、上記のディレクトリを指定したインストール方法を詳しく解説します。
 
 ## 1. Scoopとは
 
@@ -68,7 +69,7 @@ Scoop のインストーラーのスクリプトをダウンロードします�
 2. ディレクトリ指定付きで、インストーラーを起動する
 
    ``` PowerShell
-   ./installer.ps1 -ScoopDir "C:\Users\<ユーザー名>\app\scope" -ScoopGlobalDir "c:\app\scoop" -ScoopCacheDir "c:\var\cache\scoop"
+   ./installer.ps1 -ScoopDir "C:\Users\<ユーザー名>\app\scope" -ScoopGlobalDir "C:\app\scoop" -ScoopCacheDir "C:\var\cache\scoop"
    ```
 
    **注意**: <ユーザー名>は、自分のアカウント名に置き換えてください。
@@ -102,8 +103,24 @@ Scoop のインストーラーのスクリプトをダウンロードします�
 
 ### 3.1. Scoopの設定ファイル
 
-`Scoop`の設定ファイルは、`${USERPROFILE}/.config/scoop/config.json`です。
+`Scoop`の設定ファイルは、`%USERPROFILE%/.config/scoop/config.json`です。
 このファイルを書き換えると、ディレクトリなどを変更できます。
+
+config.json の中身は、つぎのようになっています。
+
+``` json: ${USERPROFILE}/.config/scoop/config.json
+{
+  "root_path": "C:\\Users\\<ユーザー名>\\app\\scoop\\",
+  "global_path": "C:\\app\\scoop\\",
+  "cache_path": "C:\\var\\cache\\scoop\\",
+  "scoop_repo": "https://github.com/ScoopInstaller/Scoop",
+  "scoop_branch": "master",
+  "last_update": "2023-05-31T07:56:21.9231246+09:00"
+}
+
+```
+
+**注意**: "<ユーザー名>"には、実際には自身のアカウント名が入ります。
 
 ### 3.2. 設定ファイルの書き換え
 
