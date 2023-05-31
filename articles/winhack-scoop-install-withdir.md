@@ -3,7 +3,7 @@ title: "Windows: Scoopをディレクトリ指定つきでインストールす�
 emoji: "⛏️"
 type: "tech"
 topics: ["Windows", "Scoop", "環境構築", "インストール" ]
-published: false
+published: true
 ---
 
 ## はじめに
