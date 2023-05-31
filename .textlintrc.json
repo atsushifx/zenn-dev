@@ -99,7 +99,8 @@
                 "ScoopCacheDir",
                 "/ScoopInstaller/i",
                 "shims",
-                "_path"
+                "_path",
+                "config"
             ]
         },
         "@proofdict/proofdict": {
