@@ -89,6 +89,7 @@ Windows 環境では、多くの場合 Visual Studio を使って C++,C#とい�
 
 2. インストール画面の表示
     正常に実行されれば、下記のインストール画面が表示されます
+    ![インストール画面](https://i.imgur.com/b3OAuZ4.png)
 
 以上で、`Build Tools`のインストールは終了です。
 
@@ -96,7 +97,7 @@ Windows 環境では、多くの場合 Visual Studio を使って C++,C#とい�
 
 ### 3.1. Pathの設定
 
-環境変数`Path`にいかのパスを追加します。PC を再起動すると、各言語のコンパイラが使えるようになります。
+環境変数`Path`に以下のパスを追加します。PC を再起動すると、各言語のコンパイラが使えるようになります。
 
 | Path | 内容 |
 | --- | --- |
@@ -106,6 +107,22 @@ Windows 環境では、多くの場合 Visual Studio を使って C++,C#とい�
 
 ### 3.2. 開発環境コンソールの設定
 
+インストールに成功すると、`Windows Terminal`に`Developper PowerShell for VS 2022`という項目が追加されます。
+旧来の`PowerShell` を呼び出しているので、`PowerShell 7`に書き換えます。
+
+次の手順で、`PowerShell`を書き換えます。
+
+1. `Windows Terminal`で`Ctrl+,`を入力し、`[設定]`を開く
+    ![設定](https://i.imgur.com/D7GBrd3.png)
+
+2. `[Developper PowerShell]`を選択する
+    ![設定-Developper PowerShell](https://i.imgur.com/dV1kmPn.png)
+
+3. `[コマンドライン]`を書き換える
+    コマンドラインの`powershell.exe`を`pwsh.exe`書き換えて、`[保存]`をクリックします。
+    ![設定 - コマンドライン書き換え](https://i.imgur.com/fQpcxbo.png)
+
+以後、`Developper PowerShell`で、自分好みにカスタマイズした`PowerShell`が使えます。
 
 ## 4. 開発環境の確認
 
