@@ -4,5 +4,6 @@
     "markdownlint.run": "onSave",
     // textlint config
     "textlint.autoFixOnSave": true,
-    "textlint.nodePath": "C:\\Users\\atsushifx\\.local\\share\\pnpm\\5"
+    "textlint.nodePath": "C:\\Users\\atsushifx\\.local\\share\\pnpm\\5",
+    "editor.fontFamily": "\"DejaVu SanS\", 'Courier New', monospace"
 }
