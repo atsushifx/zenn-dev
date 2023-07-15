@@ -1,5 +1,5 @@
 ---
-title: "開発環境: Visual Studio Build Toolsをインストールする方法"
+title: "開発環境: "Visual Studio Build Toolsのインストール手順ガイド"
 emoji: "🦾"
 type: "tech"
 topics: ["開発環境", "BuildTools", "cpp", "winget", "vsconfig"]
@@ -8,20 +8,35 @@ published: false
 
 ## はじめに
 
-`Visual Studio Build Tools`をインストールして、C++/C#/F#の開発環境を構築する方法について紹介します。
+`Visual Studio Build Tools`を使用して、C++/C#/F#の開発環境を構築する方法を解説します。
 
 ### 対象読者
 
-Windows でプログラミングをしている ITエンジニア、プログラマーを対象としています。
+Windows でプログラミングをしている ITエンジニアを対象としています。
+
+### 重要なキーワード
+
+この記事であつかう重要なキーワードと注釈を掲載します:
+
+- Visual Studio Build Tools: プログラムのコンパイルをコマンドラインから行なうツールセット
+- Visual Studio Installer: `Build Tools`を構成する各種コンポーネントのインストール／アンインストールを行なうツール。
+- 構成ファイル: `Visual Studio Installer`が使用するインストールするコンポーネント一覧のファイル
+- JSON形式: データの記述に使われる軽量なデータ形式、設定ファイルなどの記述にも使われる
+- コンポーネント: `Visual Studio Build Tools`の各機能を構成する部品の単位。
+- Roslyn コンパイラ:　Microsoft がオープンソースで提供している C#コンパイラ
+- Developer PowerShell: 起動時に各言語のコンパイルに必要な環境変数を設定した`PowerShell
+- "Hello, World": プログラミング言語において、最初に書かれる簡単なプログラム。開発環境やプログラミング学習の際の基準としてよく使用される
 
 ## 1. Visual Studio Build Toolsとは
 
 `Visual Studio Build Tools`は、コマンドラインでプログラムのコンパイルやビルドを行なうためのツールです。
 通常の`Visual Studio`では、GUI上から簡単にコンパイルやビルドができますが、`Build Tools`ではコマンドラインからの操作が必要となります。
 
+`Build Tools`の各コマンドは、コマンドラインから実行します。このため、自動化スクリプトやビルドツールで使用できます。
+
 なお、`Build Tools`を利用するには、[マイクロソフトのライセンス](https://visualstudio.microsoft.com/ja/license-terms/vs2022-ga-diagnosticbuildtools/)に同意する必要がありますので、注意してください。
 
-**注意事項:**
+**注意:**
 
 - [マイクロソフト ソフトウェア ライセンス条項 ](https://visualstudio.microsoft.com/ja/license-terms/vs2022-ga-diagnosticbuildtools/)に同意する必要がある
 
@@ -33,11 +48,12 @@ Windows でプログラミングをしている ITエンジニア、プログラ
 
 ### 2.1. 構成ファイルを使用したBuild Toolsのインストール
 
-構成ファイルを使ったインストールには、`--config`オプションを使って構成ファイルを指定します。
+`Visual Studio Installer`に`--config`オプションを指定すると、指定した構成ファイルに基づいて`Build Tools`をインストールします。
+このオプションを使用すると、一度作成した`Build Tools`の構成を詳細かつ正確に再現できます。
 
-以下のようにして、構成ファイルを使って`Build Tools`をインストールします。
+i 下の例では、構成ファイル`minimum.vsconfig`を使って`Build Tools`をインストールします。
 
-``` PowerShell
+``` powershell
 vs_BuildTools.exe --config minimum.vsconfig
 
 ```
@@ -48,13 +64,14 @@ vs_BuildTools.exe --config minimum.vsconfig
 
 ### 2.2. 使用する構成ファイル
 
-`Build Tools`の構成ファイルは、インストールするコンポーネントを列挙した`json`形式のファイルです。
-構成ファイルは、`Visual Studio Installer`の GUI上で`[その他]`-`[構成のエクスポート]`を選ぶと作成できます。
-このときにインストール済みの`Build Tools`のコンポーネント一覧が、構成ファイルに出力されます。
+構成ファイルは、インストールするコンポーネントの一覧を記載した`JSON`形式のファイルです。
+`Visual Stuido Installer`の GUI では`C++デスクトップ`などのパッケージや個別のコンポーネントを選択します。
+このときに選択した各コンポーネントが、Vsconfig ファイルに記載されます。
+たとえば、`Microsoft.VisualStudio.Component.Roslyn.Compiler`は Roslyn というコンパイラで、C#プログラムのコンパイルに使います。
 
-今回、使用する構成ファイルは次のようになります。
+今回使用する構成ファイルは、以下の通りです。
 
-``` json: minimum.vsconfig
+```json: minimum.vsconfig
 {
   "version": "1.0",
   "components": [
@@ -71,7 +88,7 @@ vs_BuildTools.exe --config minimum.vsconfig
     "Microsoft.VisualStudio.Workload.VCTools",
     "Microsoft.VisualStudio.Component.Windows11SDK.22621",
     "Microsoft.VisualStudio.Component.FSharp.MSBuild",
-    "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
+    "Microsoft.VisualStudio.Component.Roslyn.LanguageServices"
   ]
 }
 
@@ -86,17 +103,17 @@ vs_BuildTools.exe --config minimum.vsconfig
 | `Microsoft.VisualStudio.Component.VC.CoreBuildTools` | `VC Core Build Tools` | C++コンパイラコア |
 | `Microsoft.VisualStudio.Component.VC.Tools.x86.x64` |  `Visual C++ Tools` | Windows用C++コンパイラ |
 | `Microsoft.VisualStudio.Component.Windows11SDK.22621` | `WIndows 11 SDK` | C/C++用標準ライブラリを含む |
-| `Microsoft.VisualStudio.Component.FSharp.MSBuild` | F# MS Build | F# コンパイラ |
+| `Microsoft.VisualStudio.Component.FSharp.MSBuild` | `F# MS Build` | F# コンパイラ |
 
 ### 2.3. 構成ファイルの作成
 
 以下の手順で、構成ファイルを作成します。
 
 1. `VIsual Studio Installer`のを起動:
-    スタートメニューで`Visual Studio Installer`を選び、インストーラーを起動します。
+    スタートメニューで`Visual Studio Installer`を選び、インストーラーを起動します
 
 2. 構成ファイルのエクスポート:
-    `[その他]`-`[構成ファイルのエクスポート]`を選び、構成ファイルを出力します。
+    `[その他]`-`[構成ファイルのエクスポート]`を選び、構成ファイルを出力します S
 
 ### 2.4. 構成ファイルによる`Build Tools`のインストール
 
@@ -108,7 +125,7 @@ vs_BuildTools.exe --config minimum.vsconfig
 1. 以下のコマンドを実行:
   コマンドラインで`winget`を実行します。このとき`--override`オプションで`Visual Studio Installer`に`--config`オプションを指定します。
 
-   ``` PowerShell
+   ```powershell
    winget install Microsoft.VisualStudio.2022.BuildTools --override "--passive --config minimum.vsconfig"
    ```
 
@@ -118,38 +135,37 @@ vs_BuildTools.exe --config minimum.vsconfig
 
 以上で、`Build Tools`のインストールは終了です。
 
-## 3. 開発環境の設定
+## 3. 開発環境の構築
 
-### 3.1. Pathの設定
+### 3.1. パスの設定
 
 環境変数`Path`に以下のパスを追加します。PC を再起動すると、各言語のコンパイラが使えるようになります。
 
-| Path | 内容 |
+| パス | 対象言語 |
 | --- | --- |
-| `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.36.32532\bin\HostX64\x64` | C/C++ コンパイラ (Windows x64)|
+| `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.36.32532\bin\HostX64\x64` | C/C++ コンパイラ `(Windows x64)`|
 | `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\bin\Roslyn` | C#コンパイラ |
 |`C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\FSharp\Tools` |  F# コンパイラ |
 
 ### 3.2. 開発環境コンソールの設定
 
-`Build Tools`のインストールに成功すると、`Windows Terminal`に`Developer PowerShell for VS 2022'という項目が追加されます。
+`Build Tools`のインストールに成功すると、`Windows Terminal`に`Developer PowerShell for  ...'という項目が追加されます。
 
 この項目の PowerShell は、旧来の`Windows PowerShell`を使用していて使い勝手がよくありません。
-`WIndows PowerShell`ではなく`PowerShell Core`を使用するように、設定を書き換えます。
+代わりに、自分用にカスタマイズ済みの`PowerShell Core`を使って起動するように、設定を書き換えます。
 
 次の手順で、`Windows Terminal`を書き換えます。
 
-1. [設定]を開く:
+  1. [設定]を開く:
     `Windows Terminal`で`Ctrl+,`を入力し、[設定]を開く
     ![設定](https://i.imgur.com/D7GBrd3.png)
 
-2. [Developer PowerShell]を選択する
+  2. [Developer PowerShell]を選択する
     ![設定-Developer PowerShell](https://i.imgur.com/dV1kmPn.png)
 
-3. [コマンドライン]を書き換える
+  3. [コマンドライン]を書き換える
     コマンドラインの`powershell.exe`を`pwsh.exe`書き換えて、[保存]をクリックします。
     ![設定 - コマンドライン書き換え](https://i.imgur.com/fQpcxbo.png)
-
 
 以上で、`Build Tools`のインストールと開発環境の構築は終了です。
 
@@ -157,22 +173,29 @@ vs_BuildTools.exe --config minimum.vsconfig
 
 `Build Tools`が正常に動いているか、各言語で"Hello, World"プログラムを作成して確認します。
 
+### 4.1  "Hello,World"による開発環境の確認
+
+[#3. 開発環境の構築](#3-開発環境の構築)までの操作が正常に終了していれば、C++/C#/F#の各プログラミング言語でプログラムのコンパイル／実行ができます。
+この章では、動作確認用に各プログラミング言語で"Hello, World"プログラムを作成し、正常にコンパイルできるかを確認します。
+
 **注意事項:**
 以下は、`Developer PowerShell`上で動作確認しています。
 
-### 4.1. C++でHello, World
+### 4.2. C++での動作確認
 
 次の手順で、C++の開発環境を確認します。
 
-1. `Developer PowerShell`で一時作業用ディレクトリに移動:
+1. 作業用ディレクトリに移動:
+  `Developer PowerShell`を開き、プログラミング用の適当な作業用ディレクトリに移動する。
 
-    ``` PowerShell
-    > cd ~\workspaces\temp\src
+    ```powershell
+    > cd ~\workspaces\temp\src\cpp
     ```
 
-2. 下記の`hello.cpp`プログラムを作成:
+2. `hello.cpp` の作成:
+   下記の`hello.cpp`プログラムを作成:
 
-    ``` hello.cpp
+    ```cpp: hello.cpp
     #include <iostream>
 
     using namespace std;
@@ -183,51 +206,49 @@ vs_BuildTools.exe --config minimum.vsconfig
     }
     ```
 
-3. 上記プログラムをコンパイル:
-    `Build Tools`では、C++コンパイラは`cl.exe`です。
-    `cl`を使って、上記`hello.cpp`をコンパイルします。
-
-    ``` PowerShell
-    cl hello.cpp
-    Microsoft(R) C/C++ Optimizing Compiler Version 19.36.32535 for x64
-    Copyright (C) Microsoft Corporation.  All rights reserved.
-    hello.cpp
-    C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.36.32532\include\ostream(774): warning C4530: C++ 例外処理を使っていますが、アンワインド セマンティクスは有効にはなりません。/EHsc を指定してください。
-    hello.cpp(7): note: コンパイル対象の関数 テンプレート インスタンス化 'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const char *)' のリファレンス を確認してください
-    Microsoft (R) Incremental Linker Version 14.36.32535.0
-    Copyright (C) Microsoft Corporation.  All rights reserved.
-
-    /out:hello.exe
-    hello.obj
-    ```
+3. `hello.exe`の作成
+   C++コンパイラ (`cl`)で、上記`hello.cpp`プログラムをコンパイルする
+  
+   ```powershell
+   cl hello.cpp
+   Microsoft(R) C/C++ Optimizing Compiler Version 19.36.32535 for x64
+   Copyright (C) Microsoft Corporation.  All rights reserved.
+   hello.cpp
+   
+   Microsoft (R) Incremental Linker Version 14.36.32535.0
+   Copyright (C) Microsoft Corporation.  All rights reserved.
+   /out:hello.exe
+   hello.obj
+   
+   ```
 
     **注意:**
     `warning`がでていても、`/out:hello.exe`が表示されていればコンパイルは成功しています。
 
-4. `hello.exe` の実行確認:
+4. `hello.exe` の実行:
     `hello.exe`を実行し、正常に動作するかを確認します。
 
-    ``` PowerShell
-    > .\hello.exe
+    ```powershell
     Hello, I'm C++.
-    >
-    ```
+     ```
 
-    上記のように、`Hello, I'm C++.`と出れば正常です。
+上記のように、`Hello, I'm C++.`と出れば正常です。
 
-### 4.2. C#でHello, World
+### 4.3. C#での動作確認
 
 次の手順で、C#の開発環境を確認します。
 
-1. `Developer PowerShell`で一時作業用ディレクトリに移動:
-
-    ``` PowerShell
-    > cd ~\workspaces\temp\src
+1. 作業用ディレクトリに移動:
+  `Developer PowerShell`を開き、プログラミング用の適当な作業用ディレクトリに移動する。
+  
+    ```powershell
+    > cd ~\workspaces\temp\src\c#
     ```
 
-2. 下記の`hello.cs`プログラムを作成:
+2. `hello.cs`の作成:
+    下記の`hello.cs`プログラムを作成する
 
-    ``` hello.cs
+    ```csharp: hello.cs
     using System;
 
     namespace hello
@@ -242,9 +263,10 @@ vs_BuildTools.exe --config minimum.vsconfig
     }
     ```
 
-3. C#コンパイラを実行し、hello.exe を作成
+3. hello.exe の作成:
+   C#コンパイラ(`csc`)で、上記"hello.cs"プログラムをコンパイルする
 
-    ``` PowerShell
+    ```powershell
     csc .\hello.cs
     Microsoft (R) Visual C# Compiler バージョン 4.6.0-3.23259.8 (c3cc1d0c)
     Copyright (C) Microsoft Corporation. All rights reserved.
@@ -255,34 +277,35 @@ vs_BuildTools.exe --config minimum.vsconfig
 4. hello.exe の実行確認:
     hello.exe を実行し、出力を確認する
 
-   ``` PowerShell
-    > .\hello.exe
+    ```powershell
     Hello, I'm C#
-    >
     ```
 
 上記のように、`Hello, I`m C#`と出れば正常です。
 
-### 4.3. F#でHello, World
+### 4.4. F#での動作確認
 
-次の手順で、C#の開発環境を確認します。
+次の手順で、F#の開発環境を確認します。
 
-1. `Developer PowerShell`で一時作業用ディレクトリに移動:
+1. 作業用ディレクトリに移動:
+  `Developer PowerShell`を開き、一時時作業用ディレクトリに移動する。
 
-    ``` PowerShell
-    > cd ~\workspaces\temp\src
+    ```powershell
+    > cd ~\workspaces\temp\src\f#
     ```
 
-2. 下記の`hello.cs`プログラムを作成:
+2. `hello.fs`の作成:
+    下記の`hello.fs`プログラムを作成:
 
-    ``` hello.fs
+    ```fsharp: hello.fs
     printf "Hello, I'm F#"
 
     ```
 
-3. C#コンパイラを実行し、hello.exe を作成
+3. `hello.exe`の作成:
+    F#コンパイラを実行し、hello.exe を作成
 
-    ``` PowerShell
+    ```powershell
    fsc hello.fs
    Microsoft (R) F# Compiler バージョン F# 7.0 のための 12.5.0.0
    Copyright (C) Microsoft Corporation. All rights reserved.
@@ -293,24 +316,22 @@ vs_BuildTools.exe --config minimum.vsconfig
 4. hello.exe の実行確認:
     hello.exe を実行し、出力を確認する
 
-  ```PowerShell
-    > .\hello.exe
-    Hello, I'm F#
-    >
-    ```
+   ```powershell
+   Hello, I'm F#
+   ```
 
 上記のように、`Hello, I`m F#`と出れば正常です。
 
 ## さいごに
 
-以上で、`Visual Studio Build Tools`のインストールと開発環境の設定が完了しました。
-これで、コマンドラインから`C++`,`C#`,`F#`の各プログラムのコンパイルが行えます。
+以上で、`Visual Studio Build Tools`のインストールと動作確認が終了しました。
+これからは、C++/C#/F#でのプログラミングができます。
 
-`make`などのビルドツールを使うことで、大規模ソフトウェアの作成もできますし、`Rust`のようなC++コンパイラが必要なプログラミング言語のインストールもできます。
+make などの開発ツールと併用することで大規模ソフトウェアの開発もできますし、`Rust`のようなソフトウェア開発に C++のコンパイルが必須なプログラミング言語も利用できます。
 
 これを機会に、プログラミングの世界に飛び込んでみてください。
 
-それでは、Happy hacking!
+それでは、Happy  hacking!
 
 ## 参考資料
 
