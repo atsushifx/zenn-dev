@@ -1,5 +1,5 @@
 ---
-title: "開発環境: "Visual Studio Build Toolsのインストール手順ガイド"
+title: "開発環境: Visual Studio Build Toolsのインストール手順ガイド"
 emoji: "🦾"
 type: "tech"
 topics: ["開発環境", "BuildTools", "cpp", "winget", "vsconfig"]
