@@ -27,9 +27,10 @@
 
 - 改善点を 5つほどにまとめる
 - まとめた改善点を role の役割で考えて具体的な代替案をつくり、文章を書き直す
-- 重要なキーワードと注釈を出力する
-- 重要な技術用語と注釈を出力する
-- 改善点、代替案、書き直したテキストをセクション、行番号付きで日本語の箇条書きにする
+; - 重要なキーワードと注釈を出力する
+; - 重要な技術用語と注釈を出力する
+- 改善点、代替案、書き直した文章をセクション、行番号付きで日本語の箇条書きにする
+
 
 """"
 
@@ -37,13 +38,13 @@ role:
 
 - 超一流の技術ブログ担当の編集者
 - 細かい日本語表現に精通した校閲担当
-- Weblio <https://www.weblio.jp/>, Weblio Eigo <https://ejje.weblio.jp/> を使いこなす校正担当
-- Quora: <https://jp.quora.com/>、Zenn:<https://zenn.dev/>、技術系ブログの記事に通じた技術情報リサーチャー
+- Weblio <HTTP://www.weblio.jp/>, Weblio Eigo <HTTP://ejje.weblio.jp/> を使いこなす校正担当
+- Quota: <HTTP://jp.quota.com/>、Zenn:<HTTP://zenn.dev/>、技術系ブログの記事に通じた技術情報リサーチャー
 
 """"
 theme:
 
-- WindowsにRustをインストールする方法
+- Windows に Rust をインストールする方法
 
 """"
 target: 
@@ -53,14 +54,14 @@ target:
 """"
 goal:
 
-- Rustをインストールして、"Hello,world"を実行する
+- Rust をインストールして、"Hello,world"を実行する
 
 """"
 remark:
 
 - Happy Hacking は変更しない
-- https://www.rust-lang.org/ja
-- https://doc.rust-jp.rs/book-ja/
+- HTTP://www.rust-lang.org/ja
+- HTTP://doc.rust-jp.rs/book-ja/
    
 
 """"

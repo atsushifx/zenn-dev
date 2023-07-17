@@ -1,5 +1,5 @@
 ---
-title: "開発環境: WindowsにRust(MSVC)をインストールする　(2023年版)"
+title: "開発環境: WindowsにRust(MSVC)の開発環境を構築する (2023年版)"
 emoji: "🦾"
 type: "tech"
 topics: ["Windows", "開発環境", "Rust" ]
@@ -8,37 +8,34 @@ published: false
 
 ## tl;dr
 
-- `Rust`[^1]をインストールする前に、`Visual Studio Build Tools`[^2]をインストールする必要がある
-- 環境変数を設定することで、指定したディレクトリに`Rust`をインストールできる
-- `Rust`のインストールには、`winget`コマンドを使用できる
+- `Rust`[^1]開発のためには、`Visual Studio Build Tools`[^2]をインストールが必要
+- 環境変数を設定し、それに基づいて`Rust`をインストールする
+- これらの手順は、`winget`コマンドを用いて効率的に行える
 
-以上。
-
-[^1]: 高速で安全性が高く、並行性と実用性を兼ね備えたシステムプログラミング言語。メモリ安全性の維持と高速性を両立したプログラミング言語として知られている。
-[^2]: マイクロソフトが提供するクロスプラットフォーム用のソフトウェア開発ツール。Rust のインストールにはこれが必要となる。
+[^1]: Rust: 高速で安全性が高く、並行性と実用性を兼ね備えたシステムプログラミング言語。その特徴として、メモリ安全性の維持と高速性を両立した設計があげられる。
+[^2]: `Visual Studio Build Tools`: マイクロソフトが提供するクロスプラットフォーム用のソフトウェア開発ツール。Rust のインストールにはこれが必要となる。
 
 ## はじめに
 
-プログラミング言語`Rust`では、ソースのコンパイル／ビルドに`C++`のコンパイラが必須です。
-Windows版Rust では Microsoft の`Visual C++`が GNU の`GNU C++`が求められます。
+プログラミング言語`Rust`を使用するためには、ソースのコンパイル／ビルド用に`C++`コンパイラが必須です。
+Windows版Rust では`Visual C++`か、もしくは`GNU C++`が求められます。
 このため、Rust をインストールする前に C++の開発環境をセットアップする必要があります。
 
-この記事では、`Visual C++`コンパイラを含む Microsoft`のソフトウェア開発ツール、`Visual Studio Build Tools`を事前にインストールしておきます。
+この記事では、`Visual C++`コンパイラを含む Microsoft`のソフトウェア開発ツール、`Visual Studio Build Tools`をあらかじめインストールしておきます。
 
-`Rust`および`Visual Studio Build Tools`のインストールは、`winget`[^3]コマンドで簡単に行えます。
-この記事では、`Rust`と`Visual Studio Build Tools`のインストール方法を説明します。
+`Rust` および   `Visual Studio Build Tools` のインストールは、`winget`[^3] コマンドで簡単に行えます。
+`winget`は Windows の公式パッケージマネージャーで、ソフトウェアのインストールをコマンドラインから一括で行えます。
+この記事では、`Rust`と`Visual Studio Build Tools`のインストール方法をステップバイステップで説明します。
 
-[^3]: WIndows 公式のパッケージマネージャー
+[^3]: `winget`: WIndows 公式のパッケージマネージャー
 
-## 1. Rustのインストール
-
-### 1.1. Visual Studio Build Toolsのインストール
+## 1. Visual Studio Build Toolsのインストール
 
 Rust が正常に動作するためには、C++コンパイラが必要です。`Rust`を使うため、事前に、C++コンパイラを含む Microsoft のソフトウェア開発ツール、`Visual Studio Build Tools`をインストールしておきます。
 
 詳しい説明は、"[Visual Studio Build Toolsのインストール手順ガイド](winhack-develop-buildtools-install.md)"を見てください。
 
-#### Visual Studio Build Toolsをインストールする
+### 1.1. Visual Studio Build Toolsをインストールする
 
 次の手順で、`Visual Studio Build Tools`をインストールします。
 
@@ -50,7 +47,7 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
    ```
 
 2. コンポーネントの選択:
-    \[コンポーネントの選択\]画面で、[C++によるデスクトップ開発]を選択する
+    \[コンポーネントの選択\]画面で、\[C++によるデスクトップ開発\]を選択する
     ![インストーラー:コンポーネントの選択](https://i.imgur.com/xb0GWdD.png)
 
 3. `Build Tools`のインストール:
@@ -58,12 +55,12 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
    ![インストール](https://i.imgur.com/cbjlNHM.png)
 
 4. `Visual Studio Installer`の終了:
-    右上の\[×\]をクリックし、インストーラーを終了する
+    右上の\[×]をクリックし、インストーラーを終了する
 
-以上で、`Visual Studio Build Tools`のインストールは終了です。
-次に、`Path`を設定して、`Rust`コンパイラが`C++`コンパイラを実行できるようにします。
+これで`Visual Studio Build Tools`のインストールは完了です。
+次に、`Visual Studio Build Tools`の`Path`を設定します。
 
-#### Pathを設定する
+### 1.2. Pathを設定する
 
 次の手順で、`Path`を設定します。
 
@@ -83,34 +80,36 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
 
 3. [システム環境変数]の`Path`を編集:
     "システム環境変数"の`Path`を選び、[編集(I)]をクリックする。
-    \[環境変数名の編集\]ダイアログが表示される
+    \[システムの環境変数\]ダイアログが表示される
     ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
 
 4. `C++`コンパイラのパスを追加:
 
-    [新規]をクリックし、以下の Path を追加する
+    [新規]をクリックし、以下の`Path`を追加する
     | Path | 概要 |
     | --- | --- |
     |`C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.36.32532/bin/HostX64/x64` | `C++`コンパイラ |
 
-5. 各ダイアログを閉じる:
-    \[OK\]をクリックし、各ダイアログを閉じる
+5. ダイアログの終了:
+    \[OK\]をクリックし、すべてのダイアログを終了する
 
 6. PC の再起動
     設定した`Path`を環境に反映させるため、PC を再起動する
 
-以上で、`Visual Studio Build Tools`のインストールは終了です。
+以上で、`Visual Studio Build Tools`のセットアップは完了です。
 
-### 1.2 環境変数の設定
+## 2. Rust のインストール
 
-`Rust`は以下の環境変数を使用します。これらの変数を、`Rust`をインストールする前に設定することで`Rust`のインストール先などをかえることができます。
-以下に、Rust が使用する環境変数とその設定を載せておきます。
+### 2.1. 環境変数の設定
+
+以下に、`Rust`のインストールおよび動作に関する環境変数をしめします。これらの変数をインストール前に設定することで、インストール先などを指定できます。
+以下に、`Rust`が使用する環境変数とその設定を載せておきます。
 
   | 環境変数 | 概要 | 備考 |
-  |-- |-- |-- |
-  | `CARGO_HOME` | `Rust`のインストール先 | `Rust`の各種`crate`やコンパイラなどはこのディレクトリ下に保存する |
-  |  `Path` |`Rust`ツールパス | `Rust`の各種ツールを実行するために、`Rust`用のパスを追加 |
-  | `RUSTUP_HOME` |  `Rust`用各種データ保存先 | `Rust`コンパイラの実体や、C用のヘッダーなどの保存先 |
+  |--- |--- |--- |
+  | `CARGO_HOME` | `Cargo`のインストール先 | `Rust`のパッケージマネージャー`Cargo`のインストール先。`Rust`コンパイラなども、このディレクトリ下に保存する |
+  | `Path` |`Rust`ツールパス | `Rust`の各種ツールを実行するための`Path`を追加する |
+  | `RUSTUP_HOME` |  `Rust`用各種データ保存先 | Rustのツールチェーン、コンパイラの実体や、C用のヘッダー、ライブラリなど各種データを保存する |
 
 #### 環境変数を設定する
 
@@ -135,31 +134,34 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
     | 環境変数 | 設定 | 備考 |
     | --- | --- | --- |
     | `CARGO_HOME` | `c:\lang\rust` | 自分の環境では、`c:\lang`下に各種言語が入る |
-    | `Path` | `%CARGO_HOME%\bin` | Pathに左記の設定を追加
+    | `Path` | `%CARGO_HOME%\bin` | `Path`に左記の設定を追加する |
 
 4. [ユーザー環境変数]の編集:
    "システム環境変数"に以下の環境変数を設定する
     | 環境変数 | 設定 | 備考 |
     | --- | --- | --- |
-    | `RUSTUP_HOME` | `%XDG_DATA_HOME%\rustup` | `XDG Base Directory`に対応 |
+    | `RUSTUP_HOME` | `%XDG_DATA_HOME%\rustup` | `XDG Base Directory`[^4]に対応 |
 
-5. ダイアログを閉じる:
-    \[OK\]をクリックし、各ダイアログを閉じる
+5. ダイアログの終了:
+    すべてのダイアログの\[OK\]をクリックし、ダイアログを終了する
 
-6. PC の再起動
-    設定した`Path`を環境に反映させるため、PC を再起動する
+6. PC の再起動:
+    設定した`Path`を環境全体に反映させるため、PC を再起動する
 
-以上で、環境変数の設定は終了です。
+以上で、環境変数の設定は完了です。
 
-### 1.3.  Rustのインストール
+[^4]:`XDG Base DIrectory`: Linux/UNIX で設定ファイルを保存するときに用いられる標準的なディレクトリ仕様
 
-`Rust`を公式サイトからインストールするさいには、`Rust toolchain`のインストーラーである`Rustup`[^4]を使用します。
+### 2.2.  Rustをインストールする
 
-`winget`のパッケージには`Rust`言語そのもののージのほかに、`Rustup`のものも含まれています。
+`Rust`を公式サイトからインストールする際には、`Rust toolchain`のインストーラーである`Rustup`[^5]を使用します。
+`Rustup`は`cargo`やそのほかの Rust でのソフトウェア開発に必要なツールチェーンも一緒にインストールします。
+`Rust`開発環境全体の管理・構築・アップデートができるツールです。
 
+`winget`のパッケージには`Rust`言語とそのインストーラー`Rustup`のパッケージが含まれています。
 今回は、`Rustup`を使用するために`rustup`パッケージをインストールします。
 
-下記に、`winget`内の`Rust`言語関連のパッケージをまとめておきます。
+下記に、`winget`内の`Rust`言語関連のパッケージをまとめています。
 
 | `パッケージID` | 説明 | 備考 |
 | --- | --- | --- |
@@ -167,11 +169,9 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
 | `Rustlang.Rust.MSVC`| `Rust (MSVC)` | Rust言語、C/C++モジュールに `VIsual C++` を使用する版 |
 | `Rustlang.Rust.GNU` | `Rust (GNU)` | Rust言語、C/C++モジュールに`GNU C++`を使用する版 |
 
-[^4]: Rust開発環境を構築、管理する公式のツール。Rust言語の開発環境を構築する際には、`rustup` の使用が推奨されている。
+[^5]: `Rustup`: Rust開発環境を構築、管理する公式のツール。Rust言語の開発環境を構築する際には、`rustup` の使用が推奨されている。
 
-#### Rustをインストールする
-
-次の手順で、Rust をインストールします。
+次の手順で、`Rust`をインストールします。
 
 1. `rustup` のインストール:
     `Windows Terminal`で次のコマンドを実行し、`Rustup`をインストールする
@@ -180,8 +180,8 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
     winget install rustlang.rustup
     ```
 
-2. rust のインストール:
-    自動的に`rustup`が実行され、`rust`をインストールする
+2. `Rust` のインストール:
+    `rustup`が自動的に実行され、`rust`をインストールする
 
     ``` PowerShell: rustup
     info: profile set to 'default'
@@ -192,18 +192,18 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
      ,
     ```
 
-以上で、rust のインストールは終了です。
+以上で、rust のインストールは完了です。
 
-#### Rustの動作チェック
+### 2.3. Rustの動作チェック
 
-インストールが正常に終了していれば、`Rust`コンパイラ`rustc`が使えます。
+インストールが正常に終了していれば、`Rust`コンパイラ`rustc`が使用可能です。
 次の手順で、`rustc`の動作をチェックします。
 
-1. `rustc`の起動;
+1. `rustc`のバージョン  ;
     `Windows Terminal`で次のコマンドを実行する
 
     ```powershell
-    rustc -V
+    rustc --version
     ```
 
 2. バージョンのチェック:
@@ -213,15 +213,15 @@ Rust が正常に動作するためには、C++コンパイラが必要です。
     rustc 1.71.0 (8ede3aae2 2023-07-12)
     ```
 
-上記のようにバージョン番号が表示されれば、`Rust`は正常にインストールされています。
+( `rustc 1.71.0  ...`) のようなバージョン番号が表示されれば、`Rust`は正常にインストールされています。
 
-## 2. 開発環境の確認
+## 3. 開発環境の確認
 
-Rust を正常にインストールしてプログラミングできることを確認するために、簡単なプログラム(`Hello, world`)を作成して実行します。
+`Rust`を正常にインストールし、`Rust` によるプログラミングができることを確認するために`Hello,World`を出力する簡単なプログラムを作成します。
 
-### 2.1. Rustで`Hello, World`
+### 3.1. Rustで`Hello, World`
 
-次の手順で、Rust の開発環境を確認します。
+次の手順で、`Rust` の開発環境を確認します。
 
 1. 作業用ディレクトリに移動:
     `PowerShell`を開き、プログラミング用の適当な作業用ディレクトリに移動する
@@ -231,9 +231,10 @@ Rust を正常にインストールしてプログラミングできることを
     ```
 
 2. `hello.rs`の作成:
-    下記の`helllo.rs`のソースを作成する
+    `hello.rs`ファイルを作成し、ファイルに以下の`Rust`コードを記述する
 
-    ```rust ;hello.rs
+    ```rust
+    // hello.rs
      fn main()
      {
         println!("Hello, rust World!")
@@ -250,24 +251,24 @@ Rust を正常にインストールしてプログラミングできることを
 4. `hello.exe` の実行:
     `hello.exe`を実行し、正常に動作するかを確認する
 
-    ```powershell
+    ```txt
     Hello, rust World!
     ```
 
-上記のように、`Hello, rust World!`が出力されていれば正常に動作しています。
+上記のように"`Hello, rust World!`"が出力されていれば、`Rust`は正常に動作しています。
 
 ## さいごに
 
 以上の手順で、Windows 環境に MSVC版Rust をインストールできます。
 まとめると、以下の主要なステップで Rust のインストールが可能です。
 
-1. `Rust`のインストール前に、C++コンパイラを含む"Visual Studio Build Tools"をインストールします
-2. 環境変数を事前に設定することで、Rust のインストール先などを自由に設定します
-3. `winget`コマンドを使うことで、簡単に Rust をインストールします
+1. `Rust`のインストール前に、C++コンパイラを含む"`Visual Studio Build Tools`"をインストールします
+2. 環境変数を事前に設定すれば、`Rust` のインストール先などを自由に変更できます
+3. `winget`コマンドを使うことで、簡単に `Rust`をインストールします
 
 これらのステップを実行すれば、スムーズに`Rust`の開発環境が構築できます。
 
-是非、この新たな環境を活用し、プログラミングの世界を楽しんでください。
+今回の記事を参考に、Rust の開発環境構築を進めてみてください。そして新たに手にした Rust の力を活用し、あなたのエンジニアリングの世界をさらに広げてみてください。
 
 それでは、Happy hacking!
 
@@ -276,5 +277,6 @@ Rust を正常にインストールしてプログラミングできることを
 ### Webサイト
 
 - [Rust公式Web](https://www.rust-lang.org/ja)
-- [Rust日本語ドキュメント](https://doc.rust-jp.rs/)
+- [Rust日本語ドキュメント](https://doc.rust-lang.org/book/ja/)
 - [Visual Studio Build Toolsのインストール手順ガイド](https://zenn.dev/atsushifx/articles/winhack-develop-buildtools-install)
+- [`XDG Base Directory`](https://wiki.archlinux.jp/index.php/XDG_Base_Directory)
