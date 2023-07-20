@@ -3,7 +3,7 @@ title: "Education: Racket言語でAtCoderに挑戦する (PracticeA)"
 emoji: "🎾"
 type: "tech"
 topics: ["Racket", "学習", "AtCoder", "競技プログラミング", "WelcometoAtCoder" ]
-published: true
+published: false
 ---
 
 ## はじめに
@@ -154,7 +154,7 @@ Racket の場合、
 #### 局所変数`let`について
 
 - [Local Binding](https://docs.racket-lang.org/guide/let.html)
-- [局所変数レット - Scheme入門 スーパービギナー編](https://sites.google.com/site/atponslisp/home/scheme/racket/schemenyuumon-1/schemenyuumon/dai-12shou--kyokusho-hensuu-retto)
+
 
 #### オンライン学習サイト
 
