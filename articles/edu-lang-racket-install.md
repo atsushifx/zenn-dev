@@ -3,7 +3,7 @@ title: "Windowsに関数型言語'Racket'をインストールする方法"
 emoji: "🎾"
 type: "tech"
 topics: ["プログラミング言語", "Racket", "環境構築", "勉強" ]
-published:  false
+published:  true
 ---
 
 ## tl;dr
