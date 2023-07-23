@@ -66,9 +66,18 @@
         "spelling": {
             "language": "en",
             "skipPatterns": [
+                "/Weblio/g",
+                "/Eigo/g",
+                "/Qiita/g",
+                "/Zenn/g",
+                "/NewsPicks/g",
+                "/ITMedia/g",
                 "/winget/g",
                 "lang",
-                "/PowerShell/lg"
+                "/PowerShell/g",
+                "/Ctrl/g",
+                "/REPL/g",
+                "/Eval/g"
             ]
         },
         "@proofdict/proofdict": {
