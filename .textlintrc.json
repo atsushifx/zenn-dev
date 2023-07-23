@@ -74,9 +74,10 @@
                 "/ITMedia/g",
                 "/winget/g",
                 "lang",
-                "/PowerShell/lg",
+                "/PowerShell/g",
                 "/Ctrl/g",
-                "/REPL/g"
+                "/REPL/g",
+                "/Eval/g"
             ]
         },
         "@proofdict/proofdict": {

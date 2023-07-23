@@ -1,5 +1,5 @@
 ---
-title: "Education: Racket: 関数型言語'Racket'をインストールする"
+title: "Windowsに関数型言語'Racket'をインストールする方法"
 emoji: "🎾"
 type: "tech"
 topics: ["プログラミング言語", "Racket", "環境構築", "勉強" ]
@@ -8,7 +8,7 @@ published:  false
 
 ## tl;dr
 
-以下の手順で、`Racket`が使えるようになります。
+以下の手順で、`Racket`[^1]が使えるようになります。
 
 1. `Racket`のインストール
     Windows 公式パッケージマネージャー`winget`を使って、指定ディレクトリに`Racket`をインストールします。
@@ -23,33 +23,27 @@ published:  false
     Path の設定を Windows に反映させるため、Windows を再起動します。
 
 以上で、`PowerShell`から`Racket`がつかえるようになります。
+
 Enjoy!
+
+[^1]: Racket: Scheme を元に作成されたマルチパラダイムなプログラミング言語
 
 ## はじめに
 
-この記事では、関数型言語 Racket のインストール方法について解説します。
+この記事では、関数型言語[^2] Racket のインストール方法について解説します。
 Racket は関数型プログラミング言語である、シンプルさと拡張性の高さが特徴です。
 Racket を学ぶことにより、関数型というプログラミングパラダイムを知ることができ、プログラミング能力がより強力になるでしょう。
 
+[^2]: 関数型言語: プログラミング言語の分類の 1つで、プログラム中の処理や制御を関数として記述するプログラミング言語: see [Wikipedia](https://ja.m.wikipedia.org/wiki/%E9%96%A2%E6%95%B0%E5%9E%8B%E8%A8%80%E8%AA%9E)
+
 ### Racketについて
 
-Racket は、LISP 派生言語である Scheme をベースにした多機能な関数型言語であり、シンプルさと拡張性の高さが魅力です。
-Racket は、Scheme は Scheme の強力な特性を引き継ぎつつ、さらに多くの機能を提供することでプログラマの生産性を向上させています。
+Racket は、LISP 派生言語である Scheme をベースにした多機能な関数型言語です。Racket の特徴としては、以下の点が挙げられます。
 
-Racket の特徴:
-
-- **関数型プログラミング:**
-   Racket は関数型言語であり、関数が第一級オブジェクトとして扱われます。つまり、関数を変数に代入したり、関数の引数として渡できますきます
-
-- **マクロシステム:**
-  Racket は強力なマクロシステムを持っています。これにより、新しい言語構造やドメイン固有の抽象化を作成し、既存のコードを効果的に再利用できます。
-
-- **IDEのサポート:**
-  Racket には、`Dr Racket`という統合開発環境(IDE)が組み込まれています。Racket をインストールすれば、すぐに Racket によるプログラミンをはじめられます。ほかのエディタで開発閑居を構築する必要はありません。
-
-- **ツールによるサポート:**
-   Racket には、`Raco`というコマンドラインツールがあり、Racket開発におけるさまざまなタスクをサポートします。
-   `Raco` には、Racket のパッケージ管理、プロジェクトの作成・ビルド、ドキュメントの生成などのさまざまな機能があり Racket での開発を強力にサポートします。
+- 関数型プログラミング: Racket は関数型言語であり、関数が第一級オブジェクトとして扱われます。
+- マクロシステム: Racket は強力なマクロシステムを持ち、ドメイン固有の抽象化をサポートします。
+- IDE のサポート: Racket には統合開発環境(IDE)である`Dr Racket`が組み込まれており、手軽に Racket のプログラミングが始められます。
+- ツールによるサポート: Racket にはコマンドラインツールである`Raco`があり、さまざまな開発タスクをサポートします。
 
 ## 1, Racketのインストール
 
@@ -70,7 +64,7 @@ winget install Racket.Racket --location C:\lang\racket
 
 ### 2.1. 環境変数の設定
 
-Racket の設定ファイルを`XDG Base DIrectory`下に置くため、環境変数"`PLTUSERHOME`"を設定します。
+Racket の設定ファイルを`XDG Base DIrectory`[^3]下に置くため、環境変数"`PLTUSERHOME`"を設定します。
 以下の手順で、"`PLTUSERHOME`"を設定します。
 
 1. [システムのプロパティ]ダイアログを開く:
@@ -97,7 +91,9 @@ Racket の設定ファイルを`XDG Base DIrectory`下に置くため、環境�
 
 以上で、環境変数の設定は完了です。
 
-### 2.2 Pathの設定
+[^3]: `XDG Base Directory`: 設定ファイルをユーザーディレクトリのどこに保存するかを決めた仕様
+
+### 2.2. Pathの設定
 
 Racket を動かすために、Path に Racket のインストールパスを追加します。
 次の手順で、Path を追加します。
@@ -122,7 +118,7 @@ Racket を動かすために、Path に Racket のインストールパスを追
     ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
 
 4. パスを追加:
-    \[新規\]をクリックし"C:\lang\racket"を追加する
+    \[新規\]をクリックし、Racket をインストールしたディレクトリ __("C:\lang\racket")__ を追加する
 
 5. ダイアログの終了:
     \[OK\]をクリックし、すべてのダイアログを終了する
@@ -137,9 +133,9 @@ Racket を動かすために、Path に Racket のインストールパスを追
 インストール、環境設定が終われば`Racket`が動きます。
 この章では、`Racket`を起動して実際に Racket を使う方法を説明します。
 
-### 3.1  Racketを起動、終了する
+### 3.1. Racketを起動、終了する
 
-Racket は、引数なしで起動すると’REPL`という対話型でプログラムを実行するモードに入ります。
+Racket は、引数なしで起動すると REPL[^4]:という対話型でプログラムを実行するモードに入ります。
 Racket を終了するには、"Ctrl+D"というキーを押すか、"(exit)"と入力します。
 
 実際にやってみましょう。
@@ -161,6 +157,8 @@ C: /zenn-cli >
 ```
 
 `(exit)`を入力すると、Racket が終了して`PowerShell`のプロンプトを表示します。
+
+[^4]: `REPL`: Read-Eval-Print-Loop の略、プログラミング言語のインタプリタで対話的にコードを実行できる処理系
 
 ### 3.2. 簡単なプログラミング
 
@@ -220,4 +218,5 @@ Racket の REPL上では、簡単なプログラムを実行できます。
 
 ### Webサイト
 
-- [Racket Documentation](https://docs.racket-lang.org/)
+- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト
+- [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント
