@@ -35,7 +35,7 @@ Racket の基本的な使い方まで説明するので、開発環境をきち�
 
 ### Racketについて
 
-Racket は、LISP 派生言語である Scheme をもとにした多機能な関数型言語です。Racket の特徴としては、以下の点が挙げられます。
+Racket は、Scheme をもとにした多機能な関数型プログラミング言語です。Racket の特徴としては、以下の点が挙げられます。
 
 - 関数型プログラミング: Racket は関数型言語であり、関数が第一級オブジェクトとして扱われます。
 - マクロシステム: Racket は強力なマクロシステムを持ち、ドメイン固有の抽象化をサポートします。
@@ -48,11 +48,11 @@ Racket は、LISP 派生言語である Scheme をもとにした多機能な関
 詳しい説明は、参考資料を見てください。
 
 - Racket: Scheme をもとにした多機能な関数型言語
-- Scheme: シンプルな文法と拡張性を両立させた関数型言語
-- 関数型言語: プログラミング言語の分類の 1つ、プログラミングの処理を関数というかたちで記述する言語
-- REPL: Read-Eval-Print-Loop のこと。プログラミング言語で対話的にプログラミングするインターフェイス型式
+- Scheme: LISP から派生した、シンプルかつ拡張性の高い文法構造を持つ関数型プログラミング言語
+- 関数型プログラミング: プログラムの実行を数学的な関数の計算としてモデリングし、状態や変更可能なデータを避けるプログラミング言語パラダイム
+- REPL: Read-Eval-Print-Loop のこと。対話型のインターフェイスで、コードを入力すると即座に結果を表示する。例え。ば、"2 + 2"と入力すれば、"4"が返ってくる
 - `XDG Base DIrectory`: さまざまなツールの設定ファイルをディレクトリ上のどこに保存するかを決めている仕様
-- winget: Windows の公式波けっけー時マネージャー。コマンドライン上でコマンドを実行することでアプリをインストールできる
+- winget: Windows の公式パッケージマネージャーで、コマンドライン上でコマンドを実行することでアプリをインストールできるツール。 → [Microsoft Docs](https://learn.microsoft.com/ja-jp/windows/package-manager/winget/)
 - `PLTUSERHOME`: Racket の設定ファイル、パッケージを保存するディレクトリを指定する環境変数
 
 ## 1, Racketのインストール
@@ -62,8 +62,7 @@ Windows 環境に`Racket`をインストールする方法を解説します。
 ### 1.1 `winget`を使ったRacketのインストール
 
 `Racket`は、Windows パッケージマネージャー"winget"でインストールできます。
-今回は、Racket を"c:\lang\racket"ディレクトリにインストールします。
-以下のコマンドを実行します:
+以下のコマンドを実行すると、Racket を"c:\lang\racket"ディレクトリにインストールします。
 
 ```powershell
 winget install Racket.Racket --location C:\lang\racket
@@ -73,9 +72,9 @@ winget install Racket.Racket --location C:\lang\racket
 
 ## 2. Racketの環境設定
 
-### 2.1. 環境変数の設定
+### 2.1. `PLTUSERHOME`の設定
 
-Racket の設定ファイルを`XDG Base DIrectory`下に置くため、環境変数"`PLTUSERHOME`"を設定します。
+Racket の設定ファイルを`XDG Base Directory`下に置くため、環境変数"`PLTUSERHOME`"を設定します。
 以下の手順で、"`PLTUSERHOME`"を設定します。
 
 1. [システムのプロパティ]ダイアログを開く:
@@ -137,7 +136,7 @@ Racket を動かすために、Path に Racket のインストールパスを追
 
 以上で、Path の設定は完了です。
 
-## 3. Racketの起動
+## 3. WindowsでRacketを動かす
 
 インストール、環境設定が終われば`Racket`が動きます。
 この章では、`Racket`を起動して実際に Racket を使う方法を説明します。
@@ -162,7 +161,6 @@ Racket を終了するには、`(exit)`と入力します。
 
 ```racket
 (exit)
-C: /zenn-cli >
 ```
 
 `(exit)`を入力すると、Racket が終了して`PowerShell`のプロンプトを表示します。
@@ -171,7 +169,7 @@ C: /zenn-cli >
 
 Racket の REPL上では、簡単なプログラムを実行できます。
 
-1. 数字を入れると、その数字が返ります:
+1. 数字、文字列などは入力した値をそのまま出力します。このようなデータはリテラルと呼ばれます:
 
    ```racket
    > 4
@@ -181,24 +179,24 @@ Racket の REPL上では、簡単なプログラムを実行できます。
    >
    ```
 
-2. 文字列は、`"`でくくります。たとえば、`Hello, World`は"Hello, World"になります:
+2. 文字列リテラルは、`"`でくくります。たとえば、`Hello, World`は"Hello, World"になります:
 
    ``` racket
    > "Hello, World"
    "Hello, World"
    ```
 
-   `"`で括らない場合は、文字列を関数や変数として評価しようとします。まだ、何も定義していないため"undefined"エラーがかえります。
+   `"`で括らない場合は、文字列を関数や変数として評価しようとします。まだ、何も定義していないためエラーがかえります。
 
    ```racket
 
    >Hello
    Hello: undefined;
-   cannot reference an identifier before its definition
-   in module: top-level
-   
-   >
+   cannot reference an identifier before its definition  in module: top-level
+
    ```
+
+   この場合、Hello というシンボルに関数やリテラルが設定されていないため、"Hello: undefined"というエラーが返ってきています。
 
 3. 四則演算は、式を"()"でくくり、一番左に`+`,`-`などの演算子を書きます:
 
@@ -214,7 +212,7 @@ Racket の REPL上では、簡単なプログラムを実行できます。
 ## おわりに
 
 本記事では、Racket を Windows 環境にインストールし、REPL を用いて簡単なプログラミングをするまでを、詳細に解説しました。
-この記事にしたがえば、無理なく Racket でプログラミングする環境を構築できるはずです。
+この記事にしたがえば、無理なく Racket でプログラミングする環境を構築できるでしょう。
 
 ここから Racket でのプログラミングを学びましょう。
 関数型言語の考え方を身につけることで、プログラマとしても一歩先にいけるでしょう。
@@ -228,7 +226,7 @@ Racket の REPL上では、簡単なプログラムを実行できます。
 - [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト
 - [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント
 
-### 本/公式サイト
+### 本
 
 - [Racket Guide](https://docs.racket-lang.org/guide/index.html)
 - [How to Design Programs](https://htdp.org/)
