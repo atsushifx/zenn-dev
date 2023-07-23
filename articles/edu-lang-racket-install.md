@@ -70,8 +70,8 @@ winget install Racket.Racket --location C:\lang\racket
 
 ### 2.1. 環境変数の設定
 
-Racket の設定ファイルを`XDG Base DIrectory`下に置くため、環境変数"PLTUSERHOME"を設定します。
-以下の手順で、"PLTUSERHOME"を設定します。
+Racket の設定ファイルを`XDG Base DIrectory`下に置くため、環境変数"`PLTUSERHOME`"を設定します。
+以下の手順で、"`PLTUSERHOME`"を設定します。
 
 1. [システムのプロパティ]ダイアログを開く:
     下記のコマンドを実行する
@@ -87,10 +87,10 @@ Racket の設定ファイルを`XDG Base DIrectory`下に置くため、環境�
     \[環境変数\]ボタンをクリックする。[環境変数]ダイアログが表示される
     ![環境変数](https://i.imgur.com/r75yAaY.png)
 
-3. [ユーザー環境変数]の"PLTUSERHOME"を編集:
-    "ユーザー環境変数"の"PLTUSERHOME"を選び、[編集(I)]をクリックする
-    \[ユーザーの環境変数\]ダイアログが表示されるので、"%XDG_DATA_HOME%\racket"を設定する
-    ![ユーザー環境変数の編集](https://i.imgur.com/ujPkIoU.png)
+3. [ユーザー環境変数]の"`PLTUSERHOME`"を編集:
+    "ユーザー環境変数"の"`PLTUSERHOME`"を選び、[編集(I)]をクリックする  
+    \[ユーザーの環境変数\]ダイアログが表示されるので、"`%XDG_DATA_HOME%\racket`"を設定する
+    ![ユーザー環境変数の編集](https://i.imgur.com/5dDeHCQ.png)
 
 4. 全ダイアログを閉じる:
    それぞれのダイアログの\[OK\]をクリックし、すべてのダイアログを閉じる
@@ -168,7 +168,7 @@ C: /zenn-cli >
 Racket の REPL上では、簡単なプログラムを実行できます。
 
 1. 数字を入れると、その数字が返ります:
-   
+
    ```racket
    > 4
    4
@@ -189,15 +189,14 @@ Racket の REPL上では、簡単なプログラムを実行できます。
    ```racket
 
    >Hello
-  Hello: undefined;
-  cannot reference an identifier before its definition
-  in module: top-level
-  >
-
+   Hello: undefined;
+   cannot reference an identifier before its definition
+   in module: top-level
+   
+   >
    ```
 
 3. 四則演算は、式を"()"でくくり、一番左に`+`,`-`などの演算子を書きます:
-
 
   ```racket
   > (+ 2 4)
@@ -214,7 +213,7 @@ Racket の REPL上では、簡単なプログラムを実行できます。
 この記事にしたがえば、無理なく Racket でプログラミングする環境を構築できるはずです。
 
 ここから Racket でのプログラミングを学びましょう。
-関数型言語の考え方を身につけることで、プログラマーとしても一歩先にいけるでしょう。
+関数型言語の考え方を身につけることで、プログラマとしても一歩先にいけるでしょう。
 
 それでは、Happy Hacking!
 

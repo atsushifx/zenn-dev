@@ -68,7 +68,10 @@
             "skipPatterns": [
                 "/winget/g",
                 "lang",
-                "/PowerShell/lg"
+                "/PowerShell/lg",
+                "/Ctrl/g",
+                "/REPL/g"
+
             ]
         },
         "@proofdict/proofdict": {
