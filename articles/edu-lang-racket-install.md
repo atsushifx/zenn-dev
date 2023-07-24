@@ -22,8 +22,7 @@ published:  true
 4. Windows の再起動
     Path の設定を Windows に反映させるため、Windows を再起動します。
 
-以上で、`PowerShell`から`Racket`がつかえるようになります。
-
+以上で、`PowerShell`から`Racket`がつかえるようになります。  
 Enjoy!
 
 ## はじめに
@@ -126,12 +125,22 @@ Racket を動かすために、Path に Racket のインストールパスを追
     ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
 
 4. パスを追加:
-    \[新規\]をクリックし、Racket をインストールしたディレクトリ __("C:\lang\racket")__ を追加する
+    \[新規\]をクリックし、Racket をインストールしたディレクトリ ("C:\lang\racket") を追加する
 
-5. ダイアログの終了:
+5. [ユーザー環境変数]の`Path`を編集:
+    "ユーザー環境変数"の`Path`を選び、[編集(E)]をクリックする。
+    \[ユーザーの環境変数\]ダイアログが表示される
+    ![Pathの編集](https://i.imgur.com/ey9OT8O.png)
+
+6. パスを追加:
+    \[新規\]をクリックし、パッケージバイナリ用のディレクトリ ("%PLTUSERHOME%\Racket\8.9") を追加する。
+    **注意**:
+    パスの"8.9"は Racket のインストールする Racket のバージョン
+
+7. ダイアログの終了:
     \[OK\]をクリックし、すべてのダイアログを終了する
 
-6. PC の再起動
+8. PC の再起動
     設定した`Path`を環境に反映させるため、PC を再起動する
 
 以上で、Path の設定は完了です。

@@ -73,11 +73,21 @@
                 "/NewsPicks/g",
                 "/ITMedia/g",
                 "/winget/g",
+                "/https/g",
                 "lang",
                 "/PowerShell/g",
                 "/Ctrl/g",
                 "/REPL/g",
-                "/Eval/g"
+                "/Eval/g",
+                "PLTUSERHOME",
+                "raco",
+                "/subcommand/g",
+                "bzip2",
+                "/env/g",
+                "/dotenv/g",
+                "/gui/g",
+                "/fmt/",
+                "pkgs"
             ]
         },
         "@proofdict/proofdict": {
