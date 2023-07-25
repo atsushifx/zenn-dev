@@ -66,28 +66,11 @@
         "spelling": {
             "language": "en",
             "skipPatterns": [
-                "/Weblio/g",
-                "/Eigo/g",
-                "/Qiita/g",
-                "/Zenn/g",
-                "/NewsPicks/g",
-                "/ITMedia/g",
-                "/winget/g",
-                "/https/g",
-                "lang",
-                "/PowerShell/g",
-                "/Ctrl/g",
-                "/REPL/g",
-                "/Eval/g",
-                "PLTUSERHOME",
-                "raco",
-                "/subcommand/g",
-                "bzip2",
-                "/env/g",
-                "/dotenv/g",
-                "/gui/g",
-                "/fmt/",
-                "pkgs"
+                "/https/ig",
+                "<[^.]*>/",
+                "/js/g",
+                "/svg/g",
+                "/LSP/g"
             ]
         },
         "@proofdict/proofdict": {
