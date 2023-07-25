@@ -121,7 +121,7 @@ Racket のパッケージは、[Package Index](https://pkgs.racket-lang.org/)で
 | gui-pkg-manager | GUIのRacketパッケージマネージャー | RacketのパッケージをGUIで管理するツール ||
 
 このほかにも、さまざまなパッケージがあります。
-パッケージの詳細について\は、[Racket Package Index](https://pkgs.racket-lang.org/)を見てください。
+パッケージの詳細については、[Racket Package Index](https://pkgs.racket-lang.org/)を見てください。
 
 ### 2.5. Racketパッケージマネージャーのアンインストール
 
