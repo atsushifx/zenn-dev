@@ -3,7 +3,7 @@ title: "開発環境: Racketのパッケージを管理する方法"
 emoji: "🎾"
 type: "tech"
 topics: ["Windows", "開発環境", "Racket", "raco" ]
-published: false
+published: true
 ---
 
 ## はじめに
