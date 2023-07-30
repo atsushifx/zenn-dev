@@ -1,26 +1,28 @@
 ---
-title: "開発環境: Visual Studio Code+Racket LSPのRacket開発環境を構築する"
+title: "Racket: Visual Studio CodeにLSPによるRacketプログラミング環境を構築する方法"
 emoji: "🎾"
-type: "tech" 
+type: "tech"
 topics: [ "VSCode", "開発環境", "環境構築", "Racket",  "MagicRacket" ]
 published: false
 ---
 
-## TL;DR
+## tl;dr
 
 - `racket-langserver`をインストール
-- `Magic Racket`をインストール
-- `Magic Racket`を`racket-langserver`用に設定
+- `VS Code`に`Magic Racket`をインストール
+- 'Magic Racket`の設定
 
-以上で、`VS Code`で Racket 用 LSP が使えるようになる。
+以上で、`VS Code`で Racket 用 LSP が使えるようになります。
 Enjoy!
 
 ## 1. はじめに
 
-`Visual Studio Code`には、Racket 用の各種 extension が提供されています。
-これらの extension をインストールすれば、`VS Code`で Racket の開発ができます。
+`Visual Studio Code`には、LSP[^1](Language Server Protocol)に対応した各種拡張が提供されています。
+Racket言語には、`Magic Racket`という`Racket LSP`クライアントが提供されています。
 
-とくに、Racket LSP クライアントである`Magic Racket`拡張を入れると、開発の効率が大幅に上がります。
+Racket言語サーバーと`Magic Racket`を組み合わせることで、効率的な Racket プログラミング環境を構築できます。
+
+[^1]LSP: 各種プログラミング言語に依存しないで、プログラミングをサポートする機能を提供するための共通のインターフェイスプロトコル。
 
 ### 1.1. LSPとは
 
@@ -33,17 +35,29 @@ LSP は、これらの機能をプログラミング言語に依存しないプ�
 
 ### 1.2. `racket-langserver`とは
 
-`racket-langserver`は Racket 用の LSP言語サーバーです。`racket-langserver`を利用することで、Racket プログラミング時にコード補完や高度なコードシンタックスチェックが行えます。
+`racket-langserver`[^2]は Racket 用の LSP言語サーバーです。`racket-langserver`を利用することで、Racket プログラミング時にコード補完や高度なコードシンタックスチェックなどのプログラミングサポートを行います。
 
-## 2. Racket言語サーバーのインストール
+[^2]:`racket-langserver`: Racket言語に対応した LSP の実装。Racket のプログラミングをサポートするさまざまな機能を提供する。
 
-Racket の言語サーバー`racket-langserver`はパッケージで提供されています。よって、`raco`で`racket-langserver`をインストールできます。
+### 1.3. `Magic Racket`とは
+
+`Magic Racket`[^3]は、`Visual Studio Code`用の`Racket LSP`クライアント拡張です。
+Racket言語サーバー (例:`racket-langserver`) と連携して、プログラミングをサポートするさまざまな機能を提供します。
+
+また、`REPL`[^4]をサポートしており選択した`式`やファイルをインタープリターで実行できます。
+
+[^3]:`Magic Racket`:`Visual Studio Code`用の`Racket LSP`クライアント。Racket プログラミング時に、`Racket LSP`サーバーと連携してプログラミングをサポートする機能を提供する。
+[^4]:｀`REPL`:入力したプログラムを実際に評価して返す、対話的プログラミングインターフェイス。
+
+## 2. `Racket LSP`サーバーのインストール
+
+Racket の LSP サーバー`racket-langserver`はパッケージで提供されています。よって、`raco`で`racket-langserver`をインストールできます。
 
 ### 2.1. `raco` による言語サーバーのインストール
 
 次の手順で、`racket-langserver`をインストールします。
 
-1. `raco`コマンドの実行:}
+1. `raco`コマンドの実行:
    以下のコマンドを実行する
 
    ```powershell
@@ -51,7 +65,7 @@ Racket の言語サーバー`racket-langserver`はパッケージで提供され
    ```
 
 2. `racket-langserver`のインストール:
-   コンソールにいかのようなメッセージが表示される。
+   コンソールに下記のメッセージが表示される。
 
   ```powershell
   Resolving "racket-langserver" via https://download.racket-lang.org/releases/8.9/catalog/
@@ -82,7 +96,7 @@ Racket の言語サーバー`racket-langserver`はパッケージで提供され
    content-length: 24
    
    { "method": "version" }
-   #<EOF> <-- `Ctrl+Z`キーで"<EOF>"を入力
+   #<EOF> ← `Ctrl+Z`キーで"<EOF>"を入力
    ```
 
 3. エラーメッセージの確認:
@@ -95,20 +109,21 @@ Racket の言語サーバー`racket-langserver`はパッケージで提供され
     .
    ```
 
-上記のようにエラーメッセージが出力されれば、言語サーバー派生上に動作しています。
+上記のようにエラーメッセージが出力されれば、言語サーバーは正常に動作しています。
 
-## 2. VS Codeの設定
+## 3. `Racket LSP`クライアントのインストール
 
-`VS Code`に`Magic Racket`をいれ、`Racket`プログラミング環境を構築します。
+`VS Code`に’Racket LSP`のクライアントである`Magic Racket 拡張`をインストールします。
+これにより、`VS Code`で Racket言語サーバーのさまざまな機能が使えます。
 
-### 2.1. `Magic Racket`とは
+### 3.1. `Magic Racket`とは
 
 `Magic Racket`は、`Visual Studio Code`用の"Racket LSP"クライアントです。
 LSP によるエラー表示や定義部へのジャンプなどをサポートしており、プログラミングを効率化します。
 
 また、`REPL` をサポートしており選択した`式`やファイルをインタープリターで実行できます。
 
-### 2.2. `Magic Racket`のインストール
+### 3.2. `Magic Racket`のインストール
 
 次の手順で、`Magic Racket`拡張をインストールします。
 
@@ -126,12 +141,19 @@ LSP によるエラー表示や定義部へのジャンプなどをサポート�
 
 以上で、`Magic Racket`のインストールは完了です。
 
+### 3.3. `Magic Racket`の設定
+
+`Magic Racket`では、Racket の実行時パス、言語サーバーを実行するための引数などを設定できます。
+ただし、`racket-langserver`が正常に動作していれば、設定の変更は必要ありません。
+
 ## さいごに
 
 以上で、`Visual Studio Code`+`Racket LSP`による Racket開発環境が構築できました。
-for 文など、特殊な構文の書き方をポップアップで説明してくれるので、予想以上に使いやすいです。
+`Magic Racket`を導入すると、コードの補完、構文のポップアップによる説明、コードの自動成形など、
+プログラミングをサポートするさまざまな機能が使えます。
 
-これで、Racket のプログラミングもはかどるでしょう。
+`Magic Racket`は Racket の学習やプログラミングにおいて強力な武器となるでしょう。
+これからも、Racket でのプログラミングを通じて自身の能力を向上させましょう。
 
 それでは、Happy Hacking!
 
@@ -139,5 +161,5 @@ for 文など、特殊な構文の書き方をポップアップで説明して�
 
 ### Webサイト
 
-- `racket-langserver`: <https://github.com/jeapostrophe/racket-langserver>
-- `Magic Racket`: <https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket>
+- [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver)
+- [`Magic Racket`](https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket)
