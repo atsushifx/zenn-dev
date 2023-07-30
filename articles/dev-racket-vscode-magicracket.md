@@ -17,7 +17,7 @@ Enjoy!
 
 ## 1. はじめに
 
-この記事では、LSP[^1](Language Server Protocol)を用いて、Racket の効率的なプログラミング環境を構築する方法について説明します。
+この記事では、LSP[^1](Language Server Protocol)を用いて、Racket の効率的なプログラミング環境を構築する手順について説明します。
 `Racket LSP`と`Magic Racket`を組み合わると、`Visual Studio Code`上で、コード補完やコードの自動整形といったプログラミングサポート機能を利用できます。
 
 [^1]: LSP: 各種プログラミング言語に依存しないで、プログラミングをサポートする機能を提供するための共通のインターフェイスプロトコル。
@@ -26,21 +26,21 @@ Enjoy!
 
 LSP (Language Server Protocol) は、プログラミング効率向上のための標準的なインターフェイスです。
 プログラミングをサポートする機能には、コードの補完、構文のポップアップ表示、シンタックスハイライトなどがあります。
-LSP は、これらの機能をプログラミング言語に依存しないプロトコルとして定義します。
+LSP は、これらの機能をプログラミング言語に依存しない方式で提供するためのプロトコルとして定義します。
 そして、LSP に対応したエディタならば、上記のサポート機能が使えます。
 
 この記事では`Racket LSP`を`Visual Studio Code`で使用する方法を説明していますが、`Vim`や`emacs`のような他のエディタにも LSP クライアントが提供されています。
-これらのエディタでも、上記のプログラミングサポート機能が利用可能です。
+これらのエディタでも、このようなプログラミングサポート機能が利用できます。
 
 ### 1.2. `racket-langserver`とは
 
-`racket-langserver`[^2]は`Racket`言語専用の LSP です。`racket-langserver`は、Racket プログラミング時にコード補完やコードシンタックスチェックなどのプログラミングサポートを行います。
+`racket-langserver`[^2]は`Racket`言語専用の LSP です。`racket-langserver`は、Racket プログラミング時にコード補完やコードシンタックスチェックなどのプログラミングサポートを提供します。
 
 [^2]:`racket-langserver`: Racket 用の LSP。これにより、コード補完やシンタックスチェックなどのプログラミングサポートが可能になる。
 
 ### 1.3. `Magic Racket`とは
 
-`Magic Racket`[^3]は、`Visual Studio Code`用の`Racket LSP`クライアントとして機能する拡張機能 (`extension`) です。
+`Magic Racket`[^3]は、`Visual Studio Code`に対応する`Racket LSP`クライアントの拡張機能 (extension) です。
 `Racket LSP` (`racket-langserver`) と連携して、プログラミングをサポートするさまざまな機能を提供します。また、`REPL`[^4]のサポートもしており、選択した式やファイルを直接実行できます。
 
 [^3]:`Magic Racket`:`Visual Studio Code`用の`Racket LSP`クライアント。Racket プログラミング時に、`Racket LSP`サーバーと連携してプログラミングをサポートする機能を提供する。
@@ -48,13 +48,13 @@ LSP は、これらの機能をプログラミング言語に依存しないプ�
 
 ## 2. `Racket LSP`サーバーのインストール
 
-Racket の LSP サーバー`racket-langserver`はパッケージで提供されています。これは、`raco`[^5]を使ってインストールできます。
+Racket の LSP サーバー`racket-langserver`はパッケージで提供されています。これは、`raco`[^5]というツールを使ってインストールします。
 
 [^5]:`raco`: Racket言語の開発支援ツール。パッケージ管理やプログラムのコンパイル／テストなどを行なう。
 
 ### 2.1. `raco` による`Racket LSP`のインストール
 
-以下のコマンドを実行して`racket-langserver`をインストールします。
+以下のコマンドを使って`racket-langserver`をインストールします。
 
 1. `raco pkg`コマンドの実行:
    以下の`raco pkg`コマンドを実行し、パッケージをインストールする
@@ -77,7 +77,7 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
     ```
 
 2. `LSP`コマンドの実行:
-   `racket-langserver`がコマンドの入力待ちになるので、適当な `LSP`コマンドを入力して`Ctrl+Z`キーで入力を終了する
+   `racket-langserver`がコマンドの入力待ちになったら、任意の`LSP`コマンドを入力して`Ctrl+Z`キーで入力を終了する
 
    ```powershell
    content-length: 24
@@ -96,12 +96,12 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
     .
    ```
 
-上記のようなエラーメッセージが出力された場合、言語サーバーは正常に動作しています。
+上記のようなエラーメッセージが出力された場合、言語サーバーは正常に動作していることを示します。
 
 ## 3. `Racket LSP`クライアントのインストール
 
 次に、`VS Code`に`Racket LSP`のクライアントである`Magic Racket 拡張`をインストールします。
-これにより、`VS Code` で `Racket LSP`のさまざまな機能が使えます。
+これにより、`VS Code` で `Racket LSP`のさまざまな機能が利用できます。
 
 ### 3.1. `Magic Racket`のインストール
 
@@ -112,14 +112,14 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
    [![拡張機能](https://i.imgur.com/4JIrBTs.png)](https://imgur.com/4JIrBTs)
 
 2. 'Magic Racket`の検索:
-   検索ウィンドウに`Magic Racket`と入力し、`Magic Racket`を探す
+   検索ウィンドウに`Magic Racket`と入力して、該当の拡張機能を検索する
    [![Magic Racket](https://i.imgur.com/DV1cXLQ.png)](https://imgur.com/DV1cXLQ)
 
 3. `Magic Racket`のインストール:
   \[インストール\]をクリックして、`Magic Racket`をインストールする
   [![インストール](https://i.imgur.com/sjIih4s.png)](https://imgur.com/sjIih4s)
 
-以上で、`Magic Racket`のインストールは完了です。
+これで、`Magic Racket`のインストールは完了です。
 
 ### 3.2. `Magic Racket`の設定
 
@@ -134,10 +134,10 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 2. `Magic Racket`を選択する:
    ![インストール](https://i.imgur.com/sjIih4s.png)
 
-3. \[拡張機能の設定\]を選択し、設定ウィンドウを表示する:
+3. \[拡張機能の設定\]を選択して設定ウィンドウを開く:
    ![設定](https://i.imgur.com/V3zShBh.png)
 
-4. 必要なら、各種項目を設定する:
+4. 必要に応じて、各種項目を設定する:
 
 以上で、設定の変更は完了です。
 
@@ -146,7 +146,7 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 以上で、`Visual Studio Code`+`Racket LSP`による Racket開発環境が構築できました。
 `Magic Racket`を導入することで、プログラミングのサポートがさらに強化され、効率的な Racket プログラミングが可能となります。
 
-これからは、Racket LSP を活用して、より効率的なプログラミングを楽しみましょう。
+これからは、Racket LSP を活用して、より効率的なプログラミングを楽しめます。
 それでは、Happy Hacking!
 
 ## 参考資料
