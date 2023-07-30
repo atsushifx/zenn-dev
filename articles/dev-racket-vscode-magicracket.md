@@ -1,5 +1,5 @@
 ---
-title: "Racket: Visual Studio CodeにLSPによるRacketプログラミング環境を構築する方法"
+title: "Racket: `Racket LSP`を使って`Visual Studio Code`にRacketプログラミング環境を構築する方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "VSCode", "開発環境", "環境構築", "Racket",  "MagicRacket" ]
@@ -13,7 +13,7 @@ published: false
 - 'Magic Racket`の設定
 
 以上で、`VS Code`で Racket 用 LSP が使えるようになります。
-Enjoy!
+いかで、詳細な手順を解説します。
 
 ## 1. はじめに
 
@@ -27,7 +27,7 @@ Racket言語サーバーと`Magic Racket`を組み合わせることで、効率
 ### 1.1. LSPとは
 
 LSP (Language Server Protocol) は、プログラミングの効率アップのための共通のインターフェイスです。
-プログラミングをサポートする機能には、変数名などのコードの補完、ヘルプの表示、シンタックスハイライトなどがあります。
+プログラミングをサポートする機能には、コードの補完、構文のポップアップ表示、シンタックスハイライトなどがあります。
 LSP は、これらの機能をプログラミング言語に依存しないプロトコルとして定義します。
 そして、LSP に対応したエディタならどのエディタでも、上記のサポート機能が使えます。
 
@@ -47,7 +47,7 @@ Racket言語サーバー (例:`racket-langserver`) と連携して、プログ�
 また、`REPL`[^4]をサポートしており選択した`式`やファイルをインタープリターで実行できます。
 
 [^3]:`Magic Racket`:`Visual Studio Code`用の`Racket LSP`クライアント。Racket プログラミング時に、`Racket LSP`サーバーと連携してプログラミングをサポートする機能を提供する。
-[^4]:｀`REPL`:入力したプログラムを実際に評価して返す、対話的プログラミングインターフェイス。
+[^4]:｀`REPL` (`Read`-`Eval`-`Print`-`Loop`): 対話的なプログラミングインターフェイスで、入力したプログラムを実際に評価して返す。Racket で実行したい式やコードを`REPL`に入力することで、その結果を即座に確認できる。
 
 ## 2. `Racket LSP`サーバーのインストール
 
@@ -77,10 +77,9 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 
 上記のメッセージが表示され、コマンドラインに戻れば`racket-langserver`のインストールは完了です。
 
-### 2.2. "Racket言語サーバー"の実行
+### 2.2. "`racket-langserver`"の実行
 
-インストールが完了すれば、Racket言語サーバー (`racket-langserver`)が実行できます。
-次の手順で、`racket-langserver`を実行します。
+ここでは、`racket-langserver`を起動し、LSP コマンドを入力して動作を確認します。
 
 1. `racket-langserver`の起動:
     次のコマンドを実行し、`racket-langserver`を起動する
@@ -90,7 +89,7 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
     ```
 
 2. `LSP`コマンドの実行:
-   適当な `LSP`コマンドを入力し、`Ctrl+Z`キーで"\<EOF\>"を入力する
+   `racket-langserver`がコマンドの入力待ちになるので、適当な `LSP`コマンドを入力して`Ctrl+Z`キーで入力を終了する
 
    ```powershell
    content-length: 24
@@ -100,7 +99,7 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
    ```
 
 3. エラーメッセージの確認:
-   コマンドの実行結果としてエラーメッセージが出ることを確認する
+   上記のコマンドの実行結果として、いかのようなエラーメッセージが出ることを確認する
 
    ```powershell
    jsexpr->string: expected argument of type <legal JSON value>; given: #<eof>
@@ -118,10 +117,15 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 
 ### 3.1. `Magic Racket`とは
 
-`Magic Racket`は、`Visual Studio Code`用の"Racket LSP"クライアントです。
-LSP によるエラー表示や定義部へのジャンプなどをサポートしており、プログラミングを効率化します。
+`Magic Racket`は、`Visual Studio Code`用の"Racket LSP"クライアントで、以下の機能を提供します:
 
-また、`REPL` をサポートしており選択した`式`やファイルをインタープリターで実行できます。
+- LSP によるエラー表示とエラー修正のサポート
+- 定義部へのジャンプと定義の参照
+- 変数のホバー情報表示
+- コードの補完
+- コードの自動成形
+
+また、`REPL`をサポートしていて選択した式やファイルを`REPL`で実行できるので、迅速なプログラムのテストや実行が可能です。
 
 ### 3.2. `Magic Racket`のインストール
 
@@ -149,12 +153,9 @@ LSP によるエラー表示や定義部へのジャンプなどをサポート�
 ## さいごに
 
 以上で、`Visual Studio Code`+`Racket LSP`による Racket開発環境が構築できました。
-`Magic Racket`を導入すると、コードの補完、構文のポップアップによる説明、コードの自動成形など、
-プログラミングをサポートするさまざまな機能が使えます。
+`Magic Racket`を導入することで、プログラミングのサポートがさらに強化され、効率的な Racket プログラミングが可能となります。
 
-`Magic Racket`は Racket の学習やプログラミングにおいて強力な武器となるでしょう。
 これからも、Racket でのプログラミングを通じて自身の能力を向上させましょう。
-
 それでは、Happy Hacking!
 
 ## 参考資料
