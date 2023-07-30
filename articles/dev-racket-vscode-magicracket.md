@@ -20,7 +20,7 @@ Enjoy!
 この記事では、LSP[^1](Language Server Protocol)を用いて、Racket の効率的なプログラミング環境を構築する方法について説明します。
 `Racket LSP`と`Magic Racket`を組み合わると、`Visual Studio Code`上で、コード補完やコードの自動整形といったプログラミングサポート機能を利用できます。
 
-[^1]LSP: 各種プログラミング言語に依存しないで、プログラミングをサポートする機能を提供するための共通のインターフェイスプロトコル。
+[^1]: LSP: 各種プログラミング言語に依存しないで、プログラミングをサポートする機能を提供するための共通のインターフェイスプロトコル。
 
 ### 1.1. LSPとは
 
@@ -87,7 +87,7 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
    ```
 
 3. エラーメッセージの確認:
-   上記のコマンドの実行結果として、いかのようなエラーメッセージが出ることを確認する
+   上記のコマンドの実行結果として、下記のようなエラーメッセージが出ることを確認する
 
    ```powershell
    jsexpr->string: expected argument of type <legal JSON value>; given: #<eof>
@@ -100,12 +100,12 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 
 ## 3. `Racket LSP`クライアントのインストール
 
-次に、`VS Code`に’Racket LSP`のクライアントである`Magic Racket 拡張`をインストールします。
+次に、`VS Code`に`Racket LSP`のクライアントである`Magic Racket 拡張`をインストールします。
 これにより、`VS Code` で `Racket LSP`のさまざまな機能が使えます。
 
 ### 3.1. `Magic Racket`のインストール
 
-次の手順で、`Magic Racket`拡張をインストールします。
+次の手順で、`Magic Racket 拡張`をインストールします。
 
 1. 拡張機能の選択:
    `VS Code`の左側のメニューから`拡張機能`を選択する
@@ -125,6 +125,21 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 
 `Magic Racket`では、Racket の実行時パス、言語サーバーを実行するための引数などを設定できます。
 ただし、`racket-langserver`が正常に動作していれば、設定の変更は必要ありません。
+
+`Magic Racket`の設定方法は、次の通りです。
+
+1. `VS Code`の左側のメニューから`拡張機能`を選択する:
+   ![拡張機能](https://i.imgur.com/4JIrBTs.png)
+
+2. `Magic Racket`を選択する:
+   ![インストール](https://i.imgur.com/sjIih4s.png)
+
+3. \[拡張機能の設定\]を選択し、設定ウィンドウを表示する:
+   ![設定](https://i.imgur.com/V3zShBh.png)
+
+4. 必要なら、各種項目を設定する:
+
+以上で、設定の変更は完了です。
 
 ## さいごに
 
