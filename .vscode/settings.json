@@ -1,4 +1,5 @@
 {
+    "editor.fontFamily": "'0xProto', 'Source Serif 4','DejaVu Serif'",
     "textlint.nodePath": "C:\\Users\\atsushifx\\.local\\share\\pnpm\\5",
     "textlint.autoFixOnSave": true
 }
