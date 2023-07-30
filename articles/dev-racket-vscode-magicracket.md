@@ -3,7 +3,7 @@ title: "Racket: Visual Studio CodeでのRacket LSPプログラミング環境の
 emoji: "🎾"
 type: "tech"
 topics: [ "VSCode", "開発環境", "環境構築", "Racket",  "MagicRacket" ]
-published: false
+published: true
 ---
 
 ## tl;dr
