@@ -1,5 +1,5 @@
 ---
-title: "Racket: `Racket LSP`と`Magic Racket`を使って`Visual Studio Code`にRacketプログラミング環境を構築する方法"
+title: "Racket: Visual Studio CodeでのRacket LSPプログラミング環境の構築方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "VSCode", "開発環境", "環境構築", "Racket",  "MagicRacket" ]
@@ -10,36 +10,38 @@ published: false
 
 - `racket-langserver`をインストール
 - `VS Code`に`Magic Racket`をインストール
-- 'Magic Racket`の設定
+- `Magic Racket`の設定
 
 以上で、`VS Code`で `Racket LSP`が使えるようになります。
-この記事で、詳細な手順を解説します。
+Enjoy!
 
 ## 1. はじめに
 
-`Racket`言語用の LSP[^1](Language Server Protocol)として`racket-langserver`が提供されています。これと`Visual Studio Code`の拡張機能である`Magic Racket`を組み合わせることで、効率的な`Racket`プログラミング環境を構築できます。
+この記事では、LSP[^1](Language Server Protocol)を用いて、Racket の効率的なプログラミング環境を構築する方法について説明します。
+`Racket LSP`と`Magic Racket`を組み合わると、`Visual Studio Code`上で、コード補完やコードの自動整形といったプログラミングサポート機能を利用できます。
 
 [^1]LSP: 各種プログラミング言語に依存しないで、プログラミングをサポートする機能を提供するための共通のインターフェイスプロトコル。
 
 ### 1.1. LSPとは
 
-LSP (Language Server Protocol) は、プログラミングの効率アップのための共通のインターフェイスです。
+LSP (Language Server Protocol) は、プログラミング効率向上のための標準的なインターフェイスです。
 プログラミングをサポートする機能には、コードの補完、構文のポップアップ表示、シンタックスハイライトなどがあります。
 LSP は、これらの機能をプログラミング言語に依存しないプロトコルとして定義します。
-そして、LSP に対応したエディタならどのエディタでも、上記のサポート機能が使えます。
+そして、LSP に対応したエディタならば、上記のサポート機能が使えます。
 
 この記事では`Racket LSP`を`Visual Studio Code`で使用する方法を説明していますが、`Vim`や`emacs`のような他のエディタにも LSP クライアントが提供されています。
-これにより、これらのエディタでも、上記のプログラミングサポート機能が利用可能です。
+これらのエディタでも、上記のプログラミングサポート機能が利用可能です。
 
 ### 1.2. `racket-langserver`とは
 
-`racket-langserver`[^2]は`Racket`言語専用の LSP です。`racket-langserver`を利用することで、`Racket`プログラミング時にコード補完やコードシンタックスチェックなどのプログラミングサポートを行います。
+`racket-langserver`[^2]は`Racket`言語専用の LSP です。`racket-langserver`は、Racket プログラミング時にコード補完やコードシンタックスチェックなどのプログラミングサポートを行います。
 
-[^2]:`racket-langserver`: Racket言語に対応した LSP の実装。Racket のプログラミングをサポートするさまざまな機能を提供する。
+[^2]:`racket-langserver`: Racket 用の LSP。これにより、コード補完やシンタックスチェックなどのプログラミングサポートが可能になる。
 
 ### 1.3. `Magic Racket`とは
 
-`Magic Racket`[^3]は、`Visual Studio Code`用の`Racket LSP`クライアント拡張です。`Racket LSP` (`racket-langserver`) と連携して、プログラミングをサポートするさまざまな機能を提供します。また、`Racket`の特性を活かした`REPL`[^4]のサポートもしており、選択した式やファイルを直接実行できます。
+`Magic Racket`[^3]は、`Visual Studio Code`用の`Racket LSP`クライアントとして機能する拡張機能 (`extension`) です。
+`Racket LSP` (`racket-langserver`) と連携して、プログラミングをサポートするさまざまな機能を提供します。また、`REPL`[^4]のサポートもしており、選択した式やファイルを直接実行できます。
 
 [^3]:`Magic Racket`:`Visual Studio Code`用の`Racket LSP`クライアント。Racket プログラミング時に、`Racket LSP`サーバーと連携してプログラミングをサポートする機能を提供する。
 [^4]:`REPL` (`Read`-`Eval`-`Print`-`Loop`): 対話的なプログラミングインターフェイスで、入力したプログラムを実際に評価して返す。Racket で実行したい式やコードを`REPL`に入力することで、その結果を即座に確認できる。
@@ -52,27 +54,16 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 
 ### 2.1. `raco` による`Racket LSP`のインストール
 
-次の手順で、`racket-langserver`をインストールします。
+以下のコマンドを実行して`racket-langserver`をインストールします。
 
-1. `raco`コマンドの実行:
-   以下のコマンドを実行する
+1. `raco pkg`コマンドの実行:
+   以下の`raco pkg`コマンドを実行し、パッケージをインストールする
 
    ```powershell
    raco pkg install --auto racket-langserver
    ```
 
-2. `racket-langserver`のインストール:
-   コンソールに下記のメッセージが表示される。
-
-  ```powershell
-  Resolving "racket-langserver" via https://download.racket-lang.org/releases/8.9/catalog/
-  Resolving "racket-langserver" via https://pkgs.racket-lang.org
-   .
-   .
-   
-  ```
-
-上記のメッセージが表示され、コマンドラインに戻れば`racket-langserver`のインストールは完了です。
+コマンドラインに戻れば`racket-langserver`のインストールは完了です。
 
 ### 2.2. "`racket-langserver`"の実行
 
@@ -105,32 +96,19 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
     .
    ```
 
-上記のようにエラーメッセージが出力されれば、言語サーバーは正常に動作しています。
+上記のようなエラーメッセージが出力された場合、言語サーバーは正常に動作しています。
 
 ## 3. `Racket LSP`クライアントのインストール
 
 次に、`VS Code`に’Racket LSP`のクライアントである`Magic Racket 拡張`をインストールします。
 これにより、`VS Code` で `Racket LSP`のさまざまな機能が使えます。
 
-### 3.1. `Magic Racket`とは
-
-`Magic Racket`は、`Visual Studio Code`用の"`Racket LSP`"クライアントで、以下の機能を提供します:
-
-- LSP によるエラー表示とエラー修正のサポート
-- 定義部へのジャンプと定義の参照
-- 変数のホバー情報表示
-- コードの補完
-- コードの自動成形
-
-また、前述したように`REPL`をサポートしており、選択した式やファイルを即座に実行し結果を確認できます。
-迅速なプログラムのテストや実行が可能です。
-
-### 3.2. `Magic Racket`のインストール
+### 3.1. `Magic Racket`のインストール
 
 次の手順で、`Magic Racket`拡張をインストールします。
 
 1. 拡張機能の選択:
-   `VS Code`で`拡張機能`を選択する
+   `VS Code`の左側のメニューから`拡張機能`を選択する
    [![拡張機能](https://i.imgur.com/4JIrBTs.png)](https://imgur.com/4JIrBTs)
 
 2. 'Magic Racket`の検索:
@@ -143,7 +121,7 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 
 以上で、`Magic Racket`のインストールは完了です。
 
-### 3.3. `Magic Racket`の設定
+### 3.2. `Magic Racket`の設定
 
 `Magic Racket`では、Racket の実行時パス、言語サーバーを実行するための引数などを設定できます。
 ただし、`racket-langserver`が正常に動作していれば、設定の変更は必要ありません。
@@ -153,12 +131,13 @@ Racket の LSP サーバー`racket-langserver`はパッケージで提供され�
 以上で、`Visual Studio Code`+`Racket LSP`による Racket開発環境が構築できました。
 `Magic Racket`を導入することで、プログラミングのサポートがさらに強化され、効率的な Racket プログラミングが可能となります。
 
-これからも Racket のプログラミングを通じて、関数型プログラミングの世界を楽しみましょう。
+これからは、Racket LSP を活用して、より効率的なプログラミングを楽しみましょう。
 それでは、Happy Hacking!
 
 ## 参考資料
 
 ### Webサイト
 
+- [Language Server Protocol Specification](https://github.com/tennashi/lsp_spec_ja)
 - [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver)
 - [`Magic Racket`](https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket)
