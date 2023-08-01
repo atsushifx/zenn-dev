@@ -18,6 +18,8 @@ Enjoy!
 ## 1. はじめに
 
 この記事では、`Visual Studio Code`に`Code Runner`をインストールして、`Racket`プログラムを実行させる方法を説明します。
+`Visual Studio Code`は強力なエディタですが、`Racket`のデバッグ機能が不足していることがあります。
+`Code Runner`を使用することで、`Visual Studio Code`から`Racket`プログラムを実行できるようになります。
 
 ### 1.1. Code Runnerとは
 
@@ -28,6 +30,8 @@ Enjoy!
 たとえば、プログラムが`Racket`のプログラムなら`racket \<コードファイル\>`となります。
 
 ## 2. Code Runnerのインストール
+
+`VS Code`に`Code Runner`をインストールする方法には 2種類あります。それぞれの方法を説明します。
 
 ### 2.1. VS Code上でのCode Runnerのインストール
 
@@ -49,7 +53,8 @@ Enjoy!
 
 ### 2.2. コマンドラインからのCode Runnerのインストール
 
-次の手順で、コマンドラインから`Code Runner`をインストールします。
+`VS Code`では、コマンドラインから拡張機能をインストールできます。
+次の手順で、`Code Runner`をインストールします。
 
 1. `PowerShell`を開く:
    ![PowerShell](https://i.imgur.com/2YbB7lj.png)
@@ -64,18 +69,19 @@ Enjoy!
 
 ## 3. Code Runnerの設定
 
+`Code Runner`は言語ごとに実行するコマンドを設定できます。
+そのためには、"VS Code"の設定ファイル"`settings.json`"に"Executor Map"を設定する必要があります。
+
 ### 3.1. Executor Mapの編集
 
-`Code Runner`は言語ごとに実行するコマンドを設定しています。
-コマンドを設定している"Executor Map"を編集して、LISPプログラムを`Racket`で実行させます。
-
-次の手順で、`Executor Mapを編集します。`
+次の手順で、`Executor Map を編集します。
 
 1. ユーザー設定を開く:
    `Ctrl+Shift+P`とし、\[ユーザー設定を開く\]を選ぶ
+   ![ユーザー設定](https://i.imgur.com/y94dSHr.png)
 
 2. 設定を追加:
-   "settings.json"に下記の設定を追加し、`Racket`、`Scheme`、`LISP`プログラムで`Racket`を実行させる
+   "settings.json"に下記の設定を追加し、RacketでRacket/Scheme/LISPプログラムを実行できるようにします。
 
    ```json: settings.json
    "code-runner.customCommand": "echo hello",
@@ -121,8 +127,9 @@ Enjoy!
 
 ## さいごに
 
-この記事では、`Visual Studio Code`拡張機能をインストールして、Racketプログラムを実行させるまでを説明しました。
+この記事では、`Visual Studio Code`に`Code Runner`をインストールして、Racketプログラムを実行させる方法を紹介しました。
 
+`VS Code`で`Racket`が動かせることで、Racket の学習が進むことでしょう。
 それでは、Happy Hacking!
 
 ## 参考資料

@@ -68,8 +68,8 @@
             "skipPatterns": [
                 "/https/ig",
                 "<[^.]*>/",
-                "/js/g",
-                "/powershell/g"
+                "/js/ig",
+                "/PowerShell/ig"
             ]
         },
         "@proofdict/proofdict": {
