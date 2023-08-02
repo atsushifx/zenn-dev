@@ -3,7 +3,7 @@ title: "Racket: Racketプログラミング用にCode Runnerをインストー�
 emoji: "🎾"
 type: "tech"
 topics: [ "VSCode", "開発環境", "環境構築", "Racket",  "CodeRunner" ]
-published: false
+published: true
 ---
 
 ## tl;dr
