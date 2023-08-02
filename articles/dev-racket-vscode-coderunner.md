@@ -3,7 +3,7 @@ title: "Racket: Racketプログラミング用にCode Runnerをインストー�
 emoji: "🎾"
 type: "tech"
 topics: [ "VSCode", "開発環境", "環境構築", "Racket",  "CodeRunner" ]
-published: true
+published: false
 ---
 
 ## tl;dr
@@ -40,7 +40,7 @@ Enjoy!
    左側のメニューから\[`拡張機能`\]アイコンをクリックする (または、`Ctrl+Shift+X`を押す)
    ![拡張機能](https://i.imgur.com/4JIrBTs.png)
 
-2. 'Code Runner`の検索:
+2. `Code Runner`の検索:
    検索バーに`Code Runner`を入力し、検索結果から該当の拡張機能を選択する
    ![Code Runner](https://i.imgur.com/bdYaeL0.png)
 
@@ -97,7 +97,7 @@ Enjoy!
 3. 設定の保存
    `Ctrl+S`とし設定ファイルを保存し、`Ctrl+W`で閉じる
 
-以上で、`Executor Map`の編集は完了です。
+以上で、`Executor Map`の設定は完了です。
 
 ## 4. Code Runnerの動作確認
 
