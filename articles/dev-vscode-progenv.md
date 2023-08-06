@@ -59,12 +59,106 @@ published: false
 行末にある空白を表示します。
 また、"Trailing Spaces: Delete"コマンドで行末の空白を一括削除します。
 
-#### `WakaTime`
-
-`VS Code`による作業時間を計測します。
-
 ## 設定ファイル
 
-### 作成した設定ファイル
+### "extensions.json"
+
+上記の各拡張機能を"extensions.json"の推奨拡張機能にしました。
+ファイルは、以下のようになります。
+
+```json: extensions.json
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "formulahendry.code-runner",
+    "streetsidesoftware.code-spell-checker",
+    "editorconfig.editorconfig",
+    "oderwat.indent-rainbow",
+    "ymotongpoo.licenser",
+    "fnando.linter",
+    "shardulm94.trailing-spaces",
+    "ionutvmi.path-autocomplete"
+  ]
+}
+
+```
+
+### "settings.json"
+
+以下の"settings.json"に各種拡張機能の設定を載せておきます。
+
+```json: settings.json
+{
+    // file saves & encoding
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "onWindowChange",
+    "explorer.confirmDelete": true,
+
+    // workbench common settings
+    "workbench.startupEditor": "none",
+    "workbench.commandPalette.experimental.suggestCommands": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.closeEmptyGroups": true,
+    "workbench.editor.showTabs": true,
+
+    // editor settings
+    "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
+    "editor.autoIndent": "advanced",
+    "editor.tabSize": 4
+    "editor.useTabStops": true,
+    "editor.wordWrap": "on",
+    "editor.unicodeHighlight.includeComments": true,
+    "editor.cursorStyle": "block",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.suggestSelection": ""recentlyUsed",
+    "editor.minimap.autohide": true,
+    "editor.minimap.renderCharacters": false,
+    "editor.renderLineHighlight": "all",
+
+    // terminal
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.tabs.location": "left",
+
+    // git settings
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "always"
+    "git.suggestSmartCommit": true,
+
+    // config files (json, yaml)
+    "json.validate.enable": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    // javsscript
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    // ** extensions settings **
+    // markdown
+    "markdown.extension.theming.decoration.renderTrailingSpace": true
+
+    // lincenser : license for My Programs
+    "licenser.license": "MIT",
+    "licenser.author": "Furukawa, Atsushi <atsushifx@aglabo.com>",
+
+    // spell checker
+    "cSpell.autoFormatConfigFile": true,
+    "cSpell.diagnosticLevel": "Warning",
+    "cSpell.files": [
+        "$workinDir/**"
+    ],
+
+    // lint
+    // better comments
+    "better-comments.highlightPlainText": true,
+}
+```
 
 ## さいごに
+
+## 参考資料
+
+### Webサイト
+
+- VS Code extensions: <https://marketplace.visualstudio.com/vscode>
