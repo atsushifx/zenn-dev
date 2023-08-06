@@ -12,6 +12,59 @@ published: false
 
 ## 基本設定
 
+### ワークベンチの設定
+
+ワークベンチでは、つぎのように設定します:
+
+- コマンドパレットでよく使うコマンドを表示する
+- Preview を表示しない
+- タブを表示する
+
+`settings.json`は:
+
+```json; settings.json
+   // workbench common settings
+    "workbench.startupEditor": "none",
+    "workbench.commandPalette.experimental.suggestCommands": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.closeEmptyGroups": true,
+    "workbench.editor.showTabs": true,
+```
+
+となります。
+
+### エディタの設定
+
+エディタは、つぎのように設定します:
+
+- インデント: advanced (プログラミング言語の構文にもとづいてインデント)
+- タブ:  tab キーで、次のタブまで空白を入力
+- セーブ時にフォーマット
+- ペースト時にフォーマット
+
+`settings.json`は:
+
+```json: settings.json
+
+    // editor settings
+    "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
+    "editor.autoIndent": "advanced",
+    "editor.tabSize": 4
+    "editor.useTabStops": true,
+    "editor.wordWrap": "on",
+    "editor.  eHighlight.includeComments": true,
+    "editor.cursorStyle": "block",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.suggestSelection": ""recentlyUsed",
+    "editor.minimap.autohide": true,
+    "editor.minimap.renderCharacters": false,
+    "editor.renderLineHighlight": "all",
+
+```
+
+となります。
+
 ## 拡張機能
 
 ### 拡張機能一覧
@@ -24,6 +77,16 @@ published: false
 コメントの行頭に、"!","`ToDo`"など、特定のタグをつけるとコメントの色が変わります。
 タグのスタイルは設定ファイルで変えられます。また、タグの追加もできます。
 
+現状、タグの追加の設定はせず、コメントのハイライトのみおこなっています。
+現状の設定は:
+
+```json: settings.json
+   // better comments
+    "better-comments.highlightPlainText": true,
+```
+
+となります。
+
 #### `Code Runner`
 
 作成したプログラムを手軽に実行します。また、コードを選択しての実行もできます。
@@ -33,6 +96,22 @@ published: false
 
 コーディング中にスペルチェックを行い、タイプミスした単語に波線をつけて表示します。
 また、ユーザー辞書などにもとづいてタイプミスした単語を正しい単語にします。
+
+スペルチェックするファイルは、作業中のディレクトリだけにしたいので
+`cSpell.files`オプションで読み込むファイルを設定しています。
+
+`cSpell` の設定は:
+
+```json: settings.json
+   // spell checker
+    "cSpell.autoFormatConfigFile": true,
+    "cSpell.diagnosticLevel": "Warning",
+    "cSpell.files": [
+        "$workinDir/**"
+    ],
+```
+
+となります。
 
 #### `EditorConfig`
 
@@ -45,6 +124,15 @@ published: false
 #### `licenser`
 
 コードのヘッダー部に OSSライセンスを挿入します。
+自分の場合の`licenser`の設定は:
+
+```json: settings.json
+    // lincenser : license for My Programs
+    "licenser.license": "MIT",
+    "licenser.author": "Furukawa, Atsushi <atsushifx@aglabo.com>",
+```
+
+となります。
 
 #### `Linter`
 
