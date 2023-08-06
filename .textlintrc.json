@@ -6,7 +6,7 @@
                 "./.textlint/allowlist.yml"
             ]
         }
-        },
+    },
     "rules": {
         "preset-ja-engineering-paper": {
             "use-si-units": false,
@@ -69,6 +69,7 @@
                 "/https/ig",
                 "<[^.]*>/",
                 "/js/ig",
+                "/svg/ig",
                 "/PowerShell/ig"
             ]
         },
