@@ -9,8 +9,12 @@ published: false
 ## はじめに
 
 この記事では、`Visual Studio Code`でプログラミングするときのために、オススメの設定と拡張機能を紹介します。
+紹介した拡張機能を推奨の拡張機能ファイルと、この記事での設定ファイルを載せておきます。
+快適な開発環境作りの参考にしてください。
 
 ## 基本設定
+
+ここでは`VS Code`の基本機能、ワークベンチやエディタの設定をします。
 
 ### ワークベンチの設定
 
@@ -20,7 +24,7 @@ published: false
 - Preview を表示しない
 - タブを表示する
 
-`settings.json`は:
+上記の設定を含めた`settings.json`は以下のようになります:
 
 ```json; settings.json
    // workbench common settings
@@ -42,10 +46,9 @@ published: false
 - セーブ時にフォーマット
 - ペースト時にフォーマット
 
-`settings.json`は:
+上記の設定を含めた`settings.json`は以下のようになります:
 
 ```json: settings.json
-
     // editor settings
     "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
     "editor.autoIndent": "advanced",
@@ -67,9 +70,10 @@ published: false
 
 ## 拡張機能
 
-### 拡張機能一覧
+プログラミングをするうえで便利な拡張機能を紹介します。
+ここでは、プログラミング言語に関わらないタブ設定やコメントなどを強化する拡張を紹介します。
 
-各プログラミング言語共通で使える拡張機能を紹介します。
+### 拡張機能一覧
 
 #### `Better Comments`
 
@@ -149,10 +153,11 @@ published: false
 
 ## 設定ファイル
 
+ワークベンチなどの基本設定や、上記で紹介した拡張機能を簡単にインストール、使うための設定ファイルを紹介します。
+
 ### "extensions.json"
 
-上記の各拡張機能を"extensions.json"の推奨拡張機能にしました。
-ファイルは、以下のようになります。
+上記で紹介した拡張機能を推奨拡張機能にした"extensions.json"の例です:
 
 ```json: extensions.json
 {
@@ -171,9 +176,13 @@ published: false
 
 ```
 
+上記のファイルを".`vscode/`"下に置けば、この記事で紹介した拡張機能を一気にインストールできます。
+
 ### "settings.json"
 
-以下の"settings.json"に各種拡張機能の設定を載せておきます。
+基本設定で紹介した設定、および各拡張機能の設定を 1つの"settings.json"にしました。
+下記のファイルの内容をコピーすれば、`VS Code`をプログラミング用に設定できます。
+後は、自分の好みに合わせて設定をかえればいいでしょう。
 
 ```json: settings.json
 {
@@ -201,7 +210,7 @@ published: false
     "editor.cursorStyle": "block",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.suggestSelection": ""recentlyUsed",
+    "editor.suggestSelection": "recentlyUsed",
     "editor.minimap.autohide": true,
     "editor.minimap.renderCharacters": false,
     "editor.renderLineHighlight": "all",
@@ -244,6 +253,9 @@ published: false
 ```
 
 ## さいごに
+
+以上で、`VS Code`をプログラミング用エディタとして設定できました。
+後は、プログラミング言語やフレームワークごとの拡張機能をインストールすれば快適なプログラミングができるでしょう。
 
 ## 参考資料
 
