@@ -8,15 +8,14 @@ published: false
 
 ## はじめに
 
-この記事では、`Visual Studio Code`でプログラミングするときのために、オススメの設定と拡張機能を紹介します。
-紹介した拡張機能を推奨の拡張機能ファイルと、この記事での設定ファイルを載せておきます。
-快適な開発環境作りの参考にしてください。
+この記事では、`Visual Studio Code`(以下、`VS Code`)でプログラミングするときのために、オススメの設定と拡張機能を紹介します。
+紹介した拡張機能を簡単にインストールするための"`extensions.json`"と、この記事での設定を反映するための"`settings.json`"も載せています。
 
-## 基本設定
+## 1. 基本設定
 
 ここでは`VS Code`の基本機能、ワークベンチやエディタの設定をします。
 
-### ワークベンチの設定
+### 1.1. ワークベンチの設定
 
 ワークベンチでは、つぎのように設定します:
 
@@ -37,11 +36,11 @@ published: false
 
 となります。
 
-### エディタの設定
+### 1.2. エディタの設定
 
 エディタは、つぎのように設定します:
 
-- インデント: advanced (プログラミング言語の構文にもとづいてインデント)
+- インデント: プログラミング言語の構文にもとづいてインデント
 - タブ:  tab キーで、次のタブまで空白を入力
 - セーブ時にフォーマット
 - ペースト時にフォーマット
@@ -55,11 +54,11 @@ published: false
     "editor.tabSize": 4,
     "editor.useTabStops": true,
     "editor.wordWrap": "on",
-    "editor.  eHighlight.includeComments": true,
+    "editor.unicodeHighlight.includeComments": true,
     "editor.cursorStyle": "block",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.suggestSelection": ""recentlyUsed",
+    "editor.suggestSelection": "recentlyUsed",
     "editor.minimap.autohide": true,
     "editor.minimap.renderCharacters": false,
     "editor.renderLineHighlight": "all",
@@ -68,12 +67,12 @@ published: false
 
 となります。
 
-## 拡張機能
+## 2. 拡張機能
 
 プログラミングをするうえで便利な拡張機能を紹介します。
 ここでは、プログラミング言語に関わらないタブ設定やコメントなどを強化する拡張を紹介します。
 
-### 拡張機能一覧
+### 2.1. 拡張機能一覧
 
 #### `Better Comments`
 
@@ -81,12 +80,12 @@ published: false
 コメントの行頭に、"!","`ToDo`"など、特定のタグをつけるとコメントの色が変わります。
 タグのスタイルは設定ファイルで変えられます。また、タグの追加もできます。
 
-現状、タグの追加の設定はせず、コメントのハイライトのみおこなっています。
-現状の設定は:
+設定は:
 
 ```json: settings.json
    // better comments
     "better-comments.highlightPlainText": true,
+
 ```
 
 となります。
@@ -99,7 +98,7 @@ published: false
 #### `Code Spell Checker`
 
 コーディング中にスペルチェックを行い、タイプミスした単語に波線をつけて表示します。
-また、ユーザー辞書などにもとづいてタイプミスした単語を正しい単語にします。
+また、ユーザー辞書などに基づいてタイプミスした単語を正しい単語にします。
 
 スペルチェックするファイルは、作業中のディレクトリだけにしたいので
 `cSpell.files`オプションで読み込むファイルを設定しています。
@@ -151,13 +150,13 @@ published: false
 行末にある空白を表示します。
 また、"Trailing Spaces: Delete"コマンドで行末の空白を一括削除します。
 
-## 設定ファイル
+## 3. 設定ファイル
 
 ワークベンチなどの基本設定や、上記で紹介した拡張機能を簡単にインストール、使うための設定ファイルを紹介します。
 
-### "extensions.json"
+### 3.1. "extensions.json"
 
-上記で紹介した拡張機能を推奨拡張機能にした"extensions.json"の例です:
+上記で紹介した拡張機能を推奨拡張機能にした"extensions.json"です:
 
 ```json: extensions.json
 {
@@ -178,7 +177,7 @@ published: false
 
 上記のファイルを".`vscode/`"下に置けば、この記事で紹介した拡張機能を一気にインストールできます。
 
-### "settings.json"
+### 3.2. "settings.json"
 
 基本設定で紹介した設定、および各拡張機能の設定を 1つの"settings.json"にしました。
 下記のファイルの内容をコピーすれば、`VS Code`をプログラミング用に設定できます。
@@ -254,7 +253,7 @@ published: false
 
 ## さいごに
 
-以上で、`VS Code`をプログラミング用エディタとして設定できました。
+`VS Code`をプログラミング用エディタとして設定できました。
 後は、プログラミング言語やフレームワークごとの拡張機能をインストールすれば快適なプログラミングができるでしょう。
 
 ## 参考資料
