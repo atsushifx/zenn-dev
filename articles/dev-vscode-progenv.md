@@ -25,7 +25,7 @@ published: false
 
 上記の設定を含めた`settings.json`は以下のようになります:
 
-```json: settings.json
+```jsonc: settings.json
    // workbench common settings
     "workbench.startupEditor": "none",
     "workbench.commandPalette.experimental.suggestCommands": true,
@@ -45,10 +45,10 @@ published: false
 
 上記の設定を含めた`settings.json`は以下のようになります:
 
-```json: settings.json
+```jsonc: settings.json
     // editor settings
     "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
-    "editor.autoIndent": "advanced",   // 構文にも基づいてインデント
+    "editor.autoIndent": "advanced",   // 各プログラミング言語の構文に基づいて自動インデント
     "editor.tabSize": 4,
     "editor.useTabStops": true,
     "editor.wordWrap": "on",
@@ -73,12 +73,12 @@ published: false
 #### `Better Comments`
 
 コメントにタグ機能を追加する拡張機能です。
-特定のタグをコメントの行頭につけると、コメントの色が変わります。
+特定のタグ('!','`ToDo`'など)をコメントの行頭につけると、それぞれ異なる色でコメントが表示されます。
 設定するタグやコメントの色、スタイルは設定ファイルで変更できます。
 
 設定は:
 
-```json: settings.json
+```jsonc: settings.json
    // better comments
     "better-comments.highlightPlainText": true,
 
@@ -98,7 +98,7 @@ published: false
 
 `cSpell` の設定は:
 
-```json: settings.json
+```jsonc: settings.json
    // spell checker
     "cSpell.autoFormatConfigFile": true,
     "cSpell.diagnosticLevel": "Warning",
@@ -122,7 +122,7 @@ published: false
 コードのヘッダー部に OSSライセンスを挿入します。
 自分の場合の`licenser`の設定は:
 
-```json: settings.json
+```jsonc: settings.json
     // licenser: license for My Programs
     "licenser.license": "MIT",
     "licenser.author": "Furukawa, Atsushi <atsushifx@aglabo.com>",
@@ -151,7 +151,7 @@ published: false
 
 上記で紹介した拡張機能を推奨拡張機能にした"extensions.json"です:
 
-```json: extensions.json
+```jsonc: extensions.json
 {
   "recommendations": [
     "aaron-bond.better-comments",
@@ -179,7 +179,7 @@ published: false
 下記のファイルの内容をコピーすれば、`VS Code`をプログラミング用に設定できます。
 後は、自分の好みに合わせて設定をかえればいいでしょう。
 
-```json: settings.json
+```jsonc: settings.json
 {
     // file saves & encoding
     "files.eol": "\n",
@@ -247,17 +247,17 @@ published: false
 }
 ```
 
-### 3.3. `VS Code`に設定を追加する
+### 3.3. `Visual Studio Code`に設定を追加する
 
 以下の手順で、上記の設定を追加します。
 
-1. `VS Code`上で\[`Ctrl+Shift+P`\]としてコマンドパレットを開く:
+1. `VS Code`上で\[`F1`\]キーとしてコマンドパレットを開く:
    ![コマンドパレット](https://i.imgur.com/ZP9RSjX.png)
 
 2. \[ユーザー設定を開く(JSON)\]として、`VS Code`の設定ファイルを開く:
    ![ユーザー設定](https://i.imgur.com/7NMDX1b.png)
 
-3. 上記の設定をコピーし、設定ファイルを保存する
+3. 上上記の"settings.json"の内容をコピーし、設定ファイルに貼り付けて保存する
 
 以上で、`VS Code`に設定を追加できます。
 
@@ -265,6 +265,7 @@ published: false
 
 `VS Code`をプログラミング用エディタとして設定できました。
 後は、プログラミング言語やフレームワークごとの拡張機能をインストールすれば快適なプログラミングができるでしょう。
+これらの設定を活用して、より効率的で楽しいコーディング体験を楽しんでください。
 
 それでは、Happy Hacking!
 
@@ -272,4 +273,4 @@ published: false
 
 ### Webサイト
 
-- VS Code extensions: <https://marketplace.visualstudio.com/vscode>
+- [VS Code extensions](https://marketplace.visualstudio.com/vscode)
