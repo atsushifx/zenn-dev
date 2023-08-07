@@ -52,7 +52,7 @@ published: false
     // editor settings
     "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
     "editor.autoIndent": "advanced",
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
     "editor.useTabStops": true,
     "editor.wordWrap": "on",
     "editor.  eHighlight.includeComments": true,
@@ -203,7 +203,7 @@ published: false
     // editor settings
     "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
     "editor.autoIndent": "advanced",
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
     "editor.useTabStops": true,
     "editor.wordWrap": "on",
     "editor.unicodeHighlight.includeComments": true,
@@ -221,7 +221,7 @@ published: false
 
     // git settings
     "git.autofetch": true,
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
     "git.suggestSmartCommit": true,
 
     // config files (json, yaml)
@@ -233,7 +233,7 @@ published: false
 
     // ** extensions settings **
     // markdown
-    "markdown.extension.theming.decoration.renderTrailingSpace": true
+    "markdown.extension.theming.decoration.renderTrailingSpace": true,
 
     // lincenser : license for My Programs
     "licenser.license": "MIT",
