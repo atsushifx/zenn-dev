@@ -1,7 +1,7 @@
 ---
-title: "開発環境: VS Codeでプログラミングするためのおすすめ拡張機能と設定"
-emoji: "😎"
-type: "tech" # tech: 技術記事 / idea: アイデア
+title: "開発環境: VS Codeでプログラミングするための拡張機能と設定"
+emoji: "🦾"
+type: "tech"
 topics: [ "開発環境", "VSCode", "extensions", "拡張機能"]
 published: false
 ---
@@ -9,7 +9,7 @@ published: false
 ## はじめに
 
 この記事では、`Visual Studio Code`(以下、`VS Code`)でプログラミングするときのために、オススメの設定と拡張機能を紹介します。
-紹介した拡張機能を簡単にインストールするための"`extensions.json`"と、この記事での設定を反映するための"`settings.json`"も載せています。
+その後、`VS Code`の設定ファイル"`extensions.json`" と "`settings.json`" を使用して簡単にインストール、設定する方法を解説します。
 
 ## 1. 基本設定
 
@@ -17,30 +17,28 @@ published: false
 
 ### 1.1. ワークベンチの設定
 
-ワークベンチでは、つぎのように設定します:
+ワークベンチでは、次のように設定します:
 
 - コマンドパレットでよく使うコマンドを表示する
-- Preview を表示しない
+- Preview を表示しないようにする
 - タブを表示する
 
 上記の設定を含めた`settings.json`は以下のようになります:
 
-```json; settings.json
+```json: settings.json
    // workbench common settings
     "workbench.startupEditor": "none",
     "workbench.commandPalette.experimental.suggestCommands": true,
-    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreview": false,           // Previewを表示しない
     "workbench.editor.closeEmptyGroups": true,
     "workbench.editor.showTabs": true,
 ```
 
-となります。
-
 ### 1.2. エディタの設定
 
-エディタは、つぎのように設定します:
+エディタは、次のように設定します:
 
-- インデント: プログラミング言語の構文にもとづいてインデント
+- インデント: 各プログラミング言語の構文に基づいて自動インデント
 - タブ:  tab キーで、次のタブまで空白を入力
 - セーブ時にフォーマット
 - ペースト時にフォーマット
@@ -50,7 +48,7 @@ published: false
 ```json: settings.json
     // editor settings
     "editor.fontFamily": "0xProto,'3270Condensed NFM ', 'Source Serif 4','DejaVu Serif",
-    "editor.autoIndent": "advanced",
+    "editor.autoIndent": "advanced",   // 構文にも基づいてインデント
     "editor.tabSize": 4,
     "editor.useTabStops": true,
     "editor.wordWrap": "on",
@@ -65,8 +63,6 @@ published: false
 
 ```
 
-となります。
-
 ## 2. 拡張機能
 
 プログラミングをするうえで便利な拡張機能を紹介します。
@@ -77,8 +73,8 @@ published: false
 #### `Better Comments`
 
 コメントにタグ機能を追加する拡張機能です。
-コメントの行頭に、"!","`ToDo`"など、特定のタグをつけるとコメントの色が変わります。
-タグのスタイルは設定ファイルで変えられます。また、タグの追加もできます。
+特定のタグをコメントの行頭につけると、コメントの色が変わります。
+設定するタグやコメントの色、スタイルは設定ファイルで変更できます。
 
 設定は:
 
@@ -97,11 +93,8 @@ published: false
 
 #### `Code Spell Checker`
 
-コーディング中にスペルチェックを行い、タイプミスした単語に波線をつけて表示します。
-また、ユーザー辞書などに基づいてタイプミスした単語を正しい単語にします。
-
-スペルチェックするファイルは、作業中のディレクトリだけにしたいので
-`cSpell.files`オプションで読み込むファイルを設定しています。
+コーディング中にスペルチェックを行い、タイプミスした単語を波線で表示します。
+また、ユーザー辞書に基づいて修正します。
 
 `cSpell` の設定は:
 
@@ -110,7 +103,7 @@ published: false
     "cSpell.autoFormatConfigFile": true,
     "cSpell.diagnosticLevel": "Warning",
     "cSpell.files": [
-        "$workingDir/**"
+        "$workingDir/**"                 // `VS Code`で編集中のディレクトリのみを対象にする
     ],
 ```
 
@@ -130,7 +123,7 @@ published: false
 自分の場合の`licenser`の設定は:
 
 ```json: settings.json
-    // lincenser : license for My Programs
+    // licenser: license for My Programs
     "licenser.license": "MIT",
     "licenser.author": "Furukawa, Atsushi <atsushifx@aglabo.com>",
 ```
@@ -178,7 +171,7 @@ published: false
 上記のファイルを".`vscode/`"下に置いて、`VS Code`を起動します。
 下記の画面が現れるので、\[インストール\]をクリックすると、すべての拡張機能をインストールします。
 
-[![拡張機能のインストール](https://i.imgur.com/crL6SWa.png)
+![拡張機能のインストール](https://i.imgur.com/crL6SWa.png)
 
 ### 3.2. "settings.json"
 
@@ -230,14 +223,14 @@ published: false
     "json.validate.enable": true,
     "diffEditor.ignoreTrimWhitespace": true,
 
-    // javsscript
+    // javascript
     "javascript.updateImportsOnFileMove.enabled": "always",
 
     // ** extensions settings **
     // markdown
     "markdown.extension.theming.decoration.renderTrailingSpace": true,
 
-    // lincenser : license for My Programs
+    // licenser: license for My Programs
     "licenser.license": "MIT",
     "licenser.author": "Furukawa, Atsushi <atsushifx@aglabo.com>",
 
