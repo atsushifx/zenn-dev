@@ -110,7 +110,7 @@ published: false
     "cSpell.autoFormatConfigFile": true,
     "cSpell.diagnosticLevel": "Warning",
     "cSpell.files": [
-        "$workinDir/**"
+        "$workingDir/**"
     ],
 ```
 
@@ -175,7 +175,10 @@ published: false
 
 ```
 
-上記のファイルを".`vscode/`"下に置けば、この記事で紹介した拡張機能を一気にインストールできます。
+上記のファイルを".`vscode/`"下に置いて、`VS Code`を起動します。
+下記の画面が現れるので、\[インストール\]をクリックすると、すべての拡張機能をインストールします。
+
+[![拡張機能のインストール](https://i.imgur.com/crL6SWa.png)
 
 ### 3.2. "settings.json"
 
@@ -242,7 +245,7 @@ published: false
     "cSpell.autoFormatConfigFile": true,
     "cSpell.diagnosticLevel": "Warning",
     "cSpell.files": [
-        "$workinDir/**"
+        "$workingDir/**"
     ],
 
     // lint
@@ -251,10 +254,26 @@ published: false
 }
 ```
 
+### 3.3. `VS Code`に設定を追加する
+
+以下の手順で、上記の設定を追加します。
+
+1. `VS Code`上で\[`Ctrl+Shift+P`\]としてコマンドパレットを開く:
+   ![コマンドパレット](https://i.imgur.com/ZP9RSjX.png)
+
+2. \[ユーザー設定を開く(JSON)\]として、`VS Code`の設定ファイルを開く:
+   ![ユーザー設定](https://i.imgur.com/7NMDX1b.png)
+
+3. 上記の設定をコピーし、設定ファイルを保存する
+
+以上で、`VS Code`に設定を追加できます。
+
 ## さいごに
 
 `VS Code`をプログラミング用エディタとして設定できました。
 後は、プログラミング言語やフレームワークごとの拡張機能をインストールすれば快適なプログラミングができるでしょう。
+
+それでは、Happy Hacking!
 
 ## 参考資料
 
