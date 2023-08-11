@@ -70,7 +70,11 @@
                 "<[^.]*>/",
                 "/js/ig",
                 "/svg/ig",
-                "/PowerShell/ig"
+                "/PowerShell/ig",
+                "/gitignore/ig",
+                "/config/ig",
+                "gibo",
+                "gitattributes"
             ]
         },
         "@proofdict/proofdict": {
