@@ -3,12 +3,12 @@ title: "Education: Racket: `Racket`で\"Hello World\"を出力する"
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "scheme", "helloworld" ]
-published: true
+published: false
 ---
 
 ## はじめに
 
-現在、関数柄言語`Racket'を学習しています。ここでは、学習したことを備忘録的にメモしておきます。
+現在、関数型プログラミング言語`Racket'を学習しています。ここでは、学習したことを備忘録的にメモしておきます。
 
 ### Racketとは
 
