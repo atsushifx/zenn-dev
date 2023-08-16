@@ -70,6 +70,7 @@
                 "<[^.]*>/",
                 "/js/ig",
                 "/svg/ig",
+                "/OSS/ig",
                 "/PowerShell/ig",
                 "/gitignore/ig",
                 "/config/ig",
