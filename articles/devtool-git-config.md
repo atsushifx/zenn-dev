@@ -3,7 +3,7 @@ title: "開発環境構築: Gitの効果的な活用を支援するグローバ�
 emoji: "🔧"
 type: "tech"
 topics: [ "環境構築", "開発環境", "Git", "gitconfig", "SCM" ]
-published: false
+published: true
 ---
 
 ## はじめに
