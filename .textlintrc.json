@@ -76,7 +76,9 @@
                 "/config/ig",
                 "gibo",
                 "gitattributes",
-                "init"
+                "init",
+                "/LSP/ig",
+                "/lang/ig"
             ]
         },
         "@proofdict/proofdict": {
