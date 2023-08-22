@@ -39,7 +39,7 @@ published: false
 #### Webサイト
 
 - [VS Code Extensions](https://marketplace.visualstudio.com/vscode)
-- [Racket lang-server](https://github.com/jeapostrophe/racket-langserver)
+- [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver)
 
 #### ブログ記事
 

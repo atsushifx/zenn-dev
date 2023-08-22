@@ -7,7 +7,7 @@
     "dictionaryDefinitions": [
         {
             "name": "gitTerms",
-            "path": "./.vscode/cspell/gitTerms.dic",
+            "path": "./.vscode/cspell/zennterms.dic",
             "scope": "workspace",
             "addWords": true
         }
