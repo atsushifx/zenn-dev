@@ -22,7 +22,9 @@
         "zenn-Terms",
         "racket-Terms"
     ],
-    "words": [],
+    "words": [
+        "textlint"
+    ],
     "ignoreWords": [
         "aaron",
         "evzen",
