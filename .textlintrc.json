@@ -71,16 +71,13 @@
                 "<[^.]*>/",
                 "/js/ig",
                 "/svg/ig",
-                "/OSS/ig",
                 "/PowerShell/ig",
-                "/gitignore/ig",
                 "/config/ig",
-                "gibo",
-                "gitattributes",
                 "init",
                 "/LSP/ig",
                 "/UI/ig",
-                "/Zenn/ig"
+                "/Zenn/ig",
+                "/winget/ig"
             ]
         },
         "@proofdict/proofdict": {
