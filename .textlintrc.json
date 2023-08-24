@@ -1,6 +1,7 @@
 {
     "plugins": {},
     "filters": {
+        "comments": true,
         "allowlist": {
             "allowlistConfigPaths": [
                 "./.textlint/allowlist.yml"
@@ -70,15 +71,13 @@
                 "<[^.]*>/",
                 "/js/ig",
                 "/svg/ig",
-                "/OSS/ig",
                 "/PowerShell/ig",
-                "/gitignore/ig",
                 "/config/ig",
-                "gibo",
-                "gitattributes",
                 "init",
                 "/LSP/ig",
-                "/lang/ig"
+                "/UI/ig",
+                "/Zenn/ig",
+                "/winget/ig"
             ]
         },
         "@proofdict/proofdict": {
