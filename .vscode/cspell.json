@@ -22,18 +22,18 @@
         "zenn-Terms",
         "racket-Terms"
     ],
-    "words": [
-
-    ],
+    "words": [],
     "ignoreWords": [
-    	"aaron",
-    	"evzen",
-    	"fnando",
-    	"formulahendry",
-    	"ionutvmi",
-    	"oderwat",
-    	"shardulm",
-    	"ymotongpoo"
+        "aaron",
+        "evzen",
+        "fnando",
+        "formulahendry",
+        "ionutvmi",
+        "oderwat",
+        "sdras",
+        "shardulm",
+        "wybitul",
+        "ymotongpoo"
     ],
     "import": []
 }
