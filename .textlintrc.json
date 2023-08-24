@@ -78,7 +78,7 @@
                 "gitattributes",
                 "init",
                 "/LSP/ig",
-                "/lang/ig"
+                "/UI/ig"
             ]
         },
         "@proofdict/proofdict": {

@@ -6,21 +6,34 @@
     "ignorePaths": [],
     "dictionaryDefinitions": [
         {
-            "name": "gitTerms",
-            "path": "./.vscode/cspell/zennterms.dic",
+            "name": "zenn-Terms",
+            "path": "./.vscode/cspell/zenn-terms.dic",
+            "scope": "workspace",
+            "addWords": true
+        },
+        {
+            "name": "racket-Terms",
+            "path": "./.vscode/cspell/racket-terms.dic",
             "scope": "workspace",
             "addWords": true
         }
     ],
     "dictionaries": [
-        "gitTerms"
+        "zenn-Terms",
+        "racket-Terms"
     ],
     "words": [
-        "Creset"
+
     ],
     "ignoreWords": [
-        "dbus",
-        "keyrings"
+    	"aaron",
+    	"evzen",
+    	"fnando",
+    	"formulahendry",
+    	"ionutvmi",
+    	"oderwat",
+    	"shardulm",
+    	"ymotongpoo"
     ],
     "import": []
 }
