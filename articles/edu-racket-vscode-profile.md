@@ -1,5 +1,5 @@
 ---
-title: "Racket: RacketプログラミングのためのVisual Studio Code環境構築"
+title: "RacketプログラミングのためのVisual Studio Code環境構築"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "開発環境","VisualStudioCode", "環境構築"]
@@ -8,19 +8,41 @@ published: false
 
 ## はじめに
 
-この記事では、Racket プログラミング用に Visual Studio Code をセットアップする手順を紹介します。
+この記事では、Racket[^1]プログラミング用に Visual Studio Code[^2] をセットアップする手順を紹介します。
+メジャーなエディタである`Visual Studio Code`に、Racket プログラミング用の環境を構築することで、効率的に Racket のプログラミングができます。
 
-## 1.  Visual Studio Code とは
+[^1]: Racket: 関数型プログラミング言語の一種でシンプルな構文と豊富なライブラリが特徴
+[^2]: `Visual Studio Code`: オープンソースのコードエディタで、拡張性に優れ、主要なプログラミング言語に対応
 
-`Visual Studio Code` (以下、`VS Code`)は、多機能なオープンソースのコードエディタです。主要なプログラミング言語に対応し、ユーザーは必要に応じて拡張機能を導入できます。
+## 1.  セットアップ
 
-`VS Code`は幅広いプログラミング言語向けにカスタマイズされた拡張機能を提供しており、Racket に対する拡張機能も提供しています。
+### 1.1. Racketのインストール
+
+Racket は、コンソール上で:
+
+```powershell
+winget install racket.racket
+```
+
+で、簡単にインストールできます。
+
+インストール先ディレクトリを指定するなどの、詳しいインストール方法は[Windowsに関数型言語'Racket'をインストールする方法](edu-lang-racket-install)を読んでください。
+
+### 1.2 `Visual Studio Code`の初期設定
+
+この記事では、[VS Code でプログラミングするための拡張機能と設定](dev-vscode-progeny)にしたがって`Visual Studio Code`をセットアップしていることとしています。
+
+`Visual Studio Code`をインストールしたばかりの人や拡張機能[^3]についてよくわからないほうは、上記記事を参照してください。
+
+[^3]: 拡張機能: `VS Code`に追加できる機能拡張で、プログラミング言語や作業環境に特化した機能を提供
 
 ## 2. Visual Studio Codeのセットアップ
 
-### 2.1. プロファイルとは
+### 2.1. プロファイルの役割と利点
 
-プロファイルは、異なる作業環境ごとに拡張機能や設定を簡単に切り替えるためのツールです。記事を書くためのプロファイルやプログラミング用のプロファイルといった区別をつけることで、作業効率を向上させることができます。
+プロファイル[^4]は、異なる作業環境ごとに拡張機能や設定を簡単に切り替えるためのツールです。記事を書くためのプロファイルやプログラミング用のプロファイルといった区別をつけることで、作業効率を向上させることができます。
+
+[^4]: プロファイル: 作業環境に名前をつけ拡張機能や設定を保存する機能
 
 ### 2.2. Racket用プロファイルの作成
 
@@ -37,7 +59,7 @@ published: false
     <!-- textlint-enable --->
      ![新しいプロファイル](https://i.imgur.com/vHqth5k.png)
 
-3.プロファイルの作成
+3.プロファイルの作成完了
     プロファイル"racket-programming"が作成される。
 
 以上で、プロファイルの作成は完了です。
@@ -49,8 +71,11 @@ Racket プログラミング用に、以下の拡張機能を追加します。
 
 ### 3.1. Night Owl
 
-Night Owl は、コーディング用のカラーテーマです。
-このテーマは、目に優しい色使いとシンタックスハイライトが特長です。
+Night Owl は、コーディング用のカラーテーマ[^5]です。
+このテーマは、目に優しい色使いとシンタックスハイライト[^6]が特長です。
+
+[^5]: カラーテーマ: コードエディタの色彩をカスタマイズするための設定
+[^6]: シンタックスハイライト: プログラミングの構文をわかりやすくするためにキーワード種別ごとに色分けする機能
 
 ### 3.2. Code Runner
 
@@ -58,17 +83,17 @@ Night Owl は、コーディング用のカラーテーマです。
 
 ### 3.3. Magic Racket
 
-Magic Racket は、Racket 用のコード入力補完やシンタックスハイライトを提供する拡張機能です。詳細については、"[Visual Studio CodeでのRacket LSPプログラミング環境の構築方法](/dev-racket-vscode-magicracket)"を参照してください。
+Magic Racket は、Racket 用のコード入力補完やシンタックスハイライトを提供する拡張機能です。詳細については、"[Visual Studio CodeでのRacket LSPプログラミング環境の構築方法](dev-racket-vscode-magicracket)"を参照してください。
 
 ### 3.4.その他の拡張機能
 
 そのほかにも、プログラミングに有用拡張機能を追加しています。詳細は、"[VS Codeでプログラミングするための拡張機能と設定](dev-vscode-progenv)"をご覧ください。
 
-### 4. Racketプログラミング用の設定
+## 4. Racketプログラミング用の設定
 
 上記で追加した拡張機能について、どのように設定したかを追加します。
 
-### 4.1. Code Runner
+### 4.1. Code Runnerの設定
 
 `Code Runner'には、Racketプログラムを動作させる設定を追加します。
 設定ファイル"settings.json"に、次の設定を追加します:
@@ -76,17 +101,17 @@ Magic Racket は、Racket 用のコード入力補完やシンタックスハイ
 ```json: settings.json
 "code-runner.executorMap": {
   "racket": "racket $fullFileName",
-  "scheme": "racket $fullFiVisual Studio CodeでのRacket LSPプログラミング環境の構築方法leName",
-  "lisp": "racket $fulFileName",
 }
 ```
 
-### 4.2. Magic Racket
+### 4.2. Magic Racketの設定
 
-`racket-langserver`には、特別な設定は設定の必要ありません。
+`Magic Racket`には、特別な設定の必要はありません。ただし、`Racket`用の`LSP`[^7]を設定する必要があります。
 詳細については、[Visual Studio CodeでのRacket LSPプログラミング環境の構築方法](dev-racket-vscode-magicracket)を参照してください。
 
-### 4.3. その他の拡張機能
+[^7]: `LSP (Language Server Protocol): プログラミング言語ごとのコード分析や補完を行うためのプロトコル
+
+### 4.3. その他の拡張機能の設定
 
 そのほかの拡張機能の設定については、"[VS Codeでプログラミングするための拡張機能と設定](dev-vscode-progenv)"を参照してください。
 
@@ -115,7 +140,7 @@ Magic Racket は、Racket 用のコード入力補完やシンタックスハイ
 
 ```
 
-### おわりに
+## おわりに
 
 この記事を通じて、Racket プログラミング用に`Visual Studio Code`をセットアップする方法を解説しました。
 `VS Code`には、ほかにも強力な拡張機能があります。
@@ -124,15 +149,16 @@ Magic Racket は、Racket 用のコード入力補完やシンタックスハイ
 自分に最適な開発環境を構築して、Racket プログラミングの世界をより楽しんでください。
 それでは、Happy Hacking!
 
-### 参考資料
+## 参考資料
 
-#### Webサイト
+### Webサイト
 
 - [VS Code Extensions](https://marketplace.visualstudio.com/vscode)
 - [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver)
 
-#### ブログ記事
+### ブログ記事
 
-- [VS Codeでプログラミングするための拡張機能と設定](https://zenn.dev/atsushifx/articles/dev-vscode-progenv)
+- [Windowsに関数型言語'Racket'をインストールする方法](edu-lang-racket-install)
+- [Racket プログラミング用に Code Runner をインストール・設定する方法](https://zenn.dev/atsushifx/articles/dev-racket-vscode-coderunner)
 - [Visual Studio CodeでのRacket LSPプログラミング環境の構築方法](https://zenn.dev/atsushifx/articles/dev-racket-vscode-magicracket)
-- Racket プログラミング用に Code Runner をインストール・設定する方法](<https://zenn.dev/atsushifx/articles/dev-racket-vscode-coderunner>)
+- [VS Codeでプログラミングするための拡張機能と設定](https://zenn.dev/atsushifx/articles/dev-vscode-progenv)
