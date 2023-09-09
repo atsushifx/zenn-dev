@@ -3,7 +3,7 @@ title: "Racketの起動方法と終了方法"
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket" ]
-published: false
+published: true
 ---
 
 ## はじめに
