@@ -72,12 +72,10 @@
                 "/js/ig",
                 "/svg/ig",
                 "/PowerShell/ig",
-                "/config/ig",
-                "init",
-                "/LSP/ig",
-                "/UI/ig",
-                "/Zenn/ig",
-                "/winget/ig"
+                "/Ctrl/ig",
+                "/Eval/ig",
+                "/REPL/ig",
+                "/EOF/ig"
             ]
         },
         "@proofdict/proofdict": {
