@@ -76,8 +76,12 @@
                 "/Eval/ig",
                 "/REPL/ig",
                 "/EOF/ig",
+                "/cmd/ig",
                 "/subst/ig",
-                "/tmp/ig"
+                "/tmp/ig",
+                "/zdrive/ig",
+                "/bin/ig",
+                "/init/ig"
             ]
         },
         "@proofdict/proofdict": {
