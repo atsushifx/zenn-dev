@@ -81,7 +81,8 @@
                 "/tmp/ig",
                 "/zdrive/ig",
                 "/bin/ig",
-                "/init/ig"
+                "/init/ig",
+                "/xml/ig"
             ]
         },
         "@proofdict/proofdict": {
