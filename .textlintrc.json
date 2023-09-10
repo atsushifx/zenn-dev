@@ -76,7 +76,8 @@
                 "/Eval/ig",
                 "/REPL/ig",
                 "/EOF/ig",
-                "/subst/ig"
+                "/subst/ig",
+                "/tmp/ig"
             ]
         },
         "@proofdict/proofdict": {

@@ -12,6 +12,12 @@
             "addWords": true
         },
         {
+            "name": "hack-Terms",
+            "path": "./.vscode/cspell/hack-terms.dic",
+            "scope": "workspace",
+            "addWords": true
+        },
+        {
             "name": "racket-Terms",
             "path": "./.vscode/cspell/racket-terms.dic",
             "scope": "workspace",
@@ -20,6 +26,7 @@
     ],
     "dictionaries": [
         "zenn-Terms",
+        "hack-Terms",
         "racket-Terms"
     ],
     "words": [
