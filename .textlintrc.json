@@ -82,7 +82,9 @@
                 "/zdrive/ig",
                 "/bin/ig",
                 "/init/ig",
-                "/xml/ig"
+                "/xml/ig",
+                "/car/ig",
+                "/cdr/ig"
             ]
         },
         "@proofdict/proofdict": {
