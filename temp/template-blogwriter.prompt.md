@@ -49,24 +49,24 @@
 """"
 :theme:
 
-- Windows の subst コマンドを使って、作業用に自動的に一時ドライブを作成する方法
+- Racket の Symbol について、ひととおり理解する
 
 """"
 :target:
 
-- Windows 上でプログラミングを行なう ITエンジニア
+- 関数型プログラミングを学習する ITエンジニア
 
 """"
 :goal:
 
-- 一時ドライブを Windows の起動時およびユーザーのログイン時に自動的に作成し、使えるようにする
+- Racket言語で symbol を使ったプログラミングができるようになること)
 
 """"
 :remark:
 
-- <https://learn.Microsoft.com/ja-jp/windows-server/administration/windows-commands/subst>
-- <https://atmarkit.itmedia.co.jp/ait/articles/1506/26/news026.html>
-- <https://learn.microsoft.com/ja-jp/windows/win32/taskschd/about-the-task-scheduler>
+- How to Design Programs: <https://htdp.org>
+- Racket Guide- Symbols: <https://docs.racket-lang.org/guide/symbols.html>
+- Racket Reference - Symbols: <https://docs.racket-lang.org/reference/symbols.html>
 
 """"
 
