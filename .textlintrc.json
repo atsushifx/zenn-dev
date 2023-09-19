@@ -71,6 +71,7 @@
                 "<[^.]*>/",
                 "/js/ig",
                 "/svg/ig",
+                "/[0-9]+\\./ig",
                 "/PowerShell/ig",
                 "/Ctrl/ig",
                 "/Eval/ig",
@@ -82,7 +83,9 @@
                 "/zdrive/ig",
                 "/bin/ig",
                 "/init/ig",
-                "/xml/ig"
+                "/xml/ig",
+                "/car/ig",
+                "/cdr/ig"
             ]
         },
         "@proofdict/proofdict": {
