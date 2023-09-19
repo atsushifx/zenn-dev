@@ -71,6 +71,7 @@
                 "<[^.]*>/",
                 "/js/ig",
                 "/svg/ig",
+                "/[0-9]+\\./ig",
                 "/PowerShell/ig",
                 "/Ctrl/ig",
                 "/Eval/ig",
