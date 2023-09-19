@@ -3,7 +3,7 @@ title: "Education: Racket 言語の基本的なデータ型"
 emoji: "🎾"
 type: "idea"
 topics: ["Racket", "関数型プログラミング", "関数型プログラミング言語", "データ型", ]
-published: false
+published: true
 ---
 
 ## はじめに
