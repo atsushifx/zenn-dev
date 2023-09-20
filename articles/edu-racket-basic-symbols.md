@@ -3,7 +3,7 @@ title: "Racketにおけるシンボルの基本"
 emoji: "🎾"
 type: "idea"
 topics: ["Racket", "識別子",  "シンボル", ]
-published: false
+published: true
 ---
 
 ## はじめに
