@@ -64,7 +64,7 @@
 """"
 :theme:
 
-- Racket言語でプログラミングする方法
+- Racket言語の Symbol について
 
 """"
 :target:
@@ -74,11 +74,13 @@
 """"
 :goal:
 
-- Racket で基本的なプログラミングができるようになる
+- Racket の Symbol を使えるようになる
+-
 
 """"
 remark:
 
+- トップのメタデータについて
 - Happy Hacking は変更しない
 
 """"
