@@ -64,18 +64,17 @@
 """"
 :theme:
 
-- Racket言語の Symbol について
+- Debian の apt の使い方
 
 """"
 :target:
 
-- 関数型プログラミングを学習するエンジニア
+- Windows wsl を使うエンジニア
 
 """"
 :goal:
 
-- Racket の Symbol を使えるようになる
--
+- Debian apt をつかってパッケージを update できる
 
 """"
 remark:

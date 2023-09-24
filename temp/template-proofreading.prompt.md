@@ -43,5 +43,7 @@
 
 :remark:
 
+- [第8章 Debian パッケージ管理ツール](https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html)
+
 """"
 /begin
