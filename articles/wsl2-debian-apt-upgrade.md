@@ -3,7 +3,7 @@ title: "WSLでのDebianのアップグレード方法"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "apt", "パッケージマネージャー" ]
-published: false
+published: true
 ---
 
 ## はじめに
