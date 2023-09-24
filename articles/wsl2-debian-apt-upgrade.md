@@ -8,21 +8,25 @@ published: false
 
 ## はじめに
 
-この記事では、WSL (`Windows Subsystem for Linux`) 上で動く Debian を最新のバージョンにアップグレードする方法を説明します。
-Debian のアップグレードは、セキュリティパッチの適用や新機能の利用を可能にし、システムの安定性とパフォーマンスを向上させます。WSL を利用するエンジニアにとって、この手順は重要です。
+この記事では、WSL (`Windows Subsystem for Linux`) 上の Debian を最新のバージョンにアップグレードする方法を説明します。
+Debian をアップグレードすることで、セキュリティパッチの適用や新機能の利用が可能になり、システムの安定性とパフォーマンスが向上します。
 
 ## 1. パッケージマネージャー `apt` とは
 
-Debian は、パッケージ管理のために`apt` (Advanced Package Tool) というツールを使用しています。
-`apt` を使用することで、Debian は提供するソフトウェアをパッケージとして管理しています。
+Debian では、ソフトウェアのパッケージ管理に apt (`Advanced Package Tool``)[^1] というツールを用いています。
 これにより、ソフトウェアのインストール、アンインストール、バージョンアップなどが容易に行えます。
+
+[^1]: apt (`Advanced Package Tool`): Debian で使用されるパッケージ管理のためのツール
 
 ### 1.1. aptとソースリスト
 
 Debian では、パッケージ管理のために`apt` というツールが使用されています。
-apt では、ソースリストを参照してパッケージの情報を取得しています。
+apt では、ソースリスト[^2]を参照してパッケージの情報を取得しています。
 
-公式のソースリストは`/etc/apt/sources.list`に、その他のミラーのソースリストは`/etc/apt/sources.list.d/`下の`<mirrorname>.list`となります。
+公式のソースリストは`/etc/apt/sources.list`ファイルに格納されます。
+その他のミラーのソースリストは`/etc/apt/sources.list.d/`ディレクトリ内の`<mirrorname>.list`ファイルに格納されます。
+
+[^2]: ソースリスト: パッケージマネージャー`apt`がパッケージの情報を取得するために使用するリスト
 
 ### 1.2. 公式ソースリスト
 
@@ -43,7 +47,7 @@ deb http://ftp.debian.org/debian bookworm-backports main
 
 ### 2.1. cdnミラーの追加
 
-cdn ミラーを追加は、以下の手順で行います。
+cdn[^3]ミラーを追加する手順は、以下の通りです。
 
 1. [`Debian mirrors backed by Fastly CDN`](https://deb.debian.org/)にアクセスして、適切な`source`をコピーします
 
@@ -59,11 +63,13 @@ cdn ミラーを追加は、以下の手順で行います。
 
    ```
 
-以上で、`cdn`ミラーの追加は完了です。
+これで、`cdn`ミラーの追加は完了です。
+
+[^3]: cdn (`Content Delivery Network`): インターネット上のコンテンツを効率的に配信するためのネットワーク
 
 ### 2.2 日本のミラーの追加
 
-日本のミラーの追加は、以下の手順で行います。
+日本のミラーの追加の手順は、以下の通りです。
 
 1. [CDN 対応ミラーの設定](https://www.debian.or.jp/community/push-mirror.html)にアクセスし、ここの `source` をコピーします
 
@@ -124,7 +130,7 @@ sudo apt upgrade -y
 
 実行結果は、次のようになります。
 
-  ``` bash
+ ``` bash
  atsushifx@ys:/etc/apt$ sudo apt upgrade -y
 Reading package lists... Done
 Building dependency tree... Done
@@ -141,16 +147,16 @@ ldconfig: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link
 
 atsushifx@ys:/etc/apt/sources.list.d#
 
-  ```
+ ```
 
-  以上で、Debian のアップグレードは終了です。
+これで、Debian のアップグレードは終了です。
 
 ## おわりに
 
 この記事では、ソースリストをアップデートし`Debian`をアップグレードする方法について説明しました。
 今後、定期的に`Debian`をアップグレードすることで安定して WSL を使うことができます。
 
-これにより、効率的なプログラミング環境が実現できるでしょう。
+このアップグレードにより、より効率的なプログラミング環境が実現でき、快適な開発体験が得られるでしょう。
 それでは、Happy Hacking!
 
 ## 参考資料
