@@ -49,24 +49,23 @@
 """"
 :theme:
 
-- Racket の Symbol について、ひととおり理解する
+- Debian aptを使ってDebianをアップグレードする
 
 """"
 :target:
 
-- 関数型プログラミングを学習する ITエンジニア
+- WindowsユーザでLinuxを使おうとしているエンジニア
 
 """"
 :goal:
 
-- Racket言語で symbol を使ったプログラミングができるようになること)
+- debian aptの設定方法を知る
+- aptの使い方を知って、Linuxをアップグレードする
 
 """"
 :remark:
 
-- How to Design Programs: <https://htdp.org>
-- Racket Guide- Symbols: <https://docs.racket-lang.org/guide/symbols.html>
-- Racket Reference - Symbols: <https://docs.racket-lang.org/reference/symbols.html>
+- Debian パッケージ管理ツール: <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
 
 """"
 

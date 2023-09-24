@@ -85,7 +85,9 @@
                 "/init/ig",
                 "/xml/ig",
                 "/car/ig",
-                "/cdr/ig"
+                "/cdr/ig",
+                "/WSL/ig",
+                "/CDN/ig"
             ]
         },
         "@proofdict/proofdict": {
