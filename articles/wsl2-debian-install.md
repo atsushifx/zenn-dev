@@ -1,96 +1,120 @@
 ---
-title: "WSL2: WSL2 に Debian をインストールする方法"
+title: "Windows WSL2 に Debian をインストールする方法"
 emoji: "📚"
 type: "tech"
 topics: ["wsl", "Linux", "Debian", "インストール"]
-published: true
+published: false
 ---
 
 ## tl;dr
 
-`Windows WSL2`に、`Debian`をインストールするには、
+`Windows WSL2`に`Debian`をインストールするには、`Windows Terminal`で次のコマンドを実行します。
 
 1. `wsl --set-default-version 2`
-
 2. `wsl --install -d Debian`
-
-3. Windows Terminal を立ち上げなおす
-
-で、できます。
+3. `Windows Terminal` を立ち上げなおす
 
 これで`Windows Terminal`から`Debian`が使えるようになります。
 
 ## はじめに
 
-wsl __(Windows Subsystem for Linux)__ には、CLI で使える wsl コマンドがあります。
-ここでは、上記の`wsl`コマンドを使って`Debian`をインストールします。
+この記事では、WSL (`Windows Subsystem for Linux`) を使用して Debian をインストールする方法を紹介します。
+WSL を利用することで、Windows上に Linux 環境を構築できるようになりました。
 
-### wslコマンドでDebianをインストールする
+WSL2 を使うためには、`wsl`コマンドを使用して、WSL上に Linux をインストールする必要があります。
+この記事では、Linux ディストリビューションの 1つである Debian をインストールします。
 
-次の手順で、Debian をインストールします。
+## 1. 規定バージョンの指定
 
-1. wsl コマンドで、kernel バージョンを指定します。
-    コマンドラインで、`wsl --set-default-version 2`を実行します。
+WSL には WSL1 と WSL2 の 2種類がありますが、この記事では WSL2 での設定方法を紹介します。
 
-   ``` PowerShell: Windows Terminal
-   # wsl --set-default-version 2
-   WSL 2 との主な違いについては、https://aka.ms/wsl2
-   を参照してください
-   この操作を正しく終了しました。
+## 1.1. 既定バージョンを指定する
 
+WSL2 を使うため、`wsl --set-default-version`規定のバージョンを指定します。
+
+1. `wsl --set-default-version`コマンドで、カーネルバージョンを指定する
+
+   ```powershell
+   wsl --set-default-version 2
    ```
 
-2. wsl コマンドで、`Debian`をインストールします。
-    コマンドラインで、`wsl --install -d Debian`を実行します。
+2. `wsl --status`で既定のバージョンを確認する
 
-   ``` PowerShell: Windows Terminal
-   # wsl --install -d Debian
+   ```powershell
+   wsl --status
+   ```
+
+   実行結果は、次のようになります。
+
+   ```powershell
+   C: > wsl --status
+   既定のバージョン: 2
+
+   C: >
+   ```
+
+このように`既定のバージョン: 2`と出力されれば、設定は成功です。
+
+## 2. Debianのインストール
+
+WSL にコマンドラインで使える`wsl`コマンドがあります。
+今回は、`wsl`コマンドを使って Debian をインストールします。
+
+## 2.1. wslコマンドでDebianをインストールする
+
+`wsl --install`コマンドを使い Debian をインストールします。
+次の手順で、Debian をインストールします。
+
+1. `wsl --install`コマンドで Debian をインストールする
+
+   ```powershell
+   wsl --install -d Debian
+   ```
+
+   実行結果は、次のようになります。
+
+   ```powershell
+   C: > wsl --install -d Debian
    インストール中: Debian GNU/Linux
    Debian GNU/Linux はインストールされました。
    Debian GNU/Linux を開始しています...
+
    ```
 
-3. `Debian Console`が表示されるので、ユーザーとパスワードを設定します。
-   Console で`<ユーザー名>`と`<パスワード>`を設定します。
+2. UNIX ユーザーを作成する
+   UNIX ユーザー作成のプロンプトが表示されるので、ユーザー名とパスワードをお設定してユーザーを作成する
 
-   ``` bash: Debian Console - Windows Terminal
-   Installing, this may take a few minutes...
+   ```powershell
    Please create a default UNIX user account. The username does not need to match your Windows username.
-   For more information visit: https://aka.ms/wslusers
+   For more information visit: <https://aka.ms/wslusers>
    Enter new UNIX username: atsushifx
-   New password:
-   Retype new password:
-   passwd: password updated successfully
-   Installation successful!
 
-   atsushifx@ys:~$
+   New paaaword:
+   Retype new password:
+
    ```
 
 以上で、`Debian`のインストールは終了です。
+このとき、パスワードを入力しても画面に出力されなので注意してください。
+また、セキュリティのために Windows 用のパスワードとは別のパスワードを使うべきです。
 
-### Windows TerminalにDebianを登録する
+## 3. Windows Terminalの設定
 
-インストールした`Debian`を使うために、`Windows Terminal`に`Debian`を登録します。
+`Windows Terminal`のプロファイルには、Debian が自動的に登録されます。
+`Windows Terminal`を一度閉じ。再度開くと新しいシェルに`Debian`が追加さます。
 
-1. 新しいプロフィールを作成する
-  Windows Terminal の設定を開きます。
-  左のメニューをスクロールすると`+`ボタンが出てくるので、クリックして新しいプロフィールを作成します。
+## おわりに
 
-2. `Debian`を設定する。
-   作成した"新しいプロフィール"の設定項目に Debian を設定します。
-     次の項目を設定します。
+この記事では、Windows WSL2 に Debian をインストールする方法について説明しました。
+WSL2 を利用することで、Windows上に Linux 環境を作成できます。
 
-   | 設定項目        | 設定       |
-   | -- | --- |
-   | プロフィール名 | wsl Debian |
-   | コマンド ライン | `wsl.exe`  |
+これにより、多くの Linux 用ツールやアプリが利用できるようになり、開発の幅が広がります。
+Linux の環境をしっかりと理解し、より高度な技術の習得を目指しましょう。
 
-3. ターミナルで`Debian`を起動する
-  作成したプロフィールで`Debian`を開始します。
+それでは、Happy Hacking!
 
-   ``` bash: Debian Console - Windows Terminal
-   atsushifx@ys:/mnt/c/Users/atsushifx$
+## 参考資料
 
-   ```
+### Webサイト
 
-以上で、`Debian`の開始は終了です。以後は、`Windows Terminal`上で`Debian`を使えます。
+- WSL を使用して Windows に Linux をインストールする方法 : <https://learn.microsoft.com/ja-jp/windows/wsl/install>
