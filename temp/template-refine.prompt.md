@@ -64,7 +64,7 @@
 """"
 :theme:
 
-- Debian の apt の使い方
+- Windows wsl2 に Debian をインストールする
 
 """"
 :target:
@@ -74,13 +74,15 @@
 """"
 :goal:
 
-- Debian apt をつかってパッケージを update できる
+- Windows wsl2 に Debian をインストールする
+- Windows Terminal でインストールした Debian が実行できる
 
 """"
 remark:
 
-- トップのメタデータについて
 - Happy Hacking は変更しない
+- WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
+- とほほの WSL: <https://www.tohoho-web.com/ex/wsl.html>
 
 """"
 /begin

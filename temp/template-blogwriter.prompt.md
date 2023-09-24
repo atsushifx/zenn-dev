@@ -49,18 +49,18 @@
 """"
 :theme:
 
-- Debian aptを使ってDebianをアップグレードする
+- windows wsl に Debian をインストールする
 
 """"
 :target:
 
-- WindowsユーザでLinuxを使おうとしているエンジニア
+- Windows ユーザで Linux を使おうとしているエンジニア
 
 """"
 :goal:
 
-- debian aptの設定方法を知る
-- aptの使い方を知って、Linuxをアップグレードする
+- Windows wsl2 に Debian をインストールする
+- Windows Terminal で Debian が実行できる
 
 """"
 :remark:

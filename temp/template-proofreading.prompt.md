@@ -43,7 +43,8 @@
 
 :remark:
 
-- [第8章 Debian パッケージ管理ツール](https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html)
+- WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
+- とほほの WSL: <https://www.tohoho-web.com/ex/wsl.html>
 
 """"
 /begin
