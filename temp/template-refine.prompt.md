@@ -64,18 +64,17 @@
 """"
 :theme:
 
-- Windows wsl2 に Debian をインストールする
+- Windows に WSL2 環境を構築する
 
 """"
 :target:
 
-- Windows wsl を使うエンジニア
+- Windows を使うエンジニア
 
 """"
 :goal:
 
-- WSL2 に Debian をインストールする
-- Windows Terminal でインストールした Debian が実行できる
+- Windows で wsl コマンドを実行して、WSL 環境を構築する
 
 """"
 remark:

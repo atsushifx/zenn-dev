@@ -2,18 +2,17 @@
 
 - """" ではじまる文章は区切りなので、そこから次の入力を待つ
 - ";"で始まる文章はコメントなので指示として扱わない
-- 最初に、入力バッファー :text を空にする
+- :で始まる英数字は変数として扱う
 
 ## 執筆コマンド
 
-- /begin が入力されたら、バッファー :text の文書を破棄して、新たに入力を待つ
-- /end が入力されたら、バッファー:text への記録を終了し、指示を待つ
-- /write が入力されたら、:text の文書をもとに下記の記述指示にしたがって文章を書く。
+- /begin が入力されたら、バッファー :text を空にして、新たに入力を待つ
+- /end が入力されたら、バッファー:text への記録を終了し、文章を書く
+- /write が入力されたら、:text の文書をもとに下記の記述指示にしたがって文章を書く
 - /exit が入力されたら。すべての指示、記録を消去して新たにチャットをはじめる
 
 以後、/begin まではレビューの指示、コマンドとして解釈する。
 その後、/end が入力されるまで文書の入力を待つ。
-/write コマンドが実行されない限り、記事を書かない。
 
 ## 記述指示
 
@@ -49,7 +48,7 @@
 """"
 :theme:
 
-- windows wsl に Debian をインストールする
+- Windows に WSL 実行環境を構築する方法
 
 """"
 :target:
@@ -59,13 +58,13 @@
 """"
 :goal:
 
-- Windows wsl2 に Debian をインストールする
-- Windows Terminal で Debian が実行できる
+- WindowS に WSL2 実行環境を構築する
 
 """"
 :remark:
 
-- Debian パッケージ管理ツール: <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
+- WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
+- WSL の基本的なコマンド: <https://learn.Microsoft.com/ja-jp/windows/wsl/basic-commands>
 
 """"
 
