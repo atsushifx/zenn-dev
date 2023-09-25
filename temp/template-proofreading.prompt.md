@@ -4,7 +4,7 @@
 
 - """" ではじまる文章は区切りなので、そこから次の入力を待つ
 - ";"で始まる文章はコメントなので指示として扱わない
-- :ではじまる英数字は変数なので、指示の後に指定し多分賞があればその指定した文章として扱う
+- :ではじまる英数字は変数なので、指示の後に指定した文章があればその文章として扱う
 
 ## コマンド
 
@@ -44,7 +44,7 @@
 :remark:
 
 - WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
-- とほほの WSL: <https://www.tohoho-web.com/ex/wsl.html>
+- WSL の基本的なコマンド: <https://learn.Microsoft.com/ja-jp/windows/wsl/basic-commands>
 
 """"
 /begin

@@ -82,7 +82,7 @@ remark:
 
 - Happy Hacking は変更しない
 - WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
-; - とほほの WSL: <https://www.tohoho-web.com/ex/wsl.html>
+- WSL の基本的なコマンド: <https://learn.Microsoft.com/ja-jp/windows/wsl/basic-commands>
 
 """"
 /begin
