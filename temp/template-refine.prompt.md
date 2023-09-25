@@ -74,7 +74,7 @@
 """"
 :goal:
 
-- Windows wsl2 に Debian をインストールする
+- WSL2 に Debian をインストールする
 - Windows Terminal でインストールした Debian が実行できる
 
 """"
@@ -82,7 +82,7 @@ remark:
 
 - Happy Hacking は変更しない
 - WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
-- とほほの WSL: <https://www.tohoho-web.com/ex/wsl.html>
+; - とほほの WSL: <https://www.tohoho-web.com/ex/wsl.html>
 
 """"
 /begin
