@@ -3,7 +3,7 @@ title: "WSL2 に Debian をインストールする方法"
 emoji: "📚"
 type: "tech"
 topics: ["wsl", "Linux", "Debian", "インストール"]
-published: false
+published: true
 ---
 
 ## tl;dr
