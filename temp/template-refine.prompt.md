@@ -64,7 +64,7 @@
 """"
 :theme:
 
-- Windows に WSL2 環境を構築する
+- Windows に WSL 環境を構築する
 
 """"
 :target:
