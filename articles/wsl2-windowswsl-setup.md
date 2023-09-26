@@ -3,7 +3,7 @@ title: "WindowsにWSLをセットアップする手順"
 emoji: "🔧"
 type: "tech"
 topics: ["Windows", "Linux", "WSL", "環境構築", ]
-published: false
+published: true
 ---
 
 ## tl;dr
