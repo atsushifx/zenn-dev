@@ -3,7 +3,7 @@ title: "wsl2: wsl上のDebianを日本語化する"
 emoji: "🐧"
 type: "tech"
 topics: ["wsl", "Debian", "apt", "日本語", "開発環境" ]
-published: true
+published: false
 ---
 
 ## はじめに
@@ -73,30 +73,30 @@ wsl を再起動しないと変更が反映されません。一度、wsl のコ
 
 2. locale の再作成
   `/usr/sbin/locale-gen`コマンドを実行し。`ja_JP.UTF-8`も含めた locale を再作成する。
-  
+
   ``` bash: Debian
   atsushifx@ys:~$ sudo /usr/sbin/locale-gen
   Generating locales (this might take a while)...
   en_US.UTF-8... done
   ja_JP.UTF-8... done
   Generation complete.
-  
+
   atsushifx@ys:~$ /usr/bin/localectl list-locales
   C.UTF-8
   en_US.UTF-8
   ja_JP.UTF-8
-  
+
   atsushifx@ys:~$
   ```
-  
+
   上記のように、locale に`ja_JP.UTF-8`が含まれていれば成功です。
 
 3. デフォルトロケールを日本語に設定
   `update-locale`でデフォルトロケールを変更します。
-  
+
   ``` bash: Debian
   atsushifx@ys:~$ sudo /usr/bin/update-locale LANG=ja_JP.UTF-8
-  
+
   atsushifx@ys:~$
   ```
 
@@ -120,7 +120,7 @@ wsl を再起動しないと変更が反映されません。一度、wsl のコ
   と入力し、`tzdataを設定しています`ダイアログを表示します。
 
 2. `tzdata`の設定
-  
+
   ダイアログで`Asia`、`Tokyo`を選択し、`OK`で設定します。
 
 3. Debian の再起動
