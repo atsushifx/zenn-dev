@@ -43,8 +43,10 @@
 
 :remark:
 
-- WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
 - WSL の基本的なコマンド: <https://learn.Microsoft.com/ja-jp/windows/wsl/basic-commands>
+- WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
+- `systemd` を使用して WSL を使用して Linux サービスを管理する: <https://learn.microsoft.com/ja-jp/windows/wsl/systemd>
+- `systemd`: <https://ja.wikipedia.org/wiki/Systemd>
 
 """"
 /begin

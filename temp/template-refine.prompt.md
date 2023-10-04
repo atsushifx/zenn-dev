@@ -6,7 +6,7 @@
 
 ## レビューコマンド
 
-- /begin が入力されたら、バッファー :text を空にして、次の入力を待つ
+- /begin が入力されたら、バッファー :text を空にして、入力を待つ
 - /end が入力されたら、バッファー :text に入力された文章に対し、指示にしたがってレビューする
 - /exit が入力されたら、バッファー :text およびすべての指示、入力の記録を破棄して新たにチャットを始める
 - /cont  が入力されたら、前の出力の続きを出力する。
@@ -19,6 +19,7 @@
 """"
 :text に入力された文章を下記の指示にしたがってレビューし、結果を :review に保存する。
 
+- mermaid 記法、katex 記法を許容する
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - もとの文章の章立てを尊重する
 - :role でしめされた役割で推敲、校正、校閲をする
@@ -64,7 +65,7 @@
 """"
 :theme:
 
-- Windows に WSL 環境を構築する
+- Windows WSL 環境で`systemd`を使用する
 
 """"
 :target:
@@ -74,14 +75,15 @@
 """"
 :goal:
 
-- Windows で wsl コマンドを実行して、WSL 環境を構築する
+- Windows WSL 環境で `systemd` を使用する
 
 """"
 remark:
 
 - Happy Hacking は変更しない
-- WSL を使用して Windows に Linux をインストールする方法: <https://learn.microsoft.com/ja-jp/windows/wsl/install>
-- WSL の基本的なコマンド: <https://learn.Microsoft.com/ja-jp/windows/wsl/basic-commands>
+- WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
+- `systemd` を使用して WSL を使用して Linux サービスを管理する: <https://learn.microsoft.com/ja-jp/windows/wsl/systemd>
+- `systemd`: <https://ja.wikipedia.org/wiki/Systemd>
 
 """"
 /begin

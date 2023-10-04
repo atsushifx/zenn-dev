@@ -13,14 +13,19 @@ Debian は apt で簡単に日本語環境にできます。
 
 ## Debianの日本語化
 
-### パッケージの導入と日本語の設定
+### パッケージの導入
 
 Debian の apt には日本語環境のためのパッケージがあるので、それをインストールします。
-その後、locale と timezone を日本語環境に書き換えます。
+その後、`locale`と`timezone` を日本語環境に書き換えます。
 
-### 日本語packageの導入
+#### 日本語packageの導入
 
-Debian の日本語パッケージは、`task-japanese`です。次の手順で、日本語パッケージをインストールします。
+Debian の日本語パッケージは、`task-japanese`です。
+次のコマンドを実行して、日本語パッケージをインストールします。
+
+```bash: Debian
+sudo apt install -y task-japanese
+```
 
 ``` bash: debian
 atsushifx@ys:~$ sudo apt install -y task-japanese
@@ -41,37 +46,87 @@ atsushifx@ys:~$
 
 以上で、日本語パッケージのインストールは終了です。
 
-### localeを日本語にする
+### Debianの日本語化
 
-システムの locale を日本語にすると、エラーメッセージが日本語になります。
-次の手順で、 locale を日本語にします。
+#### localeを日本語にする
 
-#### 対話型 (初心者向け)
+システムの`locale` を日本語にすると、エラーメッセージが日本語になります。
+次の手順で、`locale` を日本語にします。
 
-dpkg-reconfigure を使うことで、画面のメニューを見ながら locale を設定できます。
+#### 対話式コマンドによる日本語ロケールの設定
+
+`dpkg-reconfigure` を使うことで、画面のメニューを見ながら`locale`を設定できます。
 次の手順で、locale を日本語にします。
 
-1. dpkg-reconfigure の起動
-  コマンドラインから`dpkg-reconfigure locales`と入力し、locale 設定ダイアログを表示します。
+1. `dpkg-reconfigure` の起動
+   コマンドラインで次のコマンドを実行します。
+
+   ```powershell
+   sudo dpkg-reconfigure locales
+   ```
+
+  `locale` 設定ダイアログが表示されます。」
 
 2. 日本語ロケールの選択
-  `生成するロケール`で `ja_JP.UTF-8 UTF-8`をチェックし、`<OK>`を選択します。
+    ダイアログの`Locales to be generated`項目の`ja_JP.UTF8 UTF-8`をチェックして、\[OK]をクリックします。
 
-3. デフォルトロケールの設定
-  Default Locale に`ja_JP.UTF-8`を選択し、`<Ok>`を選択します。
 
-以上で、default locale が日本語になります。
-wsl を再起動しないと変更が反映されません。一度、wsl のコンソールを閉じ、再度 wsl を起動してください。
+3. デフォルトロケールの選択
+   `Configuring Locales`ダイアログが表示されます。
+    `ja_JP.UTF-8`を選択して、\[OK]をクリックします。
 
-#### コマンド型 (Pro用、スクリプト用)
+4.ロケールの作成
+   ロケールを作成します。コマンドラインは、次のようになります。
+
+   ```bash
+   Generating locales (this might take a while)...
+   en_US.UTF-8... done
+   ja_JP.UTF-8... done
+   Generation complete.
+
+   atsushifx@ys #
+  ```
+
+以上で、`locale`の設定は終了です。
+Debian を再起動すると、メッセージが日本語になっています。
+
+#### コンソールでの日本語ロケールの設定
 
 非対話式のコマンドでも、日本語 locale を設定できます。
 次の手順で、locale を日本語にします。
 
-1. ja_JP.UTF-8 locale を追加
-  `sudo vim /etc/locale.gen\`として`/etc/locale.gen`を編集し、`ja_JP.UTF-8`をコメントアウトから外す。
+1.  日本語ロケールの追加
+   `root`で次のコマンドを実行し、`ja_JP.UTF-8`を locale に追加します。
+
+   ```bash: Debian
+   sed -e 's/# ja_JP.UTF-8/ja_JP.UTF-8/ig' /etc/locale.gen >/etc/locale.gen.new
+   mv /etc/locales.gen.new /etc/locales.gen
+   ```
+
 
 2. locale の再作成
+    次のコマンドを実行して、`ja_JP.UTF-8`も含んだ`locale`を作成します。
+
+   ```bash: Debian
+   /usr/sbin/locale-gen
+   ``
+
+   実行結果は、次のようになります。
+
+   ```bash: Debian
+   Generating locales (this might take a while)...
+     en_US.UTF-8... done
+     ja_JP.UTF-8... done
+   Generation complete.
+
+   root@ys: #
+     ```
+
+
+3.
+  `sudo vim /etc/locale.gen\`として`/etc/locale.gen`を編集し、`ja_JP.UTF-8`をコメントアウトから外す。
+
+1. locale の再作成
   `/usr/sbin/locale-gen`コマンドを実行し。`ja_JP.UTF-8`も含めた locale を再作成する。
 
   ``` bash: Debian
@@ -167,7 +222,7 @@ atsushifx@ys:~$
 ### man の日本語化
 
 Debian には、日本語に翻訳された`manpages`があります。通常の`manpages`パッケージに加え、日本語`manpages`パッケージをインストールして、man を日本語化します。
-次の手順で、manpages を日本語化します。
+次の手順で、manages を日本語化します。
 
 1. `manpages`パッケージのインストール
   次の手順で、`manpages`パッケージをインストールします。

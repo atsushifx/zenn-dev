@@ -67,6 +67,8 @@
         "spelling": {
             "language": "en",
             "skipPatterns": [
+                "/_/g",
+                "/katex/ig",
                 "/https/ig",
                 "<[^.]*>/",
                 "/js/ig",
