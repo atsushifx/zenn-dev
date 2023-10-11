@@ -89,7 +89,8 @@
                 "/car/ig",
                 "/cdr/ig",
                 "/WSL/ig",
-                "/CDN/ig"
+                "/CDN/ig",
+                "/systemd/ig"
             ]
         },
         "@proofdict/proofdict": {
