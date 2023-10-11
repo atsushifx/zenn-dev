@@ -3,7 +3,7 @@ title: "WSL 2 上の Debian で  systemd を有効化する方法"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "wslconf", "systemd"  ]
-published: false
+published: true
 ---
 
 ## tl;dr
