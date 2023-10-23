@@ -5,7 +5,7 @@
 - """" ではじまる文章は区切りなので、そこから次の入力を待つ
 - ";"で始まる文章はコメントなので指示として扱わない
 - :ではじまる英数字は変数なので、指示の後に指定した文章があればその文章として扱う
-- $xx$という文を正しい記法として無視する
+- 文章内の LaTeX 記法は、$で囲まれているかをチェックする
 
 ## コマンド
 
@@ -44,10 +44,9 @@
 
 :remark:
 
-- WSL の基本的なコマンド: <https://learn.Microsoft.com/ja-jp/windows/wsl/basic-commands>
+- \<br />タグは正しく使われているとする
 - WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
-- `systemd` を使用して WSL を使用して Linux サービスを管理する: <https://learn.microsoft.com/ja-jp/windows/wsl/systemd>
-- `systemd`: <https://ja.wikipedia.org/wiki/Systemd>
+- WSL 2 上の Debian で systemd を有効化する方法: <https://zenn.dev/atsushifx/articles/wsl2-debian-config-systemd-enable>
 
 """"
 /begin

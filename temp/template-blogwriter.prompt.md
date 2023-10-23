@@ -48,17 +48,17 @@
 """"
 :theme:
 
-- Windows に WSL で `systemd` を使う方法
+- Windows 上の WSL2  で`wsl.conf`を使って動作をカスタマイズする方法
 
 """"
 :target:
 
-- Windows ユーザで Linux を使おうとしているエンジニア
+- Windows ユーザで WSL を使おうとしているエンジニア
 
 """"
 :goal:
 
-- WindowS に WSL2 実行環境で `systemd` を使えるようにする
+- WindowS に WSL2 実行環境で、自分の動作設定用の`wsl.conf `が作成できる
 
 """"
 :remark:
