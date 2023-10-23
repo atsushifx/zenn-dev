@@ -19,7 +19,6 @@
 """"
 :text に入力された文章を下記の指示にしたがってレビューし、結果を :review に保存する。
 
-- mermaid 記法、katex 記法を許容する
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - もとの文章の章立てを尊重する
 - :role でしめされた役割で推敲、校正、校閲をする
@@ -65,7 +64,7 @@
 """"
 :theme:
 
-- Windows WSL 環境で`systemd`を使用する
+- `wsl.conf`ファイルを設定して、WSL の動作をカスタマイズする
 
 """"
 :target:
@@ -75,15 +74,14 @@
 """"
 :goal:
 
-- Windows WSL 環境で `systemd` を使用する
+- WSL上の Debian 内に`/etc/wsl.conf`ファイルを作成し、WSL の動作をカスタマイズする
 
 """"
 remark:
 
 - Happy Hacking は変更しない
 - WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
-- `systemd` を使用して WSL を使用して Linux サービスを管理する: <https://learn.microsoft.com/ja-jp/windows/wsl/systemd>
-- `systemd`: <https://ja.wikipedia.org/wiki/Systemd>
+- Windows Subsystem for Linux のリリース ノート:<https://learn.microsoft.com/ja-jp/windows/wsl/release-notes>
 
 """"
 /begin
