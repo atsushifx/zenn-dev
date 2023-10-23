@@ -75,7 +75,7 @@ WSL2[^1] は Windows 上で Linux の環境をスムーズに利用できる強�
 
 1. `/etc/wsl.conf`の作成
    WSL2上の Debian で、次のコマンドを実行して`/etc/wsl.conf`を作成する。
-   `/etc/wsl.conf` に[2.2.の節](#22-作成したwslconf)で作成した `wsl.conf` の内容をコピー＆ペーストする
+   `/etc/wsl.conf` に 2.2.の節で作成した `wsl.conf` の内容をコピー＆ペーストする
 
    以下のコマンドを実行してください
 
