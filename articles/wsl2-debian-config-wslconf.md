@@ -3,7 +3,7 @@ title: "wsl.conf を使用して WSL2 の動作をカスタマイズする方法
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL2", "wslconf", "環境設定", "カスタマイズ" ]
-published: false
+published: true
 ---
 
 ## tl;dr
