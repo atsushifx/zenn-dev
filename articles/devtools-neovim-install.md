@@ -8,29 +8,34 @@ published: false
 
 ## はじめに
 
-`Neovim`[^1]は`Vim`から派生した高機能テキストエディタで、とくにその拡張性とモダンな機能が注目されています。
-この記事では、Windows の公式パッケージマネージャー`winget`を使用して`Neovim`をインストールする方法について説明します。
+`Neovim`[^1]は、`Vim`から派生した高機能テキストエディタで、拡張性とモダンな機能が特徴です。
+この記事では、Windows の公式パッケージマネージャー`winget`[^2]を使用して`Neovim`をインストールする方法について説明します。
 
-[^1]: `Neovim`: `Vim`から派生したテキストエディタで、プログラマビリティと拡張性に焦点をあてている
+[^1]: `Neovim`: `Vim`から派生したテキストエディタで、拡張性にモダンな機能が特徴
+[^2]: `winget`: Windows の公式パッケージマネージャー
 
 ## 1. `Neovim`のインストール
 
 ### 1.1. `winget`のオプション
 
-`winget`には`--location`オプションを使用できないパッケージがあり、`Neovim`もその 1 つです。
-その代わり、`--override`オプションを使ってインストーラーのオプションを指定することで、インストール先の変更などを行います。
+`winget`には多くのオプションがありますが、パッケージによっては対応していないものがあります。
+`Neovim`は、`--location`オプションと`--interactive`オプションには対応していません。
+その代わり、`--override`オプションを使ってインストーラーのオプションを指定することで対応できます。
 
 ### 1.2. インストール先ディレクトリの設定
 
-GitHub にある[Neovimのリポジトリ](https://github.com/Neovim/Neovim/blob/master/cmake.packaging/WixPatch.xml)を参照すると、インストール先ディレクトリは`INSTALL_ROOT`[^3]プロパティで指定可能です。
-インストールコマンドでは、"`INSTALL_ROOT`=<インストール先ディレクトリ>"を指定して、希望のインストール先を設定します。
+`Neovim`では、`INSTALL_ROOT`[^3]プロパティを用いてインストール先ディレクトリを指定します。
+GitHub にある[Neovimの`WiX`インストーラーの設定](https://github.com/Neovim/Neovim/blob/master/cmake.packaging/WixPatch.xml)を参照してください。
+
+インストールコマンドでは、"`INSTALL_ROOT`=<インストール先ディレクトリ>"を指定して、インストール先ディレクトリを設定します。
 
 [^3]: `INSTALL_ROOT`: `WiX`インストーラーで、ソフトウェアのインストール先を指定するプロパティ
 
 ### 1.3. 対話形式インストールの設定
 
-`Neovim`のインストーラーは`msiexec`[^4]を使用しており、対話形式インストールが可能です。
-インストール時に`/qf`オプションを指定すると、対話形式でインストールできます。
+`Neovim`のインストーラーは`msiexec`[^4]コマンドを使用しています。
+`msiexec`は Windows 標準のインストーラーであり、GUI の対話形式でのインストールが可能です。
+インストール時に`/qf`オプションを指定すると、`フルUI`でインストールできます。
 
 [^4]: `msiexec`:Windows のインストーラーコンポーネントであり、インストール、保守、アンインストールを行なうためのツール
 
@@ -47,11 +52,11 @@ winget install --id Neovim.Neovim --override "/qf INSTALL_ROOT=c:\bin\nvim"
 
 ## 2. `Neovim`の設定
 
-インストールした`Neovim`をコンソールから実行できるように Windows を設定します。
+インストールした`Neovim`をコンソールから実行できるように Windows の環境変数を設定します。
 
 ### 2.1. "Path"の追加
 
-コンソールから`Neovim`を実行できるように、環境変数"Path"に"`c:\bin\nvim\bin`"を追加します。
+コンソールから`Neovim`を実行できるように、環境変数 "Path" に"`c:\bin\nvim\bin`"を追加します。
 次の手順で、"Path"を設定します。
 
 1. \[環境変数]ダイアログを開く:
@@ -64,7 +69,7 @@ winget install --id Neovim.Neovim --override "/qf INSTALL_ROOT=c:\bin\nvim"
 3. \[環境変数]ダイアログを閉じる:
    \[OK]をクリックして、ダイアログを閉じます。
 
-または、次の PowerShell コマンドで"Path"を追加します:
+または、PowerShell コマンドで"Path"を追加します:
 
 <!-- markdownlint-disable line-length -->
 ```powershell
@@ -72,6 +77,8 @@ winget install --id Neovim.Neovim --override "/qf INSTALL_ROOT=c:\bin\nvim"
 
 ```
 <!-- markdownlint-enable -->
+**注意**
+上記コマンドの実行には、管理者権限が必要です。
 
 以上で、"Path"の追加は終了です。
 PC を再起動すると、変更した"Path"がシェルに反映されます。
@@ -83,7 +90,7 @@ PC を再起動すると、変更した"Path"がシェルに反映されます�
 次の PowerShell コマンドを実行します:
 
 ```powershell
-New-Item -Path C:\bin\nvim\bin\vim.exe -Type SymbolicLink -Value C:\bin\nvim\bin\nvim.exe
+New-Item -Path C:\bin\nvim\bin\vim.exe -ItemType SymbolicLink -Value C:\bin\nvim\bin\nvim.exe
 
 ```
 
