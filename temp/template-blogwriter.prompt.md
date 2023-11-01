@@ -35,7 +35,7 @@
 - mermaid.js, svg を使って図解する
 - 参考にした資料を参考資料としてリンクを出力する
 
-上記の作成した記事を論理的、段階的に 5回レビューし、より質の高い記事に仕上げる。
+上記の作成した記事を論理的、段階的に 5 回レビューし、より質の高い記事に仕上げる。
 レビュー後の記事を日本語のマークダウン文章で出力する。
 
 ## 記述変数
@@ -48,23 +48,23 @@
 """"
 :theme:
 
-- Windows 上の WSL2  で`wsl.conf`を使って動作をカスタマイズする方法
+- winget を使って指定したディレクトリに neovim をインストールする方法
 
 """"
 :target:
 
-- Windows ユーザで WSL を使おうとしているエンジニア
+- Windows ユーザーであるプログラマー
 
 """"
 :goal:
 
-- WindowS に WSL2 実行環境で、自分の動作設定用の`wsl.conf `が作成できる
+- Windows に neovim が正常にインストールされる
 
 """"
 :remark:
 
-- WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
-- `systemd` を使用して WSL を使用して Linux サービスを管理する: <https://learn.microsoft.com/ja-jp/windows/wsl/systemd>
+- nevi 公式サイト: <https://neovim.io/>
+- nevi GitHub リポジトリ: <https://github.com/neovim/neovim>
 
 """"
 

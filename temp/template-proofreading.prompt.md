@@ -21,7 +21,7 @@
 
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - :role にしたがってレビュー、推敲、校正、校閲を担当する
-- Web上の学術情報を参照し、正確な表現になるよう努める
+- Web 上の学術情報を参照し、正確な表現になるよう努める
 - <https//www.weblio.jp/>  を参照し、正しい表現を使う
 - :remark で示された Web を参照し間違っている情報を指摘する
 - 指摘した改善点も校閲する
@@ -43,10 +43,6 @@
 - 技術情報や学術情報に精通したした研究者
 
 :remark:
-
-- \<br />タグは正しく使われているとする
-- WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
-- WSL 2 上の Debian で systemd を有効化する方法: <https://zenn.dev/atsushifx/articles/wsl2-debian-config-systemd-enable>
 
 """"
 /begin
