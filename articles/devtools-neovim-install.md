@@ -3,7 +3,7 @@ title: "wingetを使ったNeovimのインストール"
 emoji: "🍣"
 type: "tech"
 topics: [ "tips", "winget", "Neovim", "開発環境" ]
-published: false
+published: true
 ---
 
 ## はじめに
