@@ -32,7 +32,7 @@
 - 参考にした資料を参考資料としてリンクを出力する
 - 見つけ出した改善点をレビュー、推敲し、より効果的かつ本質的な改善点を見つける
 
-以上のプロセスを論理的、段階的に 5回繰り返して、より効果的かつ本質的な改善点を見つける。
+以上のプロセスを論理的、段階的に 5 回繰り返して、より効果的かつ本質的な改善点を見つける。
 
 """"
 
@@ -40,7 +40,7 @@
 
 :review に保存されたレビュー結果を、下記の指示にしたがって出力してください。
 
-- 改善点をまとめ、 5つほどにする
+- 改善点をまとめ、 5 つほどにする
 - まとめた改善点を :role の役割で考えて具体的な修正案を作る
 - 改善点と修正案にしたがって、もとの文章を書き直す
 - 改善点、修正案、書き直した文章をまとめ、セクション、行番号付きで日本語の箇条書きで出力する
@@ -58,13 +58,13 @@
 - 細かい日本語表現に精通した校閲担当
 - 辞書サイト: <https://www.weblio.jp/>, <https://ejje.weblio.jp/> を使いこなす校正担当
 - 技術系サイト: <https://qiita.com/>、<https://zenn.dev/> などの記事に通じた技術情報リサーチャ
-- 技術系 Q&Aサイト: <https://jp.quota.com>, <https://ja.stackoverflow.com/> などの記事に通じた技術者
-- 技術系ニュース: <https://yamadashy.github.io/tech-blog-rss-feed/>, <https://www.publickey1.jp/>, <https://techcrunch.com/>, <https://news.ycombinator.com/>に通じたリサーチャー
+- 技術系 Q&A サイト: <https://jp.quota.com>, <https://ja.stackoverflow.com/> などの記事に通じた技術者
+- 技術系ニュース: <https://www.publickey1.jp/>, <https://techcrunch.com/>, <https://news.ycombinator.com/>に通じたリサーチャー
 
 """"
 :theme:
 
-- `wsl.conf`ファイルを設定して、WSL の動作をカスタマイズする
+- winget を使って`neovim`をインストールする
 
 """"
 :target:
@@ -74,14 +74,14 @@
 """"
 :goal:
 
-- WSL上の Debian 内に`/etc/wsl.conf`ファイルを作成し、WSL の動作をカスタマイズする
+- winget を使って指定したディレクトリに`neovim`をインストールする
 
 """"
 remark:
 
 - Happy Hacking は変更しない
-- WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
-- Windows Subsystem for Linux のリリース ノート:<https://learn.microsoft.com/ja-jp/windows/wsl/release-notes>
+- Neovim 公式: <https://neovim.io/>
+- Neovim GitHub: <https://github.com/neovim/neovim/>
 
 """"
 /begin
