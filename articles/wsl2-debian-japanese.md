@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: "WSLのDebianを日本語化する方法"
+=======
+title: "WSL上のDebianを日本語化する方法"
+>>>>>>> af77db2 (add: Debianの再起動を追加)
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "apt", "日本語", "開発環境" ]
@@ -8,6 +12,7 @@ published: false
 
 ## はじめに
 
+<<<<<<< HEAD
 `WSL`$_{(Windows Subsystem for Linux)}$ は Windows 上でインストールした Linux ディストリビューションを実行する環境です。
 `WSL`の Debian は実機上の Debian と同じように使えますが、デフォルトでは日本語が使えません。
 この記事では、`WSL`上の Debian`を日本語化して、日本語による開発を容易にします。
@@ -18,6 +23,18 @@ published: false
 
 - **WSL $_{(Windows Subsystem for Linux)}$**:
   `Windows Subsystem for Linux`の略で、Windows 上で Linux ディストリビューションを実行する環境
+=======
+`WSL` $_{(Windows Subsystem for Linux)}$は Windows 上でインストールした Linux ディストリビューションを実行する環境です。
+`WSL`の Debian は実機上の Debian と同じように使えますが、デフォルトでは日本語が使えません。
+この記事では、`WSL`上の Debian`を日本語化して、日本語による開発を容易にします。
+
+あわせて、Debian のデフォルトロケールを日本語にして、Debian の使い勝手をよくします。
+
+## 重要な技術用語
+
+- WSL $_{(Windows Subsystem for Linux)}$:
+  Windows 上で Linux を動かすための環境
+>>>>>>> af77db2 (add: Debianの再起動を追加)
 
 - **Debian**:
   WSL 用に提供されている Linux ディストリビューションの 1 つ
@@ -25,11 +42,19 @@ published: false
 - **`locale`**:
   言語、地域設定を管理するためのシステムコンポーネント
 
+<<<<<<< HEAD
 - **`timeZone`**:
   地理的な位置にもとづいて時間を設定するもの
 
 - **`apt`**:
   Linux ディストリビューション `Debian`で使われているパッケージ管理ツール
+=======
+- `timeZone`
+  タイムゾーンは、地理的な位置にもとづいて時間を設定するもの
+
+- `apt`
+  Linux ディストリビューション `Debian`で使われているパッケージマネージャー
+>>>>>>> af77db2 (add: Debianの再起動を追加)
 
 ## 1. Debianの日本語化の手順
 
@@ -45,7 +70,13 @@ Debian の日本語化は次の手順で行います。
 
 ## 2. 日本語パッケージの導入
 
+<<<<<<< HEAD
 ### 2.1. 日本語パッケージを導入する
+=======
+以下の手順で、Debian を日本語化します。
+
+### 2.1. 日本語パッケージの導入手順
+>>>>>>> af77db2 (add: Debianの再起動を追加)
 
 次のコマンドを実行して、日本語パッケージをインストールします。
 
@@ -76,12 +107,19 @@ atsushifx@ys:~$
 
 ### Debianの日本語化
 
+<<<<<<< HEAD
 ### 3.1. ロケールを日本語にする手順
+=======
+### 3.1. `locale`を日本語にする手順
+>>>>>>> af77db2 (add: Debianの再起動を追加)
 
 Debian の`locale` を日本語にして、Debian が出力するメッセージを日本語化します。
 次の手順で、`locale` を日本語にします。
 
-#### 日本語ロケールの設定 (対話式)
+#### 日本語ロケールの設定手順 (対話式)
+
+`dpkg-reconfigure` を使って、日本語ロケールを設定します。
+これにより、Debian がメッセージなどを日本語で出力するようになります。
 
 次の手順で、locale を日本語にします。
 
@@ -92,11 +130,11 @@ Debian の`locale` を日本語にして、Debian が出力するメッセージ
    sudo dpkg-reconfigure locales
    ```
 
-   ![locales](https://i.imgur.com/fVyJZ74.png)
+   ![localesダイアログ](https://i.imgur.com/fVyJZ74.png)
 
 2. 日本語ロケールの選択
   ダイアログの`Locales to be generated`項目の`ja_JP.UTF8 UTF-8`をチェックして、\[OK]をクリックします。
-   ![日本語locales](https://i.imgur.com/HMVJETO.png)
+   ![`Locales to be generated`ダイアログ](https://i.imgur.com/HMVJETO.png)
 
 3. デフォルトロケールの選択
    `Configuring Locales`ダイアログが表示されます。
@@ -124,7 +162,6 @@ Debian を再起動すると、メッセージが日本語になっています�
 コマンドラインからの操作でも、日本語ロケールを設定できます。
 この場合は、ロケール設定ファイル`/etc/locale.gen`ファイルに日本語ロケールを追加後、ロケールを再度作成します。
 
-非対話式のコマンドでも、日本語`locale`を設定できます。
 次の手順で、`locale`を日本語にします。
 
 1.  日本語ロケールの追加
@@ -165,7 +202,7 @@ Debian を再起動すると、メッセージが日本語になっています�
    /usr/bin/update-locale LANG=ja_JP.UTF-8
    ```
 
-以上で、日本語`locale`の設定は終了です。
+以上で、日本語ロケールの設定は終了です。
 Debian を再起動すると、メッセージなどが日本語になります。
 
 ### 3.2. `timeZone`の設定
@@ -174,7 +211,7 @@ Debian を再起動すると、メッセージなどが日本語になります�
 
 #### `timeZone`の設定手順 (対話式)
 
-次の手順で、`TimeZone`を設定します。
+次の手順で、`timeZone`を設定します。
 
 1. `dpkg-reconfigure`コマンドを起動する
   bash から、次のコマンドを実行します。
@@ -187,7 +224,7 @@ Debian を再起動すると、メッセージなどが日本語になります�
 
 2. `tzdata`の設定
 
-   ![TimeZone](https://i.imgur.com/z5Fmt0R.png)
+   ![timeZone](https://i.imgur.com/z5Fmt0R.png)
 
 以上で、`timeZone`が日本になります。
 
@@ -204,9 +241,12 @@ Debian を再起動すると、メッセージなどが日本語になります�
 ``` bash
 atsushifx@ys:~$ sudo rm /etc/localtime
 
+<<<<<<< HEAD
 atsushifx@ys:~$
 ```
 
+=======
+>>>>>>> af77db2 (add: Debianの再起動を追加)
 2. 新`timeZone`の設定
    `Asia/Tokyo`の`timeZone`ファイルを`/etc/localtime`にリンクします
 
