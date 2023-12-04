@@ -1,6 +1,12 @@
 {
     "plugins": {},
-    "filters": {},
+    "filters": {
+        "allowlist": {
+            "allowlistConfigPaths": [
+                ".textlint/allowlist.yml"
+            ]
+        }
+    },
     "rules": {
         "preset-ja-engineering-paper": {
             "prh": false,
@@ -57,10 +63,6 @@
             "language": "en",
             "skipPatterns": [
                 "_",
-<<<<<<< HEAD
-                "/tl;dr/ig",
-=======
->>>>>>> af77db2 (add: Debianの再起動を追加)
                 "/https/ig",
                 "/js/ig",
                 "/svg/ig",
