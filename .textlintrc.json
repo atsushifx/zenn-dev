@@ -56,6 +56,7 @@
         "spelling": {
             "language": "en",
             "skipPatterns": [
+                "_",
                 "/tl;dr/ig",
                 "/https/ig",
                 "/js/ig",
@@ -73,11 +74,7 @@
                 "/techcrunch/ig",
                 "/ycombinator/ig",
                 "/publickey1/ig",
-                "/PowerShell/ig",
-                "/github/ig",
-                "/winget/ig",
-                "/neovim/ig",
-                "/io/ig"
+                "/PowerShell/ig"
             ]
         },
         "@proofdict/proofdict": {
