@@ -9,7 +9,9 @@ published: false
 ## はじめに
 
 この記事では、**Windows Subsystem for Linux (以下、WSL)**上の Debian を日本語化する方法について解説します。
-Debian に日本語環境を導入し、日本語ロケールを追加した後、デフォルトロケールを日本語に設定してエラーメッセージなどが日本語で表示されるようにする方法を説明します。
+Debian に日本語環境を導入し、日本語ロケールを追加した後、デフォルトロケールを日本語に設定します。
+
+これにより、Debian はエラーメッセージなどを日本語で出力するようになり、開発効率が向上します。
 
 ## 重要な技術用語
 
@@ -35,12 +37,12 @@ Debian に日本語環境を導入し、日本語ロケールを追加した後�
 
 WSL上の Debian を日本語化する具体的な手順は、次のとおりです。
 
-1. `apt`で Debian を日本語対応にするパッケージ`task-japanese`をインストールする
-2. 日本語`locale`を追加し、`デフォルトロケール`を日本語である`ja_JP.UTF-8`に設定する
-3. `timeZone`を`Asia/Tokyo` (日本時間)に設定する
-4. Debian を再起動する
+1. `apt`で Debian を日本語対応にするパッケージ`task-japanese`をインストール
+2. 日本語`locale`を追加し、`デフォルトロケール`を日本語である`ja_JP.UTF-8`に設定
+3. `timeZone`を`Asia/Tokyo` (日本時間)に設定
+4. Debian を再起動
 
-以上で、Debian が日本語化されます。
+以上の手順で、Debian が日本語化されます。
 
 ## 2. 日本語パッケージの導入
 
@@ -92,8 +94,7 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 
 #### 日本語`locale`の設定 (対話式)
 
-`locale`の設定には、`dpkg-reconfigure`というパッケージ設定ツールを使用します。
-次の手順で、`locale`を日本語にします。
+次の手順で、`locale`を日本語に設定します。
 
 1. `dpkg-reconfigure` の起動:
    コマンドラインで次のコマンドを実行します。
@@ -176,8 +177,7 @@ Debian を日本語環境にするため、`timeZone`を`Asia/Tokyo (JST)`に設
 
 #### `timeZone`の設定 (対話式)
 
-`dpkg-reconfigure`コマンドで`TUI`型式による設定が行えます。
-次の手順で、`timeZone`を`Asia/Tokyo`に設定します。
+次の手順で、`timeZone`を`Asia/Tokyo`(日本標準時) に設定します。
 
 1. `dpkg-reconfigure`の起動:
   コマンドラインで、次のコマンドを実行します。
