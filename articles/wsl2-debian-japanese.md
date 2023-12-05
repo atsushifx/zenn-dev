@@ -1,5 +1,5 @@
 ---
-title: "WSLのDebianを日本語化する方法"
+title: "WSL上のDebianを日本語化する方法"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "apt", "日本語", "開発環境" ]
@@ -8,32 +8,32 @@ published: false
 
 ## はじめに
 
-この記事では、**Windows Subsystem for Linux (以下、WSL)**上の Debian に日本語環境を設定する方法を解説します。
-Debian に日本語環境を導入し、日本語でメッセージなどを表示させる方法をステップバイステップで解説します。
+この記事では、**Windows Subsystem for Linux (以下、WSL)**上の Debian を日本語化する方法について解説します。
+Debian に日本語環境を導入し、日本語ロケールを追加した後、デフォルトロケールを日本語に設定してエラーメッセージなどが日本語で表示されるようにする方法を説明します。
 
 ## 重要な技術用語
 
 - **Windows Subsystem for Linux (WSL)**:
-  Windows 上で Linux 環境を動作させるためのサブシステム
+  Windows 上で Linux の実行環境を提供する互換性レイヤー
 
 - **Debian**:
-  フリーでオープンな開発が行われている Linux ディストリビューションの 1つ
+  自由ソフトウェアとして開発され、オープンなモデルを採用した Linux ディストリビューションの 1つ
 
-- **`locale`**:
-  コンピューター上で用いられる言語、国や地域、文字コードなどのユーザーインターフェイスやデータフォーマットを管理するコンポーネント
+- **`locale`** (ロケール):
+  特定地域の言語、通貨、時間や日付フォーマットなどの環境設定を抽象化したもの
 
 - **デフォルトロケール**
-  `locale`で指定された地域のうち、現在の地域を指定するロケール
+  システムの動作を規定する標準的なパラメーターの一覧を提供する`locale`
 
 - **`timeZone`** (タイムゾーン):
   地球上の各地域のローカル標準時間を定義するための区分
 
 - **`apt`**:
-  Linux ディストリビューション `Debian`で使われているパッケージ管理ツールで、これをつかってソフトウェアのインストール、アップデート、リムーブなどを行なう
+  `Debian`および派生ディストリビューションで使われているパッケージ管理システム。ソフトウェアのインストール、アップデート、削除などを行なえる
 
 ## 1. Debianの日本語化の手順
 
-WSL上の Debian を日本語環境に設定し、日本語で利用可能にするための詳細な手順は次のとおりです。
+WSL上の Debian を日本語化する具体的な手順は、次のとおりです。
 
 1. `apt`で Debian を日本語対応にするパッケージ`task-japanese`をインストールする
 2. 日本語`locale`を追加し、`デフォルトロケール`を日本語である`ja_JP.UTF-8`に設定する
@@ -44,13 +44,12 @@ WSL上の Debian を日本語環境に設定し、日本語で利用可能にす
 
 ## 2. 日本語パッケージの導入
 
-Debian には、日本語環境に対応するためのツール、フォントなどをまとめたパッケージ`task-japanese`があります。
-Debian に`task-japanese`をインストールする手順を説明します。
+Debian には、日本語環境への対応のためのツールとフォントを集めたパッケージ`task-japanese`があります。
 
 ### 2.1 日本語パッケージを導入する
 
 次のコマンドを実行して、日本語パッケージ`task-japanese`をインストールします。
-これにより、日本語表示に必要尾なフォントや日本語に対応したユーティリティがインストールされます。
+これにより、日本語表示に必要なフォントや日本語に対応したユーティリティがインストールされます。
 
 ```bash:
 sudo apt install -y task-japanese
@@ -75,27 +74,28 @@ ldconfig: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link
 atsushifx@ys:~$
 ```
 
-**注意**:
-実行結果に、`ldconfig: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`というメッセージが表示されます。これは Debian の日本語化には影響ありません。
+以上で、日本語パッケージのインストールは完了です。
 
-以上で、日本語パッケージのインストールは終了です。
+### 3. Debianの日本語設定
 
-### 3. Debianの日本語化
+Debian を日本語化するには 2つのステップが必要です。
 
-Debian を日本語化するには、まず「`locale`を日本語」にし、次に「タイムゾーンを`Asia/Tokyo`(JST)」にする必要があります。
-このセクションでは、日本語ロケールの設定方法とタイムゾーンの設定方法を説明します。
+1. デフォルトロケールを日本語に設定すること
+2. `timeZone`を`Asia/Tokyo` (`JST`)に設定すること
 
-### 3.1 日本語`locale`の追加
+です。
+このセクションでは、上記 2つの設定方法を説明します。
 
-Debian に日本語`locale`を追加します、その語`デフォルトロケール`を日本語の`ja_JP.UTF-8`にすると、日本語のシステムメッセージ、エラーメッセージを主力します。
+### 3.1 日本語`locale`の設定
+
+Debian に日本語`locale`を追加します、その語`デフォルトロケール`を日本語の`ja_JP.UTF-8`にします。
 
 #### 日本語`locale`の設定 (対話式)
 
-`dpkg-reconfigure`はパッケージの設定を`TUI`で行なうツールです。このツールを使うことで、`locale`の設定をメニューから対話形式で行えます。
-
+`locale`の設定には、`dpkg-reconfigure`というパッケージ設定ツールを使用します。
 次の手順で、`locale`を日本語にします。
 
-1. `dpkg-reconfigure` の起動
+1. `dpkg-reconfigure` の起動:
    コマンドラインで次のコマンドを実行します。
 
    ```bash:
@@ -104,17 +104,17 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 
    ![localesダイアログ](https://i.imgur.com/fVyJZ74.png)
 
-2. 日本語ロケールの選択
+2. 日本語ロケールの選択:
   ダイアログの`Locales to be generated`項目の`ja_JP.UTF8 UTF-8`をチェックして、\[OK]をクリックします。
    ![`Locales to be generated`ダイアログ](https://i.imgur.com/HMVJETO.png)
 
-3. デフォルトロケールの選択
+3. デフォルトロケールの選択:
    `Configuring Locales`ダイアログが表示されます。
     `ja_JP.UTF-8`を選択して、\[OK]をクリックします。
 
    ![`Configuring Locales`ダイアログ](https://i.imgur.com/WOg7MF3.png)
 
-4. ロケールの作成
+4. ロケールの作成:
    `dpkg-reconfigure`が`locale`を作成します。
    以下のように、`ja_JP.UTF-8`が追加されていれば設定成功です。
 
@@ -130,11 +130,12 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 #### 日本語`locale`の設定 (コマンドライン)
 
 コマンドラインからの操作で、日本語`locale`を設定できます。
-この場合は、ロケール設定ファイル`/etc/locale.gen`ファイルに日本語ロケールを追加後、ロケールを再度作成します。
+この場合は、ロケール設定ファイル`/etc/locale.gen`ファイルに日本語ロケールを追加します。
+その後、ロケールを再度作成します。
 
 次の手順で、`locale`を日本語にします。
 
-1. 日本語ロケールの追加
+1. 日本語ロケールの追加:
    `root`で次のコマンドを実行し、`ja_JP.UTF-8`を locale に追加します。
 
    ```bash:
@@ -142,14 +143,14 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
    mv /etc/locale.gen.new /etc/locale.gen
    ```
 
-2. locale の再作成
-   `root`で次のコマンドを実行して、`ja_JP.UTF-8`も含んだ`locale`を作成します。
+2. locale の再作成:
+   `root`で次のコマンドを実行して、`ja_JP.UTF-8`を含んだ`locale`を作成します。
 
    ```bash:
    /usr/sbin/locale-gen
    ```
 
-   次のように、`ja_JP.UTF-8`が表示されていれば、設定成功です
+   実行結果は、次のようになります:
 
    ```bash:
    Generating locales (this might take a while)...
@@ -158,8 +159,10 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
    Generation complete.
    ```
 
-3. デフォルトロケールを日本語に設定
-  `update-locale`でデフォルトロケールを変更します。
+   上記のように`locale`に`ja_JP.UTF-8`が含まれていれば、日本語`locale`が追加されています。
+
+3. デフォルトロケールを日本語に設定:
+   `update-locale`でデフォルトロケールを変更します。
 
    ```bash:
    /usr/bin/update-locale LANG=ja_JP.UTF-8
@@ -169,15 +172,15 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 
 ### 3.2 `timeZone`の設定
 
-`timeZone`を日本時間に設定します。対話式のものとコマンドの使用によるものの 2種類の方法があります。
+Debian を日本語環境にするため、`timeZone`を`Asia/Tokyo (JST)`に設定します。
 
-#### `timeZone`の設定手順 (対話式)
+#### `timeZone`の設定 (対話式)
 
 `dpkg-reconfigure`コマンドで`TUI`型式による設定が行えます。
-次の手順で、`timeZone`を設定します。
+次の手順で、`timeZone`を`Asia/Tokyo`に設定します。
 
-1. `dpkg-reconfigure`の起動
-  bash から、次のコマンドを実行します:
+1. `dpkg-reconfigure`の起動:
+  コマンドラインで、次のコマンドを実行します。
 
    ```bash:
    sudo /usr/sbin/dpkg-reconfigure tzdata
@@ -185,8 +188,8 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 
    ![タイムゾーン設定ダイアログ](https://i.imgur.com/DbvibFq.png)
 
-2. `tzdata`の設定
-   `timeZone`で`Asia`,`Tokyo`を選択します:
+2. `tzdata`の設定:
+   `timeZone`で`Asia`,`Tokyo`を選択します
 
    ![タイムゾーン設定ダイアログ](https://i.imgur.com/z5Fmt0R.png)
 
@@ -199,21 +202,21 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 
 次の手順で、timeZone を設定します。
 
-1. 旧`timeZone`の削除
+1. 旧`timeZone`の削除:
    旧`timeZone`ファイル`/etc/localtime`を削除します
 
    ```bash:
    sudo rm -f /etc/localtime
    ```
 
-2. 新`timeZone`の設定
+2. 新`timeZone`の設定:
    `Asia/Tokyo`の`timeZone`ファイルを`/etc/localtime`にリンクします
 
    ```bash:
    sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
    ```
 
-3. `timeZone`の確認
+3. `timeZone`の確認:
    `date`コマンドを実行し、日時が`JST`になっているかを確認します。
 
    ```bash:
@@ -246,12 +249,15 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 3. Debian の起動
    Debian コンソールを起動します。日本語化した Debian が起動します
 
-以上で、Debian の再起動は終了です。
+以上で、Debian の再起動が終了しました。
+再起動により、設定した`locale`と`timeZone`がシステムに反映されます。
 
 ## おわりに
 
-Debian を日本語対応にすることで、日本語を使ったアプリケーションが開発可能になります。
-メッセージが日本語になることで、開発の効率が上がるでしょう。
+これで WSL上の Debian を日本語化できました。
+これにより、メッセージなどが日本語になり開発効率が向上します。
 
-日本語化した Debian を引き続き活用して、効率的に開発を進めましょう。
+それだけでなく、日本語を扱うアプリケーションも開発できるようになりました。
+
+日本語化した Debian を活用し、効率的なプログラミングをすすめてください。
 それでは、Happy Hacking!

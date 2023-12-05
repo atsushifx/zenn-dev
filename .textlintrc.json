@@ -1,6 +1,7 @@
 {
     "plugins": {},
     "filters": {
+        "comments": true,
         "allowlist": {
             "allowlistConfigPaths": [
                 ".textlint/allowlist.yml"
