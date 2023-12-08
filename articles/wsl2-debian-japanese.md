@@ -3,7 +3,7 @@ title: "WSL上のDebianを日本語化する方法"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "apt", "日本語", "開発環境" ]
-published: false
+published: true
 ---
 
 ## はじめに
