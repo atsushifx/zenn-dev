@@ -80,7 +80,8 @@
                 "/techcrunch/ig",
                 "/ycombinator/ig",
                 "/publickey1/ig",
-                "/PowerShell/ig"
+                "/PowerShell/ig",
+                'tzdata'
             ]
         },
         "@proofdict/proofdict": {
