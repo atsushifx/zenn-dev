@@ -21,13 +21,13 @@ Debian に日本語環境を導入し、日本語ロケールを追加した後�
 - **Debian**:
   自由ソフトウェアとして開発され、オープンなモデルを採用した Linux ディストリビューションの 1つ
 
-- **`locale`** (ロケール):
+- **ロケール** (`locale`):
   システムにおける特定地域の言語や、時間や日付の表示フォーマットなどの環境設定を表すもの
 
 - **デフォルトロケール**
   システム全体で使用されるデフォルトの`locale`
 
-- **`timeZone`** (タイムゾーン):
+- **タイムゾーン** (`timeZone`):
   地球上の各地域のローカル標準時間を定義するための区分
 
 - **`apt`**:
@@ -38,8 +38,8 @@ Debian に日本語環境を導入し、日本語ロケールを追加した後�
 `WSL`上の `Debian` を日本語化する具体的な手順は、次のとおりです。
 
 1. `apt`で Debian を日本語対応にするパッケージ`task-japanese`をインストール
-2. 日本語`locale`を追加し、`デフォルトロケール`を日本語である`ja_JP.UTF-8`に設定
-3. `timeZone`を`Asia/Tokyo` (日本時間)に設定
+2. 日本語ロケールを追加し、`デフォルトロケール`を日本語である`ja_JP.UTF-8`に設定
+3. タイムゾーンを`Asia/Tokyo` (日本時間)に設定
 4. Debian を再起動
 
 以上の手順で、Debian が日本語化されます。
@@ -89,13 +89,13 @@ Debian を日本語化するには 2つのステップが必要です。
 です。
 このセクションでは、上記 2つの設定方法を説明します。
 
-### 3.1 日本語`locale`の設定
+### 3.1 日本語ロケールの設定
 
-Debian に日本語`locale`を追加します、その語`デフォルトロケール`を日本語の`ja_JP.UTF-8`にします。
+Debian に日本語ロケールを追加します、その語`デフォルトロケール`を日本語(`ja_JP.UTF-8`)にします。
 
-#### 日本語`locale`の設定 (対話式)
+#### 日本語ロケールの設定 (対話式)
 
-次の手順で、`locale`を日本語に設定します。
+次の手順で、ロケールを日本語に設定します。
 
 1. `dpkg-reconfigure` の起動:
    コマンドラインで次のコマンドを実行します。
@@ -127,28 +127,28 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
    Generation complete.
    ```
 
-以上で、`locale`の設定は完了です。
+以上で、日本語ロケールの設定は完了です。
 
-#### 日本語`locale`の設定 (コマンドライン)
+#### 日本語ロケールの設定 (コマンドライン)
 
-コマンドラインからの操作で、日本語`locale`を設定できます。
+コマンドラインからの操作で、日本語ロケールを設定できます。
 こちらの操作は、シェルスクリプト内で自動的に日本語かをしたいときに使用できます。
 
 設定方法は、ロケール設定ファイル`/etc/locale.gen`ファイルに日本語ロケールを追加します。
 その後、ロケールを再度作成します。
 
-次の手順で、`locale`を日本語にします。
+次の手順で、日本語ロケールを設定します。
 
 1. 日本語ロケールの追加:
-   `root`で次のコマンドを実行し、`ja_JP.UTF-8`を locale に追加します。
+   `root`で次のコマンドを実行し、`ja_JP.UTF-8`をロケールに追加します。
 
    ```bash:
    sed -e 's/# ja_JP.UTF-8/ja_JP.UTF-8/ig' /etc/locale.gen >/etc/locale.gen.new
    mv /etc/locale.gen.new /etc/locale.gen
    ```
 
-2. locale の再作成:
-   `root`で次のコマンドを実行して、`ja_JP.UTF-8`を含んだ`locale`を作成します。
+2. ロケールの再作成:
+   `root`で次のコマンドを実行して、`ja_JP.UTF-8`を含んだロケールを作成します。
 
    ```bash:
    /usr/sbin/locale-gen
@@ -163,9 +163,9 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
    Generation complete.
    ```
 
-   上記のように`locale`に`ja_JP.UTF-8`が含まれていれば、日本語`locale`が追加されています。
+   上記のようにロケールに`ja_JP.UTF-8`が含まれていれば、日本語ロケールが追加されています。
 
-3. デフォルトロケールを日本語に設定:
+3. デフォルトロケールを日本語ロケールに設定:
    `update-locale`でデフォルトロケールを変更します。
 
    ```bash:
@@ -174,13 +174,13 @@ Debian に日本語`locale`を追加します、その語`デフォルトロケ�
 
 以上で、日本語ロケールの設定は完了です。
 
-### 3.2 `timeZone`の設定
+### 3.2 タイムゾーンの設定
 
-Debian を日本語環境にするため、`timeZone`を`Asia/Tokyo (JST)`に設定します。
+Debian を日本語環境にするため、タイムゾーンを`Asia/Tokyo (JST)`に設定します。
 
-#### `timeZone`の設定 (対話式)
+#### タイムゾーンの設定 (対話式)
 
-次の手順で、`timeZone`を`Asia/Tokyo`(日本標準時) に設定します。
+次の手順で、タイムゾーンを`Asia/Tokyo` ('JST') に設定します。
 
 1. `dpkg-reconfigure`の起動:
   コマンドラインで、次のコマンドを実行します。
@@ -192,44 +192,53 @@ Debian を日本語環境にするため、`timeZone`を`Asia/Tokyo (JST)`に設
    ![タイムゾーン設定ダイアログ](https://i.imgur.com/DbvibFq.png)
 
 2. `tzdata`の設定:
-   `timeZone`で`Asia`,`Tokyo`を選択します
+   `tzdata`に、`Asia`,`Tokyo`を選択します
 
    ![タイムゾーン設定ダイアログ](https://i.imgur.com/z5Fmt0R.png)
 
-以上で、`timeZone`が日本になります。
+3. タイムゾーンの設定:
+   実行結果は、次のようになります。
 
-#### `timeZone`の設定手順 (コマンドライン)
+   ```bash
+   Current default time zone: 'Asia/Tokyo'
+   Local time is now:      Fri Dec  8 08:57:31 JST 2023.
+   Universal Time is now:  Thu Dec  7 23:57:31 UTC 2023.
+   ```
 
-`timeZone`は、`/etc/localtime`に保存されています。
-このファイルは`/usr/share/zoneinfo`下にある各地域の`timeZone`情報ファイルへのシンボリックになっています。
+以上で、タイムゾーンが日本になります。
 
-次の手順で、timeZone を設定します。
+#### タイムゾーンの設定 (コマンドライン)
 
-1. 旧`timeZone`の削除:
-   旧`timeZone`ファイル`/etc/localtime`を削除します
+タイムゾーンは、`/etc/localtime`に保存されています。
+このファイルは`/usr/share/zoneinfo`下にある各地域のタイムゾーン情報ファイルへのシンボリックになっています。
+
+次の手順で、タイムゾーンを設定します。
+
+1. 旧タイムゾーンの削除:
+   旧タイムゾーンファイル`/etc/localtime`を削除します
 
    ```bash:
    sudo rm -f /etc/localtime
    ```
 
-2. 新`timeZone`の設定:
-   `Asia/Tokyo`の`timeZone`ファイルを`/etc/localtime`にリンクします
+2. 新タイムゾーンの設定:
+   `Asia/Tokyo`のタイムゾーンファイルを`/etc/localtime`にリンクします
 
    ```bash:
    sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
    ```
 
-3. `timeZone`の確認:
-   `date`コマンドを実行し、日時が`JST`になっているかを確認します。
+3. タイムゾーンの確認:
+   `date`コマンドを実行し、タイムゾーンが`JST`になっているかを確認します。
 
    ```bash:
    date
    Mon Dec  4 06:48:59 PM JST 2023
    ```
 
-   上記のように、`JST`と出力されていれば、`timeZone`は日本標準時になっています。
+   上記のように、`JST`と出力されていれば、タイムゾーンは日本標準時になっています。
 
-以上で、`timeZone`の設定は終了です。
+以上で、タイムゾーンの設定は終了です。
 
 ## 4. Debianの再起動
 
