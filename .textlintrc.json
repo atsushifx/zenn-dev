@@ -1,6 +1,13 @@
 {
     "plugins": {},
-    "filters": {},
+    "filters": {
+        "comments": true,
+        "allowlist": {
+            "allowlistConfigPaths": [
+                ".textlint/allowlist.yml"
+            ]
+        }
+    },
     "rules": {
         "preset-ja-engineering-paper": {
             "prh": false,
@@ -56,7 +63,7 @@
         "spelling": {
             "language": "en",
             "skipPatterns": [
-                "/tl;dr/ig",
+                "_",
                 "/https/ig",
                 "/js/ig",
                 "/svg/ig",
@@ -74,10 +81,7 @@
                 "/ycombinator/ig",
                 "/publickey1/ig",
                 "/PowerShell/ig",
-                "/github/ig",
-                "/winget/ig",
-                "/neovim/ig",
-                "/io/ig"
+                'tzdata'
             ]
         },
         "@proofdict/proofdict": {

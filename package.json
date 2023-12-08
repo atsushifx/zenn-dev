@@ -10,6 +10,6 @@
         "url": "https://github.com/atsushifx/zenn-cli.git"
     },
     "dependencies": {
-        "zenn-cli": "^0.1.148"
+        "zenn-cli": "^0.1.150"
     }
 }
