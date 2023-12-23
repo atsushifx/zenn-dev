@@ -3,7 +3,7 @@ title: "dotfilesを使ってWSLの環境を管理する方法"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "bash", "dotfiles", "GitHub", ]
-published: false
+published: true
 ---
 
 ## tl;dr
