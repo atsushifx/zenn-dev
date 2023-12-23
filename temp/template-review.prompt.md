@@ -28,6 +28,7 @@
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
 - :goal で示された目標向けに記事を改善する
+- :link で示された資料を参考にする
 - :remark で示された記述、表現を尊重する
 - 重要なキーワードを見逃さず、ピックアップして注釈をつける
 - 重要な技術用語をピックアップして注釈をつける
@@ -65,17 +66,23 @@
 """"
 :theme:
 
-- WSL上の Debian を日本語化する
+- WSL で`dotfiles`を使って各種設定ファイルを管理する
 
 """"
 :target:
 
-- Windows を使うエンジニア
+- WSL を使うエンジニア
 
 """"
 :goal:
 
-- WSL上の Debian に日本語ロケールを追加して、日本語でメッセージなどを出力させる
+- WSL上の Debian に`dotfiles`を導入し、設定ファイルを git で管理できるようにする
+
+""""
+link:
+
+- <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
+- <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
 
 """"
 remark:
