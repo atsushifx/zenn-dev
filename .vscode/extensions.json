@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "fnando.linter",
         "davidanson.vscode-markdownlint",
         "taichi.vscode-textlint",
         "negokaz.zenn-editor",

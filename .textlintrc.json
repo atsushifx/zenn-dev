@@ -81,7 +81,8 @@
                 "/ycombinator/ig",
                 "/publickey1/ig",
                 "/PowerShell/ig",
-                'tzdata'
+                "atsushifx",
+                "dotfiles"
             ]
         },
         "@proofdict/proofdict": {
