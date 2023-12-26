@@ -83,7 +83,8 @@
                 "/PowerShell/ig",
                 "atsushifx",
                 "dotfiles",
-                "AWK"
+                "AWK",
+                "/Homebrew/ig"
             ]
         },
         "@proofdict/proofdict": {
