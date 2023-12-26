@@ -21,9 +21,9 @@
 
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 一人称の文章で、ですます調を使う。リストのばあいは「体言止め」「である調」を基本とする
-- カジュアルな文体を基本とするが、プロフェッショナルな文章になるよう堅めの文章にする
+  プロフェッショナルな文体を目指すが、読みやすさを重視しカジュアルな文体も許容する
 - タイトル、ヘッダーなどはエンジニア向けにプロフェッショナルな文体とし、!などで煽らない
-- もとの文章の章立てを尊重する
+- 全体的な文章について、説明に注視し、「あなた」などの呼びかけは使わない
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
@@ -66,7 +66,7 @@
 """"
 :theme:
 
-- WSL で`dotfiles`を使って各種設定ファイルを管理する
+- WSL 上の Debian で開発環境校区に必要な必須パッケージをインストールする
 
 """"
 :target:
@@ -76,18 +76,29 @@
 """"
 :goal:
 
-- WSL上の Debian に`dotfiles`を導入し、設定ファイルを git で管理できるようにする
+- WSL上の Debian でパッケージをインストールする方法を解説する
+- 今後の開発環境構築のため必要になるパッケージをリストアップし、説明を加える
 
 """"
 link:
 
-- <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
-- <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+- Debian GNU/Linux FAQ:
+  <https://www.debian.org/doc/manuals/debian-faq/>
+- Homebrew on Linux:
+  <https://docs.brew.sh/Homebrew-on-Linux>
+- Debian パッケージ管理ツール:
+  <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
+- APT - Wikipedia:
+  <https://ja.wikipedia.org/wiki/APT>
+- Linux 用 Windows サブシステムとは:
+  <https://learn.microsoft.com/ja-jp/windows/wsl/about>
 
 """"
 remark:
 
-- Happy Hacking などのカジュアルな文体は変更しない
+- カジュアルな文体は変更しない
+- Happy Hacking は残す
+- `7zip`は`p7zip`に変更しない
 
 """"
 /begin

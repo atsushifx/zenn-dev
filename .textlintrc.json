@@ -82,7 +82,10 @@
                 "/publickey1/ig",
                 "/PowerShell/ig",
                 "atsushifx",
-                "dotfiles"
+                "dotfiles",
+                "AWK",
+                "/Homebrew/ig",
+                "/LinuxBrew/ig"
             ]
         },
         "@proofdict/proofdict": {
