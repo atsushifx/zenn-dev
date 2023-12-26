@@ -30,7 +30,8 @@
 - theme にもとづいた記事を書く
 - goal でしめされた目標にむかって記事を書く
 - target の読者層向けの記事を書く
-- remark 上の参考文献にしたがって、正確な記事を書く
+- link 上の参考文献にしたがって、正確な記事を書く
+- remark の指示にしたがって文章を書く
 - 必要ならテキストを使って図解する
 - mermaid.js, svg を使って図解する
 - 参考にした資料を参考資料としてリンクを出力する
@@ -48,23 +49,24 @@
 """"
 :theme:
 
-- winget を使って指定したディレクトリに neovim をインストールする方法
+- WSL上の Debian に最低限必要なパッケージをインストールする方法
 
 """"
 :target:
 
-- Windows ユーザーであるプログラマー
+- Windows ユーザーで WSL を使用する ITエンジニア
 
 """"
 :goal:
 
-- Windows に neovim が正常にインストールされる
+- WSL上の Debian に必要なパッケージをインストールする方法
 
 """"
-:remark:
+:link:
 
-- nevi 公式サイト: <https://neovim.io/>
-- nevi GitHub リポジトリ: <https://github.com/neovim/neovim>
+- パッケージ管理ツール:<https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
+""""
+:remark:
 
 """"
 

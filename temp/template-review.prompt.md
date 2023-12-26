@@ -66,7 +66,7 @@
 """"
 :theme:
 
-- WSL で`dotfiles`を使って各種設定ファイルを管理する
+- WSL 上の Debian で最低限必要なパッケージをインストールする
 
 """"
 :target:
@@ -76,13 +76,14 @@
 """"
 :goal:
 
-- WSL上の Debian に`dotfiles`を導入し、設定ファイルを git で管理できるようにする
+- WSL上の Debian でパッケージをインストールして、開発環境構築や`dotfiles`ができるようにする
 
 """"
 link:
 
-- <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
-- <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+- パッケージ管理ツール: <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
+- `Linux Brew`: <https://docs.brew.sh/Homebrew-on-Linux>
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
 
 """"
 remark:
