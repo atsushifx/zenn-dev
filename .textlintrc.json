@@ -84,7 +84,8 @@
                 "atsushifx",
                 "dotfiles",
                 "AWK",
-                "/Homebrew/ig"
+                "/Homebrew/ig",
+                "/LinuxBrew/ig"
             ]
         },
         "@proofdict/proofdict": {
