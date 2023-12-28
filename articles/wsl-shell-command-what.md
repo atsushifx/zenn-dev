@@ -3,7 +3,7 @@ title: "Linux開発環境構築: `what`コマンドによるスクリプト管�
 emoji: "🐕"
 type: "tech"
 topics: [ "Linux", "shellscript", "コメント", "what", "whatdoc", ]
-published: false
+published: true
 ---
 
 ## はじめに
