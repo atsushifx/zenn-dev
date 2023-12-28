@@ -47,17 +47,14 @@
 """"
 :link
 
-- <https://www.debian.org/doc/manuals/debian-faq/>
-- <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
-- <https://ja.wikipedia.org/wiki/APT>
-- <https://learn.microsoft.com/ja-jp/windows/wsl/about>
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- `SCSS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
 
 """"
 :remark:
 
-- パッケージ`7zip`は正しいパッケージなので、そのままで変更しない
 - "それでは、Happy Hacking!"はそのままにし、「おわりに」セクションの文体は左記に会わせる
-- 参考資料の`URL:`はつけたままにする
 
 """"
 /begin

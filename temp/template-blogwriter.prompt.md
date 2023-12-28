@@ -49,7 +49,8 @@
 """"
 :theme:
 
-- WSL上の Debian に最低限必要なパッケージをインストールする方法
+- `agla shell utils`の`what`コマンドの使い方について説明する
+- `what`コマンド用のコメントの書き方を説明する
 
 """"
 :target:
@@ -59,12 +60,14 @@
 """"
 :goal:
 
-- WSL上の Debian に必要なパッケージをインストールする方法
+- WSL上のシェルスクリプト、設定ファイルに`what`コマンド用のヘッダーコメントを書けるようにする
 
 """"
 :link:
 
-- パッケージ管理ツール:<https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+
 """"
 :remark:
 

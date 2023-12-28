@@ -85,7 +85,9 @@
                 "dotfiles",
                 "AWK",
                 "/Homebrew/ig",
-                "/LinuxBrew/ig"
+                "/LinuxBrew/ig",
+                "whatdoc",
+                "/desc/ig"
             ]
         },
         "@proofdict/proofdict": {
