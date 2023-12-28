@@ -67,38 +67,30 @@
 :theme:
 
 - シェルスクリプト管理コマンド`what`の使い方の説明
+- what 用に`whatdoc`コメントの書き方の説明
 
 """"
 :target:
 
-- WSL を使うエンジニア
+- Linux のシェルスクリプトを使うエンジニア
 
 """"
 :goal:
 
-- WSL上の Debian でパッケージをインストールする方法を解説する
-- 今後の開発環境構築のため必要になるパッケージをリストアップし、説明を加える
+- `what`コマンドをインストールし、使えるようにする
+- ユーザーが`what`コマンド用に`whatdoc`コメントを書けるようにする
 
 """"
 link:
 
-- Debian GNU/Linux FAQ:
-  <https://www.debian.org/doc/manuals/debian-faq/>
-- Homebrew on Linux:
-  <https://docs.brew.sh/Homebrew-on-Linux>
-- Debian パッケージ管理ツール:
-  <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
-- APT - Wikipedia:
-  <https://ja.wikipedia.org/wiki/APT>
-- Linux 用 Windows サブシステムとは:
-  <https://learn.microsoft.com/ja-jp/windows/wsl/about>
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
 
 """"
 remark:
 
 - カジュアルな文体は変更しない
 - Happy Hacking は残す
-- `7zip`は`p7zip`に変更しない
 
 """"
 /begin

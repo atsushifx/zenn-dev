@@ -1,30 +1,63 @@
 ---
-title: "WSL 開発環境構築: whatコマンドで、スクリプト、設定ファイルを管理する"
+title: " Linux開発環境構築: whatコマンドによるスクリプト管理と文書化"
 emoji: "🐕"
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [ "shellscrypt", "コメント", "bash", "what", ]
+type: "tech"
+topics: [ "Linux", "shellscript", "コメント", "what", ]
 published: false
 ---
 
 ## はじめに
 
-拙作、[`agla shell utils`](https://github.com/atsushifx/agla-shell-utils)には、シェルスクリプト管理用コマンド`what`が含まれています。
-この記事では、`what`の使い方を紹介するとともに、`what`用のヘッダーコメントの書き方を解説します。
+この記事では、[`agla shell utils`](https://github.com/atsushifx/agla-shell-utils)に含まれる`what`コマンドを使って、スクリプトを管理する方法を紹介します。
+`what`コマンドは、`whatdoc`コメントを解釈し、各シェルスクリプトの説明を提供し、スクリプトの理解を容易にします。
 
-`what`コマンドは、`.editorconfig`のような設定ファイルも対象にします。
+この記事では、`what`の使い方を紹介するとともに、`what`コマンド用コメント`whatdoc`の書き方を解説します。
+各種スクリプトや設定ファイルに`whatddoc`コメントを追加して、これらのファイルの理解を容易にしましょう。
 
-シェルスクリプトや設定ファイルに`what`用コメントを追加して、開発環境を充実させましょう。
+## 重要キーワード
 
-## 1. whatコマンド とは
+このセクションでは、この記事で使用する重要なキーワードの説明をりリストアップします。
 
-### 1.1 whatコマンドの機能
+- `what`コマンド:
+  スクリプト内の`whatdoc`コメントを解析して情報を表示するツール。スクリプトの目的や使用方法を簡単に把握できる
+
+- `whatdoc`コメント:
+  特定のフォーマットで書かれたコメント、スクリプトの説明やバージョン情報などを含み、スクリプトの理解を容易にする
+
+- `SCSS` (`Source Code Control System`):
+  UNIX系OS で使われていたバージョン管理システム。`what`コマンドの由来となっている
+
+## 1. whatコマンド の基本
+
+`what`コマンドは、指定したシェルスクリプトに関する情報を出力します。
+このセクションでは、`what`コマンドの使用方法を説明します。
+
+### 1.1 whatコマンドの基本機能
 
 what コマンドは、`agla shell utils`に含まれるシェルスクリプト管理用のユーティリティです。
-このコマンドは、シェルスクリプトや設定ファイルのバージョン情報と簡単な説明を表示する役割を果たします。
+このコマンドは、シェルスクリプトや設定ファイル中の`whatdoc`コメントを解釈し、ファイルの情報を提供します。
 
-シェルスクリプトを管理し、コードの迅速に理解するのに役立ちます。
+たとえば、次のように`whatdoc`コメントを追加したスクリプトがあります。
 
-### 1.2 whatコマンドの使い方 (short desc)
+```bash: sample.sh
+#!/usr/bin/env bash
+#
+# @(#) : Sample script to demonstrate whatdoc
+# 注意: このスクリプトは`whatdoc`のデモンストレーションです
+
+```
+
+このスクリプトに対して、`what`コマンドを実行すると次のようになります:
+
+```bash
+$ what sample.sh
+sample.sh: (v 1.0.0) :  Sample script to demonstrate whatdoc
+
+```
+
+このように、シェルスクリプトに関する情報を簡単に得ることができます。
+
+### 1.2 whatコマンドの基本操作
 
 what コマンドの使い方は簡単です。
 
@@ -43,7 +76,7 @@ what ( v0.0.5 ) : display shell script usage
 
 となります。
 
-### 1.3 whatコマンドの使い方 (long desc)
+### 1.3 whatコマンドの応用操作
 
 '-d'オプションで、コマンドに関する長い説明が表示されます。
 このときのコマンドは:
@@ -73,9 +106,9 @@ THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS CODE REMAINS WITH
 
 となります。
 
-## 2. whatのインストール
+## 2. whatコマンドのインストール
 
-### 2.1. whatのインストール手順
+### 2.1. whatコマンドのインストール手順
 
 what コマンドは、次の手順でインストールします:
 
@@ -102,13 +135,12 @@ what コマンドは、次の手順でインストールします:
 
 以上で、what コマンドが使えるようになります。
 
-## 3. whatdocコメント
+## 3. `whatdoc`コメント
 
-what コマンドでコマンドの説明を出力するには、ファイル内に適切なコメントを追加する必要があります。
-このコメントを`whatdoc`コメントと呼びます。
-このセクションでは、what コマンド用のコメントの書き方を説明します。
+what コマンドでコマンドの説明を出力するには、ファイル内に適切な`whatdoc`コメントを追加する必要があります。
+これにより、スクリプトの目的、使用方法、バージョン情報などが一目でわかり、より効率的なコード管理が可能になります。
 
-### 3.1 基本的なコメントフォーマット
+### 3.1 `whatdoc`コメントの基本フォーマット
 
 whatdoc コメントは、以下のようなフォーマットで記述します:
 
@@ -122,7 +154,7 @@ whatdoc コメントは、以下のようなフォーマットで記述します
 # @date    2023-12-27
 # @license MIT
 #
-# @description <<
+# @desc
 #
 # what <file>
 #  print shell script usage
@@ -137,18 +169,18 @@ whatdoc コメントは、以下のようなフォーマットで記述します
 # THIS CODE IS MADE AVAILABLE AS IS, WITHOUT WARRANTY OF ANY KIND.
 # THE ENTIRE RISK OF THE USE OR THE RESULTS FROM THE USE OF THIS CODE REMAINS WITH THE USER.
 #
-#<<
+#
 
 ```
 
 **注意事情**:
-whatdocコメントはヘッダー部に記述します。`shebang`のあとに`#`コメントを続ける必要があります。
+whatdoc コメントはヘッダー部に記述します。`shebang`のあとに`#`コメントを続ける必要があります。
 
-whatdocコメントは、`@(#)`からはじまります。
+whatdoc コメントは、`@(#)`からはじまります。
 `@(#)`は、`SCSS`という UNIX系OS で使われてたバージョン管理システム用のヘッダーです。
-ここから、ヘッダーコメントの最終行までが whatdocコメントになります。
+ここから、ヘッダーコメントの最終行までが whatdoc コメントになります。
 
-### 2.2 short desc
+### 2.2 `whatdoc`コメントヘッダー (short desc)
 
 `@(#)`ではじまるコメントは、コマンドの簡単な説明となります。
 `what <ファイル名>`で出力される説明は、ここのコメントとなります。
@@ -167,9 +199,9 @@ whatdoc コメントでは、`@`から始まるキーワードをコメントタ
 | @author | @author <氏名> | スクリプトの作成者を記述  |  |
 | @date | @date <日時> | スクリプトの作成日時を記述 | |
 | @license |  @license <ライセンス> | 主に`OSS`のライセンスを略号で記述 | |
-| @desc | @desc << ... << | スクリプトの長い説明をヒアドキュメントで記述 | 詳細は、[後述](#24-long-desc) |
+| @desc | @desc << ... << | スクリプトの長い説明を複数行のコメントで記述 | 詳細は、後述 |
 
-### 2.4 long desc
+### 2.4 @descタグ (`long desc``)
 
 `@desc`タグは特殊で、複数行に渡ってコメントを記述します。
 `@desc`タグ以降の、行頭に`#`をつけたコメントをヒアドキュメントとして認識し、残りのヘッダコメント
@@ -201,10 +233,11 @@ whatdoc コメントでは、`@`から始まるキーワードをコメントタ
 この記事では、`what`コマンドの使い方と、コマンドを使うためのコメントの書き方を紹介しました。
 各種スクリプトや`、bashrc`などの設定ファイルに whatdoc コメントを記述することで、スクリプトや設定ファイルの理解が容易になります。
 
-what コマンドや whatdoc コメントを使い、WSL や Linux での生産性を向上させましょう。
+`what`コマンドを活用すれば、Linux 環境の生産性を向上できます。
 
 それでは、Happy Hacking!
 
 ## 参考資料
 
 - `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- `SCSS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
