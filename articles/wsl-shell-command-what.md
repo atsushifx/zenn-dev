@@ -1,8 +1,8 @@
 ---
-title: " Linux開発環境構築: whatコマンドによるスクリプト管理と文書化"
+title: " Linux開発環境構築: `what`コマンドによるスクリプト管理と文書化"
 emoji: "🐕"
 type: "tech"
-topics: [ "Linux", "shellscript", "コメント", "what", ]
+topics: [ "Linux", "shellscript", "コメント", "what", "whatdoc", ]
 published: false
 ---
 
@@ -12,11 +12,11 @@ published: false
 `what`コマンドは、`whatdoc`コメントを解釈し、各シェルスクリプトの説明を提供し、スクリプトの理解を容易にします。
 
 この記事では、`what`の使い方を紹介するとともに、`what`コマンド用コメント`whatdoc`の書き方を解説します。
-各種スクリプトや設定ファイルに`whatddoc`コメントを追加して、これらのファイルの理解を容易にしましょう。
+各種スクリプトや設定ファイルに`whatdoc`コメントを追加して、これらのファイルの理解を容易にしましょう。
 
 ## 重要キーワード
 
-このセクションでは、この記事で使用する重要なキーワードの説明をりリストアップします。
+このセクションでは、この記事で使用する重要なキーワードの説明をリストアップします。
 
 - `what`コマンド:
   スクリプト内の`whatdoc`コメントを解析して情報を表示するツール。スクリプトの目的や使用方法を簡単に把握できる
@@ -24,7 +24,7 @@ published: false
 - `whatdoc`コメント:
   特定のフォーマットで書かれたコメント、スクリプトの説明やバージョン情報などを含み、スクリプトの理解を容易にする
 
-- `SCSS` (`Source Code Control System`):
+- `SCCS` (`Source Code Control System`):
   UNIX系OS で使われていたバージョン管理システム。`what`コマンドの由来となっている
 
 ## 1. whatコマンド の基本
@@ -78,7 +78,7 @@ what ( v0.0.5 ) : display shell script usage
 
 ### 1.3 whatコマンドの応用操作
 
-'-d'オプションを使用すると、スクリプトの詳細な説明を表示します。
+'-d'オプションで、スクリプトの詳細な説明を表示します。
 これにより、より深い理解が可能になります。
 
 このときのコマンドは:
@@ -122,20 +122,20 @@ what コマンドは、次の手順でインストールします:
    ```
 
 2. what コマンドのインストール
-   ダウンロードした what コマンドを`path`のとおったディレクトリにコピーする。
+   ダウンロードした`what`コマンドを`path`のとおったディレクトリにコピーする。
 
    ```bash
    cp what ~/bin
    ```
 
 3. 実行権限の追加:
-   コピーした what コマンドに実行権限を追加する。
+   コピーした `what`コマンドに実行権限を追加する。
 
    ```bash
    chmod +x ~/bin/what
    ```
 
-以上で、what コマンドが使えるようになります。
+以上で、`what`コマンドが使えるようになります。
 
 ## 3. `whatdoc`コメント
 
@@ -244,4 +244,4 @@ whatdoc コメントでは、`@`から始まるキーワードをコメントタ
 
 - `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
 - `what` コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
-- `SCSS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
+- `SCCS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
