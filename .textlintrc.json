@@ -87,7 +87,9 @@
                 "/Homebrew/ig",
                 "/LinuxBrew/ig",
                 "whatdoc",
-                "/desc/ig"
+                "/desc/ig",
+                "conf"
+
             ]
         },
         "@proofdict/proofdict": {
