@@ -67,31 +67,26 @@
 """"
 :theme:
 
-- シェルスクリプト管理コマンド`what`の使い方の説明
-- what 用に`whatdoc`コメントの書き方の説明
+- WSL上に開発環境を高知すくする記事をまとめる
 
 """"
 :target:
 
-- Linux のシェルスクリプトを使うエンジニア
+- Windows で WSL を使うエンジニア
 
 """"
 :goal:
 
-- `what`コマンドをインストールし、使えるようにする
-- ユーザーが`what`コマンド用に`whatdoc`コメントを書けるようにする
+- 各記事をまとめて、WSL で開発環境を構築する
 
 """"
 link:
-
-- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
-- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
 
 """"
 remark:
 
 - カジュアルな文体は変更しない
-- Happy Hacking は残す
+- 「それでは、Happy Hacking!」は残す
 
 """"
 /begin
