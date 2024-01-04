@@ -86,7 +86,7 @@ link:
 remark:
 
 - カジュアルな文体は変更しない
-- Happy Hacking は残す
+- 「それでは、Happy Hacking!」は残す
 
 """"
 /begin

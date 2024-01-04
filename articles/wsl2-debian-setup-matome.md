@@ -1,5 +1,5 @@
 ---
-title: "WSL 開発環境構築: 開発環境の構築記事 (まとめ)"
+title: "WSL 開発環境の構築記事 まとめ"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "Debian", "開発環境", "環境構築", ]
@@ -9,32 +9,38 @@ published: false
 ## はじめに
 
 この記事では、WSL (Windows Subsystem for Linux) で開発環境を構築するための記事をまとめています。
-各記事の手順を実行することで、`XDG Base Directory`仕様に従った開発環境が構築できます。
+各記事の手順を実行すると:
+
+- WSL に Debian をインストールします
+- `XDG Base Directory`が使えるように環境変数を設定します
+- `XDG Base Directory`にしたがってバージョン管理した設定ファイルを設定します
+
+これにより、どの Windows でも同じ WSL開発環境を構築できます。
 
 実際のソフトウェア開発には、開発言語や各種ツールをインストールする必要があります。
 これらも`XDG Base Directory`下に設定ファイルを作成するようにできます。
 
 ## キーワード
 
-- WSL (Windows Subsystem for Linux):
-  Windows上で Linux の環境を再現するサブシステム
+- **WSL (Windows Subsystem for Linux)**:
+  Windows で Linux のコマンドやアプリケーションを使えるようにするサブシステム
 
-- `XDG Base Directory`:
+- **`XDG Base Directory`**:
   Linux上で各種ツールが使用するファイルを保存する際のディレクトリ配置を定めている仕様
 
-- Debian:
+- **Debian**:
   信頼性と安定性に重点を置いた Linux ディストリビューション
 
-- apt (Advanced Package Tool):
+- **apt (Advanced Package Tool)**:
   Debian系の Linux ディストリビューションで使用されるパッケージマネージャー
 
-- `/etc/wsl.conf`:
+- **`/etc/wsl.conf`**:
   WSL の動作を設定する設定ファイル
 
-- `dotfiles`:
+- **`dotfiles`**:
   各種ツールの設定ファイルをバージョン管理するためのリポジトリ
 
-- `whatdoc`:
+- **`whatdoc`**:
   `what`コマンドの文書化に使用される、規定されたフォーマットのコメント
 
 ## WSL開発環境構築の記事まとめ
@@ -43,10 +49,10 @@ published: false
 各記事の手順に従うことで、開発環境が構築できます。
 
 1. [WindowsにWSLをセットアップする手順](https://zenn.dev/atsushifx/articles/wsl2-windowswsl-setup)
-   Windows で、`WSL`を使えるように環境を設定する。あわせて、`wsl`コマンドを使えるようにする。
+   Windows で WSL を使えるように初期設定する
 
 2. [WSL2 に Debian をインストールする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-install)
-   `wsl`コマンドを使って、`WSL`上に Debian をインストールする。
+   `wsl`コマンドを使って、`WSL`上に Debian をインストールする
 
 3. [WSLでのDebianのアップグレード方法](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-upgrade)
    Debian のパッケージマネージャー`apt`用に、`source.list`日本ミラーを追加する。
@@ -68,14 +74,16 @@ published: false
    `zip`, `curl`, `git`などの今後のソフトウェア開発や環境構築に必須となるであろうパッケージをインストールする。
 
 8.[`what`コマンドによるスクリプト管理と文書化](https://zenn.dev/atsushifx/articles/wsl-shell-command-what)
-   拙作`what`コマンドをインストールする。また、今後`what`コマンドを使用するためれに`whatdoc`の記述方法を説明する。
+   作成した`what`コマンドをインストールする。また、今後`what`コマンドを使用するためれに`whatdoc`の記述方法を説明する。
 
 ## おわりに
 
 この記事では、WSL上で開発環境を構築するための記事をまとめました。
 各記事の方法を実践することで、各開発言語用のベースとなる環境が構築できます。
 
-WSL に開発環境を構築することで、効率的なソフトウェア開発できるでしょう。
+次に、プログラミング言語と必要尾なツールをセットアップします。
+それで、WSL上で効率的なソフトウェア開発可能になります。
+
 それでは、Happy Hacking!
 
 ## 参考資料
