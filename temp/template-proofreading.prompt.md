@@ -41,21 +41,18 @@
 """"
 :role:
 
-- 日本語の表記に精通した校閲担当
-- 漢字の表記や日本語の表現揺れに精通した校正担当
-- 技術情報や学術情報に精通したした研究者
+- 日本語の表記に精通している校閲担当
+- 漢字の表記や日本語の表現揺れに精通している校正担当
+- 技術情報や学術情報に精通している研究者
 
 """"
 :link
-
-- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
-- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
-- `SCSS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
 
 """"
 :remark:
 
 - "それでは、Happy Hacking!"はそのままにし、「おわりに」セクションの文体は左記に会わせる
+- 「しましょう」のようなカジュアルでよびかけるような文体は、使わない
 
 """"
 /begin

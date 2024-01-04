@@ -1,5 +1,5 @@
 ---
-title: "WSL 開発環境の構築記事 まとめ"
+title: "WSL開発環境構築の記事まとめ"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "Debian", "開発環境", "環境構築", ]
@@ -8,8 +8,8 @@ published: false
 
 ## はじめに
 
-この記事では、WSL (Windows Subsystem for Linux) で開発環境を構築するための記事をまとめています。
-各記事の手順を実行すると:
+この記事では、WSL (Windows Subsystem for Linux) 上に開発環境を構築するガイドを紹介します。
+リストアップした記事の詳細な手順に従えば、WSL に Debian をインストールし、環境設定を完了できます。
 
 - WSL に Debian をインストールします
 - `XDG Base Directory`が使えるように環境変数を設定します
@@ -26,13 +26,13 @@ published: false
   Windows で Linux のコマンドやアプリケーションを使えるようにするサブシステム
 
 - **`XDG Base Directory`**:
-  Linux上で各種ツールが使用するファイルを保存する際のディレクトリ配置を定めている仕様
+  Linux システム上でアプリケーションがファイルを格納する際の標準ディレクトリ構成を規定する仕様
 
 - **Debian**:
   信頼性と安定性に重点を置いた Linux ディストリビューション
 
-- **apt (Advanced Package Tool)**:
-  Debian系の Linux ディストリビューションで使用されるパッケージマネージャー
+- **apt (Advanced Package Tool)** :
+  Debian系Linux ディストリビューション専用のパッケージ管理ツール
 
 - **`/etc/wsl.conf`**:
   WSL の動作を設定する設定ファイル
@@ -46,20 +46,20 @@ published: false
 ## WSL開発環境構築の記事まとめ
 
 以下に WSL で開発環境を構築する記事をまとめました。
-各記事の手順に従うことで、開発環境が構築できます。
+各記事の手順にしたがえば、開発環境を構築できます。
 
 1. [WindowsにWSLをセットアップする手順](https://zenn.dev/atsushifx/articles/wsl2-windowswsl-setup)
    Windows で WSL を使えるように初期設定する
 
-2. [WSL2 に Debian をインストールする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-install)
+2. [WSL に Debian をインストールする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-install)
    `wsl`コマンドを使って、`WSL`上に Debian をインストールする
 
 3. [WSLでのDebianのアップグレード方法](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-upgrade)
-   Debian のパッケージマネージャー`apt`用に、`source.list`日本ミラーを追加する。
+   Debian のパッケージマネージャー`apt`用に、`sources.list`の`CDN`ミラー、日本ミラーを追加する。
    その後、`apt`を使って Debian をアップグレードする。
 
 4. [WSL上のDebianを日本語化する方法](https://zenn.dev/atsushifx/articles/wsl2-debian-japanese)
-   `apt`を使ってん日本語パッケージをインストールする。
+   `apt`を使って日本語パッケージをインストールする。
    その後、`locale`を日本語に、`timezone`を`Asia/Tokyo`に設定する。
 
 5. [wsl.conf を使用して WSL2 の動作をカスタマイズする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-config-wslconf)
@@ -73,16 +73,16 @@ published: false
 7. [必須パッケージのインストール](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages)
    `zip`, `curl`, `git`などの今後のソフトウェア開発や環境構築に必須となるであろうパッケージをインストールする。
 
-8.[`what`コマンドによるスクリプト管理と文書化](https://zenn.dev/atsushifx/articles/wsl-shell-command-what)
-   作成した`what`コマンドをインストールする。また、今後`what`コマンドを使用するためれに`whatdoc`の記述方法を説明する。
+8. [`what`コマンドによるスクリプト管理と文書化](https://zenn.dev/atsushifx/articles/wsl-shell-command-what)
+   作成した`what`コマンドをインストールする。また、今後`what`コマンドの利用に必要な`whatdoc`コメントのフォーマットについて説明する。
 
 ## おわりに
 
 この記事では、WSL上で開発環境を構築するための記事をまとめました。
 各記事の方法を実践することで、各開発言語用のベースとなる環境が構築できます。
 
-次に、プログラミング言語と必要尾なツールをセットアップします。
-それで、WSL上で効率的なソフトウェア開発可能になります。
+次に、プログラミング言語と必要なツールをセットアップします。
+これにより、WSL上で効率的なソフトウェア開発可能になります。
 
 それでは、Happy Hacking!
 
@@ -95,5 +95,5 @@ published: false
 - WSL での詳細設定の構成: <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
 - Debian パッケージ管理ツール: <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
 - APT - Wikipedia: <https://ja.wikipedia.org/wiki/APT>
-- `XDG Base Directory` - Arch Wiki<https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
-- ドットファイル - Arch WIki:<https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
+- `XDG Base Directory` - Arch Wiki: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+- ドットファイル - Arch WIki: <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
