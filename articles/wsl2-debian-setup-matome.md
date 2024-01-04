@@ -3,7 +3,7 @@ title: "WSL開発環境構築の記事まとめ"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "Debian", "開発環境", "環境構築", ]
-published: false
+published: true
 ---
 
 ## はじめに
