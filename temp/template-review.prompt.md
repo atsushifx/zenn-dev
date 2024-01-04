@@ -82,9 +82,6 @@
 """"
 link:
 
-- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
-- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
-
 """"
 remark:
 
