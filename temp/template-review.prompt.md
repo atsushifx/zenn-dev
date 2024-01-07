@@ -67,7 +67,7 @@
 """"
 :theme:
 
-- WSL上に開発環境を高知すくする記事をまとめる
+- WSL上にカスタマイズされた Debian をインポートし、開発環境を素早く構築する
 
 """"
 :target:
@@ -77,10 +77,14 @@
 """"
 :goal:
 
-- 各記事をまとめて、WSL で開発環境を構築する
+- WSL に設定された Debian をインポートする
+- インポートした Debian をダウンロードしたユーザー用にセットアップする
 
 """"
 link:
+
+- WSL で使用する Linux ディストリビューションをインポートする:
+  <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
 
 """"
 remark:

@@ -49,7 +49,7 @@
 """"
 :theme:
 
-- WSL で開発環境を構築する記事のまとめ
+- カスタマイズされた Debian を wsl でインポートし、WSL開発環境を高速に構築する方法
 
 """"
 :target:
@@ -59,13 +59,13 @@
 """"
 :goal:
 
-- WSL上の開発環境を構築すること
+- WSL上の Debian に、開発環境を構築すること
 
 """"
 :link:
 
-- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
-- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- WSL で使用する Linux ディストリビューションをインポートする:
+  <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
 
 """"
 :remark:
