@@ -122,6 +122,28 @@ default=<myaccount>    # <myaccount>は、自分のアカウントに置き換�
 
 ```
 
+### 2.3 パスワードの設定
+
+安全のため、自アカウントにパスワードを設定します。
+bash で、次のコマンドを実行します:
+
+```bash
+passwd <myaccount>  # <myaccount>.は自アカウントにかきかえてください
+```
+
+実行結果は、次のようになります。
+
+```bash
+$ passwd <myaccount>
+New password:
+Retype new password:
+passwd: password updated successfully
+
+$
+```
+
+以上で、パスワードの設定は終了です。
+
 ## 3. WSLの再起動
 
 以上で、WSL の設定委は終了です。
