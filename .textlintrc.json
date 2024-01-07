@@ -88,8 +88,9 @@
                 "/LinuxBrew/ig",
                 "whatdoc",
                 "/desc/ig",
-                "conf"
-
+                "conf",
+                "/7z/ig",
+                "PublicArchives"
             ]
         },
         "@proofdict/proofdict": {
