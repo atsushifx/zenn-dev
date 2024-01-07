@@ -107,7 +107,36 @@ bash で、アカウント変更スクリプトを実行します:
 move_useraccount.sh <myaccount>   # <myaccount>は、自分のアカウントに置き換えてください
 ```
 
-## 3. その他
+### 2.2 デフォルトユーザーの設定
+
+起動時のデフォルトユーザーを設定します。
+以下のように、`/etc/wsl.conf`を設定します。
+
+```:/etc/wsl.conf
+ .
+ .
+ .
+## User settings
+[user]
+default=<myaccount>    # <myaccount>は、自分のアカウントに置き換えてください。
+
+```
+
+## 3. WSLの再起動
+
+以上で、WSL の設定委は終了です。
+WSL を再起動すると、設定が反映されて開発環境が使えるようになります。
+
+### 3.1 WSLを再起動する
+
+WSL をシャットダウンします。
+PowerShell で次のコマンドを実行します:
+
+```powershell
+wsl --shutdown
+```
+
+以後、Debian は自分のアカウントで起動します。
 
 ## おわりに
 
