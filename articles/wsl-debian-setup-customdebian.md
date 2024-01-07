@@ -47,14 +47,13 @@ PowerShell で次のコマンドを実行します:
 7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
 
 Scanning the drive for archives:
-1 file, 186643947 bytes (178 MiB)
+1 file, 185010644 bytes (177 MiB)
 
 Extracting archive: .\custom-debian.tar.7z
 --
-
 Path = .\custom-debian.tar.7z
 Type = 7z
-Physical Size = 186643947
+Physical Size = 185010644
 Headers Size = 138
 Method = LZMA2:24
 Solid = -
@@ -62,8 +61,8 @@ Blocks = 1
 
 Everything is Ok
 
-Size:       889139200
-Compressed: 186643947
+Size:       905297920
+Compressed: 185010644
 
 >
 ```
@@ -91,9 +90,22 @@ wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.t
 
 ```
 
-上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています・
+上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています。
 
 ## 2. Debianのセットアップ
+
+インポートした Debian を使えるようにするため、ユーザーのセットアップを行います。
+
+### 2.1 アカウントの変更
+
+インポート時は、ユーザーアカウントが`pwruser`となっています。
+インポートした Debian を使うには、このアカウントを自分のアカウントに変更する必要があります。
+
+bash で、アカウント変更スクリプトを実行します:
+
+```bash
+move_useraccount.sh <myaccount>   # <myaccount>は、自分のアカウントに置き換えてください
+```
 
 ## 3. その他
 
