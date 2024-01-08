@@ -63,7 +63,7 @@ WSL を使うことで、Windows上で Linux を使ったシステム開発が�
 6. [必須パッケージのインストール](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages)
    `zip`, `curl`, `git`などの今後のソフトウェア開発や環境構築に必要なパッケージをインストールします。
 
-7. [dotfiles を使って WSL の環境を管理する方法](https://zenn.dev/atsushifx/articles/wsl2-Debian-dotfiles)
+7. [dotfilesを使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)
    GitHub上の dotfiles リポジトリを使って、環境設定を統一します。
 
 8. [`what`コマンドによるスクリプト管理と文書化](https://zenn.dev/atsushifx/articles/wsl-shell-command-what)
