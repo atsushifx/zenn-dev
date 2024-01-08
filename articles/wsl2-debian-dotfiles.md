@@ -8,7 +8,7 @@ published: false
 
 ## tl;dr
 
-`dotfiles`を用いると、以下の手順で簡単に開発環境を構築できます:
+`dotfiles`を使用すると、以下の手順で簡単に開発環境を構築できます:
 
 1. `dotfiles`リポジトリのフォーク
 2. WSL 環境に`dotfiles`をクローン
@@ -21,7 +21,7 @@ Enjoy!
 
 ## はじめに
 
-WSL上で`dotfiles`を使って、設定ファイルを一元管理する方法を紹介します。
+WSL上で`dotfiles`を使用して設定ファイルを一元管理する方法を紹介します。
 これにより、バックアップや環境の移行、設定の同期が容易に行えます。
 
 ## 技術用語
@@ -45,14 +45,14 @@ WSL上で`dotfiles`を使って、設定ファイルを一元管理する方法�
 
 ## 1. `dotfiles`とは
 
-`dotfiles`は設定ファイルを効率的に管理するリポジトリです。
-設定のバックアップ、移行、共有が簡単になります。
+`dotfiles`は設定ファイルを効率的に管理するためのリポジトリです。
+設定のバックアップ、移行、共有が簡単に行えます。
 
 ## 2. `dotfiles`の初期設定
 
 ### 2.1 dotfilesリポジトリのフォーク
 
-リポジトリを自分の GitHub アカウントにフォークし、`dotfiles`リポジトリをコピーします。
+`dootfiles`リポジトリを自分の GitHub アカウントにフォークし、`dotfiles`リポジトリをコピーします。
 これにより、自分の`dotfiles`を使って WSL 環境をパーソナライズし、自分だけの開発環境を構築できます。
 
 [dotfiles リポジトリ](https://github.com/atsushifx/dotfiles)にアクセスし、\[Fork]ボタンをクリックしてください。
@@ -91,7 +91,7 @@ Resolving deltas: 100% (730/730), done.
 
 ### 2.3 シンボリックリンクの作成
 
-シンボリックリンクを作成することで、設定ファイルを効率的に管理し、いつでも最新の状態に保つことができます。
+シンボリックリンクを作成することで、設定ファイルを効率的に管理し、常に最新の状態に保つことができます。
 これにより、変更をリポジトリに簡単に反映させることができます。
 
 以下のスクリプトを実行して、シンボリックリンクを作成します:
@@ -117,7 +117,7 @@ etc -> /home/<myaccount>/.local/dotfiles/linux/opt/etc
 
 ### 2.4 `/etc/profile`, `~/.profile`の書き換え
 
-このステップにより、シェルが起動するたびに自動的に`dotfiles`の設定が読み込まれます。
+このステップでは、シェルが起動するたびに自動的に`dotfiles`の設定が読み込まれるようにしまます。
 これにより、環境設定の一貫性と再現性が保たれます。
 
 以下のスクリプトを実行します:
@@ -143,7 +143,7 @@ fi
 
 ## おわりに
 
-WSL を`dotfiles`リポジトリを使って管理する方法を説明しました。
+この記事では、`dotfiles`リポジトリを使用して WSL の環境を管理する方法について説明しました。
 `dotfiles`を活用することで、WSL の開発環境を迅速かつ効率的に構築できるだけでなく、環境を継続的に管理することも可能になります。
 
 開発環境を素早く構築し、新たなプログラミング体験を楽しみましょう。
@@ -154,13 +154,13 @@ WSL を`dotfiles`リポジトリを使って管理する方法を説明しまし
 ### Webサイト
 
 - Linux 用 Windows サブシステムとは
-  - URL: <https://learn.microsoft.com/ja-jp/windows/wsl/about>
-    説明: Microsoft 公式による WSL の詳細な説明とその利用方法
+  URL: <https://learn.microsoft.com/ja-jp/windows/wsl/about>
+  説明: Microsoft 公式による WSL の詳細な説明とその利用方法
 
 - `dotfiles` - `Arch Wiki`
-  - URL: <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
-    説明: `dotfiles`のバージョン管理方法とそのメリット
+  URL: <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
+  説明: `dotfiles`のバージョン管理方法とそのメリット
 
 - `XDG Base Directory` - `Arch Wiki`
-  - URL: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
-    説明: `XDG Base Directory`の基本原則と、それに準拠するアプリケーションのリスト
+  URL: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+  説明: `XDG Base Directory`の基本原則と、それに準拠するアプリケーションのリスト
