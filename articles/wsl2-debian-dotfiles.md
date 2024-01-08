@@ -3,7 +3,7 @@ title: "WSL開発環境: dotfilesを使った環境管理"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "bash", "dotfiles", "環境構築", ]
-published: false
+published: true
 ---
 
 ## tl;dr
