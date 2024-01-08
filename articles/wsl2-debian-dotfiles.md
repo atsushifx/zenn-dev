@@ -52,7 +52,7 @@ WSL上で`dotfiles`を使用して設定ファイルを一元管理する方法�
 
 ### 2.1 dotfilesリポジトリのフォーク
 
-`dootfiles`リポジトリを自分の GitHub アカウントにフォークし、`dotfiles`リポジトリをコピーします。
+`dotfiles`リポジトリを自分の GitHub アカウントにフォークし、`dotfiles`リポジトリをコピーします。
 これにより、自分の`dotfiles`を使って WSL 環境をパーソナライズし、自分だけの開発環境を構築できます。
 
 [dotfiles リポジトリ](https://github.com/atsushifx/dotfiles)にアクセスし、\[Fork]ボタンをクリックしてください。
