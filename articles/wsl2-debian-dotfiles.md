@@ -1,57 +1,81 @@
 ---
-title: "dotfilesを使ってWSLの環境を管理する方法"
+title: "WSL開発環境: dotfilesを使った環境管理"
 emoji: "🐧"
 type: "tech"
-topics: ["WSL", "bash", "dotfiles", "GitHub", ]
-published: true
+topics: ["WSL", "bash", "dotfiles", "環境構築", ]
+published: false
 ---
 
 ## tl;dr
 
-以下の手順で`dotfiles`[^1]を設定します:
+`dotfiles`を使用すると、以下の手順で簡単に開発環境を構築できます:
 
-1. `GitHub から`dotfiles`リポジトリをクローンする
-2. システムディレクトリ、ユーザーディレクトリにシンボリックリンクを作成する
-3. `dotfiles`設定スクリプトを`/etc/profile`,`~/.profile`に追加する
+1. `dotfiles`リポジトリのフォーク
+2. WSL 環境に`dotfiles`をクローン
+3. シンボリックリンクを作成して、設定ファイルを管理
+4. `profile`スクリプトを編集して、自動読み込み
 
-これにより、設定ファイルを`dotfiles`リポジトリで一元管理でき、容易にバックアップや移行ができます。
+これにより、環境設定の効率的な管理とバージョン管理が可能になります。
 
 Enjoy!
 
 ## はじめに
 
-WSL (Windows Subsystem for Linux)[^2] では、`~/.config`ディレクトリ下に設定ファイルの多くが保存されています。
-これらを GitHub上の`dotfiles`リポジトリにて管理することで、バックアップ・バージョン管理・設定の移行などがスムーズに行えます。
+WSL上で`dotfiles`を使用して設定ファイルを一元管理する方法を紹介します。
+これにより、バックアップや環境の移行、設定の同期が容易に行えます。
 
-この記事では、すでにある GitHub上の`dotfiles`リポジトリを使って、素早く簡単に環境を設定する方法を説明します。
+## 技術用語
 
-この記事で使用する`dotfilesリポジトリ`は、[dotfiles repository](https://github.com/atsushifx/dotfiles)となります。
-このリポジトリをフォークして、この記事の方法に従えば、WSL の設定ファイルを効率的に管理できるでしょう。
+この記事で使う技術用語をリストアップします:
+
+- WSL (Windows Subsystem for Linux):
+  Windows上で Linux を実行する機能
+
+- `dotfiles`:
+  UNIX/Linux系OS の設定ファイルを管理するためのリポジトリ
+
+- `XDG Base Directory`:
+  設定ファイルやキャッシュなどを整理し、管理を容易にするためのディレクトリ標準規格
+
+- リポジトリ (Repository):
+  バージョン管理システムにおいて、ファイルやディレクトリの変更履歴を保存する場所
+
+- シンボリックリンク (Symbolic Link):
+  あるファイルやディレクトリを別の場所から参照するためのショートカット
 
 ## 1. `dotfiles`とは
 
-### 1.1 `dotfiles`とは何か
-
-`dotfiles`は、UNIX/Linux系OS[^3]の設定ファイルを管理するためのリポジトリを示します。
-
-もともと`dotfiles`は、ファイル名が`.`で始まる設定ファイルを指し、これらを集約的に管理することを意味します。
-近年では`XDG Base Directory`[^4]という仕様により`~/.config`下にあるディレクトリ、ファイルのことが多くなりました。
-この記事では、上記に従い`~/.config/`下にある各種ファイルを`dotfiles`で管理しています。
+`dotfiles`は設定ファイルを効率的に管理するためのリポジトリです。
+設定のバックアップ、移行、共有が簡単に行えます。
 
 ## 2. `dotfiles`の初期設定
 
-### 2.1 リポジトリからクローン
+### 2.1 dotfilesリポジトリのフォーク
 
-この記事で使用する`dotfiles`リポジトリは、[/atsushifx/dotfiles](https://github.com/atsushifx/dotfiles)です。
-これを`~/.local/`下にクローン[^5]し、ローカルの WSL上に設定ファイルをコピーします。
+`dotfiles`リポジトリを自分の GitHub アカウントにフォークし、`dotfiles`リポジトリをコピーします。
+これにより、自分の`dotfiles`を使って WSL 環境をパーソナライズし、自分だけの開発環境を構築できます。
 
-次のコマンドを実行します:
+[dotfiles リポジトリ](https://github.com/atsushifx/dotfiles)にアクセスし、\[Fork]ボタンをクリックしてください。
+
+![フォークの方法](https://imgur.com/Za9iXFh.png)
+
+**注意**:
+フォークすると、自分の GitHub アカウントに`dotfiles`リポジトリが作成されます。
+
+### 2.2 dotfilesリポジトリのクローン
+
+フォークした`dotfiles`リポジトリを WSL上の Debian にクローンし、`dotfiles`を WSL上にダウンロードします。
+
+以下のコマンドを実行します:
 
 ```bash
-git clone https://github.com/atsushifx/dotfiles
+git clone https://github.com/<myaccount>/dotfiles
 ```
 
-実行した結果、以下のように出力されます:
+**注意**:
+\<myaccount>を自分の GitHub アカウントに変えて実行してください。
+
+実行結果は以下のようになります:
 
 ```bash
 Cloning into 'dotfiles'...
@@ -63,83 +87,80 @@ Receiving objects: 100% (1580/1580), 295.93 KiB | 14.09 MiB/s, done.
 Resolving deltas: 100% (730/730), done.
 ```
 
-この結果、ローカルの PC上に GitHub上の`dotfiles`がコピーされます。
+この結果、GitHub上の`dotfiles`がローカルの PC にコピーされます。
 
-### 2.2 シンボリックリンクの作成
+### 2.3 シンボリックリンクの作成
 
-クローンしたディレクトリをもとに、本来のディレクトリへシンボリックリンク[^6]を作成します。
-この操作により、設定ディレクトリの変更が直接リポジトリのファイルに反映され、バージョン管理が容易になります。
+シンボリックリンクを作成することで、設定ファイルを効率的に管理し、常に最新の状態に保つことができます。
+これにより、変更をリポジトリに簡単に反映させることができます。
 
-#### システムディレクトリのシンボリックリンク
-
-`linux/opt/`下の各ディレクトリを'/opt'下にシンボリックリンクします。
-次のリンク用スクリプトを実行します:
+以下のスクリプトを実行して、シンボリックリンクを作成します:
 
 ```bash
-~/.local/dotfiles/scripts/bootstrap-linux/optlinks.sh
+~/.local/dotfiles/scripts/bootstrap-linux/dotfileslinks.sh
 ```
 
-#### ユーザーディレクトリのシンボリックリンク
+実行すると、以下のリンクが作成されます。
 
-`linux/.config`ディレクトリを`$HOME`下にシンボリックリンクします。
-次のコマンドを実行します:
+```bash:$HOME
+.config -> ./.local/dotfiles/linux/.config
+.editorconfig -> ./.config/.editorconfig
+```
+
+```bash:/opt
+bin -> /home/<myaccount>/.local/dotfiles/linux/opt/bin
+etc -> /home/<myaccount>/.local/dotfiles/linux/opt/etc
+```
+
+**注意**:
+\<myaccount>は、自分のアカウントとなります。
+
+### 2.4 `/etc/profile`, `~/.profile`の書き換え
+
+このステップでは、シェルが起動するたびに自動的に`dotfiles`の設定が読み込まれるようにしまます。
+これにより、環境設定の一貫性と再現性が保たれます。
+
+以下のスクリプトを実行します:
 
 ```bash
-ln -s ~/local/dotfiles/linux/.config ~
+~/.local/dotfiles/scripts/bootstrap-linux/addscripts.sh
 ```
 
-これで、$XDG_CONFIG_HOME ディレクトリがリポジトリの管理下となります。
+実行すると、次の内容がファイルに追加されます。
 
-### 2.3 `/etc/profile`, `~/.profile`の書き換え
-
-リポジトリ管理下の`dotfiles`が参照されるように、`/etc/profile`,`~/.profile`にスクリプトを追加します。
-以下のスクリプトを、それぞれのファイルの最終行に追加します:
-
-```bash: /etc/profile
+```: /etc/profile
 if [[ -f /opt/etc/profile]]; then
   . /opt/etc/profile
 fi
 ```
 
-**注意**:
-`/etc/profile`はシェルが自動的に実行するスクリプトです。
-上記のようにスクリプトを追加することで`/opt/etc/profile`、つまり`dotfiles`管理下の`profile`も自動的に実行します。、
-
-```bash: ~/.profile
+```: ~/.profile
 ## exec dotfiles
 if [[ -f "$HOME/.config/profile" ]]; then
   . $HOME/.config/profile
 fi
 ```
 
-**注意**:
-`~/.profile`はシェルスクリプトがユーザースクリプトとして自動的に実行するスクリプトです。
-上記のスクリプトを追加することで、`XDG_CONFIG_HOME`下の`profile`スクリプトも自動的に実行されます。
-
-以後、シェルの起動時にはリポジトリ下の設定ファイルを参照するようになります。
-
 ## おわりに
 
-以上で、WSL を`dotfiles`リポジトリを使って管理する方法を説明しました。
-この記事では、`XDG Base Directory`で規定されている`~/.config`下にある設定ファイルを対象にしています。
+この記事では、`dotfiles`リポジトリを使用して WSL の環境を管理する方法について説明しました。
+`dotfiles`を活用することで、WSL の開発環境を迅速かつ効率的に構築できるだけでなく、環境を継続的に管理することも可能になります。
 
-`/etc/profile`や`~/.profile`にスクリプトを追加することで、上記`~/.config`下の設定ファイルを参照するようにしています。
-
-`dotfiles`の活用により、WSL 環境を迅速かつ効率的に構築し、継続的な管理を実現できます。
-ぜひ、本記事で紹介した方法を使って、dotfiles を効率的に管理してみてください。
-
+開発環境を素早く構築し、新たなプログラミング体験を楽しみましょう。
 それでは、Happy Hacking!
 
 ## 参考資料
 
 ### Webサイト
 
-- `archlinux` - `dotfiles`: <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
-- `archlinux` - `XDG Base Directory`: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+- Linux 用 Windows サブシステムとは
+  URL: <https://learn.microsoft.com/ja-jp/windows/wsl/about>
+  説明: Microsoft 公式による WSL の詳細な説明とその利用方法
 
-[^1]: `dotfiles`: UNIX/Linux系の OS の設定ファイルを管理するためのリポジトリ
-[^2]: WSL: `Windows Subsystem for Linux`の略称で、Windows上で Linux の実行ファイルを動作させるための互換レイヤー
-[^3]: UNIX/Linux系OS: 複数のユーザーが同時に利用できるマルチタスク／マルチユーザーの OS
-[^4]: `XDG Base Directory`: UNIX/Linux系OS で各種設定ファイルの保存ディレクトリを規定する仕様
-[^5]: クローン: バージョン管理システム`git`のコマンドで、リモートリポジトリを PC上のローカルにコピーするコマンド
-[^6]: シンボリックリンク: ファイルやディレクトリを別の芭蕉から参照するための仮想的なリンクで、一般的なファイル／ディレクトリと同様に動作する
+- `dotfiles` - `Arch Wiki`
+  URL: <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
+  説明: `dotfiles`のバージョン管理方法とそのメリット
+
+- `XDG Base Directory` - `Arch Wiki`
+  URL: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+  説明: `XDG Base Directory`の基本原則と、それに準拠するアプリケーションのリスト
