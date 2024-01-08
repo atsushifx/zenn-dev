@@ -3,19 +3,19 @@ title: "WSL開発環境: 環境構築の記事まとめ"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "Debian", "開発環境", "環境構築", ]
-published: true
+published: false
 ---
 
 ## はじめに
 
-WSL (Windows Subsystem for Linux) は、Windows上で Linux の環境を再現する強力な機能です。
-WSL を使うことで、Linux 環境に合わせた開発や Linux の強力なコマンドラインツールを使うことができます。
+WSL (Windows Subsystem for Linux) は、Windows上で Linux を実行するシステムです。
+WSL を使うことで、Windows上で Linux を使ったシステム開発が行えます。
 
 この記事では、Windows に WSL をセットアップし、開発環境を構築する方法を紹介します。
 記事の手順にしたがうことで、どの Windows でも同じ WSL開発環境を構築できます。
 
 実際のソフトウェア開発には、開発言語や各種ツールをインストールする必要があります。
-これらも`XDG Base Directory`下に設定ファイルを作成するようにできます。
+これらも`XDG Base Directory`下に設定ファイルを作成するように設定できます。
 
 ## キーワード
 
@@ -40,7 +40,7 @@ WSL を使うことで、Linux 環境に合わせた開発や Linux の強力な
 - **`whatdoc`**:
   `what`コマンドの文書化に使用される、規定されたフォーマットのコメント
 
-## WSL開発環境構築の記事まとめ
+## WSL開発環境構築の手順
 
 以下に WSL で開発環境を構築する記事をまとめました。
 各記事の手順にしたがえば、開発環境を構築できます。
