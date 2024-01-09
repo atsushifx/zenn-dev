@@ -1,9 +1,9 @@
 ---
-title: "Linux開発環境構築: `what`コマンドによるスクリプト管理と文書化"
-emoji: "🐕"
+title: "WSL開発環境: whatコマンドによるスクリプト管理と文書化"
+emoji: "🐧"
 type: "tech"
 topics: [ "Linux", "shellscript", "コメント", "what", "whatdoc", ]
-published: true
+published: false
 ---
 
 ## はじめに
@@ -125,14 +125,14 @@ what コマンドは、次の手順でインストールします:
    ダウンロードした`what`コマンドを`path`のとおったディレクトリにコピーする。
 
    ```bash
-   cp what ~/bin
+   sudo cp what /opt/bin
    ```
 
 3. 実行権限の追加:
    コピーした `what`コマンドに実行権限を追加する。
 
    ```bash
-   chmod +x ~/bin/what
+   sudo chmod +x /opt/bin/what
    ```
 
 以上で、`what`コマンドが使えるようになります。
