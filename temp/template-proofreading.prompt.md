@@ -48,6 +48,10 @@
 """"
 :link
 
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- `SCCS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
+
 """"
 :remark:
 

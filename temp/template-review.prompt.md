@@ -77,16 +77,22 @@
 """"
 :goal:
 
-- WSL にまとめた記事の方法を実行して開発環境を構築する
+- WSL上に what コマンドをインストールする
+- whatdoc コメントの書き方を知る
 
 """"
 link:
+
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- `SCCS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
 
 """"
 remark:
 
 - カジュアルな文体は変更しない
 - 「それでは、Happy Hacking!」は残す
+- 　title の「WSL開発環境:」は残す
 
 """"
 /begin
