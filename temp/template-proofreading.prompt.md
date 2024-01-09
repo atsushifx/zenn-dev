@@ -21,7 +21,7 @@
 
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
-- 文章に「しましょう」のような指示は極力使わない
+- 文章に「しましょう」のような命令形の文体は使わない
 - :role にしたがってレビュー、推敲、校正、校閲を担当する
 - Web 上の学術情報を参照し、正確な表現になるよう努める
 - <https//www.weblio.jp/>  を参照し、正しい表現を使う
@@ -48,11 +48,14 @@
 """"
 :link
 
+- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- `SCCS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
+
 """"
 :remark:
 
 - "それでは、Happy Hacking!"はそのままにし、「おわりに」セクションの文体は左記に会わせる
-- 「しましょう」のような命令形の文体は使わない
 
 """"
 /begin
