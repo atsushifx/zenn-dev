@@ -3,7 +3,7 @@ title: "WSL開発環境: whatコマンドによるスクリプト管理"
 emoji: "🐧"
 type: "tech"
 topics: [ "Linux", "shellscript", "コメント", "what", "whatdoc", ]
-published: false
+published: true
 ---
 
 ## はじめに
