@@ -168,22 +168,37 @@ wsl --shutdown
 設定ファイルを`dotfiles`で管理したい場合は、以下の手順にしたがってください:
 
 1. `/opt/`下のサブディレクトリを削除:
-   `/opt/bin`, `/opt/etc` をシンボリックリンクにするため削除します。
-   以下のコマンドを実行します:
+    `/opt/bin`, `/opt/etc` をシンボリックリンクにするため削除します。
+    以下のコマンドを実行します:
 
-   ```bash
-   sudo rm -fr /opt/etc /opt/bin
-   ```
+    ```bash
+    sudo rm -fr /opt/etc /opt/bin
+    ```
 
 2. `dotfiles`を削除:
-   `~/.local/`下に`dotfiles`ディレクトリを削除します。
-   次のコマンドを実行します:
+    `~/.local/`下に`dotfiles`ディレクトリを削除します。
+    次のコマンドを実行します:
 
-   ```bash
-   rm -fr ~/.local/dotfiles
-   ```
+    ```bash
+    rm -fr ~/.local/dotfiles
+    ```
+
+3. `dotfiles`の組み込み:
+    [`dotfiles`を使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)にしたがって、`dotfiles`を組み込みます。
+
+以上で、`dotfiles`の組み込みは完了です。
+
+### 4.2 whatコマンドのインストール
+
+[`dotfiles`の組み込み](#41-dotfilesの組み込み)によって、`what`コマンドが削除されます。
+[whatコマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)にしたがって、`what`コマンドをインストールします。
 
 ## おわりに
+
+以上で、Debian の高速セットアップは終了です。
+この環境をもとにプログラミング言語や開発ツールをインストールすると、プログラミング言語用の開発環境が構築できます。
+
+それでは、Happy Hacking!
 
 ## 参考資料
 
