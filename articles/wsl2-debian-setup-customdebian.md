@@ -1,5 +1,5 @@
 ---
-title: "WSL開発環境: tarファイルによる高速セットアップ"
+title: "WSL開発環境: tarファイルを使ったDebianの高速セットアップ"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "import", "カスタマイズ",]
@@ -8,10 +8,13 @@ published: false
 
 ## はじめに
 
-[WSL開発環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome) によって、どの Windows でも WSL上に開発環境を構築できるようになりました。
-この記事では、構築をさらに簡単にするため、Debian アーカイブを使って環境を構築する方法を紹介します。
+WSL開発環境構築の記事に従えば、どの Windows でも WSL上に開発環境を構築できます。
+この記事では、事前にセットアップされた Debian の tar アーカイブを用いて、WSL に Debian 環境を構築する宇方法を紹介します。
+これにより、Debian のセットアップにかかる時間を大幅に削減し、迅速に開発を開始できます。
 
-## 1. カスタマイズされたDebianのインポート
+## 1. カスタマイズされた Debian のインポート
+
+カスタマイズ済みの Debian アーカイブをダウンロードし、WSL にインポートする手順を説明します。
 
 ### 1.1 Debianアーカイブのダウンロード
 
@@ -28,11 +31,15 @@ Debian アーカイブは、`Google Drive`の[PublicArchives](https://drive.goog
 3. ダイアログの\[エラーを無視してダウンロード]ボタンをクリックしてダウンロード
   ![ファイルのウィルススキャンを実行できません](https://imgur.com/o4SZp6T.jpg)
 
-以上で、`custom-debian.tar.7z`
+以上で、`custom-debian.tar.7z`のダウンロードは終了です。
 
 ### 1.2 Debianアーカイブの展開
 
-ダウンロードした Debian アーカイブを tar型式のファイルに展開します。
+ダウンロードした Debian の`7z`アーカイブを`7zip`の展開コマンド`7z x`[^1]コマンドで展開します
+展開に成功すると、`custom-debian.tar`ファイルが作成されます。
+
+これにより、`WSL --import`[^2]で Debian がインポートできます。
+
 PowerShell で次のコマンドを実行します:
 
 ```powershell
@@ -68,10 +75,14 @@ Compressed: 185010644
 ```
 
 上記のように`Everything is Ok`となれば、展開は成功しています。
+結果、`custom-debian.tar`ファイルが作成されます。
+
+[^1]: '7z x': `7z`型式のアーカイブファイルを展開するコマンド
+[^2]: `wsl --import`: WSL に Linux ディストリビューションをインポートするコマンド
 
 ### 1.3. Debianのインポート
 
-展開に成功すると、以下のように`custom-debian.tar`ファイルができているはずです。
+展開に成功すると、`custom-debian.tar`ファイルができているはずです。
 この tar ファイルを、WSL にインポートします。
 
 PowerShell で、次のコマンドを実行します:
@@ -92,11 +103,11 @@ wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.t
 
 上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています。
 
-## 2. Debianのセットアップ
+## 2. デフォルトユーザーの設定
 
-インポートした Debian を使えるようにするため、ユーザーのセットアップを行います。
+デフォルトユーザーを自身のアカウントに変更します。
 
-### 2.1 アカウントの変更
+### 2.1 ユーザーアカウントの変更
 
 インポート時は、ユーザーアカウントが`pwruser`となっています。
 インポートした Debian を使うには、このアカウントを自分のアカウントに変更する必要があります。
@@ -124,7 +135,7 @@ default=<myaccount>    # <myaccount>は、自分のアカウントに置き換�
 
 ### 2.3 パスワードの設定
 
-安全のため、自アカウントにパスワードを設定します。
+自アカウントにぱスワードを設定します。
 bash で、次のコマンドを実行します:
 
 ```bash
@@ -144,13 +155,15 @@ $
 
 以上で、パスワードの設定は終了です。
 
+**注意**:
+自アカウントを安全に使用するために、強力なパスワードを設定する必要があります。複雑で予測しにくいパスワードを設定することを推奨します。
+
 ## 3. WSLの再起動
 
 以上で、WSL の設定は終了です。
-WSL を再起動すると、設定が反映されて開発環境が使えるようになります。
+WSL を再起動することで上記の設定が反映され、Debian に自アカウントでログインするようになります。
 
-WSL をシャットダウンします。
-PowerShell で次のコマンドを実行します:
+PowerShell で次のコマンドを実行し、WSL をシャットダウンします:
 
 ```powershell
 wsl --shutdown
@@ -161,6 +174,7 @@ wsl --shutdown
 ## 4. 追加の設定
 
 この章では、開発環境を自分の GitHub で管理する方法を紹介します。
+これにより、設定ファイルをバージョン管理でき、環境のバックアップや移行が簡単にできます。
 
 ### 4.1 dotfilesの組み込み
 
@@ -188,10 +202,10 @@ wsl --shutdown
 
 以上で、`dotfiles`の組み込みは完了です。
 
-### 4.2 whatコマンドのインストール
+### 4.2 `what`コマンドのインストール
 
 [`dotfiles`の組み込み](#41-dotfilesの組み込み)によって、`what`コマンドが削除されます。
-[whatコマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)にしたがって、`what`コマンドをインストールします。
+[`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)にしたがって、`what`コマンドをインストールします。
 
 ## おわりに
 
@@ -203,3 +217,6 @@ wsl --shutdown
 ## 参考資料
 
 ### Webサイト
+
+- WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
+- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>

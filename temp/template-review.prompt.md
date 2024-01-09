@@ -83,8 +83,8 @@
 """"
 link:
 
-- WSL で使用する Linux ディストリビューションをインポートする:
-  <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
+- WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
+- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
 
 """"
 remark:
