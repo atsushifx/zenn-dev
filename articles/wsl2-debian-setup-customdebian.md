@@ -8,7 +8,7 @@ published: false
 
 ## はじめに
 
-この記事では、WSL (Windows Subsystem for Linux)[^1]にカスタマイズ済み Debian[^2] をインポートする方法を紹介します。
+この記事では、WSL (Windows Subsystem for Linux)[^1]へのカスタマイズ済み Debian[^2] のインポート方法を説明します。
 カスタマイズ済み Debian は、開発に必要なツールや設定があらかじめ組み込まれた`tarアーカイブ`[^3]型式のファイルです。
 これをインポートすることで、WSL上に迅速に開発環境が構築できます。
 
@@ -24,8 +24,7 @@ published: false
 
 この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)でセットアップした Debian をエクスポートしています。
 
-ただし、不特定の人に配布するため、`dotfiles`は`git`によるクローンではなくダウンロードにしています。
-GitHub との連携はしていません。
+一般公開のため、`dotfiles`は`git`クローンではなく直接ダウンロード方式を採用しています。
 
 ## 2. カスタマイズされた Debian のインポート
 
