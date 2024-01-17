@@ -10,7 +10,7 @@ published: false
 
 この記事では、WSL (Windows Subsystem for Linux)[^1]にカスタマイズ済み Debian[^2] をインポートする方法を紹介します。
 カスタマイズ済み Debian は、開発に必要なツールや設定があらかじめ組み込まれた`tarアーカイ`[^3]型式のファイルです。
-この記事では、WSL上でこのカスタマイズ済み Debian を簡単にセットアップし、効率的な開発構築をする方法を紹介します。
+これをインポートすることで、WSL上に迅速に開発環境が構築できます。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
 [^2]: Debian: Linux ディストリビューションの 1つ
@@ -18,7 +18,7 @@ published: false
 
 ## 1. Debian アーカイブの概要
 
-カスタマイズ済み Debian アーカイブには、`開発効率を高めるために`Git`、`Vim`などのツールやカスタム設定`が含まれています。
+カスタマイズ済み Debian アーカイブには、開発効率を高めるためのツールや設定が含まれています。具体的には、`Git`、`curl`、`XDG Base Directory`用環境変数などです。
 これにより、WSL 環境で迅速に開発を開始できます。
 
 この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)でセットアップした Debian をエクスポートしています。
@@ -27,7 +27,7 @@ published: false
 
 ## 2. カスタマイズされた Debian のインポート
 
-以下のセクションでは、カスタマイズ済みの Debian アーカイブをダウンロードし、その後、WSL にインポートする具体的な手順について説明します。
+カスタマイズ済みの Debian アーカイブをダウンロードし、その後、WSL にインポートする具体的な手順について説明します。
 インポートを行なうためには、WSL が有効になっている必要があります。
 インポート後は、`wsl --list`コマンドで Debian が正しくリストに載っていることを確認する必要があります。
 
@@ -35,7 +35,7 @@ published: false
 
 `Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)上の Debian アーカイブファイル`custom-debian.tar.7z`を、ダウンロードします。
 
-次の手順で Debian アーカイブをダウンロードしてください:
+以下の手順で Debian アーカイブをダウンロードしてください:
 
 1. [PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)にアクセス
    ![PublicArchivesフォルダのスクリーンショット](https://imgur.com/GNakFoH.jpg)
@@ -296,5 +296,5 @@ wsl --shutdown
 - WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
 - WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
 - 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
-- `dotfiles`を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
-- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- dotfiles を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
+- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
