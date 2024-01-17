@@ -89,9 +89,8 @@ link:
 """"
 remark:
 
-- カジュアルな文体は変更しない
 - 「それでは、Happy Hacking!」は残す
-- 　title の「WSL開発環境:」は残す
+- title の「WSL開発環境:」ヘッダーは残す
 
 """"
 /begin

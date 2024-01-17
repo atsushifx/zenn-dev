@@ -1,5 +1,5 @@
 ---
-title: "WSL開発環境: tarファイルを使ったDebianの高速セットアップ"
+title: "WSL開発環境: Debian tarアーカイブを使用した高速セットアップ"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "import", "カスタマイズ",]
@@ -8,9 +8,12 @@ published: false
 
 ## はじめに
 
-WSL開発環境構築の記事に従えば、どの Windows でも WSL上に開発環境を構築できます。
-この記事では、事前にセットアップされた Debian の tar アーカイブを用いて、WSL に Debian 環境を構築する宇方法を紹介します。
-これにより、Debian のセットアップにかかる時間を大幅に削減し、迅速に開発を開始できます。
+この記事では、カスタマイズ済みの Debian[^2] の`tarアーカイブ`を、WSL[^1] にインポートする方法を紹介します。
+
+Debian アーカイブをインポートすることで、初期設定の時間を大幅に削減できます。
+
+[^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
+[^2]: Debian: Linux ディストリビューションの 1つ
 
 ## 1. カスタマイズされた Debian のインポート
 
@@ -18,15 +21,15 @@ WSL開発環境構築の記事に従えば、どの Windows でも WSL上に開�
 
 ### 1.1 Debianアーカイブのダウンロード
 
-Debian アーカイブは、`Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)上に`custom-debian.tar.7z`というファイル名でアップロードしています。
+`Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)上の Debian アーカイブファイル`custom-debian.tar.7z`を、ダウンロードします。
 
 次の手順で Debian アーカイブをダウンロードしてください:
 
 1. [PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)にアクセス
-   ![IPublicArchives](https://imgur.com/GNakFoH.jpg)
+   ![PublicArchives](https://imgur.com/GNakFoH.jpg)
 
 2. `custom-debian-tar.7z`の右端のメニューでダウンロードを選択
-   ![メニューでダウンロード「](https://imgur.com/7K0l7EL.jpg)
+   ![メニューでダウンロードを選択](https://imgur.com/7K0l7EL.jpg)
 
 3. ダイアログの\[エラーを無視してダウンロード]ボタンをクリックしてダウンロード
   ![ファイルのウィルススキャンを実行できません](https://imgur.com/o4SZp6T.jpg)
@@ -35,21 +38,19 @@ Debian アーカイブは、`Google Drive`の[PublicArchives](https://drive.goog
 
 ### 1.2 Debianアーカイブの展開
 
-ダウンロードした Debian の`7z`アーカイブを`7zip`の展開コマンド`7z x`[^1]コマンドで展開します
+ダウンロードした Debian の`7z`アーカイブを`7zip`[^3]の展開コマンド`7z x`コマンドで展開します
 展開に成功すると、`custom-debian.tar`ファイルが作成されます。
 
-これにより、`WSL --import`[^2]で Debian がインポートできます。
-
-PowerShell で次のコマンドを実行します:
+PowerShell で、以下のコマンドを実行して展開します:
 
 ```powershell
-7z x  .\custom-debian.tar.7z
+7z x custom-debian.tar.7z
 ```
 
 実行結果は、次のようになります:
 
 ``` powershell
-> 7z x .\custom-debian.tar.7z
+> 7z x custom-debian.tar.7z
 
 7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
 
@@ -77,8 +78,9 @@ Compressed: 185010644
 上記のように`Everything is Ok`となれば、展開は成功しています。
 結果、`custom-debian.tar`ファイルが作成されます。
 
-[^1]: '7z x': `7z`型式のアーカイブファイルを展開するコマンド
-[^2]: `wsl --import`: WSL に Linux ディストリビューションをインポートするコマンド
+これにより、`WSL --import`で Debian がインポートできます。
+
+[^3]: `7zip`: `7z`型式でのファイル圧縮、展開ツール
 
 ### 1.3. Debianのインポート
 
@@ -97,6 +99,7 @@ wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.t
 > wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.tar
 インポート中です。この処理には数分かかることがあります。
 この操作を正しく終了しました。
+
 >
 
 ```
@@ -105,12 +108,12 @@ wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.t
 
 ## 2. デフォルトユーザーの設定
 
-デフォルトユーザーを自身のアカウントに変更します。
+インポート時は、ユーザーアカウントが`pwruser`となっています。また、`root`でログインするようになっています。
+インポートした Debian を使うには、`pwruser`を自分のアカウントに変更して、デフォルトユーザーに設定する必要があります。
 
 ### 2.1 ユーザーアカウントの変更
 
-インポート時は、ユーザーアカウントが`pwruser`となっています。
-インポートした Debian を使うには、このアカウントを自分のアカウントに変更する必要があります。
+ユーザーアカウント`pwruser`を、自アカウントに変更します。
 
 bash で、アカウント変更スクリプトを実行します:
 
@@ -124,18 +127,19 @@ move_useraccount.sh <myaccount>   # <myaccount>は、自分のアカウントに
 以下のように、`/etc/wsl.conf`を設定します。
 
 ```:/etc/wsl.conf
- .
- .
- .
+
+
 ## User settings
 [user]
 default=<myaccount>    # <myaccount>は、自分のアカウントに置き換えてください。
 
 ```
 
+これで、Debian 起動時に自アカウントでログインします。
+
 ### 2.3 パスワードの設定
 
-自アカウントにぱスワードを設定します。
+自アカウントにパスワードを設定します。
 bash で、次のコマンドを実行します:
 
 ```bash
@@ -178,7 +182,7 @@ wsl --shutdown
 
 ### 4.1 dotfilesの組み込み
 
-この記事でインポートした Debian では、各種設定ファイルが`dotfiles`で管理されていません。
+この記事でインポートした Debian では、各種設定ファイルが`dotfiles`[^4]で管理されていません。
 設定ファイルを`dotfiles`で管理したい場合は、以下の手順にしたがってください:
 
 1. `/opt/`下のサブディレクトリを削除:
@@ -201,6 +205,8 @@ wsl --shutdown
     [`dotfiles`を使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)にしたがって、`dotfiles`を組み込みます。
 
 以上で、`dotfiles`の組み込みは完了です。
+
+[^4]: `dotfiles`: UNIX/Linux の設定ファイル用を管理するためのバージョン管理システム上のリポジトリ
 
 ### 4.2 `what`コマンドのインストール
 
