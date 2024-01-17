@@ -8,15 +8,15 @@ published: false
 
 ## はじめに
 
-この記事では、WSL (Windows Subsystem for Linux)[^1] へ基本的な開発環境が構築されたカスタマイズ済み Debian[^2] をインポートする方法を説明します。
-これにより、開発環境を短時間で構築できます。
+この記事では、WSL[^1]上で使用するカスタマイズ済み Debian[^2] をインポートする方法を説明します。
+これにより、WSL上の開発環境が短時間で構築できます。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
 [^2]: Debian: Linux ディストリビューションの 1つ
 
 ## 1. Debian アーカイブの概要
 
-カスタマイズ済みの Debian アーカイブは、基本的な開発環境を構築した`tar アーカイブ`[^3]ファイルです。
+カスタマイズ済みの Debian アーカイブは、ツールのインストール、環境設定を含む`tar アーカイブ`[^3]ファイルです。
 ここには`Git`や`XDG Base Directory`など、開発効率を向上させるツールと設定が含まれています。
 
 この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome) でセットアップした Debian をエクスポートしています。
@@ -27,8 +27,7 @@ published: false
 
 ## 2. wslインポートの概要
 
-`wsl --import`コマンドを使用することで、構築済みの Linux 環境を手に入れることができます。
-このコマンドは、指定したディレクトリに`tarアーカイブ`型式の Linux ディストリビューションをインポートします。
+`wsl --import`コマンドは、`tar`アーカイブ形式の Linux ディストリビューションをインポートするために利用されます。
 
 ### 2.1. wsl インポートのコマンドライン
 
@@ -106,46 +105,46 @@ wsl --import <ディストリビューション> <インポートディレクト
 
 [^5]: `7zip`: `7z`型式および`zip`型式に対応したファイルアーカイブ・圧縮・展開ツール
 
-### 3.3  Debianアーカイブのインポート
+### 3.3 インポートディレクトリの設定
 
-正常に展開できていれば`custom-debian.tar`ファイルができているはずです。
-これを、以下のように`wsl --import`コマンドでインポートします。
-
-```powershell
-wsl --import Debian <インポートディレクトリ> custom-debian.tar
-```
-
-インポートディレクトリは、ユーザーが管理できる適当なディレクトリを指定する必要があります。
+インポートディレクトリは、ユーザーが管理できるディレクトリを指定する必要があります。
 ここでは、UNIX/Linux の設定ファイル、データファイル用のディレクトリ規格である`XDG Base Directory`[^6]に従うことで、ディレクトリの一貫性を確保しています。
-Debian のインポートディレクトリは、`~/.local/share/wsl/debian`となります。
+Debian のインポートディレクトリは、`/~/.local/share/wsl/debian`となります。
 
-Debian アーカイブのインポートには、PowerShell で、次のコマンドを実行します:
+次の手順で、インポートディレクトリを作成します:
 
-```powershell
-mkdir  C:\Users\<myaccount>\.local\share\wsl\debian
-wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian.tar
-```
+1. インポートディレクトリの作成
 
-**注意**:
-\<myaccount>は、自分のアカウントに置き換えてください。
+   ```powershell
+   mkdir ~/.local/share/wsl/debian
+   ```
 
-実行結果は、次のようになります。
-
-```powershell
-> mkdir  C:\Users\<myaccount>\.local\share\wsl\debian
-> wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian.tar
-インポート中です。この処理には数分かかることがあります。
-この操作を正しく終了しました。
-
->
-```
-
-**注意**:
-\<myaccount>は、自分のアカウントに置き換えてください。
-
-上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています。
+以上で、インポートディレクトリの設定は終了です。
 
 [^6]: `XDG Base Directory`: Linux システムで設定ファイルやデータファイルを管理するための標準ディレクトリ構造
+
+### 3.4  Debianアーカイブのインポート
+
+正常に展開できていれば`custom-debian.tar`ファイルができているはずです。
+Debian アーカイブのインポートには、PowerShell で、次のコマンドを実行します:
+
+1. Debian のインポート
+
+   ```powershell
+   wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian.tar  # <myaccount>は、自分のアカウントに置き換えてください
+   ```
+
+   実行結果は、次のようになります。
+
+   ```powershell
+
+   インポート中です。この処理には数分かかることがあります。
+   この操作を正しく終了しました。
+
+   $
+   ```
+
+上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています。
 
 ## 4. デフォルトユーザーアカウントの変更
 
