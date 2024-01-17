@@ -72,7 +72,8 @@
 """"
 :target:
 
-- Windows で WSL を使う中級プログラマー
+- Windows で WSL を使うプログラマー
+- Linux での最低限必要なコマンドをしっているプログラマー
 
 """"
 :goal:
@@ -94,7 +95,6 @@ remark:
 
 - 「それでは、Happy Hacking!」は残す
 - title の「WSL開発環境:」ヘッダーは残す
-- 画像リンクは削除せず、ふさわしい ALT 文を作成する
 
 """"
 /begin
