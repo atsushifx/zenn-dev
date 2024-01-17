@@ -1,5 +1,5 @@
 ---
-title: "WSL開発環境: Debian tarアーカイブを使用した高速セットアップ"
+title: "WSL開発環境: カスタマイズ済みDebianのインポートとセットアップ"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "import", "カスタマイズ",]
@@ -8,18 +8,28 @@ published: false
 
 ## はじめに
 
-この記事では、カスタマイズ済みの Debian[^2] の`tarアーカイブ`を、WSL[^1] にインポートする方法を紹介します。
-
-Debian アーカイブをインポートすることで、初期設定の時間を大幅に削減できます。
+この記事では、カスタマイズ済みの Debian[^2] の`tarアーカイブ`[^3]:を、WSL[^1] にインポートする方法を紹介します。
+これにより、Debian を初期設定する手間が大幅に削減できます。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
 [^2]: Debian: Linux ディストリビューションの 1つ
 
-## 1. カスタマイズされた Debian のインポート
+## 1. Debian アーカイブの概要
 
-カスタマイズ済みの Debian アーカイブをダウンロードし、WSL にインポートする手順を説明します。
+カスタマイズ済み Debian アーカイブは、特定の設定やツールを含んだ、WSL のエクスポート機能で作成された tar アーカイブファイルです。
+このアーカイブをインストールすることで、カスタマイズズ済みの Debian を WSL上に構築できます。
 
-### 1.1 Debianアーカイブのダウンロード
+この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)でセットアップした Debian をエクスポートしています。
+
+ただし、不特定の人に配布するため、`dotfiles`はダウンロ－ドにし GitHub との連携はしていません。
+
+この Debian アーカイブをインポートすることで、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)の作業をしなくても、同一の開発環境を構築できます。」
+
+## 2. カスタマイズされた Debian のインポート
+
+以下のセクションで、カスタマイズ済みの Debian アーカイブをダウンロードし、WSL にインポートする手順を説明します。
+
+### 2.1 Debianアーカイブのダウンロード
 
 `Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)上の Debian アーカイブファイル`custom-debian.tar.7z`を、ダウンロードします。
 
@@ -36,7 +46,7 @@ Debian アーカイブをインポートすることで、初期設定の時間�
 
 以上で、`custom-debian.tar.7z`のダウンロードは終了です。
 
-### 1.2 Debianアーカイブの展開
+### 2.2 Debianアーカイブの展開
 
 ダウンロードした Debian の`7z`アーカイブを`7zip`[^3]の展開コマンド`7z x`コマンドで展開します
 展開に成功すると、`custom-debian.tar`ファイルが作成されます。
@@ -82,7 +92,7 @@ Compressed: 185010644
 
 [^3]: `7zip`: `7z`型式でのファイル圧縮、展開ツール
 
-### 1.3. Debianのインポート
+### 2.3. Debianのインポート
 
 展開に成功すると、`custom-debian.tar`ファイルができているはずです。
 この tar ファイルを、WSL にインポートします。
@@ -90,28 +100,35 @@ Compressed: 185010644
 PowerShell で、次のコマンドを実行します:
 
 ```powershell
-wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.tar
+mkdir  C:\Users\<myaccount>\.local\share\wsl\debian
+wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian.tar
 ```
+
+**注意**:
+\<myaccount>は、Windows の自アカウントにかえてください。
 
 実行結果は、次のようになります。
 
 ```powershell
-> wsl --import Debian C:\Users\atsushifx\.local\share\wsl\debian .\custom-debian.tar
+> mkdir  C:\Users\<myaccount>\.local\share\wsl\debian
+> wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian.tar
 インポート中です。この処理には数分かかることがあります。
 この操作を正しく終了しました。
 
 >
-
 ```
+
+**注意**:
+\<myaccount>は、Windows の自アカウントにかえてください。
 
 上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています。
 
-## 2. デフォルトユーザーの設定
+## 3. デフォルトユーザーの設定
 
-インポート時は、ユーザーアカウントが`pwruser`となっています。また、`root`でログインするようになっています。
+インポート時は、ユーザーアカウントが`pwruser`に設定されており、`root`でログインするように設定されています 。
 インポートした Debian を使うには、`pwruser`を自分のアカウントに変更して、デフォルトユーザーに設定する必要があります。
 
-### 2.1 ユーザーアカウントの変更
+### 3.1 ユーザーアカウントの変更
 
 ユーザーアカウント`pwruser`を、自アカウントに変更します。
 
@@ -121,7 +138,7 @@ bash で、アカウント変更スクリプトを実行します:
 move_useraccount.sh <myaccount>   # <myaccount>は、自分のアカウントに置き換えてください
 ```
 
-### 2.2 デフォルトユーザーの設定
+### 3.2 デフォルトユーザーの設定
 
 起動時のデフォルトユーザーを設定します。
 以下のように、`/etc/wsl.conf`を設定します。
@@ -137,7 +154,7 @@ default=<myaccount>    # <myaccount>は、自分のアカウントに置き換�
 
 これで、Debian 起動時に自アカウントでログインします。
 
-### 2.3 パスワードの設定
+### 3.3 パスワードの設定
 
 自アカウントにパスワードを設定します。
 bash で、次のコマンドを実行します:
@@ -162,9 +179,9 @@ $
 **注意**:
 自アカウントを安全に使用するために、強力なパスワードを設定する必要があります。複雑で予測しにくいパスワードを設定することを推奨します。
 
-## 3. WSLの再起動
+## 4. WSLの再起動
 
-以上で、WSL の設定は終了です。
+以上の手順で、WSL の設定は完了します。
 WSL を再起動することで上記の設定が反映され、Debian に自アカウントでログインするようになります。
 
 PowerShell で次のコマンドを実行し、WSL をシャットダウンします:
@@ -175,12 +192,12 @@ wsl --shutdown
 
 以後、Debian は開発環境が構築された状態で起動します。
 
-## 4. 追加の設定
+## 5. 追加の設定
 
-この章では、開発環境を自分の GitHub で管理する方法を紹介します。
-これにより、設定ファイルをバージョン管理でき、環境のバックアップや移行が簡単にできます。
+このセクションでは、ダウンロード済みの`dotfiles`を削除し、新たに`dotfiles`を組み込む方法を紹介します。
+これにより、設定ファイルをバージョン管理でき、環境のバックアップや移行が簡単にできるようになります。
 
-### 4.1 dotfilesの組み込み
+### 5.1 `dotfiles`の組み込み
 
 この記事でインポートした Debian では、各種設定ファイルが`dotfiles`[^4]で管理されていません。
 設定ファイルを`dotfiles`で管理したい場合は、以下の手順にしたがってください:
@@ -208,14 +225,14 @@ wsl --shutdown
 
 [^4]: `dotfiles`: UNIX/Linux の設定ファイル用を管理するためのバージョン管理システム上のリポジトリ
 
-### 4.2 `what`コマンドのインストール
+### 5.2 `what`コマンドのインストール
 
-[`dotfiles`の組み込み](#41-dotfilesの組み込み)によって、`what`コマンドが削除されます。
+`dotfiles`の組み込みによって、`what`コマンドが削除されます。
 [`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)にしたがって、`what`コマンドをインストールします。
 
 ## おわりに
 
-以上で、Debian の高速セットアップは終了です。
+以上で、カスタマイズ済みの Debian のセットアップは完了です。
 この環境をもとにプログラミング言語や開発ツールをインストールすると、プログラミング言語用の開発環境が構築できます。
 
 それでは、Happy Hacking!
@@ -226,3 +243,4 @@ wsl --shutdown
 
 - WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
 - `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
