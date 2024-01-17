@@ -39,7 +39,7 @@
 ## 変数宣言
 
 """"
-:role:
+:role
 
 - 日本語の表記に精通している校閲担当
 - 漢字の表記や日本語の表現揺れに精通している校正担当
@@ -48,13 +48,14 @@
 """"
 :link
 
+- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
 - WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
-- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
+- dotfiles を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
+- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
 
 """"
 :remark:
-
-- "それでは、Happy Hacking!"はそのままにし、「おわりに」セクションの文体は左記に会わせる
 
 """"
 /begin

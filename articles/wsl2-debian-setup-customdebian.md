@@ -9,7 +9,7 @@ published: false
 ## はじめに
 
 この記事では、WSL (Windows Subsystem for Linux)[^1]にカスタマイズ済み Debian[^2] をインポートする方法を紹介します。
-カスタマイズ済み Debian は、開発に必要なツールや設定があらかじめ組み込まれた`tarアーカイ`[^3]型式のファイルです。
+カスタマイズ済み Debian は、開発に必要なツールや設定があらかじめ組み込まれた`tarアーカイブ`[^3]型式のファイルです。
 これをインポートすることで、WSL上に迅速に開発環境が構築できます。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
@@ -18,12 +18,14 @@ published: false
 
 ## 1. Debian アーカイブの概要
 
-カスタマイズ済み Debian アーカイブには、開発効率を高めるためのツールや設定が含まれています。具体的には、`Git`、`curl`、`XDG Base Directory`用環境変数などです。
+カスタマイズ済み Debian アーカイブには、開発効率を高めるためのツールや設定が含まれています。
+具体的には、`Git`、`curl`、`XDG Base Directory`用環境変数などです。
 これにより、WSL 環境で迅速に開発を開始できます。
 
 この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)でセットアップした Debian をエクスポートしています。
 
-ただし、不特定の人に配布するため、`dotfiles`はダウンロ－ドにし GitHub との連携はしていません。
+ただし、不特定の人に配布するため、`dotfiles`は`git`によるクローンではなくダウンロードにしています。
+GitHub との連携はしていません。
 
 ## 2. カスタマイズされた Debian のインポート
 
@@ -41,10 +43,10 @@ published: false
    ![PublicArchivesフォルダのスクリーンショット](https://imgur.com/GNakFoH.jpg)
 
 2. `custom-debian.tar.7z`の右端のメニューでダウンロードを選択
-   ![メニューでダウンロードを選択](https://imgur.com/7K0l7EL.jpg)
+   ![custom-Debian.tar.7zの右端の目メニューでダウンロードを選択](https://imgur.com/7K0l7EL.jpg)
 
 3. ダイアログの\[エラーを無視してダウンロード]ボタンをクリックしてダウンロード
-  ![ファイルのウィルススキャンを実行できません](https://imgur.com/o4SZp6T.jpg)
+  ![`エラーを無視してダウンロード'`ボタンをクリック](https://imgur.com/o4SZp6T.jpg)
 
 以上で、`custom-debian.tar.7z`のダウンロードは終了です。
 
@@ -63,7 +65,7 @@ PowerShell で、以下のコマンドを実行して展開します:
 実行結果は、次のようになります:
 
 ``` powershell
-> 7z x custom-debian.tar.7z
+$ 7z x custom-debian.tar.7z
 
 7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
 
@@ -85,7 +87,7 @@ Everything is Ok
 Size:       905297920
 Compressed: 185010644
 
->
+$
 ```
 
 上記のように`Everything is Ok`となれば、展開は成功しています。
@@ -177,7 +179,7 @@ wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian
 bash で、アカウント変更スクリプトを実行します:
 
 ```bash
-move_useraccount.sh <myaccount>   # <myaccount>は、自分のアカウントに置き換えてください
+move_useraccount.sh \<myaccount>   # <myaccount>は、自分のアカウントに置き換えてください
 ```
 
 ### 3.2 デフォルトユーザーの設定
@@ -207,13 +209,13 @@ default=<myaccount>    # <myaccount>は、自分のアカウントに置き換�
 bash で、次のコマンドを実行してパスワードを設定します:
 
 ```bash
-passwd <myaccount>  # <myaccount>.は自分のアカウントに置き換えてください。
+passwd \<myaccount>  # <myaccount>.は自分のアカウントに置き換えてください。
 ```
 
 実行結果は、次のようになります。
 
 ```bash
-$ passwd <myaccount>
+$ passwd \<myaccount>
 New password:
 Retype new password:
 passwd: password updated successfully
@@ -228,9 +230,9 @@ $
 
 ## 4. WSLの再起動
 
-以上の手順で、WSL の設定は完了します。
-WSL を再起動することで上記の設定が反映され、Debian に自アカウントでログインするようになります。
+以上の手順で、WSL の設定は完了です。
 
+WSL を再起動することで上記の設定が反映され、Debian に自アカウントでログインするようになります。
 PowerShell で次のコマンドを実行し、WSL をシャットダウンします:
 
 ```powershell
