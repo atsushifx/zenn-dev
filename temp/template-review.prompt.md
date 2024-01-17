@@ -93,8 +93,7 @@ link:
 """"
 remark:
 
-- 「それでは、Happy Hacking!」は残す
-- title の「WSL開発環境:」ヘッダーは残す
+- 読者は WSL、Debian の基本を知っているものとする
 
 """"
 /begin
