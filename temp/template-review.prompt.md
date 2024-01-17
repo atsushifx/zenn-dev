@@ -83,7 +83,10 @@
 """"
 link:
 
+- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
 - WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
+- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
+- `dotfiles`を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
 - `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
 
 """"
@@ -91,6 +94,7 @@ remark:
 
 - 「それでは、Happy Hacking!」は残す
 - title の「WSL開発環境:」ヘッダーは残す
+- 画像リンクは削除せず、ふさわしい ALT 文を作成する
 
 """"
 /begin

@@ -8,26 +8,28 @@ published: false
 
 ## はじめに
 
-この記事では、カスタマイズ済みの Debian[^2] の`tarアーカイブ`[^3]:を、WSL[^1] にインポートする方法を紹介します。
-これにより、Debian を初期設定する手間が大幅に削減できます。
+この記事では、WSL (Windows Subsystem for Linux)[^1]にカスタマイズ済み Debian[^2] をインポートする方法を紹介します。
+カスタマイズ済み Debian は、開発に必要なツールや設定があらかじめ組み込まれた`tarアーカイ`[^3]型式のファイルです。
+この記事では、WSL上でこのカスタマイズ済み Debian を簡単にセットアップし、効率的な開発構築をする方法を紹介します。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
 [^2]: Debian: Linux ディストリビューションの 1つ
+[^3]: `tarアーカイブ`: ファイルやディレクトリを 1つのファイルにまとめる UNIX のアーカイブ形式
 
 ## 1. Debian アーカイブの概要
 
-カスタマイズ済み Debian アーカイブは、特定の設定やツールを含んだ、WSL のエクスポート機能で作成された tar アーカイブファイルです。
-このアーカイブをインストールすることで、カスタマイズズ済みの Debian を WSL上に構築できます。
+カスタマイズ済み Debian アーカイブには、`開発効率を高めるために`Git`、`Vim`などのツールやカスタム設定`が含まれています。
+これにより、WSL 環境で迅速に開発を開始できます。
 
 この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)でセットアップした Debian をエクスポートしています。
 
 ただし、不特定の人に配布するため、`dotfiles`はダウンロ－ドにし GitHub との連携はしていません。
 
-この Debian アーカイブをインポートすることで、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)の作業をしなくても、同一の開発環境を構築できます。」
-
 ## 2. カスタマイズされた Debian のインポート
 
-以下のセクションで、カスタマイズ済みの Debian アーカイブをダウンロードし、WSL にインポートする手順を説明します。
+以下のセクションでは、カスタマイズ済みの Debian アーカイブをダウンロードし、その後、WSL にインポートする具体的な手順について説明します。
+インポートを行なうためには、WSL が有効になっている必要があります。
+インポート後は、`wsl --list`コマンドで Debian が正しくリストに載っていることを確認する必要があります。
 
 ### 2.1 Debianアーカイブのダウンロード
 
@@ -36,9 +38,9 @@ published: false
 次の手順で Debian アーカイブをダウンロードしてください:
 
 1. [PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)にアクセス
-   ![PublicArchives](https://imgur.com/GNakFoH.jpg)
+   ![PublicArchivesフォルダのスクリーンショット](https://imgur.com/GNakFoH.jpg)
 
-2. `custom-debian-tar.7z`の右端のメニューでダウンロードを選択
+2. `custom-debian.tar.7z`の右端のメニューでダウンロードを選択
    ![メニューでダウンロードを選択](https://imgur.com/7K0l7EL.jpg)
 
 3. ダイアログの\[エラーを無視してダウンロード]ボタンをクリックしてダウンロード
@@ -48,8 +50,9 @@ published: false
 
 ### 2.2 Debianアーカイブの展開
 
-ダウンロードした Debian の`7z`アーカイブを`7zip`[^3]の展開コマンド`7z x`コマンドで展開します
-展開に成功すると、`custom-debian.tar`ファイルが作成されます。
+ダウンロードした Debian の`7z`アーカイブを`7zip`[^4]で展開します。
+`7zip`は、さまざまな形式の圧縮ファイルを扱うことができる強力なツールで、`7z`型式にも対応しています。
+このコマンドを使って、ダウンロードした`7z`ファイルを展開し、WSL で使用できる形式にします。
 
 PowerShell で、以下のコマンドを実行して展開します:
 
@@ -90,14 +93,47 @@ Compressed: 185010644
 
 これにより、`WSL --import`で Debian がインポートできます。
 
-[^3]: `7zip`: `7z`型式でのファイル圧縮、展開ツール
+[^4]: `7zip`: `7z`型式および`zip`型式に対応したファイルアーカイブ・圧縮・展開ツール
 
-### 2.3. Debianのインポート
+### 2.3. wsl インポートの概要
 
-展開に成功すると、`custom-debian.tar`ファイルができているはずです。
-この tar ファイルを、WSL にインポートします。
+`wsl --import`コマンドは、tar アーカイブ形式でパッケージされた Linux ディストリビューションを WSL にインポートします。
+あらかじめ特定の設定やツールを組み込んだ tar アーカイブをインポートすることにより、開発した独自の環境を簡単に再現できます。
 
-PowerShell で、次のコマンドを実行します:
+`wsl --import`[^5]コマンドは、次の型式で実行します。
+
+```powershell
+wsl --import <ディストリビューション> <インポートディレクトトリ> <tarアーカイブ>
+```
+
+各パラメーターの意味は、次の通りです:
+
+- \<ディストリビューション>:
+  WSL が起動する Linux の名前、通常は Linux ディストリビューション名
+- \<インポートディレクトリ>:
+  ディストリビューションのインポートするディレクトリ、インポート前に作成して起く必要がある
+- \<tarアーカイブ>
+  カスタマイズ済みの Debian アーカイブ
+
+**注意事項**:
+インポートディレクトリは絶対ディレクトリで指定する必要があります。
+
+[^5]: `wsl --import`:  WSL に Linux ディストリビューションをインポートするためのコマンド
+
+### 2.4  Debianアーカイブのインポート
+
+正常に展開できていれば`custom-debian.tar`ファイルができているはずです。
+これを、以下のように`wsl --import`コマンドでインポートします。
+
+```powershell
+wsl --import Debian <インポートディレクトリ> custom-debian.tar
+```
+
+インポートディレクトリは、ユーザーが管理できる適当なディレクトリを指定する必要があります。
+ここでは、UNIX/Linux の設定ファイル、データファイル用のディレクトリ規格である`XDG Base Directory`[^6]に従うことで、ディレクトリの一貫性を確保しています。
+Debian のインポートディレクトリは、`~/.local/share/wsl/debian`となります。
+
+Debian アーカイブのインポートには、PowerShell で、次のコマンドを実行します:
 
 ```powershell
 mkdir  C:\Users\<myaccount>\.local\share\wsl\debian
@@ -105,7 +141,7 @@ wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian
 ```
 
 **注意**:
-\<myaccount>は、Windows の自アカウントにかえてください。
+\<myaccount>は、自分のアカウントに置き換えてください。
 
 実行結果は、次のようになります。
 
@@ -119,18 +155,24 @@ wsl --import Debian C:\Users\<myaccount>\.local\share\wsl\debian .\custom-debian
 ```
 
 **注意**:
-\<myaccount>は、Windows の自アカウントにかえてください。
+\<myaccount>は、自分のアカウントに置き換えてください。
 
 上記のように、"この操作を正しく終了しました。"と出力されれば、インポートは成功しています。
 
-## 3. デフォルトユーザーの設定
+[^6]: `XDG Base Directory`: Linux システムで設定ファイルやデータファイルを管理するための標準ディレクトリ構造
 
-インポート時は、ユーザーアカウントが`pwruser`に設定されており、`root`でログインするように設定されています 。
+## 3. デフォルトユーザーアカウントの変更
+
+インポート時の Debian では、ユーザーアカウントが`pwruser`に設定され、`root`アカウントでログインします 。
 インポートした Debian を使うには、`pwruser`を自分のアカウントに変更して、デフォルトユーザーに設定する必要があります。
 
 ### 3.1 ユーザーアカウントの変更
 
 ユーザーアカウント`pwruser`を、自アカウントに変更します。
+アカウントの変更には、現在のユーザーアカウントを新しいアカウントに変更するスクリプト`move_useraccount.sh`を使用します。
+このスクリプトを実行すると、アカウント名だけでなくホームディレクトリも自分のアカウントめいとなります。
+
+アカウント変更スクリプト`move_useraccount.sh`を用いて、アカウントを変更します。
 
 bash で、アカウント変更スクリプトを実行します:
 
@@ -152,15 +194,20 @@ default=<myaccount>    # <myaccount>は、自分のアカウントに置き換�
 
 ```
 
-これで、Debian 起動時に自アカウントでログインします。
+このように、`/etc/wsl.conf`の`[user]`セクションで`default`に自分のアカウントを設定します。
+この結果、デフォルトユーザーが自分のアカウントになります。
+
+これで、WSL を再起動すると、Debian 起動時に自分のアカウントでログインするようになります。
 
 ### 3.3 パスワードの設定
 
-自アカウントにパスワードを設定します。
-bash で、次のコマンドを実行します:
+セキュリティのため、自分のアカウントにパスワードを設定します。
+アカウントのセキュリティを確保するため、強固なパスワードを設定してください。推奨されるパスワードは、複雑で長く、予測しにくいものです。
+
+bash で、次のコマンドを実行してパスワードを設定します:
 
 ```bash
-passwd <myaccount>  # <myaccount>.は自アカウントにかきかえてください
+passwd <myaccount>  # <myaccount>.は自分のアカウントに置き換えてください。
 ```
 
 実行結果は、次のようになります。
@@ -197,9 +244,11 @@ wsl --shutdown
 このセクションでは、ダウンロード済みの`dotfiles`を削除し、新たに`dotfiles`を組み込む方法を紹介します。
 これにより、設定ファイルをバージョン管理でき、環境のバックアップや移行が簡単にできるようになります。
 
+また、上記手順で削除された`what`コマンドを再インストールする方法を説明します。
+
 ### 5.1 `dotfiles`の組み込み
 
-この記事でインポートした Debian では、各種設定ファイルが`dotfiles`[^4]で管理されていません。
+この記事でインポートした Debian では、各種設定ファイルが`dotfiles`[^7]で管理されていません。
 設定ファイルを`dotfiles`で管理したい場合は、以下の手順にしたがってください:
 
 1. `/opt/`下のサブディレクトリを削除:
@@ -223,12 +272,15 @@ wsl --shutdown
 
 以上で、`dotfiles`の組み込みは完了です。
 
-[^4]: `dotfiles`: UNIX/Linux の設定ファイル用を管理するためのバージョン管理システム上のリポジトリ
+[^7]: `dotfiles`: UNIX/Linux の設定ファイル用を管理するためのバージョン管理システム上のリポジトリ
 
 ### 5.2 `what`コマンドのインストール
 
-`dotfiles`の組み込みによって、`what`コマンドが削除されます。
-[`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)にしたがって、`what`コマンドをインストールします。
+`what`コマンド[^8]は、シェルスクリプトや設定ファイルの特定のコメントを解析し、ファイルの概要やバージョンを出力するユーティリティです。
+
+[`dotfiles`の組み込み](#51-dotfilesの組み込み)セクションの作業によって、`what`コマンド[^8]が削除さるので、[`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)にしたがって、`what`コマンドをインストールします。
+
+[^8]: `what`コマンド: シェルスクリプトや設定ファイルの概要を出力するコマンド
 
 ## おわりに
 
@@ -241,6 +293,8 @@ wsl --shutdown
 
 ### Webサイト
 
+- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
 - WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
-- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
 - 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
+- `dotfiles`を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
+- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
