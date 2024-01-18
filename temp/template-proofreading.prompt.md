@@ -57,5 +57,8 @@
 """"
 :remark:
 
+- `tarアーカイブ`は変更しない
+- `Happy Hacking!`は変更しない`
+
 """"
 /begin
