@@ -1,5 +1,5 @@
 ---
-title: "WSL開発環境: カスタマイズ済みDebianのインポートによる高速セットアップ"
+title: "WSL開発環境: カスタムDebianによる高速セットアップ"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "import", "カスタマイズ",]
@@ -8,30 +8,29 @@ published: false
 
 ## はじめに
 
-この記事では、WSL (Windows Subsystem for Linux)[^1]上で使用するカスタマイズ済み Debian[^2] をインポートする方法を説明します。
-これにより、WSL上の開発環境が短時間で構築できます。
+WSL (Windows Subsystem for Linux)[^1]にカスタマイズされた Debian[^2] をインポートして、開発環境を迅速にセットアップする方法を紹介します。
+これにより、同一の開発環境を短時間に構築でき、開発効率が向上します。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows 上で Linux 環境を実行するためのサブシステム
 [^2]: Debian: Linux ディストリビューションの 1つ
 
 ## 1. Debian アーカイブの概要
 
-カスタマイズ済み Debian アーカイブは、ツールのインストール、環境設定を含む`tarアーカイブ`[^3]ファイルです。
-たとえば、`Git`、`XDG Base Directory`、テキストエディタの設定など、開発効率を向上させるツールと設定が含まれています。
+カスタマイズ済み Debian アーカイブは、開発効率を高める各種ツールとカスタマイズされた設定を含む`tar アーカイブ`[^3]です。
+この記事で使うアーカイブは、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome) で事前にセットアップしたされたものです。
 
-この記事では、[環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome) でセットアップした Debian をエクスポートしています。
-なお、一般公開のため、`dotfiles`は`git`クローンではなく直接ダウンロード方式を採用しています。
-これは、個人の認証情報を含まないための措置です。
+個人の認証情報を削除するため、`dotfiles`は直接ダウンロードしたものを使用しています。
 
 [^3]: `tarアーカイブ`: UNIX/Linux で標準的な複数のファイル／ディレクトリをまとめる型式
 
 ## 2. wslインポートの概要
 
-`wsl --import`コマンドは、`tarアーカイブ`形式の Linux ディストリビューションをインポートするために利用されます。
+`wsl --import`コマンドは、`tarアーカイブ`形式の Linux ディストリビューションを WSL上にインポートします。
+インポートした`tarアーカイブ`は、WSL上の指定したディストリビューションとして実行でき、`tarアーカイブ`時点での設定を再現します。
 
 ### 2.1. wsl インポートのコマンドライン
 
-`wsl --import`[^4] コマンドは、`tarアーカイブ`形式でエクスポートされた Linux ディストリビューションを指定したディレクトリにインポートします。
+`wsl --import`[^4] コマンドは、`tarアーカイブ`形式でエクスポートされた Linux ディストリビューションを WSL上にインポートします。
 この機能により、カスタマイズされた環境を簡単に再現できます。
 
 `wsl --import`コマンドは、次の形式で実行します。
@@ -56,24 +55,27 @@ wsl --import <ディストリビューション> <インポートディレクト
 
 ## 3. カスタマイズ済みの Debian のインポート
 
-カスタマイズ済みの Debian アーカイブをダウンロードし、その後、WSL にインポートする具体的な手順について説明します。
+ここでは、カスタマイズ済みの Debian アーカイブをダウンロード、展開し、WSL にインポートする手順を紹介します。
 
 ### 3.1 Debianアーカイブのダウンロード
 
-`Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)上の Debian アーカイブファイル`custom-debian.tar.7z`を、ダウンロードします。
+Debian アーカイブは、Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)からダウンロードできます。
 
-次の手順にしたがって、Debian アーカイブをダウンロードします:
+次の手順で、Debian アーカイブをダウンロードします:
 
 1. \[[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)]にアクセス
    ![PublicArchivesフォルダのスクリーンショット](https://imgur.com/GNakFoH.jpg)
 
-2. `custom-debian.tar.7z`の右端のメニューでダウンロードを選択
-   ![custom-Debian.tar.7zの右端の目メニューでダウンロードを選択](https://imgur.com/7K0l7EL.jpg)
+2. `custom-debian.tar-x.y.z.7z`の右端のメニューでダウンロードを選択
+   ![custom-Debian.tar.7zの右端のメニューでダウンロードを選択](https://imgur.com/7K0l7EL.jpg)
 
 3. ダイアログの\[エラーを無視してダウンロード]ボタンをクリックしてダウンロード
   ![`エラーを無視してダウンロード'`ボタンをクリック](https://imgur.com/o4SZp6T.jpg)
 
-以上で、`custom-debian.tar.7z`のダウンロードは終了です。
+  **注意**:
+  スキャンできないためエラーが出る。無視してよい。
+
+以上で、`custom-debian.tar-x.y.z.7z`のダウンロードは終了です。
 
 ### 3.2 Debianアーカイブの展開
 
@@ -83,21 +85,18 @@ wsl --import <ディストリビューション> <インポートディレクト
 
 次のコマンドを実行して展開します:
 
-1. '7z`コマンドによる展開:
+1. `7z`コマンドによる展開:
+   `7z x`コマンドで、Debian アーカイブを展開する。
 
    ```powershell
-   7z x custom-debian.tar.7z
+   7z x custom-debian.tar-x.y.z.7z
    ```
 
    実行結果が次のようになれば、展開は成功しています。
 
-   ```powershel]
-
-   7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
-
-   Scanning the drive for archives
-
-
+   ```powershel
+    .
+    .
    Everything is Ok
 
    $
@@ -115,6 +114,7 @@ Debian のインポートディレクトリは、`/~/.local/share/wsl/debian`と
 次の手順で、インポートディレクトリを作成します:
 
 1. インポートディレクトリの作成
+   インポートディレクトリを作成します。
 
    ```powershell
    mkdir ~/.local/share/wsl/debian
@@ -149,9 +149,8 @@ Debian アーカイブのインポートには、PowerShell で、次のコマ�
 
 ## 4. デフォルトユーザーアカウントの変更
 
-インポート時の Debian では、ユーザーアカウントが`pwruser`に設定され、`root`アカウントでログインします。
-`pwruser`は、このアーカイブ用に設定された一時的なアカウント名です。
-インポートした Debian を使うには、`pwruser`を自分のアカウントに変更して、デフォルトユーザーに設定する必要があります。
+デフォルトユーザーアカウントを、開発者のアカウントに変更する方法を説明します。
+開発者自身のアカウントに変更することで、個々のニーズに合わせて環境をカスタマイズできます。
 
 ### 4.1 ユーザーアカウントの変更
 
@@ -170,8 +169,8 @@ Debian アーカイブのインポートには、PowerShell で、次のコマ�
 
 ### 4.2 デフォルトユーザーの設定
 
-起動時のデフォルトユーザーを設定します。
-以下のように、`/etc/wsl.conf`を設定します:
+起動時のデフォルトユーザーを`root`から自分のアカウントに変更します。
+エディタで`/etc/wsl.conf`を編集し、以下のように設定します:
 
 ```:/etc/wsl.conf
 
@@ -189,7 +188,7 @@ WSL を再起動すると、Debian 起動時に自分のアカウントでログ
 
 ### 4.3 パスワードの設定
 
-セキュリティのため、自分のアカウントにパスワードを設定します。
+セキュリティを保つため、自分のアカウントに強固なパスワードを設定します。
 アカウントのセキュリティを確保するため、強固なパスワードを設定してください。推奨されるパスワードは、複雑で長く、予測しにくいものです。
 
 bash で、次のコマンドを実行してパスワードを設定します:
@@ -201,7 +200,7 @@ passwd <myaccount>  # <myaccount>.は自分のアカウントに置き換えて�
 実行結果は、次のようになります。
 
 ```bash
-$ passwd \<myaccount>
+$ passwd <myaccount>
 New password:
 Retype new password:
 passwd: password updated successfully
@@ -210,9 +209,6 @@ $
 ```
 
 以上で、パスワードの設定は終了です。
-
-**注意**:
-自アカウントを安全に使用するために、強力なパスワードを設定する必要があります。複雑で予測しにくいパスワードを設定することを推奨します。
 
 ## 5. WSLの再起動
 
@@ -223,7 +219,7 @@ Debian の設定を反映させるため、WSL を再起動します。
 次のコマンドを実行し、WSL をシャットダウンします:
 
 1. WSL のシャットダウン
-   次のコマンドを実行し、WSL をシャットダウンします。
+   WSL をシャットダウンします。
 
    ```powershell
    wsl --shutdown
@@ -233,9 +229,11 @@ Debian の設定を反映させるため、WSL を再起動します。
 
 ## 6. 追加の設定
 
-カスタマイズした Debian では`dotfiles`[^7]がバージョン管理されていません。
-このセクションでは、既存の`dotfiles`を削除し、最新版を組み込む方法を紹介します。
-次に、`what`コマンドを再インストールする方法を紹介します。
+`dotfiles`[^7]は、開発環境の設定ファイルをまとめたものです。
+インポートした Debian では、`dotfiles`はバージョン管理されていないため、バックアップや環境の移行ができません。
+このセクションでは、既存の`dotfiles`を削除し、フォークした`dotfiles`を組み込むことで`dotfiles`をバージョン管理する方法を説明します。
+
+合わせて、`what`コマンドを再インストールする方法を説明します。
 
 [^7]: `dotfiles`: UNIX/Linux の設定ファイル用を管理するリポジトリ、または設定ファイル自身
 
@@ -248,7 +246,7 @@ Debian の設定を反映させるため、WSL を再起動します。
 
 1. `/opt/`下のサブディレクトリを削除:
     `/opt/bin`, `/opt/etc` をシンボリックリンクにするため削除します。
-    以下のコマンドを実行します:
+    次のコマンドを実行します:
 
     ```bash
     sudo rm -fr /opt/etc /opt/bin
