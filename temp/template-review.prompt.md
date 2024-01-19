@@ -8,7 +8,7 @@
 
 - /begin が入力されたら、バッファー :text を空にして、入力を待つ
 - /end が入力されたら、バッファー :text に入力された文章に対し、指示にしたがってレビューする
-- /exit が入力されたら、バッファー :text およびすべての指示、入力の記録を破棄して新たにチャットを始める
+- /exit が入力されたら、バッファー :text およびすべての変数、指示、入力の記録を破棄して新たにチャットを始める
 - /cont  が入力されたら、前の出力の続きを日本語で出力する。
 
 以後、/begin まではレビューの指示、コマンドとして解釈する。
@@ -67,7 +67,7 @@
 """"
 :theme:
 
-- WSL上にカスタマイズされた Debian をインポートし、開発環境を素早く構築する
+- WSL上の Debian に作業用ディレクトリを作成する
 
 """"
 :target:
@@ -78,17 +78,14 @@
 """"
 :goal:
 
-- WSL に設定された Debian をインポートする
-- インポートした Debian をダウンロードしたユーザー用にセットアップする
+- WSL に作業用ディレクトリを作成する
+- `XDG Base Directory`用にディレクトリを作成する
 
 """"
 link:
 
-- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
-- WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
-- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
-- `dotfiles`を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
-- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+-`XDG Base Directory' (`Arch Wiki``):
+  <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
 
 """"
 remark:
