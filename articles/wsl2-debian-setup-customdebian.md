@@ -28,7 +28,7 @@ WSL[^1]にカスタマイズされた Debian[^2] をインポートして、効�
 
 ## 2. wslインポートの概要
 
-WSL に Debian アーカイブをインポートとする際には、`wsl  --import`[^5]コマンドを使用します。
+WSL に Debian アーカイブをインポートする際には、`wsl  --import`[^5]コマンドを使用します。
 これにより、環境設定の複製や移行が簡単になります。
 
 [^5]: `wsl --import`:  WSL に Linux ディストリビューションをインポートするためのコマンド
@@ -61,11 +61,11 @@ wsl --import <ディストリビューション> <インポートディレクト
 ## 3. カスタマイズ済みの Debian のインポート
 
 カスタマイズ済み Debian アーカイブをダウンロードし、WSL にインポートする手順を紹介します。
-これにより、ユーザーは迷うことなく作業を進めることができます。
+これにより、ユーザーは作業を迷うことなく進めることができます。
 
 ### 3.1 Debianアーカイブのダウンロード
 
-Debian アーカイブは、Google Drive`の[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)からダウンロードできます。
+Debian アーカイブは、[PublicArchives](https://drive.google.com/drive/u/1/folders/1lFB3LtSv8ifIBesODG1XNYOsUlPsddLU)  からダウンロードできます。
 
 次の手順で、Debian アーカイブをダウンロードします:
 
@@ -156,7 +156,6 @@ Debian アーカイブのインポートには、PowerShell で、次のコマ�
 ## 4. デフォルトユーザーアカウントの変更
 
 デフォルトユーザーアカウントの変更方法を説明します。
-
 これにより、自分のアカウントで環境を設定できます。
 
 ### 4.1 ユーザーアカウントの変更
@@ -196,7 +195,7 @@ default=<myaccount>    # <myaccount>は、自分のアカウントに置き換�
 このように、`/etc/wsl.conf`の`[user]`セクションで`default`に自分のアカウントを設定します。
 この結果、デフォルトユーザーが自分のアカウントになります。
 
-WSL を再起動すると、Debian 起動時に自分のアカウントでログインするようになります。
+WSL を再起動すると、Debian 起動時に自分のアカウントでログインするように変更されます。
 
 ### 4.3 パスワードの設定
 
