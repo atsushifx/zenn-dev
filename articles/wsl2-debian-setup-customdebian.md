@@ -3,7 +3,7 @@ title: "WSL開発環境: カスタムDebianによる高速セットアップ"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "import", "カスタマイズ",]
-published: false
+published: true
 ---
 
 ## はじめに
