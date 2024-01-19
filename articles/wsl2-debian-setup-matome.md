@@ -66,7 +66,7 @@ WSL を使うことで、Windows上で Linux を使ったシステム開発が�
 7. [dotfilesを使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)
    GitHub上の dotfiles リポジトリを使って、環境設定を統一します。
 
-8. [`what`コマンドによるスクリプト管理と文書化](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)
+8. [`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)
    `what`コマンドをインストールします。また、`whatdoc`コメントのフォーマットについて解説します。
 
 ## おわりに

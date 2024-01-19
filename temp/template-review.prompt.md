@@ -22,8 +22,8 @@
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 一人称の文章で、ですます調を使う。リストのばあいは「体言止め」「である調」を基本とする
-  プロフェッショナルな文体を目指すが、読みやすさを重視しカジュアルな文体も許容する
-- タイトル、ヘッダーなどはエンジニア向けにプロフェッショナルな文体とし、!などで煽らない
+- プロフェッショナルな文体を目指すが、読みやすさを重視しカジュアルな文体も残す
+- 本稿などの堅い単語は使わない
 - 全体的な文章について、説明に注視し、「あなた」などの呼びかけ、「しましょう」などの命令形は使わない
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
@@ -67,32 +67,35 @@
 """"
 :theme:
 
-- WSL上に開発環境を構築する
+- WSL上にカスタマイズされた Debian をインポートし、開発環境を素早く構築する
 
 """"
 :target:
 
-- Windows で WSL を使う中級プログラマー
+- Windows で WSL を使うプログラマー
+- Linux での最低限必要なコマンドをしっているプログラマー
 
 """"
 :goal:
 
-- WSL上に what コマンドをインストールする
-- whatdoc コメントの書き方を知る
+- WSL に設定された Debian をインポートする
+- インポートした Debian をダウンロードしたユーザー用にセットアップする
 
 """"
 link:
 
-- `agla shell utils`: <https://github.com/atsushifx/agla-shell-utils>
+- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
+- WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
+- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
+- `dotfiles`を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
 - `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
-- `SCCS`: <https://ja.wikipedia.org/wiki/Source_Code_Control_System>
 
 """"
 remark:
 
-- カジュアルな文体は変更しない
-- 「それでは、Happy Hacking!」は残す
-- 　title の「WSL開発環境:」は残す
+- 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
+- タイトルの"WSL開発環境: "は削除しない
+- 「カスタマイズ済みの Debian のインポート」のサブセクションの手順は省略しない
 
 """"
 /begin
