@@ -3,7 +3,7 @@ title: "WSL開発環境: 作業用ディレクトリの作成"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "XDGBase", "workspaces", "ディレクトリ" ]
-published: false
+published: true
 ---
 
 ## はじめに
