@@ -8,7 +8,7 @@
 
 - /begin が入力されたら、バッファー :text を空にして、入力を待つ
 - /end が入力されたら、バッファー :text に入力された文章に対し、指示にしたがってレビューする
-- /exit が入力されたら、バッファー :text およびすべての指示、入力の記録を破棄して新たにチャットを始める
+- /exit が入力されたら、バッファー :text およびすべての変数、指示、入力の記録を破棄して新たにチャットを始める
 - /cont  が入力されたら、前の出力の続きを日本語で出力する。
 
 以後、/begin まではレビューの指示、コマンドとして解釈する。
@@ -24,7 +24,9 @@
 - 一人称の文章で、ですます調を使う。リストのばあいは「体言止め」「である調」を基本とする
 - プロフェッショナルな文体を目指すが、読みやすさを重視しカジュアルな文体も残す
 - 本稿などの堅い単語は使わない
-- 全体的な文章について、説明に注視し、「あなた」などの呼びかけ、「しましょう」などの命令形は使わない
+- 全体的な文章について、説明に注視する
+- 「あなた」などの呼びかけを使わない
+- 文章に「しましょう」などの命令形を使わなあい
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
@@ -67,7 +69,7 @@
 """"
 :theme:
 
-- WSL上にカスタマイズされた Debian をインポートし、開発環境を素早く構築する
+- WSL上の Debian に作業用ディレクトリを作成する
 
 """"
 :target:
@@ -78,24 +80,21 @@
 """"
 :goal:
 
-- WSL に設定された Debian をインポートする
-- インポートした Debian をダウンロードしたユーザー用にセットアップする
+- WSL に作業用ディレクトリを作成する
+- `XDG Base Directory`用にディレクトリを作成する
 
 """"
 link:
 
-- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
-- WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
-- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
-- `dotfiles`を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
-- `what`コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+-`XDG Base Directory' (`Arch Wiki``):
+  <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
 
 """"
 remark:
 
 - 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
 - タイトルの"WSL開発環境: "は削除しない
-- 「カスタマイズ済みの Debian のインポート」のサブセクションの手順は省略しない
+- 「ぐっと」「スッキリ」といったカジュアルな表現を使わない
 
 """"
 /begin
