@@ -24,7 +24,7 @@ Debian を WSL上で使用する際には、作業用ディレクトリの準備
 mkdir ~/bin ~/temp
 ```
 
-### `XDG Base Directory`ディレクトリ
+### 1.2 `XDG Base Directory`ディレクトリ
 
 WSL 環境での設定ファイルの管理を効率化するために、`XDG Base Directory`[^1]仕様にしたがってディレクトリを作成します。
 これにより、設定やデータの整理が効率化され、システムの整合性が向上します。
@@ -41,7 +41,7 @@ WSL 環境での設定ファイルの管理を効率化するために、`XDG Ba
 **注意**:
 
 - 実際に`XDG Base Directory`にしたがってファイルを保存するには、上記の各環境変数を設定する必要があります。
-- `dotfiles`組み込み済みの場合は、`/opt/etc/envrc`で設定されます。
+- `dotfiles`については、[こちらの記事](wsl2-debian-dotfiles)を参照してください。
 
 次のコマンドで、`XDG Base Directory`  を作成します:
 
@@ -55,7 +55,7 @@ mkdir -p \
 
 [^1]: `XDG Base Directory`: Linux におけるユーザーの設定ファイル、データファイル、キャッシュファイルなどを管理するための規格
 
-### `workspaces`ディレクトリ
+### 1.3 `workspaces`ディレクトリ
 
 `workspaces`は、各プロジェクトごとにサブディレクトリを作成し、そこで作業するためのディレクトリです。
 これにより、プロジェクトごとにファイルやデータを整理しやすくなります。
@@ -78,7 +78,7 @@ mkdir -p ~/workspaces/temp
 ├─ .local
 │    ├─ cache
 │    ├─ share
-│    │    ├── git
+│    │    └─ git
 │    └─ states
 ├─ bin
 ├─ temp
@@ -89,7 +89,7 @@ mkdir -p ~/workspaces/temp
 ## おわりに
 
 これで作業用ディレクトリの準備は完了です。
-これらのディレクトリを利用して作業を進めましょう。
+以後、これらのディレクトリを利用して作業を進めましょう。
 
 それでは、Happy Hacking!
 
