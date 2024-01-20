@@ -51,22 +51,25 @@ WSL を使うことで、Windows上で Linux を使ったシステム開発が�
 2. [WSL に Debian をインストールする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-install)
    `wsl`コマンドを使って、`WSL`上に Debian をインストールします。
 
-3. [WSLでのDebianのアップグレード方法](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-upgrade)
+3. [作業用ディレクトリの作成](https://zenn.dev/atsushifx/articles/wsl2-debian-workingdir-create)
+   今後の作業のために、作業用ディレクトリを作成します。
+
+4. [WSLでのDebianのアップグレード方法](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-upgrade)
    `apt`を使って Debian を最新の状態にし、セキュリティと機能の両面でシステムを改善します。
 
-4. [WSL上のDebianを日本語化する方法](https://zenn.dev/atsushifx/articles/wsl2-debian-japanese)
+5. [WSL上のDebianを日本語化する方法](https://zenn.dev/atsushifx/articles/wsl2-debian-japanese)
    `apt`を使って日本語パッケージをインストールし、日本語環境を構築します。
 
-5. [wsl.conf を使用して WSL2 の動作をカスタマイズする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-config-wslconf)
+6. [wsl.conf を使用して WSL2 の動作をカスタマイズする方法](https://zenn.dev/atsushifx/articles/wsl2-debian-config-wslconf)
    WSL の設定を自分のニーズに合わせてカスタマイズし、より効率的な開発環境を構築します。
 
-6. [必須パッケージのインストール](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages)
+7. [必須パッケージのインストール](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages)
    `zip`, `curl`, `git`などの今後のソフトウェア開発や環境構築に必要なパッケージをインストールします。
 
-7. [dotfilesを使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)
+8. [dotfilesを使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)
    GitHub上の dotfiles リポジトリを使って、環境設定を統一します。
 
-8. [`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)
+9. [`what`コマンドによるスクリプト管理](https://zenn.dev/atsushifx/articles/wsl2-shell-command-what)
    `what`コマンドをインストールします。また、`whatdoc`コメントのフォーマットについて解説します。
 
 ## おわりに
