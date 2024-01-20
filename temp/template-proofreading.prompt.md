@@ -48,16 +48,11 @@
 """"
 :link
 
-- WSL の基本的なコマンド: <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
-- WSL で使用する Linux ディストリビューションをインポートする: <https://learn.microsoft.com/ja-jp/windows/wsl/use-custom-distro>
-- 環境構築の記事まとめ: <https://zenn.dev/atsushifx/articles/wsl2-Debian-setup-matome>
-- dotfiles を使った環境管理: <https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles>
-- what コマンド: <https://raw.githubusercontent.com/atsushifx/agla-shell-utils/main/agla/what>
+- `XDG Base Directory`: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
 
 """"
 :remark:
 
-- `tarアーカイブ`は変更しない
 - `Happy Hacking!`は変更しない`
 
 """"
