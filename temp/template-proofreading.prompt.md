@@ -48,7 +48,7 @@
 """"
 :link
 
-- `XDG Base Directory`: <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+- 7zip: <https://packages-debian-org.translate.goog/sid/7zip>
 
 """"
 :remark:
