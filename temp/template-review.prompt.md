@@ -69,7 +69,7 @@
 """"
 :theme:
 
-- WSL上の Debian に作業用ディレクトリを作成する
+- WSL上の Debian に基本的なツールをインストールする
 
 """"
 :target:
@@ -80,21 +80,18 @@
 """"
 :goal:
 
-- WSL に作業用ディレクトリを作成する
-- `XDG Base Directory`用にディレクトリを作成する
+- WSL に必要な開発ツールをインストールする
 
 """"
 link:
-
--`XDG Base Directory' (`Arch Wiki``):
-  <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
 
 """"
 remark:
 
 - 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
-- タイトルの"WSL開発環境: "は削除しない
-- 「ぐっと」「スッキリ」といったカジュアルな表現を使わない
+- タイトルの"WSL開発環境: "はそのままにする
+- '7zip'はそのままにする
+- 'アーカイバ'はそのままにする
 
 """"
 /begin
