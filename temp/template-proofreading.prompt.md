@@ -48,7 +48,11 @@
 """"
 :link
 
-- 7zip: <https://packages-debian-org.translate.goog/sid/7zip>
+- カスタム Debian による高速セットアップ
+  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian>
+
+- Debian 上での必須パッケージのインストール
+  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages>
 
 """"
 :remark:

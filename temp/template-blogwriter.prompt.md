@@ -51,7 +51,7 @@
 """"
 :theme:
 
-- WSL上の Debian に作業用ディレクトリを作成する
+- WSL上の Debian に追加のパッケージをインストールする
 
 """"
 :target:
@@ -61,14 +61,16 @@
 """"
 :goal:
 
-- WSL上に開発のための作業用ディレクトリを作成すること
-- `XDG Base Directory`用に保存用ディレクトリを作成すること
+- WSL に追加のパッケージをインストールすること
 
 """"
 :link:
 
--`XDG Base Directory' (`Arch Wiki``):
-  <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
+-カスタム Debian による高速セットアップ:
+  <https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian>
+
+- Debian 上での必須パッケージのインストール:
+  <https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages>
 
 """"
 :remark:
