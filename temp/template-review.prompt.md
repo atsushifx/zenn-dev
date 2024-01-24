@@ -69,29 +69,32 @@
 """"
 :theme:
 
-- WSL上の Debian に基本的なツールをインストールする
+- WSL上の Debian に追加のツールをインストールする
 
 """"
 :target:
 
 - Windows で WSL を使うプログラマー
-- Linux での最低限必要なコマンドをしっているプログラマー
+- Linux での最低限必要なコマンドを知っているプログラマー
 
 """"
 :goal:
 
-- WSL に必要な開発ツールをインストールする
+- WSL 上で開発に便利なツールをインストールする
 
 """"
 link:
+
+- カスタム Debian による高速セットアップ
+  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian>
+- Debian 上での必須パッケージのインストール
+  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages>
 
 """"
 remark:
 
 - 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
 - タイトルの"WSL開発環境: "はそのままにする
-- '7zip'はそのままにする
-- 'アーカイバ'はそのままにする
 
 """"
 /begin
