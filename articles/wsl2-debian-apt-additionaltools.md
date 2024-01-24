@@ -1,5 +1,5 @@
 ---
-title: "WSL開発環境: 追加のパッケージのインストール"
+title: "WSL開発環境: 開発効率向上のための追加のパッケージのインストール"
 emoji:  "🐧"
 type: "tech"
 topics: [ "wsl", "開発環境", "APT",  "bash"]
@@ -8,31 +8,34 @@ published: false
 
 ## はじめに
 
-この記事では、WSL[^1]上の Debian[^2]環境を使った開発作業の効率をさらに向上させる追加パッケージを紹介します。
-[必須パッケージ](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-package) に加えて、これらのツールをインストールすることで、開発がよりスムーズになります。
+この記事では、WSL[^1] 上の Debian[^2] 環境で、開発作業の効率向上のための追加パッケージを紹介します。
+[必須パッケージ](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages) に加えて、これらのツールをインストールすることで、開発をよりスムーズに進めることができます。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows上で Linux バイナリを直接実行するための互換レイヤー
 [^2]: Debian: フリーでオープンソースの Linux ディストリビューション
 
-## 1. 記事の前提
+## 1. 記事の前提環境
 
 この記事は、[高速セットアップ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian)で構築した Debian 環境をもとにしています。
 この環境は、`bash`を使用し、`/opt/etc/`下の設定ファイルによって、カスタマイズが可能です。
-すでに`XDG Base Directory`[^3] などの基本的な設定は完了しており、すぐに作業を開始できます。
+すでに `XDG Base Directory`[^3] などの基本的な設定は完了しており、すぐに作業を開始できます。
+次のセクションでは、この環境に追加するパッケージを詳しく説明します。
 
 [^3]: `XDG Base Directory`: アプリケーション設定ファイルのための標準ディレクトリパスを定義する仕様、およびその環境変数
 
 ## 2. 追加するパッケージ
 
+WSL上で開発効率を上げるために推奨する追加的なパッケージを紹介します。
+
 ### 2.1 補完機能
 
-コマンドライン作業の効率を上げるために、タブキーを使ってコマンドを補完する機能を追加します。
+コマンドライン操作を効率化するため、タブ補完機能を追加します。
 
 | パッケージ名 | 説明 | 選定理由 | 備考 |
 | --- | --- | --- | --- |
 | `bash-completion`[^4] | `bash`コマンドラインにタブ補完機能を提供 | コマンドの補完により、日常の開発作業を迅速化する |  `git`など、多くのコマンドで利用可能 |
 
-インストールコマンド:
+以下のコマンドで、パッケージをインストールします:
 
 ```bash
 sudo apt install bash-completion
@@ -40,7 +43,7 @@ sudo apt install bash-completion
 
 [^4]: `bash-completion`:コマンドライン作業の効率を高めるための補完機能を提供するパッケージ
 
-### 2.2 タブ補完機能の組み込み方法
+### 2.2 タブ補完機能の組み込み手順
 
 タブ補完機能は、`bash`起動時に設定スクリプトを読み込む必要があります。
 ただし、高速セットアップを使用した環境では、この設定はすでに含まれていますので、追加作業は不要です。
@@ -61,14 +64,12 @@ fi
 
 ### 2.3 開発ツール
 
-WSL上で使用するツールをリストアップします。
-
 | パッケージ名 | 説明 | 選定理由 | 備考 |
 | --- | --- | --- | ---  |
 | `build-essential`[^5] | ビルドに必要な基本的なパッケージ | ほかのツールをビルドする際に必要なため |  |
 | `python3` | Python 実行環境 | スクリプトの作成、利用のため  |  |
 
-インストールコマンド:
+以下のコマンドで、パッケージをインストールします:
 
 ```bash
 sudo apt install build-essential python3
@@ -78,7 +79,7 @@ sudo apt install build-essential python3
 
 ## 3. WSLの再起動
 
-パッケージのインストール後、変更を有効にするため、WSL を再起動します」。
+パッケージのインストール後、変更を有効にするため、WSL を再起動します。
 以下の手順で、WSL を再起動します。
 
 1. WSL のシャットダウン:
@@ -104,8 +105,5 @@ WSL上での開発環境を強化するためのツールを紹介しました�
 
 ### Webサイト
 
-- カスタム Debian による高速セットアップ
-  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian>
-
-- Debian 上での必須パッケージのインストール
-  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages>
+- [カスタム Debian による高速セットアップ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian)
+- [Debian 上での必須パッケージのインストール](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages)
