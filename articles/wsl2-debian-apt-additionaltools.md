@@ -3,7 +3,7 @@ title: "WSL開発環境: 開発効率向上のための追加のパッケージ�
 emoji:  "🐧"
 type: "tech"
 topics: [ "wsl", "開発環境", "APT",  "bash"]
-published: false
+published: true
 ---
 
 ## はじめに
