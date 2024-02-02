@@ -95,6 +95,7 @@ remark:
 
 - 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
 - タイトルの"WSL開発環境: "はそのままにする
+- `linuxbrew`は`Homebrew`に統合されたので記述しない
 
 """"
 /begin
