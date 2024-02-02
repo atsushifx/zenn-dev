@@ -11,7 +11,7 @@ published: false
 Homebrew は、`macOS` で広く利用されるパッケージマネージャーで、Linux や WSL[^1] 環境下でも使用できます。
 WSL は Windows上で Linux 環境を提供する機能で、開発者にとって非常に便利です。
 
-`Homebrew`は、各種パッケージを*`/home/linuxbrew`下にインストールするため、管理者権限を必要としません。
+`Homebrew`は、各種パッケージを`/home/linuxbrew`下にインストールするため、管理者権限を必要としません。
 システムへの影響を最小限に抑えるため、開発環境の構築時に大きな利点となります。
 
 [^1]: WSL (Windows Subsystem for Linux): Windows上で Linux 環境を提供する機能
@@ -20,7 +20,7 @@ WSL は Windows上で Linux 環境を提供する機能で、開発者にとっ�
 
 Linux版Homebrew[^2] では、`/home/linuxbrew`下にパッケージを配置しています。
 このディレクトリ構造のため、`linuxbrew`というユーザーアカウントのホームディレクトリと衝突します。
-これを防ぐため、`linuxbrew`というユーザーアカウントを作成するとことは避けましょう。
+これを防ぐため、'linuxbrew'というユーザーアカウントを作成することは避けましょう。
 
 [^2]: Homebrew: `macOS`向けに開発されたパッケージ管理システムで、Linux 環境や WSL でも利用可能
 
@@ -36,7 +36,7 @@ Homebrew をインストールするためには、`apt`を使用して`build-es
 sudo apt install build-essential gcc procps curl wget file git
 ```
 
-[^3]: `build-essential`: ソフトウェアのビルドに必要なパッケージをまとめたメタパッケージ
+[^3]: `build-essential`: ソフトウェア開発に必要なコンパイラ、ライブラリといったパッケージをまとめたメタパッケージ
 
 ### 2.2 Homebrewのインストール
 
