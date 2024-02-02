@@ -48,11 +48,9 @@
 """"
 :link
 
-- カスタム Debian による高速セットアップ
-  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian>
-
-- Debian 上での必須パッケージのインストール
-  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages>
+- [brew ホームページ](https://brew.sh)
+- [Homebrew on Linux](https://docs.brew.sh/Homebrew-on-Linux)
+- [dotfiles を使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)
 
 """"
 :remark:

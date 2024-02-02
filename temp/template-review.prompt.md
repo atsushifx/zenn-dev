@@ -69,7 +69,7 @@
 """"
 :theme:
 
-- WSL上の Debian に追加のツールをインストールする
+- WSL上の Debian に Homebrew をセットアップする
 
 """"
 :target:
@@ -80,21 +80,22 @@
 """"
 :goal:
 
-- WSL 上で開発に便利なツールをインストールする
+- WSL 上に Homebrew をインストールし、brew コマンドを使えるように環境変数を設定する
 
 """"
 link:
 
-- カスタム Debian による高速セットアップ
-  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian>
-- Debian 上での必須パッケージのインストール
-  URL: <https://zenn.dev/atsushifx/articles/wsl2-debian-apt-packages>
+- brew.sh
+  URL: <https://brew.sh>
+- Homebrew on Linux
+  URL:  <https://docs.brew.sh/Homebrew-on-Linux>
 
 """"
 remark:
 
 - 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
 - タイトルの"WSL開発環境: "はそのままにする
+- `linuxbrew`は`Homebrew`に統合されたので記述しない
 
 """"
 /begin
