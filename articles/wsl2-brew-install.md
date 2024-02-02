@@ -3,7 +3,7 @@ title: "WSL開発環境: Homebrewのセットアップ"
 emoji: "☕"
 type: "tech"
 topics: ["WSL", "開発環境", "Homebrew", "brew", ]
-published: false
+published: true
 ---
 
 ## はじめに
