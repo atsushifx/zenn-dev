@@ -75,6 +75,9 @@ WSL を使うことで、Windows上で Linux を使ったシステム開発が�
 10. [開発効率向上のための追加のパッケージのインストール](https://zenn.dev/atsushifx/articles/wsl2-debian-apt-additionaltools)
     開発作業をより効率化するために、追加してインストールするパッケージを紹介します。
 
+11. [Homebrewのセットアップ](https://zenn.dev/atsushifx/articles/wsl2-brew-install)
+    WSL にパッケージマネージャー`Homebrew` をインストールします。
+
 ## おわりに
 
 この記事では、WSL上で開発環境を構築するための記事をまとめました。
