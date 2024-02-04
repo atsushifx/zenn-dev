@@ -69,7 +69,7 @@
 """"
 :theme:
 
-- WSL上の Debian に Homebrew をセットアップする
+- WSL上の Debian に各種ツールをインストールする
 
 """"
 :target:
@@ -80,7 +80,7 @@
 """"
 :goal:
 
-- WSL 上に Homebrew をインストールし、brew コマンドを使えるように環境変数を設定する
+- WSL 上に開発や運用を効率化するツールをインストールする
 
 """"
 link:

@@ -48,14 +48,11 @@
 """"
 :link
 
-- [brew ホームページ](https://brew.sh)
-- [Homebrew on Linux](https://docs.brew.sh/Homebrew-on-Linux)
-- [dotfiles を使った環境管理](https://zenn.dev/atsushifx/articles/wsl2-debian-dotfiles)
-
 """"
 :remark:
 
-- `Happy Hacking!`は変更しない`
+- `Happy Hacking!`は変更しない
+- 「します」を「できます」に変更しない
 
 """"
 /begin
