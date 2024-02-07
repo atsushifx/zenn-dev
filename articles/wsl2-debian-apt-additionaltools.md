@@ -76,11 +76,12 @@ fi
 | パッケージ名 | 説明 | 選定理由 | 備考 |
 | --- | --- | --- | --- |
 | `build-essential`[^6] | ビルドに必要な基本的なパッケージ | ほかのツールをビルドする際に必要なため |  |
+| `delta` | 2つのファイルの`diffのビジュアル表示 |  | |
 
 以下のコマンドで、パッケージをインストールします:
 
 ```bash
-sudo apt install build-essential
+sudo apt install build-essential delta
 ```
 
 [^6]: `build-essential`:  Debian系 Linux ディストリビューションでソフトウェアをビルドするのに必要な基本的なパッケージ群
