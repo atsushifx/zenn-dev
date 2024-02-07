@@ -3,7 +3,7 @@ title: "WSL開発環境: 開発効率を向上させるパッケージのイン�
 emoji:  "🐧"
 type: "tech"
 topics: [ "wsl", "開発環境", "APT",  "bash"]
-published: true
+published: false
 ---
 
 ## はじめに
@@ -17,7 +17,8 @@ WSL[^1] 上の Debian[^2] 環境をさらに便利に使うため、作業効率
 
 ## 1. 記事の前提環境
 
-この記事は、[高速セットアップ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian)で構築した Debian 環境に特化しています。
+この記事は、[高速セットアップ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-customdebian)で構築した Debian 環境
+を前提にしています。
 高速セットアップとは、事前にカスタマイズされた Debian をインポートすることで、WSL上の Debian を迅速に設定するプロセスです。
 これにより、`/opt/etc/`下で全ユーザー共通のカスタマイズが可能となります。
 `XDG Base Directory`[^4]に対応しており、`~/.config`下に各ユーザーごとの設定を記述できます。
@@ -76,12 +77,12 @@ fi
 | パッケージ名 | 説明 | 選定理由 | 備考 |
 | --- | --- | --- | --- |
 | `build-essential`[^6] | ビルドに必要な基本的なパッケージ | ほかのツールをビルドする際に必要なため |  |
-| `python3` | Python 実行環境 | 各種ツール実行用 |  |
+| `delta` | 2つのファイルの`diff`をビジュアルに表示 |  |  |
 
 以下のコマンドで、パッケージをインストールします:
 
 ```bash
-sudo apt install build-essential
+sudo apt install build-essential delta
 ```
 
 [^6]: `build-essential`:  Debian系 Linux ディストリビューションでソフトウェアをビルドするのに必要な基本的なパッケージ群
