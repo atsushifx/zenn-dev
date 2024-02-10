@@ -70,6 +70,7 @@
 :theme:
 
 - WSL上にプログラミングを効率化するツールをインストールする
+- OSS ツールの利用を共有し、技術コミュニティを発展させる
 
 """"
 :target:
@@ -81,14 +82,10 @@
 :goal:
 
 - WSL 上にプログラミング作業を効率化するツールをインストールする
+- OSS ツールの使用を公開し、技術コミュニティの発展に寄与する
 
 """"
 link:
-
-- brew.sh
-  URL: <https://brew.sh>
-- Homebrew on Linux
-  URL:  <https://docs.brew.sh/Homebrew-on-Linux>
 
 """"
 remark:
