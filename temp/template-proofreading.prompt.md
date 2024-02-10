@@ -52,7 +52,6 @@
 :remark:
 
 - `Happy Hacking!`は変更しない
-- 「します」を「できます」に変更しない
 
 """"
 /begin
