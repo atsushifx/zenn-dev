@@ -3,7 +3,7 @@ title: "WSL開発環境: プログラミングに便利なOSSコマンドライ�
 emoji: "☕"
 type: "tech"
 topics: ["WSL", "開発環境", "brew", "開発ツール", "CLI", ]
-published: false
+published: true
 ---
 
 ## はじめに
@@ -213,8 +213,6 @@ WSL[^1] 上でのプログラミング作業の効率を上げるため、`CLI`[
 
   ```bash
   $ sudo apt list|rg -e 'python[^.]*pip'
-
-  WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
 
   WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
 
