@@ -8,9 +8,9 @@ published: false
 
 ## はじめに
 
-この記事では、Windows 環境で関数型プログラミング言語「Racket」をインストールする手順について紹介します。
+この記事では、Windows に関数型プログラミング言語「Racket」をインストールする手順について紹介します。
 
-以下の手順にしたがって Windows に Racket をインストールすれば、どこからでも Racket を起動し、終了できるようになります。
+以下の手順で Windows に Racket をインストールすれば、どこからでも Racket を起動し、終了できるようになります。
 これにより、Racket言語での関数型プログラミング学習を開始できます。
 
 ## 重要キーワードと注釈
@@ -64,23 +64,7 @@ PowerShell上で、以下のコマンドを実行します:
 winget install Racket.Racket --location C:\lang\racket
 ```
 
-実行結果は、次のようになります:
-
-```powershell
-$ winget install Racket.Racket --location C:\lang\racket
-
-見つかりました Racket [Racket.Racket] バージョン 8.11.1
-このアプリケーションは所有者からライセンス供与されます。
-Microsoft はサードパーティのパッケージに対して責任を負わず、ライセンスも付与しません。
-ダウンロード中 https://download.racket-lang.org/releases/8.11.1/installers/racket-8.11.1-x86_64-win32-cs.exe
-  ██████████████████████████████   165 MB /  165 MB
-インストーラーハッシュが正常に検証されました
-パッケージのインストールを開始しています...
-インストールが完了しました
-
-```
-
-以上で、Racket のインストールは完了です。
+このコマンドは、`winget`を使用して`c:\lang\racket`に Racket をインストールします。
 
 Racket が正常にインストールできたかどうかの確認は、次のようにします。
 
@@ -95,7 +79,7 @@ Welcome to Racket v8.11.1 [cs].
 ### 2.2 環境変数の設定
 
 環境変数`PLTUSERHOME`,`PLTADDONDIR`を設定することで、Racket の設定とアドオンを`XDG Base Directory`規格のディレクトリに保存します。
-とくに、Racket の設定を`XDG Base Directory`下で管理することで、設定ファイルを Git/GitHub で管理できるようになります。
+Racket の設定を`XDG Base Directory`で管理すると、設定ファイルを Git/GitHub で管理できるようになります。
 これにより、Racket プログラミングにおける可搬性が向上します。
 
 設定には、以下のコマンドを実行します:
@@ -281,10 +265,7 @@ Racket には、`XREPL`という強化された`REPL`機能が含まれている
 ## おわりに
 
 以上で、Windows に Racket をインストールし、起動と終了までできるようになりました。
-Racket を学習することで、新たなプログラミングパラダイムである関数型プログラミングへの造詣を深めることができるでしょう。
-
-強力な`REPL`機能は、Racket プログラミングの強力さを体感させてくれます。
-`raco`による機能拡張は、既存の開発環境においても Racket の開発をサポートします。
+これで Racket を使用して、関数型プログラミングの学習ができるようになりました。
 
 Racket と関数型プログラミングの学習を通じて、プログラミングの理解を深め、より複雑な問題を効率的に解決できる能力を身につけましょう。
 
@@ -302,5 +283,5 @@ Racket と関数型プログラミングの学習を通じて、プログラミ�
 
 - [Racket Guide](https://docs.racket-lang.org/guide/index.html)
 - [How to Design Programs](https://htdp.org/)
-- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.htmll)
+- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)
 - [Beautiful Racket](https://beautifulracket.com/)
