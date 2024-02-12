@@ -24,10 +24,10 @@ published: false
 - `XDG Base Directory`:
   UNIX/Linux システムで使用される、ユーザーの設定ファイルやデータファイルを整理し保存するためのディレクトリ構造の規格。Windows ではこの規格に準じた管理を行なうために、`XDG`環境変数を設定します。
 
-- 統合開発環境 (IDE) `Dr. Racket`:
+- 統合開発環境 (IDE) `Dr Racket`:
   Racket プログラミング言語専用の統合開発環境。コードの編集、実行、デバッグを 1つのアプリケーション内で行なうことができ、プログラミング学習者からプロフェッショナルまで幅広くサポートします。
 
--`raco`:
+- `raco`:
   Racket のコマンドラインツールで、パッケージ管理やプロジェクトのビルド、プログラムの実行など、開発に関連する多様なタスクをサポートします。
 
 - `winget`:
@@ -160,6 +160,8 @@ Racket を動かすために、Path に Racket 動作用のパスを追加しま
 
 4. パスを追加:
     \[新規\]をクリックし、Racket をインストールしたディレクトリ (`C:\lang\racket`) を追加する
+   ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
+    *環境変数: システムPath*
 
 5. [ユーザー環境変数]の`Path`を編集:
     "ユーザー環境変数"の`Path`を選び、[編集(E)]をクリックする。
@@ -169,6 +171,9 @@ Racket を動かすために、Path に Racket 動作用のパスを追加しま
 
 6. パスを追加:
     \[新規\]をクリックし、パッケージバイナリ用のディレクトリ (`%PLTADDONDIR%\<version>`) を追加する。
+    ![Pathの編集](https://i.imgur.com/ey9OT8O.png)
+    *環境変数: ユーザーPath*
+
     **注意**:
     パスの`<version>`は、実際にインストールした Racket のバージョン番号に書き換えてください。
     Racket のバージョンは、`racket --version`で確認できます。
@@ -229,7 +234,7 @@ Racket には、`XREPL`という強化された`REPL`機能が含まれている
 
   ```powershell
   Welcome to Racket v8.11.1 [cs].
-  > # \[Ctrl+D]キー押下
+  > [Ctrl+D]キー押下
 
   $
   ```
