@@ -3,7 +3,7 @@ title: "Windowsに関数型プログラミング言語「Racket」をインス�
 emoji: "🎾"
 type: "tech"
 topics: ["プログラミング言語", "Racket", "関数型プログラミング", "環境構築", ]
-published: true
+published: false
 ---
 
 ## はじめに
@@ -24,7 +24,7 @@ published: true
 - `XDG Base Directory`:
   UNIX/Linux システムで使用される、ユーザーの設定ファイルやデータファイルを整理し保存するためのディレクトリ構造の規格。Windows ではこの規格に準じた管理を行なうために、`XDG`環境変数を設定します。
 
-- 統合開発環境 (IDE) `Dr Racket`:
+- `Dr Racket`:
   Racket プログラミング言語専用の統合開発環境。コードの編集、実行、デバッグを 1つのアプリケーション内で行なうことができ、プログラミング学習者からプロフェッショナルまで幅広くサポートします。
 
 - `raco`:
@@ -78,7 +78,6 @@ Microsoft はサードパーティのパッケージに対して責任を負わ�
 パッケージのインストールを開始しています...
 インストールが完了しました
 
-$
 ```
 
 以上で、Racket のインストールは完了です。
@@ -103,7 +102,7 @@ Welcome to Racket v8.11.1 [cs].
 
 ```powershell
 [System.Environment]::SetEnvironmentVariable("PLTUSERHOME", $env:XDG_CONFIG_HOME, "User")
-[System.Environment]::SetEnvironmentVariable("PLTADDONDIR", $env:XDG_DATA_HOME+"/Racket/addon", "User")
+[System.Environment]::SetEnvironmentVariable("PLTADDONDIR", $env:XDG_DATA_HOME+"/Racket", "User")
 
 ```
 
@@ -112,7 +111,25 @@ Welcome to Racket v8.11.1 [cs].
 
 以上で、環境変数の設定は完了です。
 
-### 2.3 `.gitignore`の設定
+### 2.3 `config.rkd`の設定
+
+Racket では、ライブラリや機能拡張をパッケージという形で提供しています。
+パッケージ関連の設定は、`c:/lang/racket/etc/config.rkd`にハッシュとして保存されているので、次のように書き換えます。
+
+```racket:c:/lang/racket/etc/config.rkd
+#hash(
+  (build-stamp . "")
+  (catalogs . ("https://download.racket-lang.org/releases/8.11.1/catalog/" #f))
+  (default-scope . "user")
+  (doc-search-url . "https://download.racket-lang.org/releases/8.11.1/doc/local-redirect/index.html")
+  (download-cache-dir . "C:/Users/atsushifx/.local/cache/racket/download-cache")
+)
+
+```
+
+以上で、`config.rkd`の設定は終了です。
+
+### 2.4 `.gitignore`の設定
 
 `.gitignore`に、Racket の状態ファイル、一時ファイル、ダウンロードキャッシュなどを指定します。
 
@@ -129,7 +146,7 @@ racket-prefs.rktd
 
 以上で、`.gitignore`の設定は完了です。
 
-### 2.4 Pathの設定
+### 2.5 Pathの設定
 
 Racket を動かすために、Path に Racket 動作用のパスを追加します。
 なお、アドオン用のディレクトリには Racket のバージョン番号が含まれます。
@@ -137,53 +154,53 @@ Racket を動かすために、Path に Racket 動作用のパスを追加しま
 次の手順で、Path を追加します。
 
 1. [システムのプロパティ]ダイアログを開く:
-    下記のコマンドを実行する
+   下記のコマンドを実行する
 
-    ```powershell
-    systempropertiesadvanced.exe
-    ```
+   ```powershell
+   systempropertiesadvanced.exe
+   ```
 
-    [システムのプロパティ]ダイアログが表示される
-    ![システムのプロパティ](https://i.imgur.com/zfaLYCw.png)
-    *システムのプロパティ*
+   [システムのプロパティ]ダイアログが表示される
+   ![システムのプロパティ](https://i.imgur.com/zfaLYCw.png)
+   *システムのプロパティ*
 
 2. [環境変数]ダイアログを開く:
-    \[環境変数\]ボタンをクリックする。[環境変数]ダイアログが表示される
-    ![環境変数](https://i.imgur.com/r75yAaY.png)
-    *環境変数*
+   \[環境変数\]ボタンをクリックする。[環境変数]ダイアログが表示される
+   ![環境変数](https://i.imgur.com/r75yAaY.png)
+   *環境変数*
 
 3. [システム環境変数]の`Path`を編集:
-    "システム環境変数"の`Path`を選び、[編集(I)]をクリックする。
-    \[システムの環境変数\]ダイアログが表示される
-    ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
-    *環境変数: システムPath*
+   "システム環境変数"の`Path`を選び、[編集(I)]をクリックする。
+   \[システムの環境変数\]ダイアログが表示される
+   ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
+   *環境変数: システムPath*
 
 4. パスを追加:
-    \[新規\]をクリックし、Racket をインストールしたディレクトリ (`C:\lang\racket`) を追加する
+   \[新規\]をクリックし、Racket をインストールしたディレクトリ (`C:\lang\racket`) を追加する
    ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
-    *環境変数: システムPath*
+   *環境変数: システムPath*
 
 5. [ユーザー環境変数]の`Path`を編集:
-    "ユーザー環境変数"の`Path`を選び、[編集(E)]をクリックする。
-    \[ユーザーの環境変数\]ダイアログが表示される
-    ![Pathの編集](https://i.imgur.com/ey9OT8O.png)
-    *環境変数: ユーザーPath*
+   "ユーザー環境変数"の`Path`を選び、[編集(E)]をクリックする。
+   \[ユーザーの環境変数\]ダイアログが表示される
+   ![Pathの編集](https://i.imgur.com/ey9OT8O.png)
+   *環境変数: ユーザーPath*
 
 6. パスを追加:
-    \[新規\]をクリックし、パッケージバイナリ用のディレクトリ (`%PLTADDONDIR%\<version>`) を追加する。
-    ![Pathの編集](https://i.imgur.com/ey9OT8O.png)
-    *環境変数: ユーザーPath*
+   \[新規\]をクリックし、パッケージバイナリ用のディレクトリ (`%PLTADDONDIR%\<version>`) を追加する。
+   ![Pathの編集](https://i.imgur.com/ey9OT8O.png)
+   *環境変数: ユーザーPath*
 
-    **注意**:
-    パスの`<version>`は、実際にインストールした Racket のバージョン番号に書き換えてください。
-    Racket のバージョンは、`racket --version`で確認できます。
+   **注意**:
+   パスの`<version>`は、実際にインストールした Racket のバージョン番号に書き換えてください。
+   Racket のバージョンは、`racket --version`で確認できます。
 
 7. ダイアログの終了:
-    \[OK\]をクリックし、すべてのダイアログを終了する
+   \[OK\]をクリックし、すべてのダイアログを終了する
 
 以上で、Path の設定は完了です。
 
-### 2.5 Windowsの再起動
+### 2.6 Windowsの再起動
 
 環境変数の設定や Path の変更をシステム全体に反映させるためには、Windows の再起動が必要です。
 次の手順で、Windows を再起動します。
