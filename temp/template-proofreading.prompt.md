@@ -48,6 +48,14 @@
 """"
 :link
 
+- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト
+- [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント
+- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/) : Racket で使われている拡張`REPL`のドキュメント
+- [Racket Guide](https://docs.racket-lang.org/guide/index.html)
+- [How to Design Programs](https://htdp.org/)
+- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.htmll)
+- [Beautiful Racket](https://beautifulracket.com/)
+
 """"
 :remark:
 
