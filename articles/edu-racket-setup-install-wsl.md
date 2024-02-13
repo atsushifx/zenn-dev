@@ -10,7 +10,7 @@ published: false
 
 この記事では、WSL (Windows Subsystem for Linux) 上の Debian に関数型プログラミング言語「Racket」をインストールする方法を紹介します。
 Racket のインストールには、パッケージマネージャー`Homebrew`を使用します。
-`Homebrew`のセットアップ方法については、[Homebrewのセットアップ](https://zenn.dev/atsushifx/articles/wsl2-brew-install)を参照してください。
+`Homebrew`のセットアップ方法については、[こちらの記事](https://zenn.dev/atsushifx/articles/wsl2-brew-install)を参照してください。
 
 `Homebrew`を使用するとパッケージをユーザー権限でインストールするため、OS への影響を最小限に抑えることができます。
 また、リポジトリの更新が迅速なため、最新バージョンの Racket を利用できるのが大きなメリットです。
@@ -52,7 +52,7 @@ Racket のインストールには、パッケージマネージャー`Homebrew`
 `brew`を利用することで、`minimal Racket`パッケージをインストールし、Racket の最小実行環境および開発ツールを利用できます。
 完全版の Racket が必要な場合は、開発ツール`raco`を使用して、統合開発環境`Dr Racket`などの追加パッケージをインストールします。
 
-次のコマンドで、Racket をインストールします:
+以下のコマンドを実行し、Racket をインストールします:
 
 ```shell
 brew install racket
