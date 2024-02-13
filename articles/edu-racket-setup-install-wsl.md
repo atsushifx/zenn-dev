@@ -63,7 +63,7 @@ brew install racket
 Racket が正常にインストールできたかどうかの確認は、次のようにします:
 
 ```shell
-$ racket --version
+# racket --version
 Welcome to Racket v8.11.1 [cs].
 
 ```
@@ -102,7 +102,7 @@ Racket が使用する状態ファイルや状態ファイルは、`XDG_CONFIG_H
 
 以下のように、`.gitignore`を設定します:
 
-```git:~/.config/.gitignore
+```git:$XDG_CONFIG_HOME/.gitignore
 # Racket
 _lock*
 racket-prefs.rktd
