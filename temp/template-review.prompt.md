@@ -67,18 +67,18 @@
 """"
 :theme:
 
-- Windows上に関数型プログラミング言語`Racket`をインストールする
+- WSL上の Debian に関数型プログラミング言語`Racket`をインストールする
 
 """"
 :target:
 
 - Windows で関数型言語を学ぶプログラマー
-- Windows でコマンドライン、PowerShell の使い方を知っているプログラマー
+- bash の基本的な使い方を知っているプログラマー
 
 """"
 :goal:
 
-- Windows に`Racket`をインストールする
+- WSL上に`Racket`をインストールする
 - ターミナルから、Racket を起動し、終了する
 
 """"
@@ -87,15 +87,18 @@ link:
 - [Racket公式Web](https://racket-lang.org/)
 - [Racket Documentation](https://docs.racket-lang.org/)
 - [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/)
+- [Installation Configuration and Search Paths](https://docs.racket-lang.org/raco/config-file.html)
 - [Racket Guide](https://docs.racket-lang.org/guide/index.html)
 - [How to Design Programs](https://htdp.org/)
 - [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.htmll)
 - [Beautiful Racket](https://beautifulracket.com/)
+
 """"
 remark:
 
 - 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
-- タイトルの"WSL開発環境: "はそのままにする
+- Linuxbrew は Homebrew と統合されたので、Linuxbrew について書かない
+- 「次のようにします」は、カジュアルさを保つため極力変更しない
 
 """"
 /begin
