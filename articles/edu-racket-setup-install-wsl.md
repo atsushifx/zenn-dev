@@ -1,9 +1,10 @@
 ---
 title: "WSL上のDebianに関数型プログラミング言語「Racket」をインストールする"
-emoji: "☕"
+emoji: "🎾"
 type: "tech"
-topics: [ "WSL", "Racket", "環境構築", "関数型プログラミング", ]
 published: true
+topics: [ "WSL", "Racket", "環境構築", "関数型プログラミング", ]
+published: false
 ---
 
 ## はじめに
@@ -36,7 +37,7 @@ Racket のインストールには、パッケージマネージャー`Homebrew`
   Racket のパッケージマネージャーおよびコマンドラインツール
 
 - **`Homebrew`**:
-  `macOS`/`Linux`で使用できるパッケージマネージャー
+  `macOS`/`Linux`で使用できるパッケージマネージャーで、WSL にも対応している
 
 - **`config.rktd`**:
   Racket の設定ファイル
@@ -44,13 +45,17 @@ Racket のインストールには、パッケージマネージャー`Homebrew`
 - **`XREPL` (`eXtended REPL`)**:
    Racket の`REPL`を強化する拡張機能
 
+- **`Expeditor` (`Expression Editor`)**:
+  Racket の対話的インタフェースで、入力中の式(=プログラム)を編集するエディタ
+
 ## 1. Racket のインストール
 
 ### 1.1 `brew` を使用した Racket のインストール
 
 `Homebrew`は、`macOS`/`Linux`で利用可能なパッケージマネージャーであり、WSL上でも使用できます。
-`brew`を利用することで、`minimal Racket`パッケージをインストールし、Racket の最小実行環境および開発ツールを利用できます。
-完全版の Racket が必要な場合は、開発ツール`raco`を使用して、統合開発環境`Dr Racket`などの追加パッケージをインストールします。
+`brew`では、リポジトリに Racket の最小実行環境である`minimal Racket`が登録されています。
+この記事では、`brew`を使って上記の`minimal Racket`をインストールします。
+統合開発環境`Dr Racket`を含めた完全版 Racket を使いたい場合は、`minimal Racket`をインストールしたあとに追加のパッケージをインストールします。
 
 以下のコマンドを実行し、Racket をインストールします:
 
@@ -63,7 +68,7 @@ brew install racket
 Racket が正常にインストールできたかどうかの確認は、次のようにします:
 
 ```shell
-# racket --version
+$ racket --version
 Welcome to Racket v8.11.1 [cs].
 
 ```
@@ -96,9 +101,9 @@ Racket の設定は、`config.rktd`ファイルに保存されます。
 
 ### 1.3 `.gitignore`の設定
 
-Racket が使用する状態ファイルや状態ファイルは、`XDG_CONFIG_HOME`下に保存されます。
-これらのファイルは、`dotfiles`でバージョン管理しません。
-そのため、`.gitignore`で明示的に指定して Git の管理ファイルから除外します。
+Racket が使用する設定ファイルや状態ファイルは、`XDG_CONFIG_HOME`下に保存されます。
+この中の状態ファイルは、Racket によって毎回書き換えられるため、リポジトリに保存しません。
+そのため、`.gitignore`で明示的に除外し、リポジトリをクリーンに保ちます。
 
 以下のように、`.gitignore`を設定します:
 
@@ -110,33 +115,33 @@ racket-prefs.rktd
 ```
 
 これにより、Racket が生成するロックファイルや状態ファイルが Git の追跡対象から除外されます。
-
 以上で、`.gitignore`の設定は完了です。
 
-### 1.4 `XREPL`のインストール
+### 1.4 拡張機能のインストール
 
-`XREPL`は、Racket の`REPL`を強化するパッケージで、`REPL`にヒストリーや行編集機能を追加します。
-`XREPL`にはグラフィックスやテキストレンダリングのライブラリ、`pango`と`cairo`が必要です。
-これにより、`XREPL`はプラットフォームに依存しないかたちで、高度なテキストやグラフィック表示ができます。
-そのため、上記ライブラリをインストールしたあとに、`XREPL`をインストールします。
+Racket には、対話的にプログラムを入力して結果を表示する`REPL`機能があります。
+ただし、`minimal Racket`の`REPL`では、入力しているプログラムの編集ができません。
+そのため、`REPL`に編集機能や拡張コマンドなどの機能拡張をするパッケージをインストールします。
 
-次の手順で、`XREPL`をインストールします。
+次の手順で、拡張機能をインストールします。
 
 1. 必須ライブラリのインストール
+   拡張機能を動かすためには、テキストレンダリングなどのライブラリが必要です。
    次のコマンドで、ライブラリをインストールします:
 
    ```shell
    sudo apt install libpango-1.0-0 libcairo2 libpangocairo-1.0-0
    ```
 
-2. `XREPL`のインストール:
-   次のコマンドで、`XREPL`をインストールします:
+2. 拡張機能のインストール
+   編集機能用のパッケージ`expeditor`と、`REPL`の機能拡張パッケージ`xrepl`をインストールします。
+   次のコマンドで、拡張機能をインストールします:
 
    ```shell
-   raco pkg install --auto --scope installation xrepl
+   raco pkg install --auto --scope installation expeditor xrepl
    ```
 
-以上で、`XREPL`のインストールは完了です。
+以上で、拡張機能のインストールは完了です。
 
 ## 2. Racketの起動と終了
 
@@ -210,7 +215,7 @@ WSL上で、Racket をインストールし、基本的な設定を行なう方�
 
 ### Webサイト
 
-- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。」
+- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
 - [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント。Racket の使い方、言語の特徴、開発ツールに関する詳細が載っている。
 - [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/) : Racket で使われている拡張`REPL`のドキュメント
 
