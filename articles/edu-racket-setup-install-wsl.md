@@ -4,7 +4,7 @@ emoji: "🎾"
 type: "tech"
 published: true
 topics: [ "WSL", "Racket", "環境構築", "関数型プログラミング", ]
-published: false
+published: true
 ---
 
 ## はじめに
