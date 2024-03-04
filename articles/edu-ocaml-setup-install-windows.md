@@ -8,21 +8,26 @@ published: false
 
 ## はじめに
 
-この記事では、Windows 環境に`OCaml`をインストールし、設定する方法について詳しく説明します。
-`OCaml`はもともと UNIX/Linux系OS にインストールすることを前提としています。
-そのため、Windows に対応した`OCaml`である`DkML`をインストールします。
+この記事では、Windows 環境で関数型プログラミング言語`OCaml`をインストールして設定する方法について解説します。
+`OCaml`は UNIX/Linux系OS に最適化されているため、Windows 向けのインストーラーである`DkML`を使用します。
 
-`DkML`を Windows にインストールする場合、いくつかのポイントに注意が必要です。
-
-`OCaml`をインストールし、関数型プログラミングの世界を楽しみましょう。
+このプロセスを通じて、Windows に`OCaml`をインストールし、関数型プログラミングの世界を楽しみましょう。
 Enjoy!
+
+## 技術用語
+
+この記事で取り上げる重要な技術用語を以下に解説します。
+
+- `OCaml`: ML言語ファミリーに属し、型推論、強力なパターンマッチング、モジュールシステムを特徴とする関数型プログラミング言語
+- `DkML`: Windows に`OCaml`を簡単にインストールするためのインストーラー
+- `opam`: `OCaml`のパッケージを管理するためのパワフルなツールで、ライブラリやツールのインストール、バージョン管理を容易にする
+- `XDG Base Directory`: UNIX系OS のディレクトリ標準仕様で、設定やデータファイルはこの仕様にしたがって整理する
 
 ## 前提条件
 
-この記事では、以下の条件で`OCaml`をインストールします。
+この記事では、以下の前提で`OCaml`をインストールします。
 
-自分の環境では、プログラミング言語は`c:\lang\`下にインストールしています。
-`OCaml`もこの慣習にしたがい、`c:\lang\ocaml`下にインストールします。
+`OCaml`は、`c:\lang\ocaml`下にインストールします。
 `OCaml`のパッケージマネージャー`opam`は、ここでは`XDG Base`ディレクトリ仕様にしたがい、`$XDG_DATA_HOME/opam`下にキャッシュなどの各種ファイルを配置します。
 
 **注意**:
@@ -105,7 +110,8 @@ Enjoy!
 
 ## `OCaml`のインストール
 
-この記事では、Windows版`OCaml`である`DkML`をインストールします。
+この記事では、`DkML`をインストールし、それを利用して Windows版`OCaml`をインストールします。
+`OCaml`のビルドに、`Visual Studio BuildTools`も必要なため、あわせて`BuildTools`もインストールします。
 
 ### `DkML`のインストール
 
@@ -243,6 +249,8 @@ Enter #help;; for help.
 
 - `Clrl+Z` (`EOF`)を入力する:
   プロンプトの先頭で、`Ctrl+Z` (`EOF`) を入力します
+  **注意**:
+  Windows 環境では、`EOF`は`Ctrl+Z`で入力します。
 
   ```OCaml
   # ^Z [`Ctrl+Z`を入力]
@@ -306,10 +314,29 @@ utop #
 
 ## おわりに
 
-この記事では、Windows 環境に`OCaml`をインストールする方法、および`OCaml`に基本的な使用方法を説明しました。
-強力な`REPL`機能は、`OCaml`プログラミングの助けになるでしょう。
+以上で、Windows 環境に`OCaml`をセットアップし、`OCaml`の起動と終了ができました。
+これにより、関数型プログラミングの学習環境が整いました。
 
-`OCaml`を使った関数型プログラミングの学習本もでています。
-関数型プログラミングのスキルアップにちょうど良いといえるでしょう。
+次は、実際に`OCaml`を使って関数型プログラミングについて学習しましょう。
+参考資料に、大学の講義資料や関数型プログラミングの本があるので、学習の助けになるでしょう。
 
+関数型プログラミングを学び、プログラマーとしてステップアップしてください。
 それでは、Happy Hacking!
+
+## 参考資料
+
+### Webサイト
+
+- [`OCaml`公式](https://Ocaml.org/)
+- [`Windows版OCaml` `DkML`](https://github.com/diskuv/dkml-installer-Ocaml)
+- [Windowsに`XDG Base Directory`を導入する](https://zenn.dev/atsushifx/articles/winhack-environ-xdg-base)
+
+### Webリソース
+
+- [京都大学工学部専門科目「プログラミング言語処理系」講義資料](https://kuis-isle3sw.github.io/IoPLMaterials/)
+- [`OCaml`入門](https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/class/isle4-09w/mltext.pdf)
+
+### 本
+
+- [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
+- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
