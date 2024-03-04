@@ -8,19 +8,19 @@ published: false
 
 ## はじめに
 
-この記事では、Windows 環境で関数型プログラミング言語`OCaml`を簡単にセットアップする方法を紹介します。
+この記事では、Windows 環境で関数型プログラミング言語`OCaml`を容易にセットアップする方法を紹介します。
 `DkML`インストーラーを使用することで、`OCaml`のビルドとインストールを手軽に自動化できます。
 
-`OCaml`は、ML ファミリーに属する関数型プログラミング言語で、型推論、パターンマッチング、モジュールシステムなどを特徴とし、型安全性と高いパフォーマンスを実現しています。
+`OCaml`は、ML ファミリーに属する関数型プログラミング言語で、型推論、パターンマッチング、モジュールシステムなどを特徴とし、型安全性と高パフォーマンスを提供します。
 
 ## 技術用語
 
 この記事で取り上げる重要な技術用語を以下に解説します。
 
-- `OCaml`: 型推論、パターンマッチング、モジュールシステムを特徴とする関数型プログラミング言語であり、型安全性と高いパフォーマンスを提供し、複雑なアプリの開発に適してる
-- `DkML`: Windows 環境における`OCaml`のインストールを自動化するためのインストーラー
+- `OCaml`: 型推論、パターンマッチング、モジュールシステムを特徴とする関数型プログラミング言語であり、型安全性と高いパフォーマンスを提供している
+- `DkML`: `OCaml` のインストールを Windows 環境で自動化するツール
 - `opam`: `OCaml` のパッケージ管理ツールで、ライブラリやツールのインストールやバージョン管理を簡単に行える
-- `XDG Base Directory`: UNIX 系 OS のディレクトリ標準仕様で、設定やデータファイルを統一的に配置す
+- `XDG Base Directory`: UNIX 系 OS のディレクトリ標準仕様で、設定やデータファイルを統一的に配置する
 - `Visual Studio BuildTools`: コマンドラインで使用する開発ツールセット、`OCaml` のビルドに使用される
 - `utop`: `OCaml`の`REPL`拡張パッケージで、高度な編集機能や補完機能を提供する
 
@@ -31,14 +31,20 @@ published: false
 - `winget`コマンドが使用可能であること
 - `OCaml`は、`c:\lang\ocaml`以下にインストールされること
 - 設定ファイルやデータファイルは`XDG Base Directory`仕様に従うこと
-- `XDG Base Directory`用に`XDG Base`の各環境変数が設定されていること
-- `opam`のファイルは、`$XDG_DATA_HOME/opam`以下に配置されること
+  `XDG Base Directory`: UNIX 系 OS のディレクトリ標準仕様。Windows でも、この仕様に従うことで設定ファイルを統一的に管理できる
+- `XDG Base Directory`の仕様にしたがった各環境変数が設定されていること。
+- `opam`のファイルは、`$XDG_DATA_HOME/opam`以下に配置されること。
 
 以上です。
 
 ## 2. 初期設定
 
-`OCaml`をインストールする前に、必要な設定をします。
+<!-- textlint-disable ja-technical-writing/ja-no-redundant-expression -->
+`OCaml`をインストールする前に、あらかじめ必要な設定を行います。
+<!-- textlint-enable -->
+
+**注意**:
+この記事では`PowerShell`を使用しています。他のシェルを使用している場合は、適宜コマンドを調整してください。
 
 ### 2.1 `Path`の設定
 
@@ -85,7 +91,7 @@ published: false
 
 ### 2.2 `OPAMROOT`の設定
 
-`OPAMROOT`は`opam`がパッケージを管理する場所を指定します。
+`OPAMROOT`は`opam`がパッケージを管理する場所を指定する環境変数です。
 `OPAMROOT`を指定しない場合は、Windows は、`＄USERPROFILE/.opam`でパッケージを管理します。
 
 この記事では、`XDG Base Direcory`に準じた`OPAMROOT`を設定することで、環境をクリーンに保ちます。
@@ -122,8 +128,8 @@ published: false
 ## 3. `OCaml`のインストール
 
 このセクションでは、まず`DkML`をインストールし、`DkML`を使って Windows版`OCaml`をインストールします。
-`DkML`は Windows版`OCaml`インストーラーです。
-これは、`OCaml`が UNIX/Linux系OS用に作成されているためで、`DkML`は Windows での差異を吸収します。
+`DkML`は Windows版`OCaml`のインストーラーです。
+これは、`OCaml`がもともと UNIX/Linux系OS用に設計されているためで、`DkML`を使用することで Windows での運用の差異を吸収します。
 
 ### 3.1 `DkML`のインストール
 
@@ -221,7 +227,7 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
 ### 3.7 `utop`のインストール
 
-`utop`は、`OCaml`の`REPL`各種の拡張機能を追加するパッケージです。
+`utop`は、`OCaml`の`REPL`に各種拡張機能を提供するパッケージです。
 
 次のコマンドで、`utop`をインストールします。
 
@@ -232,7 +238,8 @@ opam install utop -y
 
 ## 4. `OCaml`の起動、終了
 
-`OCaml`を正常にインストールしたか確認するために、`OCaml`を起動、終了します。
+`OCaml`を正常にインストールしたか確認します。
+そのため、`OCaml`を起動し、そのあと、終了させます。
 
 ### 4.1 `OCaml`の起動
 
@@ -360,7 +367,7 @@ utop #
 
 ### Webサイト
 
-- [`OCaml`公式](https://Ocaml.org/):
+- [`OCaml`公式](https://ocaml.org/):
   `OCaml`の基本から応用までを網羅的に学べる公式ドキュメント。初心者から上級者まで幅広く対応しています。
 - [`Windows版OCaml` `DkML`](https://github.com/diskuv/dkml-installer-Ocaml):
   Windows 環境で`OCaml`を設定する際に役立つ`DkML`インストーラーの詳細情報。
