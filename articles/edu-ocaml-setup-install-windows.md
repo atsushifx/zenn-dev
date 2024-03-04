@@ -1,5 +1,5 @@
 ---
-title: "OCaml: WindowsにOCamlをインストールする方法"
+title: "OCaml: WindowsでOCamlを設定する方法"
 emoji: "🐪"
 type: "tech"
 topics: [ "学習", "関数型プログラミング", "環境構築", "Windows", ]
@@ -8,18 +8,25 @@ published: false
 
 ## はじめに
 
-この記事では、Windows に`OCaml`をインストールする方法を説明します。
-`OCaml`は UNIX/Linux系OS にインストールすることが前提になっており、Windows では`DkML`という Windows版の`OCaml`をインストールする必要があります。
+この記事では、Windows 環境に`OCaml`をインストールし、設定する方法について詳しく説明します。
+`OCaml`はもともと UNIX/Linux系OS にインストールすることを前提としています。
+そのため、Windows に対応した`OCaml`である`DkML`をインストールします。
 
-インストールには、ちょっとしたこつが必要です。が、この記事に従えばインストールできるでしょう。
+`DkML`を Windows にインストールする場合、いくつかのポイントに注意が必要です。
 
 `OCaml`をインストールし、関数型プログラミングの世界を楽しみましょう。
 Enjoy!
 
 ## 前提条件
 
-`OCaml`は、`c:\lang\ocaml`下にインストールします。
-`OCaml`のパッケージマネージャー`opam`は、`XDG Base`にしたがい、`$XDG_DATA_HOME/opam`下にインストールします。
+この記事では、以下の条件で`OCaml`をインストールします。
+
+自分の環境では、プログラミング言語は`c:\lang\`下にインストールしています。
+`OCaml`もこの慣習にしたがい、`c:\lang\ocaml`下にインストールします。
+`OCaml`のパッケージマネージャー`opam`は、ここでは`XDG Base`ディレクトリ仕様にしたがい、`$XDG_DATA_HOME/opam`下にキャッシュなどの各種ファイルを配置します。
+
+**注意**:
+`XDG Base`仕様の環境変数は、[Windowsに`XDG Base Directory`を導入する](https://zenn.dev/atsushifx/articles/winhack-environ-xdg-base)で設定してあるものとします。
 
 ## 初期設定
 
@@ -28,6 +35,9 @@ Enjoy!
 ### `Path`の設定
 
 環境変数`Path`に`OCaml`の実行ディレクトリ`c:\lang\ocaml\bin`を追加します。
+これにより、どのディレクトリにいてもインストールした`opam`、`DkML`が実行できます。
+
+次の手順で、`Path`を設定します。
 
 1. システムのプロパティを開く:
 
@@ -63,9 +73,8 @@ Enjoy!
 
 ### `OPAMROOT`の設定
 
-パッケージマネージャー`opam`がパッケージを保存するディレクトリを、環境変数`OPAMROOT`で設定します。
-
-以下のようにして、`OPAMROOT`を設定します。
+パッケージマネージャー`opam`によって管理されるパッケージの保存先を指定するために、環境変数`OPAMROOT`を設定します。
+次のようにして、`OPAMROOT`を設定します。
 
 ```powershell
 [System.Environment]::SetEnvironmentVariable("OPAMROOT", $env:XDG_DATA_HOME+"/opam", "User")
@@ -78,7 +87,7 @@ Enjoy!
 
 ここまでで設定した`Path`や環境変数を`Windows Terminal`に反映させるため、`Windows Terminal`を再起動します。
 
-以下の手順で、`Windows Terminal`を再起動します:
+次の手順で、`Windows Terminal`を再起動します:
 
 1. `exit`コマンドで`Windows Terminal`を終了する:
 
@@ -96,12 +105,11 @@ Enjoy!
 
 ## `OCaml`のインストール
 
-Windows では、[`Diskuv`](https://diskuv.com/)が提供している[`DkML`](https://github.com/diskuv/dkml-installer-ocaml)が Windows版の`Ocaml`になります。
-この記事では、上記の`DkML`をインストールします。
+この記事では、Windows版`OCaml`である`DkML`をインストールします。
 
 ### `DkML`のインストール
 
-以下のコマンドで、`DkML`をインストールします:
+次の手順で、`DkML`をインストールします:
 
 ```powershell
 winget install Diskuv.OCaml --location c:\lang\ocaml
@@ -161,7 +169,7 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
 ここまでで設定した`Path`や環境変数を`Windows Terminal`に反映させるため、`Windows Terminal`を再起動します。
 
-以下の手順で、`Windows Terminal`を再起動します:
+次の手順で、`Windows Terminal`を再起動します:
 
 1. `exit`コマンドで`Windows Terminal`を終了する:
 
@@ -190,6 +198,8 @@ opam install utop -y
 
 ## `OCaml`の起動、終了
 
+`OCaml`を正常にインストールしたか確認するために、`OCaml`を起動、終了します。
+
 ### `OCaml`の起動
 
 次のコマンドで、`OCaml`を起動します。
@@ -198,24 +208,27 @@ opam install utop -y
 ocaml
 ```
 
-次のように、プロンプトが表示されれば成功です。
+以下のように、プロンプトが表示されれば成功です。
 
 ```OCaml
 OCaml version 4.14.0
 Enter #help;; for help.
 
 #
-
+```
 
 **注意**:
-`OCaml`と入力したとき、"アプリを選択してください"ダイアログが表示されることがあります。
-これは、opamパッケージの実行ディレクトリ`$OPAMTOOT/playground/bin`下に、Linux用の起動スクリプト`ocaml`があるためです。
-Windows環境では使わないので、上記のスクリプトを削除してください。
+<!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
+  `OCaml`と入力したとき、"アプリを選択してください"ダイアログが表示されることがあります。
+  これは、`opam`パッケージの実行ディレクトリ`$OPAMROOT/playground/bin`下に、Linux 用の起動スクリプト`ocaml`があるためです。
+  Windows 環境では使わないので、上記のスクリプトを削除してください。
+  ![アプリを選択してください](https://i.imgur.com/nU3ShKm.jpg)
+<!-- textlint-enable -->
 
 ### `OCaml`の終了
 
 `OCaml`を終了して、`PowerShell`に戻ります。
-以下の2つの方法があります。
+以下の 2つの方法があります。
 
 - `#quit`ディレクティブを使う:
   `#quit;;`とディレクティブと終端記号を入力します
@@ -293,7 +306,7 @@ utop #
 
 ## おわりに
 
-この記事では、Windows に`OCaml`をインストールする方法、および`OCaml`を起動、終了する方法まで説明しました。
+この記事では、Windows 環境に`OCaml`をインストールする方法、および`OCaml`に基本的な使用方法を説明しました。
 強力な`REPL`機能は、`OCaml`プログラミングの助けになるでしょう。
 
 `OCaml`を使った関数型プログラミングの学習本もでています。
