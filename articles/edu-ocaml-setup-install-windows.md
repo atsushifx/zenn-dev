@@ -54,9 +54,9 @@ published: false
 次の手順で、`Path`を設定します。
 
 1. システムのプロパティを開く:
-   \[設定]＞[システム > バージョン情報]＞\[システムの詳細設定]して、\[システムのプロパティ]を開く。
+  [設定]＞[システム > バージョン情報]＞\[システムの詳細設定]して、\[システムのプロパティ]を開く。
 
-  あるいは、`[Win]+R`かコマンドラインから、次のコマンドを実行する。
+   あるいは、`[Win]+R`かコマンドラインから、次のコマンドを実行する。
 
    ```powershell
    SystemPropertiesAdvanced.exe
@@ -67,24 +67,24 @@ published: false
    ![システムのプロパティ](https://i.imgur.com/zfaLYCw.png)
    *システムのプロパティ*
 
-1. \[環境変数]ダイアログを開く:
+2. \[環境変数]ダイアログを開く:]
    \[環境変数]ボタンをクリックして、\[環境変数]ダイアログを開く
    ![環境変数](https://i.imgur.com/r75yAaY.png)
    *環境変数*
 
-2. \[システム環境変数]の`Path`を編集する:
+3. \[システム環境変数]の`Path`を編集する:
    "システム環境変数"の`Path`を選び、[編集(I)]をクリックする。
 
     ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
    *環境変数: システムPath*
 
-3. 実行ディレクトリを追加する:
+4. 実行ディレクトリを追加する:
    \[新規\]をクリックし、`C:\lang\ocaml\bin` を追加する。
 
    ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
    *環境変数: システムPath*
 
-4. ダイアログを閉じる:
+5. ダイアログを閉じる:
    各ダイアログの\[OK]をクリックし、各ダイアログを閉じる。
 
 以上で、環境変数の設定は完了です。
@@ -95,12 +95,14 @@ published: false
 `OPAMROOT`を指定しない場合は、Windows は、`＄USERPROFILE/.opam`でパッケージを管理します。
 
 この記事では、`XDG Base Direcory`に準じた`OPAMROOT`を設定することで、環境をクリーンに保ちます。
-次のコマンドで、`OPAMROOT`を設定します。
+次の手順で、`OPAMROOT`を設定します。
 
-```powershell
-[System.Environment]::SetEnvironmentVariable("OPAMROOT", $env:XDG_DATA_HOME+"/opam", "User")
+1. `powershell`で環境変数設定コマンドを実行する:
 
-```
+   ```powershell
+   [System.Environment]::SetEnvironmentVariable("OPAMROOT", $env:XDG_DATA_HOME+"/opam", "User")
+
+   ```
 
 以上で、`OPAMROOT`の設定は完了です。
 
@@ -163,17 +165,17 @@ published: false
 
 ### 3.3 `DkML`の初期設定
 
-次のコマンドで、`DkML`を初期設定します:
+次の手順で、`DkML`を初期設定します:
 
-```powershell
-dkml init --disable-sandboxing --system
+1. `dkml init`で`DkML`を初期化する:
 
-```
-
-<!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
-**注意**:
-Windows 環境では、標準のサンドボックス機能がうまく機能しない場合があるため、`--disable-sandboxing`オプションを使用しています。
-<!-- textlilnt-enable -->
+   ```powershell
+   dkml init --disable-sandboxing --system
+   ```
+   <!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
+   **注意**:
+   Windows 環境では、標準のサンドボックス機能がうまく機能しない場合があるため、`--disable-sandboxing`オプションを使用しています。
+   <!-- textlilnt-enable -->
 
 以上で、`DkML`の初期設定は完了です。
 これにより、`opam`コマンドが使えるようになります。
@@ -181,29 +183,35 @@ Windows 環境では、標準のサンドボックス機能がうまく機能し
 ### 3.4 `opam`の初期設定
 
 `DkML`に続いて`opam`を初期設定します。
-次のコマンドを実行します:
+次の手順で、`opam`を初期設定します:
 
-```powershell
-opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
+1. `opam`を初期設定する:
 
-```
+   ```powershell
+   opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
-これにより、`OCaml`が`opam`の実行ディレクトリにインストールできます。
+   ```
+
 以上で、`opam`の初期設定は完了です。
 
 ### 3.5 初期設定スクリプトの設定
 
 `OCaml`を実行するためには、いくつかの環境変数を設定しておく必要があります。
-そのため、PowerShell の初期設定スクリプトに以下の行を追加します。
+次の手順で、初期設定スクリプトを設定します:
 
-```powershell:$profile
-(& opam env) -split '\r?\n' | ForEach-Object { Invoke-Expression $_ }
+1. エディタで初期設定スクリプト`$profile`を開きます
 
-```
+2. `$profile'の末尾に次の行を追加します:
 
-`opam env`コマンドは、環境変数設定スクリプトを出力します。上記コマンドでは、出力された環境変数ごとに`Invoke-Expression`を実行して環境変数を設定しています。
+   ```powershell:$profile
+   (& opam env) -split '\r?\n' | ForEach-Object { Invoke-Expression $_ }
+   ```
+
+3. `$profile`を保存して、エディタを終了します
 
 以上で、初期設定スクリプトの設定は完了です。
+
+`opam env`コマンドは、環境変数設定スクリプトを出力します。上記コマンドでは、出力された環境変数ごとに`Invoke-Expression`を実行して環境変数を設定しています。
 
 ### 3.6 `Terminal`の再起動
 
@@ -229,12 +237,16 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
 `utop`は、`OCaml`の`REPL`に各種拡張機能を提供するパッケージです。
 
-次のコマンドで、`utop`をインストールします。
+次の手順で、`utop`をインストールします。
 
-```powershell
-opam install utop -y
+1. `opam`を使って、`utop`パッケージをインストールする:
 
-```
+   ```powershell
+   opam install utop -y
+
+   ```
+
+以上で、`utop`のインストールは完了です。
 
 ## 4. `OCaml`の起動、終了
 
@@ -268,27 +280,28 @@ Enter #help;; for help.
 `OCaml`を終了して、`PowerShell`に戻ります。
 以下の 2つの方法があります。
 
-- `#quit`ディレクティブを使う:
-  `#quit;;`とディレクティブと終端記号を入力します
+1. `#quit`ディレクティブを使う:
+   `#quit;;`とディレクティブと終端記号を入力します
 
-  ```OCaml
-  # #quit;;
+   ```OCaml
+   # #quit;;
 
-  >
-  ```
+   >
+   ```
 
-  上記のように、`powershell`のプロンプトに戻ります。
+   上記のように、`powershell`のプロンプトに戻ります。
 
-- `Clrl+Z` (`EOF`)を入力する:
-  プロンプトの先頭で、`Ctrl+Z` (`EOF`) を入力します
-  **注意**:
-  Windows 環境では、`EOF`は`Ctrl+Z`で入力します。
+2. `Clrl+Z` (`EOF`)を入力する:
+   プロンプトの先頭で、`Ctrl+Z` (`EOF`) を入力します
 
-  ```OCaml
-  # ^Z [`Ctrl+Z`を入力]
+   **注意**:
+   Windows 環境では、`EOF`は`Ctrl+Z`で入力します。
 
-  >
-  ```
+   ```OCaml
+   # ^Z [`Ctrl+Z`を入力]
+
+   >
+   ```
 
   上記のように、`powershell`のプロンプトに戻ります。
 
