@@ -9,35 +9,37 @@ published: false
 ## はじめに
 
 この記事では、Windows 環境で関数型プログラミング言語`OCaml`をインストールして設定する方法について解説します。
-`OCaml`は UNIX/Linux系OS に最適化されているため、Windows 向けのインストーラーである`DkML`を使用します。
+`OCaml`は UNIX/Linux系OS に最適化されているため、Windows 環境でも容易にインストールできるよう`DkML`という専用のインストーラーを使用します。
 
-このプロセスを通じて、Windows に`OCaml`をインストールし、関数型プログラミングの世界を楽しみましょう。
+このプロセスを通じて、Windows に`OCaml`をインストールし、関数型プログラミングの魅力を楽しみましょう。
 Enjoy!
 
 ## 技術用語
 
 この記事で取り上げる重要な技術用語を以下に解説します。
 
-- `OCaml`: ML言語ファミリーに属し、型推論、強力なパターンマッチング、モジュールシステムを特徴とする関数型プログラミング言語
-- `DkML`: Windows に`OCaml`を簡単にインストールするためのインストーラー
+- `OCaml`: ML 言語ファミリーに属し、型推論、強力なパターンマッチング、モジュールシステムを特徴とし、型安全性と高いパフォーマンスを実現した関数型プログラミング言語
+- `DkML`: Windows 上で`OCaml`を簡単にインストールするためのインストーラー
 - `opam`: `OCaml`のパッケージを管理するためのパワフルなツールで、ライブラリやツールのインストール、バージョン管理を容易にする
 - `XDG Base Directory`: UNIX系OS のディレクトリ標準仕様で、設定やデータファイルはこの仕様にしたがって整理する
+- `Visual Studio BuildTools`: Microsoft が提供すコマンドラインで使える開発ツールセット。`DkML`はこれらを利用して`OCaml`をビルドする
+- `utop`:`OCaml`の`REPL` (`Read-Eval-Print-Loop`)用の機能拡張パッケージ。より高度な編集機能やタブ補完機能を提供する
 
-## 前提条件
+## 1. 前提条件
 
 この記事では、以下の前提で`OCaml`をインストールします。
 
-`OCaml`は、`c:\lang\ocaml`下にインストールします。
+`OCaml`は、`c:\lang\ocaml`下にインストールします。これにより、`Path`に空白が含まれるなどの Windows 特有の問題を防ぎます。
 `OCaml`のパッケージマネージャー`opam`は、ここでは`XDG Base`ディレクトリ仕様にしたがい、`$XDG_DATA_HOME/opam`下にキャッシュなどの各種ファイルを配置します。
 
 **注意**:
 `XDG Base`仕様の環境変数は、[Windowsに`XDG Base Directory`を導入する](https://zenn.dev/atsushifx/articles/winhack-environ-xdg-base)で設定してあるものとします。
 
-## 初期設定
+## 2. 初期設定
 
 `OCaml`をインストールする前に、`Path`や環境変数など、必要な設定をしておきます。
 
-### `Path`の設定
+### 2.1 `Path`の設定
 
 環境変数`Path`に`OCaml`の実行ディレクトリ`c:\lang\ocaml\bin`を追加します。
 これにより、どのディレクトリにいてもインストールした`opam`、`DkML`が実行できます。
@@ -76,7 +78,7 @@ Enjoy!
 
 以上で、環境変数の設定は完了です。
 
-### `OPAMROOT`の設定
+### 2.2 `OPAMROOT`の設定
 
 パッケージマネージャー`opam`によって管理されるパッケージの保存先を指定するために、環境変数`OPAMROOT`を設定します。
 次のようにして、`OPAMROOT`を設定します。
@@ -88,9 +90,10 @@ Enjoy!
 
 以上で、`OPAMROOT`の設定は完了です。
 
-### `Terminal`の再起動
+### 2.3 `Terminal`の再起動
 
 ここまでで設定した`Path`や環境変数を`Windows Terminal`に反映させるため、`Windows Terminal`を再起動します。
+この再起動により、新しく設定した環境変数が `Terminal` 環境に適用され、`OCaml` および関連ツールを問題なく使用できるようになります。
 
 次の手順で、`Windows Terminal`を再起動します:
 
@@ -108,12 +111,12 @@ Enjoy!
 
 以上で、`Windows Terminal`の再起動は完了です。
 
-## `OCaml`のインストール
+## 3. `OCaml`のインストール
 
 この記事では、`DkML`をインストールし、それを利用して Windows版`OCaml`をインストールします。
 `OCaml`のビルドに、`Visual Studio BuildTools`も必要なため、あわせて`BuildTools`もインストールします。
 
-### `DkML`のインストール
+### 3.1 `DkML`のインストール
 
 次の手順で、`DkML`をインストールします:
 
@@ -123,7 +126,7 @@ winget install Diskuv.OCaml --location c:\lang\ocaml
 
 以上で、`DkML`のインストールは完了です。
 
-### `Visual Studio BuildTools`のインストール
+### 3.2 `Visual Studio BuildTools`のインストール
 
 `DkML`は、`Visual Studio BuildTools`を使って`OCaml`やパッケージをビルドします。
 次のコマンドで、`BuildTools`をインストールします:
@@ -134,7 +137,7 @@ winget install Diskuv.OCaml --location c:\lang\ocaml
 ```
 <!-- markdownlint-enable -->
 
-### `DkML`の初期設定
+### 3.3 `DkML`の初期設定
 
 次のコマンドで、`DkML`を初期設定します:
 
@@ -145,7 +148,7 @@ dkml init --disable-sandboxing --system
 
 以上で、`DkML`の初期設定は完了です。
 
-### `opam`の初期設定
+### 3.4 `opam`の初期設定
 
 `DkML`に続いて`opam`を初期設定します。
 次のコマンドを実行します:
@@ -157,7 +160,7 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
 以上で、`opam`の初期設定は完了です。
 
-### 初期設定スクリプトの設定
+### 3.5 初期設定スクリプトの設定
 
 `OCaml`を実行するためには、いくつかの環境変数を設定しておく必要があります。
 そのため、PowerShell の初期設定スクリプトに以下の行を追加します。
@@ -171,7 +174,7 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
 以上で、初期設定スクリプトの設定は完了です。
 
-### `Terminal`の再起動
+### 3.6 `Terminal`の再起動
 
 ここまでで設定した`Path`や環境変数を`Windows Terminal`に反映させるため、`Windows Terminal`を再起動します。
 
@@ -191,7 +194,7 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 
 以上で、`Windows Terminal`の再起動は完了です。
 
-### `utop`のインストール
+### 3.7 `utop`のインストール
 
 `utop`は、`OCaml`の`REPL`各種の拡張機能を追加するパッケージです。
 
@@ -202,11 +205,12 @@ opam install utop -y
 
 ```
 
-## `OCaml`の起動、終了
+## 4. `OCaml`の起動、終了
 
 `OCaml`を正常にインストールしたか確認するために、`OCaml`を起動、終了します。
+また、`REPL`の機能拡張パッケージ`utop`の起動、終了もします。
 
-### `OCaml`の起動
+### 4.1 `OCaml`の起動
 
 次のコマンドで、`OCaml`を起動します。
 
@@ -231,7 +235,7 @@ Enter #help;; for help.
   ![アプリを選択してください](https://i.imgur.com/nU3ShKm.jpg)
 <!-- textlint-enable -->
 
-### `OCaml`の終了
+### 4.2 `OCaml`の終了
 
 `OCaml`を終了して、`PowerShell`に戻ります。
 以下の 2つの方法があります。
@@ -262,7 +266,7 @@ Enter #help;; for help.
 
 以上で、`OCaml`の終了は完了です。
 
-### `utop`の起動
+### 4.3 `utop`の起動
 
 高度な編集機能を使いたいときは、`OCaml`の拡張`REPL`である`utop`を起動します。
 
@@ -283,7 +287,7 @@ utop #
 上記のように、プロンプトが出力されます。
 以上で、`utop`の起動は終了です。
 
-### `utop`の終了
+### 4.4 `utop`の終了
 
 `utop`を終了して、`PowerShell`に戻ります。
 以下の 2つの方法があります。
