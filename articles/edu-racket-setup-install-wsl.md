@@ -2,7 +2,6 @@
 title: "WSL上のDebianに関数型プログラミング言語「Racket」をインストールする"
 emoji: "🎾"
 type: "tech"
-published: true
 topics: [ "WSL", "Racket", "環境構築", "関数型プログラミング", ]
 published: true
 ---

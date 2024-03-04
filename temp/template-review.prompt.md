@@ -65,40 +65,39 @@
 - 技術系ニュース: <https://www.publickey1.jp/>, <https://techcrunch.com/>, <https://news.ycombinator.com/>に通じたリサーチャー
 
 """"
-:theme:
+:theme
 
-- WSL上の Debian に関数型プログラミング言語`Racket`をインストールする
+- Windows上に`OCaml`をインストールする
 
 """"
 :target:
 
 - Windows で関数型言語を学ぶプログラマー
-- bash の基本的な使い方を知っているプログラマー
+- PowerShell の基本的な使い方を知っているプログラマー
 
 """"
 :goal:
 
-- WSL上に`Racket`をインストールする
-- ターミナルから、Racket を起動し、終了する
+- Windows上に`OCaml`をインストールする
+- ターミナルから、`OCaml` を起動し、終了する
+- 手順については、過度に簡潔にしない
 
 """"
 link:
 
-- [Racket公式Web](https://racket-lang.org/)
-- [Racket Documentation](https://docs.racket-lang.org/)
-- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/)
-- [Installation Configuration and Search Paths](https://docs.racket-lang.org/raco/config-file.html)
-- [Racket Guide](https://docs.racket-lang.org/guide/index.html)
-- [How to Design Programs](https://htdp.org/)
-- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.htmll)
-- [Beautiful Racket](https://beautifulracket.com/)
+- [公式サイト](https://ocaml.org/)
+- [`OCaml.jp`](https://ocaml.jp/)
+- [`DkML` Installer - Native Code Edition](https://github.com/diskuv/dkml-installer-ocaml)
+- [京都大学工学部専門科目「プログラミング言語処理系」講義資料](https://kuis-isle3sw.github.io/IoPLMaterials/)
+- [`OCaml`入門](https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/class/isle4-09w/mltext.pdf)
+- [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
+- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
 
 """"
 remark:
 
-- 「それでは、Happy Hacking!」は変更せず、その前の文章をあわせる
-- Linuxbrew は Homebrew と統合されたので、Linuxbrew について書かない
-- 「次のようにします」は、カジュアルさを保つため極力変更しない
+- 「Happy Hacking!」は変更せず、その前の文章をあわせる
+- 「次の」を「以下に」へと変更しない
 
 """"
 /begin
