@@ -13,7 +13,7 @@ published: false
 
 `OCaml`は、型推論、パターンマッチング、モジュールシステムなどを特徴とし、型安全性と高パフォーマンスを提供する関数型プログラミング言語です。
 
-Windows環境では、WSL上に `Ocaml`環境を構築することが推奨されています。
+Windows環境では、WSL上に `OCaml`環境を構築することが推奨されています。
 しかし、Windows環境に`OCaml`をインストールすることで、使い慣れた Windows環境で`OCaml`が使用できます。
 
 ## 技術用語
@@ -33,7 +33,7 @@ Windows環境では、WSL上に `Ocaml`環境を構築することが推奨さ�
 これらの条件を確認し、必要なら準備してください。
 
 - **`winget`コマンドが使用可能**: Windows パッケージマネージャーを使用してソフトウェアをインストールする。
-- **`OCaml`のインストール先:`c:\lang\ocaml`**: このディレクトリはインストール中に指定できる。
+- **`OCaml`のインストール先:`c:\lang\OCaml`**: このディレクトリはインストール中に指定できる。
 - **`XDG Base Directory`の採用**:Windows でも UNIX系OS のファイルシステム標準に従うことで、設定やデータファイルの管理を一元化する。これは、`$XDG_DATA_HOME`環境変数を設定することで達成される。
 - **環境変数の設定**: 環境変数`OPAMROOT`を`$XDG_DATA_HOME/opam`に設定します。これにより、`opam`が管理するファイルを整理しやすくします。
 
@@ -50,13 +50,13 @@ Windows環境では、WSL上に `Ocaml`環境を構築することが推奨さ�
 
 ### 2.1 `Path`の設定
 
-環境変数`Path`に`OCaml`の実行ディレクトリ`c:\lang\ocaml\bin`を追加します。
-このためには、システムの環境設定画面を開いてシステム環境変数`Path`に`c:\lang\ocaml\bin`を追加します。
+環境変数`Path`に`OCaml`の実行ディレクトリ`c:\lang\OCaml\bin`を追加します。
+このためには、システムの環境設定画面を開いてシステム環境変数`Path`に`c:\lang\OCaml\bin`を追加します。
 
 次の手順で、`Path`を設定します。
 
 1. システムのプロパティを開く:
-  [設定]＞[システム > バージョン情報]＞\[システムの詳細設定]して、\[システムのプロパティ]を開く。
+  [設定]＞[システム > バージョン情報]＞\[システムの詳細設定]として、\[システムのプロパティ]を開く。
 
    あるいは、`[Win]+R`かコマンドラインから、次のコマンドを実行する。
 
@@ -81,7 +81,7 @@ Windows環境では、WSL上に `Ocaml`環境を構築することが推奨さ�
    *環境変数: システムPath*
 
 4. 実行ディレクトリを追加する:
-   \[新規\]をクリックし、`C:\lang\ocaml\bin` を追加する。
+   \[新規\]をクリックし、`C:\lang\OCaml\bin` を追加する。
 
    ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
    *環境変数: システムPath*
@@ -132,7 +132,7 @@ Windows環境では、WSL上に `Ocaml`環境を構築することが推奨さ�
 ## 3. `OCaml`のインストール
 
 このセクションでは、まず`DkML`をインストールし、`DkML`を使って Windows版`OCaml`をインストールします。
-`DkML`は Windows版`OCaml`のインストーラーです。
+`DkML`は`OCaml`を Windows環境にて簡単にインストールできるインストーラーです。
 これは、`OCaml`がもともと UNIX/Linux系OS用に設計されているためで、`DkML`を使用することで Windows での運用の差異を吸収します。
 
 ### 3.1 `DkML`のインストール
@@ -143,7 +143,7 @@ Windows環境では、WSL上に `Ocaml`環境を構築することが推奨さ�
 1. `winget`で、`DkML`をインストールする:
 
    ```powershell
-   winget install Diskuv.OCaml --location c:\lang\ocaml
+   winget install Diskuv.OCaml --location c:\lang\OCaml
    ```
 
 以上で、`DkML`のインストールは完了です。
@@ -260,7 +260,7 @@ Windows環境では、WSL上に `Ocaml`環境を構築することが推奨さ�
 次のコマンドで、`OCaml`を起動します。
 
 ```powershell
-ocaml
+OCaml
 ```
 
 以下のように、プロンプトが表示されれば成功です。
@@ -274,7 +274,7 @@ Enter #help;; for help.
 
 <!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
 **注意**:
-`OCaml`を起動する際に、"アプリを選択してください"ダイアログが表示された場合は、`$OPAMROOT/playground/bin`にある Linux用の起動スクリプト`ocaml`が原因です。このスクリプトは Windows 環境では不要なので、削除してください。
+`OCaml`を起動する際に、"アプリを選択してください"ダイアログが表示された場合は、`$OPAMROOT/playground/bin`にある Linux用の起動スクリプト`OCaml`が原因です。このスクリプトは Windows 環境では不要なので、削除してください。
 <!-- textlint-enable -->
 
 ### 4.2 `OCaml`の終了
@@ -283,7 +283,7 @@ Enter #help;; for help.
 以下の 2つの方法があります。
 
 1. `#quit`ディレクティブを使う:
-   `#quit;;`とディレクティブと終端記号を入力します
+   `#quit;;`とコマンドと終端記号を入力します
 
    ```OCaml
    # #quit;;
@@ -340,7 +340,7 @@ utop #
 以下の 2つの方法があります。
 
 1. `#quit`ディレクティブを使う:
-   `#quit;;`とディレクティブと終端記号を入力します
+   `#quit;;`とコマンドと終端記号を入力します
 
    ```OCaml
    utop # #quit;;
@@ -380,9 +380,9 @@ utop #
 
 ### Webサイト
 
-- [`OCaml`公式](https://ocaml.org/):
+- [`OCaml`公式](https://OCaml.org/):
   `OCaml`の基本から応用までを網羅的に学べる公式ドキュメント。初心者から上級者まで幅広く対応しています。
-- [`Windows版OCaml` `DkML`](https://github.com/diskuv/dkml-installer-Ocaml):
+- [`Windows版OCaml` `DkML`](https://github.com/diskuv/dkml-installer-OCaml):
   Windows 環境で`OCaml`を設定する際に役立つ`DkML`インストーラーの詳細情報。
 - [Windowsに`XDG Base Directory`を導入する](https://zenn.dev/atsushifx/articles/winhack-environ-xdg-base):
   Windows 環境で`XDG Base Directory`を利用する方法について解説した記事。
@@ -395,4 +395,4 @@ utop #
 ### 本
 
 - [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
-- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
+- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-OCaml)
