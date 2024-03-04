@@ -165,7 +165,7 @@ dkml init --disable-sandboxing --system
 ```
 
 <!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
-  **注意**:
+**注意**:
 Windows 環境では、標準のサンドボックス機能がうまく機能しない場合があるため、`--disable-sandboxing`オプションを使用しています。
 <!-- textlilnt-enable -->
 
@@ -183,9 +183,6 @@ opam init --disable-sandboxing --bare --switch=playground --shell=pwsh  -a
 ```
 
 これにより、`OCaml`が`opam`の実行ディレクトリにインストールできます。
-<!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
-Windows 環境では、標準のサンドボックス機能がうまく機能しない場合があるため、`--disable-sandboxing`オプションを使用しています。
-<!-- textlilnt-enable -->
 以上で、`opam`の初期設定は完了です。
 
 ### 3.5 初期設定スクリプトの設定
@@ -236,7 +233,6 @@ opam install utop -y
 ## 4. `OCaml`の起動、終了
 
 `OCaml`を正常にインストールしたか確認するために、`OCaml`を起動、終了します。
-また、`REPL`の機能拡張パッケージ`utop`の起動、終了もします。
 
 ### 4.1 `OCaml`の起動
 
@@ -255,12 +251,9 @@ Enter #help;; for help.
 #
 ```
 
-**注意**:
 <!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
-  `OCaml`を起動する際に、"アプリを選択してください"ダイアログが表示された場合は、`$OPAMROOT/playground/bin`にある Linux用の起動スクリプト`ocaml`が原因です。このスクリプトは Windows 環境では不要なので、削除してください。
-  ![アプリを選択してください](https://i.imgur.com/nU3ShKm.jpg)
-  *\[アプリを選択してください]ダイアログ*
-
+**注意**:
+`OCaml`を起動する際に、"アプリを選択してください"ダイアログが表示された場合は、`$OPAMROOT/playground/bin`にある Linux用の起動スクリプト`ocaml`が原因です。このスクリプトは Windows 環境では不要なので、削除してください。
 <!-- textlint-enable -->
 
 ### 4.2 `OCaml`の終了

@@ -48,13 +48,13 @@
 """"
 :link
 
-- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト
-- [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント
-- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/) : Racket で使われている拡張`REPL`のドキュメント
-- [Racket Guide](https://docs.racket-lang.org/guide/index.html)
-- [How to Design Programs](https://htdp.org/)
-- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.htmll)
-- [Beautiful Racket](https://beautifulracket.com/)
+- [公式サイト](https://ocaml.org/)
+- [`OCaml.jp`](https://ocaml.jp/)
+- [`DkML` Installer - Native Code Edition](https://github.com/diskuv/dkml-installer-ocaml)
+- [京都大学工学部専門科目「プログラミング言語処理系」講義資料](https://kuis-isle3sw.github.io/IoPLMaterials/)
+- [`OCaml`入門](https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/class/isle4-09w/mltext.pdf)
+- [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
+- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
 
 """"
 :remark:
