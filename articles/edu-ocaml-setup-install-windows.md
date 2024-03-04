@@ -33,7 +33,7 @@ Windows環境では、WSL上に `OCaml`環境を構築することが推奨さ�
 これらの条件を確認し、必要なら準備してください。
 
 - **`winget`コマンドが使用可能**: Windows パッケージマネージャーを使用してソフトウェアをインストールする。
-- **`OCaml`のインストール先:`c:\lang\OCaml`**: このディレクトリはインストール中に指定できる。
+- **`OCaml`のインストール先:`c:\lang\ocaml`**: このディレクトリはインストール中に指定できる。
 - **`XDG Base Directory`の採用**:Windows でも UNIX系OS のファイルシステム標準に従うことで、設定やデータファイルの管理を一元化する。これは、`$XDG_DATA_HOME`環境変数を設定することで達成される。
 - **環境変数の設定**: 環境変数`OPAMROOT`を`$XDG_DATA_HOME/opam`に設定します。これにより、`opam`が管理するファイルを整理しやすくします。
 
@@ -50,8 +50,8 @@ Windows環境では、WSL上に `OCaml`環境を構築することが推奨さ�
 
 ### 2.1 `Path`の設定
 
-環境変数`Path`に`OCaml`の実行ディレクトリ`c:\lang\OCaml\bin`を追加します。
-このためには、システムの環境設定画面を開いてシステム環境変数`Path`に`c:\lang\OCaml\bin`を追加します。
+環境変数`Path`に`OCaml`の実行ディレクトリ`c:\lang\ocaml\bin`を追加します。
+このためには、システムの環境設定画面を開いてシステム環境変数`Path`に`c:\lang\ocaml\bin`を追加します。
 
 次の手順で、`Path`を設定します。
 
@@ -81,7 +81,7 @@ Windows環境では、WSL上に `OCaml`環境を構築することが推奨さ�
    *環境変数: システムPath*
 
 4. 実行ディレクトリを追加する:
-   \[新規\]をクリックし、`C:\lang\OCaml\bin` を追加する。
+   \[新規\]をクリックし、`C:\lang\ocaml\bin` を追加する。
 
    ![Pathの編集](https://i.imgur.com/ujPkIoU.png)
    *環境変数: システムPath*
@@ -260,13 +260,13 @@ Windows環境では、WSL上に `OCaml`環境を構築することが推奨さ�
 次のコマンドで、`OCaml`を起動します。
 
 ```powershell
-OCaml
+ocaml
 ```
 
 以下のように、プロンプトが表示されれば成功です。
 
-```OCaml
-OCaml version 4.14.0
+```ocaml
+The OCaml version 4.14.0
 Enter #help;; for help.
 
 #
@@ -274,7 +274,7 @@ Enter #help;; for help.
 
 <!-- textlint-disable ja-technical-writing/no-doubled-joshi -->
 **注意**:
-`OCaml`を起動する際に、"アプリを選択してください"ダイアログが表示された場合は、`$OPAMROOT/playground/bin`にある Linux用の起動スクリプト`OCaml`が原因です。このスクリプトは Windows 環境では不要なので、削除してください。
+`OCaml`を起動する際に、"アプリを選択してください"ダイアログが表示された場合は、`$OPAMROOT/playground/bin`にある Linux用の起動スクリプト`ocaml`が原因です。このスクリプトは Windows 環境では不要なので、削除してください。
 <!-- textlint-enable -->
 
 ### 4.2 `OCaml`の終了
@@ -285,7 +285,7 @@ Enter #help;; for help.
 1. `#quit`ディレクティブを使う:
    `#quit;;`とコマンドと終端記号を入力します
 
-   ```OCaml
+   ```ocaml
    # #quit;;
 
    >
@@ -299,7 +299,7 @@ Enter #help;; for help.
    **注意**:
    Windows 環境では、`EOF`は`Ctrl+Z`で入力します。
 
-   ```OCaml
+   ```ocaml
    # ^Z [`Ctrl+Z`を入力]
 
    >
@@ -342,7 +342,7 @@ utop #
 1. `#quit`ディレクティブを使う:
    `#quit;;`とコマンドと終端記号を入力します
 
-   ```OCaml
+   ```ocaml
    utop # #quit;;
 
    >
@@ -353,7 +353,7 @@ utop #
 2. `Ctrl+D` (`EOF`)を入力する:
    プロンプトの先頭で、`Ctrl+D` (`EOF`)を入力します
 
-   ```OCaml
+   ```ocaml
    utop # [`Ctrl+D`を入力]
 
    >
@@ -395,4 +395,4 @@ utop #
 ### 本
 
 - [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
-- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-OCaml)
+- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
