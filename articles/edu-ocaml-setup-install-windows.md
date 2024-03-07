@@ -2,7 +2,7 @@
 title: "OCaml: Windows環境でOCamlをセットアップする"
 emoji: "🐪"
 type: "tech"
-topics: [ "学習", "関数型プログラミング", "環境構築", "Windows", ]
+topics: [ "Windows", "OCaml", "環境構築", "関数型プログラミング", ]
 published: true
 ---
 
