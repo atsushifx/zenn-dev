@@ -3,7 +3,7 @@ title: "OCaml: WindowsのWSL環境にOCamlをセットアップする方法"
 emoji: "🐪"
 type: "tech"
 topics: [ "WSL", "OCaml", "環境構築", "関数型プログラミング", ]
-published: false
+published: true
 ---
 
 ## はじめに
@@ -303,4 +303,4 @@ Enter #help;; for help.
   お茶の水女子大の浅井健一先生による、プログラミング講義の教科書。
 
 - **[`OCaml`入門テキスト](https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/class/isle4-09w/mltext.pdf)**:
-  京都大学の五十嵐先生による`OCaml`入門テキスト。1章は古いのスキップ推奨。
+  京都大学の五十嵐先生による`OCaml`入門テキスト。1章は古いのでスキップ推奨。
