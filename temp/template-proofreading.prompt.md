@@ -22,6 +22,7 @@
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 文章に命令形の文体は使わないことに注意する
+- 英単語の両端のスペースは削除しない
 - :role にしたがってレビュー、推敲、校正、校閲を担当する
 - :role にしたがって、表記の統一や適切な表現を確認する
 - <https//www.weblio.jp/>  を参照し、正しい表現を使う
@@ -49,10 +50,11 @@
 :link
 
 - [公式サイト](https://ocaml.org/)
-- [`OCaml.jp`](https://ocaml.jp/)
-- [`DkML` Installer - Native Code Edition](https://github.com/diskuv/dkml-installer-ocaml)
-- [京都大学工学部専門科目「プログラミング言語処理系」講義資料](https://kuis-isle3sw.github.io/IoPLMaterials/)
+- [`OCaml` - `Wikipedia`](https://ja.wikipedia.org/wiki/OCaml)
+- [`IoPLMaterials`](https://kuis-isle3sw.github.io/IoPLMaterials/)
 - [`OCaml`入門](https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/class/isle4-09w/mltext.pdf)
+- [お気楽`Ocaml` プログラミング入門](http://www.nct9.ne.jp/m_hiroi/func/ocaml.html)
+- [WSL開発環境: 環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)
 - [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
 - [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
 

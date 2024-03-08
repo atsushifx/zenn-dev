@@ -92,7 +92,8 @@
                 "/7z/ig",
                 "PublicArchives",
                 "/Unlicense/ig",
-                "OSS"
+                "OSS",
+                "2024"
             ]
         },
         "@proofdict/proofdict": {
