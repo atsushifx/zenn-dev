@@ -21,7 +21,7 @@ Enjoy!
 - **`OCaml`**:
   型安全性を持ち、静的型付け、型推論、パターンマッチング、モジュールシステム、およびオブジェクト指向プログラミングをサポートする関数型プログラミング言語
 
-- **WSL (Windows Subsystem for Linux)**:
+- **`WSL` (`Windows Subsystem for Linux`)**:
   Windows上で Linux のバイナリ実行ファイルを直接実行できる互換レイヤー
 
 - **`opam` (`OCaml Package Manager`)**:
