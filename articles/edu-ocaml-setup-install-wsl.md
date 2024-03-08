@@ -50,9 +50,9 @@ Enjoy!
 
 以上です。
 
-## `OCaml`とは
+## 1. `OCaml`とは
 
-### `OCaml`の特徴
+### 1.1 `OCaml`の特徴
 
 `OCaml`は、静的型付けの関数型プログラミング言語で、主に次のような特徴があります。
 
@@ -64,7 +64,7 @@ Enjoy!
 
 `OCaml`は「マルチパラダイム言語」とも呼ばれ、関数型、手続き型、オブジェクト指向の要素を併せ持っています。
 
-### `opam` (`OCaml`パッケージマネージャー)
+### 1.2 `opam` (`OCaml`パッケージマネージャー)
 
 `opam`は`OCaml`用のパッケージマネージャーです。
 `OCaml`自身も`opam`で提供されており、複数のバージョンの`OCaml`を切り替えて使うことができます。
@@ -74,21 +74,21 @@ Enjoy!
 
 ほかのさまざまなパッケージは、`opam list -a`で見ることができます。
 
-## 前提条件
+## 2. 前提条件
 
 この記事では、次の環境が前提となります。
 
 - `WSL`環境に`Homebrew`がインストール済み
-- `XDG Base Directory`仕様の各環境変数`XDG_CONFIG_HOME`が設定済み
+- `XDG Base Directory`仕様の各環境変数が設定済み
 - `dotfiles`による`bash`環境が構築済み
 
 環境がまだの場合は、[WSL開発環境の構築まとめ記事](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)を参考に環境構築をしてください。
 
-## `OCaml`のインストール
+## 3. `OCaml`のインストール
 
 `OCaml`をインストール手順は、次の通りです。
 
-### `OPAMROOT`の設定
+### 3.1 `OPAMROOT`の設定
 
 `OPAMROOT`は`opam`がパッケージを管理する場所を指定する環境変数です。
 `OPAMROOT`を指定しない場合は、`~/.opam` でパッケージを管理します。
@@ -105,7 +105,7 @@ Enjoy!
 
 以上で、`OPAMROOT`の設定は完了です。
 
-### `bubblewrap`のインストール
+### 3.2 `bubblewrap`のインストール
 
 `bubblewrap`は、ユーザー権限でサンドボックスを作成するツールです。
 `OCaml`では、サンドボックス機能を実現するために使われています。
@@ -120,7 +120,7 @@ Enjoy!
 
 以上で、`bubblewrap`のインストールは完了です。
 
-### ターミナル (WSL)の再起動
+### 3.3 ターミナル (WSL)の再起動
 
 ここまでで設定した環境変数を`WSL`に反映させるため、ターミナル`WSL`を再起動します。
 次の手順で、ターミナルを再起動します。
@@ -138,7 +138,7 @@ Enjoy!
 
 以上で、WSL の再起動は完了です。
 
-### `opam`のインストール
+### 3.4 `opam`のインストール
 
 パッケージマネージャー`opam`は、`brew`を使ってインストールします。
 次の手順で、`opam`をインストールします。
@@ -151,7 +151,7 @@ Enjoy!
 
 以上で、`opam`のインストールは終了です。
 
-### `opam`の初期化
+### 3.5 `opam`の初期化
 
 `opam`の各種コマンドを使えるように、`opam`を初期化します。
 次の手順で、`opam`を初期化します。
@@ -164,7 +164,7 @@ Enjoy!
 
 以上で、`opam`の初期化は終了です。
 
-### `opam switch`での`OCaml`のインストール
+### 3.6 `opam switch`での`OCaml`のインストール
 
 `opam switch`は複数のバージョンの`OCaml`をインストールできる機能です。
 インストールした`OCaml`は、`opam switch`で切り替えられます。
@@ -179,11 +179,11 @@ Enjoy!
 
    **注意**:
    上記の`5.1.1`は、`OCaml`のバージョンを指定します。
-   どのバージョンが指定できるかは、`ocaml switch list-available`を使用してください。
+   どのバージョンが指定できるかは、`opam switch list-available`を使用してください。
 
 以上で、`OCaml`のインストールは終了です。
 
-### `profile`の設定
+### 3.7 `profile`の設定
 
 `OCaml`の環境を設定するため、`$XDG_CONFIG_HOME/profile`に次の行を追加します。
 <!-- markdownlint-disable line-length -->
@@ -199,7 +199,7 @@ test -r /home/atsushifx/.local/share/opam/opam-init/init.sh && . /home/atsushifx
 
 以上で、`profile`の設定は終了です。
 
-### ターミナルの再起動
+### 3.8 ターミナル(WSL) の再起動
 
 `profile`で設定した`OCaml`の設定を反映させるため、ターミナル (WSL)を再起動します。
 次の手順で、ターミナルを再起動します。
@@ -217,11 +217,11 @@ test -r /home/atsushifx/.local/share/opam/opam-init/init.sh && . /home/atsushifx
 
 以上で、WSL の再起動は完了です。
 
-## `OCaml`の起動、終了
+## 4. `OCaml`の起動、終了
 
 `OCaml`が正常にインストールできたかどうかを確認するため、`OCaml`を起動、終了します。
 
-### `OCaml`の起動
+### 4.1 `OCaml`の起動
 
 次のコマンドで、`OCaml`を起動します。
 
@@ -240,7 +240,7 @@ Enter #help;; for help.
 
 以上で、`OCaml`の起動は終了です。
 
-### `OCaml`の終了
+### 4.2 `OCaml`の終了
 
 起動した`OCaml`を終了するには、`quit`ディレクティブを入力する方法と、`EOF`を入力する方法の 2つがあります。
 次の方法で、`OCaml`を終了します。
