@@ -8,28 +8,28 @@ published: false
 
 ## はじめに
 
-この記事では、`rlwrap`を利用して`OCaml`の`REPL`の機能を強化する方法を紹介します。
-`rlwrap`により、編集機能、ヒストリー機能、タブ補完機能が`OCaml`の`REPL`に追加され、より快適な開発体験を提供します。
+本記事では、`rlwrap`を使用して`OCaml`の`REPL`の機能を強化する方法を詳しく説明します。
+`rlwrap`を活用することで、`OCaml`の`REPL`に編集機能、履歴機能、タブ補完機能を追加し、効率的かつ快適な開発体験を実現します。
 
-## `rlwrap`とは
+## 1. `rlwrap`とは
 
-### `rlwrap`の概要
+### 1.1 `rlwrap`の概要
 
-`rlwrap` (`readline wrapper`)は、アプリの`REPL`に編集機能やヒストリー機能などの機能拡張を行なうツールです。
+`rlwrap` (`readline wrapper`)は、任意のアプリケーションの`REPL`に対して編集機能や履歴管理機能を提供するツールです。
 
-### `rlwrap`の基本的な使い方
+### 1.2 `rlwrap`の基本的な使い方
 
-`rlwrap`の使い方はシンプルです。`rlwrap <app>`と入力するだけで、選択したアプリに対して強化された`REPL`機能を利用できます。
-たとえば、`OCaml`を使う場合は`rlwrap ocaml`と入力します。
+`rlwrap`を使用するには、`rlwrap <app>`の形式でコマンドを実行します。
+たとえば、`OCaml`の場合は`rlwrap ocaml`と入力します。
 
-## `rlwrap`のセットアップ
+## 2. `rlwrap`のセットアップ
 
-### 環境変数の設定
+### 2.1 環境変数の設定
 
 環境変数`RLWRAP_HOME`は、`rlwrap`が使用するファイルを保存するディレクトリを指定します。
-`XDG Base Directory`仕様にしたがい、`RLWRAP_HOME`に`$XDG_DATA_HOME/rlwrap`を設定します。
+ここでは、`XDG Base Directory`仕様にしたがって`RLWRAP_HOME`に`$XDG_DATA_HOME/rlwrap`を設定し、設定やデータファイルを整理します。
 
-環境変数設定スクリプト`$XDG_CONFIG_HOME/envrc`に次の行を追加します:
+環境変数を設定するには、`$XDG_CONFIG_HOME/envrc`に次を追加します:
 
 ```bash: $XDG_CONFIG_HOME/envrc
 #  rlwrap
@@ -37,7 +37,7 @@ export RLWRAP_HOME="${XDG_DATA_HOME}/rlwrap"
 
 ```
 
-### `rlwrap`のインストール
+### 2.2 `rlwrap`のインストール
 
 `rlwrap`のインストールは、パッケージマネージャー`brew`を利用して簡単に行なうことができます。
 次のコマンドで、`rlwrap`をインストールします:
@@ -47,22 +47,22 @@ brew install rlwrap
 
 ```
 
-## `OCaml`用の設定
+## 3. `OCaml`用の設定
 
-### タブ補完ファイルの設定
+### 3.1 タブ補完ファイルの設定
 
-`rlwrap`は、`$RLWRAP_HOME`下の`タブ補完ファイル(`completions`)を自動的に読み込み、ファイル内のキーワードをタブ補完します。
+`rlwrap`は、`$RLWRAP_HOME`下のタブ補完ファイル(`completions`)を自動的に読み込み、ファイル内のキーワードをタブ補完します。
+タブ補完ファイルの名前は、`<app>_completions`となります。`OCaml`の場合、このファイルは`ocaml_completions`となります。
 
-タブ補完ファイルのファイル名は、`<app>_completions`となります。
-`OCaml`のコマンドは`ocaml`なので、タブ補完ファイルは`ocaml_completions`となります。
+タブ補完ファイル`ocaml_completions`を [GitHubのGist](https://gist.github.com/atsushifx/b72b101a4339223a2a8e9e8b779dae8e)に公開しています。
 
-タブ補完ファイル`ocaml_completions`を gist に保全しました。下記に、`ocaml_completions`を載せますので利用してください。
+`Gist`の`ocaml_completions`は、次のようになります。
 
 @[gist](https://gist.github.com/atsushifx/b72b101a4339223a2a8e9e8b779dae8e?file=ocaml_completions)
 
-### ヒストリーファイルの作成
+### 3.2 ヒストリーファイルの作成
 
-`rlwrap`は、`-f`オプションで`.`を指定することで、ヒストリーをもとにタブ補完します。
+`rlwrap`は、`-f`オプションで`.`を指定すると、ヒストリーファイルをタブ補完に利用します。
 このとき、ヒストリーファイルが存在しないとエラーで`rlwrap`が終了してしまいます。
 そのため、あらかじめ、ヒストリーファイルを作成しておきます。
 
@@ -73,7 +73,7 @@ touch $RLWRAP_HOME/ocaml_history
 
 ```
 
-### エイリアスの設定
+### 3.3 エイリアスの設定
 
 エイリアスを設定し、`ocaml`コマンドで自動的に`rlwrap`を介して`REPL`を起動できるようにします。
 次のコマンドをエイリアス設定ファイルに追加します:
@@ -83,7 +83,7 @@ alias ocaml="rlwrap -f . ocaml "
 
 ```
 
-## ターミナル (WSL)の再起動
+## 4. ターミナル (WSL)の再起動
 
 ここまでで設定した環境変数を`WSL`に反映させるため、ターミナル`WSL`を再起動します。
 次の手順で、ターミナルを再起動します。
@@ -101,17 +101,25 @@ alias ocaml="rlwrap -f . ocaml "
 
 ## おわりに
 
-`rlwrap`を使うことで、`OCaml`の`REPL`はより使いやすくなりました。
+`rlwrap`の導入により、`OCaml`の`REPL`操作がより快適になりました。
+これにより、`OCaml`を使った関数型プログラミングの学習も、より効率的になるでしょう。
 
-今後、`OCaml`で関数型プログラミングの勉強をするうえで力になるでしょう。
+関数型プログラミングの学習を進め、プログラマーとしてのスキルアップを目指しましょう。
+
 それでは、Happy Hacking!
 
 ## 技術用語と注釈
 
-この記事で用いる技術用語について解説します。
+この記事で使用する技術用語について解説します。
 
 - `rlwrap`:
   コマンドラインの入力行に対して編集機能や履歴管理、タブによる補完機能を提供するユーティリティ
+
+- `RLWRAP_HOME`:
+  `rlwrap`が設定ファイルやデータファイルを保存するディレクトリを決める環境変数
+
+- タブ補完ファイル:
+  `rlwrap`がタブ補完に使用するコマンドや関数名などが記載されたファイル
 
 - `REPL` (`Read-Eval-Print Loop`):
   プログラムを一行ずつ実行してその結果をすぐに見ることができる対話式のプログラミング環境
@@ -121,9 +129,6 @@ alias ocaml="rlwrap -f . ocaml "
 
 - `XDG Base Directory`:
   UNIX/Linux システムで設定ファイルを保存するディレクトリを決める標準的な仕様
-
-- `RLWRAP_HOME`:
-  `rlwrap`が設定ファイルやデータファイルを保存するディレクトリを決める環境変数
 
 ## 参考資料
 
