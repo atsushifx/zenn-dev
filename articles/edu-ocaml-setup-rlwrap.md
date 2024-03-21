@@ -26,12 +26,12 @@ published: false
 
 ### 2.1 環境変数の設定
 
-環境変数`RLWRAP_HOME`は、`rlwrap`が使用するファイルを保存するディレクトリを指定します。
+環境変数`RLWRAP_HOME`は、`rlwrap`の設定ファイルやデータファイルを保存するディレクトリを指定します。
 ここでは、`XDG Base Directory`仕様にしたがって`RLWRAP_HOME`に`$XDG_DATA_HOME/rlwrap`を設定し、設定やデータファイルを整理します。
 
-環境変数を設定するには、`$XDG_CONFIG_HOME/envrc`に次を追加します:
+環境変数を設定するには、`~/.config/envrc`に次を追加します:
 
-```bash: $XDG_CONFIG_HOME/envrc
+```bash: ~/.config/envrc
 #  rlwrap
 export RLWRAP_HOME="${XDG_DATA_HOME}/rlwrap"
 
@@ -39,7 +39,9 @@ export RLWRAP_HOME="${XDG_DATA_HOME}/rlwrap"
 
 ### 2.2 `rlwrap`のインストール
 
-`rlwrap`のインストールは、パッケージマネージャー`brew`を利用して簡単に行なうことができます。
+`rlwrap`のインストールは、パッケージマネージャーを利用して簡単に行なうことができます。
+この記事では、Linux にも対応しているパッケージマネージャー`Homebrew`を使って`rlwrap`をインストールします。
+
 次のコマンドで、`rlwrap`をインストールします:
 
 ```bash
@@ -51,8 +53,8 @@ brew install rlwrap
 
 ### 3.1 タブ補完ファイルの設定
 
-`rlwrap`は、`$RLWRAP_HOME`下のタブ補完ファイル(`completions`)を自動的に読み込み、ファイル内のキーワードをタブ補完します。
-タブ補完ファイルの名前は、`<app>_completions`となります。`OCaml`の場合、このファイルは`ocaml_completions`となります。
+`rlwrap`は、`$RLWRAP_HOME`下のタブ補完ファイル(`completions`)を自動的に読み込み、ファイル内のキーワードを補完対象にします。
+タブ補完ファイルの名前は、`<app>_completions`となります。`OCaml`の場合、このファイルは`ocaml_completions`となり、`OCaml`のモジュール、関数、型などが補完対象となります。
 
 タブ補完ファイル`ocaml_completions`を [GitHubのGist](https://gist.github.com/atsushifx/b72b101a4339223a2a8e9e8b779dae8e)に公開しています。
 
@@ -75,7 +77,7 @@ touch $RLWRAP_HOME/ocaml_history
 
 ### 3.3 エイリアスの設定
 
-エイリアスを設定し、`ocaml`コマンドで自動的に`rlwrap`を介して`REPL`を起動できるようにします。
+エイリアスを設定し、`ocaml`コマンドを実行する際に`rlwrap`を介して`ocaml`を起動させます。
 次のコマンドをエイリアス設定ファイルに追加します:
 
 ```bash:$XDG_CONFIG_HOME/aliases
@@ -83,19 +85,19 @@ alias ocaml="rlwrap -f . ocaml "
 
 ```
 
-## 4. ターミナル (WSL)の再起動
+## 4. シェルの再起動
 
-ここまでで設定した環境変数を`WSL`に反映させるため、ターミナル`WSL`を再起動します。
-次の手順で、ターミナルを再起動します。
+ここまでで設定した環境変数を`WSL`に反映させるため、シェルを再起動します。
+次の手順で、シェルを再起動します:
 
-1. ターミナルの終了
-   `exit`を入力し、ターミナルを終了します:
+1. シェルの終了:
+   `exit`を入力し、シェルを終了します:
 
    ```bash
    exit
    ```
 
-2. WSL の起動
+2. 新規 WSL セッションの開始:
    `Windows Terminal`のプルダウンメニューで、`Debian`を選択します。
    ![Terminal-プルダウンメニュー](https://i.imgur.com/wAW3pvL.jpg)
 
