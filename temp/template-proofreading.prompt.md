@@ -49,14 +49,7 @@
 """"
 :link
 
-- [公式サイト](https://ocaml.org/)
-- [`OCaml` - `Wikipedia`](https://ja.wikipedia.org/wiki/OCaml)
-- [`IoPLMaterials`](https://kuis-isle3sw.github.io/IoPLMaterials/)
-- [`OCaml`入門](https://www.fos.kuis.kyoto-u.ac.jp/~igarashi/class/isle4-09w/mltext.pdf)
-- [お気楽`Ocaml` プログラミング入門](http://www.nct9.ne.jp/m_hiroi/func/ocaml.html)
-- [WSL開発環境: 環境構築の記事まとめ](https://zenn.dev/atsushifx/articles/wsl2-debian-setup-matome)
-- [プログラミングの基礎](https://www.saiensu.co.jp/search/?isbn=978-4-7819-9932-6&y=2018)
-- [関数型言語で学ぶプログラミングの基本](https://tatsu-zine.com/books/programming-basics-with-ocaml)
+- [公式サイト](https://github.com/hanslub42/rlwrap):
 
 """"
 :remark:
