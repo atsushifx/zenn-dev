@@ -79,7 +79,7 @@
 :goal:
 
 - `OCaml`に`VS Code`で使うパッケージをインストールする
-- `VS Code`に`OCaml`用機能拡張'(`extension`)をインストールする
+- `VS Code`に`OCaml`用拡張機能 (`extension`)をインストールする
 - `extension`を`OCaml`用に設定する
 
 """"
@@ -87,9 +87,9 @@ link:
 
 - `opam`: <https://opam.ocaml.org/>
 - `ocaml-lsp`:<https://github.com/ocaml/ocaml-lsp>
-- `ocamlforamt`:<https://github.com/ocaml-ppx/ocamlformat>
+- `ocamlformat`:<https://github.com/ocaml-ppx/ocamlformat>
 - `Configureing Your Editor`: <https://ocaml.org/docs/configuring-your-editor>
-- `OCaml Plarform`: <https://github.com/ocamllabs/vscode-ocaml-platform>
+- `OCaml Platform`: <https://github.com/ocamllabs/vscode-ocaml-platform>
 - `Code Runner`: <https://github.com/formulahendry/vscode-code-runner>
 
 """"

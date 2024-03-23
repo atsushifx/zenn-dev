@@ -1,5 +1,5 @@
 ---
-title: "OCaml: OCaml用にVS Codeをセットアップする"
+title: "OCaml: Visual Studio CodeをOCaml用にセットアップする"
 emoji: "🐪"
 type: "tech"
 topics: [ "OCaml", "VSCode", "環境構築", "関数型プログラミング", ]
@@ -8,37 +8,43 @@ published: false
 
 ## はじめに
 
-`VSCode` (`Visual Studio Code`)には、さまざまなプログラミング言語用の機能拡張があります。
-この記事では、`VSCode`に`OCaml`用の機能拡張を入れて、`OCaml`開発環境を構築します。
+`Visual Studio Code` (以下、`VS Code`)は多言語をサポートする強力なエディタで、`OCaml`用の拡張機能も用意されています。
+この記事では`OCaml`開発を快適に進めるために、`VS Code`を環境構築する方法を紹介します。
 
-## `OCaml`パッケージのインストール
+## 1. `OCaml`パッケージのインストール
 
-### `Ocaml言語サーバ`のインストール
+### 1.1 `LSP`サーバのインストール
 
-`VS Code`の`OCaml`拡張は、`lsp` (言語サーバ)を使ってタブ補完やコードフォーマットを行います。
-このセクションでは、`OCaml`の`lsp`をインストールします。
+`VS Code`の`OCaml Platform`拡張機能は、`LSP` (`Language Server Protocol`)を使ってタブ補完やコードフォーマットを行います。
+このセクションでは、`OCaml`の`LSP`をインストールし、動作を確認します。
 
-次のコマンドで、`OCaml`用`lsp`をインストールします:
+次のコマンドで、`OCaml`用`LSP`をインストールします:
 
 ```bash
 opam install --yes ocaml-lsp-server
 
 ```
 
-次のようにして、`lsp`の動作を確認します:
+**注意**:
+関連パッケージを自動的にインストールするため、`opam`に`--yes`オプションを追加して実行しています。
 
-1. `lsp`の起動
-    次のコマンドで`lsp`を起動する
+`LSP`の動作確認は、`ocamllsp`を実行しエラーメッセージが出力されることを確認します。
+次の手順で、`LSP`を動作確認します:
+
+1. `LSP`サーバの起動:
+    次のコマンドで`LSP`サーバを起動する
 
     ```bash
     ocamllsp
     ```
 
-2. エラーメッセージの確認
-    \[Enter]を入力し、`lsp`がエラーメッセージを出力するか確認する
+2. エラーメッセージの確認:
+    \[Enter\]を入力し、`LSP`サーバがエラーメッセージを出力するか確認する
+    **注意**:
+    これは、`LSP`サーバが正常に動作していることを確認するため
 
     ```bash
-    # \[Enter]を入力
+    # \[Enter\]を押す
 
     /-----------------------------------------------------------------------
     | Internal error: Uncaught exception.
@@ -47,20 +53,20 @@ opam install --yes ocaml-lsp-server
 
     上記のようなエラーメッセージが出力される
 
-3. `lsp`の中止
-    \[`Ctrl+C`]を入力し、`lsp`を中止する
+3. `LSP`サーバの停止:
+    \[`Ctrl+C`\]を入力し、`lsp`を中止する
 
     ```bash
-    ^C  # [Ctrl+C]を入力
+    ^C  # [Ctrl+C]を押して、中止する
 
     >
     ```
 
 上記のようにエラーメッセージが出力されれば、`lsp`は正常にインストールされています。
 
-### コードフォーマッタのインストール
+### 1.2 コードフォーマッタのインストール
 
-`OCaml`のコードフォーマット用に、コードフォーマッタをインストールします。
+`OCaml`のコードフォーマット用に、コードフォーマッタをインストールし、動作を確認します。
 
 次のコマンドで、コードフォーマッタをインストールします。
 
@@ -69,7 +75,7 @@ opam install --yes ocamlformat
 
 ```
 
-次のようにして、コードフォーマッタの動作を確認します:
+次の手順で、コードフォーマッタの動作を確認します:
 
 1. フォーマッタ用に`.ocamlformat`を作成する:
 
@@ -81,7 +87,7 @@ opam install --yes ocamlformat
 
     ```bash
     ocamlformat --enable-outside-detected-project hello.ml
-    (* my first ocaml progrram *)
+    (* my first OCaml program *)
     print_endline "Hello, OCaml!!"
 
     ```
@@ -91,12 +97,11 @@ opam install --yes ocamlformat
 
 上記のように整形されたプログラムが出力されれば、フォーマッタの正常にインストールされています。
 
-## 機能拡張のインストール
+## 2. 拡張機能のインストール
 
-### `OCaml Platform`のインストール
+### 2.1 `OCaml Platform`のインストール
 
 `OCaml`のプログラミング用に、`OCaml Platform`をインストールします。
-
 次の手順で、`OCaml Platform`をインストールします:
 
 1. `VS Code`を起動する:
@@ -105,18 +110,18 @@ opam install --yes ocamlformat
    code .
    ```
 
-2. [拡張機能:マーケートプレイス]を表示する:
-  [`Ctrl+Shift+X`]を入力し、[拡張機能:マーケットプレイス]を表示する。
+2. [拡張機能ビュー]を表示する:
+  [`Ctrl+Shift+X`]を入力し、[拡張機能ビュー]を表示する。
 
 3. [`OCaml Platform`]を検索する:
-  上部の入力ウィンドウに`caml`と入力し、[`OCaml Platform`]を検索する。
+  上部の検索バーに`ocaml`と入力し、[`OCaml Platform`]を検索する。
 
 4. [`OCaml Platform`]をインストールする:
-  [インストール]をクリックし、[`OCaml Platform`]をインストールする。
+  \[インストール\]をクリックし、[`OCaml Platform`]をインストールする。
 
-### `Code Runner`のインストール
+### 2.2 `Code Runner`のインストール
 
-`Code Runner`は、編集中のプログラムを実行する機能拡張です。
+`Code Runner`は、編集中のプログラムを実行する拡張機能です。
 編集するプログラミング言語にあわせて、適当なコマンドを実行します。
 
 次の手順で、[`Code Runner`]をインストールします。
@@ -127,16 +132,16 @@ opam install --yes ocamlformat
    code .
    ```
 
-2. [拡張機能:マーケートプレイス]を表示する:
-  [`Ctrl+Shift+X`]を入力し、[拡張機能:マーケットプレイス]を表示する。
+2. [拡張機能ビュー]を表示する:
+  [`Ctrl+Shift+X`]を入力し、[拡張機能ビュー]を表示する。
 
 3. [`Code Runner`]を検索する:
-  上部の入力ウィンドウに`code`と入力し、[`OCaml Platform`]を検索する。
+  上部の検索バーに`code`と入力し、[`OCaml Platform`]を検索する。
 
 4. [`Code Runner`]をインストールする:
-  [インストール]をクリックし、[`Code Runner`]をインストールする。
+  \[インストール\]をクリックし、[`Code Runner`]をインストールする。
 
-### \[`Code Runner`]の設定
+### 2.3 `Code Runner`の設定
 
 \[`Code Runner`]を使用するため、設定ファイルに`OCaml`用の設定を追加します。
 
@@ -153,6 +158,7 @@ opam install --yes ocamlformat
 
 3. `OCaml`設定を追加する:
   設定ファイル (`settings.json`)に次の行を追加する。
+  これにより、`OCaml`でのプログラム実行時に適切なコマンドが使用される。
 
   ``` :settings.json
   code-runner.executorMap": {
@@ -161,15 +167,52 @@ opam install --yes ocamlformat
   ```
 
   **注意**:
-  `executorMap`にほかの言語の設定もある場合があります。
+  `OCaml`以外の言語で環境構築する場合は、`executorMap`セクション内にほかの言語の設定を追加します。
 
-以上で、`Run Code` (`Ctrl+Shift+N`)でプログラムが実行できます。
+以上で、`Run Code`でプログラムが実行できます。
 
 ## おわりに
 
-この記事では、`VS Code` (`Visual Studio Code`)に`OCaml`のための拡張機能を追加する方法を説明しました。
-これにより、`VS Code`のリッチな編集機能を使って`OCaml`プログラムを書き、実行できるようになりました。
+この記事を通じて、`VS Code`に`OCaml`のための拡張機能を追加する方法を説明しました。
+このように拡張機能を使うことで、`OCaml`による関数型プログラミングの学習がより便利になりました。
 
-このように機能拡張を使うことで、`OCaml`による関数型プログラミングの学習がますます便利になります。
-これを利用して、自分の学習を進めプログラマーとしてステップアップしましょう。
+今後は`VS Code`を活用し、`OCaml`で関数型プログラミングを学習しましょう。
+それによって、さらにスキルを向上させましょう。
+
 それでは、Happy Hacking!
+
+## 技術用語と注釈
+
+この記事で扱う技術用語です:
+
+- `OCaml`:
+  強力な型システムを特徴とする関数型プログラミング言語
+
+- `VS Code` (`Visual Studio Code`):
+  Microsoft によって開発された、軽量で強力な機能を持つコードエディタ
+
+- `opam`:
+  `OCaml`用のライブラリやツールを提供する`OCaml`パッケージマネージャー
+
+- `LSP` (`Language Server Protocol`):
+  エディタ、IDE用に統一された方法でプログラミング言語のサポートを提供するプロトコル
+
+- `OCaml Platform`:
+  `OCaml`プログラミングのために、`OCaml`言語のサポートを強化する`VS Code`拡張機能
+
+- `Code Runner`:
+  任意の言語のコードスニペットやファイルを簡単に実行できる`VS Code`拡張機能
+
+## 参考資料
+
+### Webサイト
+
+- [`opam`](https://opam.ocaml.org/)
+
+- [`ocaml-lsp`](https://github.com/ocaml/ocaml-lsp)
+
+- [`ocamlformat`](https://github.com/ocaml-ppx/ocamlformat)
+
+- [`OCaml Platform`](https://github.com/ocamllabs/vscode-ocaml-platform)
+
+- [`Code Runner`](https://github.com/formulahendry/vscode-code-runner)
