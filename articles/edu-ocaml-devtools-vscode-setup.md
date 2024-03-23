@@ -101,7 +101,7 @@ opam install --yes ocamlformat
     ```
 
     **注意**:
-    ｀Warning`エラーが出る場合は、`--enable-outside-detected-project`を追加する
+    `Warning`エラーが出る場合は、`--enable-outside-detected-project`を追加する
 
 上記のように整形されたプログラムが出力されれば、フォーマッタの正常にインストールされています。
 
