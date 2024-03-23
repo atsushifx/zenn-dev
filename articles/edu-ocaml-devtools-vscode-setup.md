@@ -101,7 +101,7 @@ opam install --yes ocamlformat
     ```
 
     **注意**:
-    ｀Warning`エラーが出る場合は、`--enable-outside-detected-project`を追加する
+    `Warning`エラーが出る場合は、`--enable-outside-detected-project`を追加する
 
 上記のように整形されたプログラムが出力されれば、フォーマッタの正常にインストールされています。
 
@@ -144,7 +144,7 @@ opam install --yes ocamlformat
   [`Ctrl+Shift+X`]を入力し、[拡張機能ビュー]を表示する。
 
 3. [`Code Runner`]を検索する:
-  上部の検索バーに`code`と入力し、[`OCaml Platform`]を検索する。
+  上部の検索バーに`code`と入力し、[`Code Runner`]を検索する。
 
 4. [`Code Runner`]をインストールする:
   \[インストール\]をクリックし、[`Code Runner`]をインストールする。
