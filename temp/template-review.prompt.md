@@ -68,7 +68,7 @@
 """"
 :theme
 
-- `OCaml`用に`rlwrap`を設定する
+- `Visual Studio Code`を`OCaml`用にセットアップする
 
 """"
 :target:
@@ -78,13 +78,19 @@
 """"
 :goal:
 
-- `WSL`に`rlwrap`をインストールする
-- `OCaml`用に`rlwrap`を設定する
+- `OCaml`に`VS Code`で使うパッケージをインストールする
+- `VS Code`に`OCaml`用拡張機能 (`extension`)をインストールする
+- `extension`を`OCaml`用に設定する
 
 """"
 link:
 
-- [公式サイト](https://github.com/hanslub42/rlwrap)
+- `opam`: <https://opam.ocaml.org/>
+- `ocaml-lsp`:<https://github.com/ocaml/ocaml-lsp>
+- `ocamlformat`:<https://github.com/ocaml-ppx/ocamlformat>
+- `Configureing Your Editor`: <https://ocaml.org/docs/configuring-your-editor>
+- `OCaml Platform`: <https://github.com/ocamllabs/vscode-ocaml-platform>
+- `Code Runner`: <https://github.com/formulahendry/vscode-code-runner>
 
 """"
 remark:

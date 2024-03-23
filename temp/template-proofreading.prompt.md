@@ -49,14 +49,18 @@
 """"
 :link
 
-- [公式サイト](https://github.com/hanslub42/rlwrap):
+- `opam`: <https://opam.ocaml.org/>
+- `ocaml-lsp`:<https://github.com/ocaml/ocaml-lsp>
+- `ocamlformat`:<https://github.com/ocaml-ppx/ocamlformat>
+- `Configureing Your Editor`: <https://ocaml.org/docs/configuring-your-editor>
+- `OCaml Platform`: <https://github.com/ocamllabs/vscode-ocaml-platform>
+- `Code Runner`: <https://github.com/formulahendry/vscode-code-runner>
 
 """"
 :remark:
 
 - `Happy Hacking!`は変更しない
 - 「次の」「以下に」は、基本「次の」で統一する
-- Linux用の brew があるため、パッケージマネージャーは`brew`で変更しない
 
 """"
 /begin
