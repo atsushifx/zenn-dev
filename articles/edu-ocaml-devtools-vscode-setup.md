@@ -3,7 +3,7 @@ title: "OCaml: OCaml用にVisual Studio Codeをセットアップする"
 emoji: "🐪"
 type: "tech"
 topics: [ "OCaml", "VSCode", "環境構築", "関数型プログラミング", ]
-published: false
+published: true
 ---
 
 ## はじめに
