@@ -21,7 +21,7 @@
 
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
-- 一人称の文章で、ですます調を使う。リストのばあいは「体言止め」「である調」を基本とする
+- ですます調を使う。リストのばあいは「体言止め」「である調」を基本とする
 - 「Enjoy!」「Happy Hacking!」にあわせたカジュアルな文体と説明用のプロフェッショナルな文体のバランスをとる
 - 「さぁ」など、読者に直接話しかける形式の文章は使わない
 - :role でしめされた役割で推敲、校正、校閲をする
@@ -68,7 +68,7 @@
 """"
 :theme
 
-- `Visual Studio Code`を`OCaml`用にセットアップする
+- Scheme 方言 Racket をカスタマイズする方法の説明
 
 """"
 :target:
@@ -78,26 +78,26 @@
 """"
 :goal:
 
-- `OCaml`に`VS Code`で使うパッケージをインストールする
-- `VS Code`に`OCaml`用拡張機能 (`extension`)をインストールする
-- `extension`を`OCaml`用に設定する
+- `Racket`の設定方法を知り、自分の環境に合わせたカスタマイズ方法を理解する
 
 """"
 link:
 
-- `opam`: <https://opam.ocaml.org/>
-- `ocaml-lsp`:<https://github.com/ocaml/ocaml-lsp>
-- `ocamlformat`:<https://github.com/ocaml-ppx/ocamlformat>
-- `Configureing Your Editor`: <https://ocaml.org/docs/configuring-your-editor>
-- `OCaml Platform`: <https://github.com/ocamllabs/vscode-ocaml-platform>
-- `Code Runner`: <https://github.com/formulahendry/vscode-code-runner>
+- [`FileSystem`](https://docs.racket-lang.org/reference/Filesystem.html):
+  セクション:`Location Paths`にて設定ファイル／ディレクトリを説明している
+- [`Installation Configuration and Search Paths`](https://docs.racket-lang.org/raco/config-file.html)
+  `raco`が使用する設定ファイルについて
+- [`How to Design Programs`](https://htdp.org/)
+  `Racket`によるプログラミング入門書籍
 
 """"
 remark:
 
-- 「Enjoy」「Happy Hacking!」は変更せず、その前の文章をあわせる
-- 「以下」の表現は、基本的に「次の」で統一する
-- Linux でも Homebrew がつかえるため、パッケージマネージャーは`brew`を使用する
+- 「Enjoy」、「Happy Hacking!」は変更せず、その前の文章をあわせる
+- 「以下の表」については、上記の「次の」を適用しない
+- 上記以外の「以下」の表現は、基本的に「次の」で統一する
+- `racketrc.rktl`が正しいファイル名なので修正しない
+- 文章に具体例を追加しない
 
 """"
 /begin
