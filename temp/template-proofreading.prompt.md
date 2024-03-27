@@ -49,12 +49,19 @@
 """"
 :link
 
-- `opam`: <https://opam.ocaml.org/>
-- `ocaml-lsp`:<https://github.com/ocaml/ocaml-lsp>
-- `ocamlformat`:<https://github.com/ocaml-ppx/ocamlformat>
-- `Configureing Your Editor`: <https://ocaml.org/docs/configuring-your-editor>
-- `OCaml Platform`: <https://github.com/ocamllabs/vscode-ocaml-platform>
-- `Code Runner`: <https://github.com/formulahendry/vscode-code-runner>
+- [`FileSystem`](https://docs.racket-lang.org/reference/Filesystem.html):
+  `Racket`言語におけるファイルシステムの操作に関する公式ドキュメント。
+  `Locating Paths`セクションでは、今回説明した各種ファイル／ディレクトリを利用するかを解説している。
+
+- [`Installation Configuration and Search Paths`](https://docs.racket-lang.org/raco/config-file.html)
+  `Racket`とそのパッケージマネージャー`raco`の設定ファイルと検索パスに関する公式ドキュメント。
+  インストール時の設定や、`raco`がどのようにしてパッケージや設定ファイルを検索するかの説明が含まれています。
+
+- [Racket Documentation](https://docs.racket-lang.org/):
+  `Racket`公式ドキュメント
+
+- [`Racket` - `Discord`](https://discord.com/invite/racket-571040468092321801)
+  `Discord`の`Racket`チャンネル
 
 """"
 :remark:
