@@ -185,3 +185,9 @@ UNIX/Linux では旧来の`.racket`も指定できます。
 - [`Installation Configuration and Search Paths`](https://docs.racket-lang.org/raco/config-file.html)
   `Racket`とそのパッケージマネージャー`raco`の設定ファイルと検索パスに関する公式ドキュメント。
   インストール時の設定や、`raco`がどのようにしてパッケージや設定ファイルを検索するかの説明が含まれています。
+
+- [Racket Documentation](https://docs.racket-lang.org/):
+  `Racket`公式ドキュメント
+
+- [`Racket` - `Discord`](https://discord.com/invite/racket-571040468092321801)
+  `Discord`の`Racket`チャンネル
