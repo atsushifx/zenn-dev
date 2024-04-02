@@ -1,72 +1,40 @@
 ---
-title: "WSL上のDebianに関数型プログラミング言語「Racket」をインストールする"
+title: "Racket: WSLに関数型プログラミング言語「Racket」をインストールする"
 emoji: "🎾"
 type: "tech"
-topics: [ "WSL", "Racket", "環境構築", "関数型プログラミング", ]
-published: true
+topics: [ ""Racket", "WSL", "環境構築", "関数型プログラミング", ]
+published: false
 ---
 
 ## はじめに
 
-この記事では、WSL (Windows Subsystem for Linux) 上の Debian に関数型プログラミング言語「Racket」をインストールする方法を紹介します。
-Racket のインストールには、パッケージマネージャー`Homebrew`を使用します。
-`Homebrew`のセットアップ方法については、[こちらの記事](https://zenn.dev/atsushifx/articles/wsl2-brew-install)を参照してください。
+## 1. Racket のセットアップ
 
-`Homebrew`を使用するとパッケージをユーザー権限でインストールするため、OS への影響を最小限に抑えることができます。
-また、リポジトリの更新が迅速なため、最新バージョンの Racket を利用できるのが大きなメリットです。
+### 1.1 インストール前環境設定
 
-## 重要キーワードと注釈
+Racket は、環境変数でホームディレクトリなどを設定できます。詳しくは、[Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment)を参照してください。
+現在の Racket は、デフォルトで`XDG Base Directory`に対応しているので、環境変数を設定する必要はありません。
 
-- **`WSL` (`Windows Subsystem for Linux`)**:
-  Windows上で Linux のバイナリ実行ファイルを直接実行できるようにする互換層。
+`XDG Base Directory`仕様にしたがわなくなるので、環境変数を設定しないほうが良いでしょう。
 
-- **`関数型プログラミング`**:
-  プログラムの実行を数学的関数の評価として扱い、状態変化やデータ変更を避けるプログラミングパラダイム
+### 1.2 `brew` を使用した Racket のインストール
 
-- **`REPL` (`Read-Eval-Print Loop`)**:
-  プログラムのコードを入力し、その評価結果を即座に得ることができる対話型の環境
+Racket は、現在`apt`版は 8.7、`Homebrew`版は 8.1.1 のバージョンがインストールできます。
+パッケージの更新が早く、最新盤が使える`Homebrew`版の Racket をインストールします。
 
-- **`Racket`**:
-  多様なプログラミングスタイルをサポートする関数型プログラミング言語
+`Homebrew`版には、処理系のみのパッケージ`minimal-racket`だけが提供されています、
+そのため、`minimal-racket`をインストールします。
 
-- **`minimal Racket`**:
-  Racket言語の基本的な実行環境と開発ツールのみを含み、最小限の機能を提供する軽量版 Racket パッケージ
+次のコマンドで、`minimal-racket`をインストールします。
 
-- **`raco`**:
-  Racket のパッケージマネージャーおよびコマンドラインツール
+```bash
+brew install minimal-racket
 
-- **`Homebrew`**:
-  `macOS`/`Linux`で使用できるパッケージマネージャーで、WSL にも対応している
-
-- **`config.rktd`**:
-  Racket の設定ファイル
-
-- **`XREPL` (`eXtended REPL`)**:
-   Racket の`REPL`を強化する拡張機能
-
-- **`Expeditor` (`Expression Editor`)**:
-  Racket の対話的インタフェースで、入力中の式(=プログラム)を編集するエディタ
-
-## 1. Racket のインストール
-
-### 1.1 `brew` を使用した Racket のインストール
-
-`Homebrew`は、`macOS`/`Linux`で利用可能なパッケージマネージャーであり、WSL上でも使用できます。
-`brew`では、リポジトリに Racket の最小実行環境である`minimal Racket`が登録されています。
-この記事では、`brew`を使って上記の`minimal Racket`をインストールします。
-統合開発環境`Dr Racket`を含めた完全版 Racket を使いたい場合は、`minimal Racket`をインストールしたあとに追加のパッケージをインストールします。
-
-以下のコマンドを実行し、Racket をインストールします:
-
-```shell
-brew install racket
 ```
-
-上記コマンドで、`minimal Racket`をインストールします。
 
 Racket が正常にインストールできたかどうかの確認は、次のようにします:
 
-```shell
+```bash
 $ racket --version
 Welcome to Racket v8.11.1 [cs].
 
@@ -74,33 +42,9 @@ Welcome to Racket v8.11.1 [cs].
 
 上記のようにバージョンが表示されれば、インストールに成功しています。
 
-### 1.2 `config.rktd`の設定
-
-Racket の設定は、`config.rktd`ファイルに保存されます。
-この設定ファイルは、Racket および Racket 用開発ツールである`raco`の動作をカスタマイズするために使用されます。
-
-今回は、`raco`用にダウンロードキャッシュを`XDG_CACHE_HOME`下にダウンロードするように設定します。
-あわせて、インストールするパッケージをユーザー用にインストールさせます。
-
-`config.rktd`に、次の設定を追加します。
-
-```racket: /home/linuxbrew/.linuxbrew/Cellar/minimal-racket/<version>/.bottle/etc/racket/config.rktd
-  (default-scope . "user")
-  (download-cache-dir . "/home/<user>/.local/cache/racket/download-cache")
-
-```
-
-**注意**:
-
-- `brew`を使用してインストールしたため、上記のディレクトリとなります。
-- `<version>`は、インストールした Racket のバージョン番号です。
-- `<user>`は、Racket をインストールしたユーザーアカウントです。
-
-以上で、`config.rktd`の設定は完了です。
-
 ### 1.3 `.gitignore`の設定
 
-Racket が使用する設定ファイルや状態ファイルは、`XDG_CONFIG_HOME`下に保存されます。
+Racket が使用する設定ファイルや状態ファイルは、`$XDG_CONFIG_HOME/Racket`下に保存されます。
 この中の状態ファイルは、Racket によって毎回書き換えられるため、リポジトリに保存しません。
 そのため、`.gitignore`で明示的に除外し、リポジトリをクリーンに保ちます。
 
@@ -146,16 +90,17 @@ Racket には、対話的にプログラムを入力して結果を表示する`
 
 ### 2.1 Racket を起動する
 
-次の手順で、Racket を起動します。
-ターミナルで、次のコマンドを実行します:
+Racket を起動するには、ターミナルからコマンドを実行します。
 
-```shell
+次のコマンドを実行します:
+
+```bash
 racket
 ```
 
 起動に成功すると、次のようにメッセージとプロンプトが表示されます:
 
-```shell
+```bash
 $ racket
 Welcome to Racket v8.11.1 [cs].
 >
@@ -210,13 +155,51 @@ WSL上で、Racket をインストールし、基本的な設定を行なう方�
 
 それでは、Happy Hacking!
 
+## 重要キーワードと注釈
+
+- **`WSL` (`Windows Subsystem for Linux`)**:
+  Windows上で Linux のバイナリ実行ファイルを直接実行できるようにする互換層。
+
+- **`関数型プログラミング`**:
+  プログラムの実行を数学的関数の評価として扱い、状態変化やデータ変更を避けるプログラミングパラダイム
+
+- **`REPL` (`Read-Eval-Print Loop`)**:
+  プログラムのコードを入力し、その評価結果を即座に得ることができる対話型の環境
+
+- **`Racket`**:
+  多様なプログラミングスタイルをサポートする関数型プログラミング言語
+
+- **`minimal Racket`**:
+  Racket言語の基本的な実行環境と開発ツールのみを含み、最小限の機能を提供する軽量版 Racket パッケージ
+
+- **`raco`**:
+  Racket のパッケージマネージャーおよびコマンドラインツール
+
+- **`Homebrew`**:
+  `macOS`/`Linux`で使用できるパッケージマネージャーで、WSL にも対応している
+
+- **`config.rktd`**:
+  Racket の設定ファイル
+
+- **`XREPL` (`eXtended REPL`)**:
+   Racket の`REPL`を強化する拡張機能
+
+- **`Expeditor` (`Expression Editor`)**:
+  Racket の対話的インタフェースで、入力中の式(=プログラム)を編集するエディタ
+
 ## 参考資料
 
 ### Webサイト
 
-- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
-- [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント。Racket の使い方、言語の特徴、開発ツールに関する詳細が載っている。
-- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/) : Racket で使われている拡張`REPL`のドキュメント
+- [Racket公式Web](https://racket-lang.org/):
+  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
+- [Racket Documentation](https://docs.racket-lang.org/):
+  Racket の公式ドキュメント。Racket の使い方、言語の特徴、開発ツールに関する詳細が載っている。
+- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
+  Racket で使われている拡張`REPL`のドキュメント
+
+- [Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment):
+  Racket の環境設定用のファイル、ディレクトリ、環境変数のまとめ
 
 ### 本
 
