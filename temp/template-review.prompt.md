@@ -6,7 +6,7 @@
 
 ## レビューコマンド
 
-- /begin が入力されたら、バッファー :text をクリアし、""を代入する。その語、入力を待つ
+- /begin が入力されたら、バッファー :text をクリアして、生成をとりやめ、入力を待つ
 - /end が入力されたら、バッファー :text に入力された文章に対し、指示にしたがってレビューする
 - /exit が入力されたら、バッファー :text およびすべての変数、指示、入力の記録を破棄して新たにチャットを始める
 - /cont が入力されたら、前の出力の続きを日本語で出力する
@@ -21,9 +21,11 @@
 
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
-- ですます調を使う。リストのばあいは「体言止め」「である調」を基本とする
+- ですます調を使う。箇条書きのばあいは「体言止め」「である調」を基本とする
+- 箇条書き、注釈などの説明文は、基本、体言止めとする
 - 「Enjoy!」「Happy Hacking!」にあわせたカジュアルな文体と説明用のプロフェッショナルな文体のバランスをとる
 - 「さぁ」など、読者に直接話しかける形式の文章は使わない
+- 「しましょう」のような指示形式は基本使わない、ただし動機づけとしての効果があるなら可
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
@@ -68,7 +70,7 @@
 """"
 :theme
 
-- Scheme 方言 Racket をカスタマイズする方法の説明
+- Racket を WSL にインストールする
 
 """"
 :target:
@@ -78,26 +80,28 @@
 """"
 :goal:
 
-- `Racket`の設定方法を知り、自分の環境に合わせたカスタマイズ方法を理解する
+- `Racket`を WSL上の Debian にインストールする
+- `Racket`の起動および`Racket`の終了ができる
 
 """"
 link:
 
-- [`FileSystem`](https://docs.racket-lang.org/reference/Filesystem.html):
-  セクション:`Location Paths`にて設定ファイル／ディレクトリを説明している
-- [`Installation Configuration and Search Paths`](https://docs.racket-lang.org/raco/config-file.html)
-  `raco`が使用する設定ファイルについて
-- [`How to Design Programs`](https://htdp.org/)
-  `Racket`によるプログラミング入門書籍
+- [Racket公式Web](https://racket-lang.org/):
+  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
+- [Racket Documentation](https://docs.racket-lang.org/):
+  Racket の公式ドキュメント。Racket の使い方、言語の特徴、開発ツールに関する詳細が載っている。
+- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
+  Racket で使われている拡張`REPL`のドキュメント
+- [Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment):
+  Racket の環境設定用のファイル、ディレクトリ、環境変数のまとめ
 
 """"
 remark:
 
 - 「Enjoy」、「Happy Hacking!」は変更せず、その前の文章をあわせる
-- 「以下の表」については、上記の「次の」を適用しない
 - 上記以外の「以下」の表現は、基本的に「次の」で統一する
-- `racketrc.rktl`が正しいファイル名なので修正しない
-- 文章に具体例を追加しない
+- 技術用語に注釈はつけず、技術用語セクションで説明する
+- `Linuxbrew`が`Homebrew`に統合されたため、`Homebrew`についてチェックする
 
 """"
 /begin
