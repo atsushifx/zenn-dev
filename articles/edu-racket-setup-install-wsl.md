@@ -11,7 +11,7 @@ published: false
 WSL（Windows Subsystem for Linux）を用いることで、Windows上でも Linux環境を手軽に利用できます。
 この記事では、WSL上に関数型プログラミング言語`Racket`をセットアップし、関数型プログラミングの魅力に触れる方法を紹介します。
 
-`XREPL`の導入により、Racket の機能を拡張し、よりインタラクティブにできます。
+`XREPL`の導入により、`Racket`の機能を拡張し、よりインタラクティブにできます。
 `Racket`をインストールし、関数型プログラミングをはじめましょう。
 Enjoy!
 
@@ -37,7 +37,7 @@ brew install minimal-racket
 Racket が正常にインストールできたかどうかの確認は、次のようにします:
 
 ```bash
-$ racket --version
+racket --version
 Welcome to Racket v8.11.1 [cs].
 
 ```
@@ -56,7 +56,7 @@ Racket では、`$XDG_CONFIG_HOME/racket`下に設定ファイルを保存しま
 
 次のように、`.gitignore`を設定します:
 
-```:$XDG_CONFIG_HOME/.gitignore
+```plaintext
 # Racket
 _lock*
 racket-prefs.rktd
@@ -84,6 +84,7 @@ racket-prefs.rktd
 
    ```bash
    sudo apt install libpango-1.0-0 libcairo2 libpangocairo-1.0-0
+
    ```
 
 2. `XREPL`のインストール
@@ -92,6 +93,7 @@ racket-prefs.rktd
 
    ```bash
    raco pkg install --auto --scope installation xrepl
+
    ```
 
 以上で、拡張機能のインストールは完了です。
@@ -131,7 +133,7 @@ Racket を終了する方法は、次の通りです。
 
   ```racket
   Welcome to Racket v8.11.1 [cs].
-  > [Ctrl+D]キー押下
+  > ← [Ctrl+D]キー押下
 
   $
   ```
