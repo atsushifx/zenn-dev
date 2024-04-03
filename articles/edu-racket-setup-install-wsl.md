@@ -3,7 +3,7 @@ title: "Racket: WSL上でRacketをセットアップする方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "WSL", "環境構築", "関数型プログラミング", ]
-published: false
+published: true
 ---
 
 ## はじめに
@@ -48,6 +48,8 @@ Welcome to Racket v8.11.1 [cs].
 
 `XDG Base Directory`仕様にしたがって、Racket は設定ファイルやデータファイルを管理します。
 `XDG Base Directory`については、[技術用語と注釈](#技術用語と注釈)を参照してください。
+
+すでに`XDG Base Directory`仕様にしたがっているため、環境変数などの設定は必要ありません。
 
 ### 1.3 `.gitignore`の設定
 
