@@ -1,5 +1,5 @@
 ---
-title: "Racket: Windows上にRacketをセットアップする"
+title: "Racket: Windows上にRacketをセットアップする方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "環境構築", "関数型プログラミング", ]
@@ -31,7 +31,7 @@ Racket の特徴としては:
 この記事では、Racket を`c:\lang\Racket`下にインストールします。
 通常では`C:\Program Files\Racket`下にインストールされますが、ディレクトリに空白が含まれてるため上記のディレクトリに変更しています。
 
-### 2.2 環境設定
+### 2.2 設定ディレクトリ
 
 環境設定用のディレクトリは、`XDG Base Directory`仕様にしたがって配置します。
 通常では、初期設定ファイルが`C:\Users\<ユーザー名>`下に保存されます。
@@ -40,14 +40,14 @@ Racket の特徴としては:
 上記の設定に合わせ、ほかの環境設定ディレクトリも変更します。
 どのようなディレクトリを変更するかは、[Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment)を参照してください。
 
-## 3. Racketのセットアップ
+## 3. Racketのインストール
 
 ### 3.1 `winget`を使ったRacketのインストール
 
 `winget`は、Windows の公式パッケージマネージャーで、Racket をコマンドラインからインストールできます。
 Racket を`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
 
-次のコマンドを実行します:
+次のコマンドで、Racket をインストールします:
 
 ```powershell
 winget install Racket.Racket --location C:\lang\racket
@@ -85,7 +85,7 @@ Racket をどこのディレクトリからでも起動できるように、`Pat
 
 ### 4.1 環境変数の設定
 
-Racketの設定ファイルを`XDG Base Directpry`に準拠させるための各種環境変数を設定します。
+Racket の設定ファイルを`XDG Base Directpry`に準拠させるための各種環境変数を設定します。
 環境変数の設定は、次のようになります。
 
 | 環境変数 | 変数説明 | 設定値| 説明 | 備考 |
@@ -101,12 +101,12 @@ Racketの設定ファイルを`XDG Base Directpry`に準拠させるための各
 
 ```
 
-### 4.2 `config.rkd`の設定
+### 4.2 `config.rktd`の設定
 
-Racketは、各種ディレクトリやコマンドラインツール`raco`用の設定をコンフィグファイル`config.rktd`で設定しています。
+Racket は、各種ディレクトリやコマンドラインツール`raco`用の設定をコンフィグファイル`config.rktd`で設定しています。
 Racket用ホームディレクトリの変更に伴い、パッケージ用ダウンロードキャッシュディレクトリを`config.rktd`で設定します。
 
-`config.rktd`は、Racketインストールディレクトリ下の`etc`ディレクトリにあります。
+`config.rktd`は、Racket インストールディレクトリ下の`etc`ディレクトリにあります。
 この記事では、`c:\lang\racket\etc\config.rktd`となります。
 
 `config.rktd`を次のように書き換えます。
@@ -117,25 +117,27 @@ Racket用ホームディレクトリの変更に伴い、パッケージ用ダ�
   (catalogs . ("https://download.racket-lang.org/releases/8.12/catalog/" #f))
   (doc-search-url . "https://download.racket-lang.org/releases/8.12/doc/local-redirect/index.html")
   (default-scope . "user")
-  (download-cache-dir . "C:\\Users\\atsushifx\\.local\\cache/racket/download-cache")
- )  ;; ← 追加
+  (download-cache-dir . "C:/Users/atsushifx/.local/cache/racket/download-cache") ;; ← 追加
+ )
 
 ```
 
 **注意**:
-`config.rktd`にはRacketのバージョン番号が含まれているため、Racketがバージョンアップした場合には`config.rktd`を書き換える必要があります。
+
+- `downloadc-cache-dir`はフルパスでかく必要があるため、`C:/Users/<ユーザー名>/.local/cache`と`XDG_CACHE_HOME`を展開して`/racket/download-cache`を追加しています。
+- `config.rktd`には Racket のバージョン番号が含まれているため、Racket がバージョンアップした場合には`config.rktd`を書き換える必要があります。
 
 ### 4.3 `.gitignore`の設定
 
-Racketホームディレクトリは、GitHubの`dotfiles`リポジトリでの管理下にあります。
-`prefs`ファイルやロックファイル、ダウンロードキャッシュなどは、`.gitignore`によりgitの管理から外します。
+Racket ホームディレクトリは、GitHub の`dotfiles`リポジトリでの管理下にあります。
+`prefs`ファイルやロックファイル、ダウンロードキャッシュなどは、`.gitignore`により git の管理から外します。
 
 次の内容を、`$XDG_CONFIG_HOME`下の`.gitignore`に追加します。
 
 ``` :.gitignore
 # Racket
 _lock*
-*/download-cache*
+**/download-cache/
 racket-prefs.rktd
 
 ```
@@ -143,22 +145,22 @@ racket-prefs.rktd
 ### 4.4 アドオン用Pathの設定
 
 アドオンによっては、実行用にランチャーを作成するものがあります。
-ユーザーアドオンの場合は、アドオンディレクトリ+Racketバージョン番号下にランチャーを作成します。
+ユーザーアドオンの場合は、アドオンディレクトリ+Racket バージョン番号下にランチャーを作成します。
 この記事では、`Racket 8.12`をインストールしたので、`$PLTADDONDIR+"/8.12"`となります。
 
-次のコマンドでアドオン用pathを環境変数Pathに追加します:
+次のコマンドでアドオン用 path を環境変数 Path に追加します:
 
 <!-- markdownlint-disable line_length -->
 ```powershell
-[System.Environment]::SetEnvironmentVariable("Path", [System.Environment]::GetEnvironmentVariable("Path", "User")+";"+$env:PLTADDONDIR+"\8.12", "User")
+[System.Environment]::SetEnvironmentVariable("Path", [System.Environment]::GetEnvironmentVariable("Path", "User")+";"+$env:PLTADDONDIR+"/8.12", "User")
 
 ```
 <!-- markdownlint-enable -->
 
 ### 4.5 ターミナルの再起動
 
-設定したPathや環境変数は、現在のPowerShellセッションでは使用できません。
-新しくターミナルを起動して、設定が反映されたPowerShellセッションを使う必要があります。
+設定した Path や環境変数は、現在の PowerShell セッションでは使用できません。
+新しくターミナルを起動して、設定が反映された PowerShell セッションを使う必要があります。
 
 次の手順で、ターミナルを再起動します:
 
@@ -172,17 +174,11 @@ racket-prefs.rktd
 2. `ターミナル`の起動:
   [Windows+R]として[ファイル名を指定して実行]ダイアログを開き、`wt`と入力してターミナルを起動します
 
-  ```windows
-  wt
-  ```
+   ```windows
+   wt
+   ```
 
 ## 5. WindowsでのRacketの起動と終了
-
-インストールに成功すると、Windows上で Racket を動かすことができます。
-
-**注意**:
-Racket の操作は、ターミナルのコマンドラインから行います。
-この章では、コマンドラインの基本的な操作に慣れていることを前提とします。
 
 ### 5.1 Racket の起動
 
@@ -193,7 +189,7 @@ Racket の操作は、ターミナルのコマンドラインから行います�
 racket
 ```
 
-Racketの起動に成功すると、`REPL`が起動して次のようにメッセージとプロンプトが表示されます:
+Racket の起動に成功すると、`REPL`が起動して次のようにメッセージとプロンプトが表示されます:
 
 ```powershell
 > racket
@@ -204,7 +200,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 5.2 Racketの終了
 
-Racketをファイルを指定せずに起動すると、`REPL`が起動します。
+Racket をファイルを指定せずに起動すると、`REPL`が起動します。
 起動した`REPL`は、次の方法で終了できます。
 
 - `EOF` (`Ctrl+D`)の入力:
@@ -212,7 +208,7 @@ Racketをファイルを指定せずに起動すると、`REPL`が起動しま�
 
   ```powershell
   Welcome to Racket v8.12 [cs].
-  > ;; ← [Ctrl+D]キー押下
+  > [Ctrl+D]キー押下
 
   $
   ```
@@ -239,10 +235,10 @@ Racketをファイルを指定せずに起動すると、`REPL`が起動しま�
 
 ## おわりに
 
-ここまでで、Racketのインストールおよび環境設定、起動と終了まで説明しました。
-これによりWindows上で基本的なRacketプログラミングができるようになりました。
+ここまでで、Racket のインストールおよび環境設定、起動と終了まで説明しました。
+これにより Windows上で基本的な Racket プログラミングができるようになりました。
 
-Racketの`REPL`を使えば、コマンドラインで`Racket`を実行することができ、インタラクティブなプログラミングを体験できます。
+Racket の`REPL`を使えば、コマンドラインで`Racket`を実行でき、インタラクティブなプログラミングを体験できます。
 次は、実際に`Racket`でプログラミングをしてみましょう。
 
 それでは、Happy Hacking!
