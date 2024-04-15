@@ -1,5 +1,5 @@
 ---
-title: "Racket: WindowsにRacketをセットアップする方法"
+title: "Racket: WindowsへのRacketのインストールと設定"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "環境構築", "関数型プログラミング", ]
@@ -8,9 +8,8 @@ published: false
 
 ## はじめに
 
-この記事では、`Windows`に関数型プログラミング言語`Racket`をセットアップする方法を紹介します。
-`Racket`をインストールし、環境を設定することで、ターミナルから`Racket`を起動できるようになります。
-その結果、`Racket`を使って関数型プログラミングの学習ができます。
+この記事では、`Windows`に関数型プログラミング言語`Racket`をインストールし、設定する方法を説明します。
+その結果、ターミナルから`Racket`を起動できるようになり、`Racket`で関数型プログラミングが学習できます。
 
 ## 1. Racketについて
 
@@ -35,7 +34,7 @@ published: false
 ### 2.1 インストールディレクトリ
 
 この記事では、`Racket`を`c:\lang\Racket`下にインストールします。
-通常は`C:\Program Files\Racket`にインストールされますが、ディレクトリに空白が含まれるため`c:\lang\racket`に変更しています。
+通常は`C:\Program Files\Racket`にインストールされますが、ディレクトリが空白を含むため`c:\lang\racket`に変更しています。
 
 ### 2.2 設定ディレクトリ
 
@@ -53,7 +52,7 @@ published: false
 `winget`は、`Windows`の公式パッケージマネージャーで、コマンドラインから`Racket`をインストールできます。
 `Racket`を`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
 
-次のコマンドで、`Racket`をインストールします:
+次のコマンドを実行して、`Racket`をインストールします:
 
 ```powershell
 winget install Racket.Racket --location C:\lang\racket
@@ -253,7 +252,24 @@ Welcome to Racket v8.12 [cs].
 
 それでは、Happy Hacking!
 
-## 重要キーワードと注釈
+## 技術用語と注釈
+
+この記事で使用する技術用語を解説します:
+
+- `Racket`:
+  `Scheme`に基づく関数型プログラミング言語で、学術、教育、実験的プログラムなどの広範に使用
+- 関数型プログラミング:
+  数学における関数をもとにプログラミングを行なうプログラミングパラダイム
+- `DrRacket`:
+  `Racket`における初心者から研究者まで使える公式の統合開発環境(`IDE`)
+- `raco`:
+  `Racket`においてパッケージの管理やプロジェクト管理をサポートするコマンドラインツール
+- `XDG Base Directory`:
+  `UNIX`/`Linux`において設定ファイル、データファイルを保存するディレクトリを定める仕様
+- マクロシステム:
+  コンパイル時にコードの生成などを行い、言語の構文を柔軟に拡張するシステム
+- `winget`:
+  `Windows`でコマンドライン上でアプリケーションの管理が行える公式パッケージマネージャー
 
 ## 参考資料
 
