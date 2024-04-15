@@ -1,10 +1,9 @@
 ---
 title: "Racket: WindowsへのRacketのインストールと設定方法"
-title: "Racket: WindowsへのRacketのインストールと設定方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "環境構築", "関数型プログラミング", ]
-published: false
+published: true
 ---
 
 ## はじめに
