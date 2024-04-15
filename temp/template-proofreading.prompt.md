@@ -51,13 +51,13 @@
 :link
 
 - [Racket公式Web](https://racket-lang.org/):
-  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
+  `Racket`の特徴、使用法、ダウンロード情報を提供する公式サイト。
 - [Racket Documentation](https://docs.racket-lang.org/):
-  Racket の公式ドキュメント。Racket の使い方、言語の特徴、開発ツールに関する詳細が載っている。
+  `Racket`の全機能について詳細に説明する公式ドキュメント。初心者から専門家まで参考になる。
 - [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-  Racket で使われている拡張`REPL`のドキュメント
+  `Racket`の拡張`REPL`に関するガイド。機能拡張やカスタマイズ方法を詳解。
 - [Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment):
-  Racket の環境設定用のファイル、ディレクトリ、環境変数のまとめ
+  Racket の環境設定に関するガイド。設定ファイル、ディレクトリ構造、環境変数について詳しく解説され、Racket のカスタマイズや管理に役立つ情報が提供される。
 
 """"
 :remark:
