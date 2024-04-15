@@ -8,8 +8,8 @@ published: false
 
 ## はじめに
 
-この記事で、`Windows`に`Racket`をインストールし、基本的な設定を行なう方法を説明します。
-この設定を経て、ターミナルから`Racket`を起動し、関数型プログラミングの学習をはじめられます。
+この記事では、`Windows`に`Racket`をインストールし、基本的な設定を行なう方法を説明します。
+設定後、ターミナルから`Racket`を起動し、すぐに関数型プログラミングの学習をはじめられます。
 
 ## 1. Racketについて
 
@@ -20,7 +20,7 @@ published: false
 ### 1.2 特徴
 
 - 関数型プログラミング言語
-- 言語を拡張できる強力なマクロシステム:
+- プログラム内で新しい言語機能を定義できる強力なマクロシステム
 - 公式による統合開発環境`DrRacket`のサポート
 - コマンドラインツール`raco`による開発タスクのサポート
 
@@ -28,14 +28,12 @@ published: false
 
 ### 2.1 インストールディレクトリ
 
-この記事では、`Racket`を`c:\lang\Racket`下にインストールすることを前提にしています。
-通常、`C:\Program Files\Racket`にインストールしますが、ディレクトリ名に空白が含まれるため、一部のツールやスクリプトで問題を起こす可能性があるからです。
+通常、`Racket`は`C:\Program Files\Racket`にインストールされますが、空白を含む`Path`を避けるため、この記事では`c:\lang\racket`にインストールします。
 
 ### 2.2 設定ディレクトリ
 
 環境設定用のディレクトリは、`XDG Base Directory`仕様にしたがって配置します。
-通常では、初期設定ファイルが`$USERPROFILE` (`C:\Users\<ユーザー名>`)下に保存されます。
-このディレクトリには`Windows`が利用するさまざまなフォルダやアプリケーションの設定用フォルダが存在しています。
+通常、初期設定ファイルは`$USERPROFILE` (`C:\Users\<ユーザー名>`)下に保存しますが、ここには`Windows`用のさまざまなフォルダやアプリケーションの設定用フォルダが存在しています。
 これらのフォルダとの混乱を避けるために`XDG Base Directory`仕様に従い、`~\.config\racket`にファイルを配置します。
 
 上記の設定に合わせ、ほかの環境設定ディレクトリも変更します。
@@ -43,7 +41,7 @@ published: false
 
 ## 3. Racketのインストール
 
-`Windows`公式パッケージマネージャー`winget`を用い、Racket をインストールします。
+`Windows`公式パッケージマネージャー`winget`を用い、`Racket`をインストールします。
 そのためには、`Windows Package Manager`ツールがシステムにインストールされている必要があります。
 
 ### 3.1 `winget`を使ったRacketのインストール
@@ -51,7 +49,7 @@ published: false
 `winget`は、`Windows`の公式パッケージマネージャーで、コマンドラインから`Racket`をインストールできます。
 `c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
 
-次のコマンドを実行して、`Racket`をインストールします:
+次のコマンドで`Racket`をインストールします:
 
 ```powershell
 winget install Racket.Racket --location C:\lang\racket
@@ -73,8 +71,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 3.2 Pathの設定
 
-どのディレクトリからでも`Racket`を起動できるように、環境変数`Path`に`c:\lang\racket`を追加します。
-
+すべてのディレクトリから`Racket`を起動できるように、`環境変数Path`に`c:\lang\racket`を追加します。
 `PowerShell`で次のコマンドを実行します:
 
 <!-- markdownlint-disable line_length -->
@@ -110,12 +107,10 @@ Welcome to Racket v8.12 [cs].
 `Racket`には`config.rktd`という設定ファイルがあり、`Racket`のさまざまな設定を管理できます。
 ここでは、アドオンをダウンロードしたときにファイルをキャッシュするディレクトリを`XDG Base Directory`に準拠するように設定します。
 
-`config.rktd`は、`Racket`がインストールされているディレクトリ下の`etc`ディレクトリにあります。
-この記事では、`c:\lang\racket\etc\config.rktd`に位置します。
+コンフィグファイル `config.rktd`の場所: `c:\lang\racket\etc\config.rktd`
+次のように、`config.rktd`を編集します:
 
-次のように、`config.rktd`に編集します。
-
-```racket:c:/lang/racket/etc/config.rkd
+```racket: config.rkd
 #hash(
   (build-stamp . "")
   (catalogs . ("https://download.racket-lang.org/releases/8.12/catalog/" #f))
@@ -143,9 +138,9 @@ Welcome to Racket v8.12 [cs].
 これらのうち、`Racket`のセッション情報を含むユーザー設定ファイル、および一時ファイルを含むダウンロードキャッシュは`Git`の管理下から外す必要があります。
 これを実現するため、`$XDG_CONFIG_HOME`下の`.gitignore`に上記ファイルを除外する設定を追加します。
 
-次の内容を、`.gitignore`に追加します:
+次の内容を`.gitignore`に追加します:
 
-``` :.gitignore
+``` : .gitignore
 # Racket
 _lock*
 **/download-cache/
@@ -155,7 +150,7 @@ racket-prefs.rktd
 
 ### 4.4 アドオン用Pathの設定
 
-アドオンによっては、実行用にランチャーを作成するものがあります。
+`アドオン`によっては、実行用に`ランチャー`を作成するものがあります。
 ユーザーアドオンの場合は、アドオンディレクトリ+`Racket`バージョン番号下にランチャーを作成します。
 この記事では、`Racket 8.12`をインストールしたので、`$PLTADDONDIR+"/8.12"`となります。
 
@@ -170,7 +165,7 @@ racket-prefs.rktd
 
 ### 4.5 ターミナルの再起動
 
-設定した`Path`や環境変数は、現在の`PowerShell`セッションでは使用できません。
+設定した`Path`や環境変数は、現在の`PowerShell`セッションに即座には反映されません。
 新しくターミナルを起動して、設定が反映された`PowerShell`セッションを使う必要があります。
 
 次の手順で、ターミナルを再起動します:
@@ -194,7 +189,7 @@ racket-prefs.rktd
 ### 5.1 Racket の起動
 
 次の手順で、`Racket`を起動します。
-ターミナルで、次のコマンドを実行します:
+ターミナルに次のコマンドを入力して、`Racket`を起動します:
 
 ```powershell
 racket
@@ -260,6 +255,8 @@ Welcome to Racket v8.12 [cs].
 
 - `Racket`:
   `Scheme`に基づいていて、教育、研究、実験的なプロジェクトに適しているく関数型プログラミング言語
+- `REPL` (`Read-Eval-Print-Loop`):
+  コマンドラインからコードを入力し、即座に結果を得られる対話的プログラミングを実現する環境
 - 関数型プログラミング:
   関数を中心に構築され、データの不変性と副作用の最小化を特徴とするプログラミングパラダイム
 - `DrRacket`:
@@ -301,6 +298,8 @@ Welcome to Racket v8.12 [cs].
   `Racket`の全機能について詳細に説明する公式ドキュメント。初心者から専門家まで参考になる。
 - [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
   `Racket`の拡張`REPL`に関するガイド。機能拡張やカスタマイズ方法を詳解。
+- [Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment):
+  設定ファイル、環境変数、ディレクトリ構造などの`Racket`用環境設定の解説。
 
 ### 本
 
