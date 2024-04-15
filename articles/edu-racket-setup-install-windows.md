@@ -1,5 +1,5 @@
 ---
-title: "Racket: Windows上にRacketをセットアップする方法"
+title: "Racket: WindowsにRacketをセットアップする方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "環境構築", "関数型プログラミング", ]
@@ -8,7 +8,9 @@ published: false
 
 ## はじめに
 
-この記事では、Windows上に関数型プログラミング言語`Racket`をセットアップする方法を紹介します。
+この記事では、Windows に関数型プログラミング言語`Racket`をセットアップする方法を紹介します。
+Racket をインストールし、環境を設定することで、ターミナルから Racket を起動できるようになります。
+その結果、で Racket を使って関数型プログラミングの学習ができます。
 
 ## 1. Racketについて
 
@@ -18,7 +20,7 @@ Racket は Scheme に基づくマルチパラダイムなプログラミング�
 Racket の特徴としては:
 
 - 関数型プログラミング: Racket は関数型プログラミング言語であり、関数が第一級オブジェクトとして扱われます。
-- マクロシステム: Racket は強力なマクロシステムを持ちます。
+- マクロシステム: Racket には強力なマクロシステムが搭載されています。
 - 統合開発環境のサポート: Racket には統合開発環境(IDE)`Dr Racket`が組み込まれており、手軽に Racket のプログラミングが始められます。
 - ツールによるサポート: Racket にはコマンドラインツールである`raco`があり、さまざまな開発タスクをサポートします。
 
@@ -29,22 +31,22 @@ Racket の特徴としては:
 ### 2.1 インストールディレクトリ
 
 この記事では、Racket を`c:\lang\Racket`下にインストールします。
-通常では`C:\Program Files\Racket`下にインストールされますが、ディレクトリに空白が含まれてるため上記のディレクトリに変更しています。
+通常は`C:\Program Files\Racket`にインストールされますが、ディレクトリに空白が含まれるため`c:\lang\racket`に変更しています。
 
 ### 2.2 設定ディレクトリ
 
 環境設定用のディレクトリは、`XDG Base Directory`仕様にしたがって配置します。
 通常では、初期設定ファイルが`C:\Users\<ユーザー名>`下に保存されます。
-このディレクトリ下にはファイルを置きたくないため、`XDG Base Directory`仕様の`~\.config\racket`下にファイルを保存します。
+このディレクトリ下にはファイルを保存したくないため、`XDG Base Directory`仕様にしたがって`~\.config\racket`下にファイルを配置します。
 
 上記の設定に合わせ、ほかの環境設定ディレクトリも変更します。
-どのようなディレクトリを変更するかは、[Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment)を参照してください。
+どのディレクトリを変更するかの詳細は、[Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment)を参照してください。
 
 ## 3. Racketのインストール
 
 ### 3.1 `winget`を使ったRacketのインストール
 
-`winget`は、Windows の公式パッケージマネージャーで、Racket をコマンドラインからインストールできます。
+`winget`は、Windows の公式パッケージマネージャーで、コマンドラインから Racket をインストールできます。
 Racket を`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
 
 次のコマンドで、Racket をインストールします:
@@ -70,7 +72,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 3.2 Pathの設定
 
-Racket をどこのディレクトリからでも起動できるように、`Path`に Racket のインストールディレクトリ`c:\lang\racket`を追加します。
+どのディレクトリからでも Racket を起動できるように、環境変数`Path`に`c:\lang\racket`を追加します。
 
 `PowerShell`で次のコマンドを実行します:
 
@@ -85,13 +87,14 @@ Racket をどこのディレクトリからでも起動できるように、`Pat
 
 ### 4.1 環境変数の設定
 
-Racket の設定ファイルを`XDG Base Directpry`に準拠させるための各種環境変数を設定します。
+Racket の設定ファイルを`XDG Base Directory`に準拠させるため、環境変数を設定します。
+
 環境変数の設定は、次のようになります。
 
-| 環境変数 | 変数説明 | 設定値| 説明 | 備考 |
-| --- | --- | --- | --- | --- |
-| `PLTUSERHOME` | Racket用ホームディレクトリ | `$XDG_CONFIG_HOME+"/racket"` | 初期設定ファイルなどを保存 | |
-| `PLTADDONDIR` | ユーザーアドオンディレクトリ | `$XDG_DATA_HOME+"/racket"` |  ユーザー用にダウンロードしたアドオンを保存 | |
+| 環境変数 | 変数説明 | 設定値| 説明 |
+| --- | --- | --- | --- |
+| `PLTUSERHOME` | Racket用ホームディレクトリ | `$XDG_CONFIG_HOME+"/racket"` | 初期設定ファイルなどを保存 |
+| `PLTADDONDIR` | ユーザーアドオンディレクトリ | `$XDG_DATA_HOME+"/racket"` |  ユーザー用にダウンロードしたアドオンを保存 |
 
 次のコマンドで環境変数を設定します:
 
@@ -104,7 +107,7 @@ Racket の設定ファイルを`XDG Base Directpry`に準拠させるための�
 ### 4.2 `config.rktd`の設定
 
 Racket は、各種ディレクトリやコマンドラインツール`raco`用の設定をコンフィグファイル`config.rktd`で設定しています。
-Racket用ホームディレクトリの変更に伴い、パッケージ用ダウンロードキャッシュディレクトリを`config.rktd`で設定します。
+パッケージ用ダウンロードキャッシュディレクトリを`XDG`Base Directory`準拠にするため、config.rktd`で設定します。
 
 `config.rktd`は、Racket インストールディレクトリ下の`etc`ディレクトリにあります。
 この記事では、`c:\lang\racket\etc\config.rktd`となります。
@@ -124,8 +127,11 @@ Racket用ホームディレクトリの変更に伴い、パッケージ用ダ�
 
 **注意**:
 
-- `downloadc-cache-dir`はフルパスでかく必要があるため、`C:/Users/<ユーザー名>/.local/cache`と`XDG_CACHE_HOME`を展開して`/racket/download-cache`を追加しています。
+<!-- textlint-disable japanese/sentence-length, ja-technical-writing/sentence-length -->
+- `downloadc-cache-dir`はフルパスで書く必要があるため、`C:/Users/<ユーザー名>/.local/cache`と`XDG_CACHE_HOME`を展開して、そのあとに`/racket/download-cache`を追加しています。
 - `config.rktd`には Racket のバージョン番号が含まれているため、Racket がバージョンアップした場合には`config.rktd`を書き換える必要があります。
+
+<!-- textlint-enable -->
 
 ### 4.3 `.gitignore`の設定
 
@@ -165,14 +171,14 @@ racket-prefs.rktd
 次の手順で、ターミナルを再起動します:
 
 1. `powershell`の終了:
-   次のコマンドを実行して、`powershell`を終了します
+   次のコマンドを実行して、`powershell`を終了します。
 
    ```powershell
    exit
    ```
 
 2. `ターミナル`の起動:
-  [Windows+R]として[ファイル名を指定して実行]ダイアログを開き、`wt`と入力してターミナルを起動します
+  [Windows+R]として[ファイル名を指定して実行]ダイアログを開き、`wt`と入力してターミナルを起動します。
 
    ```windows
    wt
