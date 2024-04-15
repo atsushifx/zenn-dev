@@ -1,5 +1,5 @@
 ---
-title: "Racket: WindowsへのRacketのインストールと設定"
+title: "Racket: WindowsへのRacketのインストールと設定方法"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "環境構築", "関数型プログラミング", ]
@@ -8,49 +8,48 @@ published: false
 
 ## はじめに
 
-この記事では、`Windows`に関数型プログラミング言語`Racket`をインストールし、設定する方法を説明します。
-その結果、ターミナルから`Racket`を起動できるようになり、`Racket`で関数型プログラミングが学習できます。
+この記事で、`Windows`に`Racket`をインストールし、基本的な設定を行なう方法を説明します。
+この設定を経て、ターミナルから`Racket`を起動し、関数型プログラミングの学習をはじめられます。
 
 ## 1. Racketについて
 
-`Racket`は`Scheme`に基づくマルチパラダイムなプログラミング言語です。
-関数型プログラミングが基本であり、オブジェクト指向プログラミングもサポートしています。
+### 1.1 目的
 
-`Racket`の特徴として:
+このセクションでは、`Racket`の特徴を解説します。
 
-- 関数型プログラミング:
-  `Racket`は関数型プログラミング言語であり、関数が第一級オブジェクトとして扱われます。
-- マクロシステム:
-  `Racket`には強力なマクロシステムが搭載されています。
-- 統合開発環境のサポート:
-  `Racket`には統合開発環境(IDE) `DrRacket`が組み込まれており、手軽に`Racket`のプログラミングが始められます。
-- ツールによるサポート:
-  `Racket`にはコマンドラインツールである`raco`があり、さまざまな開発タスクをサポートします。
+### 1.2 特徴
 
-が挙げられます。
+- 関数型プログラミング言語
+- 言語を拡張できる強力なマクロシステム:
+- 公式による統合開発環境`DrRacket`のサポート
+- コマンドラインツール`raco`による開発タスクのサポート
 
 ## 2. 前提条件
 
 ### 2.1 インストールディレクトリ
 
-この記事では、`Racket`を`c:\lang\Racket`下にインストールします。
-通常は`C:\Program Files\Racket`にインストールされますが、ディレクトリが空白を含むため`c:\lang\racket`に変更しています。
+この記事では、`Racket`を`c:\lang\Racket`下にインストールすることを前提にしています。
+通常、`C:\Program Files\Racket`にインストールしますが、ディレクトリ名に空白が含まれるため、一部のツールやスクリプトで問題を起こす可能性があるからです。
 
 ### 2.2 設定ディレクトリ
 
 環境設定用のディレクトリは、`XDG Base Directory`仕様にしたがって配置します。
-通常では、初期設定ファイルが`C:\Users\<ユーザー名>`下に保存されます。
-このディレクトリ下にはファイルを保存したくないため、`XDG Base Directory`仕様にしたがって`~\.config\racket`下にファイルを配置します。
+通常では、初期設定ファイルが`$USERPROFILE` (`C:\Users\<ユーザー名>`)下に保存されます。
+このディレクトリには`Windows`が利用するさまざまなフォルダやアプリケーションの設定用フォルダが存在しています。
+これらのフォルダとの混乱を避けるために`XDG Base Directory`仕様に従い、`~\.config\racket`にファイルを配置します。
 
 上記の設定に合わせ、ほかの環境設定ディレクトリも変更します。
 どのディレクトリを変更するかの詳細は、[Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment)を参照してください。
 
 ## 3. Racketのインストール
 
+`Windows`公式パッケージマネージャー`winget`を用い、Racket をインストールします。
+そのためには、`Windows Package Manager`ツールがシステムにインストールされている必要があります。
+
 ### 3.1 `winget`を使ったRacketのインストール
 
 `winget`は、`Windows`の公式パッケージマネージャーで、コマンドラインから`Racket`をインストールできます。
-`Racket`を`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
+`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
 
 次のコマンドを実行して、`Racket`をインストールします:
 
@@ -58,8 +57,7 @@ published: false
 winget install Racket.Racket --location C:\lang\racket
 ```
 
-`racket --version`を実行して、正常にインストールできたかを確認します。
-次のコマンドを実行します:
+インストール後に`racket --version`で、正常にインストールされたかを確認します:
 
 ```powershell
 c:\lang\racket\racket --version
@@ -90,7 +88,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 4.1 環境変数の設定
 
-`Racket`の設定ファイルを`XDG Base Directory`に準拠させるため、環境変数を設定します。
+`Racket`の設定ファイルを`XDG Base Directory`に準拠させるため、関連する環境変数を設定します。
 
 環境変数の設定は、次のようになります。
 
@@ -109,13 +107,13 @@ Welcome to Racket v8.12 [cs].
 
 ### 4.2 `config.rktd`の設定
 
-`Racket`は、各種ディレクトリやコマンドラインツール`raco`用の設定をコンフィグファイル`config.rktd`で設定しています。
-パッケージ用ダウンロードキャッシュディレクトリを`XDG`Base Directory`準拠にするため、config.rktd`で設定します。
+`Racket`には`config.rktd`という設定ファイルがあり、`Racket`のさまざまな設定を管理できます。
+ここでは、アドオンをダウンロードしたときにファイルをキャッシュするディレクトリを`XDG Base Directory`に準拠するように設定します。
 
-`config.rktd`は、Racket インストールディレクトリ下の`etc`ディレクトリにあります。
-この記事では、`c:\lang\racket\etc\config.rktd`となります。
+`config.rktd`は、`Racket`がインストールされているディレクトリ下の`etc`ディレクトリにあります。
+この記事では、`c:\lang\racket\etc\config.rktd`に位置します。
 
-`config.rktd`を次のように書き換えます。
+次のように、`config.rktd`に編集します。
 
 ```racket:c:/lang/racket/etc/config.rkd
 #hash(
@@ -128,6 +126,8 @@ Welcome to Racket v8.12 [cs].
 
 ```
 
+上記のようにすることで、キャッシュファイルが`~/.config`ディレクトリ下に保存されることを防ぎ、システムをきれいなまま保ちます。
+
 **注意**:
 
 <!-- textlint-disable japanese/sentence-length, ja-technical-writing/sentence-length -->
@@ -139,9 +139,11 @@ Welcome to Racket v8.12 [cs].
 ### 4.3 `.gitignore`の設定
 
 `Racket`ホームディレクトリは、`GitHub`の`dotfiles`リポジトリでの管理下にあります。
-`Racket`のセッションを保存しているユーザー設定ファイル、一時ファイルを保存するダウンロードキャッシュなどは、`.gitignore`により git の管理から外します。
+`Racket`ホームディレクトリ上には、初期設定ファイル、ユーザー設定ファイル、アドオン用のダウンロードキャッシュが存在します。
+これらのうち、`Racket`のセッション情報を含むユーザー設定ファイル、および一時ファイルを含むダウンロードキャッシュは`Git`の管理下から外す必要があります。
+これを実現するため、`$XDG_CONFIG_HOME`下の`.gitignore`に上記ファイルを除外する設定を追加します。
 
-次の内容を、`$XDG_CONFIG_HOME`下の`.gitignore`に追加します。
+次の内容を、`.gitignore`に追加します:
 
 ``` :.gitignore
 # Racket
@@ -198,7 +200,7 @@ racket-prefs.rktd
 racket
 ```
 
-`Racket`の起動に成功すると、`REPL`が起動して次のメッセージとプロンプトが表示されます:
+`Racket`の起動に成功すると、`REPL`が開始されて次のメッセージとプロンプトが表示されます:
 
 ```powershell
 > racket
@@ -209,8 +211,8 @@ Welcome to Racket v8.12 [cs].
 
 ### 5.2 Racketの終了
 
-`Racket`をファイルを指定せずに起動すると、`REPL`が起動します。
-起動した`REPL`は、次の方法で終了できます。
+`Racket`をファイルを指定せずに起動すると、`REPL`が開始します。
+`REPL`は、次の方法で終了できます。
 
 - `EOF` (`Ctrl+D`)の入力:
   `REPL`は`EOF`が入力されると終了します。`EOF`は、`Ctrl+D`で入力できます。
@@ -245,9 +247,9 @@ Welcome to Racket v8.12 [cs].
 ## おわりに
 
 ここまでで、`Racket`のインストールおよび環境設定、起動と終了まで説明しました。
-これにより `Windows`上で基本的な`Racket`プログラミングができるようになりました。
+結果、`Windows`上で基本的な`Racket`プログラミングができるようになりました。
 
-`Racket`の`REPL`を使えば、コマンドラインで`Racket`プログラムを実行でき、インタラクティブなプログラミングを体験できます。
+`Racket`の`REPL`を使えば、コマンドラインで`Racket`プログラムを実行し、インタラクティブなプログラミングを楽しめます
 次は、実際に`Racket`でプログラミングをしてみましょう。
 
 それでは、Happy Hacking!
@@ -257,38 +259,38 @@ Welcome to Racket v8.12 [cs].
 この記事で使用する技術用語を解説します:
 
 - `Racket`:
-  `Scheme`に基づく関数型プログラミング言語で、学術、教育、実験的プログラムなどの広範に使用
+  `Scheme`に基づいていて、教育、研究、実験的なプロジェクトに適しているく関数型プログラミング言語
 - 関数型プログラミング:
-  数学における関数をもとにプログラミングを行なうプログラミングパラダイム
+  関数を中心に構築され、データの不変性と副作用の最小化を特徴とするプログラミングパラダイム
 - `DrRacket`:
-  `Racket`における初心者から研究者まで使える公式の統合開発環境(`IDE`)
+  プログラミングの基本から上級テクニックまで学べる`Racket`公式の統合開発環境(`IDE`)
 - `raco`:
-  `Racket`においてパッケージの管理やプロジェクト管理をサポートするコマンドラインツール
+  `Racket`のパッケージの管理やプロジェクトのビルドなどをサポートするコマンドラインツール
 - `XDG Base Directory`:
-  `UNIX`/`Linux`において設定ファイル、データファイルを保存するディレクトリを定める仕様
+  `UNIX`/`Linux`において設定ファイル、データファイルを保存先ディレクトリを定め、システムの整理と管理を容易にする標準ディレクトリ仕様
 - マクロシステム:
-  コンパイル時にコードの生成などを行い、言語の構文を柔軟に拡張するシステム
+  コンパイルがコード生成や構文拡張をし、プログラミング言語の柔軟性と機能性を強化するシステム
 - `winget`:
-  `Windows`でコマンドライン上でアプリケーションの管理が行える公式パッケージマネージャー
+  `Windows`でコマンドラインからアプリケーションのインストールや管理が行える公式パッケージマネージャー
 
 ## 参考資料
 
 ### Webサイト
 
 - [Racket公式Web](https://racket-lang.org/):
-  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
+  `Racket`の特徴、使用法、ダウンロード情報を提供する公式サイト。
 - [Racket Documentation](https://docs.racket-lang.org/):
-  Racket の公式ドキュメント。Racket の使用方法、言語の特徴、開発ツールの詳細情報が掲載されている。初心者から上級者までが参照できる豊富なガイドが含まれる。
+  `Racket`の全機能について詳細に説明する公式ドキュメント。初心者から専門家まで参考になる。
 - [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-  Racket で使われている拡張`REPL`のドキュメント。より強化された REPL環境の設定方法や利用可能な追加機能について説明されている。
+  `Racket`の拡張`REPL`に関するガイド。機能拡張やカスタマイズ方法を詳解。
 
 ### 本
 
 - [Racket Guide](https://docs.racket-lang.org/guide/index.html):
-  `Racket`の基本的な概念と使い方を解説したガイドブック。`Racket`初心者が言語の基礎を学ぶのに最適な資料。
+  `Racket`の基礎から応用までを分かりやすく解説した初心者向けのガイドブック。
 - [How to Design Programs](https://htdp.org/):
-  プログラム設計の原理と方法を学ぶための教科書。関数型プログラミングを中心に、段階的なプログラム設計技法を体系的に説明している。
+  関数型プログラミングを核としたプログラム設計の技法を、初級から上級まで段階的に学べる教科書。
 - [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html):
-  コンピュータサイエンスの基礎とプログラミングの原則を扱った古典的なテキスト。深い洞察と理論的背景に基づき、プログラミングとは何か、どのように考えるべきかを探求する。
+  コンピュータサイエンスとプログラミングの原則に関する深い理解を提供する古典的なテキスト。論理的な思考とプログラミングスキルの向上に役立つ。
 - [Beautiful Racket](https://beautifulracket.com/)
-  `Racket`を使用して独自のプログラミング言語を設計し、実装する方法を学ぶことができる実践的なガイド。初心者から中級者に向けて、言語の作成プロセスを段階的に解説する
+  `Racket`を用いて自分だけのプログラミング言語を設計・実装するための実践的なガイド。初心者も中級者も、プログラミング言語の作り方を段階的に学べる。
