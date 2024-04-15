@@ -8,29 +8,33 @@ published: false
 
 ## はじめに
 
-この記事では、Windows に関数型プログラミング言語`Racket`をセットアップする方法を紹介します。
-Racket をインストールし、環境を設定することで、ターミナルから Racket を起動できるようになります。
-その結果、で Racket を使って関数型プログラミングの学習ができます。
+この記事では、`Windows`に関数型プログラミング言語`Racket`をセットアップする方法を紹介します。
+`Racket`をインストールし、環境を設定することで、ターミナルから`Racket`を起動できるようになります。
+その結果、`Racket`を使って関数型プログラミングの学習ができます。
 
 ## 1. Racketについて
 
-Racket は Scheme に基づくマルチパラダイムなプログラミング言語です。
-関数型プログラミングを基本にしていますが、オブジェクト指向プログラミングもサポートしています。
+`Racket`は`Scheme`に基づくマルチパラダイムなプログラミング言語です。
+関数型プログラミングが基本であり、オブジェクト指向プログラミングもサポートしています。
 
-Racket の特徴としては:
+`Racket`の特徴として:
 
-- 関数型プログラミング: Racket は関数型プログラミング言語であり、関数が第一級オブジェクトとして扱われます。
-- マクロシステム: Racket には強力なマクロシステムが搭載されています。
-- 統合開発環境のサポート: Racket には統合開発環境(IDE)`Dr Racket`が組み込まれており、手軽に Racket のプログラミングが始められます。
-- ツールによるサポート: Racket にはコマンドラインツールである`raco`があり、さまざまな開発タスクをサポートします。
+- 関数型プログラミング:
+  `Racket`は関数型プログラミング言語であり、関数が第一級オブジェクトとして扱われます。
+- マクロシステム:
+  `Racket`には強力なマクロシステムが搭載されています。
+- 統合開発環境のサポート:
+  `Racket`には統合開発環境(IDE) `DrRacket`が組み込まれており、手軽に`Racket`のプログラミングが始められます。
+- ツールによるサポート:
+  `Racket`にはコマンドラインツールである`raco`があり、さまざまな開発タスクをサポートします。
 
-が上げられます。
+が挙げられます。
 
 ## 2. 前提条件
 
 ### 2.1 インストールディレクトリ
 
-この記事では、Racket を`c:\lang\Racket`下にインストールします。
+この記事では、`Racket`を`c:\lang\Racket`下にインストールします。
 通常は`C:\Program Files\Racket`にインストールされますが、ディレクトリに空白が含まれるため`c:\lang\racket`に変更しています。
 
 ### 2.2 設定ディレクトリ
@@ -46,10 +50,10 @@ Racket の特徴としては:
 
 ### 3.1 `winget`を使ったRacketのインストール
 
-`winget`は、Windows の公式パッケージマネージャーで、コマンドラインから Racket をインストールできます。
-Racket を`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
+`winget`は、`Windows`の公式パッケージマネージャーで、コマンドラインから`Racket`をインストールできます。
+`Racket`を`c:\lang\racket`下にインストールするため、`--location`オプションでインストール先ディレクトリを指定します。
 
-次のコマンドで、Racket をインストールします:
+次のコマンドで、`Racket`をインストールします:
 
 ```powershell
 winget install Racket.Racket --location C:\lang\racket
@@ -63,7 +67,7 @@ c:\lang\racket\racket --version
 
 ```
 
-次のように Racket のバージョンが表示されれば、正常にインストールされています。
+次のように `Racket`のバージョンが表示されれば、正常にインストールされています。
 
 ```powershell
 Welcome to Racket v8.12 [cs].
@@ -72,7 +76,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 3.2 Pathの設定
 
-どのディレクトリからでも Racket を起動できるように、環境変数`Path`に`c:\lang\racket`を追加します。
+どのディレクトリからでも`Racket`を起動できるように、環境変数`Path`に`c:\lang\racket`を追加します。
 
 `PowerShell`で次のコマンドを実行します:
 
@@ -87,7 +91,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 4.1 環境変数の設定
 
-Racket の設定ファイルを`XDG Base Directory`に準拠させるため、環境変数を設定します。
+`Racket`の設定ファイルを`XDG Base Directory`に準拠させるため、環境変数を設定します。
 
 環境変数の設定は、次のようになります。
 
@@ -106,7 +110,7 @@ Racket の設定ファイルを`XDG Base Directory`に準拠させるため、�
 
 ### 4.2 `config.rktd`の設定
 
-Racket は、各種ディレクトリやコマンドラインツール`raco`用の設定をコンフィグファイル`config.rktd`で設定しています。
+`Racket`は、各種ディレクトリやコマンドラインツール`raco`用の設定をコンフィグファイル`config.rktd`で設定しています。
 パッケージ用ダウンロードキャッシュディレクトリを`XDG`Base Directory`準拠にするため、config.rktd`で設定します。
 
 `config.rktd`は、Racket インストールディレクトリ下の`etc`ディレクトリにあります。
@@ -129,14 +133,14 @@ Racket は、各種ディレクトリやコマンドラインツール`raco`用�
 
 <!-- textlint-disable japanese/sentence-length, ja-technical-writing/sentence-length -->
 - `downloadc-cache-dir`はフルパスで書く必要があるため、`C:/Users/<ユーザー名>/.local/cache`と`XDG_CACHE_HOME`を展開して、そのあとに`/racket/download-cache`を追加しています。
-- `config.rktd`には Racket のバージョン番号が含まれているため、Racket がバージョンアップした場合には`config.rktd`を書き換える必要があります。
+- 設定には`Racket`のバージョン番号が含まれているため、`Racket`がバージョンアップした場合には`config.rktd`を書き換える必要があります。
 
 <!-- textlint-enable -->
 
 ### 4.3 `.gitignore`の設定
 
-Racket ホームディレクトリは、GitHub の`dotfiles`リポジトリでの管理下にあります。
-`prefs`ファイルやロックファイル、ダウンロードキャッシュなどは、`.gitignore`により git の管理から外します。
+`Racket`ホームディレクトリは、`GitHub`の`dotfiles`リポジトリでの管理下にあります。
+`Racket`のセッションを保存しているユーザー設定ファイル、一時ファイルを保存するダウンロードキャッシュなどは、`.gitignore`により git の管理から外します。
 
 次の内容を、`$XDG_CONFIG_HOME`下の`.gitignore`に追加します。
 
@@ -151,10 +155,10 @@ racket-prefs.rktd
 ### 4.4 アドオン用Pathの設定
 
 アドオンによっては、実行用にランチャーを作成するものがあります。
-ユーザーアドオンの場合は、アドオンディレクトリ+Racket バージョン番号下にランチャーを作成します。
+ユーザーアドオンの場合は、アドオンディレクトリ+`Racket`バージョン番号下にランチャーを作成します。
 この記事では、`Racket 8.12`をインストールしたので、`$PLTADDONDIR+"/8.12"`となります。
 
-次のコマンドでアドオン用 path を環境変数 Path に追加します:
+次のコマンドで`アドオン用Path`を環境変数`Path`に追加します:
 
 <!-- markdownlint-disable line_length -->
 ```powershell
@@ -165,8 +169,8 @@ racket-prefs.rktd
 
 ### 4.5 ターミナルの再起動
 
-設定した Path や環境変数は、現在の PowerShell セッションでは使用できません。
-新しくターミナルを起動して、設定が反映された PowerShell セッションを使う必要があります。
+設定した`Path`や環境変数は、現在の`PowerShell`セッションでは使用できません。
+新しくターミナルを起動して、設定が反映された`PowerShell`セッションを使う必要があります。
 
 次の手順で、ターミナルを再起動します:
 
@@ -188,14 +192,14 @@ racket-prefs.rktd
 
 ### 5.1 Racket の起動
 
-次の手順で、Racket を起動します。
+次の手順で、`Racket`を起動します。
 ターミナルで、次のコマンドを実行します:
 
 ```powershell
 racket
 ```
 
-Racket の起動に成功すると、`REPL`が起動して次のようにメッセージとプロンプトが表示されます:
+`Racket`の起動に成功すると、`REPL`が起動して次のメッセージとプロンプトが表示されます:
 
 ```powershell
 > racket
@@ -206,7 +210,7 @@ Welcome to Racket v8.12 [cs].
 
 ### 5.2 Racketの終了
 
-Racket をファイルを指定せずに起動すると、`REPL`が起動します。
+`Racket`をファイルを指定せずに起動すると、`REPL`が起動します。
 起動した`REPL`は、次の方法で終了できます。
 
 - `EOF` (`Ctrl+D`)の入力:
@@ -220,7 +224,7 @@ Racket をファイルを指定せずに起動すると、`REPL`が起動しま�
   ```
 
 - `exit`関数の実行:
-  `exit`関数を実行して Racket を終了します。関数として呼びだすため、`()`でくくる必要があります。
+  `exit`関数を実行して`Racket`を終了します。関数として呼びだすため、`()`でくくる必要があります。
 
   ```powershell
   Welcome to Racket v8.12 [cs].
@@ -241,10 +245,10 @@ Racket をファイルを指定せずに起動すると、`REPL`が起動しま�
 
 ## おわりに
 
-ここまでで、Racket のインストールおよび環境設定、起動と終了まで説明しました。
-これにより Windows上で基本的な Racket プログラミングができるようになりました。
+ここまでで、`Racket`のインストールおよび環境設定、起動と終了まで説明しました。
+これにより `Windows`上で基本的な`Racket`プログラミングができるようになりました。
 
-Racket の`REPL`を使えば、コマンドラインで`Racket`を実行でき、インタラクティブなプログラミングを体験できます。
+`Racket`の`REPL`を使えば、コマンドラインで`Racket`プログラムを実行でき、インタラクティブなプログラミングを体験できます。
 次は、実際に`Racket`でプログラミングをしてみましょう。
 
 それでは、Happy Hacking!
