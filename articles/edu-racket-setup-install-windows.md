@@ -275,13 +275,20 @@ Welcome to Racket v8.12 [cs].
 
 ### Webサイト
 
-- [Racket公式Web](https://racket-lang.org/) :  Racket の公式サイト
-- [Racket Documentation](https://docs.racket-lang.org/) : Racket の公式ドキュメント
-- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/) : Racket で使われている拡張`REPL`のドキュメント
+- [Racket公式Web](https://racket-lang.org/):
+  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
+- [Racket Documentation](https://docs.racket-lang.org/):
+  Racket の公式ドキュメント。Racket の使用方法、言語の特徴、開発ツールの詳細情報が掲載されている。初心者から上級者までが参照できる豊富なガイドが含まれる。
+- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
+  Racket で使われている拡張`REPL`のドキュメント。より強化された REPL環境の設定方法や利用可能な追加機能について説明されている。
 
 ### 本
 
-- [Racket Guide](https://docs.racket-lang.org/guide/index.html)
-- [How to Design Programs](https://htdp.org/)
-- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)
+- [Racket Guide](https://docs.racket-lang.org/guide/index.html):
+  `Racket`の基本的な概念と使い方を解説したガイドブック。`Racket`初心者が言語の基礎を学ぶのに最適な資料。
+- [How to Design Programs](https://htdp.org/):
+  プログラム設計の原理と方法を学ぶための教科書。関数型プログラミングを中心に、段階的なプログラム設計技法を体系的に説明している。
+- [Structure and Interpretation of Computer Programs](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html):
+  コンピュータサイエンスの基礎とプログラミングの原則を扱った古典的なテキスト。深い洞察と理論的背景に基づき、プログラミングとは何か、どのように考えるべきかを探求する。
 - [Beautiful Racket](https://beautifulracket.com/)
+  `Racket`を使用して独自のプログラミング言語を設計し、実装する方法を学ぶことができる実践的なガイド。初心者から中級者に向けて、言語の作成プロセスを段階的に解説する
