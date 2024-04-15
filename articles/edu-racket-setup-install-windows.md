@@ -52,9 +52,6 @@ published: false
 次のコマンドで`Racket`をインストールします:
 
 ```powershell
-次のコマンドで`Racket`をインストールします:
-
-```powershell
 winget install Racket.Racket --location C:\lang\racket
 ```
 
@@ -113,7 +110,7 @@ Welcome to Racket v8.12 [cs].
 コンフィグファイル `config.rktd`の場所: `c:\lang\racket\etc\config.rktd`
 次のように、`config.rktd`を編集します:
 
-```racket: c:/lang/racket/etc/config.rkd
+```racket: config.rkd
 #hash(
   (build-stamp . "")
   (catalogs . ("https://download.racket-lang.org/releases/8.12/catalog/" #f))
