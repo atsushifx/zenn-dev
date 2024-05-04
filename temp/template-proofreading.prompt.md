@@ -22,7 +22,8 @@
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 読みやすさを重視し、ひらいた漢字は指摘しない
-- 文章に命令形の文体は使わないことに注意する
+- 文章に命令形の文体は使わない、ただし読者に動機づけするための提案である「しましょう」などの場合は容認する
+- 'Happy Hacking'、'Enjoy'といった文に会わせ、全体の文章の調子を修正する
 - 読みやすさのため、基本的に、英単語、数字の両端にスペースをいれる
 - :role にしたがってレビュー、推敲、校正、校閲を担当する
 - :role にしたがって、表記の統一や適切な表現を確認する
@@ -50,20 +51,22 @@
 """"
 :link
 
-- [Racket公式Web](https://racket-lang.org/):
-  `Racket`の特徴、使用法、ダウンロード情報を提供する公式サイト。
-- [Racket Documentation](https://docs.racket-lang.org/):
-  `Racket`の全機能について詳細に説明する公式ドキュメント。初心者から専門家まで参考になる。
-- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-  `Racket`の拡張`REPL`に関するガイド。機能拡張やカスタマイズ方法を詳解。
-- [Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment):
-  Racket の環境設定に関するガイド。設定ファイル、ディレクトリ構造、環境変数について詳しく解説され、Racket のカスタマイズや管理に役立つ情報が提供される。
+- [Magic Racket](https://github.com/Eugleo/magic-racket):
+  `VS Code`用の`Racket LSP`クライアント。コードのタブ補完、エラーチェックといった機能を実現する。
+
+- [`racket fmt`](https://github.com/suxiaogang223/racket-fmt):
+  `Racket`用コードフォーマッタ
+
+- [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver):
+  `Racket`用の`LSP`サーバ
+
+- [`racket fmt`公式ドキュメント](https://docs.racket-lang.org/fmt/)
+  `Racket`公式サイトによるコードフォーマッタのドキュメント
 
 """"
 :remark:
 
 - `Happy Hacking!`は変更しない
-- 「次の」「以下に」は、基本「次の」で統一する
 
 """"
 /begin
