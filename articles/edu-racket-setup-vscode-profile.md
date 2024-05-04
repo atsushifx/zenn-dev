@@ -3,7 +3,7 @@ title: "Racket: Visual Studio Codeで快適なRacket開発環境を構築する"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "VisualStudioCode", "VSCode", "開発環境", "環境構築", ]
-published: false
+published: true
 ---
 
 ## はじめに
