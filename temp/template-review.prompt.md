@@ -70,7 +70,8 @@
 """"
 :theme
 
-- Racket を Windows にインストールする
+- `VS Code`に Racket プログラミング用拡張機能をインストールする。
+- `VS Code`拡張機能用に Racket パッケージをインストールする。
 
 """"
 :target:
@@ -78,30 +79,22 @@
 - Windows で関数型言語を学ぶプログラマー
 
 """"
-:goal:
+:goal
 
-- `Racket`を Windows にインストールする
-- `Racket`の起動および`Racket`の終了ができる
+- `VS Code`を使用して、Racket言語のプログラミングができるようになる
 
 """"
 link:
 
-- [Racket公式Web](https://racket-lang.org/):
-  Racket の公式サイト。Racket に関する全般的な情報を提供し、Racket の配布もしている。
-- [Racket Documentation](https://docs.racket-lang.org/):
-  Racket の公式ドキュメント。Racket の使用方法、言語の特徴、開発ツールの詳細情報が掲載されている。初心者から上級者までが参照できる豊富なガイドが含まれる。
-- [`XREPL`: `eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-  Racket で使われている拡張`REPL`のドキュメント。より強化された REPL環境の設定方法や利用可能な追加機能について説明されている。
-- [Racketの環境設定ファイル／ディレクトリまとめ](https://zenn.dev/atsushifx/articles/edu-racket-setup-environment):
-  Racket の環境設定に関するガイド。設定ファイル、ディレクトリ構造、環境変数について詳しく解説され、Racket のカスタマイズや管理に役立つ情報が提供される。
+- Magic Racket: <https://github.com/Eugleo/magic-racket>
+- `Racket fmt`: <https://github.com/suxiaogang223/racket-fmt>
+- `Racket LSP`: <https://github.com/jeapostrophe/racket-langserver>
+- `raco fmt`: <https://docs.racket-lang.org/fmt/>
 
 """"
 remark:
 
 - 「Enjoy」、「Happy Hacking!」は変更せず、その前の文章をあわせる
-- 「以下」の表現は、基本的に「次の」で統一する
-- 技術用語に注釈はつけず、技術用語セクションで説明する
-- 「説明」「解説」を「紹介」に変更しない
 
 """"
 /begin
