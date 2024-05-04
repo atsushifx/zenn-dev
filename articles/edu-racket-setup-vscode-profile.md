@@ -24,7 +24,7 @@ published: false
 
 ### 1.2 `VS Code`設定
 
-`VS Code` に`programming` プロファイルが設定されていることが前提です。
+`VS Code` に`programming` プロファイルが設定されていることを前提としています。
 この設定がまだの場合は、以下のリンクから`VS Code`でのプログラミング環境の設定方法を確認してください。
 
 - [VS Codeでプログラミング環境を設定する](<https://zenn.dev/atsushifx/articles/dev-vscode-progenv>)
@@ -113,7 +113,7 @@ raco fmt helloworld.rkt
 
 2. プロファイルを作成する
   プロファイル名を `racket-programming` として入力し、[コピー元]に `programming` を選んで、[作成]をクリックします。
-  [create-profile create profile](https://i.imgur.com/qryC0jv.jpg)
+  ![create-profile create profile](https://i.imgur.com/qryC0jv.png)
 
 ### 3.2 `VS Code`拡張機能インストール
 
