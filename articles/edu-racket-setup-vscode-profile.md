@@ -9,7 +9,7 @@ published: false
 ## はじめに
 
 この記事では、`VS Code` (`Visual Studio Code`)に、`Racket`用のプロファイルを設定し、快適な`Racket`開発環境を構築する方法を紹介します。
-構築後は、コードのタブ補完やコードフォーマットなどの便利な機能を利用でき、効率的にプロジェクトを進行できるようになります。
+構築後は、タブ補完やコードフォーマットなど便利な機能を利用して、プロジェクトを効率的に進行できるようになります。
 
 `Racket`用プロファイルを利用することで、プロジェクト間で共通の設定を活用でき、開発の一貫性を保ちながら効率化を図ることができます。
 
@@ -25,7 +25,7 @@ Enjoy!
 
 ### 1.2 VS Codeの設定
 
-`VS Code`に、`programming`プロファイルが設定されているものとします。
+`VS Code`には、`programming`プロファイルが設定されているとします。
 まだの場合は、[`VS Code`でプログラミングするための拡張機能と設定](https://zenn.dev/atsushifx/articles/dev-vscode-progenv)を参照して、`programming`プロファイルを作成してください。
 
 ## 2. Racket拡張機能のインストール
@@ -50,7 +50,7 @@ racket --lib racket-langserver
 
 ```
 
-`LSP`に適当なコマンドを入力しエラーメッセージが出力されることを確認します。
+`LSP`に適当なコマンドを入力して、エラーメッセージが出力されることを確認します。
 次のテキストを入力します:
 
 ```bash
@@ -150,14 +150,15 @@ raco fmt helloworld.rkt
 
 @[gist](https://gist.github.com/atsushifx/fbc86f1649ed1d5778812ea21bf73804?file=editorconfig)
 
-`VS Code`は`EditorConfig'拡張機能により、上記の`.editorconfig`でタブやインデントを設定します。
+`VS Code`は`EditorConfig`拡張機能を用いて、上記の`.editorconfig`に従いタブやインデントを設定します。
 
 ## おわりに
 
 以上で、`VS Code`に`Racket`用のプロファイルが設定できました。
-
 これにより、`Racket`ソースファイルによるプログラミングが行えます。
 より、実際のプログラミングに近い方式となり、関数型プログラミングの学習もレベルアップするでしょう。
+
+`Racket`でのプログラミングを通じて、関数型プログラミングを楽しんでください。
 
 それでは、Happy Hacking!
 
@@ -190,3 +191,12 @@ raco fmt helloworld.rkt
 
 - [Magic Racket](https://github.com/Eugleo/magic-racket):
   `VS Code`用の`Racket LSP`クライアント。コードのタブ補完、エラーチェックといった機能を実現する。
+
+- [`racket fmt`](https://github.com/suxiaogang223/racket-fmt):
+  `Racket`用コードフォーマッタ
+
+- [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver):
+  `Racket`用の`LSP`サーバ
+
+- [`racket fmt`公式ドキュメント](https://docs.racket-lang.org/fmt/)
+  `Racket`公式サイトによるコードフォーマッタのドキュメント
