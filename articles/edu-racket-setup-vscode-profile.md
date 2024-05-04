@@ -1,5 +1,5 @@
 ---
-title: "Racket: Visual Studio CodeにRacket用プロファイルを設定する"
+title: "Racket: Visual Studio Codeで快適なRacket開発環境を構築する"
 emoji: "🎾"
 type: "tech"
 topics: [ "Racket", "VisualStudioCode", "VSCode", "開発環境", "環境構築", ]
@@ -8,13 +8,12 @@ published: false
 
 ## はじめに
 
-この記事では、`VS Code` (`Visual Studio Code`)を`Racket`のプログラミングに最適化した環境に設定する方法を紹介します。
-これにより、`Racket`コードにタブ補完、コードフォーマットなどの便利な機能を活用できます。
+この記事では、`VS Code` (`Visual Studio Code`)に、`Racket`用のプロファイルを設定し、快適な`Racket`開発環境を構築する方法を紹介します。
+構築後は、コードのタブ補完やコードフォーマットなどの便利な機能を利用でき、効率的にプロジェクトを進行できるようになります。
 
-上記の環境設定は、`VS Code`に`Racket`プログラミング用のプロファイルとして保存します。
-プロファイルを利用することで、複数のプロジェクトで共通の`Racket`の設定が使えるようになります。
+`Racket`用プロファイルを利用することで、プロジェクト間で共通の設定を活用でき、開発の一貫性を保ちながら効率化を図ることができます。
 
-`VS Code`で、`Racket`による関数型プログラミングの学習を進めましょう。
+`VS Code`を使用して、`Racket`で関数型プログラミングの学習を進めましょう。
 Enjoy!
 
 ## 1. 前提条件
@@ -161,6 +160,29 @@ raco fmt helloworld.rkt
 より、実際のプログラミングに近い方式となり、関数型プログラミングの学習もレベルアップするでしょう。
 
 それでは、Happy Hacking!
+
+## 技術用語と注釈
+
+- `Racket`:
+  教育や研究、実用的なアプリケーション開発で使用される関数型プログラミング言語
+
+- `VS Code` (`Visual Studio Code`):
+  多様なプログラミング言語を拡張機能によってサポートした、Microsoft製のソースコードエディタ
+
+- `LSP` (`Language Server Protocol`):
+  プログラミング言語に対応したコード補完やエラー検出、コードフォーマット機能を提供するためにエディタや IDE に提供されるプロトコル
+
+- `racket-langserver`:
+  `Racket`用にパッケージとして提供される`LSP`の実装
+
+- `fmt`:
+  `Racket`用に提供されるコードフォーマッタ
+
+- `Code Runner`:
+  `VS Code`において、様座なプログラミング言語を直接実行する機能を提供する`VS Code`格調機能
+
+- `editorconfig`:
+  エディタ、IDE でコードの統一した書式設定で適用するための設定ファイル
 
 ## 参考資料
 
