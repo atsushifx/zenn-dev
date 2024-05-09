@@ -21,12 +21,11 @@
 
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
-- 簡素な書き方の「ですます調」を使う
 - 一文に同じ助詞が 2回以上登場しない形で文章を書く
-- 箇条書き、注釈などの説明文は、基本、体言止め、または「である調」とする
-- 「Enjoy!」「Happy Hacking!」にあわせたカジュアルな文体と説明用のプロフェッショナルな文体のバランスをとる
-- 「さぁ」など、読者に直接話しかける形式の文章は使わない
-- 「しましょう」のような指示形式は基本使わない、ただし動機づけとしての提案なら使ってもよい
+- 箇条書き、注釈などの説明文は、辞書的な 1行の文章かつ体言で終わる文章にする
+- 技術文書としてプロフェッショナルさを重視し、敬体「ですます調」で説明する
+- 「Enjoy!」「Happy Hacking!」の文章は変更せず、文章を前記のカジュアルさにあわせる
+- カジュアルな文体と説明用のプロフェッショナルな文体のバランスをとる
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
@@ -70,8 +69,7 @@
 """"
 :theme
 
-- `VS Code`に Racket プログラミング用拡張機能をインストールする。
-- `VS Code`拡張機能用に Racket パッケージをインストールする。
+- WSL のコマンドラインから、Racket の起動、終了をする方法の理解
 
 """"
 :target:
@@ -81,20 +79,21 @@
 """"
 :goal
 
-- `VS Code`を使用して、Racket言語のプログラミングができるようになる
+- `WSL`のコマンドラインから`Racket`を起動できる
+- `Racket`を終了し、コマンドラインに復帰できる
+- `Windows Terminal`を使用して、`WSL`コンソールの起動、終了ができる
 
 """"
 link:
 
-- Magic Racket: <https://github.com/Eugleo/magic-racket>
-- `Racket fmt`: <https://github.com/suxiaogang223/racket-fmt>
-- `Racket LSP`: <https://github.com/jeapostrophe/racket-langserver>
-- `raco fmt`: <https://docs.racket-lang.org/fmt/>
+- [`The Racket Guide`](https://docs.racket-lang.org/guide/):
+
+- [`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/):
+
+- [`Racket 公式ドキュメント`](https://docs.racket-lang.org/):
 
 """"
 remark:
-
-- 「Enjoy」、「Happy Hacking!」は変更せず、その前の文章をあわせる
 
 """"
 /begin
