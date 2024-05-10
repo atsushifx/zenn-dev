@@ -3,7 +3,7 @@ title: "Racket: Windows/WSL上でのRacketの起動と終了"
 emoji: "🎾"
 type: "tech"
 topics: ["プログラミング言語", "関数型プログラミング", "Racket", "REPL", ]
-published: false
+published: true
 ---
 
 ## はじめに
