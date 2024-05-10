@@ -1,5 +1,5 @@
 ---
-title: "Racket: Racketの基本操作 （起動、および終了方法)"
+title: "Racket: Windows/WSL上でのRacketの起動と終了"
 emoji: "🎾"
 type: "tech"
 topics: ["プログラミング言語", "関数型プログラミング", "Racket", "REPL", ]
@@ -8,19 +8,18 @@ published: false
 
 ## はじめに
 
-この記事では、`Windows`および`WSL` (`Windows Subsystem for Linux`) で、`Racket`を起動、終了する方法を説明します。
+この記事では、`Windows`および`WSL` (`Windows Subsystem for Linux`)上で`Racket`を起動および終了する方法について説明します。
+`Windows`、`WSL`で共通のコマンドライン操作を中心に、プログラマーがより効率的に作業できるようサポートします。
 
-`Racket`は`Scheme`をもとにした関数型プログラミング言語で、`Windows`や`Linux`などの複数の OS に対応しています。
-
-コンソールでの操作を覚えて、一段レベルアップを目指しましょう。
+この記事を読めば、`Racket`によるプログラミングがはじめられます。
+`Racket`を用いて関数型プログラミングの学習をすすめ、プログラミングスキルを向上させましょう。
 Enjoy!
 
 ## 1. 前提
 
 ### 1.1 OS環境 (Windows & WSL)
 
-`Racket`は、複数の`OS`に対応しています。
-このため、`Windows`環境だけでなく、`WSL`でも`Racket`を使用できます。
+`Racket`は複数の`OS`に対応しており、`Windows`と`WSL`の両方の環境で`Racket`を使用できます。
 
 この記事では、`Windows`、`WSL`共通の操作を説明します。
 
@@ -42,16 +41,16 @@ Enjoy!
 
 ## 2. `Windows Terminal`の使い方
 
-`Windows`、`WSL`で`CLI`を使うために、`Windows Terminal`を使用しています。
-この賞では、`Windows Terminal`の起動、終了方法を説明します。
+`Windows`、`WSL`上で`CLI`を使うために、`Windows Terminal`を使用しています。
+この章では、`Windows Terminal`の起動および終了方法について説明します。
 
 ### 2.1. `Windows Terminal`の起動、終了
 
-`Windows Terminal`はショートカットコマンド`wt`で起動します。
+`Windows Terminal`は`wt`コマンドで簡単に起動します。
 次の手順で、`Windows Terminal`を起動、終了します。
 
 1. `Windows Terminal`の起動
-  [`Win+R`]→[`wt`]と入力し、`Windows Terminal`を起動する。
+  \[`Win+R`]→\[`wt`]と入力し、`Windows Terminal`を起動する。
 
    ![Windows Terminal](https://i.imgur.com/3zmz5A6.png)
    *図1: Windows Terminalの起動*
@@ -60,7 +59,7 @@ Enjoy!
    コマンドラインに`exit`と入力して、`Windows Terminal`を終了する。
 
    **注意**:
-   `Windows Terminal`にほかのタブが開いているときは`Windows Terminal`は終了しません。自タブは閉じますが、ほかのタブが残ります。
+   `Windows Terminal`が複数のタブが開いている場合、現在のタブを閉じても他のタブは開いたままになります。
 
    ```powershell
    exit
@@ -72,7 +71,7 @@ Enjoy!
 次の手順で、`Windows Terminal`を起動、終了します:
 
 1. `Windows Terminal`の起動
-  [`Win+R`]→[`wt debian`]と入力し、プロファイル`debian`で`Windows Terminal`を起動する。
+  \[`Win+R`]→\[`wt debian`]と入力し、プロファイル`debian`で`Windows Terminal`を起動する。
 
    **注意**:
    プロファイル`debian`は、自分の`WSL`のプロファイルに置き換える必要があります。
@@ -84,7 +83,7 @@ Enjoy!
   コマンドラインに`exit`と入力して、`Windows Terminal`を終了する。
 
    **注意**:
-   `Windows Terminal`にほかのタブが開いているときは`Windows Terminal`は終了しません。自タブは閉じますが、ほかのタブが残ります。
+   `Windows Terminal`が複数のタブが開いている場合、現在のタブを閉じても他のタブは開いたままになります。
 
    ```bash
    exit
@@ -92,12 +91,12 @@ Enjoy!
 
 ## 3. `Racket`の起動と終了
 
-この章では、`Racket`の起動と終了の手順について詳しく説明します。
+`Racket`の起動と終了の手順について詳しく説明します。
 
 ### 3.1 `Racket`の起動
 
 コマンドラインで、`racket`と入力することで`Racket`が起動します。
-このようにプログラムファイルを指定していない場合は、`Racket`の対話的インタフェースである`REPL`が起動します。
+プログラムファイルを指定していない場合は、`Racket`の対話的インタフェイスである`REPL`が起動します。
 
 次の手順で、`Racket`を起動します。
 
@@ -117,7 +116,7 @@ Enjoy!
 
    ```
 
-### 3.2 `Racket`の終了
+### 3.2 `Racket REPL`の終了
 
 `Racket`を起動して`REPL`が動作している場合は、`REPL`が終了すると`Racket`も終了します。
 
@@ -131,7 +130,7 @@ Enjoy!
 
 ### 3.3 `Racket REPL`
 
-`Racket`を引数なしで実行すると、`REPL` (`Read-Eval-Print-Loop`)という対話型インタフェースが起動します。
+`Racket`を引数なしで実行すると、`REPL` (`Read-Eval-Print-Loop`)という対話型インタフェイスが起動します。
 `REPL`実行時には、コマンドラインに`Racket`プログラムを入力できます。
 `REPL`は、入力された`Racket`プログラムを評価して、即座に結果を返します。
 
@@ -139,7 +138,7 @@ Enjoy!
 
 ### 3.4 `XREPL`
 
-`XREPL` (`eXtended REPL`) は、通常の`REPL`を拡張した対話型インタフェースです。
+`XREPL` (`eXtended REPL`) は、通常の`REPL`を拡張した対話型インタフェイスです。
 ヘルプ、シェル、終了などの基本機能から、外部ファイルのロード、エディタでの編集、デバッグ機能など、多岐にわたるメタコマンドによる機能拡張が特徴です。
 `XREPL`を使いこなすことで、`Racket`プログラミングにおける生産性が向上します。
 
@@ -210,9 +209,8 @@ Enjoy!
 ### 4.3 過去の値の参照
 
 `XREPL`では、過去の式の結果を`^`で参照できます。
-`^`で 1つ前、`^^`で 2つ前となり、`^`の数でどのくらい前の値かを表します。
-
-例をあげると、次のようになります:
+`^`で 1つ前、`^^`で 2つ前の結果を参照でき、`^`をふやすごとにもう 1つ前の値が参照できます。
+たとえば、次のように使用します:
 
 ```racket
 > "こんにちは "
@@ -220,6 +218,7 @@ Enjoy!
 
 > (string-append ^ ^ "世界")
 "こんにちは こんにちは 世界"
+
 ```
 
 ## おわりに
@@ -227,17 +226,38 @@ Enjoy!
 以上で、`Racket`の基本的な操作を説明しました。
 ここまでの記事で、`Racket REPL`による簡単なプログラミング、および`Racket`の終了ができるようになりました。
 
-参考資料を読むことで、`Racket`での拡張された`REPL`を使いこなすこともできるでしょう。
+参考資料を読むことで、`Racket`での拡張された`REPL`である`XREPL`を使いこなすこともできるでしょう。
 `Racket`に親しみ、関数型プログラミングの学習を続けましょう。
 
 それでは、Happy Hacking!
+
+## 技術用語と注釈
+
+- `Racket`:
+  `Scheme`言語に基づいて開発された、教育および研究向けの関数型プログラミング言語。
+
+- `WSL` (`Windows Subsystem for Linux`):
+  `Windows`上で`Linux`のバイナリ実行ファイルをネイティブに実行できるようにする互換層。
+
+- `REPL` (`Read-Eval-Print Loop`):
+  プログラムのコードを一行ごとに入力し、それぞれの実行結果を即座に得られる対話型のプログラミング環境。
+
+- `XREPL` (`eXtended REPL`):
+  標準の`REPL`にエラートレース、外部ファイルの編集機能などを追加した強化版`REPL`
+
+- `CLI` (`Command Line Interface`):
+  コマンドラインや端末を通じてコンピューターを操作するためのテキストベースのユーザーインタフェイス。
+
+- `Windows Terminal`:
+  複数のコマンドラインツールやシェルをタブで管理できる`Windows`用のターミナルアプリケーション
 
 ## 参考資料
 
 ### Webサイト
 
 - [`The Racket Guide`](https://docs.racket-lang.org/guide/):
-
+  `Racket`の基本概念およびチュートリアルを提供するガイド。
 - [`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-
+  機能拡張された`REPL`に関する詳細情報を提供する資料。
 - [`Racket 公式ドキュメント`](https://docs.racket-lang.org/):
+  `Racket`言語に関する包括的な情報を提供する公式ドキュメント。
