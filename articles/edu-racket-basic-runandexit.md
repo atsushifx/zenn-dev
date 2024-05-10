@@ -98,7 +98,7 @@ Enjoy!
    コマンドラインに`racket`と入力する。
 
    ```bash
-   racket`
+   racket
    ```
 
 2. プロンプトの表示
