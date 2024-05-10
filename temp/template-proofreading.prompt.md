@@ -21,13 +21,15 @@
 
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
-- 読みやすさを重視し、ひらいた漢字は指摘しない
-- 文章に命令形の文体は使わない、ただし読者に動機づけするための提案である「しましょう」などの場合は容認する
-- 'Happy Hacking'、'Enjoy'といった文に会わせ、全体の文章の調子を修正する
+- 読みやすさを重視し、漢字をひらがなに変換した文はそのままにする
+- 技術文書としてプロフェッショナルさを重視し、基本的に「ですます調」を使う
+- 読みやすさのためくだけた表現を許容し、プロフェッショナルとのバランスをとる
+- 「'Happy Hacking'」、「'Enjoy'」などの文は削除しない、
+- 文章に命令形の文体は使わない、ただし読者に動機づけするための提案などの場合は容認する
 - 読みやすさのため、基本的に、英単語、数字の両端にスペースをいれる
 - :role にしたがってレビュー、推敲、校正、校閲を担当する
 - :role にしたがって、表記の統一や適切な表現を確認する
-- <https//www.weblio.jp/>  を参照し、正しい表現を使う
+- <https//www.weblio.jp/> を参照し、正しい表現を使う
 - :link で示された Web を参照し、間違っている情報を指摘する
 - :remark に示された記述を尊重する
 - 指摘した改善点も校閲する
@@ -51,22 +53,15 @@
 """"
 :link
 
-- [Magic Racket](https://github.com/Eugleo/magic-racket):
-  `VS Code`用の`Racket LSP`クライアント。コードのタブ補完、エラーチェックといった機能を実現する。
-
-- [`racket fmt`](https://github.com/suxiaogang223/racket-fmt):
-  `Racket`用コードフォーマッタ
-
-- [`racket-langserver`](https://github.com/jeapostrophe/racket-langserver):
-  `Racket`用の`LSP`サーバ
-
-- [`racket fmt`公式ドキュメント](https://docs.racket-lang.org/fmt/)
-  `Racket`公式サイトによるコードフォーマッタのドキュメント
+- [`The Racket Guide`](https://docs.racket-lang.org/guide/):
+  `Racket`の基本概念およびチュートリアルを提供するガイド。
+- [`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/):
+  機能拡張された`REPL`に関する詳細情報を提供する資料。
+- [`Racket 公式ドキュメント`](https://docs.racket-lang.org/):
+  `Racket`言語に関する包括的な情報を提供する公式ドキュメント。
 
 """"
 :remark:
-
-- `Happy Hacking!`は変更しない
 
 """"
 /begin
