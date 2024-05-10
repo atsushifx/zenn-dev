@@ -1,214 +1,257 @@
 ---
-title: "Racketの起動方法と終了方法"
+title: "Racket: Windows/WSL上でのRacketの起動と終了"
 emoji: "🎾"
-type: "idea"
-topics: ["プログラミング言語", "Racket" ]
-published: true
+type: "tech"
+topics: ["プログラミング言語", "関数型プログラミング", "Racket", "REPL", ]
+published: false
 ---
 
 ## はじめに
 
-この記事では、Racket の起動と終了方法について詳しく説明します。
+この記事では、`Windows`および`WSL` (`Windows Subsystem for Linux`) 上で`Racket`を起動および終了する方法を詳しく説明します。
 
-Racket は Scheme に基づいたマルチパラダイムなプログラミング言語で、教育者、プログラマー、研究者など、さまざまな人々によって用いられています。
+`Racket`の基本操作をマスターし、関数型プログラミングを通じてプログラミングスキルを向上させましょう。
+Enjoy!
 
-この記事では、関数型プログラミングを学んでスキルアップしたい ITエンジニア向けに、Racket の基本操作を解説しています。
+## 1. 前提
 
-## 1. Windows Terminalによるコンソール入出力
+### 1.1 OS環境 (Windows & WSL)
 
-この記事では、Windows のコンソールでの操作を使って、Racket の使い方を説明しています。
-ここでは Windows 用コンソールである`Windows Terminal`の使い方を簡単に説明します。
+`Racket`は複数の`OS`に対応しており、`Windows`と`WSL`の両環境で`Racket`が使用可能です。
+この記事では、`Windows`と`WSL`で共通の操作を説明します。
 
-この記事でのコマンドは、`Windows Terminal`+`PowerShell`で入力しています。
+### 1.2 `Racket`処理系
 
-### 1.1. Windows Terminalの起動と終了方法
+`Windows`、`WSL`ともに、`Racket`をインストールしている必要があります。
+まだインストールしていない場合、下記の記事を参照して`Racket`をインストールしてください。
 
-`Windows Terminal`はショートカットコマンド`wt`で起動します。
-`Win+R`キーでコマンドウィンドウを開き`wt`と入力すると`Windows Terminal`が起動します。
+- `Windows`: [WindowsへのRacketのインストールと設定方法](https://zenn.dev/atsushifx/articles/edu-racket-setup-install-windows)
+- `WSL`: [WSL上でRacketをセットアップする方法](https://zenn.dev/atsushifx/articles/edu-racket-setup-install-wsl)
 
-![Windows Terminal](https://i.imgur.com/2YbB7lj.png)
-*図1: Windows Terminalの起動*
+### 1.3 `CLI`環境
 
-`Windows Terminal`上のコマンドラインに、`exit`を入力すると`Windows Terminal`を終了します。
+`CLI` (`コマンドラインインタフェイス`) を使用して、`Racket`を起動します。
+この方式は、`Racket`の学習と使用において非常に効果的です。
 
-```powershell
-exit
-```
+## 2. `Windows Terminal`の使い方
 
-## 2. Racket の起動と終了手順
+`Windows`、`WSL`上で`CLI`を使うために、`Windows Terminal`を使用します。
+この章では、`Windows Terminal`の起動および終了方法について説明します。
 
-ここでは、Racket の起動と終了手順について詳しく説明します。
-Racket を効果的に活用するためには、これらの基本操作を理解することが重要です。
+### 2.1. `Windows Terminal`の起動、終了
 
-### 2.1. RacketのREPLについて
+`Windows Terminal`を起動するには、`wt`コマンドを使用します。
+次の手順で、`Windows Terminal`を起動、終了します。
 
-Racket を引数なしで実行すると、REPL[^1] (`Read`-`Eval`-`Print`-`Loop`)という対話型インタフェースが起動します。
-REPL を使用することで、コマンドラインから Racketプログラムを即座に評価できます。
+1. `Windows Terminal`の起動
+  \[`Win+R`]→\[`wt`]と入力し、`Windows Terminal`を起動する。
 
-REPL に、`EOF`を入力する、あるいは終了コマンドを実行することで、Racket を終了します。
+   ![Windows Terminal](https://i.imgur.com/3zmz5A6.png)
+   *図1: Windows Terminalの起動*
 
-Racket では通常の REPL に追加機能を持たせた XREPL[^2] (eXtended REPL)も利用できます。
-たとえば、メタコマンド`,exit`を入力すると、Racket を終了できます。
+2. `Windows Terminal`の終了
+   コマンドラインに`exit`と入力して、`Windows Terminal`を終了する。
 
-[^1]: REPL: `Read`-`Eval-`Print`-Loop`の略で、コンソールで入力した式、関数を評価して結果を返す対話式インタフェース
-[^2]:XREPL: REPL にメタコマンドを追加した対話式インタフェース、シェルコマンドの実行機能などやエディタ飛び出しなどの拡張機能を搭載する
+   **注意**:
+   `exit`で現在のタブを閉じても、ほかのタブは開いたままで`Windows Terminal`は終了しません。
 
-### 2.2. Racketの起動方法
+   ```powershell
+   exit
+   ```
 
-`racket`とコマンドラインに入力することで、Racket を起動できます。
-以下の手順で、Racket を起動します:
+### 2.2 `WSL`用コンソールの起動、終了
 
-```powershell
-racket
-```
+｀WSL`用プロファイルを指定して｀Windows Terminal`を起動することで、｀WSL`用コンソールを使用できます。
+次の手順で、`WSL`用コンソール`を起動、終了します:
 
-起動すると、次のプロンプトが表示されます:
+1. `Windows Terminal`の起動
+  \[`Win+R`]→\[`wt debian`]と入力し、プロファイル`debian`で`Windows Terminal`を起動する。
 
-```racket
-Welcome to Racket v8.9 [cs].
->
-```
+   **注意**:
+   プロファイル`debian`は、自分の`WSL`のプロファイルに置き換える必要があります。
 
-以上で、Racket の起動は終了です。
+   ![Windows Terminal](https://i.imgur.com/rWEGpZn.png)
+   *図2: Windows Terminal (WSL)の起動*
 
-### 2.3. Racketの終了方法
+2. `Windows Terminal`の終了
+  コマンドラインに`exit`と入力して、`Windows Terminal`を終了する。
 
-Racket を終了する方法は `EOF`を入力する方法とコマンドを入力する方法の 2つがあります。
-XREPL を使っている場合は、メタコマンドを使って Racket を終了できます。
+   **注意**:
+   `exit`で現在のタブを閉じても、ほかのタブは開いたままで`Windows Terminal`は終了しません。
 
-#### Racketの終了方法 (`Ctrl+D`を入力する)
+   ```bash
+   exit
+   ```
 
-Racket は、`Ctrl+D`キーで終了できます。
-以下の手順で、Racket を終了します。
+## 3. `Racket`の起動と終了
 
-```racket
-Welcome to Racket v8.9 [cs].
-> [Ctrl+Dキーを入力]
+`Racket`の起動と終了の手順について詳しく説明します。
 
-C: /lisp >
-```
+### 3.1 `Racket`の起動
 
-入力中の時は`Ctrl+D`キーで終了できません。この場合は`Ctrl+C`キーで入力を中断してから、`Ctrl+D`キーで終了します。
+コマンドラインに`racket`コマンドを入力することで、`Racket`が起動します。
+プログラムファイルを指定していない場合、`Racket`の対話的インタフェイスである`REPL` (`Read-Eval-Print Loop`) が起動します。
 
-```Racket
-Welcome to Racket v8.9 [cs].
-> Hello  [Ctrl+C ← 入力を中断して、プロンプトに戻る\]
-> [Ctrl+D ← Racketを終了する]
+次の手順で、`Racket`を起動します。
 
-C: /lisp >
-```
+1. `Racket`の起動
+   コマンドラインに`racket`と入力する。
 
-上記のように、`[Ctrl+C]、[Ctrl+D]`で Racket を終了します。
+   ```bash
+   racket
+   ```
 
-#### Racketの終了方法 (`exit`コマンドを入力する)
+2. プロンプトの表示
+   `REPL`が起動し、プロンプトが表示される。
 
-Racket は、終了関数`exit`で終了できます。
-関数を実行するさいには、`(exit)`のように`()`でくくります。
+   ```bash
+   Welcome to Racket v8.11.1 [cs].
+   >
 
-以下の手順で、Racket を終了します。
+   ```
 
-```Racket
-Welcome to Racket v8.9 [cs].
->  (exit)
+### 3.2 `Racket REPL`の終了
 
-C: /lisp >
-```
+`REPL`が動作している場合、`REPL`を終了させることで`Racket`も同時に終了します。
 
-`(exit)`を入力することで上記のように Racket が終了し、コマンドラインに戻ります。
+`REPL`を終了させるには、次の方法があります。
 
-`(exit)`を入力すれば、入力途中でも Racket は終了します。
-下記のようにして、Racket を終了します。
+| 終了方法 | 説明 | 備考 |
+| --- | --- | --- |
+| `EOF`入力 | 標準入力に`EOF`を入力する。| `Windows`は`Ctrl+Z`、`WSL`は`Ctrl+D`で`EOF`を入力できる。|
+| `exit`関数 | `(exit)`と入力し、`exit`関数を実行する。 | |
+| `exit`コマンド | `,exit`と入力し、`exit`コマンドを実行する。 | `XREPL`のみ実行可能。 |
 
-```Racket
-Welcome to Racket v8.9 [cs].
->   Hello(exit)
-Hello: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
- [,bt for context]
+### 3.3 `Racket REPL`
 
-C: /lisp >
-```
+`Racket`を引数なしで実行すると、`REPL` (`Read-Eval-Print-Loop`)という対話型インタフェイスが起動します。
+`REPL`実行時には、コマンドラインに`Racket`プログラムを入力できます。
+`REPL`は、入力された`Racket`プログラムを評価して、即座に結果を返します。
 
-この場合、入力中の`Hello`について未定義のエラーを出力します。
-その後、`(exit)`が実行されるので、Racket が終了します。
+これにより、`Racket`ではコマンドラインでインタラクティブにプログラミングができます。
 
-## 3. XREPLの基本操作
+### 3.4 `XREPL`
 
-このセクションでは、Racket の標準`REPL` である`XREPL` について説明します。
+`XREPL` (`eXtended REPL`) は、通常の`REPL`を拡張した対話型インタフェイスです。
+ヘルプ、シェル、終了などの基本機能から、外部ファイルのロード、エディタでの編集、デバッグ機能など、多岐にわたるメタコマンドによる機能拡張が特徴です。
+`XREPL`を使いこなすことで、`Racket`プログラミングにおける生産性が向上します。
 
-### 3.1 XREPLとは
+## 4. `XREPL`の基本操作
 
-REPL は、通常の REPL を拡張した対話型インタフェースです。
-ヘルプ、シェル、終了などの基本機能から外部ファイルのロード、エディタでの編集、デバッグ機能など、多岐にわたるメタコマンドによる機能拡張が特徴です。
-XREPL を使いこなすことで、Racket プログラミングにおける生産性が向上します。
+この章では、`XREPL`の簡単な操作方法を紹介します。
 
-### 3.2. メタコマンドの使い方
+### 4.1 `EOF`による終了
 
-`XREPL`では、追加された機能をメタコマンドを通して実行します。
-たとえば、`,help`コマンドの場合は次のようになります。
+`EOF`を入力して、`XREPL`を終了します。
+次の手順で、`XREPL`を終了します:
 
-```racket
-;;  ,helpコマンドの使用例
-,help
-; General commands:
-;   help (h ?): display available commands
-;   exit (quit ex): exit racket
-;   cd: change the current directory
-;   pwd: display the current directory
-;   shell (sh ls cp mv rm md rd git svn): run a shell command
-;   edit (e): edit files in your $EDITOR
-;   drracket (dr drr): edit files in DrRacket
-; Binding information:
- .
- .
- .
+1. 通常の`EOF`入力
+  `Ctrl+D` (`Windows`では、`Ctrl+Z`)を入力する。
 
-```
+   ```bash
+   Welcome to Racket v8.11 [cs].
+   > [Ctrl+D]
 
-同様に`,exit`メタコマンドで Racket を終了します。
+   $
+   ```
 
-```Racket
-Welcome to Racket v8.9 [cs].
->  ,exit
+2. 入力途中での`EOF`入力
+   入力途中の場合は、`Ctrl+C`で中断後に`EOF`を入力する。
 
-C: /lisp >
-```
+   ```bash
+   Welcome to Racket v8.11 [cs].
+   > Hell [`Ctrl+C`]
+   ; user break [,bt for context]
+   > [`Ctrl+D`]
 
-タコマンドを使えば、プログラムのデバッグなど、システムの深い部分へのアクセスも可能です。
+   $
+   ```
 
-### 3.3 基本的なメタコマンド
+3. `Ctrl+Z`によるサスペンド時の`EOF`入力
+   `WSL`環境で`Ctrl+Z`を入力すると、`Racket`がサスペンドします。
+   この場合は、`fg`コマンドで`Racket`に復帰後、`EOF`を入力します。
 
-以下に、主なメタコマンドを紹介します。
+   ```bash
+   Welcome to Racket v8.11 [cs].
+   > [`Ctrl+Z`]
 
-| メタコマンド |  説明   |  内容 |
-| --- | ---  | --- |
+   [1]+  停止                  racket
+
+   $ fg
+   racket
+
+   [`Ctrl+D`]
+
+   $
+   ```
+
+### 4.2 基本的なメタコマンド
+
+`XREPL`では、メタコマンドを使用して拡張機能を利用できます。
+主なメタコマンドは、次の通りです。
+
+| メタコマンド | 説明 | 内容 |
+| --- | --- | --- |
 | ,help | ヘルプ | 使用できるメタコマンドの一覧を表示します |
 | ,exit | 終了 | Racket を終了し、コマンドラインに戻ります |
 | ,shell | シェル | 指定したシェルコマンドを実行します。 ディレクトリの移動、表示などに使われます |
 | ,edit | 編集 | 指定したファイルを OS 指定のエディタで編集します |
 
 これ以外にも、さまざまなメタコマンドが用意されています。
-詳細は、[XREPL: eXtended REPL](https://docs.racket-lang.org/xrepl/index.html)を参照してください。
+詳細は、[`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/index.html)を参照してください。
+
+### 4.3 過去の値の参照
+
+`XREPL`では、過去の式の結果を`^`で参照できます。
+`^`で 1つ前、`^^`で 2つ前の結果を参照でき、`^`を増やすことで、さらに 1つ前の値が参照できます。
+たとえば、次のように使用します:
+
+```racket
+> "こんにちは "
+"こんにちは "
+
+> (string-append ^ ^ "世界")
+"こんにちは こんにちは 世界"
+
+```
 
 ## おわりに
 
-この記事では、Racket の基本操作として起動と終了を説明しました。
-Racket を効果的に活用するためには、これらの基本操作を理解することが重要です。
+以上で、`Racket`の基本的な操作を説明しました。
+ここまでの記事で、`Racket REPL`による簡単なプログラミング、および`Racket`の終了ができるようになりました。
 
-また、Racket の終了方法として`Ctrl+C`キーによる入力の中断と`Ctrl+D`キーによる終了を学びました。
-これにより、どのような状態からでも`PowerShell`に復帰できます。
-
-Racket の XREPL を使えば、関数型プログラミングの試すだけでなく実際のプログラミングからデバッグまで行えます。
-
-これを機会に、Racket で関数型プログラミング言語を学習してみてはどうでしょう。
+参考資料を読むことで、`Racket`での拡張された`REPL`である`XREPL`を使いこなすこともできるでしょう。
+`Racket`に親しみ、関数型プログラミングの学習を続けましょう。
 
 それでは、Happy Hacking!
+
+## 技術用語と注釈
+
+- `Racket`:
+  `Scheme`言語に基づいて開発された、教育および研究向けの関数型プログラミング言語。
+
+- `WSL` (`Windows Subsystem for Linux`):
+  `Windows`上で`Linux`のバイナリ実行ファイルをネイティブに実行できるようにする互換層。
+
+- `REPL` (`Read-Eval-Print Loop`):
+  プログラムのコードを一行ごとに入力し、それぞれの実行結果を即座に得られる対話型のプログラミング環境。
+
+- `XREPL` (`eXtended REPL`):
+  標準の`REPL`にエラートレース、外部ファイルの編集機能などを追加した強化版`REPL`
+
+- `CLI` (`Command Line Interface`):
+  コマンドラインや端末を通じてコンピューターを操作するためのテキストベースのユーザーインタフェイス。
+
+- `Windows Terminal`:
+  複数のコマンドラインツールやシェルをタブで管理できる`Windows`用のターミナルアプリケーション
 
 ## 参考資料
 
 ### Webサイト
 
-- [The Racket Guide](https://docs.racket-lang.org/guide/)
-- [XREPL: eXtended REPL](https://docs.racket-lang.org/xrepl/)
-- [Racket 公式ドキュメント](https://docs.racket-lang.org/)
+- [`The Racket Guide`](https://docs.racket-lang.org/guide/):
+  `Racket`の基本概念およびチュートリアルを提供するガイド。
+- [`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/):
+  機能拡張された`REPL`に関する詳細情報を提供する資料。
+- [`Racket 公式ドキュメント`](https://docs.racket-lang.org/):
+  `Racket`言語に関する包括的な情報を提供する公式ドキュメント。
