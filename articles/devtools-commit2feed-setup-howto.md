@@ -31,45 +31,30 @@ Enjoy!
 
 このページでは、[Today I Learned](https://github.com/atsushifx/til)リポジトリを例にして、セットアップ方法を解説します。
 
-### `GitHub Pages`の作成
+### `workflow`の設定
 
-[TIL](https://github.com/atsushifx/til)のページを作成します。
-プロジェクトルートに`/docs`ディレクトリを作成し、そこにファイル`index.md`を作成します。
+`Commit2Feed`カスタムアクションを使用して、`RSSフィード`を作成する`GitHub`ワークフローを作成します。
 
-次に、以下の手順で`GitHub Pages`を作成します。
-
-1. `GitHub Pages`メニューを表示する
-   リポジトリメニューから\[Settings]をクリックし、そのあと左サイドメニューの\[Pages\]をクリックします。
-   [GitHub Pages](https://github.com/atsushifx/til/settings/pages)画面が表示されます。
-
-2. 表示するブランチを設定する
-   \[Build and deployment]で、ブランチ`main`、フォルダー`/docs`を選択して\[`save`]します。
-
-3. Page が作成される
-   [TILのページ](https://atsushifx.github.io/til/)が作成されます。
-   `TOPページ`は、`index.md`のマークダウンとなります。
-
-### `RSSフィード`の作成
-
-カスタムアクション`Commit2Feed`を使い、リポジトリ[`til`](http://github.com/atsushifx/til)の`RSSフィード`を作成します。
-
-次の手順で、`RSSフィード`を作成します。
+次の手順で、`RSSフィード`を作成します:
 
 1. `GitHub Workflows`の作成
-   リポジトリに`/.github/workflows`ディレクトリを作成し、以下の`YAML`ファイルを作成します。
+    リポジトリに`.github/workflows`ディレクトリを作成し、`generate_rss.yml`ファイルを作成します。
+    ファイルの中身は、次のようになります。
 
-   @[gist](https://gist.github.com/atsushifx/56d5076d940da8e1a297a568e7a67abd?file=generate_rss.yml)
+    @[gist](https://gist.github.com/atsushifx/56d5076d940da8e1a297a568e7a67abd?file=generate_rss.yml)
 
-2. 'GitHub Actions`の権限設定
-   作成した`GitHub Actions`を動作させるために、権限を設定します。
+2. `GitHub workflows`の権限設定
+  作成した`RSSフィード`をリポジトリに保存するため、`GitHub Workflow`にリポジトリへの書き込み権限を設定します。
 
-   2.1 パーミッション画面に移動
-       リポジトリで\[Settings]-\[Actions]-\[General]として`Actions permissions`画面を表示します。
+  2.1 権限設定画面へ移動
+    リポジトリ画面から、
 
-   2.2 パーミッションの設定
-       \[Workflow permissions]メニューで、
+    - `Settings`メニューを選択し
+    - 左の`General`メニューから、`Actions`-`General`を選択します。
 
-       - \[Read and write permissions]を選択し、
-       - \[Allow GitHub Actions to create and approve pull requests]をチェックします。
+  2.2 権限の設定
+    下段の`Workflow permissios`画面で、
 
-       そして、\[save]をクリックして設定を保存します。
+    - `Read and write permissions`を選択し、
+    - `Allow GitHub Actions to create and approve pull requests`をチェックします。
+    - `Save`ボタンで設定を保存します。
