@@ -22,9 +22,9 @@
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 読みやすさを重視し、漢字をひらがなに変換した文はそのままにする
+- "Happy Hacking","Enjoy", "tl;dr"のかく表現は基本的に削除、変更をしない
 - 技術文書としてプロフェッショナルさを重視し、基本的に「ですます調」を使う
 - 読みやすさのためくだけた表現を許容し、プロフェッショナルとのバランスをとる
-- 「'Happy Hacking'」、「'Enjoy'」などの文は削除しない、
 - 文章に命令形の文体は使わない、ただし読者に動機づけするための提案などの場合は容認する
 - 読みやすさのため、基本的に、英単語、数字の両端にスペースをいれる
 - :role にしたがってレビュー、推敲、校正、校閲を担当する
@@ -53,12 +53,8 @@
 """"
 :link
 
-- [`The Racket Guide`](https://docs.racket-lang.org/guide/):
-  `Racket`の基本概念およびチュートリアルを提供するガイド。
-- [`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-  機能拡張された`REPL`に関する詳細情報を提供する資料。
-- [`Racket 公式ドキュメント`](https://docs.racket-lang.org/):
-  `Racket`言語に関する包括的な情報を提供する公式ドキュメント。
+- [`Commit2Feed`](https://github.com/atsushifx/commit2feed/)
+- [Generate Repository Feed](https://github.com/marketplace/actions/generate-repository-feed)
 
 """"
 :remark:
