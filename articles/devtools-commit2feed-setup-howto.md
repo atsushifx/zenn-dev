@@ -1,5 +1,5 @@
 ---
-title: "Commit2Feed: GitHubの更新履歴をRSSフィードで出力する"
+title: "Commit2Feed: GitHubのコミット履歴をRSSフィードで出力する方法"
 emoji: "🔔"
 type: "tech"
 topics: [ "githubaction", "githubpage", "commit2feed", "RSS", ]
@@ -17,22 +17,17 @@ Enjoy!
 
 ## はじめに
 
-`GitHub`では、各リポジトリのコミット履歴を`RSSフィード`として取得できます。
-ただし、表示されるのはコミットログだけで、どのファイルがどう変更されたかは実際のコミットを見る必要があります。
+`GitHubリポジトリ`のコミットログをもとに、コミット時に新規入力部をフィード化するカスタムアクションを作りました。
+[TIL](https://github.com/atsushifx/til)リポジトリを例に、アクションの活用方法を説明します。
 
-そこで、コミットで変更した部分を`RSSフィード`のサマリーとして出力するカスタム`GitHub Actions`を作りました。
-これにより、`RSSフィード`を確認することで、コードの変更部分がわかるようになります。
+## 1. `Commit2Feed`とは
 
-## `Commit2Feed`とは
+`Commit2Feed`は、`GitHubリポジトリ`のコミット履歴を`RSSフィード`形式で自動生成するカスタム`GitHubアクション`です。
+このアクションにより、リポジトリに加えられた変更点が`RSSフィード`として簡単に確認できるようになります。
 
-`Commit2Feed`は、`GitHubリポジトリ`の更新履歴から`RSSフィード`を作成するカスタム`GitHubアクション`です。
-更新履歴から、リポジトリに追加した部分をピックアップし、`RSSフィード`を作成します。
+## 2. `commit2feed`のセットアップ
 
-作成した`RSSフィード`は、リポジトリに`feeds.xml`というファイルで登録すると、`RSSフィード`として使えるようになります。
-
-## `commit2feed`のセットアップ
-
-### `workflow`の作成
+### 2.1 `workflow`の作成
 
 `Commit2Feed`カスタムアクションを使用して、`RSSフィード`を作成する`GitHub`ワークフローを作成します。
 次の手順で`GitHubワークフロー`を作成します:
@@ -63,7 +58,7 @@ Enjoy!
 
     ![workflow permission](https://i.imgur.com/QqqWfZY.png)
 
-### `RSSフィード`の作成
+### 2.2 `RSSフィード`の作成
 
 `Generate RSS Feed`ワークフローを使い、`RSSフィード`を作成します。
 次の手順で、`RSSフィード`を作成します:
@@ -85,12 +80,12 @@ Enjoy!
 3. `RSSフィード`の確認
    `RSSフィード`は、[`/docs/rss/feeds/xml`](https://raw.githubusercontent.com/atsushifx/til/main/docs/rss/feeds.xml)に作成されます。
 
-## `RSSフィード`の組み込み
+## 3. `RSSフィード`の組み込み
 
 作成した`RSSフィード`は、`GitHubページ`に組み込み必要があります。
 これにより、`GitHubページ`の更新として、リポジトリの更新履歴が出力されます。
 
-### `GitHubページ`の作成
+### 3.1 `GitHubページ`の作成
 
 次の手順で、`GitHubページ`を作成します:
 
@@ -120,7 +115,7 @@ Enjoy!
 
    ```
 
-### `RSSフィード`を`GitHubページ`に組み込む
+### 3.2 `RSSフィード`を`GitHubページ`に組み込む
 
 次の手順で、`RSSフィード`を`GitHubページ`に組み込みます:
 
@@ -143,7 +138,7 @@ Enjoy!
 
    ```
 
-## `RSSフィード`の確認
+## 4. `RSSフィード`の確認
 
 `Webブラウザ`を使って、`GitHubページ`、`RSSフィード`の確認をします。
 
