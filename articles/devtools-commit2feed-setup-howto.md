@@ -3,7 +3,7 @@ title: "Commit2Feed: GitHubのコミット履歴をRSSフィードで出力す�
 emoji: "🔔"
 type: "tech"
 topics: [ "githubaction", "githubpage", "commit2feed", "RSS", ]
-published: false
+published: true
 ---
 
 ## tl;dr
