@@ -8,9 +8,9 @@ published: false
 
 ## tl;dr
 
-1. `GitHub Pages`をつくる
-2. `GitHub Actions`に`code2feed`を組み込む
-3. 作成した`RSSフィード`を`GitHub Pages`に組み込む
+1. `GitHubワークフロー`に`Commit2Feed`を組み込む
+2. 作成したワークフローで`RSSフィード`を生成する
+3. `GitHub Pages`に`RSSフィード`を組み込む
 
 以上で、リポジトリの更新を`RSS`で発信できます。
 Enjoy!
@@ -21,24 +21,23 @@ Enjoy!
 ただし、表示されるのはコミットログだけで、どのファイルがどう変更されたかは実際のコミットを見る必要があります。
 
 そこで、コミットで変更した部分を`RSSフィード`のサマリーとして出力するカスタム`GitHub Actions`を作りました。
-これにより、`RSSフィード`を見ることで、コードの変更がわかるようになります。
+これにより、`RSSフィード`を確認することで、コードの変更部分がわかるようになります。
 
 ## `Commit2Feed`とは
 
-`Commit2Feed`は、GitHub リポジトリの更新履歴から`RSSフィード`を作成するカスタム`GitHubアクション`です。
+`Commit2Feed`は、`GitHubリポジトリ`の更新履歴から`RSSフィード`を作成するカスタム`GitHubアクション`です。
 更新履歴から、リポジトリに追加した部分をピックアップし、`RSSフィード`を作成します。
 
 作成した`RSSフィード`は、リポジトリに`feeds.xml`というファイルで登録すると、`RSSフィード`として使えるようになります。
 
 ## `commit2feed`のセットアップ
 
-### `workflow`の設定
+### `workflow`の作成
 
 `Commit2Feed`カスタムアクションを使用して、`RSSフィード`を作成する`GitHub`ワークフローを作成します。
+次の手順で`GitHubワークフロー`を作成します:
 
-次の手順で、`GitHub`ワークフローを作成します:
-
-1. `GitHub Workflows`の作成
+1. `GitHubワークフロー`の作成
    リポジトリに`.github/workflows`ディレクトリを作成し、`generate_rss.yml`ファイルを作成します。
    ファイルの中身は、次のようになります。
 
@@ -53,12 +52,16 @@ Enjoy!
     - `Settings`メニューを選択し
     - 左の`General`メニューから、`Actions`-`General`を選択します。
 
+    ![GitHub Actions permissions](https://i.imgur.com/HriwbZu.png)
+
    2.2 権限の設定
     下段の`Workflow permissios`画面で、
 
     - `Read and write permissions`を選択し、
     - `Allow GitHub Actions to create and approve pull requests`をチェックします。
     - `Save`ボタンで設定を保存します。
+
+    ![workflow permission](https://i.imgur.com/QqqWfZY.png)
 
 ### `RSSフィード`の作成
 
@@ -70,10 +73,14 @@ Enjoy!
    - `Actions`メニューを選択し、
    - `All workflows`で、`Generate RSS Feed`を選択します。
 
+   ![`Generate Feed`](https://i.imgur.com/RspUD5l.png)
+
 2. `RSSフィード`の作成
    次の手順で、`RSSフィード`を作成します。
    - `Run workflow`ボタンをクリックし、`Use workflow flom`ダイアログを表示します。
    - ダイアログ中の`Run workflow`ボタンをクリックし、`RSSフィード`を作成します。
+
+   ![`Run workflow`](https://i.imgur.com/uiDxOkE.png)
 
 3. `RSSフィード`の確認
    `RSSフィード`は、[`/docs/rss/feeds/xml`](https://raw.githubusercontent.com/atsushifx/til/main/docs/rss/feeds.xml)に作成されます。
@@ -94,7 +101,7 @@ Enjoy!
    2.1 リポジトリ画面で、\[Settings]を選択し、
    2.2 \[Pages]を選択します。
 
-   `GitHub Pages`画面に移動します。
+   ！[Pages](https://i.imgur.com/C78AEJX.png)
 
 3. `GitHubページ`の作成
    `branch`セクションで、
@@ -102,6 +109,8 @@ Enjoy!
    - `/doc`ディレクトリを選びます
 
    \[save]をクリックし、作成するページを保存します。
+
+    ![Build](https://i.imgur.com/HvDq7pT.png)
 
 4. テーマの設定
    リポジトリルートに`_config.yml`を作成し、いかのように内容を設定します。
@@ -139,15 +148,17 @@ Enjoy!
 `Webブラウザ`を使って、`GitHubページ`、`RSSフィード`の確認をします。
 
 1. `GitHubページ`は、つぎのようになります。
+   ![TIL](https://i.imgur.com/QBaizjo.png)
 
 2. `RSSフィード`は、つぎのようになります。
+   ![ フィード](https://i.imgur.com/RspUD5l.png)
 
 このように、`RSSフィード`が表示されれば、正常です。
 
 ## おわりに
 
 以上で、`GitHubリポジトリ`の更新履歴を`RSSフィード`で出力できました。
-`リポジトリ`に`RSSフィード`は組み込めませんでしたが、その代わり`GitHubページ`で更新を参照できます。
+生成した`RSSフィード`は、`GitHubページ`を通じて提供できます。
 
 この記事のように`TIL` (`Today I Learned`)で、リポジトリの更新履歴を出力すれば、自身の学習結果を効率的に発信できます。
 やり方は簡単です。この記事の`github workflow`をコピーし、記事にしたがって`GitHubページ`を作成します。
