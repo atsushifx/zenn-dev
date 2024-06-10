@@ -99,7 +99,7 @@ Enjoy!
    2.1 リポジトリ画面で、\[Settings]を選択し、
    2.2 \[Pages]を選択します。
 
-   ！[Pages](https://i.imgur.com/C78AEJX.png)
+   ![Pages](https://i.imgur.com/C78AEJX.png)
 
 3. `GitHubページ`の作成
    `branch`セクションで、
@@ -108,7 +108,7 @@ Enjoy!
 
    \[save]をクリックし、作成するページを保存します。
 
-    ![Build](https://i.imgur.com/HvDq7pT.png)
+   ![Build](https://i.imgur.com/HvDq7pT.png)
 
 4. テーマの設定
    リポジトリルートに`_config.yml`を作成し、下記の内容を設定します。
@@ -167,7 +167,7 @@ Enjoy!
 
 ## 技術用語と注釈
 
-- `GitHubワークフロー`:
+- `GitHubワークフロー` (`GitHub workflows`):
   `GitHub`上で、自動的に実行される一連のタスク
 
 - `Commit2Feed`:
@@ -176,13 +176,13 @@ Enjoy!
 - `RSSフィード`:
   Webサイトの更新情報を配信する XML形式のフォーマット
 
-- `GitHub Pages`:
+- `GitHubページ` (`GitHub Pages`):
   GitHub リポジトリを用いて、静的サイトをホスティングする無料のサービス。
 
 - `workflow`の権限設定:
   `GitHubワークフロー`がリポジトリに対して行える操作の権限を設定すること
 
-- `GitHubアクション`:
+- `GitHubアクション` (`GitHub Actions`):
   `GitHubリポジトリ`で自動化されたタスクを実行するための`GitHub`の機能
 
 ## 参考資料
