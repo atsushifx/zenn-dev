@@ -8,26 +8,29 @@ published: false
 
 ## tl;dr
 
-1. `GitHubワークフロー`に`Commit2Feed`を組み込む
+`Commit2Feed`を使用して、`RSSフィード`を生成する方法。
+
+1. `GitHubワークフロー`に`Commit2Feed`を導入する
 2. 作成したワークフローで`RSSフィード`を生成する
 3. `GitHub Pages`に`RSSフィード`を組み込む
 
-以上で、リポジトリの更新を`RSS`で発信できます。
+以上の手順で、リポジトリの更新情報を`RSSフィード`で発信できます。
 Enjoy!
 
 ## はじめに
 
-`GitHubリポジトリ`のコミットログをもとに、コミット時に新規入力部をフィード化するカスタムアクションを作りました。
-[TIL](https://github.com/atsushifx/til)リポジトリを例に、アクションの活用方法を説明します。
+`GitHubリポジトリ`のコミット履歴から、`RSSフィード`を生成する`Commit2Feed`アクションを開発しました。
+
+[TIL](https://github.com/atsushifx/til)リポジトリを例に、上記アクションの活用方法を説明します。
 
 ## 1. `Commit2Feed`とは
 
-`Commit2Feed`は、`GitHubリポジトリ`のコミット履歴を`RSSフィード`形式で自動生成するカスタム`GitHubアクション`です。
-このアクションにより、リポジトリに加えられた変更点が`RSSフィード`として簡単に確認できるようになります。
+`Commit2Feed`は、`GitHubリポジトリ`のコミット履歴を`RSSフィード`形式で自動生成します。
+`GitHubアクション`として提供されており、任意のワークフローで使用できます。
 
 ## 2. `commit2feed`のセットアップ
 
-### 2.1 `workflow`の作成
+### 2.1 `Commit2Feed`のワークフロー設定方法
 
 `Commit2Feed`カスタムアクションを使用して、`RSSフィード`を作成する`GitHub`ワークフローを作成します。
 次の手順で`GitHubワークフロー`を作成します:
@@ -82,8 +85,8 @@ Enjoy!
 
 ## 3. `RSSフィード`の組み込み
 
-作成した`RSSフィード`は、`GitHubページ`に組み込み必要があります。
-これにより、`GitHubページ`の更新として、リポジトリの更新履歴が出力されます。
+作成した`RSSフィード`を、`GitHubページ`に組み込む必要があります。
+これにより、`GitHubページ`の更新としてリポジトリの更新履歴が出力されます。
 
 ### 3.1 `GitHubページ`の作成
 
@@ -108,7 +111,7 @@ Enjoy!
     ![Build](https://i.imgur.com/HvDq7pT.png)
 
 4. テーマの設定
-   リポジトリルートに`_config.yml`を作成し、いかのように内容を設定します。
+   リポジトリルートに`_config.yml`を作成し、下記の内容を設定します。
 
    ```yaml:_config.yml
    theme: jekyll-theme-cayman
@@ -159,5 +162,32 @@ Enjoy!
 やり方は簡単です。この記事の`github workflow`をコピーし、記事にしたがって`GitHubページ`を作成します。
 そのあとは、`GitHubページ`に追加した記事が学習履歴として`RSSフィード`に出力されます。
 
-ぜひ、`TIL`リポジトリを作り、自らの学習の結果を発信しましょう。
+ぜひ、`TIL`リポジトリを作成し、自身の学習成果を共有しましょう。
 それでは、Happy Hacking！
+
+## 技術用語と注釈
+
+- `GitHubワークフロー`:
+  `GitHub`上で、自動的に実行される一連のタスク
+
+- `Commit2Feed`:
+  `GitHub`のコミット履歴を`RSSフィード`形式でを出力するカスタムアクション
+
+- `RSSフィード`:
+  Webサイトの更新情報を配信する XML形式のフォーマット
+
+- `GitHub Pages`:
+  GitHub リポジトリを用いて、静的サイトをホスティングする無料のサービス。
+
+- `workflow`の権限設定:
+  `GitHubワークフロー`がリポジトリに対して行える操作の権限を設定すること
+
+- `GitHubアクション`:
+  `GitHubリポジトリ`で自動化されたタスクを実行するための`GitHub`の機能
+
+## 参考資料
+
+### Webサイト
+
+- [`Commit2Feed`](https://github.com/atsushifx/commit2feed/):
+  コミット履歴から`RSSフィード`を生成する`Commit2Feed`アクションのリポジトリ
