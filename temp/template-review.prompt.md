@@ -70,28 +70,24 @@
 """"
 :theme
 
-- WSL のコマンドラインから、Racket の起動、終了をする方法の理解
+- GitHub カスタムアクションによる`RSSフィード`出力方法
 
 """"
 :target:
 
-- Windows で関数型言語を学ぶプログラマー
+- GitHub上のリポジトリに学習結果を保存している ITエンジニア
 
 """"
 :goal
 
-- `WSL`のコマンドラインから`Racket`を起動できる
-- `Racket`を終了し、コマンドラインに復帰できる
-- `Windows Terminal`を使用して、`WSL`コンソールの起動、終了ができる
+- 自身の`TIL`リポジトリに、`RSSフィード`を組みこんだ GitHub ページを作成できること
 
 """"
 link:
 
-- [`The Racket Guide`](https://docs.racket-lang.org/guide/):
+- [`Commit2Feed`](https://github.com/atsushifx/commit2feed/)
 
-- [`XREPL: eXtended REPL`](https://docs.racket-lang.org/xrepl/):
-
-- [`Racket 公式ドキュメント`](https://docs.racket-lang.org/):
+- [Generate Repository Feed](https://github.com/marketplace/actions/generate-repository-feed)
 
 """"
 remark:
