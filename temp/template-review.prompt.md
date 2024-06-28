@@ -70,24 +70,23 @@
 """"
 :theme
 
-- GitHub カスタムアクションによる`RSSフィード`出力方法
+- プログラミング言語`Racket`で`Hello World`プログラムを書く方法
 
 """"
 :target:
 
-- GitHub上のリポジトリに学習結果を保存している ITエンジニア
+- 関数型プログラミングの学習をしているプログラマー
 
 """"
 :goal
 
-- 自身の`TIL`リポジトリに、`RSSフィード`を組みこんだ GitHub ページを作成できること
+- `Racket`を使って、`Hello World`プログラムを書けること
 
 """"
 link:
 
-- [`Commit2Feed`](https://github.com/atsushifx/commit2feed/)
-
-- [Generate Repository Feed](https://github.com/marketplace/actions/generate-repository-feed)
+- [`Racket Documentation`](https://docs.racket-lang.org/)
+  `Racket`言語に関するドキュメンテーション
 
 """"
 remark:
