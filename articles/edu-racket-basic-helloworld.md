@@ -1,5 +1,5 @@
 ---
-title: "Racket: Racketで\"Hello World\"を出力する"
+title: 'Racket: Racketで"Hello World"を出力する'
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "REPL", "helloworld", ]
@@ -8,7 +8,11 @@ published: false
 
 ## はじめに
 
-現在、関数型プログラミング言語`Racket'を学習しています。ここでは、学習したことを備忘録的にメモしておきます。
+いままでの記事で、Windows上に`Racket`の開発環境を設定してきました。
+ここでは、総仕上げとして`Racket`で`Hello World`プログラムを作成します。
+
+`Hello World`プログラムが、実際に`Hello World`と出力すれば、`Racket`でのプログラムの準備は整っています。
+次からは、`Racket`の文法やイディオムを勉強することで関数型プログラミングへの理解を深めていきます。
 
 ## `REPL`で`Hello World`
 
@@ -42,11 +46,11 @@ World: undefined;
 
 ```
 
-上記のように、`undefined`というエラーメッセージが出力されます。
-これは、`Hello`,`World`がシンボル (`Racket`における変数名のようなもの) として解釈され、変数の値、または関数の評価を出力しようとするためです。
+上記のように`undefined`というエラーが出力されれば、`Racket`は正常に動作しています。
+これは、`Hello`, `World`という 2つの文字列が、`Racket`では未定義のシンボルとして扱われるためです。
 
-シンボルをそのまま出力するには、シンボルの前に`'`をつける必要があります。
-この場合、結果は次のようになります。
+シンボルをリテラルとして扱い、そのまま出力するには、シンボルの前にクオート (`'`) をつけます。
+クオートを就けた場合の結果は次のようになります。
 
 ```racket
 > 'Hello 'World
@@ -90,7 +94,7 @@ Hello World: undefined;
 
 ```
 
-### 関数を使った`Hello World`
+### `display`関数を使った`Hello World`
 
 関数`display`を使うと、`'`や`|`のようなクオートを外して表示します。
 関数を使う場合は、`(<関数> <パラメータ>)`のように`()`でくくって使用します。
@@ -172,7 +176,7 @@ Hello World
 
 ```
 
-### 関数による`Hello World`
+### `display`関数による`Hello World`
 
 同様に、関数`display`を使うと、次のようになります。
 
