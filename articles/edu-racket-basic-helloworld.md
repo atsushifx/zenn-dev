@@ -1,5 +1,5 @@
 ---
-title: 'Racket: Racketで"Hello World"を出力する'
+title: 'Racket: Racketで"Hello World"を出力する方法'
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "REPL", "helloworld", ]
@@ -8,17 +8,21 @@ published: false
 
 ## はじめに
 
-いままでの記事で、Windows上に`Racket`の開発環境を設定しました。
+この記事では、Windows上で`Racket`の開発環境が設定済みであることを前提にすすめます。
 ここでは、その環境を使って`Hello World`プログラムを作成します。
 
-プログラムが正常に`Hello World`を出力すれば、学習は次の段階、つまり、`Racket`を使用した関数型プログラミングの学習にすすむことができます。
+プログラムが正常に`Hello World`を出力すれば、学習は次の段階、つまり、`Racket`を使用した関数型プログラミングの学習に進むことができます。
 
 ## 1. `REPL`を使用した`Hello World`の出力
+
+最初に、`REPL` (`Read-Eval-Print-Loop`)を使って`Hello World`を出力します。
+`REPL`は入力したコードを即座に実行し、結果を見ることができるツールです。
+このため、プログラミングの学習やデバッグプロセスを効率的かつ効果的にします。
 
 ### 1.1 `REPL`の起動
 
 まずは、`Racket`のインタープリターである`REPL`モードで`Hello World`を出力します。
-次のようにして、`Racket`を`REPL`モードで起動します。
+次のようにコマンドを入力して、`Racket`を`REPL`モードで起動します。
 
 ```powershell
 # racket
@@ -30,7 +34,7 @@ Welcome to Racket v8.13 [cs].
 ### 1.2 `Hello World`の出力 (シンボル)
 
 `REPL`モードで`Hello World`と入力します。
-このとき、`Racket`は入力したキーワードを未定義のシンボルとして扱い、次のようなエラーメッセージを出力します。
+このとき、`Racket`は入力されたキーワードを未定義のシンボルとして扱い、次のようなエラーメッセージを出力します:
 
 ```powershell
 > Hello World
@@ -45,10 +49,11 @@ World: undefined;
 
 ```
 
-正常に動作させるためには、`Racket`がシンボルをリテラルとして扱う必要があります。
-このためには、シンボルの前にクオート (`'`) をつけます。
+`Racket`はシンボルが見付かると、それが関数や値を指し示すものとして評価し結果を出力します。
+`Racket`では、シンボルをリテラルとして扱うために、シンボルの前にクオート (`'`) を付ける必要があります。
+これにより、`Racket`はシンボルを特定の値として扱います。
 
-クオートを就けた場合の結果は次のようになります。
+クオートを付けた場合の結果は次のようになります:
 
 ```racket
 > 'Hello 'World
@@ -59,24 +64,12 @@ World: undefined;
 
 `Hello`と`World`が別のシンボルになっているため、2行で出力されます。
 
-### 1.3 `Hello World`の出力 (空白を含んだシンボルでのクオート方法)
+### 1.3 `Hello World`の出力 (空白を含んだシンボル)
 
-`Hello World`を出力するためには、空白も含めて 1つのシンボルとする必要があります。
-シンボルは、`|`で囲った文字列を 1つのシンボルと見なします。
+`Racket`では、空白を含む文字列をシンボルとして扱うには、クオート(`|`)を使用します。
+`'|Hello World|`と入力すると、`Hello World`を 1つのシンボルとして扱うことができます。
 
-すなわち、`|Hello World|`と入力すると`Hello World`という 1つのシンボルになります。
-
-```racket
-> |Hello World|
-Hello World: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
- [,bt for context]
-
-```
-
-`Hello World`が`undefined`になりました。
-`Hello World`だけではシンボルとして評価されるため、`'`をつかってクオートする必要があります。
+クオート ('|`)を付けた場合は、次のようになります:
 
 ```racket
 > '|Hello World|
@@ -84,7 +77,9 @@ Hello World: undefined;
 
 ```
 
-また、`\`でエスケープすることでも、空白などの文字を含むことができます。
+また、シンボルにはバックスラッシュ(`\`)を使ったエスケープシーケンスを含めることができます。
+
+バックスラッシュ (`\`)を使った例は、次のようになります:
 
 ```racket
 > 'Hello\ World
@@ -94,8 +89,10 @@ Hello World: undefined;
 
 ### 1.4 `display`関数を使った`Hello World`の出力
 
-`display`関数は、文字列やシンボルのクオートを外して、直接画面に表示します。
-次の例では、クオートされたシンボルを`display`を使用して出力しています。
+`display`関数を使用すると、引数に与えた文字列やシンボルをクオートなしで出力できます。
+たとえば、`(display "Hello World")`を実行すると、画面にはクオートなしの`Hello World`が表示されます。
+
+`display`関数を使った例は、次のようになります:
 
 ```racket
 > (display '|Hello World|)
@@ -106,7 +103,7 @@ Hello World
 ### 1.5 "文字列"による`Hello World`の出力
 
 `Racket`では、シンボルのほかに数値や文字列も入力できます。
-文字列は、`"`でくくって入力します。
+文字列は、`"`でくくって入力します:
 
 ```racket
 > "Hello World"
@@ -114,9 +111,9 @@ Hello World
 
 ```
 
-上記のように、文字列であることを示すために`"`でくくられて出力されます。
+上記のように、文字列は`"`でくくられて出力されます。
 
-`display`関数を使うことで、`"`を外すことができます。
+`display`関数を使うことで、`"`を外すことができます:
 
 ```racket
 > (display "Hello World")
@@ -128,7 +125,7 @@ Hello World
 
 ### 2.1 基本的なプログラム
 
-`Racket`での`Hello World`プログラムは、次のようになります。
+`Racket`での`Hello World`プログラムは、次のようになります:
 
 ```racket: helloworld.rkt
 #lang racket
@@ -137,7 +134,7 @@ Hello World
 
 ```
 
-出力は、次のようになります。
+出力は、次のようになります:
 
 ```bash
 "Hello World!!"
@@ -148,15 +145,17 @@ Hello World
 
 このセクションでは、[2.1](#21-基本的なプログラム)であげたプログラムを解説します。
 
-`#lang racket`は、このファイルが`Racket`プログラムであることを宣言します。これにより、`Racket`言語のプログラムの解析と実行が適切に行なわれます。
+`#lang racket`は、このファイルが`Racket`言語で記述されていることを示す宣言です。
+この宣言があることで、`Racket`プログラムとして正しく解析・実行されます。
+この宣言は省略できません。
 
-`"Hello World!!"`が、プログラムの本体です。
+プログラムの本体は、`"Hello World!!"`です。
 この行では、`Racket`に文字列`"Hello World!!"`を渡しています。
 これを評価した結果である文字列`"Hello World!!"`が出力されます。
 
 ### 2.3 シンボルを使った`Hello World`プログラム
 
-文字列の代わりにシンボルを使った場合は、次のようになります。
+文字列の代わりにシンボルを使った場合は、次のようになります:
 
 ```racket: helloworld.rkt
 #lang racket
@@ -165,7 +164,7 @@ Hello World
 
 ```
 
-出力は、次のようになります。
+出力は、次のようになります:
 
 ```bash
 '|Hello World!!|
@@ -174,7 +173,7 @@ Hello World
 
 ### 2.4 `display`関数を使った`Hello World`プログラム
 
-同様に、関数`display`を使うと、次のようになります。
+同様に、`display`関数を使うと、次のようになります:
 
 ```racket: helloworld.rkt
 #lang racket
@@ -183,7 +182,7 @@ Hello World
 
 ```
 
-出力は、次のようになります。
+出力は、次のようになります:
 
 ```bash
 Hello World!!
@@ -195,9 +194,35 @@ Hello World!!
 
 ## おわりに
 
-以上で、`Hello World!!`を出力するプログラムが書けました。
+以上で、`Hello World!!`を出力するプログラムを書く方法がわかりました。
 先頭に`#lang racket`と書き、続けて`Racket`のプログラムを書いていきます。
 
 `Racket`の文法やイディオムを覚えていけば、複雑なプログラムを書けるようになってくるでしょう。
 
 それでは、Happy Hacking!
+
+## 技術用語と注釈
+
+この記事で使用する技術用語に関して、注釈を示します:
+
+- `Racket`:
+  `LISP`系のプログラミング言語で、とくに教育や研究目的で使用されることが多い言語
+
+- `REPL` (`Read-Eval-Print-Loop`):
+  `Read-Eval-Print-Loop`の略で、プログラムのコードを一行ずつ入力し、その都度実行して結果を確認できる対話的な開発環境
+
+- `display`関数:
+  `Racket`に用意されている関数の 1つで、引数に与えたデータを文字列としてクオートを外して出力する関数
+
+- `シンボル`:
+  プログラミング言語内で、特定の値や関数を指し示す識別子
+
+- `クオート`:
+  プログラミング言語内でリテラルやシンボルを評価させずにそのままの形で扱うために用いる記号
+
+## 参考資料
+
+### リンク
+
+- [`Racket Documentation`](https://docs.racket-lang.org/)
+  `Racket`言語に関するドキュメンテーション
