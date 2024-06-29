@@ -3,7 +3,7 @@ title: 'Racket: Racket で "Hello World" を出力する方法'
 emoji: "🎾"
 type: "idea"
 topics: ["プログラミング言語", "Racket", "REPL", "helloworld", ]
-published: false
+published: true
 ---
 
 ## はじめに
