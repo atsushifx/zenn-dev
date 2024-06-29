@@ -22,7 +22,7 @@
 - 下記の指示にしたがってレビューし、結果を:review に保存する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 読みやすさを重視し、漢字をひらがなに変換した文はそのままにする
-- "Happy Hacking","Enjoy", "tl;dr"のかく表現は基本的に削除、変更をしない
+- "Happy Hacking","Enjoy"の各表現は削除、変更をしない
 - 技術文書としてプロフェッショナルさを重視し、基本的に「ですます調」を使う
 - 読みやすさのためくだけた表現を許容し、プロフェッショナルとのバランスをとる
 - 文章に命令形の文体は使わない、ただし読者に動機づけするための提案などの場合は容認する
@@ -53,11 +53,16 @@
 """"
 :link
 
-- [`Commit2Feed`](https://github.com/atsushifx/commit2feed/)
-- [Generate Repository Feed](https://github.com/marketplace/actions/generate-repository-feed)
+- [`Racket Documentation`](https://docs.racket-lang.org/)
+  `Racket`言語に関するドキュメンテーション
+
+- [`Racket - Zenn`](https://zenn.dev/topics/racket)
+  `Zenn`の`Racket`に関する記事一覧
 
 """"
 :remark:
+
+- 文末がコロン(:)の場合は、そのままにする
 
 """"
 /begin
