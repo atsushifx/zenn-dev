@@ -3,7 +3,7 @@ title: "Racket: Racketの基本データ型"
 emoji: "🎾"
 type: "idea"
 topics: ["Racket", "関数型プログラミング", "データ型", ]
-published: false
+published: true
 ---
 
 ## はじめに
