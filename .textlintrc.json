@@ -64,6 +64,7 @@
             "language": "en",
             "skipPatterns": [
                 "_",
+                ".10",
                 "/https/ig",
                 "/js/ig",
                 "/svg/ig",
