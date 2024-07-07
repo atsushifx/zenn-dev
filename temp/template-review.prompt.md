@@ -70,7 +70,7 @@
 """"
 :theme
 
-- プログラミング言語`Racket`で`Hello World`プログラムを書く方法
+- `Racket`の基本的なデータ型の説明
 
 """"
 :target:
@@ -80,7 +80,7 @@
 """"
 :goal
 
-- `Racket`を使って、`Hello World`プログラムを書けること
+- `Racket`の基本的なデータ型について理解すること
 
 """"
 link:
