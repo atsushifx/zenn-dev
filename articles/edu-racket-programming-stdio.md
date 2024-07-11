@@ -3,7 +3,7 @@ title: "Racket: Racket における入出力"
 emoji: "🎾"
 type: "idea"
 topics: ["Racket", "関数型プログラミング", "標準入出力", ]
-published: false
+published: true
 ---
 
 ## はじめに
