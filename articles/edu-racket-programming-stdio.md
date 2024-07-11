@@ -8,26 +8,34 @@ published: false
 
 ## はじめに
 
-この記事では、`racket`における入出力についてまとめます。
-`Racket`は、入力に`read`関数、出力に`write`/`print`/`display`の関数が使えます。
+この記事では、`Racket`言語における入出力関数の使い方を説明します。
+`Racket`は、入力に`read`関数、出力に`write`, `print`, `display`関数が利用できます。
+これらの関数の使い方を知り、要件に合わせて使い分けることで、高度な入出力が実現できます。
 
-この記事では、各関数について基本的なことをことを説明し、そのほかの関数については説明しません。
-詳しくは、[`Racket Reference`](https://docs.racket-lang.org/reference/input-and-output.html) を参照してください。
+ここでは、`Racket`の主要な入出力関数を紹介しています。
+詳細は[`Racket Reference`](https://docs.racket-lang.org/reference/input-and-output.html)を参照してください。
 
-## 標準入出力
+## ポートと標準入出力
 
-`Racket`の入出力関数は、標準入出力に対応しています。
-'read`関数は、ポートを指定せずに呼びだすと、標準入力からデータを読み込みます。
-`write`/`print`/`display`の各関数は、ポートを指定せずに呼びだすと、標準出力二データを出力します。
+`Racket`の入出力関数は、ポートを指定できます。
+ポートは、ファイル、ネットワークなどの入出力を管理する`Racket`のオブジェクトです。
+`Racket`の入出力関数は、ポート越しに文字などのデータを入力、出力します。
+ポートを指定しない場合は、標準入力/標準出力ポートが使用されます。
 
-このため、通常の入出力関数を使った`racket`プログラムはコンソールからの入力やパイプ・リダイレクトに対応しています。
+`read`関数は、ポートを指定しない場合、標準入力からデータを読み込みます。
+`write`,`print`,`display`の各関数は、ポートを指定しない場合、標準出力にデータを出力します。
+
+通常の入出力関数を使った (ポートを指定しない) `Racket`プログラムはコンソールからの入力やパイプ・リダイレクトに対応しています。
 
 ## 入力関数
 
-### `read`の詳細
+### `read`関数の詳細
 
-`read`関数は、入力データを記述に合わせて動的に型付けします。
-たとえば、下記のように入力したデータとデータの型を返すプログラムがあります:
+`read`関数は、入力データを`Racket`のデータ型として解釈して返します。
+入力データが`Racket`のデータの表現として間違っている場合、エラーを引き起こす場合があります。
+たとえば、リストの`(`が`)`ではなく`]`で閉じられている場合に、エラーが発生します。
+
+下記に、入力データとそのデータ型を表示するプログラムがあります。
 
 @[gist](https://gist.github.com/atsushifx/c6c137b8cd8c59213ac31722ded5ee14?file=echo-loop.rkt)
 
@@ -54,8 +62,6 @@ output: #<eof>  -  unknown
 
 ```
 
-上記のように、記述したデータに合わせて適切なデータ型が設定されています。
-
 ### ファイルからの入力
 
 ファイルからデータを読みだすには、ファイルポートを使用します。
@@ -71,17 +77,17 @@ output: #<eof>  -  unknown
 ### 文字の入力
 
 `read`関数には、文字の入力用の`read-char`関数や行入力用の`read-line`関数があります。
-`read-char`関数は、標準入力から 1文字ずつ読み込み、`read-line`関数は開業までの行を読み込みます。
+`read-char`関数は、標準入力から 1文字ずつ読み込み、`read-line`関数は改行までの 1行を読み込みます。
 
 このとき、文字は `UTF-8`エンコードとして読み込みます。
 
-詳しいことは、 [`Racket Reference`](https://docs.racket-lang.org/reference/Byte_and_String_Input.html)を参照してください。
+詳細は、 [`Racket Reference`](https://docs.racket-lang.org/reference/Byte_and_String_Input.html)を参照してください。
 
 ## 出力関数
 
 ### `write`/`print`/`display`の違い
 
-`write`/`print`/`display`の各関数は役割が違います。
+`write`,`print`,`display`の各関数は役割が違います。
 それぞれの役割は、次の通りです:
 
 - `write`:
@@ -106,10 +112,13 @@ output: #<eof>  -  unknown
 
 ファイルポートを指定すると、データをファイルに出力します。
 ファイル出力には、`open-output-file`を使用します。
-すでにファイルが存在する場合は例外が発生します。
-このとき、オプション`#:exists 'truncate`を設定するとファイルを新規データで上書きし、オプション`#:exists 'update`を指定するとファイルを更新します。
 
-プログラム例は、次のようになります:
+ファイルがすでに存在する場合、`open-output-file`関数は例外を発生させますが、`#:exists 'truncate`オプションを指定することで回避できます。
+このとき、`Racket`は、既存のファイルの内容をすべて消去し、新しい内容で上書きします。
+`'truncate`の代わりに、`#:exist`can-update`が指定できます。
+この場合、ファイルの内容は消去せず、内容を新しい内容で更新します。
+
+プログラムは、次のようになります:
 
 ```racket: fileout.rkt
 (define fout (open-output-file "data.txt"))    ; cause exception if file is already exist
@@ -118,7 +127,7 @@ output: #<eof>  -  unknown
 
 ```
 
-ファイルがすでに存在する場合は、次のようなエラーが発生します:
+ファイルがすでに存在する場合、次のようなエラーが発生しますが、`#:exist 'truncate`オプションで回避できます:
 
 ```racket
 > racket fileout.rkt
@@ -134,7 +143,7 @@ open-output-file: file exists
 上記のエラーを防ぐために、`#:exists 'truncate`を指定します:
 
 ```racket: fileout.rkt
-(define fout (open-output-file "data.txt"))
+(define fout (open-output-file "data.txt" #:exist 'truncate))
 (display "howdy" fout)
 (close-output-port fout)
 
@@ -148,6 +157,13 @@ open-output-file: file exists
 `read-line`関数は、通常の`write`関数を使って出力します。
 
 ## おわりに
+
+この記事では、`Racket`の入出力関数`read`,`write`,`print`,`display`について基本的なことを説明しました。
+`Racket`は、標準入出力に対応しているため上記関数を使うだけで柔軟性のあるプログラムが作成できます。
+`Racket`のほかの機能も学習しましょう。
+それにより、関数型プログラミングの能力が向上し、より効果的なプログラムが書けるようになるでしょう。
+
+それでは、Happy Hacking!
 
 ## 参考資料
 
