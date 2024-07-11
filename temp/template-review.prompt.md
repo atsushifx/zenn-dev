@@ -70,7 +70,7 @@
 """"
 :theme
 
-- `Racket`の基本的なデータ型の説明
+- `Racket`における入出力の説明
 
 """"
 :target:
@@ -80,13 +80,19 @@
 """"
 :goal
 
-- `Racket`の基本的なデータ型について理解すること
+- `Racket`の入出力について理解し、`read`,`write`,`print`などの関数を適切に使えること
 
 """"
 link:
 
 - [`Racket Documentation`](https://docs.racket-lang.org/)
   `Racket`言語に関するドキュメンテーション
+
+- [`Racket Guide`](https://docs.racket-lang.org/guide/i_o.html):
+  `Racket Guide`の入出力の章
+
+- [`Racket Reference`](https://docs.racket-lang.org/reference/input-and-output.html):
+  `Racket Reference`の入出力の章
 
 """"
 remark:
