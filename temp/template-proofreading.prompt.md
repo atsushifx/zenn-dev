@@ -56,6 +56,12 @@
 - [`Racket Documentation`](https://docs.racket-lang.org/)
   `Racket`言語に関するドキュメンテーション
 
+- [`Racket Guide`](https://docs.racket-lang.org/guide/i_o.html):
+  `Racket Guide`の入出力の章
+
+- [`Racket Reference`](https://docs.racket-lang.org/reference/input-and-output.html):
+  `Racket Reference`の入出力の章
+
 - [`Racket - Zenn`](https://zenn.dev/topics/racket)
   `Zenn`の`Racket`に関する記事一覧
 
