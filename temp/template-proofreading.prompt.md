@@ -20,6 +20,7 @@
 ## レビュー指示
 
 - 下記の指示にしたがってレビューし、結果を:review に保存する
+- 文中の記号は、基本、ASCII 文字を使用し、日本語の全角文字は使用しない
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 読みやすさを重視し、漢字をひらがなに変換した文はそのままにする
 - "Happy Hacking","Enjoy"の各表現は削除、変更をしない
@@ -53,17 +54,11 @@
 """"
 :link
 
-- [`Racket Documentation`](https://docs.racket-lang.org/)
-  `Racket`言語に関するドキュメンテーション
+- [`fzf` (`command-line fuzzy finder`)](https://github.com/junegunn/fzf):
+  `bash`などの`CLI`環境で、一覧の表示／絞り込み／選択を実現するツール。
 
-- [`Racket Guide`](https://docs.racket-lang.org/guide/i_o.html):
-  `Racket Guide`の入出力の章
-
-- [`Racket Reference`](https://docs.racket-lang.org/reference/input-and-output.html):
-  `Racket Reference`の入出力の章
-
-- [`Racket - Zenn`](https://zenn.dev/topics/racket)
-  `Zenn`の`Racket`に関する記事一覧
+- [`fzf-tab-completion`](https://github.com/lincheney/fzf-tab-completion):
+  `bash`の`tab`補完機能に、`fzf`を組み込むプラグインスクリプト。
 
 """"
 :remark:

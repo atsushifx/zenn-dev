@@ -70,29 +70,26 @@
 """"
 :theme
 
-- `Racket`における入出力の説明
+- `fzf-tab-completion`のセットアップ
 
 """"
 :target:
 
-- 関数型プログラミングの学習をしているプログラマー
+- `Linux`で`bash`を使用しているプログラマー
 
 """"
 :goal
 
-- `Racket`の入出力について理解し、`read`,`write`,`print`などの関数を適切に使えること
+- `bash`に`fzf-tab-completion`をセットアップし、`tab`補完機能に`fzf`を組み込むこと
 
 """"
 link:
 
-- [`Racket Documentation`](https://docs.racket-lang.org/)
-  `Racket`言語に関するドキュメンテーション
+- [`fzf` (`command-line fuzzy finder`)](https://github.com/junegunn/fzf):
+  `bash`などの`CLI`環境で、一覧の表示／絞り込み／選択を実現するツール。
 
-- [`Racket Guide`](https://docs.racket-lang.org/guide/i_o.html):
-  `Racket Guide`の入出力の章
-
-- [`Racket Reference`](https://docs.racket-lang.org/reference/input-and-output.html):
-  `Racket Reference`の入出力の章
+- [`fzf-tab-completion`](https://github.com/lincheney/fzf-tab-completion):
+  `bash`の`tab`補完機能に、`fzf`を組み込むプラグインスクリプト。
 
 """"
 remark:
