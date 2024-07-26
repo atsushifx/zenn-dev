@@ -21,12 +21,10 @@
 
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
-- 一文に同じ助詞が 2回以上登場しない形で文章を書く
-- 箇条書き、注釈などの説明文は、辞書的な 1行の文章かつ体言で終わる文章にする
-- 技術文書としてプロフェッショナルさを重視する
-- 「Enjoy!」「Happy Hacking!」の文章は変更せず、文章を前記のカジュアルさにあわせる
-- カジュアルな文体と説明用のプロフェッショナルな文体のバランスをとる
 - 文章は丁寧な「ですます」調で書くが、「お読み」のような敬語を使わない
+- 技術文書としてのプロフェッショナルさとブログとしてのカジュアルさのバランスをとる
+- 文章に「私」「あなた」のような指示名刺を使わない
+- 「Enjoy」、「Happy Hacking」は変更しない
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
@@ -70,26 +68,30 @@
 """"
 :theme
 
-- `fzf-tab-completion`のセットアップ
+- `Speed S5 Pro`の概要
+- `proxmox`の概要
 
 """"
 :target:
 
-- `Linux`で`bash`を使用しているプログラマー
+- Linux サーバを利用している ITエンジニア
 
 """"
 :goal
 
-- `bash`に`fzf-tab-completion`をセットアップし、`tab`補完機能に`fzf`を組み込むこと
+- `Speed S5 Pro`のハードウェア構成と、自宅の LAN についての設定を知ること
 
 """"
 link:
 
-- [`fzf` (`command-line fuzzy finder`)](https://github.com/junegunn/fzf):
-  `bash`などの`CLI`環境で、一覧の表示／絞り込み／選択を実現するツール。
+- [`TRIGKEY Speed S5 Pro`](https://www.amazon.co.jp/gp/product/B0BP1GC2V6/)
+  サーバとして利用するミニPC
 
-- [`fzf-tab-completion`](https://github.com/lincheney/fzf-tab-completion):
-  `bash`の`tab`補完機能に、`fzf`を組み込むプラグインスクリプト。
+- [`proxmox`](https://www.proxmox.com/)
+  サーバ用の仮想化 OS
+
+- [`Rufus`](https://rufus.ie/)
+  インストールイメージ作成ツール
 
 """"
 remark:
