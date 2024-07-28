@@ -54,11 +54,14 @@
 """"
 :link
 
-- [`fzf` (`command-line fuzzy finder`)](https://github.com/junegunn/fzf):
-  `bash`などの`CLI`環境で、一覧の表示／絞り込み／選択を実現するツール。
+- [`TRIGKEY Speed S5 Pro`](https://www.amazon.co.jp/gp/product/B0BP1GC2V6/)
+  サーバとして利用するミニPC
 
-- [`fzf-tab-completion`](https://github.com/lincheney/fzf-tab-completion):
-  `bash`の`tab`補完機能に、`fzf`を組み込むプラグインスクリプト。
+- [`proxmox`](https://www.proxmox.com/)
+  サーバ用の仮想化 OS
+
+- [`Rufus`](https://rufus.ie/)
+  インストールイメージ作成ツール
 
 """"
 :remark:

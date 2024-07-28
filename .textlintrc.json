@@ -94,7 +94,8 @@
                 "PublicArchives",
                 "/Unlicense/ig",
                 "OSS",
-                "2024"
+                "2024",
+                "TRIGKEY"
             ]
         },
         "@proofdict/proofdict": {
