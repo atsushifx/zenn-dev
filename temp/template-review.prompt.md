@@ -29,7 +29,7 @@
 - 文章は丁寧な「ですます」調で書くが、「お読み」のような敬語を使わない
 - 技術文書としてのプロフェッショナルさとブログとしてのカジュアルさのバランスをとる
 - 文章に「私」「あなた」のような指示名刺を使わない
-- 「Enjoy」、「Happy Hacking」は変更しない
+-「してください」などの指示をする文章は使わない
 - :role でしめされた役割で推敲、校正、校閲をする
 - :theme によるテーマの方向で文章を改善する
 - :target で示された読者向けの表現を使う
@@ -73,30 +73,26 @@
 """"
 :theme
 
-- `Speed S5 Pro`の概要
-- `proxmox`の概要
+- `winget`のインストール方法
 
 """"
 :target:
 
-- Linux サーバを利用している ITエンジニア
+- Windowsユーザ
 
 """"
 :goal
 
-- `Speed S5 Pro`のハードウェア構成と、自宅の LAN についての設定を知ること
+- `winget`をインストールして、使えるようになること
 
 """"
 link:
 
-- [`TRIGKEY Speed S5 Pro`](https://www.amazon.co.jp/gp/product/B0BP1GC2V6/)
-  サーバとして利用するミニPC
+- [`WinGet`ツールを使用したアプリケーションのインストールと管理](https://learn.microsoft.com/ja-jp/windows/package-manager/winget/)
+  Microsoftによる`winget`の概要
 
-- [`proxmox`](https://www.proxmox.com/)
-  サーバ用の仮想化 OS
-
-- [`Rufus`](https://rufus.ie/)
-  インストールイメージ作成ツール
+- [WinGet CLI Settings](https://aka.ms/winget-settings)
+  `winget`の各設定項目の説明
 
 """"
 remark:

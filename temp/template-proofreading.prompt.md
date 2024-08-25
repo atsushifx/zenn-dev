@@ -54,14 +54,14 @@
 """"
 :link
 
-- [`TRIGKEY Speed S5 Pro`](https://www.amazon.co.jp/gp/product/B0BP1GC2V6/)
-  サーバとして利用するミニPC
+- [`WinGet`ツールを使用したアプリケーションのインストールと管理](https://learn.microsoft.com/ja-jp/windows/package-manager/winget/)
+  Microsoftによる`winget`の概要
 
-- [`proxmox`](https://www.proxmox.com/)
-  サーバ用の仮想化 OS
+- [WinGet CLI Settings](https://aka.ms/winget-settings)
+  `winget`の各設定項目の説明
 
-- [`Rufus`](https://rufus.ie/)
-  インストールイメージ作成ツール
+- [`winget-cli`リポジトリ](https://github.com/microsoft/winget-cli)
+  `MIcrosoft`による、`winget`コマンドの`GitHub`リポジトリ
 
 """"
 :remark:
