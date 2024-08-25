@@ -1,5 +1,5 @@
 ---
-title: "wingetのインストールと設定方法 (コマンドが見付からない場合の対処法)"
+title: "wingetインストールガイド: wingetコマンドが見付からない場合の対処法"
 emoji: "🪟"
 type: "tech"
 topics: ["Windows", "hacks", "環境構築", "winget", ]
@@ -8,49 +8,51 @@ published: false
 
 ## tl;dr
 
-次の手順を実行することで、wingetをインストールできます。
+以下の手順に従って、`winget`をインストールできます。
 
-1. `GitHub`の`winget-cli`リポジトリから最新の`msixbundler`パッケージをダウンロード
-2. `Add-AppxPackage`コマンドで、ダウンロードした`msixbunle`パッケージをインストール
-3. `winget settings`で、`winget`を設定
+1. `GitHub`上の`winget-cli`リポジトリから最新の`msixbundle`パッケージをダウンロード
+2. `Add-AppxPackage`コマンドで、ダウンロードした`msixbundle`パッケージをインストール
+3. `winget settings`コマンドを使用して、`winget`を設定
 
+以上で、インストールが正常に完了しました。
 Enjoy!
 
 ## はじめに
 
-この記事では、`winget`コマンドがインストールされていない、`Microsoft Store`で`アプリインストーラー`が見付からない場合に、`winget`をインストールする方法を説明します。
+この記事では、`winget`コマンドが見つからない場合に、`winget`を再設定する手順を紹介します。
+今回は、`Microsoft Store`を使用せずに`GitHub`から直接`winget`をインストールする方法を紹介します。
 
 ## 1. `winget`のインストール手順
 
 ### 1.1 `winget`パッケージをダウンロードする
 
-`GitHub`の[`winget-cli`リポジトリ](https://github.com/microsoft/winget-cli)から、`winget`パッケージをダウンロードします。
-次の手順で、`winget`パッケージをダウンロードします。
+以下の手順で`winget`パッケージをダウンロードします:
 
 1. `winget-cli`リポジトリの`リリースページ`にアクセス:
-   [`リリースページ`](https://github.com/microsoft/winget-cli/releases)にアクセスする。>
+   [`リリースページ`](https://github.com/microsoft/winget-cli/releases)にアクセスする。
 
 2. 最新の`Windows Package Manager`をダウンロード:
   `Latest`タグのついた、`msixbundle`ファイルをダウンロードする。
 
-  **注意**:
-  `~/Downloads`に保存する
+  :::message alert
+  `ダウンロード`フォルダ (`~/Downloads`) に保存する
+  :::
 
 ### 1.2 `winget`パッケージをインストールする
 
-`Add-AppxPackage`コマンドで、ダウンロードした`msixbundle`パッケージをインストールします。
-`Powershell`のコマンドラインで、次のコマンドを実行します:
+`Add-AppxPackage`コマンドを使用して、ダウンロードした`msixbundle`パッケージをインストールします。
+以下のコマンドを実行します:
 
 ```powershell
 Add-AppxPackage ~\Downloads\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 
 ```
 
-**注意**:
+:::message alert
+`ダウンロード`フォルダ (`~\Downloads`) にパッケージが保存されていることを確認する。
+:::
 
-`~\Downloads`ディレクトリにパッケージが保存されているものとする。
-
-インストールが成功したか確認するには、次のコマンドを実行します:
+インストールが成功したかを確認するには、以下のコマンドを実行します:
 
 ```powershell
 winget --version
@@ -63,66 +65,63 @@ winget --version
 
 ### 2.1　`winget`を設定する
 
-`winget`の設定ファイルを変更して、設定を行います。
-次の手順で、`winget`を設定します。
+以下の手順で、`winget`を設定します:
 
-1. `winget settings`で設定ファイルを開く:
-   `winget settings`コマンドを実行し、`winget`の設定ファイルを開く。
+1. `winget settings`コマンドで設定ファイルを開く:
 
    ```powershell
    winget settings
 
    ```
 
-2. 設定ファイルを修正する:
-  設定ファイルを次のように修正します。
+2. 設定ファイル`settings.json`を次のように編集する:
 
-  ``` :settings.json
-  {
-    "$schema": "https://aka.ms/winget-settings.schema.json",
+   ```json:settings.json
+   {
+     "$schema": "https://aka.ms/winget-settings.schema.json",
 
-    // For documentation on these settings, see: https://aka.ms/winget-settings
-    "source": {
+      // For documentation on these settings, see: https://aka.ms/winget-settings
+      "source": {
         "autoUpdateIntervalInMinutes": 120
-    },
-    "experimentalFeatures": {
+      },
+      "experimentalFeatures": {
         "directMSI": true,
         "dependencies": true,
-        "experimentalMSStore": true,
         "configureExport": true
-    }
-  }
-  ```
+      }
+   }
+   ```
 
 ### 2.2 `winget`の設定項目
 
-各項目の説明は、次の通りです:
+`winget`の設定項目は、以下の通りです:
 
 | 設定項目 | 設定 | 説明 | 備考 |
 | --- | --- | --- | --- |
+| **source** |  |  **アプリケーションソース関連** | |
 | autoUpdateIntervalInMinutes | 120 | ソースを更新する間隔 (分) | |
-| directMSI | true | `MSI`パッケージの直接インストール | false:`MSIEXEC`経由でインストール |
+| **experimentalFeatures** | | **実験的項目** | |
+| directMSI | true | `MSI`形式パッケージを直接インストール | false:`MSIEXEC`経由でインストール |
 | dependencies | true | パッケージの依存関係解決 | 現在、依存しているパッケージの表示のみ |
-| experimentalMSStore | true | `Microsoft Store`上のアプリのインストール |  |
 | configureExport | true | 設定ファイルの出力可 |  |
 
 ### 2.3 `path`の設定
 
-`winget`を実行するために、システム環境変数`path`に以下の値を追加します:
+`winget`を実行するために、システム環境変数`path`に次の値を追加します:
 
 | `path` | 説明 | 備考 |
 | --- | ---| --- |
-| %LOCALAPPDATA%\Microsoft\WinGet\Links | ポータブルアプリ用リンク | 管理者モード／開発者モードのみリンクが追加される |
-| %LOCALAPPDATA%\Microsoft\WindowsApps | ストアアプリ用リンク | `winget`を含む |
+| %LOCALAPPDATA%\Microsoft\WinGet\Links | ポータブルアプリケーションのリンク | 管理者モード／開発者モードの場合のみ、リンクが追加される |
+| %LOCALAPPDATA%\Microsoft\WindowsApps | `Microsoft Store`アプリケーションのリンク | `winget`を含む |
 
-**注意**:
-
-環境変数`LOCALAPPDATA`には、アプリケーションのデータを格納するパスが設定されており、通常は"`C:\Users\<ユーザー名>\AppData\Local`"です。
+:::message alert
+`LOCALAPPDATA`はアプリケーションのデータが格納するパスが設定される環境変数で、通常、"`C:\Users\<ユーザー名>\AppData\Local`"が設定されています。
+:::
 
 ## おわりに
 
-`システム`-`回復`で`PCをリセット`した際に`winget`が使えなくなった経験をもとに、再設定の手順をまとめました。
-この記事が同様の問題に直面したユーザーの参考になれば幸いです。
+`システム`-`回復`で`PCをリセット`した際に`winget`が使えなくなった問題に基づき、`winget`の再設定の手順をまとめました。
+この記事が、`winget`の再設定を必要とするユーザーにとって、お役に立てれば幸いです。
 
 それでは、Happy Hacking!
 
@@ -132,28 +131,25 @@ winget --version
   `Windows Package Manager`のコマンドラインツール。アプリケーションのインストールと管理をサポート。
 
 - **Add-AppxPackage**:
-  Windows PowerShellで使用するコマンドで、アプリパッケージをインストールするためのもの。
+  `Microsoft Store`で提供されているアプリを、アプリケーションパッケージを使用してインストールするための`powershell`コマンド。
 
 - **msixbundle**:
-  Microsoftのアプリケーションパッケージ形式。
+  Microsoftが提供する、複数のファイル・リソースを1つにまとめたアプリケーションパッケージ形式。
 
-- **`Microsoft Store`**:
+- **Microsoft Store**:
   `Windows`の公式アプリストア。
 
 - **path**:
   コマンドから実行ファイルを検索するディレクトリを設定する環境変数。
 
 - **experimentalFeatures**:
-  `winget`の設定項目の中での、実験的な項目のグループを示す項目。
+  `winget`の設定項目の中で、実験的に提供されている機能を設定するグループ。
 
 - **%LOCALAPPDATA%\Microsoft\WinGet\Links**:
   `winget`でインストールしたポータブルアプリ用のリンクを保存するディレクトリ。
 
 - **%LOCALAPPDATA%\Microsoft\WindowsApps**:
   Windowsアプリのリンクを保存するディレクトリ。
-
-- **settings;json**:
-  `winget`のカスタマイズ項目を設定する設定ファイル。
 
 ## 参考資料
 
@@ -164,3 +160,6 @@ winget --version
 
 - [WinGet CLI Settings](https://aka.ms/winget-settings)
   `winget`の各設定項目の説明
+
+- [`winget-cli`リポジトリ](https://github.com/microsoft/winget-cli)
+  `MIcrosoft`による、`winget`コマンドの`GitHub`リポジトリ
