@@ -3,7 +3,7 @@ title: "wingetインストールガイド: wingetコマンドが見付からな�
 emoji: "🪟"
 type: "tech"
 topics: ["Windows", "hacks", "環境構築", "winget", ]
-published: false
+published: true
 ---
 
 ## tl;dr
