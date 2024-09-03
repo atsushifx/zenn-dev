@@ -1,9 +1,9 @@
 ---
 title: "Proxmoxのセットアップ - 構成の概要"
-emoji: "💻"
+emoji: "🏨"
 type: "tech"
 topics: ["miniPC", "Proxmox", "pve", "diagram", ]
-published: true
+published: false
 ---
 
 ## はじめに
