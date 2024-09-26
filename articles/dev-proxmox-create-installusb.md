@@ -11,18 +11,22 @@ published: false
 以下の手順で、`Proxmox`のインストールUSBを作成できます。
 
 1. `Proxmox`のWebサイトから、`ISOイメージ`をダウンロードする
-2. インストールUSB用のUSBメモリ (`microSD`+カードリーダーでも可) を用意し、PCに接続する
+2. インストールUSB用のUSBメモリを用意し、PCに接続する
 3. `USB`メモリ書き込みツール`rufus`を試用して、`ISOイメージ`をUSBメモリに書き込む
 
 以上で、インストールUSBが作成できます。
 Enjoy!
 
+:::message
+USBメモリの代わりに、マイクロSDカードとカードリーダーを試用できます。
+:::
+
 ## はじめに
 
 この記事では、`Proxmox`用のインストールUSBの作成方法を説明します。
-`ISOイメージ`のダウンロード方法から、`rufus`を用いたUSBメモリの作成まで画像付きで解説しています。
+`ISOイメージ`のダウンロード方法から、`Rufus`を用いたUSBメモリの作成までを、スクリーンショットを併用して　解説しています。
 
-## 1. `インストールUSB`の作成
+## 1. インストールUSBの作成
 
 ### 1.1 `ISOイメージ`のダウンロード
 
@@ -37,13 +41,18 @@ Enjoy!
 
 ### 1.2 `ISOイメージ`の書き込み
 
-ダウンロードした`ISOイメージ`を、`rufus`を使ってUSBに書き込み、インストールUSBを作成します。
-`rufus`は、次のコマンドでインストールできます。
+ダウンロードした`ISOイメージ`を、`Rufus`を使ってUSBに書き込み、インストールUSBを作成します。
+`Rufus`は、次のコマンドでインストールできます。
 
 ```powershell
 winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus\
 
 ```
+
+:::message
+`Rufus`を起動しやすくするため、ツール用のフォルダー`c:\app`下にインストールしています。
+
+:::
 
 以下の手順で、インストールUSBを作成します。
 
@@ -53,7 +62,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 2. `rufus`にダウンロードした`ISOイメージ`を設定します。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-isoset.png)
 
-   このとき、以下のダイアログが表示されます。`[OK]`をクリックします。
+   `ISOイメージ`がハイブリッド形式のため、以下のダイアログが表示されます。`[OK]`をクリックしてダイアログを閉じます。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-dialog1.png)
 
 3. `[スタート]`をクリックし、用意しておいたUSBメモリに`ISOイメージ`を書き込みます。
@@ -70,18 +79,18 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 以下の手順で、作成したインストールUSBが動作するかチェックします。
 
 1. PCの電源を入れる:
-   `proxmox`インストール用のPC (今回は、`Speed S5 Pro`)に`インストールUSB`を差し、電源スイッチをOnにします。
+   サーバー用PC (今回は、`Speed S5 Pro`)に`インストールUSB`を差し、電源スイッチをOnにします。
 
 2. 起動画面の確認:
    `proxmox`インストーラが起動し、以下の画面が表示されます。
    ![`proxmox`インストーラ](/images/articles/proxmox-setup/ss-proxmox-installer-boot.png)
 
-上記のように、起動画面が表示されれば、インストーラーは正常に動作しています。
+上記のように起動画面が表示されれば、インストーラーは正常に動作しています。
 
 ## おわりに
 
 この記事では、`proxmox`のインストールUSB`の作成方法から、`インストーラUSB`の動作確認までを説明しました。
-次からは実際に`proxmox`をインストールする手順を説明します。
+次回は、サーバー用PCに。`proxmox`をインストールする手順を説明します。
 
 それでは、Happy Hacking!
 
