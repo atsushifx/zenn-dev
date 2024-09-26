@@ -35,7 +35,7 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーが
 
 以下の手順で、`ISOイメージ`をダウンロードします:
 
-1. `Proxmox`のダウンロードページ[<https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads)にアクセスする。
+1. `Proxmox`のダウンロードページ [https://www.proxmox.com/en/downloads](https://www.proxmox.com/en/downloads) にアクセスする。
    ![`Proxmox` - Downloads](/images/articles/proxmox-setup/ss-proxmox-download.png)
 
 2. `Proxmox VE`ブロックの`Download`をクリックし、`ISOイメージ`をダウンロードする。
@@ -53,7 +53,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 ```
 
 :::message
-Rufusを起動しやすくするために、インストール先を変更。
+`Rufus`を起動しやすくするために、インストール先を変更。
 インストール先は、環境に合わせて変更可能。
 
 :::
@@ -82,10 +82,10 @@ Rufusを起動しやすくするために、インストール先を変更。
 
 以下の手順で、作成したインストールUSBが動作するかチェックします:
 
-1. サーバー用PCにインストールUSBを差し、起動します。
+1. サーバー用PCにインストールUSBを差し込んで、起動します。
 
 2. 起動画面の確認:
-   `Proxmox`インストーラが起動し、以下の画面が表示されます。
+   `Proxmox` インストーラが起動し、以下の画面が表示されます。
    ![`Proxmox`インストーラ](/images/articles/proxmox-setup/ss-proxmox-installer-boot.png)
 
 起動画面が表示されれば、インストーラーは正常に動作しています。
