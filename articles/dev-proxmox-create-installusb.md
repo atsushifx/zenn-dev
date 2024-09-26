@@ -12,7 +12,7 @@ published: false
 
 1. `Proxmox`のWebサイトから`ISOイメージ`をダウンロード
 
-2. インストールUSB用USBメモリを用意してPCに接続
+2. インストーラ用USBメモリを用意してPCに接続
 
 3. `Rufus`を使用して`ISOイメージ`をUSBメモリに書き込み
 
@@ -20,13 +20,14 @@ published: false
 Enjoy!
 
 :::message
-USBメモリの代わりに、マイクロSDカードとカードリーダーが使用可能
+USBメモリの代わりに、マイクロSDカードとカードリーダーが使用可能。
+
 :::
 
 ## はじめに
 
-この記事では、`Proxmox`用のインストールUSBの作成方法を説明します。
-`ISOイメージ`のダウンロードから`Rufus`によるインストールUSBの作成まで、手順をスクリーンショット付きで詳しく解説します。
+この記事では、`Proxmox`インストールUSBの作成方法を説明します。
+`ISOイメージ`のダウンロードから`Rufus`を使用した作成手順まで、スクリーンショット付きで詳しく解説します。
 
 ## 1. インストールUSBの作成
 
@@ -34,12 +35,12 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーが
 
 以下の手順で、`ISOイメージ`をダウンロードします:
 
-1. `Proxmox`のダウンロードページ[<https://www.Proxmox.com/en/downloads>](https://www.Proxmox.com/en/downloads)にアクセスする。
-   ![`Proxmox` - Downloads](/images/articles/Proxmox-setup/ss-Proxmox-download.png)
+1. `Proxmox`のダウンロードページ[<https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads)にアクセスする。
+   ![`Proxmox` - Downloads](/images/articles/proxmox-setup/ss-proxmox-download.png)
 
 2. `Proxmox VE`ブロックの`Download`をクリックし、`ISOイメージ`をダウンロードする。
 
-以上で、`ISOイメージ`のダウンロードは終了です。
+以上で、`ISOイメージ`のダウンロードは完了です。
 
 ### 1.2 `ISOイメージ`の書き込み
 
@@ -52,24 +53,24 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 ```
 
 :::message
-Rufusを起動しやすくするためにインストール先を変更。
-インストール先は環境に合わせて変更可能。
+Rufusを起動しやすくするために、インストール先を変更。
+インストール先は、環境に合わせて変更可能。
 
 :::
 
 以下の手順で、インストールUSBを作成します:
 
 1. `Rufus`を起動します。以下の起動画面が表示されます。
-   ![`Rufus`起動画面](/images/articles/Proxmox-setup/ss-rufus-start.png)
+   ![`Rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-start.png)
 
 2. `Rufus`にダウンロードした`ISOイメージ`を設定します。
-   ![`ISOイメージ`設定](/images/articles/Proxmox-setup/ss-rufus-isoset.png)
+   ![`ISOイメージ`設定](/images/articles/proxmox-setup/ss-rufus-isoset.png)
 
    `ISOイメージ`がハイブリッド形式のため、以下のダイアログが表示されます。`[OK]`をクリックしてダイアログを閉じます。
-   ![書き込み方法ダイアログ](/images/articles/Proxmox-setup/ss-rufus-dialog1.png)
+   ![書き込み方法ダイアログ](/images/articles/proxmox-setup/ss-rufus-dialog1.png)
 
 3. `[スタート]`をクリックし、用意しておいたUSBメモリに`ISOイメージ`を書き込みます。
-   ![`Rufus`イメージ書き込み](/images/articles/Proxmox-setup/ss-rufus-writing.png)
+   ![`Rufus`イメージ書き込み](/images/articles/proxmox-setup/ss-rufus-writing.png)
 
 4. `[閉じる]`をクリックし、`Rufus`を終了します。
 
@@ -85,13 +86,13 @@ Rufusを起動しやすくするためにインストール先を変更。
 
 2. 起動画面の確認:
    `Proxmox`インストーラが起動し、以下の画面が表示されます。
-   ![`Proxmox`インストーラ](/images/articles/Proxmox-setup/ss-Proxmox-installer-boot.png)
+   ![`Proxmox`インストーラ](/images/articles/proxmox-setup/ss-proxmox-installer-boot.png)
 
-上記のように起動画面が表示されれば、インストーラーは正常に動作しています。
+起動画面が表示されれば、インストーラーは正常に動作しています。
 
 ## おわりに
 
-この記事では、`Proxmox`のインストールUSBの作成方法から動作確認までを説明しました。
+この記事では、`Proxmox`インストールUSBの作成方法と動作確認を説明しました。
 次回は、サーバー用PCに`Proxmox`をインストールする手順を説明します。
 
 それでは、Happy Hacking!
@@ -111,6 +112,12 @@ Rufusを起動しやすくするためにインストール先を変更。
 
 - `winget`:
   `Windows Package Manager`のコマンドラインツール
+
+- ハイブリッド形式:
+  `BIOS`と`UEFI`の両方で起動可能なディスクイメージ形式
+
+- 仮想化:
+  ハードウェア資源を抽象化し、複数の仮想マシンを実行する技術
 
 ## 参考資料
 
