@@ -10,29 +10,34 @@ published: false
 
 以下の手順で、`Proxmox`のインストールUSBを作成できます。
 
-1. `Proxmox`のWebサイトから、`ISO installer`をダウンロードする
+1. `Proxmox`のWebサイトから、`ISOイメージ`をダウンロードする
 2. インストールUSB用のUSBメモリ (`microSD`+カードリーダーでも可) を用意し、PCに接続する
-3. `USB`メモリ書き込みツール`rufus`を試用して、`ISO installer`をUSBメモリに書き込む
+3. `USB`メモリ書き込みツール`rufus`を試用して、`ISOイメージ`をUSBメモリに書き込む
 
 以上で、インストールUSBが作成できます。
 Enjoy!
 
-## `インストールUSB`の作成
+## はじめに
 
-### `ISO installer`のダウンロード
+この記事では、`Proxmox`用のインストールUSBの作成方法を説明します。
+`ISOイメージ`のダウンロード方法から、`rufus`を用いたUSBメモリの作成まで画像付きで解説しています。
 
-以下の手順で、`ISO installer`をダウンロードします。
+## 1. `インストールUSB`の作成
+
+### 1.1 `ISOイメージ`のダウンロード
+
+以下の手順で、`ISOイメージ`をダウンロードします。
 
 1. `proxmox`のダウンロードページ[<https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads)にアクセスする。
    ![`proxmox` - Downloads](/images/articles/proxmox-setup/ss-proxmox-download.png)
 
-2. `Proxmox VE`ブロックの`Download`をクリックし、`isoイメージ`をダウンロードする。
+2. `Proxmox VE`ブロックの`Download`をクリックし、`ISOイメージ`をダウンロードする。
 
-以上で、`ISO installer`のダウンロードは終了です。
+以上で、`ISOイメージ`のダウンロードは終了です。
 
-### `ISOイメージ`の書き込み
+### 1.2 `ISOイメージ`の書き込み
 
-ダウンロードした`ISOイメージ`を、`rufus`を使ってUSBに書き込んでインストールUSBを作成します。
+ダウンロードした`ISOイメージ`を、`rufus`を使ってUSBに書き込み、インストールUSBを作成します。
 `rufus`は、次のコマンドでインストールできます。
 
 ```powershell
@@ -42,38 +47,32 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 以下の手順で、インストールUSBを作成します。
 
-1. `rufus`を起動する:
-   `rufus`を起動します。起動画面が表示されます。
+1. `rufus`を起動します。起動画面が表示されます。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-start.png)
 
-2. `rufus`に`ISOイメージ`を設定する:
-   `rufus`にダウンロードした`ISOイメージ`を設定します。
+2. `rufus`にダウンロードした`ISOイメージ`を設定します。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-isoset.png)
 
    このとき、以下のダイアログが表示されます。`[OK]`をクリックします。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-dialog1.png)
 
-3. `ISOイメージ`を`USBメモリ`に書き込む:
-   `[スタート]`をクリックし、用意しておいたUSBメモリに`ISOイメージ`を書き込みます。
+3. `[スタート]`をクリックし、用意しておいたUSBメモリに`ISOイメージ`を書き込みます。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-writing.png)
 
-4. `rufus`を終了する:
-   `[閉じる]`をクリックし、`rufus`を終了します。
+4. `[閉じる]`をクリックし、`rufus`を終了します。
 
 以上で、`インストールUSB`の作成は完了です。
 
-## 動作チェック
+## 2. 動作チェック
 
-### `インストールUSB`の起動チェック
+### 2.1 `インストールUSB`の起動チェック
 
-作成した`インストールUSB`が正常に動作するかチェックします。
-
-以下の手順で、動作チェックします。
+以下の手順で、作成したインストールUSBが動作するかチェックします。
 
 1. PCの電源を入れる:
    `proxmox`インストール用のPC (今回は、`Speed S5 Pro`)に`インストールUSB`を差し、電源スイッチをOnにします。
 
-2. 起動画面の確認
+2. 起動画面の確認:
    `proxmox`インストーラが起動し、以下の画面が表示されます。
    ![`proxmox`インストーラ](/images/articles/proxmox-setup/ss-proxmox-installer-boot.png)
 
