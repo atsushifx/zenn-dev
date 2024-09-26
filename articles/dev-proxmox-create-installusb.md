@@ -28,7 +28,7 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 ## はじめに
 
 この記事では、`Proxmox`のインストールUSB の作成方法を説明します。
-`ISOイメージ`のダウンロードから `Rufus` を使用した作成手順まで、スクリーンショット付きで詳しく説明します。
+`ISOイメージ`のダウンロードから `Rufus` を使用した作成手順まで、スクリーンショット付きで詳細に説明します。
 
 ## 1. インストールUSBの作成
 
@@ -36,7 +36,7 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 
 以下の手順で、`ISOイメージ`をダウンロードします:
 
-1. `Proxmox` のダウンロードページ <[https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads)> にアクセス
+1. `Proxmox` のダウンロードページ <https://www.proxmox.com/en/downloads> にアクセス
    ![`Proxmox` - Downloads](/images/articles/proxmox-setup/ss-proxmox-download.png)
 
 2. `Proxmox VE`ブロックの `Download` をクリックし、`ISOイメージ` をダウンロード
@@ -54,15 +54,14 @@ winget install Rufus.Rufus --interactive --location "C:\app\utils\DiskUtils\rufu
 ```
 
 :::message
-`Rufus` を起動しやすくするために、インストール先を変更します。
-インストール先は、必要に応じて変更してください。
+`Rufus` を起動しやすくするために、インストール先を変更しています。
 
 :::
 
 以下の手順で、インストールUSBを作成します:
 
 1. `Rufus` を起動します。以下の起動画面が表示されます。
-   ![ `Rufus`起動画面 ](/images/articles/proxmox-setup/ss-rufus-start.png)
+   ![`Rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-start.png)
 
 2. `Rufus` にダウンロードした `ISOイメージ` を設定します。
    ![`ISOイメージ`設定](/images/articles/proxmox-setup/ss-rufus-isoset.png)
