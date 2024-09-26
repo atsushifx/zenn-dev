@@ -10,27 +10,29 @@ published: false
 
 以下の手順で、`Proxmox`のインストールUSBを作成できます。
 
-1. `Proxmox`のWebサイトから、`ISOイメージ`をダウンロードする
-2. インストールUSB用のUSBメモリを用意し、PCに接続する
-3. `USB`メモリ書き込みツール`Rufus`を使用して、`ISOイメージ`をUSBメモリに書き込む
+1. `Proxmox`のWebサイトから`ISOイメージ`をダウンロード
+
+2. インストールUSB用USBメモリを用意してPCに接続
+
+3. `Rufus`を使用して`ISOイメージ`をUSBメモリに書き込み
 
 以上で、インストールUSBが作成できます。
 Enjoy!
 
 :::message
-USBメモリの代わりに、マイクロSDカードとカードリーダーを使用できます。
+USBメモリの代わりに、マイクロSDカードとカードリーダーが使用可能
 :::
 
 ## はじめに
 
 この記事では、`Proxmox`用のインストールUSBの作成方法を説明します。
-`ISOイメージ`のダウンロードから`Rufus`によるインストールUSBの作成までを、スクリーンショットとともに解説します。
+`ISOイメージ`のダウンロードから`Rufus`によるインストールUSBの作成まで、手順をスクリーンショット付きで詳しく解説します。
 
 ## 1. インストールUSBの作成
 
 ### 1.1 `ISOイメージ`のダウンロード
 
-ダウンロードの手順は、以下の通りです:
+以下の手順で、`ISOイメージ`をダウンロードします:
 
 1. `Proxmox`のダウンロードページ[<https://www.Proxmox.com/en/downloads>](https://www.Proxmox.com/en/downloads)にアクセスする。
    ![`Proxmox` - Downloads](/images/articles/Proxmox-setup/ss-Proxmox-download.png)
@@ -51,7 +53,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 :::message
 Rufusを起動しやすくするためにインストール先を変更。
-インストール先は自身の環境に合わせて変更可能。
+インストール先は環境に合わせて変更可能。
 
 :::
 
@@ -61,13 +63,13 @@ Rufusを起動しやすくするためにインストール先を変更。
    ![`Rufus`起動画面](/images/articles/Proxmox-setup/ss-rufus-start.png)
 
 2. `Rufus`にダウンロードした`ISOイメージ`を設定します。
-   ![`Rufus`起動画面](/images/articles/Proxmox-setup/ss-rufus-isoset.png)
+   ![`ISOイメージ`設定](/images/articles/Proxmox-setup/ss-rufus-isoset.png)
 
    `ISOイメージ`がハイブリッド形式のため、以下のダイアログが表示されます。`[OK]`をクリックしてダイアログを閉じます。
-   ![`Rufus`起動画面](/images/articles/Proxmox-setup/ss-rufus-dialog1.png)
+   ![書き込み方法ダイアログ](/images/articles/Proxmox-setup/ss-rufus-dialog1.png)
 
 3. `[スタート]`をクリックし、用意しておいたUSBメモリに`ISOイメージ`を書き込みます。
-   ![`Rufus`起動画面](/images/articles/Proxmox-setup/ss-rufus-writing.png)
+   ![`Rufus`イメージ書き込み](/images/articles/Proxmox-setup/ss-rufus-writing.png)
 
 4. `[閉じる]`をクリックし、`Rufus`を終了します。
 
@@ -89,7 +91,7 @@ Rufusを起動しやすくするためにインストール先を変更。
 
 ## おわりに
 
-この記事では、`Proxmox`のインストールUSBの作成方法から、の動作確認までを説明しました。
+この記事では、`Proxmox`のインストールUSBの作成方法から動作確認までを説明しました。
 次回は、サーバー用PCに`Proxmox`をインストールする手順を説明します。
 
 それでは、Happy Hacking!
