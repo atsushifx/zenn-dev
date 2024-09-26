@@ -22,9 +22,10 @@
 - 文章を読み、文法、表現、語彙などにおいて改善点を指摘する
 - 文章中の誤字、脱字、読んでいて変な表現を指摘する
 - 一文に同じ助詞が 2回以上登場しない形で文章を書く
-- 箇条書き、注釈などの説明文は、辞書的な 1行の文章かつ体言で終わる文章にする
+- 箇条書き、注釈などの説明文は、辞書的な1行の文章で、体言止めか動詞の連用形で終わらせる
+- 箇条書きの前の文章で、':'で文章を終わらせることを許容する
 - 技術文書としての、プロフェッショナルさを重視する
-- 全体の調子を、「Enjoy」「Happy Hacking」といったカジュアルな文章にあわせる
+- 「Enjoy」「Happy Hacking」は定型句で変更しない
 - カジュアルな文体と説明用のプロフェッショナルな文体のバランスをとる
 - 文章は丁寧な「ですます」調で書くが、「お読み」のような敬語を使わない
 - 技術文書としてのプロフェッショナルさとブログとしてのカジュアルさのバランスをとる
@@ -73,26 +74,26 @@
 """"
 :theme
 
-- `winget`のインストール方法
+- 'proxmox`用インストールUSBの作成
 
 """"
 :target:
 
-- Windowsユーザ
+- `proxmox`を利用したいWindowsユーザー
 
 """"
 :goal
 
-- `winget`をインストールして、使えるようになること
+- `proxmox`のインストールUSBを作成し、サーバー機での起動を成功させること
 
 """"
 link:
 
-- [`WinGet`ツールを使用したアプリケーションのインストールと管理](https://learn.microsoft.com/ja-jp/windows/package-manager/winget/)
-  Microsoftによる`winget`の概要
+- `PROXMOX`: [https://proxmox.com/]<https://proxmox.com/>
+  `proxmox`公式サイト
 
-- [WinGet CLI Settings](https://aka.ms/winget-settings)
-  `winget`の各設定項目の説明
+- `Rufus`: [https://rufus.ie/]<https://rufus.ie/>
+  `Rufus`公式サイト
 
 """"
 remark:
