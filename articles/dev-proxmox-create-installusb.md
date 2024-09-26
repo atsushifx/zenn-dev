@@ -3,7 +3,7 @@ title: "Proxmoxのセットアップ: インストールUSBの作成"
 emoji: "🏪"
 type: "tech"
 topics: [ "仮想化", "Proxmox", "pve", "環境構築", ]
-published: false
+published: true
 ---
 
 ## tl;dr
