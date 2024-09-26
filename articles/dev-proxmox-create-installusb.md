@@ -8,19 +8,19 @@ published: false
 
 ## tl;dr
 
-以下の手順で、`Proxmox`のインストールUSB を作成できます。
+以下の手順で、`Proxmox`のインストールUSB を作成します。
 
 1. `Proxmox` の Webサイトから `ISOイメージ` をダウンロード
 
 2. インストーラ用USBメモリを用意し、PC に接続
 
-3. `Rufus`を使用して`ISOイメージ`を USBメモリに書き込み
+3. `Rufus`を使用して`ISOイメージ`を USBメモリ に書き込み
 
 以上で、インストールUSB が作成できます。
 Enjoy!
 
 :::message
-USBメモリの代わりに、マイクロSDカードとカードリーダーが使用可能です。
+USBメモリの代わりに、マイクロSDカードとカードリーダーも使用できます。
 
 :::
 
@@ -45,7 +45,7 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーが
 ### 1.2 `ISOイメージ`の書き込み
 
 ダウンロードした`ISOイメージ`を `Rufus` で USBメモリに書き込み、インストールUSB を作成します。
-`Rufus` は次のコマンドでインストール可能です。
+`Rufus` は次のコマンドでインストール可能です。必要に応じて、インストール先を変更してください。
 
 ```powershell
 winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus\
@@ -54,7 +54,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 :::message
 `Rufus` を起動しやすくするために、インストール先を変更します。
-インストール先は、環境に合わせて変更できますま。
+インストール先は、環境に合わせて変更できます。
 
 :::
 
@@ -80,9 +80,9 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 ### 2.1 `インストールUSB`の起動チェック
 
-以下の手順で、作成したインストールUSB が動作するかチェックします:
+以下の手順で、作成した インストールUSB が動作するかチェックします:
 
-1. サーバー用PC にインストールUSB を差し込み、起動します。
+1. サーバー用PC に インストールUSB を差し込み、起動します。
 
 2. 起動画面の確認:
    `Proxmox`インストーラが起動し、以下の画面が表示されます。
@@ -93,7 +93,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 ## おわりに
 
 この記事では、`Proxmox`インストールUSB の作成方法と動作確認を説明しました。
-次回は、サーバー用PC に`Proxmox`をインストールする手順を説明します。
+次回は、サーバー用PC に `Proxmox` をインストールする手順を説明します。
 
 それでは、Happy Hacking!
 
@@ -114,7 +114,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
   `Windows Package Manager` のコマンドラインツール
 
 - ハイブリッド形式:
-  `BIOS` と `UEFI` の両方で起動可能なディスクイメージ形式
+  `BIOS` と `UEFI` の両方に対応した起動可能なディスクイメージ形式
 
 - 仮想化:
   ハードウェア資源を抽象化し、複数の仮想マシンを実行する技術
