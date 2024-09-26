@@ -14,9 +14,10 @@ published: false
 
 2. インストーラ用USBメモリを用意し、PC に接続
 
-3. `Rufus`を使用して`ISOイメージ`を USBメモリ に書き込み
+3. `Rufus` を使用して `ISOイメージ` を USBメモリ に書き込み
 
 以上で、インストールUSB が作成できます。
+
 Enjoy!
 
 :::message
@@ -26,8 +27,8 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 
 ## はじめに
 
-この記事では、`Proxmox`インストールUSB の作成方法を説明します。
-`ISOイメージ`のダウンロードから `Rufus` を使用した作成手順まで、スクリーンショット付きで詳しく解説します。
+この記事では、`Proxmox`のインストールUSB の作成方法を説明します。
+`ISOイメージ`のダウンロードから `Rufus` を使用した作成手順まで、スクリーンショット付きで詳しく説明します。
 
 ## 1. インストールUSBの作成
 
@@ -35,10 +36,10 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 
 以下の手順で、`ISOイメージ`をダウンロードします:
 
-1. `Proxmox`のダウンロードページ [<https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads) にアクセス
+1. `Proxmox` のダウンロードページ <[https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads)> にアクセス
    ![`Proxmox` - Downloads](/images/articles/proxmox-setup/ss-proxmox-download.png)
 
-2. `Proxmox VE`ブロックの`Download`をクリックし、`ISOイメージ`をダウンロード
+2. `Proxmox VE`ブロックの `Download` をクリックし、`ISOイメージ` をダウンロード
 
 以上で、`ISOイメージ`のダウンロードは完了です。
 
@@ -48,25 +49,25 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 `Rufus` は次のコマンドでインストール可能です。必要に応じて、インストール先を変更してください。
 
 ```powershell
-winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus\
+winget install Rufus.Rufus --interactive --location "C:\app\utils\DiskUtils\rufus\"
 
 ```
 
 :::message
 `Rufus` を起動しやすくするために、インストール先を変更します。
-インストール先は、環境に合わせて変更できます。
+インストール先は、必要に応じて変更してください。
 
 :::
 
 以下の手順で、インストールUSBを作成します:
 
 1. `Rufus` を起動します。以下の起動画面が表示されます。
-   ![`Rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-start.png)
+   ![ `Rufus`起動画面 ](/images/articles/proxmox-setup/ss-rufus-start.png)
 
 2. `Rufus` にダウンロードした `ISOイメージ` を設定します。
    ![`ISOイメージ`設定](/images/articles/proxmox-setup/ss-rufus-isoset.png)
 
-   `ISOイメージ` がハイブリッド形式のため、以下のダイアログが表示されます。`[OK]`をクリックしてダイアログを閉じます。
+   `ISOイメージ` がハイブリッド形式のため、以下のダイアログが表示されます。`[OK]` をクリックしてダイアログを閉じます。
    ![書き込み方法ダイアログ](/images/articles/proxmox-setup/ss-rufus-dialog1.png)
 
 3. `[スタート]`をクリックし、用意しておいた USBメモリに `ISOイメージ` を書き込みます。
@@ -80,7 +81,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 ### 2.1 `インストールUSB`の起動チェック
 
-以下の手順で、作成した インストールUSB が動作するかチェックします:
+以下の手順で、作成した インストールUSB が動作するか確認します:
 
 1. サーバー用PC に インストールUSB を差し込み、起動します。
 
@@ -123,8 +124,8 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 ### Webサイト
 
-- `Proxmox`: [<https://proxmox.com/>](https://proxmox.com/)
+- `Proxmox`: <https://proxmox.com/>
   `Proxmox`公式サイト
 
-- `Rufus`: [<https://rufus.ie/>](https://rufus.ie/)
+- `Rufus`: <https://rufus.ie/>
   `Rufus`公式サイト
