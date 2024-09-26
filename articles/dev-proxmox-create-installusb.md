@@ -12,7 +12,7 @@ published: false
 
 1. `Proxmox`のWebサイトから、`ISOイメージ`をダウンロードする
 2. インストールUSB用のUSBメモリを用意し、PCに接続する
-3. `USB`メモリ書き込みツール`rufus`を試用して、`ISOイメージ`をUSBメモリに書き込む
+3. `USB`メモリ書き込みツール`Rufus`を利用して、`ISOイメージ`をUSBメモリに書き込む
 
 以上で、インストールUSBが作成できます。
 Enjoy!
@@ -24,13 +24,13 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーを
 ## はじめに
 
 この記事では、`Proxmox`用のインストールUSBの作成方法を説明します。
-`ISOイメージ`のダウンロード方法から、`Rufus`を用いたUSBメモリの作成までを、スクリーンショットを併用して　解説しています。
+`ISOイメージ`のダウンロード方法から、`Rufus`を用いたUSBメモリの作成までを、スクリーンショットとともに解説します。
 
 ## 1. インストールUSBの作成
 
 ### 1.1 `ISOイメージ`のダウンロード
 
-以下の手順で、`ISOイメージ`をダウンロードします。
+ダウンロードの手順は、以下の通りです。
 
 1. `proxmox`のダウンロードページ[<https://www.proxmox.com/en/downloads>](https://www.proxmox.com/en/downloads)にアクセスする。
    ![`proxmox` - Downloads](/images/articles/proxmox-setup/ss-proxmox-download.png)
@@ -50,13 +50,14 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 ```
 
 :::message
-`Rufus`を起動しやすくするため、ツール用のフォルダー`c:\app`下にインストールしています。
+`Rufus`を起動しやすくするため、インストール先を`c:\app\`下に変更しています。
+インストール先は、自分の環境にあわせて変えてください。
 
 :::
 
 以下の手順で、インストールUSBを作成します。
 
-1. `rufus`を起動します。起動画面が表示されます。
+1. `rufus`を起動します。以下の起動画面が表示されます。
    ![`rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-start.png)
 
 2. `rufus`にダウンロードした`ISOイメージ`を設定します。
@@ -78,8 +79,8 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 
 以下の手順で、作成したインストールUSBが動作するかチェックします。
 
-1. PCの電源を入れる:
-   サーバー用PC (今回は、`Speed S5 Pro`)に`インストールUSB`を差し、電源スイッチをOnにします。
+1. PCをきどうする:
+   サーバー用PC (今回は、`Speed S5 Pro`)に`インストールUSB`を差し、PCを起動します。
 
 2. 起動画面の確認:
    `proxmox`インストーラが起動し、以下の画面が表示されます。
@@ -90,7 +91,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 ## おわりに
 
 この記事では、`proxmox`のインストールUSB`の作成方法から、`インストーラUSB`の動作確認までを説明しました。
-次回は、サーバー用PCに。`proxmox`をインストールする手順を説明します。
+次回は、サーバー用PCに`proxmox`をインストールする手順を説明します。
 
 それでは、Happy Hacking!
 
@@ -99,7 +100,7 @@ winget install Rufus.Rufus --interactive --location C:\app\utils\DiskUtils\rufus
 ### Webサイト
 
 - `PROXMOX`: [https://proxmox.com/]<https://proxmox.com/>
-  `proxmox`公式Webサイト
+  `proxmox`公式サイト
 
 - `Rufus`: [https://rufus.ie/]<https://rufus.ie/>
-  `インスト-ルUSB`作成ツール`Rufus`の公式サイト
+  `Rufus`公式サイト
