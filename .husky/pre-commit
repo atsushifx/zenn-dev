@@ -1,4 +1,9 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+### @(#) : husky pre-commit
+#
+# @version 1.0.0
+# @author  Furukawa, Atsushi <atsushifx@aglabo.com>
+# @date    2024-11-26
+# @license MIT
+
 
 gitleaks protect --staged
