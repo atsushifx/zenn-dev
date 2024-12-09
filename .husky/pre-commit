@@ -1,9 +1,8 @@
-### @(#) : husky pre-commit
+## @(#) : husky pre-commit
 #
 # @version 1.0.0
-# @author  Furukawa, Atsushi <atsushifx@aglabo.com>
-# @date    2024-11-26
+# @author  Furukawa, Atsushi <atsushifx@gmail.com>
+# @date    2024-11-29
 # @license MIT
-
 
 gitleaks protect --staged
