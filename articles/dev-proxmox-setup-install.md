@@ -27,3 +27,23 @@ published: false
 ### 起動設定
 
 `Proxmox`インストーラが起動するように、`USBメモリ`から起動するようにしておきます。
+
+## インストール
+
+### `Proxmox VE`のインストール
+
+次の手順で、`Proxmox`をインストールします。
+
+1. インストーラーの起動:
+   PCを`Proxmox`インストーラーから起動します。タイトル画面が表示されます。
+   ![`インストーラー`](/images/articles/pve-install/ss-01-installer.jpg)
+
+2. インストーラーの選択:
+   `Terminal UI`を選択し、インストラーを起動します。
+  ![`ブート`](/images/articles/pve-install/ss-02-booting.jpg)
+
+3. `EULA`の同意:
+   `EULA`が表示されます。`I agree`を選択します。
+  ![`EULA`](/images/articles/pve-install/ss-03-eula.jpg)
+
+4.
