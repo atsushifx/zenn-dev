@@ -12,7 +12,7 @@
 #<<
 WORKINGDIR=$(dirname "$0" )
 
-echo "Working: ${WORKINGDIR}"
 gitleaks protect --staged
+echo "textlint markdown files"
 git diff --cached --name-only *md | ${WORKINGDIR}/ci-lint.sh
 
