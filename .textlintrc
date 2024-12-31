@@ -22,6 +22,9 @@
                     "自然言語処理技術"
                 ]
             },
+            "no-mix-dearu-desumasu": {
+                "preferInList": "ですます"
+            },
             "ja-no-mixed-period": {
                 "periodMark": "。",
                 "allowPeriodMarks": [
