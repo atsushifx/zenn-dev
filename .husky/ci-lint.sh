@@ -25,6 +25,8 @@ readonly THISCMD=$( basename  "$0" )
 ## main block (call this script as command)]
 
 while IFS= read -r filename; do
+  echo "Files: $filename"
+
   ## text review with textlint
   textlint --quiet "$filename" || exit 1
 

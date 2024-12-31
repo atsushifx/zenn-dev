@@ -10,9 +10,14 @@
 # git pre-commit check script from husky
 #
 #<<
-WORKINGDIR=$(dirname "$0" )
 
+## initialize
+WD=$(dirname "$0" )
+
+## check files
 gitleaks protect --staged
-echo "textlint markdown files"
-git diff --cached --name-only *md | ${WORKINGDIR}/ci-lint.sh
+
+# lint files
+git diff --cached --name-only HEAD *.md | $WD/ci-lint.sh
+
 
