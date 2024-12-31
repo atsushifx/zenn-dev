@@ -1,8 +1,18 @@
 ## @(#) : husky pre-commit
 #
-# @version 1.0.0
+# @version 1.0.1
 # @author  Furukawa, Atsushi <atsushifx@gmail.com>
-# @date    2024-11-29
+# @date    2024-12-31
 # @license MIT
+#
+# @desc<<
+#
+# git pre-commit check script from husky
+#
+#<<
+WORKINGDIR=$(dirname "$0" )
 
 gitleaks protect --staged
+echo "textlint markdown files"
+git diff --cached --name-only *md | ${WORKINGDIR}/ci-lint.sh
+
