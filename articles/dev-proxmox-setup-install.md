@@ -28,7 +28,7 @@ published: false
 
 ### 起動設定
 
-PCの設定を変更し、電源On時に`Proxmox`インストーラーが起動するようにします。
+PC の設定を変更し、電源オン時に`Proxmox`インストーラーが起動するようにします。
 
 ## インストール
 
@@ -36,8 +36,8 @@ PCの設定を変更し、電源On時に`Proxmox`インストーラーが起動�
 
 次の手順で、`Proxmox VE`をインストールします。
 
-1. インストーラーの起動
-   PCを`Proxmox`インストーラーから起動します。タイトル画面が表示されます。
+1. インストーラーの起動:
+   PC を`Proxmox`インストーラーから起動します。タイトル画面が表示されます。
    ![`インストーラー`](/images/articles/pve-install/ss-01-installer.jpg)
 
 2. インストーラーの選択
@@ -47,3 +47,7 @@ PCの設定を変更し、電源On時に`Proxmox`インストーラーが起動�
 3. `EULA`の同意
    `EULA`が表示されます。`I agree`を選択します。
    ![`EULA`](/images/articles/pve-install/ss-03-eula.jpg)
+
+4. インストールディスクの設定:
+   `Proxmox VE`をインストールするディスクを選択します。
+   ![`インストール先](/images/articles/pve-install/ss-04-disk.jpg)
