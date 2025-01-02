@@ -74,26 +74,20 @@
 """"
 :theme
 
-- 'proxmox`用インストールUSBの作成
+- 自宅サーバのハードウェアスペックおよびLAN環境の紹介`
 
 """"
 :target:
 
-- `proxmox`を利用したいWindowsユーザー
+- 自宅サーバを構築したいITエンジニア
 
 """"
 :goal
 
-- `proxmox`のインストールUSBを作成し、サーバー機での起動を成功させること
+- 自宅サーバおよびLAN環境について簡潔かつ十分に説明する
 
 """"
 link:
-
-- `PROXMOX`: [https://proxmox.com/]<https://proxmox.com/>
-  `proxmox`公式サイト
-
-- `Rufus`: [https://rufus.ie/]<https://rufus.ie/>
-  `Rufus`公式サイト
 
 """"
 remark:
