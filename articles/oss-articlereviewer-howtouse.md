@@ -10,19 +10,19 @@ published: false
 
 `atsushifx`です。
 
-GitHub で、`TechArticleReviewer` <https://github.com/atsushifx/tech-article-reviewer> という技術記事編集フレームワークを公開しました。
-このフレームワークは、`ChatGPT`のようなチャットAI用に、技術ブログの記事をレビュー、改善するプロンプトを提供します。
-出力結果を活用することで、質の高い技術記事を効率的に執筆できるため、ぜひ活用してください。
+GitHub で、[`TechArticleReviewer`](https://github.com/atsushifx/tech-article-reviewer) という技術記事編集フレームワークを公開しました。
+このフレームワークは`ChatGPT`のようなチャットAI向けに、技術ブログの記事をレビューおよび改善するためのプロンプトを提供します。
+出力結果を活用することで、文章の精度を向上させ、質の高い技術記事を効率的に執筆することが可能です。
 
 ## プロンプトの使い方
 
 この章では、プロンプトの基本的な使い方を説明します。
 
 1. プロンプトのダウンロード:
-   [TechArticleReviewerリポジトリ](https://github.com/atsushifx/tech-article-reviewer/) 上の`article-review.prompt` というプロンプトをダウンロードします。
+   [TechArticleReviewer](https://github.com/atsushifx/tech-article-reviewer/)リポジトリ　から`article-review.prompt` をダウンロードします。
 
 2. プロンプトの設定:
-   PC上の`article-review.prompt`をエディタで開き、以下の項目を設定します。
+   PC上の`article-review.prompt`をエディタ (VSCodeなど) で開き、以下の項目を設定します。
 
    | 項目 | 変数名 | 詳細 | 備考 |
    | --- | --- | --- | --- |
@@ -74,7 +74,7 @@ GitHub で、`TechArticleReviewer` <https://github.com/atsushifx/tech-article-re
    [ChatGPT](https://chatgpt.com/)、[Claude](https://claude.ai/) などの`AIチャットボット`にアクセスし、上記のプロンプトをコピー&ペーストして実行します。
    プロンプトが正しく解釈されるとメッセージが表示され、入力待ちになります。
 
-   ```text:chatgpt
+   ```text:
    プロンプトを確認しました。レビューを開始するには、/begin コマンドを実行してください。
    レビュー対象の文章を入力いただければ、指示に従ってレビューを行います。
 
@@ -83,13 +83,22 @@ GitHub で、`TechArticleReviewer` <https://github.com/atsushifx/tech-article-re
 4. 技術記事のレビュー:
    レビューしたい技術記事を`/begin`、`/end`ではさんで、チャット AI に送信します。
 
-   ```text:chatgpt
+   ```text:
    /begin
+
    ---
    title: "TechArticleReviewer: 生成AIを使った記事編集フレームワーク"
-   .
-   .
-   .
+   emoji: "📝"
+   type: "tech"
+   topics: [ "生成AI", "AIチャットボット", "chatgpt", "prompt", "oss" ]
+   published: false
+   ---
+
+   ## はじめに
+
+   `atsushifx`です。
+
+    <!-- 以下、記事の本文 -->
 
    /end
    ```
@@ -103,9 +112,10 @@ GitHub で、`TechArticleReviewer` <https://github.com/atsushifx/tech-article-re
    セクション: タイトル
 
    - 行番号: 1
-   - 改善点: タイトルに誤字が含まれています。"AerticleReviewer" は "ArticleReviewer" の誤記です。また、タイトルが冗長で簡潔さに欠けます。
-   - 修正案: "TechArticleReviewer: 生成AIを活用した技術記事編集フレームワーク"
-   - 修正後: "TechArticleReviewer: 生成AIを活用した技術記事編集フレームワーク"
+     改善点: タイトルに冗長さがあり、「生成AIを使った」という表現が直接的すぎます。「生成AIを活用した」とすることで、より洗練された印象を与えられます。
+     修正案: "TechArticleReviewer: 生成AIを活用した技術記事編集フレームワーク"
+     修正前: "TechArticleReviewer: 生成AIを使った記事編集フレームワーク"
+     修正後: "TechArticleReviewer: 生成AIを活用した技術記事編集フレームワーク"
 
     ```
 
@@ -131,7 +141,7 @@ GitHub で、`TechArticleReviewer` <https://github.com/atsushifx/tech-article-re
 ## おわりに
 
 この記事では、TechArticleReviewer のレビュー用プロンプトを紹介しました。
-このプロンプトを使えば質の高い技術記事が書けるようになります。
+このプロンプトを使えば、レビューと改善のプロセスを効率化し、質の高い技術記事を容易に執筆できるようになります。
 この記事も本プロンプトを使用してレビューしました。
 
 プロンプトを試してみて、ぜひフィードバックをお寄せください。
