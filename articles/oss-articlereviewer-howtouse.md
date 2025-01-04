@@ -3,7 +3,7 @@ title: "TechArticleReviewer: 技術ブログ執筆を支援する記事編集フ
 emoji: "📝"
 type: "tech"
 topics: [ "生成AI", "AIチャットボット", "chatgpt", "prompt", "oss" ]
-published: false
+published: true
 ---
 
 ## はじめに
