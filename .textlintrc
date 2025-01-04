@@ -32,7 +32,8 @@
 			"no-exclamation-question-mark": false,
 			"no-doubled-joshi": {
 				"strict": false
-			}
+			},
+			"no-mix-dearu-desumasu": false
 		},
 		"preset-japanese": {
 			"sentence-length": {
@@ -99,6 +100,8 @@
 				"NAS",
 				"Wi-Fi",
 				"Proxmox",
+				"ChatGPT",
+				"TechArticleReviewer",
 				"GB",
 				"TB"
 			]
