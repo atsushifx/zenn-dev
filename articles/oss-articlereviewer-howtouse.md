@@ -11,18 +11,18 @@ published: false
 `atsushifx`です。
 
 GitHub で、[`TechArticleReviewer`](https://github.com/atsushifx/tech-article-reviewer) という技術記事編集フレームワークを公開しました。
-このフレームワークは`ChatGPT`のようなチャットAI向けに、技術ブログの記事をレビューおよび改善するためのプロンプトを提供します。
-出力結果を活用することで、文章の精度を向上させ、質の高い技術記事を効率的に執筆することが可能です。
+このフレームワークは`ChatGPT`のようなチャットAI向けに、技術ブログをレビューするプロンプトを提供します。
+出力結果を活用することで、文章の精度を向上させ、質の高い技術記事を効率的に執筆できます。
 
 ## プロンプトの使い方
 
 この章では、プロンプトの基本的な使い方を説明します。
 
 1. プロンプトのダウンロード:
-   [TechArticleReviewer](https://github.com/atsushifx/tech-article-reviewer/)リポジトリ　から`article-review.prompt` をダウンロードします。
+   [TechArticleReviewer](https://github.com/atsushifx/tech-article-reviewer/)リポジトリから`article-review.prompt` をダウンロードします。
 
 2. プロンプトの設定:
-   PC上の`article-review.prompt`をエディタ (VSCodeなど) で開き、以下の項目を設定します。
+   PC上の`article-review.prompt`をエディタ (`VS Code`など) で開き、以下の項目を設定します。
 
    | 項目 | 変数名 | 詳細 | 備考 |
    | --- | --- | --- | --- |
@@ -81,7 +81,7 @@ GitHub で、[`TechArticleReviewer`](https://github.com/atsushifx/tech-article-r
    ```
 
 4. 技術記事のレビュー:
-   レビューしたい技術記事を`/begin`、`/end`ではさんで、チャット AI に送信します。
+   対象の技術記事を`/begin`、`/end`で囲んで、チャット AI に送信します。
 
    ```text:
    /begin
@@ -141,7 +141,7 @@ GitHub で、[`TechArticleReviewer`](https://github.com/atsushifx/tech-article-r
 ## おわりに
 
 この記事では、TechArticleReviewer のレビュー用プロンプトを紹介しました。
-このプロンプトを使えば、レビューと改善のプロセスを効率化し、質の高い技術記事を容易に執筆できるようになります。
+このプロンプトを使えば、記事のレビューが容易にでき、記事の質を高めることができます。
 この記事も本プロンプトを使用してレビューしました。
 
 プロンプトを試してみて、ぜひフィードバックをお寄せください。
