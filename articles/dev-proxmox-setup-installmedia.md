@@ -1,8 +1,8 @@
 ---
-title: "Proxmoxのセットアップ: インストールUSBの作成"
+title: "Proxmoxのセットアップ: インストールメディアの作成"
 emoji: "🏪"
 type: "tech"
-topics: [ "自宅サーバ", "仮想化", "Proxmox", "pve", "環境構築" ]
+topics: [ "自宅サーバ", "仮想化", "Proxmox", "pve" ]
 published: false
 ---
 
@@ -11,12 +11,10 @@ published: false
 以下の手順で、`Proxmox`のインストールメディア を作成します。
 
 1. `Proxmox` の Webサイトから `ISOイメージ` をダウンロード
-
 2. インストーラ用USBメモリを用意し、PC に接続
-
 3. `Rufus` を使用して `ISOイメージ` を USBメモリ に書き込み
 
-以上で、インストールUSB が作成できます。
+以上で、インストールメディア が作成できます。
 
 Enjoy!
 
@@ -27,10 +25,10 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 
 ## はじめに
 
-この記事では、`Proxmox`のインストールUSB の作成方法を説明します。
+この記事では、`Proxmox`のインストールメディア の作成方法を説明します。
 `ISOイメージ`のダウンロードから `Rufus` を使用した作成手順まで、スクリーンショット付きで詳細に説明します。
 
-## 1. インストールUSBの作成
+## 1. インストールメディアの作成
 
 ### 1.1 `ISOイメージ`のダウンロード
 
@@ -45,7 +43,7 @@ USBメモリの代わりに、マイクロSDカードとカードリーダーも
 
 ### 1.2 `ISOイメージ`の書き込み
 
-ダウンロードした`ISOイメージ`を `Rufus` で USBメモリに書き込み、インストールUSB を作成します。
+ダウンロードした`ISOイメージ`を `Rufus` で USBメモリに書き込み、インストールメディア を作成します。
 `Rufus` は次のコマンドでインストール可能です。必要に応じて、インストール先を変更してください。
 
 ```powershell
@@ -58,7 +56,7 @@ winget install Rufus.Rufus --interactive --location "C:\app\utils\DiskUtils\rufu
 
 :::
 
-以下の手順で、インストールUSBを作成します:
+以下の手順で、インストールメディアを作成します:
 
 1. `Rufus` を起動します。以下の起動画面が表示されます。
    ![`Rufus`起動画面](/images/articles/proxmox-setup/ss-rufus-start.png)
@@ -74,15 +72,15 @@ winget install Rufus.Rufus --interactive --location "C:\app\utils\DiskUtils\rufu
 
 4. `[閉じる]`をクリックし、`Rufus` を終了します。
 
-以上で、インストールUSB の作成は完了です。
+以上で、インストールメディア の作成は完了です。
 
 ## 2. 動作チェック
 
-### 2.1 `インストールUSB`の起動チェック
+### 2.1 `インストールメディア`の起動チェック
 
-以下の手順で、作成した インストールUSB が動作するか確認します:
+以下の手順で、作成した インストールメディア が動作するか確認します:
 
-1. サーバー用PC に インストールUSB を差し込み、起動します。
+1. サーバー用PC に インストールメディア を差し込み、起動します。
 
 2. 起動画面の確認:
    `Proxmox`インストーラが起動し、以下の画面が表示されます。
@@ -92,7 +90,7 @@ winget install Rufus.Rufus --interactive --location "C:\app\utils\DiskUtils\rufu
 
 ## おわりに
 
-この記事では、`Proxmox`インストールUSB の作成方法と動作確認を説明しました。
+この記事では、`Proxmox`インストールメディア の作成方法と動作確認を説明しました。
 次回は、サーバー用PC に `Proxmox` をインストールする手順を説明します。
 
 それでは、Happy Hacking!
