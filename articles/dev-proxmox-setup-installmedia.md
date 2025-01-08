@@ -3,7 +3,7 @@ title: "Proxmox VE: インストールメディア作成"
 emoji: "🏪"
 type: "tech"
 topics: [ "自宅サーバ", "仮想化", "Proxmox", "pve" ]
-published: false
+published: true
 ---
 
 ## tl;dr
@@ -225,5 +225,5 @@ USBメモリのデータがすべて消去されます。必要に応じてバ�
 - `Rufus`公式サイト <https://rufus.ie/>:
   `Rufus`のダウンロードや使用方法、最新のアップデート情報が掲載されています。トラブルシューティングガイドも参考になります。
 
-- [インストーラー起動のためのBIOS設定"](dev-proxmox-setup-configbios):
+- [インストーラー起動のためのBIOS設定](dev-proxmox-setup-configbios):
   PC の`UEFI`/`BIOS`を設定して、USBメモリから PC を起動するための手順を解説しています。
