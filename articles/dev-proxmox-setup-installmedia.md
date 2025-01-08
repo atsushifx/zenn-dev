@@ -3,7 +3,7 @@ title: "Proxmox VE: インストールメディア作成"
 emoji: "🏪"
 type: "tech"
 topics: [ "自宅サーバ", "仮想化", "Proxmox", "pve" ]
-published: false
+published: true
 ---
 
 ## tl;dr
