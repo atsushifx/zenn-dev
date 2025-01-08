@@ -7,7 +7,7 @@ $~*
 
 # temporary directory
 /temp/*
-!/temp/temp*prompt*
+!/temp/*md
 
 #  ignore patch
 *.diff

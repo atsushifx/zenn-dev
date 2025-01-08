@@ -17,10 +17,8 @@
 		"preset-ja-technical-writing": {
 			"sentence-length": 100,
 			"max-kanji-continuous-len": {
-				"max": 6,
-				"allow": [
-					"自然言語処理技術"
-				]
+				"max": 8,
+				"allow": []
 			},
 			"ja-no-mixed-period": {
 				"periodMark": "。",
@@ -29,6 +27,7 @@
 					":"
 				]
 			},
+			"no-mix-dearu-desumasu": false,
 			"no-exclamation-question-mark": false,
 			"no-doubled-joshi": {
 				"strict": false
@@ -105,7 +104,9 @@
 				"UEFI",
 				"SSD",
 				"GB",
-				"TB"
+				"TB",
+				"HDD",
+				"SSD"
 			]
 		},
 		"@proofdict/proofdict": {
