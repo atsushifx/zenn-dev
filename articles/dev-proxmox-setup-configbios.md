@@ -1,6 +1,6 @@
 ---
 title: "Proxmox VE: インストーラー起動のためのBIOS設定"
-emoji: "🏠"
+emoji: "🏪"
 type: "tech"
 topics: [ "自宅サーバー", "環境構築", "Windows", "UEFI", "BIOS" ]
 published: true
