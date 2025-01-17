@@ -3,7 +3,7 @@ title: "Proxmox VE: インストール手順ガイド"
 emoji: "🏪"
 type: "tech"
 topics: ["自宅サーバ", "環境構築", "Proxmox", "pve" ]
-published: false
+published: true
 ---
 
 ## はじめに
