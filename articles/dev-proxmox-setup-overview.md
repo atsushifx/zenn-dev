@@ -1,6 +1,6 @@
 ---
 title: "Proxmoxのセットアップ: 自宅サーバーの構築 オーバービュー"
-emoji: "🏠"
+emoji: "🏪"
 type: "tech"
 topics: [ "自宅サーバー", "環境構築", "仮想化", "Proxmox", "pve" ]
 published: true

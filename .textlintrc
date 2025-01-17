@@ -17,8 +17,13 @@
 		"preset-ja-technical-writing": {
 			"sentence-length": 100,
 			"max-kanji-continuous-len": {
-				"max": 8,
-				"allow": []
+				"max": 6,
+				"allow": [
+					"自然言語処理技術"
+				]
+			},
+			"no-mix-dearu-desumasu": {
+				"preferInList": "ですます"
 			},
 			"ja-no-mixed-period": {
 				"periodMark": "。",
@@ -27,12 +32,10 @@
 					":"
 				]
 			},
-			"no-mix-dearu-desumasu": false,
 			"no-exclamation-question-mark": false,
 			"no-doubled-joshi": {
 				"strict": false
-			},
-			"no-mix-dearu-desumasu": false
+			}
 		},
 		"preset-japanese": {
 			"sentence-length": {
@@ -94,18 +97,9 @@
 				"PublicArchives",
 				"/Unlicense/ig",
 				"OSS",
+				"2024",
 				"TRIGKEY",
-				"Speed S5",
-				"NAS",
-				"Wi-Fi",
-				"Proxmox",
-				"ChatGPT",
-				"TechArticleReviewer",
-				"UEFI",
-				"SSD",
-				"GB",
-				"TB",
-				"HDD",
+				"SATA",
 				"SSD"
 			]
 		},

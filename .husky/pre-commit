@@ -18,6 +18,5 @@ WD=$(dirname "$0" )
 gitleaks protect --staged
 
 # lint files
-git diff --cached --name-only HEAD *.md | $WD/ci-lint.sh
-
+git diff --cached --name-only HEAD -- '*.md' | $WD/ci-lint.sh
 
