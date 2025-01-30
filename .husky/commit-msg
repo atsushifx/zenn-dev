@@ -14,4 +14,4 @@
 ## initialize
 WD=$(dirname "$0" )
 
-"commitlint --edit \$1"
+commitlint --edit "$1"

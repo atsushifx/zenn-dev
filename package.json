@@ -9,10 +9,8 @@
     "type": "git",
     "url": "https://github.com/atsushifx/zenn-cli.git"
   },
-  "scripts": {
-    "prepare": "husky install",
-  },
   "dependencies": {
+    "@commitlint/config-conventional": "^19.6.0",
     "zenn-cli": "^0.1.158"
   }
 }
