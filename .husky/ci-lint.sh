@@ -26,10 +26,10 @@ readonly THISCMD=$( basename  "$0" )
 
 while IFS= read -r filename; do
   ## text review with textlint
-  textlint --quiet "$filename" || exit 1
+  textlint --cache --quiet "$filename" || exit 1
 
   ## check markdown
-  markdownlint "$filename" || exit
+  markdownlint-cli2 --cache "$filename" || exit
 
 done
 
