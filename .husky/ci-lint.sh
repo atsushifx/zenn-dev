@@ -25,6 +25,9 @@ readonly THISCMD=$( basename  "$0" )
 ## main block (call this script as command)]
 
 while IFS= read -r filename; do
+  # check secret
+  secretlint "$filename"
+
   ## text review with textlint
   textlint --cache --quiet "$filename" || exit 1
 
