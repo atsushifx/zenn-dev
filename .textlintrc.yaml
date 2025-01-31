@@ -5,16 +5,12 @@ filters:
         allowlistConfigPaths:
             - .textlint/allowlist.yml
 rules:
-    preset-ja-engineering-paper:
-        prh: false
-        use-si-units: false
-        unify-kuten-and-touten: false
     preset-ja-technical-writing:
-        sentence-length: 100
+        sentence-length: 120
         max-kanji-continuous-len:
             max: 6
             allow: []
-        no-mix-dearu-desumasu: {}
+        no-mix-dearu-desumasu: true
         ja-no-mixed-period:
             periodMark: 。
             allowPeriodMarks:
@@ -23,21 +19,12 @@ rules:
         no-exclamation-question-mark: false
         no-doubled-joshi:
             strict: false
-    preset-japanese:
-        sentence-length:
-            max: 100
-        max-ten:
-            max: 4
-        no-doubled-joshi:
-            strict: false
     preset-ja-spacing:
         ja-space-between-half-and-full-width:
             space:
                 - alphabets
                 - numbers
-    no-mixed-zenkaku-and-hankaku-alphabet: true
     common-misspellings: true
-    spellcheck-tech-word: true
     '@proofdict/proofdict':
         dictURL: 'https: //atsushifx.github.io/proof-dictionary/'
     prh:

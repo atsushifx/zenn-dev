@@ -1,10 +1,23 @@
-# EditorConfig is awesome: https://EditorConfig.org
+## EditorConfig is awesome: https://EditorConfig.org
 #
-# default editorconfig set ~/ to symlink
+# @(#) : zenn.dev articles repository
+#
+# @version  1.0.0
+# @date		2025-01-31
+# @author	Furukawa Atsushi <atsushifx@aglabo.com>
+# @license  MIT
+#
+# @description<<
 
-# top-most EditorConfig file
+# default settings for til
+# markdown and lint settings
+#
+#
+#<<
+
 root = true
 
+# Unix-style newlines with a newline ending every file
 [*]
 end_of_line = lf
 insert_final_newline = true
@@ -12,27 +25,68 @@ insert_final_newline = true
 # default character-set
 charset = utf-8
 
-# indent style
+# default indent style
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+
+### Settings by ext type
+# no ext: general files settings
+[**.]
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+### Programming Languages
+
+### Documents
+# markdown
+[**.md]
+indent_size = tab
+tab_width = 2
+indent_style = space
+
+### Settings
+# json
+[**.json]
+tab_width = 2
 indent_size = tab
 indent_style = tab
-tab_width=4
 
-# file type settings
-
-# setting files
-[*.{json,yml,yaml}]
-indent_style = space
+# yaml
+[**.{yaml,yml}]
 tab_width = 2
 indent_size = tab
-
-[git*]
 indent_style = space
+
+# ini, toml
+[**.{ini,toml}]
+indent_style = tab
+indent_size = tab
 tab_width = 4
-indent_size = 4
 
-### markdown
-[*.md]
-indent_size = 2
+# rc files
+[**rc]
 indent_style = space
+indent_size = tab
 tab_width = 2
 
+### Shell Scripts
+# shell script
+[**.{sh,bash,zsh}]
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+### Git config
+# for git config
+[**.git*]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[**/git/*]
+indent_style = tab
+indent_size = tab
+tab_width = 4
