@@ -1,13 +1,9 @@
 # markdown lint rule configs
-config:
-  default: true
-  whitespace: true
+default: true
+# lint rules
+whitespace: true
+line-length:
   line_length: 120
-  ol-prefix: true
-  strong-style: true
-  no-hard-tabs: true
-ignores:
-  - .git
-  - node_modules
-
-
+ol-prefix: true
+strong-style: true
+no-hard-tabs: true

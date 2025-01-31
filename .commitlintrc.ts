@@ -5,8 +5,21 @@ const Configuration = {
 	 */
 	extends: ['@commitlint/config-conventional'],
 
-	formatter: '@commitlint/format',
-
+	rules: {
+		"type-enum": [2, "always", [
+			"build",
+			"chore",
+			"docs",
+			"feat",
+			"fix",
+			"refactor",
+			"revert",
+			"style",
+			// added commit type
+			"merge",
+			"publish",
+		]],
+	},
 };
 
 export default Configuration
