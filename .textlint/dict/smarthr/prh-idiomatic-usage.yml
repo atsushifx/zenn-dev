@@ -457,7 +457,7 @@ rules:
     prh: >-
       「！」と「？」は単独で使う場合は全角、ペアで使う場合は半角で表記する
       https://smarthr.design/products/contents/idiomatic-usage/usage/
-  - expected: '!!'
+  - expected: "!!"
     pattern:
       - ！！
     prh: >-
@@ -465,8 +465,8 @@ rules:
       https://smarthr.design/products/contents/idiomatic-usage/usage/
     specs:
       - from: ！！
-        to: '!!'
-  - expected: '!?'
+        to: "!!"
+  - expected: "!?"
     pattern:
       - ！？
     prh: >-
@@ -474,8 +474,8 @@ rules:
       https://smarthr.design/products/contents/idiomatic-usage/usage/
     specs:
       - from: ！？
-        to: '!?'
-  - expected: '??'
+        to: "!?"
+  - expected: "??"
     pattern:
       - ？？
     prh: >-
@@ -483,7 +483,7 @@ rules:
       https://smarthr.design/products/contents/idiomatic-usage/usage/
     specs:
       - from: ？？
-        to: '??'
+        to: "??"
   - expected: 改善
     pattern:
       - カイゼン
@@ -534,14 +534,14 @@ rules:
         to: 項目ごとの
       - from: フォーム毎で
         to: フォームごとで
-  - expected: サーバー
+  - expected: サーバ
     pattern:
       - /サーバ(?!ー)/
     prh: >-
       ‐er、‐or、‐arで終わる単語は「長音あり」、-yで終わる単語は「長音なし」とする（例外あり）
       https://smarthr.design/products/contents/idiomatic-usage/usage/
     specs:
-      - from: 受信サーバに拒否されました
+      - from: 受信サーバーに拒否されました
         to: 受信サーバーに拒否されました
   - expected: さら$1
     pattern:
@@ -1245,30 +1245,6 @@ rules:
         to: 伴わない
       - from: ともなって
         to: 伴って
-  - expected: パソコン
-    pattern:
-      - /(?<![a-zA-Z])PC(?![a-zA-Z])/
-    prh: >-
-      「パソコン」と表記し、「PC」の使用は控える
-      https://smarthr.design/products/contents/idiomatic-usage/usage/#recw4wmIL3QqcKmoc-0
-    specs:
-      - from: PCを使用します
-        to: パソコンを使用します
-      - from: HOGEPCFOO
-        to: HOGEPCFOO
-  - expected: 画面
-    pattern:
-      - /モーダルウィンドウ|モーダルダイアログ|ウィンドウ|ダイアログ|モーダル/
-    prh: >-
-      アプリケーションの操作画面は「画面」で表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/#recuyZUYZxqRrVbeB-0
-    specs:
-      - from: 別ウィンドウで開く
-        to: 別画面で開く
-      - from: 削除ダイアログ
-        to: 削除画面
-      - from: モーダルを閉じる
-        to: 画面を閉じる
   - expected: か所
     pattern:
       - /(?<![^\x01-\x7E])(ヶ|ケ|箇|個|ヵ|カ)所/
