@@ -42,7 +42,7 @@ jobs:
                 ~/.npm
                 .textlintcache
           
-          - name: install npm modules
+          - name: install node modules
             run: |
               npm install --no-audit --save-prod --progress=false --silent \
                 textlint \
@@ -57,4 +57,15 @@ jobs:
                 @proofdict/textlint-rule-proofdict \
                 textlint-rule-prh \
                 markdownlint-cli2
-              npm list
+              # npm list
+
+          - name: Exec textlint on github PR
+            uses: tsuyoshicho/action-textlint@v3
+            with:
+              github_token: ${{ secrets.github_token }}
+              reporter: github-pr-review
+              level: warning
+              textlint_flags: '**/*.md'
+
+          - name: Exec markdown lint 
+            run: 'npm run lint:markdown'
