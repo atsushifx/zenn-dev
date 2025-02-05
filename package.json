@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/atsushifx/zenn-dev.git"
   },
-  "dependencies": {
+  "dev-dependencies": {
     "zenn-cli": "^0.1.158"
   }
 }

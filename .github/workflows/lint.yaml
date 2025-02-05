@@ -1,0 +1,55 @@
+## @(#) : linting markdown files
+#
+# @version 1.0.0
+# @author  Furukawa Atsushi <atsushifx@gmail.com>
+# @date    2025-02-05
+# @license MIT
+#
+# @desc<<
+#
+# lint articles from PR's
+#
+#<<
+
+name: lint-articles
+
+on: 
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'linting articles'
+
+jobs: 
+    lint-artcles-on-github:
+        name: lint-on-github
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: checkout repository
+            uses: actions/checkout@master
+
+          - name: setup node/npm
+            uses: actions/setup-node@v4
+            with:
+              node-version: 22
+            
+          - name: restore cache
+            id: cache-restore
+            uses: actions/cache/restore@v4
+            with:
+              key: cache-${{ runner.os }}
+              path: |
+                ~/.npm
+                .textlintcache
+          
+          - name: install npm modules
+            run: |
+              npm install --no-audit --save-prod --progress=false --silent \
+                textlint \
+                textlint-filter-rule-allowlist textlint-filter-rule-comments \
+                textlint-rule-preset-ja-technical-writing textlint-rule-preset-ja-spacing \
+                textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet \
+                @proofdict/textlint-rule-proofdict \
+                textlint-rule-prh \
+                markdownlint-cli2
+              npm list
