@@ -13,13 +13,14 @@
 
 name: reviewdog
 
+# PR及び手動でAction実行
 on:
   pull_request:
     branches: [main]
     paths:
       - '**/*.md'
 
-
+# 実行するAction
 jobs:
     lint-on-github:
         name: lint on github
@@ -27,8 +28,8 @@ jobs:
 
         steps:
           - name: checkout repository
-            uses: actions/checkout@master
-
+            uses: actions/checkout@v4
+ 
           - name: setup node
             uses: actions/setup-node@v4
             with:
@@ -36,7 +37,6 @@ jobs:
 
           - name: restore cache
             id: cache-restore
-
             uses: actions/cache/restore@v4
             with:
               key: cache-${{ runner.os }}
@@ -62,19 +62,31 @@ jobs:
                 markdownlint-cli2
               # npm list
 
-          - name: Exec textlint on github PR
-            uses: tsuyoshicho/action-textlint@v3
-            with:
-              github_token: ${{ secrets.github_token }}
-              reporter: github-pr-review
-              level: warning
-              textlint_flags: '**/*.md'
+          - name: get changed files
+            id: changed
+            run: |
+              base_sha="$(git merge-base HEAD origin/main)"
+              head_sha="$(git rev-parse HEAD)"
+              # echo "head: ${head_sha}"
+              # echo "base: ${base_sha}"
+              files=$(git diff --name-only ${base_sha} ${head_sha} -- '**/*.md')
+              echo "files=${files}" >> $GITHUB_OUTPUT
 
-          - name: Exec markdown lint
-            run: 'npm run lint:markdown'
+          - name: lint text
+            env: 
+              changed_files: "${{ steps.changed.outputs.files }}"
+            run: |
+              npm run lint:docs -- "${changed_files}"
+            
+          - name: lint markdown  
+            env: 
+              changed_files: "${{ steps.changed.outputs.files }}"
+            run: |
+              npm run lint:markdown -- ${changed_files}
 
           - name: Always save cache
             id: cache-save
+            if: false #   
             uses: actions/cache/save@v4
             with:
               key: ${{ steps.cache-restore.outputs.cache-primary-key }}
