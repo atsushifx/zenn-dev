@@ -1229,22 +1229,6 @@ rules:
         to: ドロップダウンリストから選ぶ
       - from: ドロップダウンから選ぶ
         to: ドロップダウンリストから選ぶ
-  - expected: 伴$1
-    pattern:
-      - /ともな([いうえおわっ])/
-    specs:
-      - from: ともない
-        to: 伴い
-      - from: ともなう
-        to: 伴う
-      - from: ともなえ
-        to: 伴え
-      - from: ともなおう
-        to: 伴おう
-      - from: ともなわない
-        to: 伴わない
-      - from: ともなって
-        to: 伴って
   - expected: か所
     pattern:
       - /(?<![^\x01-\x7E])(ヶ|ケ|箇|個|ヵ|カ)所/
