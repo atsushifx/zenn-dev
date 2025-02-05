@@ -30,7 +30,7 @@ rules:
   "@textlint-ja/textlint-rule-no-synonyms": true
   no-mixed-zenkaku-and-hankaku-alphabet: true
   "@proofdict/proofdict":
-    dictURL: "https: //atsushifx.github.io/proof-dictionary/"
+    dictURL: "https://atsushifx.github.io/proof-dictionary/"
   prh:
     rulePaths:
       - ./.textlint/dict/prh.yml

@@ -1,0 +1,82 @@
+## @(#) : reviewdog / lint new articles 
+#
+# @version 1.0.0
+# @author  Furukawa Atsushi <atsushifx@gmail.com>
+# @date    2025-02-05
+# @license MIT
+#
+# @desc<<
+#
+# lint new articles on GitHub
+#
+#<<
+
+name: reviewdog
+
+on: 
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'linting articles'
+
+jobs: 
+    lint-on-github:
+        name: lint on github
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: checkout repository
+            uses: actions/checkout@master
+
+          - name: setup node
+            uses: actions/setup-node@v4
+            with:
+              node-version: 22
+            
+          - name: restore cache
+            id: cache-restore
+
+            uses: actions/cache/restore@v4
+            with:
+              key: cache-${{ runner.os }}
+              path: |
+                ~/.npm
+                .textlintcache
+          
+          - name: install node modules
+            if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
+            run: |
+              npm install --no-audit --save-prod --progress=false --silent \
+                textlint \
+                textlint-filter-rule-allowlist textlint-filter-rule-comments \
+                textlint-rule-preset-ja-technical-writing textlint-rule-preset-ja-spacing \
+                textlint-rule-ja-no-orthographic-variants \
+                @textlint-ja/textlint-rule-no-synonyms sudachi-synonyms-dictionary \
+                @textlint-ja/textlint-rule-morpheme-match \
+                textlint-rule-ja-hiraku \
+                textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet \
+                textlint-rule-common-misspellings \
+                @proofdict/textlint-rule-proofdict \
+                textlint-rule-prh \
+                markdownlint-cli2
+              # npm list
+
+          - name: Exec textlint on github PR
+            uses: tsuyoshicho/action-textlint@v3
+            with:
+              github_token: ${{ secrets.github_token }}
+              reporter: github-pr-review
+              level: warning
+              textlint_flags: '**/*.md'
+
+          - name: Exec markdown lint 
+            run: 'npm run lint:markdown'
+          
+          - name: Always save cache
+            id: cache-save
+            uses: actions/cache/save@v4
+            with:
+              key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+              path: |
+                ~/.npm
+                .textlintcache
