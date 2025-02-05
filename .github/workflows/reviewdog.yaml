@@ -35,6 +35,7 @@ jobs:
             
           - name: restore cache
             id: cache-restore
+
             uses: actions/cache/restore@v4
             with:
               key: cache-${{ runner.os }}
@@ -43,6 +44,7 @@ jobs:
                 .textlintcache
           
           - name: install node modules
+            if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
             run: |
               npm install --no-audit --save-prod --progress=false --silent \
                 textlint \
@@ -69,3 +71,12 @@ jobs:
 
           - name: Exec markdown lint 
             run: 'npm run lint:markdown'
+          
+          - name: Always save cache
+            id: cache-save
+            uses: actions/cache/save@v4
+            with:
+              key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+              path: |
+                ~/.npm
+                .textlintcache
