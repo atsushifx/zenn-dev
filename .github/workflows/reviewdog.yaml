@@ -66,7 +66,7 @@ jobs:
           - name: get changed files
             id: changed
             run: |
-              base_sha="$(git merge-base HEAD origin/main)"
+              base_sha="$(git merge-base HEAD main)"
               head_sha="$(git rev-parse HEAD)"
               # echo "head: ${head_sha}"
               # echo "base: ${base_sha}"
