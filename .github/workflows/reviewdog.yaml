@@ -1,4 +1,4 @@
-## @(#) : reviewdog / lint new articles 
+## @(#) : reviewdog / lint new articles
 #
 # @version 1.0.0
 # @author  Furukawa Atsushi <atsushifx@gmail.com>
@@ -13,13 +13,14 @@
 
 name: reviewdog
 
-on: 
-  workflow_dispatch:
-    inputs:
-      message:
-        description: 'linting articles'
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.md'
 
-jobs: 
+
+jobs:
     lint-on-github:
         name: lint on github
         runs-on: ubuntu-latest
@@ -32,7 +33,7 @@ jobs:
             uses: actions/setup-node@v4
             with:
               node-version: 22
-            
+
           - name: restore cache
             id: cache-restore
 
@@ -42,7 +43,7 @@ jobs:
               path: |
                 ~/.npm
                 .textlintcache
-          
+
           - name: install node modules
             if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
             run: |
@@ -69,9 +70,9 @@ jobs:
               level: warning
               textlint_flags: '**/*.md'
 
-          - name: Exec markdown lint 
+          - name: Exec markdown lint
             run: 'npm run lint:markdown'
-          
+
           - name: Always save cache
             id: cache-save
             uses: actions/cache/save@v4
