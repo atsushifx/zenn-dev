@@ -31,6 +31,17 @@ jobs:
           - name: checkout repository
             uses: actions/checkout@v4
 
+          - name: get changed files
+            id: changed
+            run: |
+              base_sha="$(git merge-base HEAD main)"
+              head_sha="$(git rev-parse HEAD)"
+              echo "head: ${head_sha}"
+              echo "base: ${base_sha}"
+              files=$(git diff --name-only ${base_sha} ${head_sha} -- '**/*.md')
+              echo "changed: ${files}"
+              echo "files=${files}" >> $GITHUB_OUTPUT
+
           - name: setup node
             uses: actions/setup-node@v4
             with:
@@ -63,16 +74,7 @@ jobs:
                 markdownlint-cli2
               # npm list
 
-          - name: get changed files
-            id: changed
-            run: |
-              base_sha="$(git merge-base HEAD main)"
-              head_sha="$(git rev-parse HEAD)"
-              # echo "head: ${head_sha}"
-              # echo "base: ${base_sha}"
-              files=$(git diff --name-only ${base_sha} ${head_sha} -- '**/*.md')
-              echo "files=${files}" >> $GITHUB_OUTPUT
-
+  
           - name: lint text
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
