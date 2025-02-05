@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start": "zenn preview",
-    "lint:docs": "textlint --cache **/*.md",
-    "lint:docs:fix": "textlint --cache --fix **/*.md",
-    "lint:markdown": "markdownlint-cli2 **/*.md",
-    "lint:markdown:fix": "markdownlint-cli2 --fix **/*.md"
+    "lint:docs": "textlint --cache ",
+    "lint:docs:fix": "textlint --cache --fix ",
+    "lint:markdown": "markdownlint-cli2 ",
+    "lint:markdown:fix": "markdownlint-cli2 --fix "
   },
   "repository": {
     "type": "git",
