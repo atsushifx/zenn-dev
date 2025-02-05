@@ -51,7 +51,7 @@ jobs:
             id: cache-restore
             uses: actions/cache/restore@v4
             with:
-              key: cache-${{ runner.os }}
+              key: ${{ runner.os }}-cache
               path: |
                 ~/.npm
                 .textlintcache
@@ -74,14 +74,15 @@ jobs:
                 markdownlint-cli2
               # npm list
 
-  
           - name: lint text
+            if: ${{ steps.changed.outputs.files != '' }}
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
               npm run lint:docs -- "${changed_files}"
 
           - name: lint markdown
+            if: ${{ steps.changed.outputs.files != '' }}
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
@@ -89,7 +90,6 @@ jobs:
 
           - name: Always save cache
             id: cache-save
-            if: false #
             uses: actions/cache/save@v4
             with:
               key: ${{ steps.cache-restore.outputs.cache-primary-key }}
