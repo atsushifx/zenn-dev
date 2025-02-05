@@ -19,6 +19,7 @@ on:
     branches: [main]
     paths:
       - '**/*.md'
+  workflow_dispatch:
 
 # 実行するAction
 jobs:
@@ -29,7 +30,7 @@ jobs:
         steps:
           - name: checkout repository
             uses: actions/checkout@v4
- 
+
           - name: setup node
             uses: actions/setup-node@v4
             with:
@@ -73,20 +74,20 @@ jobs:
               echo "files=${files}" >> $GITHUB_OUTPUT
 
           - name: lint text
-            env: 
+            env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
               npm run lint:docs -- "${changed_files}"
-            
-          - name: lint markdown  
-            env: 
+
+          - name: lint markdown
+            env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
               npm run lint:markdown -- ${changed_files}
 
           - name: Always save cache
             id: cache-save
-            if: false #   
+            if: false #
             uses: actions/cache/save@v4
             with:
               key: ${{ steps.cache-restore.outputs.cache-primary-key }}

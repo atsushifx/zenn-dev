@@ -37,3 +37,5 @@ logs
 # Dependency directories
 node_modules
 *lock*
+*cache*
+
