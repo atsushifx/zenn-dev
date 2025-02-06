@@ -36,7 +36,7 @@ published: true
 上記の`--remote`オプションは毎回使用するので、起動スクリプトに組み込みます。WSL 側の起動スクリプトは、次の通りです。
 
 ``` code : shell script
-/mnt/c/app/develop/ide/VSCode/bin/code --remote wsl+coding $*
+/mnt/c/app/develop/ide/VSCode/bin/code --remote wsl+${hostname} $*
 
 ```
 
@@ -44,7 +44,7 @@ published: true
 
 ## さいごに
 
-このオプションを知る前は、`Visual Studio Code`を立ち上げた後にいちいちフォルダをリモート側で開く必要がありました。
+このオプションを知る前は、`Visual Studio Code`を立ちあげた後にいちいちフォルダをリモート側で開く必要がありました。
 今回はオプションの指定をスクリプトで自動的に指定しているので、サクッとプログラミングに集中できます。
 
 それでは、Happy Hacking!
