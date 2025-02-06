@@ -31,9 +31,9 @@ jobs:
           - name: checkout repository
             uses: actions/checkout@v4
 
-          - name: fetch msin repository
+          - name: fetch main repository
             run: |
-              git fetch --depth 3 origin main
+              git fetch origin main
 
           - name: get changed files
             id: changed
