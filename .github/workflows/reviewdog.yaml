@@ -30,6 +30,8 @@ jobs:
         steps:
           - name: checkout repository
             uses: actions/checkout@v4
+            with:
+              fetch-depth: 30
 
           - name: get changed files
             id: changed
