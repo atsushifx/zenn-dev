@@ -30,11 +30,11 @@ jobs:
         steps:
           - name: checkout repository
             uses: actions/checkout@v4
-          
+
           - name: fetch main repository
             run: |
               git fetch origin main
-          
+
           - name: get changed files
             id: changed
             run: |

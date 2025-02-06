@@ -2,7 +2,7 @@
 title: "WSL2: 開発環境用にカスタムディストリビューションを作成する方法"
 emoji: "🐧"
 type: "tech"
-topics: [ "wsl", "開発環境", "環境構築", "wslconf", "ディストリビューション" ]
+topics: [ "wsl", "開発環境", "wslconf", "ディストリビューション" ]
 published: true
 ---
 
@@ -79,15 +79,15 @@ WSL では`/etc/wsl.conf`ファイルを使用することで、ディストリ�
    # Boot with systemd daemon
    [boot]
    systemd = true
-   
+
    [network]
    # hostname changed by distribution
    hostname = <my_custom_hostname>
-   
+
    [interop]
    # do not add Windows path
    appendWindowsPath = false
-   
+
    [user]
    default = <defaultUserName>
 
@@ -162,7 +162,7 @@ export で元ディストリビューションの tar アーカイブを作成�
 
 ### 2.4. 開発ディストリビューションの設定
 
-開発プロジェクトにあわせて、プログラミング言語やフレームワークの導入などをおこない、開発環境を構築しますま。
+開発プロジェクトにあわせて、プログラミング言語やフレームワークの導入などを行ない、開発環境を構築します。
 
 具体的には、必要なプログラミング言語のインストール、必要なライブラリやフレームワークの導入、開発ツールのセットアップなどが含まれます。インストールやセットアップの方法は、各言語や開発ツールの公式サイトを参照してください。
 
