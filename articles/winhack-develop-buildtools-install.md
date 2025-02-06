@@ -3,7 +3,7 @@ title: "開発環境: Visual Studio Build Toolsのインストール手順ガイ
 emoji: "🦾"
 type: "tech"
 topics: ["開発環境", "BuildTools", "cpp", "winget", "vsconfig"]
-published: true
+published: false
 ---
 
 ## はじめに
@@ -38,7 +38,7 @@ Windows でプログラミングをしている ITエンジニアを対象とし
 
 **注意:**
 
-- [マイクロソフト ソフトウェア ライセンス条項 ](https://visualstudio.microsoft.com/ja/license-terms/vs2022-ga-diagnosticbuildtools/)に同意する必要がある
+- [マイクロソフト ソフトウェア ライセンス条項](https://visualstudio.microsoft.com/ja/license-terms/vs2022-ga-diagnosticbuildtools/)に同意する必要がある
 
 ## 2. Build Toolsのインストール手順
 
