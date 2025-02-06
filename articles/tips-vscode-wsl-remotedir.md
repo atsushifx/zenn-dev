@@ -13,7 +13,7 @@ published: true
 ## はじめに
 
 `WSL`から`Visual Studio Code`を使うと、`Windows`側のパスでファイルやディレクトリを開きます。
-たとえば、`/home/atsushifx`下で`code .`としてディレクトリを開くと、"\\wsl.localhost\codings\home\atsushifx"のようなネットワークパスでディレクトリを開きます。
+`/home/atsushifx`下で`code .`としてディレクトリを開くと、`\\wsl.localhost\codings\home\atsushifx`のようにネットワークパスでディレクトリを開きます。
 
 `WSL`側のパスで開くには、`--remote`オプションを使う必要があります。
 
@@ -36,7 +36,7 @@ published: true
 上記の`--remote`オプションは毎回使用するので、起動スクリプトに組み込みます。WSL 側の起動スクリプトは、次の通りです。
 
 ``` code : shell script
-/mnt/c/app/develop/ide/VSCode/bin/code --remote wsl+coding $*
+/mnt/c/app/develop/ide/VSCode/bin/code --remote wsl+${hostname} $*
 
 ```
 
@@ -44,7 +44,7 @@ published: true
 
 ## さいごに
 
-このオプションを知る前は、`Visual Studio Code`を立ち上げた後にいちいちフォルダをリモート側で開く必要がありました。
+このオプションを知る前は、`Visual Studio Code`を立ちあげた後にいちいちフォルダをリモート側で開く必要がありました。
 今回はオプションの指定をスクリプトで自動的に指定しているので、サクッとプログラミングに集中できます。
 
 それでは、Happy Hacking!
