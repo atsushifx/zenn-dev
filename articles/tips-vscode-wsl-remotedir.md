@@ -13,7 +13,7 @@ published: true
 ## はじめに
 
 `WSL`から`Visual Studio Code`を使うと、`Windows`側のパスでファイルやディレクトリを開きます。
-たとえば、`/home/atsushifx`下で`code .`としてディレクトリを開くと、"\\wsl.localhost\codings\home\atsushifx"のようなネットワークパスでディレクトリを開きます。
+`/home/atsushifx`下で`code .`としてディレクトリを開くと、`\\wsl.localhost\codings\home\atsushifx`のようにネットワークパスでディレクトリを開きます。
 
 `WSL`側のパスで開くには、`--remote`オプションを使う必要があります。
 
