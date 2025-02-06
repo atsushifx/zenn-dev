@@ -36,7 +36,8 @@ jobs:
           - name: get changed files
             id: changed
             run: |
-              base_sha="$(git merge-base HEAD main)"
+              git fetch --depth 3 main
+              base_sha="$(git rev-parse main)
               head_sha="$(git rev-parse HEAD)"
               echo "head: ${head_sha}"
               echo "base: ${base_sha}"
