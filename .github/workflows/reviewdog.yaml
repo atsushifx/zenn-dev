@@ -57,7 +57,7 @@ jobs:
             with:
               key: ${{ runner.os }}-cache
               path: |
-                ~/node_modules
+                node_modules
                 ~/.npm
                 .textlintcache
 
@@ -99,6 +99,6 @@ jobs:
             with:
               key: ${{ steps.cache-restore.outputs.cache-primary-key }}
               path: |
-                ~/node_modules
+                node_modules
                 ~/.npm
                 .textlintcache
