@@ -30,11 +30,11 @@ jobs:
         steps:
           - name: checkout repository
             uses: actions/checkout@v4
-          
+
           - name: fetch main repository
             run: |
               git fetch origin main
-          
+
           - name: get changed files
             id: changed
             run: |
@@ -57,6 +57,7 @@ jobs:
             with:
               key: ${{ runner.os }}-cache
               path: |
+                ~/node_modules
                 ~/.npm
                 .textlintcache
 
@@ -98,5 +99,6 @@ jobs:
             with:
               key: ${{ steps.cache-restore.outputs.cache-primary-key }}
               path: |
+                ~/node_modules
                 ~/.npm
                 .textlintcache
