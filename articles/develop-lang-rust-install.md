@@ -10,7 +10,7 @@ published: true
 
 - `Rust`[^1]開発のためには、`Visual Studio Build Tools`[^2]をインストールが必要
 - 環境変数を設定し、それに基づいて`Rust`をインストールする
-- これらの手順は、`winget`コマンドを用いて効率的に行える
+- これらの手順は、`winget`コマンドを用いて効率的に行なえる
 
 [^1]: Rust: 高速で安全性が高く、並行性と実用性を兼ね備えたシステムプログラミング言語。その特徴として、メモリ安全性の維持と高速性を両立した設計があげられる。
 [^2]: `Visual Studio Build Tools`: マイクロソフトが提供するクロスプラットフォーム用のソフトウェア開発ツール。Rust のインストールにはこれが必要となる。
@@ -23,8 +23,8 @@ Windows版Rust では`Visual C++`か、もしくは`GNU C++`が求められま�
 
 この記事では、`Visual C++`コンパイラを含む Microsoft`のソフトウェア開発ツール、`Visual Studio Build Tools`をあらかじめインストールしておきます。
 
-`Rust` および   `Visual Studio Build Tools` のインストールは、`winget`[^3] コマンドで簡単に行えます。
-`winget`は Windows の公式パッケージマネージャーで、ソフトウェアのインストールをコマンドラインから一括で行えます。
+`Rust` および `Visual Studio Build Tools` のインストールは、`winget`[^3] コマンドで簡単に行なえます。
+`winget`は Windows の公式パッケージマネージャーで、ソフトウェアのインストールをコマンドラインから一括で行なえます。
 この記事では、`Rust`と`Visual Studio Build Tools`のインストール方法をステップバイステップで説明します。
 
 [^3]: `winget`: WIndows 公式のパッケージマネージャー
