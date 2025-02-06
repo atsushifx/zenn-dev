@@ -39,7 +39,7 @@ jobs:
             id: changed
             run: |
               head_sha="$(git rev-parse HEAD)"
-              base_sha="$(git rev-parse main)"
+              base_sha="$(git rev-parse origin/main)"
               echo "head: ${head_sha}"
               echo "base: ${base_sha}"
               files=$(git diff --name-only ${base_sha} ${head_sha} -- '**/*.md')
