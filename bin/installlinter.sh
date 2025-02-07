@@ -50,5 +50,7 @@ else
     options="$@"
 fi
 
+echo "Install Packages: ${packages[@]}"
+
 ## exec
 pnpm add $options "${packages[@]}"
