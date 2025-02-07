@@ -49,7 +49,12 @@ jobs:
           - name: setup node
             uses: actions/setup-node@v4
             with:
-              node-version: 22
+              node-version: 20S
+
+          - name: setup pnpm
+            uses: pnpm/action-setup@v4
+            with:
+              version: 10
 
           - name: restore cache
             id: cache-restore
@@ -58,40 +63,32 @@ jobs:
               key: ${{ runner.os }}-cache
               path: |
                 node_modules
-                ~/.npm
+                ~/.pnpm-store
                 .textlintcache
 
-          - name: install node modules
+          - name: make install script executable
+            run: |
+              chmod +x /bin/installlinter.sh
+
+          - name: Install linters
             if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
             run: |
-              npm install --no-audit --save-prod --progress=false --silent \
-                textlint \
-                textlint-filter-rule-allowlist textlint-filter-rule-comments \
-                textlint-rule-preset-ja-technical-writing textlint-rule-preset-ja-spacing \
-                textlint-rule-ja-no-orthographic-variants \
-                @textlint-ja/textlint-rule-no-synonyms sudachi-synonyms-dictionary \
-                @textlint-ja/textlint-rule-morpheme-match \
-                textlint-rule-ja-hiraku \
-                textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet \
-                textlint-rule-common-misspellings \
-                @proofdict/textlint-rule-proofdict \
-                textlint-rule-prh \
-                markdownlint-cli2
-              # npm list
+              ./bin/installlinter.sh "--save-prod"
+              pnpm list
 
           - name: lint text
             if: ${{ steps.changed.outputs.files != '' }}
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
-              npm run lint:docs -- "${changed_files}"
+              npm exec textlint --cache -- ${changed_files}"
 
           - name: lint markdown
             if: ${{ steps.changed.outputs.files != '' }}
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
-              npm run lint:markdown -- ${changed_files}
+              npm exec markdownlint-cli2 -- ${changed_files}
 
           - name: Always save cache
             id: cache-save
@@ -100,5 +97,5 @@ jobs:
               key: ${{ steps.cache-restore.outputs.cache-primary-key }}
               path: |
                 node_modules
-                ~/.npm
+                ~/.pnpm-store
                 .textlintcache
