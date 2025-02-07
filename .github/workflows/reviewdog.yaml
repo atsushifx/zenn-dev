@@ -66,9 +66,9 @@ jobs:
                 ~/.pnpm-store
                 .textlintcache
 
-          - name: make install script executable
+          - name: nstall script executable
             run: |
-              chmod +x /bin/installlinter.sh
+              chmod +x ./bin/installlinter.sh
 
           - name: Install linters
             if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
