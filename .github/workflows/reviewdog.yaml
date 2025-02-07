@@ -73,7 +73,7 @@ jobs:
           - name: Install linters
             if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
             run: |
-              ./bin/installlinter.sh "--save-prod"
+              ./bin/installlinter.sh "--save-prod --reporter silent "
               pnpm list
 
           - name: lint text
