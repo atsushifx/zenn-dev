@@ -2,14 +2,15 @@
 title: "Zenn: 変更した記事だけレビューするGitHub Action"
 emoji: "🐙"
 type: "tech"
-topics: [ "zenn", "githubactions", "review", "lint", ]
+topics: [ "zenn", "githubactions", "review", "lint", 'CI' ]
 published: false
 ---
 
 ## はじめに
 
 `atsushifx`です。
-[Zennの記事をGitHub連携でカッチリ管理するおすすめ設定](https://zenn.dev/jonghyo/articles/zenn-github-repo)　は大変、役に立ちました。
+[Zennの記事をGitHub連携でカッチリ管理するおすすめ設定](https://zenn.dev/jonghyo/articles/zenn-github-repo) は、大変役に立ちました。
+
 上記の`GitHub Actions`を参考に、既存の記事のレビューをしないようにした`GitHub Actions`を作成したので、それを説明します。
 
 ## 前提条件
@@ -23,7 +24,7 @@ published: false
 
 ## `GitHub Actions`
 
-もとの記事の`github/workflows/lint.yml`をもとに、新規/修正された記事のみレビューするように修正しました。
+元記事の`github/workflows/lint.yml`を修正して、変更がある記事のみをレビューするようにしました。
 
 @[gist](https://gist.github.com/atsushifx/e1d23573f4658ad5244e3414ba2877f0?file=reviewdog.yaml)
 
@@ -32,20 +33,19 @@ published: false
 1. 手動でも、この`Actions`を実行可能に
 
 2. step: `get changed files`:
-   このステップで、現ブランチと`main`ブランチで変更のあるマークダウンファイルを取得する。
-   `main`ブランチも必要なため、`fetch main repository`ステップで`main`ブランチをフェッチ
+   現ブランチと`main`ブランチ間で変更された、マークダウンファイルの一覧を取得する。
+   `fetch main repository`ステップで`main`ブランチをフェッチし、一覧が取得できるようにする。
 
 3. step: `setup pnpm`:
-   パッケージマネージャー`pnpm`をセットアップ、`Actions`内で使用可能に
+   パッケージマネージャー`pnpm`をセットアップし、`Actions`内で使用可能にする。
 
 4. step: `Install linters`
-   `textlint`、`markdoownlin`および`lint`用のルールをインストール。
-   インストール自体は`./bin/installlinter.sh`で行なう。
+   `./bin/installlinter.sh`スクリプトを実行し、`lint`に必要なツールおよびルールをインストールする。
 
 ## installlinter.sh
 
-自分の環境では、`textlint`などの各種`lint`コマンドはグローバルにインストールしています。
-`package.json`では、インストールされた`linter`およびルールモジュールがわからないのでスクリプトでインストールしています。
+`textlint`, `markdownlint`などの各種`lint`ツールをグローバルにインストールしています。
+`package.json`では上記のツールが記録されないため、`installlinter.sh`スクリプトで上記をインストールします:
 
 @[gist](https://gist.github.com/atsushifx/e1d23573f4658ad5244e3414ba2877f0?file=installlinter.sh)
 
@@ -53,7 +53,8 @@ published: false
 
 ## おわりに
 
-以上、修正した`GitHub Actions`について簡単にまとめました。
-`textlint`のルールなど、実際の設定は [atsushifx/zenn-dev](https://github.com/atsushifx/zenn-dev) に載っていますので参考にしてください。
+以上、記事をレビューする`GitHub Actions`の修正点について、簡単にまとめました。
+各種`lint`ツールの設定は [atsushifx/zenn-dev](https://github.com/atsushifx/zenn-dev) に掲載しています。
+筆者が実際に使っている設定ですので、参考になるでしょう。
 
 それでは、Happy Hacking!
