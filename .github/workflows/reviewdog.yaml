@@ -81,14 +81,14 @@ jobs:
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
-              pnpm exec textlint --cache -- ${changed_files}"
+              pnpm run lint:docs "${changed_files}"
 
           - name: lint markdown
             if: ${{ steps.changed.outputs.files != '' }}
             env:
               changed_files: "${{ steps.changed.outputs.files }}"
             run: |
-              pnpm exec markdownlint-cli2 -- ${changed_files}
+              pnpm run lint:markdown "${changed_files}"
 
           - name: Always save cache
             id: cache-save
