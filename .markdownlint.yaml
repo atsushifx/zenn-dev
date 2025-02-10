@@ -4,6 +4,7 @@ default: true
 whitespace: true
 line-length:
   line_length: 120
+  code_block_line_length: 120
 ol-prefix: true
 strong-style: true
 no-hard-tabs: true
