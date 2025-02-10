@@ -7,13 +7,41 @@
 #
 # @desc<<
 #
-# lint new articles on GitHub
+# Dependabot configuration:
+# - Update GitHub Actions dependencies weekly (`weekly`) at 04:00 JST
+# - Update Node.js (pnpm) dependencies daily (`daily`) at 04:00 JST
+# - Limit the number of open PRs to 10 (`open-pull-requests-limit: 10`)
+# - Add the `dependencies` label to PRs
+# - Use `Common` as the commit message prefix
+# - Set all schedules to the `Asia/Tokyo` timezone
+# - Target files under `/`, including `package.json` and `.github/workflows/*.yml`
 #
 #<<
 
+version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "github-actions" # GitHub Actions も定期的に更新
+    directory: "/"
     schedule:
       interval: "weekly"
-  
+      time: 04:00
+      timezone: Asia/Tokyo
+      open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'Common'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+
+  - package-ecosystem: "npm" # pnpm も npm ecosystem に含まれる
+    directory: "/" # package.json があるルートディレクトリ
+    schedule:
+      interval: "daily"
+      time: '04:00'
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'Common'
+      include: 'scope'
+    labels:
+      - 'dependencies'
