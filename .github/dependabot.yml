@@ -1,0 +1,19 @@
+## @(#) : Dependabot for zenn.dev
+#
+# @version  1.0.0
+# @author   Furukawa Atsushi <atsushifx@gmail.com>
+# @since    2025-02-10
+# @license  MIT
+#
+# @desc<<
+#
+# lint new articles on GitHub
+#
+#<<
+
+updates:
+  - package-ecosystem: "" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+  
