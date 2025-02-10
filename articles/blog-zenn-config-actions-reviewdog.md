@@ -3,7 +3,7 @@ title: "Zenn: 既存の記事をレビューしないようにGitHub Actionsを�
 emoji: "🐙"
 type: "tech"
 topics: [ "zenn", "githubactions", "review", "lint", "CI" ]
-published: false
+published: true
 ---
 
 ## はじめに
