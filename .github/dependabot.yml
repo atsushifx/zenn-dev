@@ -26,7 +26,7 @@ updates:
       interval: 'weekly'
       time: '04:00'
       timezone: Asia/Tokyo
-      open-pull-requests-limit: 10
+    open-pull-requests-limit: 10
     commit-message:
       prefix: 'Common'
       include: 'scope'
