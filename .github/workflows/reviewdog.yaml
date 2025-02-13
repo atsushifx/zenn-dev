@@ -42,7 +42,7 @@ jobs:
               base_sha="$(git rev-parse origin/main)"
               echo "head: ${head_sha}"
               echo "base: ${base_sha}"
-              files=$(git diff --name-only ${base_sha} ${head_sha} -- '**/*.md')
+              files=$(git diff --diff-filter=AM --name-only ${base_sha} ${head_sha} -- '**/*.md')
               echo "changed: ${files}"
               echo "files=${files}" >> $GITHUB_OUTPUT
 
