@@ -3,7 +3,7 @@ title: "カスタマイズ可能なDebian環境: WSL 2 に Debian をインス�
 emoji: "📚"
 type: "tech"
 topics: ["wsl", "Linux", "Debian", "インストール"]
-published: false
+published: true
 ---
 
 ## tl;dr
