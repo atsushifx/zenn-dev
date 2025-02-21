@@ -18,84 +18,86 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - '**/*.md'
+      - "**/*.md"
   workflow_dispatch:
 
 # 実行するAction
 jobs:
-    lint-on-github:
-        name: lint on github
-        runs-on: ubuntu-latest
+  lint-on-github:
+    name: lint on github
+    runs-on: ubuntu-latest
 
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-          - name: Fetch main repository
-            run: |
-              git fetch origin main
+      - name: Fetch main repository
+        run: |
+          git fetch origin main
 
-          - name: Get changed files
-            id: changed
-            run: |
-              head_sha="$(git rev-parse HEAD)"
-              base_sha="$(git rev-parse origin/main)"
-              echo "head: ${head_sha}"
-              echo "base: ${base_sha}"
-              files=$(git diff --diff-filter=AM --name-only ${base_sha} ${head_sha} -- '**/*.md')
-              echo "changed: ${files}"
-              echo "files=${files}" >> $GITHUB_OUTPUT
+      - name: Get changed files
+        id: changed
+        run: |
+          head_sha="$(git rev-parse HEAD)"
+          base_sha="$(git rev-parse origin/main)"
+          echo "head: ${head_sha}"
+          echo "base: ${base_sha}"
+          files=$(git diff --diff-filter=AM --name-only ${base_sha} ${head_sha} -- '**/*.md')
+          echo "changed:\n${files}"
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          $files
+          EOF
 
-          - name: Setup node
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-          - name: Setup pnpm
-            uses: pnpm/action-setup@v4
-            with:
-              version: 10
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
-          - name: Restore cache
-            id: cache-restore
-            uses: actions/cache/restore@v4
-            with:
-              key: ${{ runner.os }}-cache
-              path: |
-                node_modules
-                ~/.pnpm-store
-                .textlintcache
+      - name: Restore cache
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          key: ${{ runner.os }}-cache
+          path: |
+            node_modules
+            ~/.pnpm-store
+            .textlintcache
 
-          - name: Make install script executable
-            run: |
-              chmod +x ./bin/installlinter.sh
+      - name: Make install script executable
+        run: |
+          chmod +x ./bin/installlinter.sh
 
-          - name: Install linters
-            if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
-            run: |
-              ./bin/installlinter.sh "--save-prod --reporter silent "
-              pnpm list
+      - name: Install linters
+        if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
+        run: |
+          ./bin/installlinter.sh "--save-prod --reporter silent "
+          pnpm list
 
-          - name: Lint text
-            if: ${{ steps.changed.outputs.files != '' }}
-            env:
-              changed_files: "${{ steps.changed.outputs.files }}"
-            run: |
-              pnpm run lint:docs "${changed_files}"
+      - name: Lint text
+        if: ${{ steps.changed.outputs.files != '' }}
+        env:
+          changed_files: "${{ steps.changed.outputs.files }}"
+        run: |
+          pnpm run lint:docs "${changed_files}"
 
-          - name: Lint markdown
-            if: ${{ steps.changed.outputs.files != '' }}
-            env:
-              changed_files: "${{ steps.changed.outputs.files }}"
-            run: |
-              pnpm run lint:markdown "${changed_files}"
+      - name: Lint markdown
+        if: ${{ steps.changed.outputs.files != '' }}
+        env:
+          changed_files: "${{ steps.changed.outputs.files }}"
+        run: |
+          pnpm run lint:markdown "${changed_files}"
 
-          - name: Always save cache
-            id: cache-save
-            uses: actions/cache/save@v4
-            with:
-              key: ${{ steps.cache-restore.outputs.cache-primary-key }}
-              path: |
-                node_modules
-                ~/.pnpm-store
-                .textlintcache
+      - name: Always save cache
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+          path: |
+            node_modules
+            ~/.pnpm-store
+            .textlintcache
