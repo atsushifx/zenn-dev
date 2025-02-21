@@ -11,7 +11,7 @@ published: true
 `atsushifx`です。
 この記事では、`Proxmox VE`のインストール手順をスクリーンショット付きで詳しく解説します。
 
-前回までの記事で、[BIOSの設定](dev-proxmox-setup-configbios)、[インストーラーの作成](dev-proxmox-setup-installmedia)を行いました。今回は、実際に`Proxmox VE`をインストールします。
+前回までの記事で、[BIOSの設定](dev-proxmox-setup-configbios)、[インストーラーの作成](dev-proxmox-setup-installmedia)を行ないました。今回は、実際に`Proxmox VE`をインストールします。
 
 この記事を参考にすることで、スクリーンショットを確認しながら簡単に`Proxmox VE`をインストールできます。
 
