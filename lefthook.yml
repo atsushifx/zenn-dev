@@ -18,15 +18,15 @@ pre-commit:
       run: gitleaks protect --staged
 
     secretlint:
-      glob: '**/*'
+      glob: "**/*"
       run: secretlint --maskSecrets --secretlintignore .gitignore "{staged_files}"
 
     textlint:
-      glob: '**/*.md'
+      glob: "**/*.md"
       run: textlint --cache "{staged_files}"
 
     markdownlint:
-      glob: '**/*.md'
+      glob: "**/*.md"
       run: markdownlint-cli2 "{staged_files}"
 
 # check commit message style
@@ -34,4 +34,4 @@ commit-msg:
   parallel: true
   commands:
     commitlint:
-      run: pnpx commitlint -e
+      run: pnpm exec commitlint -e
