@@ -9,11 +9,12 @@ published: false
 ## はじめに
 
 atsushifx です。
-この記事では、開発環境構築において、`GnuPG`を使って署名付きコミットを実現する手順を解説します。
+この記事では、開発環境の構築時に、`GnuPG`を使って署名付きコミットを実現する手順を解説します。
+`Git`の設定によっては`git commit`ができなくなる問題の回避方法についても解説しています。
 
-## `GnuPG`のインストール
+## 1. `GnuPG`のインストールと設定
 
-### 環境変数`GNUPGHOME`の設定
+### 1.1 環境変数`GNUPGHOME`の設定
 
 設定ファイルは、`${USERPROFILE}`下に置かないというポリシーにもとづき、環境変数を設定します。
 以下のコマンドを実行します。
@@ -32,7 +33,7 @@ C:\Users\<ユーザー名>\AppData\Roaming\gnupg
 
 上記のように、`AppData\Roaming`となっていれば正常に設定されています。
 
-### `Gpg4win`のインストール
+### 1.2 `Gpg4win`のインストール
 
 `winget`を使って、`Gpg4win`をインストールします。
 以下のコマンドを実行します。
@@ -44,11 +45,12 @@ winget install GnuPG.Gpg4win --interactive --location C:\app\develop\utils\gpg4w
 これで、`c:\app\develop\utils\gnupg`に`GnuPG`本体が、`c:\app\develop\utils\gpg4win`に`Windows用クライアント`がインストールされます。
 
 :::message warn
-インストール先を`...gnupg`とすると、`GnuPG`と`gpg4win`が同一のディレクトリにインストールされ、後の設定で混乱を招く恐れがあります。
+インストール先を`...\gnupg`とすると、`GnuPG`と`gpg4win`が同一のディレクトリにインストールされます。
+この場合、コマンドが競合して意図しないコマンドを実行する可能性があります。
 
 :::
 
-### `Path`の追加
+### 1.3 システム`Path`への追加
 
 `Gpg4win`および`Gnupg`をシェルから容易に実行できるよう、`Path`にそれぞれのディレクトリを追加します。
 追加するのは:
@@ -67,7 +69,7 @@ winget install GnuPG.Gpg4win --interactive --location C:\app\develop\utils\gpg4w
 `Windows Terminal`を再起動して編集後の`Path`をシェルに反映させます。
 以上で、`PowerShell`上で`GnuPG`が使えるようになります。
 
-### `gpg.conf`の作成
+### 2.4 設定ファイル (`gpg.conf`等) の作成
 
 `GnuPG`を動作を設定するため設定ファイルを作成します。
 これらは`dotfiles`リポジトリで管理するため、`${XDG_CONFIG_HOME}/gnupg`下に設定ファイルを作成し、`${GNUPGHOME}`下にシンボリックリンクします。
@@ -89,11 +91,11 @@ winget install GnuPG.Gpg4win --interactive --location C:\app\develop\utils\gpg4w
 
 これにより、`${GNUPGHOME}`下に設定ファイルのシンボリックリンクが作成され、`GnuPG`が設定を参照できます。
 
-## 署名の作成
+## 2. 署名付きコミットの実現
 
 この章では、`GitHub`に署名付きコミットをするための手順を説明します。
 
-### `Git`用のPGP鍵の作成
+### 2.1 `Git`用`GPG鍵`の作成
 
 署名をするために、`GnuPG`で`GPG鍵`を作成する必要があります。
 `Windows Terminal`で`gpg --full-generate-key`を実行し、質問に答えれば`GPG 鍵`が作成されます。
@@ -126,10 +128,9 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 
 上記のような表示がされていれば、鍵が正常に作成されています。
 
-### `Git`の設定
+### 2.2 `Git`のグローバル設定
 
-作成した`GPG鍵`で`Git`に署名付きコミットをする方法を説明します。
-
+作成した`GPG鍵`で署名付きコミットをするために、`Git`のグローバル設定を変更します。
 `Git`のグローバル設定 (`${XDG_CONFIG_HOME}/git/config`) に、以下の設定を追加します。
 
 ```bash: ${XDG_CONFIG_HOME}/git/config
@@ -145,7 +146,8 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 ```
 
 :::message warn
-`gpg.program`をフルパスで設定しないと、エラーでコミットできなくなります。
+`gpg.program`は、正しいパスをフルパスを指定する必要があります。
+指定しない場合は、エラーでコミットできなくなります。
 
 :::
 
@@ -157,7 +159,7 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 
 正しいパスフレーズを入れてコミットすると、署名付きコミットになります。
 
-### `GitHub`への公開鍵の登録
+### 2.3 `GitHub`への公開鍵登録
 
 `GitHub`に上記の`GPG鍵`を登録することで、`GitHub`上のコミットが認証済み (`verified`) となります。
 これにより、自分の `GitHubリポジトリ` の信頼性を高めることができます。
@@ -223,13 +225,15 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 以上で、公開鍵の登録は完了です。
 登録後は、`GitHub`上のコミットが認証済みとなります。
 
-## トラブルシューティング
+## 3. トラブルシューティング
 
 この章では、`GnuPG`に関する簡単なトラブルシューティングを載せておきます。
 
 - [`TB-0001`]: `gpg: invalid size of lockfile`と出力されて、コミットできない。
   検索`Path`、実行時`Path`に空白が含まれていると、このエラーが出ます。
   `Git`の設定で、フルパスかつ`"`で囲むとエラーは発生しません。
+
+  `gpg.exe`が存在する`Path`を確認し、`program`を再設定してください。
 
   ```git/config
   # error発生
