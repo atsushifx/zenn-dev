@@ -10,17 +10,17 @@ published: false
 
 atsushifx です。
 この記事では、開発環境で`GnuPG`を用いた署名付きコミットを設定する手順を解説します。
-また、`Git`の設定によって発生する`git commit`不可の問題とその回避策についても説明します。
+`Git`の設定により`git commit`が実行できなくなる問題と、その回避策についても紹介します。
 
 ## 技術用語
 
 この記事で使用される、主要な技術用語について解説します。
 
 - `GnuPG`:
-  `GNU`プロジェクトが開発した、電子署名とデータ暗号化のためのオープンソースツール
+  `GNU` プロジェクトが開発した、電子署名とデータ暗号化のためのオープンソースツール
 
 - `Gpg4win`:
-  `Windows`向けに`GUI`管理ツールも含んだ`GnuPG`パッケージ
+  `Windows` 向けに `GUI`管理ツールも含んだ `GnuPG`パッケージ
 
 - `Git`:
   分散型バージョン管理システム
@@ -33,10 +33,13 @@ atsushifx です。
 
 ## 1. `GnuPG`のインストールと設定
 
+`Windows`環境での`GnuPG`のインストールと設定方法を解説します。
+環境変数の設定、`Gpg4win`のインストール、システム`Path`への追加、設定ファイルの作成とリンク設定を行ない、シェル上での動作環境を整えます。
+
 ### 1.1 環境変数`GNUPGHOME`の設定
 
-`GnuPG`の設定ファイルは、通常、`${USERPROFILE}/.gnupg`に配置されます。
-これを、その他のソフトウェアが使用している`~/AppData/Roaming`下にするため、環境変数`GNUPGHOME`を設定します。
+`GnuPG`の設定ファイルは、通常、`${USERPROFILE}/.gnupg`に配置されています。
+これを、`Windows`既定の設定ディレクトリである`~/AppData/Roaming`内に配置するため、環境変数`GNUPGHOME`を設定します。
 
 以下のコマンドで、環境変数を設定します。
 
@@ -45,7 +48,7 @@ atsushifx です。
 ```
 
 コマンドを実行して環境変数を設定した後、`Windows Terminal`を再起動し、設定が正しく適用されていることを確認します。
-以下のコマンドで、環境変数を確認できます。
+以下のコマンドを実行して、環境変数を設定します。
 
 ```powershell
 echo $env:GNUPGHOME
@@ -76,8 +79,8 @@ winget install GnuPG.Gpg4win --interactive --location C:\app\develop\utils\gpg4w
 `Gpg4win`および`Gnupg`をシェルから容易に実行できるよう、`Path`にそれぞれのディレクトリを追加します。
 追加する`Path`は:
 
-- `c:\app\develop\utils\gnupg`:   `GnuPG`本体
-- `c:\app\develop\utils\gpg4win`: `Windows用クライアント`
+- `C:\app\develop\utils\gnupg`    (`GnuPG`本体)
+- `C:\app\develop\utils\gpg4win`  (`Windows用クライアント`)
 
 の 2つです。
 
@@ -153,7 +156,7 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 `Git`のグローバル設定 (`${XDG_CONFIG_HOME}/git/config`) に、以下の設定を追加します。
 
 - `GitHub`で認証済みのメールアドレスを使用しなければ、コミットは`verified`になりません。
-- <!-- textlint-disable -->`gpg.exe`は、フルパスで記述しない場合、エラーが発生する可能性があります。<!-- textlint-enable -->
+- `gpg.exe`をフルパスで指定しない場合、エラー発生の可能性があるため、必ず正しいパスを記述してください。」
 
 ```bash: ${XDG_CONFIG_HOME}/git/config
 [commit]
@@ -163,13 +166,13 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
   signingkey = <GitHubに登録されたメールアドレス>       # GitHubで`verified`として認識されるために必要
 
 [gpg]
-  program = "C:/app/develop/utils/gnupg/bin/gpg.exe"  # 署名に使用する`GnuPG`
+  program = "C:\app\develop\utils\gnupg\bin\gpg.exe"  # 署名に使用する`GnuPG`
 
 ```
 
 :::message warn
-`gpg.program`は、正しいパスをフルパスを指定する必要があります。
-指定しない場合は、エラーでコミットできなくなります。
+`gpg.program` は正しいパスをフルパスを指定する必要があります。
+指定しない場合、エラーが発生しコミットを実行できなくなります。
 
 :::
 
@@ -250,17 +253,17 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 この章では、`GnuPG`に関する簡単なトラブルシューティングを載せておきます。
 
 - [`TB-0001`]: `gpg: invalid size of lockfile`と出力されて、コミットできない。
-  `gpg.exe`のパスに空白が含まれている場合、`invalid size of lockfile` エラーが発生することがあります。
-  `gpg.exe`のみの場合も、同様のエラーが発生する可能性があります。
+  `invalid size of lockfile`エラーが表示される場合、パスに空白が含まれている可能性があります。
+   検索パスに空白を含んだパス (`Program Files`など) がある場合も、同様にエラー発生の可能性があります。
 
-  `gpg.exe`が存在する`Path`を確認し、`program`にフルパスを設定してください。
+  `git/config`の`gpg.program`には、フルパスを指定、`"`で囲んでください。」
 
   ```git/config
   # error発生: 検索パス、実行時パスに空白が含まれている可能性あり
   program = gpg.exe
 
   # 解決策、フルパスで指定する
-  program = "C:/app/develop/utils/gnupg/bin/gpg.exe"
+  program = "C:\app\develop\utils\gnupg\bin\gpg.exe"
   ```
 
 ## おわりに
