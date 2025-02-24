@@ -10,18 +10,18 @@ published: false
 
 atsushifx です。
 
-この記事では、開発環境で`GnuPG`を用いた署名付きコミットを設定する手順を解説します。
-`Git`の設定によって`git commit`が実行できなくなる問題と、その対処法を解説します。
+この記事では、開発環境で `GnuPG` を用いた署名付きコミットを設定する手順を説明します。
+また、`Git` の設定によって署名付きコミットが失敗する問題とその対処法についても説明します。
 
 ## 技術用語
 
 この記事で使用される、主要な技術用語について解説します。
 
 - `GnuPG`:
-  `GNU` プロジェクトが開発した、電子署名とデータ暗号化のためのオープンソースツール
+  `GNU` プロジェクトが開発した、公開鍵暗号方式によるデータ暗号化と電子署名のためのオープンソースツール
 
 - `Gpg4win`:
-  `Windows` 向けに `GUI`管理ツールも含んだ `GnuPG`パッケージ
+  Windows 向けに`GUI`ツール、暗号化ツール、証明書管理ツールを含んだ、総合`GnuPG`パッケージ
 
 - `Git`:
   分散型バージョン管理システム
@@ -30,17 +30,17 @@ atsushifx です。
   `Git`で開発者が電子署名を付与し、改ざん防止と認証をするためのコミット手法
 
 - `GNUPGHOME`:
-  `GnuPG`の各設定ファイルを配置するディレクトリを設定する環境変数
+  `GnuPG` の設定ファイルを格納するディレクトリを指定する環境変数
 
 ## 1. `GnuPG`のインストールと設定
 
 `Windows` 環境での`GnuPG`のインストールと設定方法を解説します。
-環境変数の設定、`Gpg4win`のインストール、システム`Path`への追加、設定ファイルの作成とリンク設定を行ない、シェル上での動作環境を整えます。
+環境変数の設定、`Gpg4win`のインストール、システム`Path`への追加、設定ファイルの作成およびリンクを設定し、シェル上での動作環境を整えます。
 
 ### 1.1 環境変数`GNUPGHOME`の設定
 
-`gpg`の設定ファイルは、通常、`${USERPROFILE}/.gnupg`に配置されています。
-これを、`Windows` の既定の設定ディレクトリである`~/AppData/Roaming`内に配置するため、環境変数`GNUPGHOME`を設定します。
+通常、`GnuPG`の設定ファイルは`${USERPROFILE}/.gnupg`に配置されます。
+これを、`Windows` の既定の設定ディレクトリ`~/AppData/Roaming`内に配置するため、環境変数`GNUPGHOME`を設定します。
 
 以下のコマンドで、環境変数を設定します。
 
@@ -48,8 +48,8 @@ atsushifx です。
 [System.Environment]::SetEnvironmentVariable("GNUPGHOME", "${env:AppData}\gnupg", "User")
 ```
 
-コマンドを実行して環境変数を設定した後、`Windows Terminal`を再起動し、設定が正しく適用されていることを確認します。
-以下のコマンドを実行して、環境変数を設定します。
+`Windows Terminal`を再起動し、設定を反映させます。
+以下のコマンドを実行し、環境変数を確認します。
 
 ```powershell
 echo $env:GNUPGHOME
@@ -60,24 +60,23 @@ C:\Users\<ユーザー名>\AppData\Roaming\gnupg
 
 ### 1.2 `Gpg4win`のインストール
 
-`winget`を使って、`Gpg4win`をインストールします。
-以下のコマンドを実行します。
+`winget`を使って`Gpg4win`をインストールします。次のコマンドを実行します。
 
 ```powershell
 winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4win"
 ```
 
-これで、`c:\app\develop\utils\gnupg` に `gpg` が、`c:\app\develop\utils\gpg4win` に `Windows用クライアント` がインストールされます。
+これで、`c:\app\develop\utils\gnupg` には `gpg` が、`c:\app\develop\utils\gpg4win` には `Windows用クライアント` がインストールされます。
 
 :::message warn
 インストール先を`...\gnupg`とすると、`gpg`と`gpg4win`が同一のディレクトリにインストールされます。
-この場合、コマンドが競合して意図しないコマンドを実行する可能性があります。
+この場合、異なるバージョンの`GnuPG`バイナリと競合し、`gpg.exe` が正しく動作しない可能性があります。
 
 :::
 
 ### 1.3 システム`Path`への追加
 
-システム`Path`にディレクトリを追加し、簡単に実行できるようにします。
+システム`Path`にディレクトリを追加し、シェルからコマンド名だけで実行できるようにします。
 
 - `C:\app\develop\utils\gnupg`    (`gpg`)
 - `C:\app\develop\utils\gpg4win`  (`Windows用クライアント`)
@@ -90,8 +89,8 @@ winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4
 
 インストール時に追加された `C:\app\develop\utils\gpg4win\..\gnupg\bin` は、必要がなくなったので削除しておきます。
 
-`Windows Terminal` を再起動して編集後の `Path` をシェルに反映させます。
-以上で、`PowerShell`上で `GnuPG` が使えるようになります。
+`Windows Terminal` を再起動し、編集後の `Path` をシェルに反映させます。
+以上で、`PowerShell`上で `gpg` が使えるようになります。
 
 ### 1.4 設定ファイル (`gpg.conf`等) の作成
 
@@ -111,7 +110,7 @@ winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4
 2. インストールスクリプトを実行する。
    @[gist](https://gist.github.com/atsushifx/1e5b2afaff42dbab9b840620130e72e5?file=install_gpgconf.ps1)
 
-これにより、`${GNUPGHOME}`下に設定ファイルのシンボリックリンクが作成され、`GnuPG`が設定を参照できます。
+これにより、`${GNUPGHOME}`配下に設定ファイルのシンボリックリンクが作成され、`GnuPG`が設定を参照できるようになります。
 
 ## 2. 署名付きコミットの実現
 
@@ -133,7 +132,7 @@ winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4
 | 電子メールアドレス | [Your Email] | 鍵に関連つけるメールアドレス | `GitHub`に登録されたメールアドレスと同一にする |
 | パスフレーズ | [Your Pass phrase] | 鍵を保護するためのパスフレーズ | セキュリティのため、推測されにくいものを設定 |
 
-上記以外の質問は、デフォルトの選択とします。
+上記以外の質問は、デフォルト設定のままとします。
 
 作成した`GPG鍵`は、以下のコマンドで確認ができます。
 
@@ -156,7 +155,7 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 `Git`のグローバル設定 (`${XDG_CONFIG_HOME}/git/config`) に、以下の設定を追加します。
 
 - `GitHub` で認証済みのメールアドレスを指定しない場合、`verified` と認識されません。
-- `gpg.exe`をフルパスで指定しない場合、エラー発生の可能性があるため、必ず正しいパスを記述してください。」
+- `gpg.exe`は正しいフルパスを指定しないと、エラー発生の可能性があります。
 
 ```bash: ${XDG_CONFIG_HOME}/git/config
 [commit]
@@ -178,7 +177,7 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 
 上記のように設定することで、コミット時に自動的に`GnuPG`の署名が有効になります。
 
-コミットを行なうと以下のダイアログが表示されます。
+コミット時には、以下のダイアログが表示されます。
 ![パスフレーズ入力](/images/articles/gnupg-setup/ss-gpg-signing-dialog.png)
 *パスフレーズ入力*
 
@@ -245,7 +244,7 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
    ![Add new GPG key](/images/articles/gnupg-setup/ss-github-gpg-add-key.png)
    *Add new GPG key*
 
-以上で、公開鍵の登録は完了です。
+以上で公開鍵の登録は完了です。
 登録後は、`GitHub`上のコミットが認証済みとなります。
 
 ## 3. トラブルシューティング
@@ -269,7 +268,7 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 ## おわりに
 
 今回の記事では、`Windows`環境で `GnuPG` を使用して署名付きコミットを行なうための手順を解説しました。
-`Gpg4win` のインストール、`Git` の設定、`GitHub` への公開鍵登録と、ステップを踏むことで署名付きコミットの環境を構築できるようになります。
+`Gpg4win` のインストール、`Git` の設定、`GitHub` への公開鍵登録を順に行なうことで、署名付きコミットの環境を構築できるようになります。
 
 署名付きコミットを導入することで、開発者のなりすましを防ぎ、プロジェクトの信頼性を向上できます。
 特に`OSS`やチーム開発においては、コミットの正当性を保証することが重要です。
