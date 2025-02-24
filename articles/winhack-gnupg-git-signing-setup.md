@@ -3,7 +3,7 @@ title: "WinHacks: Windows で GnuPG による署名付きコミットを確実�
 emoji: "🔧"
 type: "tech"
 topics: ["Windows", "GnuPG", "Gpg4win", "署名" ]
-published: false
+published: true
 ---
 
 ## はじめに
