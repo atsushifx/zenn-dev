@@ -11,6 +11,7 @@ gpgsign
 hankaku
 hashfile
 hiraku
+installlinter
 joshi
 keyboxd
 keyid
@@ -18,10 +19,12 @@ kleopatra
 nslookup
 proofdict
 Radeon
+reviewdog
 rtgateway
 Ryzen
 signingkey
 textlint
+textlintcache
 UEFI
 USERPFROFILE
 USERPROFILE

@@ -45,8 +45,8 @@ jobs:
           files=$(git diff --diff-filter=AM --name-only ${base_sha} ${head_sha} -- '**/*.md')
           echo "changed:\n${files}"
           echo "files<<EOF" >> $GITHUB_OUTPUT
-          $files
-          EOF
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Setup node
         uses: actions/setup-node@v4
