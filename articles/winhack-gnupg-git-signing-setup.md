@@ -11,7 +11,7 @@ published: false
 atsushifx です。
 
 この記事では、開発環境で `GnuPG` を用いた署名付きコミットを設定する手順を説明します。
-また、`Git` の設定によって署名付きコミットが失敗する問題とその対処法についても説明します。
+`Git` の設定によって署名付きコミットが失敗する問題とその対処法についても説明します。
 
 ## 技術用語
 
@@ -39,8 +39,8 @@ atsushifx です。
 
 ### 1.1 環境変数`GNUPGHOME`の設定
 
-通常、`GnuPG`の設定ファイルは`${USERPROFILE}/.gnupg`に配置されます。
-これを、`Windows` の既定の設定ディレクトリ`~/AppData/Roaming`内に配置するため、環境変数`GNUPGHOME`を設定します。
+通常、`GnuPG` の設定ファイルは `${USERPROFILE}/.gnupg` に配置されます。
+これを、`Windows` の既定の設定ディレクトリ `~/AppData/Roaming`内に配置するため、環境変数 `GNUPGHOME` を設定します。
 
 以下のコマンドで、環境変数を設定します。
 
@@ -48,7 +48,7 @@ atsushifx です。
 [System.Environment]::SetEnvironmentVariable("GNUPGHOME", "${env:AppData}\gnupg", "User")
 ```
 
-`Windows Terminal`を再起動し、設定を反映させます。
+以上で、`User`環境変数に`GNUPGHOME`が設定されるので、`Windows Terminal`を再起動し、設定を反映させます。
 以下のコマンドを実行し、環境変数を確認します。
 
 ```powershell
@@ -66,9 +66,10 @@ C:\Users\<ユーザー名>\AppData\Roaming\gnupg
 winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4win"
 ```
 
-これで、`c:\app\develop\utils\gnupg` には `gpg` が、`c:\app\develop\utils\gpg4win` には `Windows用クライアント` がインストールされます。
+このとき、`GnuPG`パッケージも一緒にインストールされ、`c:\app\develop\utils\gnupg` には `gpg`バイナリが配置されます。
+`c:\app\develop\utils\gpg4win` には `Windows用クライアント` がインストールされます。
 
-:::message warn
+:::message alert
 インストール先を`...\gnupg`とすると、`gpg`と`gpg4win`が同一のディレクトリにインストールされます。
 この場合、異なるバージョンの`GnuPG`バイナリと競合し、`gpg.exe` が正しく動作しない可能性があります。
 
@@ -76,10 +77,10 @@ winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4
 
 ### 1.3 システム`Path`への追加
 
-システム`Path`にディレクトリを追加し、シェルからコマンド名だけで実行できるようにします。
+システム`Path`にディレクトリを追加し、シェル上から`gpg.exe`を実行できるようにします。
 
-- `C:\app\develop\utils\gnupg`    (`gpg`)
-- `C:\app\develop\utils\gpg4win`  (`Windows用クライアント`)
+- `C:\app\develop\utils\gnupg\bin`    (`gpg`およぼ各種バイナリ)
+- `C:\app\develop\utils\gpg4win\bin`  (`Windows用クライアント`)
 
 の 2つです。
 
@@ -90,7 +91,7 @@ winget install GnuPG.Gpg4win --interactive --location "C:\app\develop\utils\gpg4
 インストール時に追加された `C:\app\develop\utils\gpg4win\..\gnupg\bin` は、必要がなくなったので削除しておきます。
 
 `Windows Terminal` を再起動し、編集後の `Path` をシェルに反映させます。
-以上で、`PowerShell`上で `gpg` が使えるようになります。
+これで、`PowerShell`上で `gpg` が使用できます。
 
 ### 1.4 設定ファイル (`gpg.conf`等) の作成
 
@@ -251,28 +252,29 @@ sub   cv25519/30D808FC247E1BAF 2025-02-20 [E] [有効期限: 2028-02-20]
 
 この章では、`GnuPG`に関する簡単なトラブルシューティングを載せておきます。
 
-- [`TB-0001`]: `gpg: invalid size of lockfile`と出力されて、コミットできない。
-  `invalid size of lockfile`エラーが表示される場合、パスに空白が含まれている可能性があります。
-   検索パスに`Program Files` など空白を含むパスがあると、同様のエラーが発生する可能性があります。
+### [`TB-0001`]: `gpg: invalid size of lockfile`
 
-  `git/config`の`gpg.program`には、フルパスを指定、`"`で囲んでください。」
+`invalid size of lockfile`エラーが表示される場合、パスに空白が含まれている可能性があります。
+検索パスに`Program Files` など空白を含むパスがあると、同様のエラーが発生します。
 
-  ```git/config
-  # エラー発生: 検索パス、実行時パスに空白が含まれている可能性あり
-  program = gpg.exe
+`git/config`の`gpg.program`には、フルパスを指定し、`"`で囲んでください。
 
-  # 解決策、フルパスで指定する
-  program = "C:\app\develop\utils\gnupg\bin\gpg.exe"
-  ```
+```git/config
+# エラー発生: 検索パス、実行時パスに空白が含まれている可能性がある
+program = gpg.exe
+
+# 解決策、フルパスで指定し、'"'で囲む
+program = "C:\app\develop\utils\gnupg\bin\gpg.exe"
+```
 
 ## おわりに
 
-今回の記事では、`Windows`環境で `GnuPG` を使用して署名付きコミットを行なうための手順を解説しました。
+今回の記事では、`Windows`環境で `GnuPG` を使用して署名付きコミットをするための手順を説明しました。
 `Gpg4win` のインストール、`Git` の設定、`GitHub` への公開鍵登録を順に行なうことで、署名付きコミットの環境を構築できるようになります。
 
 署名付きコミットを導入することで、開発者のなりすましを防ぎ、プロジェクトの信頼性を向上できます。
 特に`OSS`やチーム開発においては、コミットの正当性を保証することが重要です。
-コミットの信頼性を向上させるために、ぜひこの機会に署名付きコミットを導入し、より安全で確実な開発環境を構築しましょう。
+署名付きコミットを導入し、より安全で確実な開発環境を構築しましょう。
 
 それでは、Happy Hacking!
 
