@@ -3,7 +3,7 @@ title: "`troubleshoot`: `git commit` で `invalid size of lockfile` が発生し
 emoji: "🛠️"
 type: "tech"
 topics: [ "トラブルシューティング", "エラー", "GnuPG", "git" ]
-published: false
+published: true
 ---
 
 ## はじめに
