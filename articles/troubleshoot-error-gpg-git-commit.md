@@ -1,5 +1,5 @@
 ---
-title: "troubleshoot: git commit で invalid size of lockfile がでたときの対処法"
+title: "`troubleshoot`: `git commit` で `invalid size of lockfile` が発生したときの対処法"
 emoji: "🛠️"
 type: "tech"
 topics: [ "トラブルシューティング", "エラー", "GnuPG", "git" ]
@@ -8,7 +8,10 @@ published: false
 
 ## はじめに
 
-この記事は、`git`で署名付きコミットをしたときに`gpg: invalid size of lockfile'というエラーが発生した場合のトラブルシューティング記事です。
+atsushifx です。
+
+`GnuPG`をインストールして、`Git`で署名付きコミットを実行したのですが、エラーが発生しました。
+エラーの解消に半日ほどかかり、ちょっとはまったので知見を共有します。
 
 ## エラーメッセージ
 
@@ -16,7 +19,8 @@ published: false
 
 ```powershell
 error: gpg failed to sign the data:
-gpg: invalid size of lockfile 'C:\\Users\\atsushifx\\AppData\\Roaming\\gnupg'C:\\Users\\atsushifx\\AppData\\Roaming\\gnupg_spawn_keyboxd_sentinel.lock'
+
+gpg: invalid size of lockfile 'C:\Users\atsushifx\AppData\Roaming\gnupg\gnupg_spawn_keyboxd_sentinel.lock'
 gpg: cannot read lockfile
 gpg: can't connect to the keyboxd: Invalid argument
 gpg: error opening key DB: No Keybox daemon running
@@ -24,27 +28,32 @@ gpg: skipped "atsushifx@gmail.com": Input/output error
 [GNUPG:] INV_SGNR 0 atsushifx@gmail.com
 [GNUPG:] FAILURE sign 33587249
 gpg: signing failed: Input/output error
+
+fatal: failed to write commit object
+
 ```
 
 ## エラーの原因と対策
 
-`git`で署名付きコミットをすると、`GnuPG`バイナリ`gpg.exe`が呼び出されます。
-このとき、実行パス、または検索パスに空白が含まれていると、上記のエラーが発生します。
+`git`で署名付きコミットの実行時、`GnuPG`バイナリである `gpg.exe` が呼び出されます。
+このとき、`C:\Program Files\GnuPG\gpg.exe` のようにパスに空白が含まれていると、エラーが発生します。
+また、設定がフルパスで指定されていない場合も、同様にエラーが発生します。
 
 ## トラブルシューティング
 
 以下の手順で、トラブルに対処します。
 
-1. `gpg.exe`の対象パスを確認する:
+1. パスの確認:
+   `gpg.exe`の実行パスを確認します。
    (例: `C:\app\develop\util\gnupg\gpg.exe`)
 
-2. `gpg.conf`に`gpg.exe`を設定する:
-   `gpg.conf`に`gpg.exe`をフルパスで設定します。
-   このとき、空白をエスケープするために、`"`で囲います。
+2. `gpg.conf`の設定:
+   `gpg.conf`の該当項目に`gpg.exe`をフルパスを設定します。
+   フルパス内の空白をエスケープするために、パス全体を`"`で囲います。
 
    ```gpg.conf
    [gpg]
-     program = "c:\app\develop\util\gnupg.gpg.exe"
+     program = "c:\app\develop\util\gnupg\gpg.exe"
 
    ```
 
@@ -54,9 +63,9 @@ gpg: signing failed: Input/output error
 ## おわりに
 
 この記事では、署名付きコミットを実行した際に `invalid size of lockfile` エラーの原因と、対策について解説しました。
-`gpg.exe`のパスを確認し、`gpg.conf`に適切なパスを設定することで、エラーが解消できます。
+`gpg.exe`のパスを確認し、`gpg.conf`に正しくパスを設定することで、エラーが解消できます。
 `gpg.conf`で`gpg.exe`と設定した場合もエラーが発生するので、注意が必要です。
 
-この記事が、エラーの対策のさんこうになったら幸いです。
+この記事の手順と注意点が、エラー対策に役立てば幸いです。
 
 それでは、Happy Hacking!
