@@ -10,10 +10,10 @@ published: false
 
 atsushifx です。
 
-この記事では、`VSCode` の `CSpell` において、環境変数 `XDG_CONFIG_HOME` を活用し、ユーザー設定と辞書を共通管理する方法を説明します。
+この記事では、`VSCode`の `CSpell`において、環境変数 `XDG_CONFIG_HOME` を活用し、ユーザー設定と辞書を共通管理する方法を説明します。
 これにより、複数のプロファイルやプロジェクト間で一元管理でき、設定の更新や共有が容易になります。
 
-`CSpell` は `import` 機能で外部の設定ファイルが読み込めます。
+`CSpell` は `import` 機能で外部の設定ファイルを読み込めます。
 このとき、設定ファイルのパスは `${env:XDG_CONFIG_HOME}` で環境変数の内容が参照できます。
 上記を組み合わせることで、`VSCode` の `workspace` とは別の共通ディレクトリで `CSpell` の設定が管理できます。
 
@@ -39,10 +39,10 @@ atsushifx です。
 
 ### 1.1 `VSCode`の設定手順
 
-`CSpell` は、`${env:XDG_CONFIG_HOME}` という形式で環境変数 `XDG_CONFIG_HOME` の値を参照できるため、これを活用して共通の設定ファイルを指定します。
-すべてのプロファイルに共通のユーザー設定を適用することで、`CSpell` の設定が統一されます。
+`CSpell`は、`${env:XDG_CONFIG_HOME}`という形式で環境変数 `XDG_CONFIG_HOME` の値を参照できるため、これを活用して共通の設定ファイルを指定します。
+すべてのユーザー設定 (`User Profile`) に共通のユーザー設定を適用することで、`CSpell` の設定が統一されます。
 
-以下の手順で、`User Profile` に `CSpell` の設定を追加します。
+以下の手順で、`User Profile`に`CSpell`の設定を追加します。
 
 1. ユーザー設定を表示:
    `Ctrl+Shift+P` キーでコマンドパレットを開き、`Preference: Open User Settings (JSON)` を選択します。
@@ -68,7 +68,7 @@ atsushifx です。
 
 共有用のユーザー辞書を作成し、プログラム内で使用される関数名、変数名、略語など、一般辞書に含まれない専門用語を登録します。
 これにより、専門用語が誤ってスペルチェックされることを防止できます。
-`Suggestions`機能により、正しい関数名や変数名が入力できます。
+`Suggestions` 機能により、正しい関数名や変数名を入力できます。
 
 1. `user-dic` の作成:
    `${env:XDG_CONFIG_HOME}/vscode/cspell/user.dic` を作成します。
@@ -80,18 +80,18 @@ atsushifx です。
    同様に、未登録の単語がプロジェクト固有の場合は[`Add Words to Workspace Dictionary`]を選択します。
 
 4. スペルチェック:
-   `CSpell`のスペルチェック機能で、単語をスペルチェックします。
-   スペルミスが見つかった場合は、`Spelling Suggestions`で正しい英単語修正します。
+   `CSpell` のスペルチェック機能で、単語をスペルチェックします。
+   スペルミスが見つかった場合は、`Spelling Suggestions`で正しい英単語に修正します。
 
 このようにして、スペルミスのないプログラミングが実現できます。
 
-## 2. `CSpell`設定
+## 2. `CSpell` 設定
 
-ユーザーが共通で使用する`CSpell`の設定について説明します。
+ユーザーが共通で使用する `CSpell` の設定について説明します。
 
-### 2.1 `CSpell`基本設定
+### 2.1 `CSpell` 基本設定
 
-`dotfiles`上にある `cspell.config.json` には、ユーザー共通辞書、プロジェクト辞書のデフォルト設定が記述され、利用する辞書群、無視対象のファイル／ディレクトリが指定されます。
+`dotfiles`上にある `CSpell`設定ファイルには、ユーザー共通辞書、プロジェクト辞書のデフォルト設定が記述され、利用する辞書群、無視対象のファイル／ディレクトリが指定されます。
 
 以下の`Gist`には、共通辞書およびプロジェクト辞書の基本設定が記述されています。
 その他、利用した辞書群に共通辞書とプロジェクト辞書を追加し、`.gitignore`で指定されたファイルを無視しています。
@@ -111,13 +111,14 @@ atsushifx です。
 
    @[gist](https://gist.github.com/atsushifx/eca0cf91141b70f72bb6aa6802359aee?file=cspell.json)
 
-   上記の設定では、`textlint` で「zenkaku」や「hankaku」などの単語を `textlint-dic` で管理しています。
+   上記の設定では、`textlint` 用の辞書として `textlint-dic` を追加しています。
+   `textlint-dic` では設定ファイル中のプラグインで使用されている英単語「`zenkaku`」、「`hankaku`」などを登録しています。
 
 このように、設定をカスタマイズすることで、プロジェクト固有の辞書が使用できます。
 
 ## 3. `Git`の設定
 
-### 3.1 `gitignore`の基本設定
+### 3.1 `gitignore` の基本設定
 
 `VSCode`関連の設定は、次のようになっています。
 
@@ -136,9 +137,9 @@ atsushifx です。
 
 となります。
 
-### 3.2 `gitignore`のカスタマイズ
+### 3.2 `gitignore` のカスタマイズ
 
-[3.1](#31-gitignoreの基本設定) では、`CSpell`関連の設定ファイルは管理の対象外でした。
+[3.1](#31-gitignore-の基本設定) では、`CSpell` 関連の設定ファイルは管理の対象外でした。
 以下の設定を追加し、`CSpell`関連のファイルを `git`管理対象に含めます。
 
 ```gitignore
