@@ -24,7 +24,7 @@
 		{
 			"name": "textlint-dic",
 			"description": "textlint plugins' filename, settings",
-			"path": "./.vscode/cspell/dicts/textlint.dic",
+			"path": "./cspell/dicts/textlint.dic",
 			"addWords": true,
 			"scope": "user"
 		}
