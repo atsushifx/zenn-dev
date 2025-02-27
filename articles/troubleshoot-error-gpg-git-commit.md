@@ -1,5 +1,5 @@
 ---
-title: "`troubleshoot`: `git commit` で `invalid size of lockfile` が発生したときの対処法"
+title: "troubleshoot: 'git commit' で 'invalid size of lockfile' が発生したときの対処法"
 emoji: "🛠️"
 type: "tech"
 topics: [ "トラブルシューティング", "エラー", "GnuPG", "git" ]
