@@ -1,5 +1,5 @@
 ---
-title: "CSpell extensionの設定をXDG_CONFIG_HOME下で共有する"
+title: "CSpell 拡張の設定、辞書を import を使って共通化する"
 emoji: "🔠"
 type: "tech"
 topics: [ "vscode", "CSpell", "extension", "開発環境", "XDG" ]
@@ -21,56 +21,56 @@ atsushifx です。
 
 この記事で使用する技術用語です。
 
-- `VSCode` (`Visual Studio Code`):
-  `Microsoft`が提供する統合開発環境
+- `VSCode`:
+  `Visual Studio Code`、`Microsoft` が提供する統合開発環境
 
-- CSpell (`Code Spell Checker`):
-  英単語のスペルチェックをする`VSCode`拡張
+- `CSpell`:
+  `Code Spell Checker`、英単語のスペルチェックをする`VSCode`拡張
 
 - `XDG_CONFIG_HOME`:
-  `XDG Base Directory`における設定ファイルを格納するディレクトリ (を示す環境変数)
+  `XDG Base Directory`における設定ファイルを格納するディレクトリを示す環境変数
 
 - `dotfiles`:
   ユーザーの設定ファイルを集約し、管理するためのリポジトリ
 
 ## 1. `VSCode`の設定
 
-`VSCode`の設定ファイルを書き換え、`CSpell`が共通の設定ファイルを読み込むよう変更します。
+`VSCode` の設定ファイルを書き換え、`CSpell` が共通の設定ファイルを読み込むよう変更します。
 
 ### 1.1 `VSCode`の設定手順
 
-`CSpell`は、`${env:XDG_CONFIG_HOME}`という形式で環境変数`XDG_CONFIG_HOME`の値を参照できるため、これを活用して共通の設定ファイルを指定します。
+`CSpell` は、`${env:XDG_CONFIG_HOME}` という形式で環境変数 `XDG_CONFIG_HOME` の値を参照できるため、これを活用して共通の設定ファイルを指定します。
 すべてのプロファイルに共通のユーザー設定を適用することで、`CSpell` の設定が統一されます。
 
-以下の手順で、`User Profile`に`CSpell`の設定を追加します。
+以下の手順で、`User Profile` に `CSpell` の設定を追加します。
 
 1. ユーザー設定を表示:
-   `Ctrl+Shift+P`キーでコマンドパレットを開き、`Preference: Open User Settings (JSON)`を選択します。
+   `Ctrl+Shift+P`キーでコマンドパレットを開き、`Preference: Open User Settings (JSON)` を選択します。
    ![ユーザー設定 (JSON)](/images/articles/vscode-cspell/ss-vscode-user-settings.png)
 
 2. 設定の追加:
-   `settings.json`に`CSpell`の設定を追加します。
+   `settings.json` に `CSpell` の設定を追加します。
 
-   ```json:settings.json
+   ```json
    // Code Spell Checker
    "cSpell.import": [
       "${env:XDG_CONFIG_HOME}/vscode/cspell.config.json"
-   ],
+   ]
    ```
 
-3. 設定のコピー:
-   上記の設定を、`CSpell`を使うプロファイルすべてにコピーします。
+3. 設定の適用:
+   上記の設定を、すべてのプロファイルに適用します。
 
-以上で、`VSCode`の設定は完了です。
-これにより、ユーザーは共通のユーザー辞書`user-dic`に登録された英単語のスペルチェックが可能になります。
+以上で、`VSCode` の設定は完了です。
+これにより、ユーザーは共通のユーザー辞書 `user-dic` に登録された英単語のスペルチェックが可能になります。
 
 ## 1.2 ユーザー辞書の設定
 
 共有用のユーザー辞書を作成し、プログラム内で使用される関数名、変数名、略語など、一般辞書に含まれない専門用語を登録します。
-これにより、上記の専門用語が誤りとして検出されることを防止できます。
+これにより、専門用語が誤ってスペルチェックされることを防止できます。
 `Suggestions`機能により、正しい関数名や変数名が入力できます。
 
-1. `user-dic`の作成:
+1. `user-dic` の作成:
    `${XDG_CONFIG_HOME}/vscode/cspell/user.dic` を作成します。
 
 2. 単語の登録:
@@ -91,8 +91,7 @@ atsushifx です。
 
 ### 2.1 基本の設定
 
-`dotfiles`上にある`cspell.config.json`では、ユーザー共通辞書、プロジェクト辞書のデフォルト設定を記述します。
-同様に、利用する辞書群、無視対象のファイル／ディレクトリを設定します。
+`dotfiles`上にある `cspell.config.json` には、ユーザー共通辞書、プロジェクト辞書のデフォルト設定が記述され、利用する辞書群、無視対象のファイル／ディレクトリが指定されます。
 
 以下の`Gist`には、共通辞書およびプロジェクト辞書の基本設定が記述されています。
 その他、利用した辞書群に共通辞書とプロジェクト辞書を追加し、`.gitignore`で指定されたファイルを無視しています。
@@ -101,18 +100,18 @@ atsushifx です。
 
 ### 2.2 `CSpell`の設定のカスタマイズ
 
-プロジェクトによって`CSpell`の設定を変えたい場合は、以下の手順で設定します。
+プロジェクトによって `CSpell` の設定を変えたい場合は、以下の手順で設定します。
 
-1. `cspell.json`の作成:
-    `~/.vscode/cspell.json`を作成します。
-    `VSCode`は、上記の設定ファイル (`~/.vscode/cspell.json`) を自動的に読み込むので、プロジェクト固有の設定を容易に反映できます。
+1. `cspell.json` の作成:
+    `~/.vscode/cspell.json` を作成します。
+    `VSCode` は、上記の設定ファイル (`~/.vscode/cspell.json`) を自動的に読み込むので、プロジェクト固有の設定を容易に反映できます。
 
 2. 設定の記述:
-    `~/.vscode/cspell.config.json`に、プロジェクト固有の辞書や設定を追加します。
+    `~/.vscode/cspell.config.json` に、プロジェクト固有の辞書や設定を追加します。
 
     @[gist](https://gist.github.com/atsushifx/eca0cf91141b70f72bb6aa6802359aee?file=cspell.json)
 
-    上記の設定では、`textlint`で"zenkaku", "hankaku" などの単語を`textlint-dic`で管理しています。
+    上記の設定では、`textlint` で"zenkaku", "hankaku"などの単語を `textlint-dic` で管理しています。
 
 このように、設定をカスタマイズすることで、プロジェクト固有の辞書が使用できます。
 
@@ -123,29 +122,24 @@ atsushifx です。
 `VSCode`関連の設定は、次のようになっています。
 
 ```:.gitignore
-#  Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+# Visual Studio Code
+.vscode/*                 # VSCode 関連の一時ファイル、ユーザー固有のファイルを除外
+# 以下の設定ファイルは、バージョン管理対象
+!.vscode/settings.json    # 主要なユーザー設定
+!.vscode/tasks.json       # タスク設定ファイル
+!.vscode/launch.json      # デバッグ設定ファイル
+!.vscode/extensions.json  # 拡張機能リスト
+!.vscode/*.code-snippets  # コードスニペット
 ```
 
-この設定では、
-
-- `.vscode/*`:
-  `.vscode`内のすべてのファイルを無視する。ただし、個別に'!'で除外したファイルは管理対象とする。
-
-- !.vscode/settings.json, ...:
-  `.vscode/settings.json`など、`VSCode`が使用する設定ファイルを管理対象とする
+この設定では、`VSCode`の設定ファイル以外は`Git`の管理対象外としています。
 
 となります。
 
 ### 3.2 `.gitignore`のカスタマイズ
 
-[3.1](#31-gitignoreの基本設定) の設定では、`CSpell`関連の設定ファイルは管理の対象外でした。
-以下の設定を追加し、`CSpell`関連のファイルを`git`管理対象に含めます。
+[3.1](#31-gitignoreの基本設定) では、`CSpell`関連の設定ファイルは管理の対象外でした。
+以下の設定を追加し、`CSpell`関連のファイルを `git`管理対象に含めます。
 
 ```:.gitignore
 !.vscode/cspell.json
@@ -153,17 +147,17 @@ atsushifx です。
 !.vscode/cspell/dicts/*
 ```
 
-上記の設定を追加することで、`CSpell`の設定ファイルや辞書ファイルが`git`によってバージョン管理され、チーム内での設定の統一や変更履歴の追跡が容易になります。
+上記の設定を追加することで、`CSpell` の設定ファイルや辞書ファイルが `git` によってバージョン管理され、チーム内での設定の統一や変更履歴の追跡が容易になります。
 
 ## おわりに
 
-この記事では、`CSpell`の`import`機能を利用し、環境変数`${env:XDG_CONFIG_HOME}`を活用して`VSCode`のスペルチェック設定を統一する方法を説明しました。
+この記事では、`CSpell` の `import`機能を利用し、環境変数 `XDG_CONFIG_HOME` を活用して `VSCode` のスペルチェック設定を統一する方法を説明しました。
 これにより、プログラム内で使用する変数名や関数名の誤字を低減し、コードの可読性が向上します。
 
-また、`VSCode`のプロジェクトごとのカスタマイズ方法についても説明しました。
+また、`VSCode` のプロジェクトごとのカスタマイズ方法についても説明しました。
 これで、プロジェクト固有の単語も適切にスペルチェックできます。
 
-`.gitignore`の適切な設定により、必要な`CSpell`の設定、辞書ファイルをバージョン管理に含める方法も紹介しました。
+`.gitignore` の適切な設定により、必要な `CSpell` の設定、辞書ファイルをバージョン管理に含める方法も紹介しました。
 
 この記事を活用すれば、プログラム内の変数名や関数名の誤字が低減され、コードの可読性向上に寄与できます。
 
@@ -174,7 +168,7 @@ atsushifx です。
 ### Webサイト
 
 - [CSpell - Configuration](https://cspell.org/configuration/):
-  `CSpell`設定ファイルに関するドキュメント
+  `CSpell` 設定ファイルに関する公式ドキュメント
 
 - [CSpell標準の辞書セット](https://github.com/streetsidesoftware/cspell-dicts):
-  `CSpell`インストール時に使用できる辞書セット
+  `CSpell` インストール時に使用可能な標準辞書セット
