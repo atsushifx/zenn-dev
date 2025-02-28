@@ -3,7 +3,7 @@ title: "XDG 環境変数と import 機能で実現する cSpell 設定・辞書�
 emoji: "🔠"
 type: "tech"
 topics: [ "vscode", "CSpell", "extension", "開発環境", "XDG" ]
-published: false
+published: true
 ---
 
 ## はじめに
