@@ -49,8 +49,8 @@ indent_style = space
 
 ### Settings
 # json
-[**.json]
-tab_width = 2
+[**.{json*}]
+tab_width = 4
 indent_size = tab
 indent_style = tab
 
