@@ -14,7 +14,7 @@ atsushifx です。
 `CSpell` の `cSpell.import` 機能を利用すると、外部ファイルを読み込むことができます (参考: [`Importing Configuration`](https://cspell.org/configuration/imports/))。
 さらに、環境変数 `XDG_CONFIG_HOME` と組み合わせることで、複数のプロジェクトやコンピューター間で一貫した設定を維持できるようになります。
 
-この方法を実践することで、コード内の英単語のスペルチェック精度が向上し、チーム全体で辞書や設定を統一できます。
+この方法を導入すると、コード内の英単語のスペルチェック精度が向上し、チーム全体で辞書や設定を統一できます。
 また、異なるプロジェクト間での設定移行がスムーズになり、`Git` を活用すれば設定の一元管理や履歴の追跡も可能になります。
 
 ## 用語集
@@ -53,12 +53,12 @@ atsushifx です。
 - `CSpell` 拡張:
   `VSCode` には、`CSpell` 拡張がインストールされている
 
-## 2. `VSCode`の設定
+## 2. `VSCode` の設定
 
 `VSCode` の設定ファイル (`settings.json`) を修正して、環境変数 `XDG_CONFIG_HOME` を参照する形で `CSpell` の共通設定ファイルを読み込むように変更します。
-この設定を適用すれば、すべての `VSCode` 環境で同じスペルチェック設定と辞書を共有できます。
+すべての `VSCode` 環境で統一されたスペルチェック設定と辞書を適用できます。
 
-### 2.1 `VSCode`の設定手順
+### 2.1 `VSCode` の設定手順
 
 以下の手順で共通設定を適用します。
 
@@ -103,7 +103,7 @@ atsushifx です。
    `${env:XDG_CONFIG_HOME}/vscode/cspell/user.dic` ファイルを作成します。
 
 2. 単語の登録:
-   `VSCode` 上で未登録の単語 (下線が引かれる) を右クリックし、コンテキストメニューから[`Add Words to user Dictionary`]を選択します。
+   `VSCode` 上で未登録の単語 (下線表示) を右クリックし、コンテキストメニューから[`Add Words to user Dictionary`]を選択します。
 
 3. プロジェクト辞書への登録:
    プロジェクト固有の英単語の場合は、コンテキストメニューから[`Add Words to Workspace Dictionary`]を選択します。
@@ -112,7 +112,7 @@ atsushifx です。
    `CSpell` のスペルチェック機能で、単語をスペルチェックします。
    スペルミスが見つかった場合は、`Spelling Suggestions`で正しい英単語に修正します。
 
-この設定により、スペルミスを減らし、より正確なプログラミングが可能になります。」
+この設定により、スペルミスを減らし、より正確なプログラミングが可能になります。
 
 ## 4. `CSpell` 設定
 
@@ -125,37 +125,35 @@ atsushifx です。
 以下の `Gist` は、共通辞書およびプロジェクト辞書の基本設定を含む `cspell.config.json` の例です。
 `dotfiles` 上の `CSpell` 設定ファイルに、ユーザー共通辞書、プロジェクト辞書のデフォルト設定が記述され、利用する辞書群および無視対象のファイル／ディレクトリが指定されます。
 
-この設定ファイルでは:
+この設定ファイルでは、以下を設定します:
 
 - ユーザー辞書 (`user-dic`) とプロジェクト辞書 (`project-dic`) を設定
 - 英語や技術用語など、標準で使用する辞書群を定義
 - `.gitignore` で指定されたファイルなど、スペルチェック対象外となるファイルパターンを設定
 
-をします。
-
 @[gist](https://gist.github.com/atsushifx/eca0cf91141b70f72bb6aa6802359aee?file=cspell.config.json)
 
 この設定ファイルは`${XDG_CONFIG_HOME}/vscode/`ディレクトリに配置します。
 
-### 4.2 `CSpell`設定のカスタマイズ
+### 4.2 `CSpell` 設定のカスタマイズ
 
 プロジェクトによって `CSpell` の設定を変えたい場合は、以下の手順で設定します。
 
 1. `cspell.json` の作成:
-   プロジェクト用に　`./vscode/cspell.json` を作成することで、プロジェクト固有の辞書を用いてスペルチェックできます。
+   プロジェクト用に `./vscode/cspell.json` を作成することで、プロジェクト辞書を用いてスペルチェックできます。
    `VSCode` は、`./vscode/cspell.json`を自動的に読み込むので、設定がすぐに反映されます。
 
 2. 設定の記述:
-   `~/.vscode/cspell.config.json` に、プロジェクト固有の辞書や設定を追加します。
+   `~/.vscode/cspell.config.json` に、プロジェクト辞書や設定を追加します。
 
    @[gist](https://gist.github.com/atsushifx/eca0cf91141b70f72bb6aa6802359aee?file=cspell.json)
 
    上記の設定では、`textlint` 用の辞書として `textlint-dic` を追加しています。
    `textlint-dic` では設定ファイル中のプラグインで使用されている英単語「`zenkaku`」、「`hankaku`」などを登録しています。
 
-このように、設定をカスタマイズすることで、プロジェクト固有の辞書が使用できます。
+このように、設定をカスタマイズすることで、プロジェクト辞書が使用できます。
 
-## 5. `Git`の設定
+## 5. `Git` の設定
 
 ### 5.1 `gitignore` の基本設定
 
@@ -172,7 +170,7 @@ atsushifx です。
 !.vscode/*.code-snippets  # コードスニペット
 ```
 
-この設定では、`VSCode`の設定ファイル以外は`Git`の管理対象外となります。
+この設定では、`VSCode` の主要な設定ファイルのみ `Git` の管理対象とし、それ以外は除外します。
 
 ### 5.2 `gitignore` のカスタマイズ
 
