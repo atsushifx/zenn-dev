@@ -1,7 +1,9 @@
 # project.dic: dictionary for this workspace only
 dism
+ENOENT
 featurename
 MSRDC
 norestart
+scannow
 wsl
 zenn
