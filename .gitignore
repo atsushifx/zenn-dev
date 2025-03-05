@@ -27,9 +27,8 @@ $~*
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
-!.vscode/cspell.json
-!.vscode/cspell.*.json
-!.vscode/cspell/dicts/*
+!.vscode/cspell*
+!.vscode/cspell/**
 
 
 
