@@ -1,5 +1,5 @@
 ---
-title: "WSL 2: GitHubからパッケージをダウンロードしてwslをセットアップする方法"
+title: "WSL 2: GitHubからパッケージをダウンロードしてWSLをセットアップする方法"
 emoji: "🐧"
 type: "tech"
 topics: ["Windows", "Linux", "WSL", "環境構築" ]
@@ -10,12 +10,21 @@ published: false
 
 atsushifx です。
 `WSL`環境を構築したのですが、最初は`ENOENT``wsl`コマンドが使えませんでした。
-[Windows の機能の有効化または無効可]を使用して、機能の無効化をためしてもエラーのままでした。
+[Windows の機能の有効化または無効可]を使用して、機能の無効化を試してもエラーのままでした。
 最終的に`GitHub`から`wsl`のパッケージをインストールすることで解決しました。
 
-この記事は、上記のようにエラーで`WSL`環境が構築できない場合に、`GitHub`上の`wsl`パッケージを用いて`WSL`を高知憂くする方法を説明します。
+この記事は、上記のようにエラーで`WSL`環境が構築できない場合に、`GitHub`上の`wsl`パッケージを用いて`WSL`をセットアップする方法を説明します。
 
 ## 用語集
+
+- `WSL` (`Windows Subsystem for Linux`):
+  Windows上で Linux 環境を実行するための機能
+
+- `GitHub`:
+  ソフトウェア開発プロジェクトのためのホスティングサービス
+
+- `dism.exe`:
+  Windows のイメージ管理・修復ツール
 
 ## 1. オーバービュー
 
@@ -69,7 +78,7 @@ atsushifx です。
 
 ### 2.2 `WSL`のインストール
 
-次の手順で、`GitHub`から`WSL`をだうんろーどし、インストールします。
+次の手順で、`GitHub`から`WSL`をダウンロードし、インストールします。
 
 1. `WSL`のダウンロード:
    [`WSL`の`release`](https://github.com/microsoft/WSL/releases) から、`wsl.2.xx.x.x64.msi`をダウンロードします。
