@@ -1,5 +1,5 @@
 ---
-title: "WSL 2: GitHubからパッケージをダウンロードしてWSLをセットアップする方法"
+title: "WSL 2: GitHub からパッケージをダウンロードして WSL をセットアップする方法"
 emoji: "🐧"
 type: "tech"
 topics: ["Windows", "Linux", "WSL", "環境構築" ]
@@ -9,16 +9,17 @@ published: false
 ## はじめに
 
 atsushifx です。
-`WSL`環境の構築中に`ENOENT`エラーが発生し、`wsl`コマンドが実行できず、トラブルに直面しました。
-[Windows の機能の有効化または無効化]を試みましたが、解決しませんでした。
-最終的に、Microsoft の`GitHub`リポジトリから`WSL`をダウンロードし、手動インストールすることで解決しました。
+`WSL`環境の構築中に`ENOENT`エラーが発生しました。
+このエラーは、ファイルまたはディレクトリが見つからないことを示しており、その結果、`wsl`コマンドが実行できなくなりました。
+機能を無効化し、再度有効化することを試してみましたが、改善しませんでした。
+最終的に、Microsoft の`GitHub`リポジトリから`WSL`をダウンロードし、手動でセットアップしました。
 
-この記事では、上記のようにエラーで`WSL`環境が構築できない場合に備え、`GitHub`から`WSL`をダウンロードし、セットアップする方法を説明します。
+この記事では、`WSL`のインストール時に発生したエラーを手動で解決する方法を解説します。
 
 ## 用語集
 
 - `WSL` (`Windows Subsystem for Linux`):
-  Windows上で Linuxバイナリをネイティブに実行するための互換性レイヤー
+  Windows上で Linuxバイナリをネイティブに実行できるようにする互換性レイヤー
 
 - `GitHub`:
   バージョン管理やイシュー管理が可能なソフトウェア開発プラットフォーム
@@ -32,50 +33,46 @@ atsushifx です。
 - `ENOENT`:
   "No such file or directory"を意味する、システムエラーコード
 
-## 1. `WSL`の概要
+## 1. ``WSL`とは?
 
-`WSL`について基本的な事柄を説明します。
+`WSL` (`Windows Subsystem for Linux`) は、Windows上で Linuxバイナリを直接実行できる互換性レイヤーです。
+これにより、Linuxディストリビューションを Windows上でネイティブに動作させることができます。
 
-### 1.1 `WSL`とは?
+## 2. `WSL1`と`WSL2`の主な違い
 
-`WSL` (`Windows Subsystem for Linux') は、Windows上で Linuxバイナリをネイティブに実行するための互換性レイヤーです。
-
-### 1.2 `WSL1`と`WSL2`の違い
-
-`WSL 1`と`WSL 2`の違いを、箇条書き形式で掲載します。
+`WSL 1`と`WSL 2`の主な違いを、箇条書き形式で紹介します。
 
 - `WSL 1`:
-  - Linux システムコールを Windows カーネルに変換する互換レイヤーとして動作する。
-  - 起動が高速だが、互換性に一部制限がある。
+  Linuxシステムコールを Windowsカーネルに変換する互換レイヤーとして動作し、起動が高速だが、互換性に一部制限がある。
 
 - `WSL 2`:
-  - 軽量な仮想マシン上で実際の Linuxカーネルを稼働させる。
-  - 高い互換性とパフォーマンスを実現し、最新の Linuxアプリケーションに対応するが、起動に若干時間を要する。
+  軽量な仮想マシンを利用して、Microsoft が提供するカスタマイズされた Linuxカーネルを実行することで、高い互換性とパフォーマンスを実現する。
 
-## 2. `WSL`環境の構築
+## 3. `WSL`環境の構築
 
 エラーに対応した`WSL`環境の構築手順を説明します。
 
-### 2.1 `WSL`、仮想化機能の有効化
+### 3.1 `WSL`、仮想化機能の有効化手順
 
-[Windows の機能の有効化または無効化]を使用し、`WSL`および仮想化関連の機能を有効化します。
+[`Windows の機能の有効化または無効化`]を使用し、`WSL`および仮想化機能を有効化します。
 次の手順で、機能を有効にします。
 
-1. 管理者ターミナルの起動:
-
+1. 管理者ターミナルの起動方法:
    - スタートメニューを右クリックし、[ターミナル(管理者)]を選択する。
 
    - 管理者権限でターミナルが起動する。
      ![管理者ターミナル](/images/articles/wsl2-setup/ss-termianl-admin.png)
-     *管理者ターミナル*
+     *管理者ターミナル:  スタートメニューから管理者ターミナルを開く*
 
 2. 機能の有効化:
-
    - `dism`コマンドで、機能を有効化する。
 
      ```powershell
+     # 仮想マシンプラットフォームを有効化する
      dism.exe /online /enable-feature /all /featurename:VirtualMachinePlatform /norestart
+     # Hyper-Vを有効化する
      dism.exe /online /enable-feature /all /featurename:Microsoft-Hyper-V-All /norestart
+     # WSL を有効化する
      dism.exe /online /enable-feature /all /featurename:Microsoft-Windows-Subsystem-Linux /norestart
      ```
 
@@ -93,21 +90,21 @@ atsushifx です。
 
 以上で、仮想化機能の有効化は完了です。
 
-### 2.2 `WSL`のインストール
+### 3.2 手動での`WSL`のインストール
 
-`GitHub`上の`WSL`パッケージをダウンロードし、Windows にインストールします。
+ `GitHub`から最新の`WSL`インストーラーをダウンロードし、インストールする手順を説明します。
 次の手順を実行します。
 
-1. `GitHub`から`WSL`をダウンロード:
-   - [`WSL`の`release`ページ](https://github.com/microsoft/WSL/releases) にアクセする。
+1. `GitHub` から最新の`WSL`をダウンロード:
+   - [`WSL`のリリースページ](https://github.com/microsoft/WSL/releases) にアクセスする。
      ![`WSL release`](/images/articles/wsl2-setup/ss-wsl-github-release.png)
      *`WSL release`*
 
-   - `WSL`パッケージをダウンロードする。
-     (Windows のアーキテクチャに合わせ、`x64`、`arm64`を選択する)
+   - 最新の`WSL`インストーラー (wsl.2.xx.arch.msi) をダウンロードする。
+     Windows のアーキテクチャ (`x64` または `arm64`) に応じたバージョンを選択する。
 
 2. `WSL`のインストール:
-   - ダウンロードした`WSL`のインストーラーを実行して、インストールを完了させる。
+   - ダウンロードした`WSL`インストーラーを実行して、インストールを完了させる。
      ![`インストール`](/images/articles/wsl2-setup/ss-wsl-install.png)
      *インストール*
 
@@ -119,6 +116,10 @@ atsushifx です。
      ```
 
    - `wsl --version`の出力を確認する。
+     **出力例**
+     :::message
+     環境によってバージョン番号は異なります
+     :::
 
      ```powershell
      WSL バージョン: 2.4.11.0
@@ -132,9 +133,9 @@ atsushifx です。
 
 上記のように、バージョンが表示されれば、`WSL`のインストールは完了です。
 
-### 2.3 `WSL`の動作確認
+### 3.3 `WSL`の動作確認
 
-`WSL`の動作確認として、Linuxディストリビューションをインストールします。
+`WSL`が正常に動作しているかを、Linuxディストリビューションをインストールして確認します。
 次の手順を実行します。
 
 1. 規定バージョンの設定:
@@ -173,20 +174,21 @@ atsushifx です。
    この操作を正しく終了しました。
    ```
 
-以上で、`WSL`のセットアップは完了です。
+以上で `WSL` のセットアップは完了です。
 
-## 3. トラブルシューティング
+## 4. トラブルシューティング
 
 Windows に`WSL`環境を構築する際に発生したトラブルとその対処法を掲載します。
 
-### 3.1 代表的なトラブルと対処法
+### 4.1 代表的なトラブルと対処法
 
 #### [WSL-001]: `wsl`が実行できない
 
 トラブル: `ENOENT`、その他のエラーメッセージが出力され、`wsl`コマンドが実行できない。
 
 - 原因:
-  `WSL`が無効になっている、あるいは関連ファイルの破損が疑われる。
+   `WSL`のシステム設定が無効になっている、または必要なシステムファイルが破損している可能性があります。
+   特に、`Windows Update`の影響で`WSL`関連の設定が変更された場合や、不完全なアンインストール・再インストールが行なわれた場合、この問題が発生することがあります。
 
 - 対処法:
   手動で`WSL`をダウンロードし、インストールすることで解決できます。
@@ -196,8 +198,11 @@ Windows に`WSL`環境を構築する際に発生したトラブルとその対�
      - 機能を無効化する。
 
        ```powershell
+       # WSL を無効化する
        dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
+       # 仮想化プラットフォームを無効化する
        dism.exe /online /disable-feature /featurename:VirtualMachinePlatform /norestart
+       # Hyper-V を無効化する
        dism.exe /online /disable-feature /featurename:Microsoft-Hyper-V-All /norestart
        ```
 
@@ -211,8 +216,11 @@ Windows に`WSL`環境を構築する際に発生したトラブルとその対�
      - 機能を有効化する。
 
        ```powershell
+       # 仮想マシンプラットフォームを有効化する
        dism.exe /online /enable-feature /all /featurename:VirtualMachinePlatform /norestart
+       # Hyper-V を有効化する
        dism.exe /online /enable-feature /all /featurename:Microsoft-Hyper-V-All /norestart
+       # WSL を　有効化する
        dism.exe /online /enable-feature /all /featurename:Microsoft-Windows-Subsystem-Linux /norestart
        ```
 
@@ -246,8 +254,11 @@ Windows に`WSL`環境を構築する際に発生したトラブルとその対�
      - 機能を無効化する。
 
        ```powershell
+       # WSL を無効化する
        dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
+       # 仮想マシンプラットフォームを無効化する
        dism.exe /online /disable-feature /featurename:VirtualMachinePlatform /norestart
+       # Hyper-V を無効化する
        dism.exe /online /disable-feature /featurename:Microsoft-Hyper-V-All /norestart
        ```
 
@@ -275,9 +286,12 @@ Windows に`WSL`環境を構築する際に発生したトラブルとその対�
      - 機能を有効化する。
 
        ```powershell
-       dism.exe /online /disable-feature /featurename:Microsoft-Windows-Subsystem-Linux /norestart
-       dism.exe /online /disable-feature /featurename:VirtualMachinePlatform /norestart
-       dism.exe /online /disable-feature /featurename:Microsoft-Hyper-V-All /norestart
+       # WSL を有効化する
+       dism.exe /online /enable-feature /all /featurename:Microsoft-Windows-Subsystem-Linux /norestart
+       # 仮想マシンプラットフォームを有効化する
+       dism.exe /online /enable-feature /all /featurename:VirtualMachinePlatform /norestart
+       # Hyper-V を有効化する
+       dism.exe /online /enable-feature /all /featurename:Microsoft-Hyper-V-All /norestart
        ```
 
      - PC を再起動する。
@@ -288,11 +302,9 @@ Windows に`WSL`環境を構築する際に発生したトラブルとその対�
 
 ## おわりに
 
-この記事では、`WSL`環境の構築中に発生する可能性のあるエラーに対処するための手順を説明しました。
+この記事では、`WSL`環境の構築中に発生する可能性のあるエラーに対処するための手順を解説しました。
 `GitHub`から`WSL`をダウンロードしてセットアップすることで、最新の`WSL`をインストールし、使用できます。
-これにより、`WSL`で Linux を使用できます。
-
-今後、Linux環境を活用した開発がよりいっそう促進されるでしょう。
+`WSL` を活用することで、Windows上で簡単に Linux環境を構築できるため、開発やテストなど多様な用途に活用できます。
 
 それでは、Happy Hacking!
 
