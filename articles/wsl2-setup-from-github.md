@@ -3,7 +3,7 @@ title: "WSL 2: GitHub からパッケージをダウンロードして WSL を�
 emoji: "🐧"
 type: "tech"
 topics: ["Windows", "Linux", "WSL", "環境構築" ]
-published: false
+published: true
 ---
 
 ## はじめに
