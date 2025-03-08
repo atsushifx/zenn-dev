@@ -23,16 +23,23 @@
 	"dictionaryDefinitions": [
 		{
 			"name": "textlint-dic",
-			"description": "textlint plugins' filename, settings",
+			"description": "dictionary for textlint plugins, filename, settings",
 			"path": "./cspell/dicts/textlint.dic",
-			"addWords": true,
+			"addWords": false,
 			"scope": "user"
+		},
+		{
+			"name": "zenn-dic",
+			"description": "dictionary for zenn.dev",
+			"path": "./cspell/dicts/zenn-dev.dic",
+			"addWords": true,
+			"scope": "workspace"
 		}
 	],
 	"dictionaries": [
 		"en",
 		"User-dic",
 		"textlint-dic",
-		"project-dic"
+		"zenn-dic"
 	]
 }
