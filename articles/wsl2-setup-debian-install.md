@@ -8,7 +8,7 @@ published: false
 
 ## tl;dr
 
-`Windows Terminal`上で、以下のコマンドを実行して、Debian をインストール、セットアップします。
+`Windows Terminal`上で、以下のコマンドを実行して、Debian をインストール・セットアップします。
 
 :::message alert
 `WSL 2`を利用する場合は、`Windows 11`の使用を推奨します。
@@ -26,9 +26,9 @@ published: false
 `atsushifx` です。
 この記事では、`WSL 2`環境に Debian をインストールし、Linux コマンドラインを快適に利用する方法を解説します。
 Debian のインストール手順から初期設定までを順を追って説明しています。
-また、簡単なトラブルシューティングにより、Debian のインストールで寅卯ぶるが発生した場合にも対応しています。
+また、簡単なトラブルシューティングにより、Debian のインストール時に発生する可能性のあるトラブルにも対応しています。
 
-｀WSL 2`を通して Linux環境を活用することで、Windows上で本番環境に近い開発体験ができるでしょう。
+`WSL 2`を通して Linux環境を活用することで、Windows上で本番環境に近い開発体験ができるでしょう。
 Enjoy!
 
 ## 用語集
@@ -38,7 +38,7 @@ Enjoy!
 `WSL`を使用するには、以下の条件が必要です。
 
 1. PC の仮想化支援機能 (`Intel VT-x` または `AMD-V`)が`BIOS`で有効になっていること
-2. Windows が WSL 対応のバージョンであること
+2. Windows が`WSL`に対応したバージョンであること
    :::message
    Windows 11 を推奨
    :::
@@ -51,7 +51,7 @@ Enjoy!
 ### 2.1 `WSL 2` の概要
 
 `WSL 2`は、Microsoft がカスタマイズした Linux カーネルを使用した仮想環境を作成します。
-従来の`WSL 1`と比較して、高速かつ互換性の高い Linux環境を提供するため、開発用途に適した環境が実現できます。
+従来の`WSL 1`と比較して、高速で互換性の高い Linux環境を提供するため、開発用途に適した環境が実現できます。
 
 ### 2.2 `WSL 2` を選ぶ理由
 
@@ -69,7 +69,7 @@ Enjoy!
 以下の手順で、`Windows Terminal`を起動します。
 
 1. 実行ダイアログの表示:
-   `[Win]+R`キーで[ファイル名を指定して実行]ダイアログを開きます、.
+   `[Win]+R`キーで[ファイル名を指定して実行]ダイアログを開きます。
    ![ファイル名を指定して実行](/images/articles/wsl2-debian/ss-winr-wt.png)
    *ファイル名を指定して実行*
 
@@ -81,7 +81,7 @@ Enjoy!
 
     :::message
     ターミナルの起動時に、`PowerShell`が立ち上がるように設定しています。
-    以後、`PowerShell`上で操作するものとして説明します。
+    以後、`PowerShell`上で操作する前提とします。
     :::
 
 ### 3.2 インストール先を`WSL 2`にする
@@ -95,7 +95,7 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
    wsl --set-default-version 2
    ```
 
-2. メッセージが出力される:
+2. メッセージが表示される:
 
    ```powershell
    WSL 2 との主な違いについては、https://aka.ms/wsl2
@@ -114,7 +114,7 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
    wsl --status
    ```
 
-2. メッセージが出力される
+2. メッセージが表示される:
 
    ```powershell
    既定のバージョン: 2
@@ -133,8 +133,12 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
    wsl --install Debian
    ```
 
+   :::message
+   本記事では、`PowerShell`でインストールしていますが、コマンドプロンプトからでもインストールできます。
+   :::
+
 2. メッセージの出力:
-   ターミナルに、以下のメッセージが出力されます。
+   ターミナルに、以下のメッセージが表示されます。
 
    ```powershell
    ダウンロード中: Debian GNU/Linux
@@ -146,7 +150,7 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
    ディストリビューションが正常にインストールされました。'wsl.exe -d Debian' を使用して起動できます
    ```
 
-上記のメッセージが出力されれば、インストールは完了です。
+上記のメッセージが表示されれば、インストールは完了です。
 
 ### 3.4 ユーザーアカウントの作成
 
@@ -161,7 +165,8 @@ Debian を使用するために、Debian用のユーザーアカウント (`UNIX
    ```
 
 2. ユーザーアカウントの作成:
-   以下のようにめっせーじが出力されます。
+   Debian をはじめて起動した場合は、次のようなメッセージが表示されます。
+   画面の指示に従ってください。
 
    ```powershell
    Please create a default UNIX user account. The username does not need to match your Windows username.
@@ -169,7 +174,7 @@ Debian を使用するために、Debian用のユーザーアカウント (`UNIX
    Enter new UNIX username:
    ```
 
-   `Enter new UNIX username:`プロンプトに従い、ユーザー名を入力します。
+   ユーザー名を入力します。
 
    ```powershell
    Enter new UNIX username: <myUserAccount>
@@ -177,7 +182,7 @@ Debian を使用するために、Debian用のユーザーアカウント (`UNIX
 
    :::message
    `<myUserAccount>` には、自分を特定する英数字のアカウントを入力します。
-   Windows のアカウントと同じである必要はありませんが、自分の覚えやすいものにしましょう
+   Windows のアカウントと同じである必要はありません。わかりやすく、入力しやすい名前を設定しましょう。
    :::
 
 3. パスワードの設定:
@@ -253,7 +258,10 @@ Debian のインストールに成功すると、`Windows Terminal`のプロフ�
 - 原因:
   インストールしようとしたディストリビューションが存在しない、またはみつからない
 - 対処法:
-  `Microsoft Store`から対象の`Linux ディストリビューション`をインストール
+  - `wsl --list --online`:
+    インストール可能なディストリビューションを確認する
+  - `Microsoft Store`:
+    `Microsoft Store`から対象の`Linux ディストリビューション`をインストール
 
 #### [WSL-004]: `WSL 2`に切り替わらない
 
@@ -284,7 +292,7 @@ Debian のインストールに成功すると、`Windows Terminal`のプロフ�
       [設定]-[`JSON ファイルを開く`]で、`Windows Terminal`の設定ファイルをエディタで開く。
 
     2. `Debian`プロファイルを追加:
-       設定ファイルの、下記`list`に
+       `settings.json`内の`profiles`セクションにある`list`配列に Debian の項目を追加します。
 
        ```settings.json
        "profiles":
