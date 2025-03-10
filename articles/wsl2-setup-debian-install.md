@@ -8,30 +8,51 @@ published: false
 
 ## tl;dr
 
-`Windows Terminal`上で、以下のコマンドを実行して、Debian をインストール・セットアップします。
+`Windows Terminal`上で、以下のコマンドを実行して、`Debian` をインストール・セットアップします。
 
 :::message alert
-`WSL 2`を利用する場合は、`Windows 11`の使用を推奨します。
+`Windows 11`を推奨
+(`Windows 10` では、`wsl --update`が使えないなど、一部の機能に制限があるため)
 :::
 
 1. `wsl --set-default-version 2`を実行
-2. `wsl --install Debian`を実行
+
+   ```powershell
+   wsl --set-default-version 2
+   ```
+
+2. `Debian`をインストール
+
+   ```powershell
+   wsl --install -d Debian
+   ```
+
 3. `wsl -d Debian`を実行し、ユーザーアカウントを作成
+
+   ```powershell
+   wsl -d Debian
+   ```
+
 4. `Windows Terminal`を再起動
 
-以上で、`Windows Terminal`に`Debian`が追加されます。
+以上で、`Windows Terminal` に `Debian` が登録され、使用できます。
+Enjoy!
 
 ## はじめに
 
-`atsushifx` です。
-この記事では、`WSL 2`環境に Debian をインストールし、Linux コマンドラインを快適に利用する方法を解説します。
-Debian のインストール手順から初期設定までを順を追って説明しています。
-また、簡単なトラブルシューティングにより、Debian のインストール時に発生する可能性のあるトラブルにも対応しています。
+atsushifx です。
+この記事では、`WSL 2`環境に `Debian` をインストールし、`Linux`コマンドラインを快適に利用する方法を解説します。
+また、インストール時のトラブルシューティングについても紹介します。
 
-`WSL 2`を通して Linux環境を活用することで、Windows上で本番環境に近い開発体験ができるでしょう。
-Enjoy!
+`WSL 2`を利用すると、Windows上でコンテナ開発や Linux ネイティブな開発環境を構築できます。
 
 ## 用語集
+
+- `WSL 1` (`Windows Subsystem for Linux 1`):
+  <!-- textlint-disabled -->
+  Linux システムコールを Windows システムコールへ変換するタイプで、`NTFS` ファイルシステム上で Linux のバイナリを実
+  行する技術
+  <!-- textlint-enabled -->
 
 - `WSL 2` (`Windows Subsystem for Linux 2`):
   Windows上で Linux環境を実現するための仮想化技術
@@ -40,41 +61,61 @@ Enjoy!
   安定性とセキュリティを重視した Linuxディストリビューション
 
 - `Windows Terminal`:
-  Windows 向けの複数のシェル環境に対応したモダンなターミナルエミュレータ
+  Windows 向けの複数のシェル環境に対応した、モダンなターミナルエミュレータ
 
 - `PowerShell`:
   Windows上で利用されるコマンドラインシェルおよびスクリプト環境
+
+- `GUID`:
+  Windows 内部でオブジェクトを一意に識別する識別子
+
+- `dism.exe`:
+  Windows のシステムイメージを管理するコマンドラインツール
+
+- `BIOS` / `UEFI`:
+  PC のファームウェア
 
 ## 1. 前提条件
 
 `WSL`を使用するには、以下の条件が必要です。
 
-1. PC の仮想化支援機能 (`Intel VT-x` または `AMD-V`)が`BIOS`で有効になっていること
-2. Windows が`WSL`に対応したバージョンであること
-   :::message
-   Windows 11 を推奨
-   :::
-3. Windows が`WSL`および`仮想マシン`関連の機能を有効化していること
+1. **の仮想化支援機能**:
+   (`Intel VT-x` または `AMD-V`)が`BIOS`/`UEFI`で有効になっていること。
+
+2. **Windowsのバージョン**:
+   `Windows 11` を推奨
+   `Windows 10` では、`wsl --update`が使えないなど、一部機能に制限あり
+
+3. **`WSL` および `Virtual Machine Platform` の有効化**:
+   `WSL`, `Virtual Machine Platform`および`Hyper-V`の各機能が Windows上で有効になっていること
 
 上記の設定については、[GitHub からパッケージをダウンロードして WSL をセットアップする方法](wsl2-setup-from-github) を参考にしてください。
+
+そのほか、インストール操作で、
+
+1. `Windows Terminal`
+
+2. `PowerShell` (not `Windows PowerShell`)
+
+を使用しています。
 
 ## 2. `WSL 2`とは
 
 ### 2.1 `WSL 2` の概要
 
-`WSL 2`は、Microsoft がカスタマイズした Linux カーネルを使用した仮想環境を作成します。
-従来の`WSL 1`と比較して、高速で互換性の高い Linux環境を提供するため、開発用途に適した環境が実現できます。
+`WSL 2`は、Microsoft がカスタマイズした `Linux`カーネルを使用した仮想環境を作成します。
+`WSL 2`は、`WSL 1`と異なり、完全な Linux カーネルを利用し、ファイルシステムのパフォーマンスが向上しています。そのため、開発用途に適した環境を提供します。
 
 ### 2.2 `WSL 2` を選ぶ理由
 
-`WSL 2`は、実際の Linuxカーネルを利用することで、従来の`WSL 1`よりも高いパフォーマンスと互換性を実現します。
-そのため、`Docker`などのコンテナ技術や最新の Linux ツールを活用する場合にも、より快適な環境が得られます。
-また、Windows環境とシームレスに連携できるため、開発効率が向上し、プロジェクトごとの環境構築も簡易化される点が大きなメリットです。
+`WSL 2`は、`Linuxカーネル`をネイティブに使用し、`WSL 1`よりも高速で高い互換性を提供します。
+特に、`Docker` などのコンテナ技術や最新の `Linux` ツールの利用に適しています。
+また、Windows のファイルシステムと統合され、エディタや `IDE` との連携も容易です。
 
-## 3. Debian のインストール、セットアップ
+## 3. `Debian`のインストール、セットアップ
 
-`WSL 2`に Debian をインストールする手順を解説します。
-`Windows Terminal`上でコマンドを実行して、Debian をインストールします。
+`WSL 2`に`Debian`をインストールする手順を解説します。
+`Windows Terminal`上でコマンドを実行して、`Debian`をインストールします。
 
 ### 3.1 `Windows Terminal`の起動
 
@@ -91,14 +132,13 @@ Enjoy!
     ![ターミナル](/images/articles/wsl2-debian/ss-terminal-normal.png)
     *ターミナル*
 
-    :::message
-    ターミナルの起動時に、`PowerShell`が立ち上がるように設定しています。
-    以後、`PowerShell`上で操作する前提とします。
-    :::
+:::message
+この記事では`PowerShell`を使用していますが、`コマンドプロンプト`でもインストールできます。
+:::
 
 ### 3.2 インストール先を`WSL 2`にする
 
-Debian を`WSL 2`環境にインストールするため、`WSL`の既定バージョンを`WSL 2`に設定します。
+`Debian`を`WSL 2`環境にインストールするため、`WSL`の既定バージョンを`WSL 2`に設定します。
 以下の手順で、`WSL 2`に設定します。
 
 1. 既定のバージョンを設定する:
@@ -118,7 +158,7 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
 
 以上で、インストール先を`WSL 2`に設定できました。
 
-現在のインストール先は、次の手順で確認できます。
+現在の `WSL` のバージョン (既定のバージョン) を、次の手順で確認できます。
 
 1. 既定のバージョンを確認する:
 
@@ -134,23 +174,19 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
 
 上記のように、`既定のバージョン`が 2 であれば、`WSL 2`にインストールされます。
 
-## 3.3 Debian のインストール手順
+## 3.3 `Debian`のインストール手順
 
-以下の手順で、`WSL 2` に Debian をインストールします。
+以下の手順で、`WSL 2` に`Debian`をインストールします。
 
-1. Debian をインストールする:
-   以下のコマンドを実行し、Debian をインストールします。
+1. `Debian`をインストールする:
+   以下のコマンドを実行し、`Debian`をインストールします。
 
    ```powershell
-   wsl --install Debian
+   wsl --install -d Debian
    ```
 
-   :::message
-   本記事では、`PowerShell`でインストールしていますが、コマンドプロンプトからでもインストールできます。
-   :::
-
 2. メッセージの出力:
-   ターミナルに、以下のメッセージが表示されます。
+   以下のメッセージがターミナルに表示されます。
 
    ```powershell
    ダウンロード中: Debian GNU/Linux
@@ -166,18 +202,18 @@ Debian を`WSL 2`環境にインストールするため、`WSL`の既定バー�
 
 ### 3.4 ユーザーアカウントの作成
 
-Debian を使用するために、Debian用のユーザーアカウント (`UNIXユーザーアカウント`) が必要です。
+`Debian`上でファイル操作やソフトウェア管理をするため、`UNIX`ユーザーアカウントを作成する必要があります。
 以下の手順で、ユーザーアカウントを作成します。
 
-1. Debian の起動:
-   以下のコマンドで、Debian を起動します。
+1. `Debian`の起動:
+   以下のコマンドで、`Debian`を起動します。
 
    ```powershell
    wsl -d Debian
    ```
 
 2. ユーザーアカウントの作成:
-   Debian をはじめて起動した場合は、次のようなメッセージが表示されます。
+   `Debian`をはじめて起動した場合は、次のようなメッセージが表示されます。
    画面の指示に従ってください。
 
    ```powershell
@@ -194,7 +230,7 @@ Debian を使用するために、Debian用のユーザーアカウント (`UNIX
 
    :::message
    `<myUserAccount>` には、自分を特定する英数字のアカウントを入力します。
-   Windows のアカウントと同じである必要はありません。わかりやすく、入力しやすい名前を設定しましょう。
+   `Windows` のアカウントと同じである必要はありません。わかりやすく、入力しやすい名前を設定しましょう。
    :::
 
 3. パスワードの設定:
@@ -210,7 +246,7 @@ Debian を使用するために、Debian用のユーザーアカウント (`UNIX
 
    :::message alert
    パスワードは画面に表示されません。
-   安全性を考慮し、Windows とは異なるパスワードを設定することが推奨されます。
+   安全性を考慮し、`Windows` とは異なるパスワードを設定することが推奨されます。
    :::
 
 以上で、ユーザーアカウントの作成は終了です。
@@ -219,7 +255,7 @@ Debian を使用するために、Debian用のユーザーアカウント (`UNIX
 
 ### 4.1 プロファイルに`Debian`を追加する
 
-Debian のインストールに成功すると、`Windows Terminal`のプロファイルに Debian が追加されます。
+`Debian`のインストールに成功すると、`Windows Terminal`のプロファイルに`Debian`が追加されます。
 `Windows Terminal`を再起動すると、以下のようにメニューに`Debian`が表示されます。
 ![シェルメニュー](/images/articles/wsl2-debian/ss-wt-shellmenu.png)
 *シェル*
@@ -228,45 +264,54 @@ Debian のインストールに成功すると、`Windows Terminal`のプロフ�
 
 ### 5.1 代表的なトラブルと対処法
 
-#### [WSL-001]: `WSL 2`に切り替えられない
+#### [WSL-001]: `WSL 2`に切り替えられない (`WSL 2 required`)
 
 - コマンド:
   `wsl --set-default-version 2`
 - エラー:
-  `WSL 2 requires an update to its kernel component. For information please visit https://aka.ms/wsl2kernel`
+  <!-- textlint-disable ja-technical-writing/sentence-length -->
+  "WSL 2 requires an update to its kernel component. For information please visit <https://aka.ms/wsl2kernel>"
+  <!-- textlint-enable -->
+  (訳: WSL 2 のカーネルコンポーネントの更新が必要です。詳細は <https://aka.ms/wsl2kernel> を参照してください。)
 - 原因:
   `WSL 2`のカーネルが古い
 - 対処法:
-  `WSL`を最新のバージョンに更新
+  `WSL` のカーネルを最新のバージョンに更新し、PC を再起動
 
   ```powershell
   wsl --update
+  shutdown /r /t 0
   ```
 
-#### [WSL-002]: `WSL 2`に切り替えられない
+#### [WSL-002]: `WSL 2`に切り替えられない (`Please enable the Virtual Machine`)
 
 - コマンド:
   `wsl --set-default-version 2`
 - エラー:
-  `Please enable the Virtual Machine Platform Windows feature and ensure that virtualization is enabled in the BIOS.`
+  <!-- textlint-disable ja-technical-writing/sentence-length -->
+  "Please enable the Virtual Machine Platform Windows feature and ensure that virtualization is
+  enabled in the BIOS."
+  <!-- textlint-enable -->
+  (訳: `Virtual Machine Platform` 機能を有効にし、`BIOS` で仮想化支援機能が有効になっていることを確認してください)
 - 原因:
-  - `Windows`の機能で`Virtual Machine Platform`が無効
-  - `BIOS`/`UEFI`で仮想化機能 (`Intel VT-x` または `AMD-V`) が無効
+  - `Windows`の`Virtual Machine Platform`機能が無効
+  - `BIOS`または  `UEFI`で仮想化支援機能 (`Intel VT-x` または `AMD-V`) が無効
 - 対処法:
-  - `PowerShell`を管理者権限で開き、以下のコマンドを実行:
+  - `PowerShell`を管理者権限で開いて、以下のコマンドを実行後、PC を再起動:
 
     ```powershell
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+    shutdown /r /t 0
     ```
 
   - `BIOS`設定で、仮想化支援機能(`Intel VT-x` または、`AMD-V`) を有効化
 
-#### [WSL-003]: `WSL`に Debian がインストールできない
+#### [WSL-003]: `WSL`に `Debian` がインストールできない
 
 - コマンド:
-  `wsl --install Debian`
+  `wsl --install -d Debian`
 - エラー:
-  `There is no distribution with the supplied name.`
+  "There is no distribution with the supplied name."
 - 原因:
   インストールしようとしたディストリビューションが存在しない、またはみつからない
 - 対処法:
@@ -275,19 +320,21 @@ Debian のインストールに成功すると、`Windows Terminal`のプロフ�
   - `Microsoft Store`:
     `Microsoft Store`から対象の`Linux ディストリビューション`をインストール
 
-#### [WSL-004]: `WSL 2`に切り替わらない
+#### [WSL-004]: `WSL 2`に切り替わらない (`WSL default version`)
 
 - コマンド:
   `wsl --status`
 - エラー:
-  `WSL default version remains as WSL 1`
+  "WSL default version remains as WSL 1"
 - 原因:
   `wsl --set-default-version 2`が正しく適用されていない
+  (`WSL` を完全に終了していない可能性がある)
 - 対処法:
   1. `PowerShell`を管理者権限で開き、次のコマンドを実行:
 
      ```powershell
      wsl --set-default-version 2
+     wsl --shutdown
      ```
 
 #### [TERM-001]: `Windows Terminal`の[プロファイル]に`Debian`が存在しない
@@ -300,7 +347,7 @@ Debian のインストールに成功すると、`Windows Terminal`のプロフ�
   プロファイルに`Debian`の項目がない
 - 対処法:
   - `Windows Terminal`のプロファイルに`Debian`を追加する：
-    1. `settings.json`を開く。
+    1. `settings.json`を開く:
       [設定]-[`JSON ファイルを開く`]で、`Windows Terminal`の設定ファイルをエディタで開く。
 
     2. `Debian`プロファイルを追加:
@@ -336,10 +383,10 @@ Debian のインストールに成功すると、`Windows Terminal`のプロフ�
 
 以上で、`Windows`上に `Debian` がインストールできました。
 これにより、`AWS`やその他のクラウドサービスに近い Linux環境を Windows上で構築できるようになり、開発環境の幅が大きく広がります。
-Linux ツールが利用できるという大きな利点により、各種開発やテストがよりスムーズになります。
+`Linux`ツールが利用できるという大きな利点により、各種開発やテストがよりスムーズになります。
 
-今後は、インストールした Debian のカスタマイズ方法や、具体的な開発環境の構築手順についても詳しく解説していく予定です。
-まずは、使いやすい Debian環境の構築に挑戦してみてください。
+今後は、`Debian` のカスタマイズ方法や具体的な開発環境の構築手順について解説する予定です。
+まずは、使いやすい`Debian`環境の構築に挑戦してみてください。
 
 それでは、Happy Hacking!
 
@@ -353,5 +400,5 @@ Linux ツールが利用できるという大きな利点により、各種開�
 - [`WSL` の基本的なコマンド](https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands):
   `wsl`コマンドが使用できる基本的なサブコマンドの紹介
 
-- [GitHub からパッケージをダウンロードして WSL をセットアップする方法](/atsushifx/articles/wsl2-setup-from-github):
+- [`GitHub`からパッケージをダウンロードして`WSL`をセットアップする方法](/atsushifx/articles/wsl2-setup-from-github):
   `WSL`をセットアップする手順
