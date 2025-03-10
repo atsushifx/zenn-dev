@@ -33,6 +33,18 @@ Enjoy!
 
 ## 用語集
 
+- `WSL 2` (`Windows Subsystem for Linux 2`):
+  Windows上で Linux環境を実現するための仮想化技術
+
+- `Debian`:
+  安定性とセキュリティを重視した Linuxディストリビューション
+
+- `Windows Terminal`:
+  Windows 向けの複数のシェル環境に対応したモダンなターミナルエミュレータ
+
+- `PowerShell`:
+  Windows上で利用されるコマンドラインシェルおよびスクリプト環境
+
 ## 1. 前提条件
 
 `WSL`を使用するには、以下の条件が必要です。
