@@ -11,11 +11,11 @@ published: false
 `Windows Terminal`上で、以下のコマンドを実行して、`Debian` をインストール・セットアップします。
 
 :::message alert
-`Windows 11`を推奨
-(`Windows 10` では、`wsl --update`が使えないなど、一部の機能に制限があるため)
+`Windows 11`を推奨します。
+`Windows 10` では `wsl --update`が使用できないなど、一部の機能に制限があります。
 :::
 
-1. `wsl --set-default-version 2`を実行
+1. `既定のバージョン`を設定
 
    ```powershell
    wsl --set-default-version 2
@@ -27,7 +27,7 @@ published: false
    wsl --install -d Debian
    ```
 
-3. `wsl -d Debian`を実行し、ユーザーアカウントを作成
+3. ユーザーアカウントを作成
 
    ```powershell
    wsl -d Debian
@@ -79,12 +79,12 @@ atsushifx です。
 
 `WSL`を使用するには、以下の条件が必要です。
 
-1. **の仮想化支援機能**:
+1. **仮想化支援機能の有効化**:
    (`Intel VT-x` または `AMD-V`)が`BIOS`/`UEFI`で有効になっていること。
 
 2. **Windowsのバージョン**:
-   `Windows 11` を推奨
-   `Windows 10` では、`wsl --update`が使えないなど、一部機能に制限あり
+   `Windows 11` を推奨。
+   `Windows 10` では `wsl --update`が使用できないなど、一部機能に制限あり。
 
 3. **`WSL` および `Virtual Machine Platform` の有効化**:
    `WSL`, `Virtual Machine Platform`および`Hyper-V`の各機能が Windows上で有効になっていること
@@ -103,7 +103,7 @@ atsushifx です。
 
 ### 2.1 `WSL 2` の概要
 
-`WSL 2`は、Microsoft がカスタマイズした `Linux`カーネルを使用した仮想環境を作成します。
+`WSL 2`は、Microsoft がカスタマイズした `Linux`カーネルを使用し、仮想環境を作成します。
 `WSL 2`は、`WSL 1`と異なり、完全な Linux カーネルを利用し、ファイルシステムのパフォーマンスが向上しています。そのため、開発用途に適した環境を提供します。
 
 ### 2.2 `WSL 2` を選ぶ理由
@@ -268,11 +268,12 @@ atsushifx です。
 
 - コマンド:
   `wsl --set-default-version 2`
-- エラー:
+- エラーメッセージ:
   <!-- textlint-disable ja-technical-writing/sentence-length -->
   "WSL 2 requires an update to its kernel component. For information please visit <https://aka.ms/wsl2kernel>"
   <!-- textlint-enable -->
-  (訳: WSL 2 のカーネルコンポーネントの更新が必要です。詳細は <https://aka.ms/wsl2kernel> を参照してください。)
+- 日本語訳:
+  WSL 2 のカーネルコンポーネントの更新が必要です。詳細は <https://aka.ms/wsl2kernel> を参照してください。
 - 原因:
   `WSL 2`のカーネルが古い
 - 対処法:
@@ -287,15 +288,16 @@ atsushifx です。
 
 - コマンド:
   `wsl --set-default-version 2`
-- エラー:
+- エラーメッセージ
   <!-- textlint-disable ja-technical-writing/sentence-length -->
   "Please enable the Virtual Machine Platform Windows feature and ensure that virtualization is
   enabled in the BIOS."
   <!-- textlint-enable -->
-  (訳: `Virtual Machine Platform` 機能を有効にし、`BIOS` で仮想化支援機能が有効になっていることを確認してください)
+- 日本語訳:
+  `Virtual Machine Platform` 機能、``BIOS`の仮想化支援機能が有効になっていることを確認してください
 - 原因:
-  - `Windows`の`Virtual Machine Platform`機能が無効
-  - `BIOS`または  `UEFI`で仮想化支援機能 (`Intel VT-x` または `AMD-V`) が無効
+  - `Windows`の`Virtual Machine Platform`機能が無効化されている
+  - `BIOS`または`UEFI`で仮想化支援機能 (`Intel VT-x` または `AMD-V`) が無効になっている
 - 対処法:
   - `PowerShell`を管理者権限で開いて、以下のコマンドを実行後、PC を再起動:
 
@@ -310,8 +312,10 @@ atsushifx です。
 
 - コマンド:
   `wsl --install -d Debian`
-- エラー:
+- エラーメッセージ:
   "There is no distribution with the supplied name."
+- 日本語訳:
+  指定した名前のディストリビューションが存在しません。
 - 原因:
   インストールしようとしたディストリビューションが存在しない、またはみつからない
 - 対処法:
@@ -324,13 +328,15 @@ atsushifx です。
 
 - コマンド:
   `wsl --status`
-- エラー:
+- エラーメッセージ:
   "WSL default version remains as WSL 1"
+- 日本語訳:
+  `WSL`の既定のバージョンが、 1 のままです。
 - 原因:
   `wsl --set-default-version 2`が正しく適用されていない
   (`WSL` を完全に終了していない可能性がある)
 - 対処法:
-  1. `PowerShell`を管理者権限で開き、次のコマンドを実行:
+  - `PowerShell`を管理者権限で開き、次のコマンドを実行後、`WSL`を再起動
 
      ```powershell
      wsl --set-default-version 2
