@@ -8,14 +8,14 @@ published: false
 
 ## tl;dr
 
-`Windows Terminal`上で、以下のコマンドを実行して、`Debian` をインストール・セットアップします。
+Windows Terminal 上で、以下のコマンドを実行して、`Debian` をインストール・セットアップします。
 
 :::message alert
 `Windows 11`を推奨します。
-`Windows 10` では `wsl --update`が使用できないなど、一部の機能に制限があります。
+`Windows 10`では一部の機能に制限があります (カーネルを`wsl --update`で更新できない)。
 :::
 
-1. `既定のバージョン`を設定
+1. `WSL`の既定のバージョンを 2 に設定
 
    ```powershell
    wsl --set-default-version 2
@@ -35,24 +35,23 @@ published: false
 
 4. `Windows Terminal`を再起動
 
-以上で、`Windows Terminal` に `Debian` が登録され、使用できます。
+以上で、`Windows Terminal` に `Debian` のプロファイルが自動追加され、メニューから選択して起動できます。
+
 Enjoy!
 
 ## はじめに
 
 atsushifx です。
-この記事では、`WSL 2`環境に `Debian` をインストールし、`Linux`コマンドラインを快適に利用する方法を解説します。
+この記事では、`WSL 2`環境に `Debian` をインストールし、Linux コマンドラインを快適に利用する方法を解説します。
 また、インストール時のトラブルシューティングについても紹介します。
 
 `WSL 2`を利用すると、Windows上でコンテナ開発や Linux ネイティブな開発環境を構築できます。
 
 ## 用語集
-
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 - `WSL 1` (`Windows Subsystem for Linux 1`):
-  <!-- textlint-disabled -->
-  Linux システムコールを Windows システムコールへ変換するタイプで、`NTFS` ファイルシステム上で Linux のバイナリを実
+  Linux システムコールを Windows システムコールへ変換する方法で、`NTFS` ファイルシステム上で Linux のバイナリを実
   行する技術
-  <!-- textlint-enabled -->
 
 - `WSL 2` (`Windows Subsystem for Linux 2`):
   Windows上で Linux環境を実現するための仮想化技術
@@ -73,21 +72,23 @@ atsushifx です。
   Windows のシステムイメージを管理するコマンドラインツール
 
 - `BIOS` / `UEFI`:
-  PC のファームウェア
+  PC の起動を管理するファームウェア (`BIOS`はレガシー形式、`UEFI`はその後継規格で、より高度な機能を提供)
+<!-- textlint-enable -->
 
 ## 1. 前提条件
 
 `WSL`を使用するには、以下の条件が必要です。
 
 1. **仮想化支援機能の有効化**:
-   (`Intel VT-x` または `AMD-V`)が`BIOS`/`UEFI`で有効になっていること。
+   (`Intel VT-x` または `AMD-V`)が`BIOS`/`UEFI`の設定で有効になっていること。
 
 2. **Windowsのバージョン**:
    `Windows 11` を推奨。
-   `Windows 10` では `wsl --update`が使用できないなど、一部機能に制限あり。
+   `Windows 10` では一部の機能に制限あり (`wsl -update`が使用できない)
 
 3. **`WSL` および `Virtual Machine Platform` の有効化**:
-   `WSL`, `Virtual Machine Platform`および`Hyper-V`の各機能が Windows上で有効になっていること
+   `WSL`, `Virtual Machine Platform`および`Hyper-V`の各機能が Windows上で有効になっていること。
+   (通常、"Virtualization Technology" というオプション名で記載される)
 
 上記の設定については、[GitHub からパッケージをダウンロードして WSL をセットアップする方法](wsl2-setup-from-github) を参考にしてください。
 
@@ -95,9 +96,13 @@ atsushifx です。
 
 1. `Windows Terminal`
 
-2. `PowerShell` (not `Windows PowerShell`)
+2. `PowerShell` (`Windows PowerShell` ではなく)
 
 を使用しています。
+
+:::message
+この記事では`PowerShell`を使用していますが、`コマンドプロンプト`でもインストールできます。
+:::
 
 ## 2. `WSL 2`とは
 
@@ -131,10 +136,6 @@ atsushifx です。
     `Windows Terminal`が起動します。
     ![ターミナル](/images/articles/wsl2-debian/ss-terminal-normal.png)
     *ターミナル*
-
-:::message
-この記事では`PowerShell`を使用していますが、`コマンドプロンプト`でもインストールできます。
-:::
 
 ### 3.2 インストール先を`WSL 2`にする
 
@@ -268,12 +269,11 @@ atsushifx です。
 
 - コマンド:
   `wsl --set-default-version 2`
-- エラーメッセージ:
-  <!-- textlint-disable ja-technical-writing/sentence-length -->
+- エラーメッセージ: <!-- textlint-disable ja-technical-writing/sentence-length -->
   "WSL 2 requires an update to its kernel component. For information please visit <https://aka.ms/wsl2kernel>"
   <!-- textlint-enable -->
 - 日本語訳:
-  WSL 2 のカーネルコンポーネントの更新が必要です。詳細は <https://aka.ms/wsl2kernel> を参照してください。
+  `WSL 2` のカーネルコンポーネントが古いため、更新が必要です。詳細は <https://aka.ms/wsl2kernel> を参照してください。
 - 原因:
   `WSL 2`のカーネルが古い
 - 対処法:
@@ -286,15 +286,14 @@ atsushifx です。
 
 #### [WSL-002]: `WSL 2`に切り替えられない (`Please enable the Virtual Machine`)
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 - コマンド:
   `wsl --set-default-version 2`
-- エラーメッセージ
-  <!-- textlint-disable ja-technical-writing/sentence-length -->
+- エラーメッセージ:
   "Please enable the Virtual Machine Platform Windows feature and ensure that virtualization is
   enabled in the BIOS."
-  <!-- textlint-enable -->
 - 日本語訳:
-  `Virtual Machine Platform` 機能、``BIOS`の仮想化支援機能が有効になっていることを確認してください
+  `Virtual Machine Platform` 機能、および`BIOS`の仮想化支援機能が有効になっていることを確認してください
 - 原因:
   - `Windows`の`Virtual Machine Platform`機能が無効化されている
   - `BIOS`または`UEFI`で仮想化支援機能 (`Intel VT-x` または `AMD-V`) が無効になっている
@@ -307,6 +306,7 @@ atsushifx です。
     ```
 
   - `BIOS`設定で、仮想化支援機能(`Intel VT-x` または、`AMD-V`) を有効化
+<!-- textlint-enable -->
 
 #### [WSL-003]: `WSL`に `Debian` がインストールできない
 
@@ -400,11 +400,11 @@ atsushifx です。
 
 ### Webサイト
 
-- [`WSL` のインストール方法](https://learn.microsoft.com/ja-jp/windows/wsl/install):
+- [`WSL` のインストール方法](https://learn.microsoft.com/ja-jp/windows/wsl/install) -
   公式ドキュメントによる、`WSL`インストール方法のチュートリアル
 
-- [`WSL` の基本的なコマンド](https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands):
+- [`WSL` の基本的なコマンド](https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands) -
   `wsl`コマンドが使用できる基本的なサブコマンドの紹介
 
-- [`GitHub`からパッケージをダウンロードして`WSL`をセットアップする方法](/atsushifx/articles/wsl2-setup-from-github):
+- [`GitHub`からパッケージをダウンロードして`WSL`をセットアップする方法](/atsushifx/articles/wsl2-setup-from-github) -
   `WSL`をセットアップする手順
