@@ -3,7 +3,7 @@ title: "WSL 2: Debianのインストールと初期設定ガイド (2025年版)"
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Linux", "Debian", "インストール"]
-published: false
+published: true
 ---
 
 ## tl;dr
