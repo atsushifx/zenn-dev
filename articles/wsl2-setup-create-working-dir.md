@@ -27,7 +27,7 @@ atsushifx です。
 `WSL`は Windows上で動作する Linux サブシステムです。
 そのため、純粋な Linux環境とは異なる点があります。
 
-- Linux のデスクトップ環境では一般的なフォルダ (Desktop、Documents など) が`WSL`では標準で用意されていません。
+- Linux のデスクトップ環境では一般的なフォルダ (`Desktop`, `Documents` など) が`WSL`では標準で用意されていません。
 - Windows のディレクトリが、`/mnt/c/`以下にマウントされており、`WSL`からアクセス可能です。
 
 これらの違いを考慮し、適切なディレクトリ構成を設計することが重要です。
@@ -56,10 +56,10 @@ atsushifx です。
 
 | ディレクトリ | 目的 |
 | --- | --- |
-| ~/bin | ユーザー固有のスクリプトや実行ファイルを配置 |
-| ~/temp | 一時ファイルを保存する |
+| `~/bin` | ユーザー固有のスクリプトや実行ファイルを配置 |
+| `~/temp` | 一時ファイルを保存する |
 
-### 3.3 `XDG Base` ディレクトリ
+### 3.3 `XDG Base Directory` ディレクトリ
 
 アプリケーションごとの設定やキャッシュは、`XDG Base Directory`に準拠して整理します。
 これにより、設定ファイルを`GitHub`の`dotfiles`リポジトリで一元管理できます。
@@ -77,11 +77,11 @@ atsushifx です。
 
 | ディレクトリ | 目的 |
 | --- | --- |
-| ~/workspaces | プログラミングルート |
-| ~/workspaces/develop | 開発プロジェクト |
-| ~/workspaces/education | 学習用コンテンツ |
-| ~/workspaces/sandbox | プログラミング用サンドボックス |
-| ~/workspaces/temp | 一時ファイル用 |
+| `~/workspaces` | プログラミングルート |
+| `~/workspaces/develop` | 開発プロジェクト |
+| `~/workspaces/education` | 学習用コンテンツ |
+| `~/workspaces/sandbox` | プログラミング用サンドボックス |
+| `~/workspaces/temp` | 一時ファイル用 |
 
 ## 4. ディレクトリの作成
 
@@ -91,8 +91,8 @@ atsushifx です。
 
 | ディレクトリ | 目的 |
 | --- | --- |
-| ~/.config/git | 設定ファイル、アトリビュートファイル、ignoreファイル |
-| ~/.local/share/git | git用credentialファイル |
+| `~/.config/git` | 設定ファイル、アトリビュートファイル、ignoreファイル |
+| `~/.local/share/git` | git用credentialファイル |
 
 ### 4.2 ディレクトリツリー
 
@@ -120,7 +120,8 @@ atsushifx です。
 
 上記のディレクトリは、下記のスクリプトで自動的に作成できます。
 
-```bash: create-workingDir.sh
+```bash
+# create-workingDir.sh
 #!/bin/bash
 
 ## ホームディレクトリに移動
@@ -161,7 +162,7 @@ bash ./create-workingDir.sh
 `WSL 2`のような仮想環境では、同じ環境を複数用意して運用することが一般的です。
 
 ディレクトリ管理と統一により、効率的な開発環境の基礎が構築できます。
-さらに、`.bashrc`などの初期化スクリプトを適切に設定することで、環境変数や`Path`の自動設定、コマンドのエイリアス適用などを行ない、より実用的な開発環境を構築できます。
+さらに、`.bashrc`などの初期化スクリプトを適切に設定することで、環境変数や`PATH`の自動設定、コマンドのエイリアス適用などを行なう、より実用的な開発環境を構築できます。
 
 それでは、Happy Hacking!
 
