@@ -1,12 +1,27 @@
 # project.dic: dictionary for this workspace only
+autoclean
+backportss
+CACH
 debian
 dism
 ENOENT
 featurename
+httpredir
+iwlwifi
+keyserver
+libc
+libgnutls
 MSRDC
+nict
 norestart
 NTFS
+oldstable
+recv
+releaseinfo
+resolv
 scannow
+timesyncd
 UEFI
+unrar
 wsl
 zenn
