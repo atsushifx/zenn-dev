@@ -462,6 +462,15 @@ sudo apt upgrade -y
 
            上記のコマンドを実行し、リポジトリが　`cdn-fastly.deb.debian.org`　になっていれば完了。
 
+  2. リポジトリの更新:
+     `apr update`を実行し、リポジトリを更新する
+
+     ```bash
+     sudo apt update
+     ```
+
+     エラーが起きなければ、正常終了。
+
 #### [SHOT-003] `archive`への変更
 
 #### [SHOT-004] キャッシュのクリア、再構築
