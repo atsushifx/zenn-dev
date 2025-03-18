@@ -320,6 +320,47 @@ sudo apt upgrade -y
 
 #### [SHOT-001] ソースリストの確認、修正
 
+- **原因**:
+  - リポジトリに`typo` (入力ミス) がある。
+  - 古い Debian のため、リポジトリが廃止された。
+    (例: `buster` 以前のリポジトリ `security.debian.org`は、`archive.debian.org`に移動されることがある)
+  -
+
+- **対策**:
+  リポジトリを確認し、正しいリポジトリに修正する。
+
+  1. リポジトリの確認:
+     `cat`コマンドで、現在のリポジトリを確認する。
+
+     ```bash
+     cat -n /etc/apt/sources.list
+     ```
+
+     または、追加のリストを確認
+
+     ```bash
+     ls /etc/apt/sources.list.d/
+     cat -n /etc/apt/sources.list.d/*.list
+     ```
+
+  2. リポジトリの修正:
+     エディターで、間違っていたリポジトリを修正する。
+
+     例: `bookworm-backportss` (誤) → `bookworm-backports` (正)
+
+     ```bash
+     # バックアップを作成する
+     sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
+     sudo vi /etc/apt/sources.list
+     ```
+
+  3. 更新の確認:
+     `apt update`を実行し、リポジトリが正しく動作するかを確認する。
+
+     ```bash
+     sudo apt update
+     ```
+
 #### [SHOT-002] ミラーの変更
 
 #### [SHOT-003] `archive`への変更
