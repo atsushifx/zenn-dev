@@ -321,10 +321,9 @@ sudo apt upgrade -y
 #### [SHOT-001] ソースリストの確認、修正
 
 - **原因**:
-  - リポジトリに`typo` (入力ミス) がある。
+  - リポジトリに`typo` (スペルミス・入力ミス) がある。
   - 古い Debian のため、リポジトリが廃止された。
-    (例: `buster` 以前のリポジトリ `security.debian.org`は、`archive.debian.org`に移動されることがある)
-  -
+    (例: `buster` 以前のリポジトリは `archive.debian.org` に移行されているため、通常のミラーではアクセスできない)
 
 - **対策**:
   リポジトリを確認し、正しいリポジトリに修正する。
@@ -336,7 +335,7 @@ sudo apt upgrade -y
      cat -n /etc/apt/sources.list
      ```
 
-     または、追加のリストを確認
+     追加のリスト (`/etc/apt/sources.list.d`下の設定ファイル) も確認する。
 
      ```bash
      ls /etc/apt/sources.list.d/
@@ -360,6 +359,15 @@ sudo apt upgrade -y
      ```bash
      sudo apt update
      ```
+
+      コンソールに、以下のような出力があれば正常に動作している。
+
+      ```bash
+      Hit:1 http://deb.debian.org/debian bookworm InRelease
+      Hit:2 http://security.debian.org/debian-security bookworm-security InRelease
+      ```
+
+      以上、エラーが出なければ修正は完了です。
 
 #### [SHOT-002] ミラーの変更
 
