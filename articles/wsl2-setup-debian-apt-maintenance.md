@@ -111,9 +111,10 @@ Debian では、公式のリポジトリに加え、地理的に分散された�
 
 ### 2.2  `Fastly CDN`ミラーの追加
 
-通常、公式`sources.list`にアクセスすると CDN によって一番近いコンテンツプロパイダーの sources.list をアクセスします。
-ただし、`CDN`を利用できない場合のために、`Fastly CDN`ミラーの`sources.list`を追加します。
+Debian のパッケージミラーは、`Fastly`による`CDN`に統合されました。
+`APT`の公式リポジトリ`deb.debian.org`にアクセスすると、自動的に最適な`Fastly CDN`ノードが利用されます。
 
+`Fastly CDN`を手動で追加もできます。
 次の手順で、`Fastly CDN`ミラーを追加します。
 
 1. [`Debian mirrors backed by Fastly CDN`](https://deb.debian.org/)にアクセスして、適切な`source`をコピーします
@@ -147,9 +148,9 @@ Debian では、公式のリポジトリに加え、地理的に分散された�
 
    ```ini:/etc/apt/sources.list.d/jpn.list
    # Japan official mirror
-   deb http://ftp.jp.debian.org/debian/ bookworm main
-   deb http://ftp.jp.debian.org/debian/ bookworm-updates main
-   deb http://ftp.jp.debian.org/debian/ bookworm-backports main
+   deb https://ftp.jp.debian.org/debian/ bookworm main
+   deb https://ftp.jp.debian.org/debian/ bookworm-updates main
+   deb https://ftp.jp.debian.org/debian/ bookworm-backports main
    ```
 
    :::message
