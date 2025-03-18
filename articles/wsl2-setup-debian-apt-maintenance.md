@@ -321,7 +321,23 @@ Debian のアップグレードは、システムにインストールされて�
 | `apt upgrade` | 既存のパッケージを更新するが、依存関係は変更しない |
 | `apt full-upgrade` | 依存関係が変わる場合も含めて、パッケージを更新・削除・追加する |
 
-例えば、新しいバージョンのパッケージが別のパッケージに置き換えられる場合、`apt upgrade` では変更されませんが、`apt full-upgrade` では適用されます。
+図にすると、下記のようになります。
+
+```mermaid
+graph TD;
+    A[既存のパッケージ] -->|apt upgrade| B[更新可能なパッケージのみ更新]
+    A -->|apt full-upgrade| C[パッケージ更新 + 依存関係の変更]
+
+    C -->|新しい依存関係| D[新しいパッケージをインストール]
+    C -->|不要なパッケージ| E[古いパッケージを削除]
+
+    style B fill:#bbf,stroke:#000,stroke-width:1px
+    style C fill:#fbb,stroke:#000,stroke-width:1px
+    style D fill:#fcc,stroke:#000,stroke-width:1px
+    style E fill:#fcc,stroke:#000,stroke-width:1px
+```
+
+*図1: `upgrade`と`full-upgrade`*
 
 アップグレード前に、影響を確認するために以下のコマンドを実行するとよいでしょう。
 
@@ -334,7 +350,7 @@ sudo apt full-upgrade --dry-run
 
 ### 3.6 不要パッケージの削除
 
-システムのンテナンスの一環として、不要になったパッケージを定期的に削除することが挙げられます。
+システムメンテナンスの一環として、不要になったパッケージを定期的に削除することが挙げられます。
 また、キャッシュはディスクスペースを消費するため、不要なキャッシュを削除するのもよいでしょう。
 
 #### 1. 不要なパッケージの削除
@@ -378,9 +394,7 @@ sudo apt autoremove -y
    `APT`のキャッシュ`/var/cache/apt/archives/*`とパッケージリスト`/var/lib/apt/lists/*`を削除することで、完全にクリーンなキャッシュを再構築できます。
 
    ```bash
-   sudo apt clean
-   sudo rm -rf /var/lib/apt/lists/*
-   sudo apt update
+   sudo apt clean && sudo rm -rf /var/lib/apt/lists/* && sudo apt update
    ```
 
    次のコマンドで、キャッシュが正常に機能しているか確認します。
@@ -394,8 +408,7 @@ sudo apt autoremove -y
 Debian では、セキュリティ更新を迅速に適用することが推奨されています。`WSL`環境でも、以下のコマンドを実行することで、セキュリティ関連のパッケージを優先的に更新できます。
 
 ```bash
-sudo apt update
-sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 ```
 
 これにより、`sources.list`に登録されたリポジトリから最新のパッケージ情報を取得し、必要なパッケージを更新できます。
