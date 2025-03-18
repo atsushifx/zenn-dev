@@ -386,84 +386,83 @@ sudo apt upgrade -y
   4. ネットワークの問題（企業ネットワークの制限など）
 
 - **対策**:
-  1. 別のミラーのリポジトリに変更する:
-     1.1 リポジトリを日本の公式ミラーに変更する。
-         公式がダウンしていた場合や、ダウンロード速度向上のために物理的に近い日本国内のミラーを選ぶことで、高速なダウンロードでのメンテナンスができます。
+  1. リポジトリを日本の公式ミラーに変更する。
+     日本国内のミラーを利用することで、公式ミラーがダウンしている場合でも高速にパッケージを取得できます。
 
-        1. エディターによる修正
+     1. エディターによる修正
 
-           ```bash
-           # バックアップを作成する
-           sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
-           sudo vi /etc/apt/sources.list
-           ```
+        ```bash
+        # バックアップを作成する
+        sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
+        sudo vi /etc/apt/sources.list
+        ```
 
-           ソースリスト:
+        ソースリスト:
 
-           ```ini:/etc/apt/sources.list
-           # 変更前
-           deb https://deb.debian.org/debian bookworm main
-           deb https://deb.debian.org/debian bookworm-updates main
-           deb https://deb.debian.org/debian bookworm-backports main
-           deb https://security.debian.org/debian-security bookworm-security main
+        ```ini:/etc/apt/sources.list
+        # 変更前
+        deb https://deb.debian.org/debian bookworm main
+        deb https://deb.debian.org/debian bookworm-updates main
+        deb https://deb.debian.org/debian bookworm-backports main
+        deb https://security.debian.org/debian-security bookworm-security main
 
-           # 変更後
-           deb https://ftp.jp.debian.org/debian/ bookworm main
-           deb https://ftp.jp.debian.org/debian/ bookworm-updates main
-           deb https://ftp.jp.debian.org/debian/ bookworm-backports main
-           deb https://security.debian.org/debian-security bookworm-security main
-           ```
+        # 変更後
+        deb https://ftp.jp.debian.org/debian/ bookworm main
+        deb https://ftp.jp.debian.org/debian/ bookworm-updates main
+        deb https://ftp.jp.debian.org/debian/ bookworm-backports main
+        deb https://security.debian.org/debian-security bookworm-security main
+        ```
 
-        2. `sed`による修正:
+     2. `sed`による修正:
 
-           ```bash
-           sudo sed -e 's|deb.debian.org|ftp.jp.debian.org|' /etc/apt/sources.list > /etc/apt/sources.list.new
-           mv /etc/apt/sources.list.new /etc/apt/sources.list
-           cat /etc/apt/sources.list
-           ```
+         ```bash
+         sudo sed -e 's|deb.debian.org|ftp.jp.debian.org|' /etc/apt/sources.list > /etc/apt/sources.list.new
+         mv /etc/apt/sources.list.new /etc/apt/sources.list
+         cat /etc/apt/sources.list
+         ```
 
-           上記のコマンドを実行し、リポジトリが　`ftp.jp.debian.org`　になっていれば完了。
+         上記のコマンドを実行し、リポジトリが　`ftp.jp.debian.org`　になっていれば完了。
 
-     1.2 リポジトリを`Fastly CND`ミラーに変更する
-         現在、`httpredir`サービスは、`Fastly CDN`に統合されている。
-         そのため、`Fastly CDN`ミラーにドメインを変更する。
+  2. リポジトリを`Fastly CND`ミラーに変更する
+     `httpredir` は現在使用されておらず、Debian の標準 CDN は `Fastly CDN` に統合されている。
+     そのため、`Fastly CDN`ミラーにドメインを変更する。
 
-        1. エディターによる変更:
+     1. エディターによる変更:
 
-           ```bash
-           # バックアップを作成する
-           sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
-           sudo vi /etc/apt/sources.list
-           ```
+        ```bash
+        # バックアップを作成する
+        sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
+        sudo vi /etc/apt/sources.list
+        ```
 
-           ソースリスト:
+        ソースリスト:
 
-           ```ini:/etc/apt/sources.list
-           # 変更前
-           deb https://deb.debian.org/debian bookworm main
-           deb https://deb.debian.org/debian bookworm-updates main
-           deb https://deb.debian.org/debian bookworm-backports main
-           deb https://security.debian.org/debian-security bookworm-security main
+        ```ini:/etc/apt/sources.list
+        # 変更前
+        deb https://deb.debian.org/debian bookworm main
+        deb https://deb.debian.org/debian bookworm-updates main
+        deb https://deb.debian.org/debian bookworm-backports main
+        deb https://security.debian.org/debian-security bookworm-security main
 
-           # 変更後
-           deb https://cdn-fastly.deb.debian.org/debian/ bookworm main
-           deb https://cdn-fastly.deb.debian.org/debian/ bookworm-updates main
-           deb https://cdn-fastly.deb.debian.org/debian/ bookworm-backports main
-           deb https://cdn-fastly.deb.debian.org/debian-security bookworm-security main
-           ```
+        # 変更後
+        deb https://cdn-fastly.deb.debian.org/debian/ bookworm main
+        deb https://cdn-fastly.deb.debian.org/debian/ bookworm-updates main
+        deb https://cdn-fastly.deb.debian.org/debian/ bookworm-backports main
+        deb https://cdn-fastly.deb.debian.org/debian-security bookworm-security main
+        ```
 
-        2. `sed`による変更:
+     2. `sed`による変更:
 
-           ```bash
-           sudo sed -e 's|deb.debian.org|cdn-fastly.deb.debian.org|' /etc/apt/sources.list > /etc/apt/sources.list.new
-           mv /etc/apt/sources.list.new /etc/apt/sources.list
-           cat /etc/apt/sources.list
-           ```
+        ```bash
+        sudo sed -e 's|deb.debian.org|cdn-fastly.deb.debian.org|' /etc/apt/sources.list > /etc/apt/sources.list.new
+        mv /etc/apt/sources.list.new /etc/apt/sources.list
+        cat /etc/apt/sources.list
+        ```
 
-           上記のコマンドを実行し、リポジトリが　`cdn-fastly.deb.debian.org`　になっていれば完了。
+        上記のコマンドを実行し、リポジトリが　`cdn-fastly.deb.debian.org`　になっていれば完了。
 
-  2. リポジトリの更新:
-     `apr update`を実行し、リポジトリを更新する
+  3. リポジトリの更新
+     `apt update`を実行し、リポジトリを更新する
 
      ```bash
      sudo apt update
