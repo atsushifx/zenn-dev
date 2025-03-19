@@ -7,10 +7,12 @@ dism
 ENOENT
 featurename
 httpredir
+inameserver
 iwlwifi
 keyserver
 libc
 libgnutls
+libxyz
 MSRDC
 nict
 norestart
@@ -21,7 +23,9 @@ releaseinfo
 resolv
 scannow
 timesyncd
+trixie
 UEFI
+unhold
 unrar
 wsl
 zenn
