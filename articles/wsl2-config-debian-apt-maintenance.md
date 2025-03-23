@@ -3,7 +3,7 @@ title: "WSL 2: Debian を快適に使うための APT 設定とメンテナン�
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "APT", "ソースリスト" ]
-published: false
+published: true
 ---
 
 ## はじめに
