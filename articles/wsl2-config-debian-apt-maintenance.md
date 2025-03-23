@@ -8,30 +8,72 @@ published: false
 
 ## はじめに
 
-atsushifx です。<!-- textlint-disable ja-technical-writing/sentence-length -->
-この記事では、`WSL 2` (`Windows Subsystem for Linux 2`) 上で Debian を快適に使うために、APT (`Advanced Package Tool`) の設定やメンテナンス手法について解説します。
-<!-- textlint-enable -->
+atsushifx です。
+この記事では、WSL 2 上で Debian を快適に使うために、APT の設定やメンテナンス手法について紹介します。
 
 APT は Debian 系ディストリビューションに採用されているパッケージ管理システムで、ソフトウェアのインストール、アップグレード、削除、依存関係の解決などを一括して実行できます。
 
-WSL 2 のような仮想化環境でも、APT を適切に活用することで、安定した開発環境を構築できます。
+WSL 2 のような仮想化環境でも APT を適切に活用すれば、安定した開発環境を構築できます。
 
-この記事では、以下のポイントを中心に紹介します:
+以下のポイントを中心に紹介します:
 
 - APT の基本的な使い方とコマンド
 - ソースリスト (`sources.list`) の管理とミラー設定
 - システムアップグレード時の注意点やトラブル対処法
 - ストレージ節約や自動更新を含む定期メンテナンスの方法
 
-<!-- textlint-disable ja-hiraku -->
-WSL 2環境で Debian を使っており APT の設定に不安がある方、システムをもっと快適に運用したい方の参考になれば幸いです。
-Enjoy!<!-- textlint-enable -->
+この記事が、WSL 2 環境で APT を使っている人にとって参考になれば幸いです。
+Enjoy!
 
 ## 用語集
 
+この記事で使用する重要な用語を以下に記載します。
+
+- `APT`:
+  Debian 系 Linux ディストリビューションで使用されるパッケージ管理システム
+
+- `apt`:
+  `APT` の CLI (コマンドラインインターフェース) ツール。
+
+- `sources.list`:
+  APT が参照するリポジトリを定義する設定ファイル
+
+- `apt.conf`:
+  APT の動作を細かく制御するための設定ファイル
+
+- `deb`:
+  Debian パッケージ形式のバイナリを指定するエントリタイプ
+
+- `deb-src`:
+  Debian パッケージのソースコードを指定するエントリタイプ
+
+- `full-upgrade`:
+  パッケージの依存関係を再評価し、必要に応じて追加・削除を行なうアップグレード手法
+
+- `autoremove`:
+  不要になった依存パッケージを自動で削除するコマンド
+
+- `autoclean`:
+  古くなって使用されないパッケージキャッシュを削除するコマンド
+
+- `unattended-upgrades`:
+  セキュリティ更新などを自動で適用する Debian のパッケージ
+
+- `bookworm`:
+  Debian 12 のコードネーム。現在の安定版リリース
+
+- `trixie`:
+  Debian の次期テスト版リリースのコードネーム
+
+- `sid`:
+  Debian の不安定版（開発版）のコードネーム
+
+- `systemd`:
+  Linux システムで使用される init システムおよびサービスマネージャー
+
 ## 1. パッケージマネージャー APT
 
-WSL 2 上の Debian を快適に運用するために、APT (`Advanced Package Tool`) の基本を理解しておくことは非常に重要です。
+WSL 2 上の Debian を快適に運用するためには、APT (`Advanced Package Tool`) の基本を理解しておくことが重要です。
 APT は、Debian 系ディストリビューションの標準的なパッケージ管理ツールであり、パッケージのインストール、アップグレード、削除、依存関係の解決を一括して実行できます。
 
 ### 1.1 APT の概要
@@ -45,7 +87,7 @@ APT は、以下のような特徴を持っています。
   複数のパッケージにまたがる依存関係を自動で解析し、必要なパッケージをまとめて処理します。
 
 - シンプルな CLI 操作
-  `apt` コマンドは直感的に操作でき、Linux 初心者でも迷わず使えるインターフェースを提供します。
+  `apt` コマンドは直感的に操作でき、Linux 初心者でも容易に使えるインターフェースを提供します。
 
 - リポジトリベースの管理
   `/etc/apt/sources.list` に登録されたリポジトリから、信頼されたパッケージを取得します。
@@ -61,15 +103,16 @@ APT を使ったパッケージ管理では、以下の基本コマンドを覚�
 | コマンド | 説明 | 備考 |
 | --- | --- | --- |
 | `apt update` | パッケージリストを最新状態に更新 | リポジトリから新しいパッケージ情報を取得します |
-| `apt upgrade -y` | 既存のパッケージを最新バージョンに更新 | 依存関係の変更を伴わない通常のアップグレード |
+| `apt upgrade -y` | 既存のパッケージを最新バージョンに更新 | 依存関係が変更されない範囲での既存パッケージの更新 |
 | `apt full-upgrade -y` | 必要に応じてパッケージの追加・削除を伴うアップグレード  | 依存関係が変更される可能性があるため注意が必要 |
 | `apt autoremove` | 不要になった依存パッケージを削除 | システムのクリーンアップに有効 |
 | `apt list --upgradable` | アップグレード可能なパッケージを一覧表示 | 更新前に影響範囲を確認する際に便利 |
 | `apt full-upgrade --dry-run` | 実行前にアップグレードの影響を確認 | パッケージの追加・削除予定を事前に確認可能 |
 
-これらのコマンドを適切に使い分けることで、システムの保守性が向上します。特に `apt full-upgrade` は、依存関係の変化を伴うため、`--dry-run` オプションでの事前確認が推奨されます。
+これらのコマンドを適切に選択・実行することで、システムの保守性が向上します。
+特に`apt full-upgrade` は、依存関係の変化を伴うため `--dry-run` オプションでの事前確認が推奨されます。
 
-WSL 2 上で安定した Debian 環境を維持するには、日常的に `apt update && apt upgrade` を実行し、定期的なアップデートを習慣化するのが有効です。
+WSL 2 上で安定した Debian 環境を維持するには、日常的に `apt update && apt upgrade` を実行して、定期的にアップデートすることを推奨します。
 
 ### 1.3 APT の基本フロー
 
@@ -93,29 +136,33 @@ APT は、リポジトリと呼ばれるサーバー群からパッケージ情�
 APT のリポジトリとは、Debian パッケージを配信するサーバー群のことです。
 APT は、リポジトリに接続して、最新のパッケージリストや更新情報を取得し、システムの状態を保ちます。
 
-設定ファイル `/etc/apt/sources.list` によって、APT が参照するリポジトリが決まります。このファイルの内容を適切に整えることで、安定性やセキュリティを確保しつつ、必要なパッケージを素早く取得できます。
+設定ファイル `/etc/apt/sources.list` によって、APT が参照するリポジトリが決まります。
+このファイルの内容を適切に整えることで、安定性やセキュリティを確保しながら、必要なパッケージを適切に取得できます。
 
 ### 2.2 公式リポジトリの種類
 
-APT における「公式リポジトリ」は、Debian プロジェクトが提供する信頼性の高いパッケージ配信元です。適切なリポジトリ設定を行なうことで、システムの安定性とセキュリティを確保しながら、必要なパッケージをスムーズに取得できます。
+APT における「公式リポジトリ」は、Debian プロジェクトが提供する信頼性の高いパッケージ配信元です。
+適切にリポジトリを設定すれば、システムの安定性とセキュリティを保ちつつ、必要なパッケージをスムーズに取得できます。
 
 #### 公式リポジトリの構成
 
-Debian の標準的な `sources.list` ファイルには、以下の 3 種類のリポジトリが定義されています。
+Debian の標準的な `sources.list` ファイルには、以下の 3種類のリポジトリが定義されています。
 
 ```ini:/etc/apt/sources.list
-deb <https://deb.debian.org/debian> bookworm main
-deb <https://deb.debian.org/debian> bookworm-updates main
-deb <https://security.debian.org/debian-security> bookworm-security main
+deb https://deb.debian.org/debian bookworm main
+deb https://deb.debian.org/debian bookworm-updates main
+deb https://security.debian.org/debian-security bookworm-security main
 ```
 
 それぞれのリポジトリは、以下のような役割を持っています。
 
+<!--markdownlint-disable line-length -->
 | リポジトリ名 | 用途 | 例 |
 | --- | --- | --- |
 | **メインリポジトリ** | Debian の基本パッケージを提供 | `deb https://deb.debian.org/debian bookworm main` |
-| **更新リポジトリ** | 安定版リリース向けの定期的な更新 | `deb https://deb.debian.org/debian bookworm-updates main` |
-| **セキュリティリポジトリ** | セキュリティ修正を優先的に提供 | `deb https://security.debian.org/debian-security bookworm-security main` |
+| **更新リポジトリ** | 安定版に対するバグ修正や小規模アップデート | `deb https://deb.debian.org/debian bookworm-updates main` |
+| **セキュリティリポジトリ** | セキュリティ修正を優先的に提供 | `deb https://security.debian.org/debian-security bookworm-security main` (セキュリティ更新専用) |
+<!-- markdownlint-enable -->
 
 これらのリポジトリを適切に組み合わせて設定することで、通常のアップデートからセキュリティ更新まで一貫したパッケージ管理が可能になります。
 
@@ -141,7 +188,8 @@ backports には、次期リリースに含まれる新しめのパッケージ�
 
 ### 2.4 APT のコンポーネント設定
 
-APT のソースリストには、リポジトリのほかに「コンポーネント」と呼ばれる分類を指定できます。これにより、APT が取得・利用するパッケージの種類を制御できます。
+APT のソースリストには、リポジトリのほかに「コンポーネント」と呼ばれる分類を指定できます。
+コンポーネントを指定することで、APT が取得・利用するパッケージの種類を制御できます。
 
 #### コンポーネントの概要
 
@@ -151,8 +199,8 @@ Debian のパッケージは、ライセンスや依存関係の方針に基づ�
 | --- | --- |
 | `main` | 完全にフリーなソフトウェア（Debian のポリシーを完全に満たす） |
 | `contrib` | 自体はフリーだが、非フリーなソフトウェアに依存しているもの |
-| `non-free` | フリーでないライセンスのソフトウェア（再配布制限など） |
-| `non-free-firmware` | フリーでないファームウェア（多くはハードウェアに必要） |
+| `non-free` | フリーでないライセンスのソフトウェア (再配布制限など) |
+| `non-free-firmware` | フリーでないファームウェア (主にハードウェアの動作に必要) |
 
 これらを指定することで、APT はそれぞれのカテゴリに属するパッケージを取得できるようになります。
 
@@ -161,9 +209,9 @@ Debian のパッケージは、ライセンスや依存関係の方針に基づ�
 以下のように、ソースリストの末尾にコンポーネント名を空白区切りで追加します。
 
 ```ini:/etc/apt/sources.list
-deb <https://deb.debian.org/debian> bookworm main contrib non-free non-free-firmware
-deb <https://deb.debian.org/debian> bookworm-updates main contrib non-free
-deb <https://security.debian.org/debian-security> bookworm-security main contrib
+deb https://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb https://deb.debian.org/debian bookworm-updates main contrib non-free
+deb https://security.debian.org/debian-security bookworm-security main contrib
 ```
 
 この例では、`main` に加えて `contrib`, `non-free`, `non-free-firmware` まで含めており、より多くのパッケージにアクセス可能です。
@@ -192,7 +240,7 @@ APT はこのリストの URL にアクセスして、ソフトウェアパッ�
 
 最も基本的なソースリストは `/etc/apt/sources.list` に配置され、システム全体のパッケージ取得元として機能します。
 
-また、特定のリポジトリや追加設定は `/etc/apt/sources.list.d/` 以下に個別の `.list` ファイルとして記述することで、柔軟に管理できます。
+また、特定のリポジトリや追加設定は、`/etc/apt/sources.list.d/` 配下の `.list` ファイルに記述することで、柔軟に管理できます。
 
 これにより、以下のようなメリットが得られます:
 
@@ -205,7 +253,7 @@ APT はこれらすべてのリストを統合して処理するため、正し�
 ### 3.2 ソースリストの記述例
 
 Debian のソースリスト（`/etc/apt/sources.list`）には、APT が参照するリポジトリ情報が記述されています。
-リポジトリの構成や目的に応じて複数のエントリを定義し、適切にメンテナンスすることで、より快適で安全なパッケージ管理が可能になります。
+リポジトリの構成や目的に応じて複数のエントリを定義・維持することで、より快適で安全なパッケージ管理が可能になります。
 
 #### **代表的な記述例**
 
@@ -215,10 +263,10 @@ Debian のソースリスト（`/etc/apt/sources.list`）には、APT が参照�
 
 # official sources.list
 
-deb <https://deb.debian.org/debian> bookworm main
-deb <https://deb.debian.org/debian> bookworm-updates main
-deb <https://deb.debian.org/debian> bookworm-backports main
-deb <https://security.debian.org/debian-security> bookworm-security main
+deb https://deb.debian.org/debian bookworm main
+deb https://deb.debian.org/debian bookworm-updates main
+deb https://deb.debian.org/debian bookworm-backports main
+deb https://security.debian.org/debian-security bookworm-security main
 ```
 
 #### **各エントリの構成**
@@ -246,7 +294,7 @@ deb <https://security.debian.org/debian-security> bookworm-security main
 ### 3.3 Debianのリリースとリポジトリ
 
 APT のソースリストでは、どの Debian リリースを使用するかを明示的に指定します。
-これにより、安定性重視の環境構築や、開発目的での最新版利用など、目的に応じた環境設計が可能になります。
+これにより、安定性を重視した環境構築や、開発目的での最新版の利用など、目的に応じた環境設計が可能になります。
 
 #### Debian の主なリリース体系
 
@@ -299,8 +347,9 @@ deb https://deb.debian.org/debian stable main
 このように設定すると、Debian の新バージョンが公開されたときに、APT は自動的に新しいリリースに切り替わります。
 例：`stable` を指定していると、`bookworm` から `trixie` に自動で移行する可能性があります。
 
-この挙動は意図しないメジャーアップグレードを引き起こすリスクがあるため、
-**安定運用を重視する環境では明示的にリリース名を指定するのが安全**です。
+:::message alert
+`stable` を使用していると、意図せずメジャーアップグレードされるリスクがあります。
+:::
 
 ## 4. ミラーの設定
 
@@ -310,7 +359,7 @@ Debian では、公式リポジトリ以外にも、さまざまなミラーリ�
 ミラーリポジトリを利用することで、地域ごとに最適化されたダウンロード速度を享受できるほか、公式リポジトリの負荷を分散できます。
 
 APT では、ディレクトリ `/etc/apt/sources.list.d/` 下に個別のリストファイルを作成し、追加のリポジトリを指定できます。
-たとえば、日本のミラーや CDN ミラーを設定することで、より快適なパッケージ管理が可能になります。
+たとえば、日本のミラーや CDN ミラーを設定することで、より高速かつ快適なパッケージ管理が可能になります。
 
 #### ミラーリポジトリの種類
 
@@ -337,7 +386,7 @@ Debian のパッケージリポジトリは、Fastly CDN に統合されてお�
 #### **Fastly CDN を利用するための設定**
 
 デフォルトでは、`deb.debian.org` を指定すれば Fastly CDN が自動的に利用されます。
-しかし、明示的に Fastly の CDN ノードの指定も可能です。
+なお、明示的に Fastly の CDN ノードの指定もできます。
 
 1. `/etc/apt/sources.list.d/cdn-fastly.list` を作成し、次の内容を記述:
 
@@ -360,7 +409,7 @@ Debian のパッケージリポジトリは、Fastly CDN に統合されてお�
 ### 4.3 日本のミラーを使う
 
 日本国内では、日本に設置された Debian ミラーを利用することで、ネットワークの遅延が少なくなります。
-つまり、より高速かつ安定した回線でのパッケージの取得が可能です。
+その結果、より高速かつ安定した通信環境でパッケージを取得できます。
 
 #### **日本のミラーのメリット**
 
@@ -405,7 +454,7 @@ WSL 2 環境では、安定した環境を維持しつつ定期的なアップ�
 
 Debian のアップグレードとは、システムにインストールされているパッケージを最新の状態に更新するプロセスです。
 `WSL 2` 環境では、定期的なアップデートが重要です。
-これにより、セキュリティリスクを軽減し、常に最新の機能を利用できます。
+これにより、セキュリティリスクを低減し、常に最新の機能を利用できます。
 
 #### 通常のアップグレード (`apt upgrade`) とフルアップグレード (`apt full-upgrade`) の違い
 
@@ -434,7 +483,7 @@ flowchart TD
 
 ```
 
-`apt full-upgrade` を実行すると構成が変わることもあるため、`--dry-run` オプションで事前に内容を確認しておくことが重要です。
+`apt full-upgrade` を実行すると、重要なパッケージが削除される可能性もあるため、`--dry-run` オプションで事前に内容を確認しておくことが重要です。
 
 #### 影響の事前確認 (`--dry-run`)
 
@@ -1030,7 +1079,7 @@ APT の基本操作からソースリストやミラー設定の最適化、ア�
 
 WSL 2 は Linux を手軽に扱える強力な環境です。APT を適切に使いこなせば、パッケージ管理の手間を最小限に抑えつつ、安全で最新の環境を維持できます。
 
-この記事の内容が、みなさんの作業環境改善の一助となれば幸いです。
+この記事の内容が、作業環境の改善に役立てば幸いです。
 それでは、Happy Hacking!
 
 ## 参考資料
