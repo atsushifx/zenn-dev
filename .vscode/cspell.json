@@ -22,13 +22,6 @@
 	"caseSensitive": true,
 	"dictionaryDefinitions": [
 		{
-			"name": "textlint-dic",
-			"description": "dictionary for textlint plugins, filename, settings",
-			"path": "./cspell/dicts/textlint.dic",
-			"addWords": false,
-			"scope": "user"
-		},
-		{
 			"name": "zenn-dic",
 			"description": "dictionary for zenn.dev",
 			"path": "./cspell/dicts/zenn-dev.dic",
@@ -37,9 +30,7 @@
 		}
 	],
 	"dictionaries": [
-		"en",
-		"User-dic",
-		"textlint-dic",
+		"user-dic",
 		"zenn-dic"
 	]
 }
