@@ -3,7 +3,7 @@ title: "WSL 2: はじめての apt 設定とアップグレード"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "Debian", "apt", "環境構築", "quickstart"]
-published: false
+published: true
 ---
 
 ## はじめに
