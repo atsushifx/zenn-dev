@@ -1,5 +1,5 @@
 ---
-title: "WSL 2: apt quickstart: 設定からアップグレードまで"
+title: "WSL 2: はじめての apt 設定とアップグレード"
 emoji: "🐧"
 type: "tech"
 topics: [ "WSL", "Debian", "apt", "環境構築", "quickstart"]
