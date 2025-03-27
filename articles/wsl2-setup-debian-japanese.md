@@ -3,7 +3,7 @@ title: "WSL 2の初期設定: Debianを日本語対応にする基本セット�
 emoji: "🐧"
 type: "tech"
 topics: ["WSL", "Debian", "日本語化", "初期設定", "開発環境" ]
-published: false
+published: true
 ---
 
 ## はじめに
