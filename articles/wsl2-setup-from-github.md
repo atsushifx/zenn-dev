@@ -119,6 +119,45 @@ Windows が上記よりも古い場合は、Windows Update を実行して最新
 
 ### 2.3 必要なシステム機能の一覧と確認方法
 
+`WSL 2{} を利用するには、いくつかの Windows 機能を有効にする必要があります。
+これらの機能が無効なままだと、仮想化機能や`wsl`コマンドが正しく動作しない原因となります。
+
+#### 必要なシステム機能
+
+WSL 2 の動作に必要な主な Windows 機能は以下の 3つです。
+
+| 機能名 | 説明 |
+| --- | --- |
+| Microsoft-Windows-Subsystem-Linux | Linux サブシステムの中核機能 |
+| VirtualMachinePlatform | 仮想マシン機能の基盤 |
+| Microsoft-Hyper-V-All | 仮想マシンの管理機能 (WSL 2では必須ではないが推奨) |
+
+#### 機能の有効／無効を確認する方法
+
+ここでは、必要な機能の一覧と、それらが有効になっているかを確認する方法を紹介します。
+
+PowerShell で以下のコマンドを実行します:
+
+```powershell
+Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -in `
+  "Microsoft-Windows-Subsystem-Linux", `
+  "VirtualMachinePlatform", `
+  "Microsoft-Hyper-V-All" } | Format-Table FeatureName, State
+```
+
+出力例:
+
+```powershell
+FeatureName                          State
+------------                         -----
+Microsoft-Windows-Subsystem-Linux    Enabled
+VirtualMachinePlatform               Enabled
+Microsoft-Hyper-V-All                Disabled
+```
+
+上記のように、`State` が `Enabled` であれば機能が有効化されています。
+`Disabled` の場合は、手順に従って機能を有効化する必要があります。
+
 ## 3. セットアップ全体の流れ
 
 ### 3.1 ステップ概要（フロー図）
