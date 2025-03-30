@@ -1,8 +1,8 @@
 ---
-title: "WSL 2の初期設定: WSLをGitHub からパッケージをダウンロードして セットアップする方法"
+title: "WSL 2の初期設定: wsl コマンドが使えないときのための WSL手動セットアップガイド"
 emoji: "🐧"
 type: "tech"
-topics: ["Windows", "Linux", "WSL", "環境構築" ]
+topics: ["Windows", "Linux", "WSL", "手動インストール", "トラブルシューティング" ]
 published: false
 ---
 
