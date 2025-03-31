@@ -25,6 +25,48 @@ Enjoy!
 
 ## 用語集
 
+- `WSL` (`Windows Subsystem for Linux`):
+  Windows 上で Linux を動作させるためのサブシステム
+
+- `WSL 1`:
+  システムコールを Windows に変換する互換レイヤー方式の WSL 初期バージョン
+
+- `WSL 2`:
+  実際の Linux カーネルを仮想マシン上で動かす方式の WSL version 2
+
+- `Hyper-V`:
+  Windows に標準搭載されている仮想化プラットフォーム
+
+- `VirtualMachinePlatform`:
+  WSL 2 のために必要な Windows のオプション機能
+
+- `HypervisorPlatform`:
+  ネスト仮想化などを可能にするオプション機能
+
+- `PowerShell`:
+  Windows 上の高機能なコマンドラインシェル
+
+- `sfc /scannow`:
+  破損したシステムファイルをスキャン・修復するコマンド
+
+- `DISM /RestoreHealth`:
+  Windows イメージを修復するコマンド
+
+- `dism.exe`:
+  Deployment Image Servicing and Management の略。Windows の修復や構成に使う管理ツール
+
+- `wsl --set-default-version`:
+  デフォルトでインストールされる WSL のバージョンを指定するコマンド
+
+- `wsl --install`:
+  Windows の WSL 環境を自動的に構築するためのコマンド (Windows 11 以降で有効)
+
+- `.msi`:
+  Windows 用インストーラパッケージ形式
+
+- `Ubuntu`:
+  最も普及している Linux ディストリビューションの 1つ
+
 ## 1. `WSL` の仕組みと構造
 
 ## 1.1 `WSL` の動作原理
