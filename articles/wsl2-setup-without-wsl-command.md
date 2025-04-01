@@ -3,7 +3,7 @@ title: "WSL 2 の初期設定: wsl コマンドが使えないときのための
 emoji: "🐧"
 type: "tech"
 topics: ["Windows", "Linux", "WSL", "手動セットアップ", "トラブルシューティング" ]
-published: false
+published: true
 ---
 
 ## はじめに
