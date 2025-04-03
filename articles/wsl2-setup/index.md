@@ -10,19 +10,30 @@ published: false
 ## はじめに
 
 atsushifx です。
-`WSL` (Windows Subsystem for Linux) は、Windows 上で `Linux` を実行するためのシステムです。
+`WSL` (`Windows Subsystem for Linux`) は、Windows 上で `Linux` を実行するためのシステムです。
 これを使えば、仮想マシンやデュアルブートのような複雑な環境構築をせずに、Windows 上で直接 `Linux` での開発ができます。
 
 この記事では、WSL を有効にして Debian 環境を導入し、開発用に初期セットアップする方法を解説します。
-実際の開発で必要になるエディタなどの設定方法について、`XDG`  仕様に沿った構成例も紹介します。
+
+エディタなどの設定方法については、`XDG Base Directory` 仕様に沿った構成例を紹介し、設定ファイルを GitHub リポジトリで管理してポータビリティを高める方法を説明します。
 
 設定手順はすべて公式ドキュメントや広く使われている方法に基づいており、Windows 環境があれば誰でも同じ開発環境を構築できます。
 
-実際の開発では、エディタやプログラミング言語などの設定も必要です。
-これらは通常ドットファイルとよばれるファイルで設定しますが、`XDG Base Directory`仕様に従って整理する方法を説明します。
-その結果、それぞれの設定ファイルが GitHub リポジトリで管理できるようになり、ポータビリティが高くなります。
-
 このシリーズでは、Debian をベースにした開発環境を、段階的に無理なく整備していけるようにガイドしていきます。
+
+## 用語集
+
+- `WSL` (`Windows Subsystem for Linux`):
+  Windows 上で Linux 環境を提供する互換レイヤー。
+
+- `Debian`:
+  安定性とセキュリティを重視する Linux ディストリビューション。
+
+- `XDG Base Directory`:
+  ユーザー設定やキャッシュなどのディレクトリ構造を規定する仕様。
+
+- `ドットファイル`:
+  ファイル名の先頭にピリオドが付く設定ファイル。
 
 ## 1. 本ガイドの構成と目的
 
@@ -32,7 +43,7 @@ atsushifx です。
 `WSL 2` は Windows 上で `Linux` 環境を提供し、ネイティブに近い動作速度とシステムコールの互換性を持っています。
 このガイドでは、特に Debian ディストリビューションを用いる構成にフォーカスし、Debian のインストールから初期環境の構築までを説明します。
 
-記事全体の構成は次のとおりです。
+記事全体の構成は次のとおりです:
 
 - `WSL 2` および Debian の概要と特徴
 - Debian を使用するうえで最低限知っておくべき基礎知識
@@ -120,7 +131,7 @@ Debian 環境を使いこなすためには、最低限のシステム操作や�
 
 ここでは、WSL 上に Debian 環境を構築する手順を順を追って説明します。
 
- 1. WSL の手動セットアップ:
+ 1. WSL の手動でのセットアップ:
     WSL を有効化し、`wsl` コマンドを使用せずに手動でインストールを行なう方法を解説します。
 
  2. Debian のインストール:
@@ -153,4 +164,4 @@ Debian 環境を使いこなすためには、最低限のシステム操作や�
 - Debian パッケージ管理ツール (Debian): <https://www.debian.org/doc/manuals/debian-faq/pkgtools.ja.html>
 - APT (Wikipedia): <https://ja.wikipedia.org/wiki/APT>
 - `XDG Base Directory` (Arch Wiki): <https://wiki.archlinux.jp/index.php/XDG_Base_Directory>
-- ドットファイル (Arch WIki): <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
+- ドットファイル (Arch Wiki): <https://wiki.archlinux.jp/index.php/%E3%83%89%E3%83%83%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB>
