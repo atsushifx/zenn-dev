@@ -3,7 +3,7 @@ title: "WSL 2の初期設定: 開発環境セットアップガイド (インデ
 emoji: "🔠"
 type: "tech"
 topics: [ "index", "WSL", "Debian", "初期設定" ]
-published: false
+published: true
 ---
 
 ## はじめに
