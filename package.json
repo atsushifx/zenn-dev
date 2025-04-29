@@ -5,8 +5,8 @@
   "description": "zenn.dev articles repo",
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "start": "zenn preview",
     "lint:text": "textlint --config ./configs/textlintrc.yaml --cache --cache-location .cache/textlintcache ",
     "lint:text:fix": "pnpm run lint:text --fix ",
     "lint:markdown": "markdownlint-cli2 --config ./configs/.markdownlint.yaml ",
