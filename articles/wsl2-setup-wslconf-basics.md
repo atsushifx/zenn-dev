@@ -113,6 +113,9 @@ systemd=true
 [user]
 default=<your-account>
 ```
+<!-- vale Google.Colons = NO -->
+*コード例 1: WSL 起動時に `systemd` を有効化し、ログインユーザーを指定する基本構成*
+<!-- vale on -->
 
 設定後は、`wsl --shutdown` を実行してから WSL を再起動することで、内容が反映されます。
 このように、`wsl.conf` は WSL 環境の起動時挙動を恒久的に制御するための要となるファイルです。
@@ -177,6 +180,8 @@ WSL の動作は、`/etc/wsl.conf` に記述する複数のセクションによ
 
 @[gist](https://gist.github.com/atsushifx/c6d69609133c12788986e882b9782017?file=wsl.conf)
 
+*コード例 2: `systemd`有効化など、WSL 起動動作をカスタマイズする `wsl.conf` の実例*
+
 ## 3. `wsl.conf`の設定
 
 実際に `/etc/wsl.conf` を編集し、WSL に設定を適用する手順を紹介します。
@@ -188,6 +193,8 @@ WSL の動作は、`/etc/wsl.conf` に記述する複数のセクションによ
    ```bash
    sudo vi /etc/wsl.conf
    ```
+
+   *コマンド例1: `wsl.conf` ファイルを作成・編集するための基本的な操作*
 
 2. 2.2 で紹介した設定例を、コピーアンドペーストします。
 
@@ -247,6 +254,8 @@ systemd が正しく有効になっているかを確認するには、以下の
 ```bash
 systemctl list-units --type=service|grep 'dbus'
 ```
+
+*コマンド例 2: `systemd` が有効かどうかを確認する診断コマンド*
 
 出力結果:
 
@@ -371,6 +380,9 @@ graph LR
 vscode=/mnt/c/app/develop/ide/VSCode
 "$vscode/bin/code" --remote wsl+$(hostname) $*
 ```
+<!-- markdownlint-disable no-emphasis-as-heading -->
+*スクリプト例 1: WSL 内から Windows 側の VSCode を起動するラッパースクリプト*
+<!-- markdownlint-enable -->
 
 上記のようなシェルスクリプトを組むことで、Windows 側と同じように`Visual Studio Code`を使用できます。
 
