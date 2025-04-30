@@ -284,9 +284,21 @@ WSL の動作は、`/etc/wsl.conf` に記述する複数のセクションによ
 - **`default` を省略した場合**：
   WSL は、インストール時に設定された初期ユーザー（最初に作成された非 root ユーザー）でログインします。これを変更したい場合は、`wsl.conf` に `default=your-username` を指定するか、以下のコマンドを利用します。
 
-   ```powershell
-   debian config --default-user your-username
-   ```
+### 3.3 `systemd`が動作しないときの対処法
+
+以下のようなフローで確認と対応を進めるのが効率的です。
+
+```mermaid
+graph TD
+  A[systemd=true を設定] --> B[WSL 再起動]
+  B --> C{確認}
+  C --> D1["systemctl list-units"]
+  C --> D2["journalctl -xe"]
+  C --> D3["エラー表示？"]
+  D3 --> E1[→ 再設定]
+```
+
+*図3:`systemd` 有効化の診断フロー*
 
 ### 3.4 `systemd` の確認方法
 
