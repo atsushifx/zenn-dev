@@ -104,6 +104,23 @@ atsushifx です。
 `wsl.conf` は `.ini` 形式の構成ファイルで、\[section]ラベル内に `key=value` 形式で設定を記述します。
 
 この構成により、視認性と保守性に優れたフォーマットでカスタマイズが可能です。
+
+```mermaid
+graph TD
+  A[wsl.conf] --> B[boot]
+  A --> C[user]
+  A --> D[network]
+  A --> E[interop]
+  A --> F[automount]
+  B --> B1[systemd=true]
+  B --> B2[command=...]
+  C --> C1[default=your-account]
+  D --> D1[hostname=...]
+  E --> E1[appendWindowsPath=false]
+```
+
+*図1: `wsl.conf` の構造と各セクションの関係*
+
 以下は、`systemd` を有効化し、WSL の起動ユーザーを固定する基本的な例です。
 
 ```ini:wsl.conf
@@ -205,9 +222,36 @@ WSL の動作は、`/etc/wsl.conf` に記述する複数のセクションによ
 
 4. `wsl.conf`を保存する
 
+**`default` を省略した場合**：
+  WSL は、インストール時に設定された初期ユーザー（最初に作成された非 root ユーザー）でログインします。これを変更したい場合は、`wsl.conf` に `default=your-username` を指定するか、以下のコマンドを利用します。
+
+   ```powershell
+   debian config --default-user your-username
+   ```
+
 ### 3.2 `wsl`への適用
 
 `/etc/wsl.conf` の設定を WSL に反映するには、WSL を完全に停止して再起動する必要があります。
+
+```text
+┌──────────────┐
+│ wsl.conf編集 │
+└────┬────────┘
+     │
+     ▼
+┌───────────────────┐
+│ PowerShellで停止   │
+│  $ wsl --shutdown │
+└────────┬──────────┘
+         │
+         ▼
+┌────────────────────┐
+│ WSLディストリ起動   │
+│  $ wsl -d Debian    │
+└────────────────────┘
+```
+
+*図2: `wsl.conf` 設定後の反映手順フロー*
 
 #### 手順
 
