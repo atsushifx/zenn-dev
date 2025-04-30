@@ -85,17 +85,17 @@ Windows には`WSL` (`Windows Subsystem for Linux`)として導入されて、Wi
 
 ここでは、WSL 上に Debian 環境を構築する手順を説明します。
 
- 1. [コマンドを使用しない WSL 手動セットアップガイド](wsl2-setup-without-wsl-command.md):
+ 1. [コマンドを使用しない WSL 手動セットアップガイド](wsl2-setup-without-wsl-command):
     通常は `wsl --install` コマンドでセットアップできます。
     `wsl` コマンドが利用できない場合に備え、手動でセットアップする方法も紹介します。
 
- 2. [Debianのインストールと初期設定ガイド](wsl2-setup-debian-install.md):
+ 2. [Debianのインストールと初期設定ガイド](wsl2-setup-debian-install):
     `wsl` コマンドを用いて `Debian` をインストールし、初期ユーザーを設定する手順を説明します。
 
- 3. [はじめての apt 設定とアップグレード](wsl2-setup-apt-basics-and-maintenance.md):
+ 3. [はじめての apt 設定とアップグレード](wsl2-setup-apt-basics-and-maintenance):
     APT のミラーサイトを適切に設定し、パッケージを最新の状態へアップグレードする方法について解説します。
 
- 4. [Debianを日本語対応にする基本セットアップガイド](wsl2-setup-debian-japanese.md):
+ 4. [Debianを日本語対応にする基本セットアップガイド](wsl2-setup-debian-japanese):
     `task` メタパッケージを用いた日本語化、および日本語表示に必要な設定項目を説明します。
 
 これらのセットアップ工程をフローチャートにすると、下記の図2となります。
