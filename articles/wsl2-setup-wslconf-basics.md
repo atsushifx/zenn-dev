@@ -3,7 +3,7 @@ title: "WSL 2の初期設定: wsl.conf を使った基本設定と systemd 有�
 emoji: "🔠"
 type: "tech"
 topics: [ "WSL", "wslconf", "環境設定", "環境構築", "カスタマイズ" ]
-published: false
+published: true
 ---
 
 <!-- vale Google.Slang = NO -->
