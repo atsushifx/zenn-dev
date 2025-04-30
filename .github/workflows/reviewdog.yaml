@@ -1,4 +1,4 @@
-## @(#) : reviewdog / lint new articles
+reviewdog## @(#) : reviewdog / lint new articles
 #
 # @version  1.0.2
 # @author   Furukawa Atsushi <atsushifx@gmail.com>
@@ -66,6 +66,7 @@ jobs:
           path: |
             node_modules
             ~/.pnpm-store
+            .cache/*
             .textlintcache
 
       - name: Make install script executable
@@ -83,7 +84,7 @@ jobs:
         env:
           changed_files: "${{ steps.changed.outputs.files }}"
         run: |
-          pnpm run lint:docs "${changed_files}"
+          pnpm run lint:text "${changed_files}"
 
       - name: Lint markdown
         if: ${{ steps.changed.outputs.files != '' }}
@@ -100,4 +101,5 @@ jobs:
           path: |
             node_modules
             ~/.pnpm-store
+            .cache/*
             .textlintcache

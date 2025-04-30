@@ -1,6 +1,6 @@
 ---
 title: "WSL 2 の初期設定: wsl コマンドが使えないときのための WSL 手動セットアップガイド"
-emoji: "🐧"
+emoji: "🔠"
 type: "tech"
 topics: ["Windows", "Linux", "WSL", "手動セットアップ", "トラブルシューティング" ]
 published: true
