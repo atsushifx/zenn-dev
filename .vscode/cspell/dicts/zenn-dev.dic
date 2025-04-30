@@ -9,6 +9,7 @@ ENOENT
 featurename
 httpredir
 iwlwifi
+journalctl
 keyserver
 libc
 libgnutls
@@ -36,6 +37,7 @@ unrar
 vlgothic
 winver
 wsl
+wslconfig
 xfonts
 zenn
 zoneinfo
