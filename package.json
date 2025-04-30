@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "zenn preview",
-    "lint:docs": "textlint --cache ",
-    "lint:docs:fix": "textlint --cache --fix ",
+    "lint:text": "textlint --cache --cache-location .cache/textlintcache ",
+    "lint:text:fix": "pnpm run lint:text --fix ",
     "lint:markdown": "markdownlint-cli2 ",
     "lint:markdown:fix": "markdownlint-cli2 --fix "
   },

@@ -23,11 +23,11 @@ pre-commit:
 
     textlint:
       glob: "**/*.md"
-      run: textlint --cache "{staged_files}"
+      run: pnpm run lint:text "{staged_files}"
 
     markdownlint:
       glob: "**/*.md"
-      run: markdownlint-cli2 "{staged_files}"
+      run: pnpm run lint:markdown "{staged_files}"
 
 # check commit message style
 commit-msg:
