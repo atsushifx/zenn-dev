@@ -98,6 +98,12 @@ Windows には`WSL` (`Windows Subsystem for Linux`)として導入されて、Wi
  4. [Debianを日本語対応にする基本セットアップガイド](wsl2-setup-debian-japanese):
     `task` メタパッケージを用いた日本語化、および日本語表示に必要な設定項目を説明します。
 
+ 5. [`wsl.conf`を使った基本設定と `systemd` 有効化ガイド](wsl2-setup-wslconf-basics):
+    `/etc/wsl.conf`を設定して、WSL の基本設定および `systemd`を有効化する方法を説明します。
+
+ 6. [XDG準拠で整理する作業ディレクトリ設計と作成ガイド](wsl2-setup-create-working-dir):
+    `XDG Base Directory`仕様に基づいたディレクトリ構成を設計し、スクリプトで自動作成する方法を解説します。
+
 これらのセットアップ工程をフローチャートにすると、下記の図2となります。
 
 ```mermaid
@@ -129,5 +135,5 @@ flowchart TD
 ### Webサイト
 
 - Windows に `Linux` をインストールする方法 (Microsoft): <https://learn.microsoft.com/ja-jp/windows/wsl/install>
-- WSL の基本的なコマンド (Microsoft): <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
+s WSL の基本的なコマンド (Microsoft): <https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands>
 - WSL での詳細設定の構成 (Microsoft): <https://learn.microsoft.com/ja-jp/windows/wsl/wsl-config>
