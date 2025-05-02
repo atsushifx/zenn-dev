@@ -92,7 +92,7 @@ Windows には`WSL` (`Windows Subsystem for Linux`)として導入されて、Wi
  2. [Debianのインストールと初期設定ガイド](wsl2-setup-debian-install):
     `wsl` コマンドを用いて `Debian` をインストールし、初期ユーザーを設定する手順を説明します。
 
- 3. [はじめての apt 設定とアップグレード](wsl2-setup-apt-basics-and-maintenance):
+ 3. [はじめての apt 設定とアップグレード](wsl2-setup-apt-first-config):
     APT のミラーサイトを適切に設定し、パッケージを最新の状態へアップグレードする方法について解説します。
 
  4. [Debianを日本語対応にする基本セットアップガイド](wsl2-setup-debian-japanese):
