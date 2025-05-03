@@ -96,12 +96,12 @@ XDG 仕様を導入することで、ホームディレクトリの可読性が�
 
 以下は代表的な環境変数とその役割です:
 
-| 環境変数            | デフォルトパス              | 用途                        |
-|---------------------|-----------------------------|-----------------------------|
-| `$XDG_CONFIG_HOME`  | `~/.config`                 | アプリケーションの設定ファイル |
-| `$XDG_DATA_HOME`    | `~/.local/share`            | アプリケーションのユーザーデータ |
-| `$XDG_CACHE_HOME`   | `~/.cache` または `~/.local/cache` | キャッシュデータ              |
-| `$XDG_STATE_HOME`   | `~/.local/state`            | 状態ファイル（ログ等）         |
+| 環境変数 | デフォルトパス | 用途 | ファイルの例 |
+| --- | --- | --- | --- |
+| `$XDG_CONFIG_HOME` | `~/.config` | アプリケーションの設定ファイル | `nvim/init.vim`, `git/config` |
+| `$XDG_DATA_HOME` | `~/.local/share` | アプリケーションのユーザーデータ | `lesshst`, `vim/site/` |
+| `$XDG_CACHE_HOME` | `~/.cache` または `~/.local/cache` | 一時的なキャッシュデータ | `vim/backup/`, `pnpm/dlx/` |
+| `$XDG_STATE_HOME` | `~/.local/state` | 状態ファイル (ログ等) | `bash/history`, `nvim/data/` |
 
 これらの環境変数は多くのアプリケーションでデフォルトとして使用されており、明示的に設定しなくても機能する場合が一般的です。
 ただし、独自に設定を行なうことでディレクトリ構成をさらに明確化でき、他のツールやスクリプトとの連携も容易になります。
@@ -481,6 +481,18 @@ DOTFILES="$HOME/.local/dotfiles/linux"
 
 #### 共通初期化スクリプト
 
+スクリプトのフローを以下に示します。
+
+```mermaid
+graph TD
+    A["スクリプト起動: setup.sh"] --> B1["ユーザー用ディレクトリの作成<br/>bin, temp"]
+    B1 --> B2["XDG準拠ディレクトリの作成<br/>~/.config, ~/.local/share, ..."]
+    B2 --> B3["作業ディレクトリの作成<br />~/workspaces"]
+    B3 --> D[dotfilesパスの変数定義]
+    D --> E[シンボリックリンク作成<br/>~/.config → dotfiles/config]
+    E --> F[初期構成完了]
+```
+
 次のスクリプトでクローン後に共通初期化をします:
 
 ```bash
@@ -489,7 +501,7 @@ DOTFILES="$HOME/.local/dotfiles/linux"
 set -euCo pipefail
 
 # 基本ディレクトリ
-mkdir -p "$HOME/bin" "$HOME/temp" "$HOME/workspaces"
+mkdir -p "$HOME/bin" "$HOME/temp"
 
 # XDGディレクトリ
 mkdir -p \
@@ -497,6 +509,9 @@ mkdir -p \
   "$HOME/.local/share" \
   "$HOME/.local/cache" \
   "$HOME/.local/state"
+
+# 作業ディレクトリ
+"$HOME/workspaces"
 
 # シンボリックリンク例
 DOTFILES="$HOME/.local/dotfiles/linux"
@@ -534,6 +549,18 @@ export PATH="$HOME/bin:$PATH"
 ```
 
 このように設定しておけば、マシンやシェルを問わず、常に一貫した環境で作業がスタートできるようになります。特に複数の端末で作業を行なう開発者や、WSL と物理 Linux マシンを併用するユーザーにとって、有効なアプローチです。
+
+#### シェル起動時の初期化フロー
+
+```mermaid
+graph TD
+    A[ユーザーが WSL / ターミナル起動] --> B[bash 起動]
+    B --> C[~/.profile を読み込み]
+    C --> D{~/.config/profile が存在？}
+    D -- Yes --> E[".config/profile を読み込み<br/>→ XDG 環境変数定義<br/>→ PATH 追加など"]
+    D -- No --> G
+    E --> G[ユーザー環境構成完了]
+```
 
 ## まとめ
 
