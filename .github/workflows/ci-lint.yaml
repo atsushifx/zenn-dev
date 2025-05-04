@@ -1,4 +1,5 @@
-## @(#) : reviewdog / lint new articles
+# src: .github/workflows/ci-lint.yaml
+## @(#) : ci-lint / lint new articles
 #
 # @version  1.0.2
 # @author   Furukawa Atsushi <atsushifx@gmail.com>
@@ -11,7 +12,7 @@
 #
 #<<
 
-name: reviewdog
+name: ci-lint
 
 # PR及び手動でAction実行
 on:
@@ -35,18 +36,20 @@ jobs:
         run: |
           git fetch origin main
 
-      - name: Get changed files
-        id: changed
+      - name: Get changed Markdown files
+        id: changed-md
         run: |
           head_sha="$(git rev-parse HEAD)"
           base_sha="$(git rev-parse origin/main)"
-          echo "head: ${head_sha}"
-          echo "base: ${base_sha}"
-          files=$(git diff --diff-filter=AM --name-only ${base_sha} ${head_sha} -- '**/*.md')
-          echo "changed:\n${files}"
-          echo "files<<EOF" >> $GITHUB_OUTPUT
-          echo "$files" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+
+          files=$(git diff --diff-filter=AM --name-only "${base_sha}" "${head_sha}" -- '**/*.md')
+          printf "changed:\n%s\n" "$files"
+
+          {
+            echo "files<<EOF"
+            echo "$files"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Setup node
         uses: actions/setup-node@v4
@@ -67,29 +70,25 @@ jobs:
             node_modules
             ~/.pnpm-store
             .cache/*
-            .textlintcache
-
-      - name: Make install script executable
-        run: |
-          chmod +x ./bin/installlinter.sh
 
       - name: Install linters
         if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
         run: |
-          ./bin/installlinter.sh "--save-prod --reporter silent "
+          chmod +x ./scripts/ag-install-linter.sh
+          ./scripts/ag-install-linter.sh "--save-prod --reporter silent "
           pnpm list
 
       - name: Lint text
-        if: ${{ steps.changed.outputs.files != '' }}
+        if: ${{ steps.changed-md.outputs.files != '' }}
         env:
-          changed_files: "${{ steps.changed.outputs.files }}"
+          changed_files: "${{ steps.changed-md.outputs.files }}"
         run: |
           pnpm run lint:text "${changed_files}"
 
       - name: Lint markdown
-        if: ${{ steps.changed.outputs.files != '' }}
+        if: ${{ steps.changed-md.outputs.files != '' }}
         env:
-          changed_files: "${{ steps.changed.outputs.files }}"
+          changed_files: "${{ steps.changed-md.outputs.files }}"
         run: |
           pnpm run lint:markdown "${changed_files}"
 
@@ -102,4 +101,3 @@ jobs:
             node_modules
             ~/.pnpm-store
             .cache/*
-            .textlintcache
