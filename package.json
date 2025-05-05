@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start": "zenn preview",
-    "lint:text": "textlint --cache --cache-location .cache/textlintcache ",
+    "lint:text": "textlint --config ./configs/textlintrc.yaml --cache --cache-location .cache/textlintcache ",
     "lint:text:fix": "pnpm run lint:text --fix ",
-    "lint:markdown": "markdownlint-cli2 ",
-    "lint:markdown:fix": "markdownlint-cli2 --fix "
+    "lint:markdown": "markdownlint-cli2 --config ./configs/.markdownlint.yaml ",
+    "lint:markdown:fix": "pnpm run lint:markdown --fix "
   },
   "repository": {
     "type": "git",
