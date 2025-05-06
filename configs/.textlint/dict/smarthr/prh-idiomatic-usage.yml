@@ -447,43 +447,6 @@ rules:
     pattern:
       - >-
         /([\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]|[ぁ-んァ-ヶ])![^!\?]/
-    prh: >-
-      「！」と「？」は単独で使う場合は全角、ペアで使う場合は半角で表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-  - expected: $1？
-    pattern:
-      - >-
-        /([\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]|[ぁ-んァ-ヶ])\?[^!\?]/
-    prh: >-
-      「！」と「？」は単独で使う場合は全角、ペアで使う場合は半角で表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-  - expected: "!!"
-    pattern:
-      - ！！
-    prh: >-
-      「！」と「？」は単独で使う場合は全角、ペアで使う場合は半角で表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: ！！
-        to: "!!"
-  - expected: "!?"
-    pattern:
-      - ！？
-    prh: >-
-      「！」と「？」は単独で使う場合は全角、ペアで使う場合は半角で表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: ！？
-        to: "!?"
-  - expected: "??"
-    pattern:
-      - ？？
-    prh: >-
-      「！」と「？」は単独で使う場合は全角、ペアで使う場合は半角で表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: ？？
-        to: "??"
   - expected: 改善
     pattern:
       - カイゼン
@@ -871,26 +834,6 @@ rules:
         to: ポリシー
       - from: ポリシ
         to: ポリシー
-  - expected: マスターデータ
-    pattern:
-      - >-
-        /(?<!部署|役職|雇用形態|等級|］|スキル|資格|研修|カスタム|システム標準|SmartHR
-        ?|ドメイン)マスタ(?!ー)(データ)?/
-    prh: >-
-      マスターデータの総称は「マスターデータ」、総称以外は「◯◯マスター」と表記するhttps://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: マスタ
-        to: マスターデータ
-      - from: マスタデータ
-        to: マスターデータ
-      - from: 部署マスター
-        to: 部署マスター
-      - from: 役職マスター
-        to: 役職マスター
-      - from: 雇用形態マスター
-        to: 雇用形態マスター
-      - from: SmartHRマスター
-        to: SmartHRマスター
   - expected: マネージャー
     pattern:
       - /マネージャ(?!ー)/
@@ -1155,32 +1098,6 @@ rules:
         to: コピーアンドペースト
       - from: コピペ
         to: コピーアンドペースト
-  - expected: システム標準マスター
-    pattern:
-      - /(システム標準マスターデータ|システム標準マスタ(?!ー))/
-    prh: >-
-      マスターデータの総称は「マスターデータ」、総称以外は「◯◯マスター」と表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: システム標準マスタ
-        to: システム標準マスター
-      - from: システム標準マスターデータ
-        to: システム標準マスター
-      - from: システム標準マスター
-        to: システム標準マスター
-  - expected: カスタムマスター
-    pattern:
-      - /(カスタムマスターデータ|カスタムマスタ(?!ー))/
-    prh: >-
-      マスターデータの総称は「マスターデータ」、総称以外は「◯◯マスター」と表記する
-      https://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: カスタムマスタ
-        to: カスタムマスター
-      - from: カスタムマスターデータ
-        to: カスタムマスター
-      - from: カスタムマスター
-        to: カスタムマスター
   - expected: SmartHR基本機能
     pattern:
       - /SmartHR本体アプリ|本体アプリ|SmartHR本体/
@@ -1334,24 +1251,6 @@ rules:
         to: 縦並び
       - from: ならび順
         to: 並び順
-  - expected: マスターデータ
-    pattern:
-      - /(?<!部署|役職|雇用形態|等級|］|スキル|資格|研修|カスタム|システム標準|SmartHR ?|ドメイン)マスター(?!データ)/
-    prh: >-
-      マスターデータの総称は「マスターデータ」、総称以外は「◯◯マスター」と表記するhttps://smarthr.design/products/contents/idiomatic-usage/usage/
-    specs:
-      - from: マスター
-        to: マスターデータ
-      - from: 部署マスター
-        to: 部署マスター
-      - from: 役職マスター
-        to: 役職マスター
-      - from: 等級マスター
-        to: 等級マスター
-      - from: 雇用形態マスター
-        to: 雇用形態マスター
-      - from: SmartHRマスター
-        to: SmartHRマスター
   - expected: 詳し
     pattern:
       - くわし
