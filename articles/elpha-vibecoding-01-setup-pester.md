@@ -3,7 +3,7 @@ title: "エルファたちとはじめる PowerShell 開発日誌: Pesterをセ�
 emoji: "🔠"
 type: "tech"
 topics: ["PowerShell", "TDD", "Pester", "テスト駆動開発", "バイブコーディング"]
-published: false
+published: true
 ---
 
 ## はじめに
