@@ -1,6 +1,6 @@
 ---
 title: "エルファたちとはじめる PowerShell 開発日誌: Pesterをセットアップして、開発を準備する"
-emoji: "🔠"
+emoji: "✨"
 type: "tech"
 topics: ["PowerShell", "TDD", "Pester", "テスト駆動開発", "バイブコーディング"]
 published: true
