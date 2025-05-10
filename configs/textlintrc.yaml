@@ -16,7 +16,8 @@ rules:
       allowPeriodMarks:
         - "、"
         - ":"
-        - "💞"
+        - "】"
+        - "」"
     no-exclamation-question-mark: false
     no-doubled-joshi:
       strict: false
