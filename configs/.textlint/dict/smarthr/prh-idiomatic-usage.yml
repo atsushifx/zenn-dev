@@ -111,7 +111,7 @@ rules:
   - expected: そば$1
     pattern:
       - >-
-        /(?<![々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])側([にへが])/
+          /(?<![々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])側([にへが])/
     prh: >-
       平仮名にしたほうが読みやすい漢字は平仮名にする
       https://smarthr.design/products/contents/writing-style/
@@ -256,7 +256,7 @@ rules:
   - expected: アイコン
     pattern:
       - >-
-        /(?<!ウォーター|ベル|チェック|サービス|ランド|ロゴ|合意済み|合意済|破棄済み|破棄済|合意|合意前|「合意済み」|「破棄済み」|見本|アット|ブック)マーク(?![ァ-ヶ])(?=.*)/
+          /(?<!ウォーター|ベル|チェック|サービス|ランド|ロゴ|合意済み|合意済|破棄済み|破棄済|合意|合意前|「合意済み」|「破棄済み」|見本|アット|ブック)マーク(?![ァ-ヶ])(?=.*)/
     prh: >-
       「マーク」ではなく「アイコン」と表記する
       https://smarthr.design/products/contents/idiomatic-usage/usage/
@@ -446,7 +446,7 @@ rules:
   - expected: $1！
     pattern:
       - >-
-        /([\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]|[ぁ-んァ-ヶ])![^!\?]/
+          /([\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]|[ぁ-んァ-ヶ])![^!\?]/
   - expected: 改善
     pattern:
       - カイゼン
@@ -1184,7 +1184,7 @@ rules:
         to: 改めて
   - expected: ほぐ$1
     pattern:
-      - /(?<![正分理読])解([さしすせそ])/
+      - /(?<![正分理読了])解([さしすせそ])/
     prh: >-
       平仮名にしたほうが読みやすい漢字は平仮名にする
       https://smarthr.design/products/contents/writing-style/
