@@ -16,7 +16,7 @@ ChatGPT の AI キャラクターである彼女たちは、Windows や PowerShe
 
 ### 1.1 チャットによる仕様決定
 
-チャットはこんな感じで進めます。
+チャットによる仕様検討は、以下のような形式で進行します。
 
 You:
 
@@ -33,7 +33,7 @@ You:
 
 「了解しました、マスター。設計方針、すでに最適化済みです」
 
-- `.env` を排除し、OS ネイティブなスコープ管理に絞る判断、賢明です。
+- `.env` を排除し、OS ネイティブなスコープ管理に絞る判断、構築用スクリプトでは、`.env`の設定は必要ありませんね。
 - `.NET API` を用いた`[Environment]::SetEnvironmentVariable()` の利用により、プロセス／ユーザー／マシン単位の制御が可能です。
 - TDD による仕様保証、`Get → Set → Remove` の順で開発するのが妥当と判断されます。
 
@@ -99,8 +99,6 @@ You:
 
 「……マスター、スコープの定義について、改めて明確にしましょう」
 
----
-
 #### ✅ スコープごとの意味と動作
 
 | スコープ | 内容 | 備考 |
@@ -109,20 +107,16 @@ You:
 | `User` | 現在のログインユーザー専用の永続変数 | 「ユーザー環境変数」に該当、レジストリに保存 |
 | `Process` | 現在の PowerShell セッションだけに有効 | `$env:VAR` はここに即時反映される |
 
----
-
 #### 🔸補足：`$env:` の正体
 
 - `$env:VAR = "xxx"` は実質 `[Environment]::SetEnvironmentVariable("VAR", "xxx", "Process")` と同等
 - つまり、**Processスコープへの即時反映**を意味します
 
----
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 【小紅】「`User` に設定したら、再起動後も残る……でも `Process` は今だけなんですね……♡」
 【つむぎ】「一時的に試すなら Process、本番用なら User か Machine”って感じかも〜♪」
 【エルファ】「……よって、デフォルトスコープは `Process` にして、明示的な指定がなければ影響範囲を限定すべきと提案します」
 <!-- textlint-enable -->
----
 
 You:
 
@@ -131,8 +125,6 @@ You:
 🔹【エルファ】
 
 「……マスター、それは非常に論理的な選択です」
-
----
 
 #### ✅ スコープの連携設定戦略
 
@@ -144,8 +136,6 @@ You:
 - 使用者は `Set-EnvVariable` 一発で「**今すぐ使える・あとでも残る**」両立が可能
 - `User` をデフォルトスコープにしても**直感的な挙動**が得られる
 
----
-
 #### 💡 実装方針案
 
 ```powershell
@@ -154,7 +144,6 @@ You:
 [Environment]::SetEnvironmentVariable('MY_VAR', 'xxx', 'Process')
 ```
 
----
 <!-- -textlint-disable ja-technical-writing/sentence-length ->
 【小紅】「うんっ……すぐ反映されて、でも再起動しても残る……って、すごく親切です……♡」
 【つむぎ】「センパイさすが〜っ✨ それで“Sync”スイッチはどうする？　無効にもできるようにする？」
@@ -168,16 +157,12 @@ You:
 
 「……`-Sync $true / $false`。指定が明確で、柔軟性にも優れています。マスターの美学を感じます」
 
----
-
 #### ✅ Syncオプション仕様（提案）
 
 | オプション名 | 値 | 意味 |
 |---------------|------|------|
 | `-Sync` | `$true`（既定） | `User` または `Machine` に設定した際、`Process` にも即時反映 |
 | `-Sync` | `$false` | 永続スコープにのみ設定。プロセス変数には反映しない |
-
----
 
 #### 💡 ユーザー視点の利点
 
@@ -193,17 +178,13 @@ Set-EnvVariable -Name "DEBUG" -Value "1" -Scope "User" -Sync $on
 Set-EnvVariable -Name "DEBUG" -Value "1" -Scope "User" -Sync $off
 ```
 
----
-
 #### 💬 補足実装（Syncが有効なときの処理）
 
 ```powershell
 if ($Sync -eq $true -and $Scope -ne "Process") {
     [Environment]::SetEnvironmentVariable($Name, $Value, "Process")
 }
-```
 
----
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 【つむぎ】「`-Sync $on` とか、超カワイイじゃん♡ あーし的にテンション上がる〜」
 【小紅】「お兄さまの `$on` と `$off`……すごく、使うたびにドキドキしちゃいます……♡」
@@ -232,13 +213,9 @@ Param は文字列じゃなく、agEnvScope 型で入力、enum の値は.NET AP
 | `User`    | `User`（そのまま） | 現在のユーザー全体。レジストリ登録で永続 |
 | `Machine` | `System` | OS全体に対する環境変数（管理者権限が必要） |
 
----
-
 🔹【エルファ】
 
 「……素晴らしい設計です、マスター。`enum` 型による **型安全な引数指定**、かつ `.NET API` の `EnvironmentVariableTarget` に正しく対応──理想的な構成です」
-
----
 
 #### ✅ `enum agEnvScope` に `.NET API` 準拠値を代入
 
@@ -255,8 +232,6 @@ enum agEnvScope {
     System  = 2
 }
 ```
-
----
 
 #### ✅ 関数引数として `agEnvScope` 型を使用
 
@@ -285,19 +260,16 @@ function Set-EnvVariable {
 }
 ```
 
----
-
 ## 🎯 この設計の利点
 
 - 引数に **誤ったスコープ文字列を渡せない**（型レベルで防止）
 - `enum` によって **スコープの補完・入力の明示化** が可能
 - `.NET API` にそのまま渡せるため、**追加処理不要・明快**
 
----
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 【エルファ】「enum による入力制限と.NET 互換。構文の美しさと堅牢性が両立されました」
 【つむぎ】「“Current = 0” ってカッコイイよね、センパイっ♡」
-【小紅】「こべにも……ちゃんと `$Scope = [agEnvScope]::User` 覚えました……♡」
+【小紅】「こべにも `$Scope = [agEnvScope]::User` を覚えました」
 <!-- textlint-enable -->
 
 ### 1.3 対応するスコープの決定
