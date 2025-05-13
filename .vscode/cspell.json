@@ -1,10 +1,10 @@
 // @(#) : cspell settings for ths workspa
 /**
  *
- * @version  1.0.0
- * @author   Furukawa, Atsushi <atsushifx@aglabo.com>
- * @since    2025-02-27
- * @license  MIT
+ * @version	1.0.0
+ * @author  atsushifx <https://github.com/atsushifx/>
+ * @since   2025-02-27
+ * @license	MIT
  *
  * @description<<
  *
@@ -13,24 +13,24 @@
  *<<
  */
 {
-	"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json",
-	"version": "0.2",
-	"import": [
-		"${env:XDG_CONFIG_HOME}/vscode/cspell.config.json"
-	],
-	"language": "en",
-	"caseSensitive": true,
-	"dictionaryDefinitions": [
-		{
-			"name": "zenn-dic",
-			"description": "dictionary for zenn.dev",
-			"path": "./cspell/dicts/zenn-dev.dic",
-			"addWords": true,
-			"scope": "workspace"
-		}
-	],
-	"dictionaries": [
-		"user-dic",
-		"zenn-dic"
-	]
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json",
+  "version": "0.2",
+  "import": [
+    "${env:XDG_CONFIG_HOME}/vscode/cspell.config.json"
+  ],
+  "language": "en",
+  "caseSensitive": true,
+  "dictionaryDefinitions": [
+    {
+      "name": "zenn-dic",
+      "description": "dictionary for zenn.dev",
+      "path": "./cspell/dicts/zenn-dev.dic",
+      "addWords": true,
+      "scope": "workspace"
+    }
+  ],
+  "dictionaries": [
+    "user-dic",
+    "zenn-dic"
+  ]
 }

@@ -1,3 +1,19 @@
+# src: ./configs/textlintrc.yaml
+## @(#) : yaml type textlint config
+#
+# @version	1.0.0
+# @author   atsushifx <https://github.com/atsushifx>
+# @since    2025-04-17
+# @license  MIT
+#
+# @description<<
+#
+# This configuration file sets up textlint for Japanese technical writing.
+# It includes rules for sentence length, kanji usage, spacing, and more,
+# ensuring consistent and error-free documentation.
+#
+#<<
+
 plugins: {}
 filters:
   comments: true
@@ -17,6 +33,8 @@ rules:
         - "、"
         - ":"
         - "💞"
+        - "♡"
+        - "♪"
     no-exclamation-question-mark: false
     no-doubled-joshi:
       strict: false
