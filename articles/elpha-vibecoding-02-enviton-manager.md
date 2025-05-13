@@ -743,7 +743,198 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
   上記のように、テスト、`_GetRaw`を実装することで、テストをパスします。
   なお、`agEnvCore.ps1`では、のちのために`enum agEnvScope`と`$On/$Off`を設定しています。
 
-### 2.4 Set/Removeも実装したクラスの例
+### 2.4 `SetRaw`, `RemoveRaw`の実装
+
+メソッド、`SetRaw`, `RemoveRaw`を実装します。
+それぞれ、`.NET API`のラッパーとして動作し、返り値も`NET API`に従います。
+
+作成したコードは、次のようになります (変更部分のみ)。
+
+- `./scripts/Tests/agEnvCore.Tests.ps1`
+
+  ```powershell
+    Context "SetRaw メソッド" {
+        Context "Process スコープに設定する場合" {
+            It "環境変数が Process に設定される" {
+                $testVar = '<UT_SetRaw_Process>'
+                $testValue = 'ProcessValue'
+
+                # 初期化
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+
+                # 設定
+                [_agEnvCore]::_SetRaw($testVar, $testValue, [agEnvScope]::Process)
+
+                # 取得
+                $raw = [_agEnvCore]::_GetRaw($testVar, [agEnvScope]::Process)
+                $raw | Should -Be $testValue
+
+                (Test-Path "Env:$testVar") | Should -BeTrue
+
+                # 後片付け
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+            }
+        }
+
+        Context "User スコープに設定する場合" {
+            It "User にのみ設定され、Process には反映されない" {
+                $testVar = '<UT_SetRaw_User>'
+                $testValue = 'UserValue'
+
+                # 初期化
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::User)
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+
+                # デフォルトScope(User)で設定
+                [_agEnvCore]::_SetRaw($testVar, $testValue, [agEnvScope]::User)
+
+                # User取得
+                $userRaw = [_agEnvCore]::_GetRaw($testVar, [agEnvScope]::User)
+                $userRaw | Should -Be $testValue
+
+                # Process未反映
+                $procRaw = [_agEnvCore]::_GetRaw($testVar, [agEnvScope]::Current)
+                $procRaw | Should -BeNullOrEmpty
+
+                # 後片付け
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::User)
+            }
+        }
+    }
+
+    Context "GetRaw / IsEnvExist メソッド" {
+        Context "環境変数が存在する場合" {
+            It "GetRaw が値を返し、IsEnvExist が true を返す" {
+                $testVar = '<TEST_VAR>'
+                $testValue = 'Value123'
+
+                [System.Environment]::SetEnvironmentVariable($testVar, $testValue, [System.EnvironmentVariableTarget]::Process)
+
+                $result = [_agEnvCore]::_GetRaw($testVar, [agEnvScope]::Process)
+                $exists = [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::Process)
+
+                $result | Should -Be $testValue
+                $exists | Should -BeTrue
+
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+            }
+        }
+
+        Context "環境変数が存在しない場合" {
+            It "GetRaw が null/empty を返し、IsEnvExist が false を返す" {
+                $testVar = '<TEST_NOT_EXIST_VAR>'
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+
+                $result = [_agEnvCore]::_GetRaw($testVar, [agEnvScope]::Process)
+                $exists = [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::Process)
+
+                $result | Should -BeNullOrEmpty
+                $exists | Should -BeFalse
+            }
+        }
+    }
+
+    Context "RemoveRaw メソッド" {
+        Context "環境変数が存在する場合" {
+            It "削除後は GetRaw が null/empty を返す" {
+                $testVar = '<UT_RemoveRaw>'
+
+                [System.Environment]::SetEnvironmentVariable($testVar, 'ToBeRemoved', [System.EnvironmentVariableTarget]::Process)
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+
+                $envVar = [_agEnvCore]::_GetRaw($testVar, [agEnvScope]::Process)
+                $envVar | Should -BeNullOrEmpty
+            }
+        }
+
+        Context "環境変数が存在しない場合" {
+            It "例外を投げずに処理される" {
+                $testVar = '<UT_RemoveRaw_Not_Exist>'
+                [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process)
+
+                { [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Process) } | Should -Not -Throw
+            }
+        }
+    }
+  ```
+
+- `./scripts/libs/agEnv.Core.ps1`
+
+  ```powershell
+      <#
+    .SYNOPSIS
+    Retrieves the raw value of an environment variable (defaults to Current scope).
+    .DESCRIPTION
+    Uses .NET API to get the value in the specified scope without validation.
+    If no scope is provided, the Current (Process) scope is used.
+    .PARAMETER Name
+    The name of the environment variable to retrieve.
+    .PARAMETER Scope
+    The scope ([agEnvScope] enum) in which to look up the variable.
+    Defaults to [agEnvScope]::Current (Process).
+    .OUTPUTS
+    Returns the variable's value as a string, or $null if not set.
+    #>
+    static [void] _SetRaw([string] $Name, [string] $Value, [agEnvScope] $Scope = [agEnvScope]::Current) {
+        [System.Environment]::SetEnvironmentVariable(
+            $Name,
+            $Value,
+            [System.EnvironmentVariableTarget]$Scope
+        )
+    }
+
+  .
+  .
+  <_getRaw>
+  .
+  .
+
+    <#
+    .SYNOPSIS
+    Removes the raw value of an environment variable (defaults to Current scope).
+    .DESCRIPTION
+    Uses .NET API to set the variable to null in the specified scope without validation.
+    .PARAMETER Name
+    The name of the environment variable to remove.
+    .PARAMETER Scope
+    The scope ([agEnvScope] enum) in which to remove the variable.
+    Defaults to [agEnvScope]::Current (Process).
+    .OUTPUTS
+    Returns nothing.
+    #>
+    static [void] _RemoveRaw(
+        [string] $Name,
+        [agEnvScope] $Scope = [agEnvScope]::Current
+    ) {
+        [System.Environment]::SetEnvironmentVariable(
+            $Name,
+            $null,
+            [System.EnvironmentVariableTarget]$Scope
+        )
+    }
+
+    <#
+    .SYNOPSIS
+    Checks whether an environment variable exists and has a non-empty value
+    (defaults to Current scope).
+    .DESCRIPTION
+    Uses .NET API to get the raw value in the specified scope without validation,
+    then returns $true if that value is neither $null nor an empty string.
+    .PARAMETER Name
+    The name of the environment variable to check.
+    .PARAMETER Scope
+    The scope ([agEnvScope] enum) in which to check the variable.
+    Defaults to [agEnvScope]::Current (Process).
+    .OUTPUTS
+    Returns a boolean: $true if the variable exists with a non-empty value;
+    otherwise $false.
+    #>
+    static [bool] isEnvExist([string]$name, $scope = [agEnvScope]::Current) {
+        return [bool]([_agEnvCore]::_GetRaw($name, $scope))
+    }
+  ```
+
+  上記のコードで、テストコードはパスしたので、コミットしておきます。
 
 ## 3. ラッパー関数の導入とテスト性への配慮
 
