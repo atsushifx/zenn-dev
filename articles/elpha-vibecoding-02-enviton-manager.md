@@ -517,15 +517,100 @@ You:
 
 ## 2. 最初のテストとクラスの作成
 
-- Scope 用 enum の設計 (`enum agEnvScope`)
-- クラスの基本設計
-- static クラスメソッドベースのテスト
+ここからは、まず `TDD` の基本となる「テストファースト」アプローチで環境変数クラスを作成していきます。
+最初に「未定義変数は null を返す」ことを確認するテストを記述し、`.NET API`をラップしたメソッドを作成します。
+`バイブコーディング`で書いていくので、テストとラップメソッド`_getRaw`は`ChatGPT`が作成します。
+
+`ChatGPT`は関数やクラスを一気に書いてくれるので、大幅な時間短縮が見込めます。
 
 ### 2.1 TDDの起点: Getメソッドの作成
 
-- "存在しない環境変数を取得したとき null を返す" などのケースからスタート
-- 最小限の assert で「守るべき動作」を先に固定
-- テスト対象クラス`agEnvManager`を作成
+ここからは TDD と`バイブコーディング`による、テストやメソッドの作成となります。
+まずは、`Pester`でテストが動くことを確認するため、必ず通るテストを作成します。
+
+#### 最低限`Pester`が`Pass`を返すテストを作成する
+
+`バイブコーディング`らしく`ChatGPT`にコードを書いてもらいます。
+今回は、`$true | Should -Be $true`として必ずパスするテストを実行します。
+
+- ./scripts/Tests/agEnvCore.Tests.ps1
+
+  ```powershell
+  # src: scripts/tests/agEnvCore.Tests.ps1
+  # @(#) : 環境変数マネージャーCoreのユニットテスト
+  #
+  # Copyright (c) 2025 atsushifx <atsushifx@gmail.com>
+  # Released under the MIT License
+  # https://opensource.org/licenses/MIT
+
+  <#
+  .SUMMARY
+  Tests the functions in agEnvCore.ps1
+
+  .DESCRIPTION
+  Tests the functions in agEnvCore.ps1
+  #>
+  BeforeAll {
+    $script = $SCRIPTROOT + '\libs\agEnvCore.ps1'
+    . $script
+  }
+
+  Describe "AgEnvManager - xxRaw 関数" {
+    Context "Test env::getRaw" {
+      It "should get valid data from Environment Variable" {
+        $true | Should -Be $true
+      }
+    }
+  }
+  ```
+
+- ./scripts/lib/agEnvCore.ps1
+
+  ```powershell
+  # src: ./scripts/libs/agEnvCore.ps1
+  # @(#) : Environment Variable Manager
+  #
+  # Copyright (c) 2025 atsushifx <atsushifx@gmail.com>
+  # Released under the MIT License
+  # https://opensource.org/licenses/MIT
+
+  Set-StrictMode -version latest
+  <#
+  .SUMMARY
+  Defines the scope of environment variable targets.
+  #>
+  enum AgEnvScope {
+    Machine = [EnvironmentVariableTarget]::Machine
+    User = [EnvironmentVariableTarget]::User
+    Process = [EnvironmentVariableTarget]::Process
+    # Alias
+    System = [EnvironmentVariableTarget]::Machine
+    Current = [EnvironmentVariableTarget]::Process
+  }
+
+  <#
+  .SUMMARY
+  Internal static helper class for environment variable operations.
+  Provides protection against critical environment variable modification.
+  #>
+  class _AgEnvCore {
+  }
+  ```
+
+実行結果派は、次の通り:
+
+```powershell
+
+Starting discovery in 1 files.
+Discovery found 1 tests in 14ms.
+Running tests.
+[+] C:\Users\atsushifx\workspaces\develop\aglabo-setup-scripts\scripts\tests\agEnvCore.Tests.ps1 65ms (7ms|45ms)
+Tests completed in 67ms
+Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+```
+
+`Passed: 1`で、すべてのテストにパスしています。
+なので、`Pester`は正常に動作しています。
 
 ### 2.2 クラスの役割と静的化の理由
 
