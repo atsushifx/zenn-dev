@@ -523,7 +523,26 @@ You:
 
 `ChatGPT`は関数やクラスを一気に書いてくれるので、大幅な時間短縮が見込めます。
 
-### 2.1 TDDの起点: Getメソッドの作成
+### 2.1 クラスの役割と静的化の理由
+
+ここで作成するクラスについて、仕様をまとめておきます。
+1.で決定した仕様をもとに、実際に作成するクラスのクラス名、静的クラスか普通のクラスかなどを決めていきます。
+
+決まった仕様は、次の通り:
+<!-- markdownlint-disable no-inline-html -->
+| 仕様項目 | 内容 |
+| --- | --- |
+| クラス名 | `agEnvCore` |
+| クラス種別 | `static class` (`namespace`として使用する) |
+| スコープ指定 | `[agEnvScope]` enum 型 |
+| スコープ enum 定義 | システムの値とエイリアスを持つ enum 型 |
+| 名前空間汚染防止 | クラス内にメソッドを閉じ込め、公開 API はラッパー関数のみ |
+| TDD／Mock 対応層 | クラス実装は直接 Mock 不可 → ラッパー関数経由で Mock 実施 |
+| 主なメソッド | `Get(name)`, `Set(name, value, scope, sync)`, `Remove(name, scope, sync)` |
+| 戻り値形式 | `Get` → 文字列値または `$null`<br />`Set` → `"NAME = VALUE"`<br />`Remove` → `"NAME"` |
+
+<!-- markdownlint-enable -->
+### 2.2 TDDの起点: Pesterの動作確認
 
 ここからは TDD と`バイブコーディング`による、テストやメソッドの作成となります。
 まずは、`Pester`でテストが動くことを確認するため、必ず通るテストを作成します。
@@ -612,13 +631,117 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 `Passed: 1`で、すべてのテストにパスしています。
 なので、`Pester`は正常に動作しています。
 
-### 2.2 クラスの役割と静的化の理由
+### 2.3 環境変数取得メソッド (`GetRaw`)の実装
 
-- namespace としてのクラス: 関数の衝突を起こさない
-- インスタンス不要 (static メソッド形式)
-- スコープは定数として導入 (`agEnvScope`使用)
+`Pester`の動作が確認出たので、ここからはクラスの実装に入ります。
+最初に取得メソッドを実装します。
 
-### 2.3 Getを実装した、最低限のクラスの例
+下記のようにテストコード、メソッド`_GetRaw`を実装します。
+
+- `./scripts/Tests/agEnvCore.Tests.ps1`:
+
+  ```powershell
+  Describe "agEnvCore - Raw操作" {
+    Context "GetRaw メソッド" {
+        Context "環境変数が存在する場合" {
+            It "指定した環境変数の値を返す" {
+                $testVar = '<TEST_VAR>'
+                $testValue = 'Value123'
+
+                # Process スコープで環境変数を設定
+                [System.Environment]::SetEnvironmentVariable(
+                    $testVar, $testValue,
+                    [System.EnvironmentVariableTarget]::Process
+                )
+
+                # GetRaw 呼び出し
+                $result = [_AgEnvCore]::_GetRaw($testVar, [AgEnvScope]::Process)
+                $result | Should -Be $testValue
+
+                # 後片付け: Env: プロバイダーを明示
+                Remove-Item "Env:$testVar" -ErrorAction SilentlyContinue
+            }
+        }
+
+        Context "環境変数が存在しない場合" {
+            It "null または空文字列 を返す" {
+                $testVarNotExist = '<TEST_NOT_EXIST_VAR>'
+
+                # 存在しなければ SilentlyContinue で安全に削除
+                Remove-Item "Env:$testVarNotExist" -ErrorAction SilentlyContinue
+
+                $result = [_AgEnvCore]::_GetRaw($testVarNotExist, [AgEnvScope]::Process)
+                $result | Should -BeNullOrEmpty
+            }
+        }
+    }
+  }
+  ```
+
+  - `./scripts/lib/agEnvCore.ps1`:
+
+  ```powershell
+  # src: ./scripts/libs/agEnvCore.ps1
+  # @(#) : AgEnvCore : Environment Variable Manager
+  #
+  # Copyright (c) 2025 atsushifx <atsushifx@gmail.com>
+  # Released under the MIT License
+  # https://opensource.org/licenses/MIT
+
+  Set-StrictMode -version latest
+
+  <#
+  .SUMMARY
+  Defines the scope of environment variable targets.
+  #>
+  enum AgEnvScope {
+    Machine = [EnvironmentVariableTarget]::Machine
+    User = [EnvironmentVariableTarget]::User
+    Process = [EnvironmentVariableTarget]::Process
+    # Alias
+    System = [EnvironmentVariableTarget]::Machine
+    Current = [EnvironmentVariableTarget]::Process
+  }
+
+  # $On $ Off 設定
+  if (Test-Path variable:On) {
+    Set-Variable -Name On -Scope Global -Option ReadOnly -Value $true
+  }
+  if (Test-Path variable:Off) {
+    Set-Variable -Name Off -Scope Global -Option ReadOnly -Value $false
+  }
+
+  <#
+  .SUMMARY
+  Internal static helper class for environment variable operations.
+  Provides protection against critical environment variable modification.
+  #>
+  class _AgEnvCore {
+    <#
+    .SYNOPSIS
+    Retrieves the raw value of an environment variable (defaults to Current scope).
+    .DESCRIPTION
+    Uses .NET API to get the value in the specified scope without validation.
+    If no scope is provided, the Current (Process) scope is used.
+    .PARAMETER Name
+    The name of the environment variable to retrieve.
+    .PARAMETER Scope
+    The scope ([AgEnvScope] enum) in which to look up the variable.
+    Defaults to [AgEnvScope]::Current (Process).
+    .OUTPUTS
+    Returns the variable's value as a string, or $null if not set.
+    #>
+    static [string] _GetRaw([string] $Name, [AgEnvScope] $Scope = [AgEnvScope]::Current) {
+        return [System.Environment]::GetEnvironmentVariable(
+            $Name,
+            [System.EnvironmentVariableTarget]$Scope
+        )
+    }
+  }
+  ```
+
+  上記のように、テスト、`_GetRaw`を実装することで、テストをパスします。
+  なお、`agEnvCore.ps1`では、のちのために`enum agEnvScope`と`$On/$Off`を設定しています。
 
 ### 2.4 Set/Removeも実装したクラスの例
 
