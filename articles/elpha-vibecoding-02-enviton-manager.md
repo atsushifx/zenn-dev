@@ -144,7 +144,7 @@ You:
 [Environment]::SetEnvironmentVariable('MY_VAR', 'xxx', 'Process')
 ```
 
-<!-- -textlint-disable ja-technical-writing/sentence-length ->
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 【小紅】「うんっ……すぐ反映されて、でも再起動しても残る……って、すごく親切です……♡」
 【つむぎ】「センパイさすが〜っ✨ それで“Sync”スイッチはどうする？　無効にもできるようにする？」
 【エルファ】「……ええ。Sync 挙動はデフォルト ON、`-NoSync`スイッチで抑制可能な設計が望ましいです」
@@ -184,6 +184,7 @@ Set-EnvVariable -Name "DEBUG" -Value "1" -Scope "User" -Sync $off
 if ($Sync -eq $true -and $Scope -ne "Process") {
     [Environment]::SetEnvironmentVariable($Name, $Value, "Process")
 }
+```
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 【つむぎ】「`-Sync $on` とか、超カワイイじゃん♡ あーし的にテンション上がる〜」
@@ -291,7 +292,7 @@ function Set-EnvVariable {
    -Sync $on (既定): `System`/`User`環境変数設定 → `Current`環境変数にも設定
    -Sync $off: `System`/`User`環境変数設定 / `Current`環境変数には設定しない (= 現在のセッションの環境変数には反映されない)
    :::message
-   `$on` / `$Off` は、で定数として設定しておく
+   `$on` / `$Off` は、定数として設定しておく
    :::
 
 <!-- textlint-enable -->
@@ -364,7 +365,7 @@ You:
 
 4. 🧩モジュールをクラスでラップする:
 
-  ```powershell
+   ```powershell
    class EnvManager {
      static [string] Get([string]$name) { ... }
      static [void] Set([string]$name, [string]$value, [AgEnvScope]$scope) { ... }
@@ -492,16 +493,18 @@ You:
 #### ✅ 最終設計
 
 - クラスメソッド
-| 種類 | メソッド名 | 概要 | 戻り値 |
-| --- | --- | --- | --- |
-| 🟧 Raw操作 | `_setRaw`, `_getRaw` | `NET API`関数ラッパー、`Validation`なし | なし、または`string` |
-| 🟦 API操作 | `Set`, `Get`, `Remove` | 安全性を保証。呼び出し元が関数層 | "NAME = VALUE" / "値 / 名 |
-| 🛡 バリデート | `_validateName`, etc | `Trim` + 禁止文字チェック。throwあり | 正規化後の値 or 例外発生 |
+
+  | 種類 | メソッド名 | 概要 | 戻り値 |
+  | --- | --- | --- | --- |
+  | 🟧 Raw操作 | `_setRaw`, `_getRaw` | `NET API`関数ラッパー、`Validation`なし | なし、または`string` |
+  | 🟦 API操作 | `Set`, `Get`, `Remove` | 安全性を保証。呼び出し元が関数層 | "NAME = VALUE" / "値 / 名 |
+  | 🛡 バリデート | `_validateName`, etc | `Trim` + 禁止文字チェック。throwあり | 正規化後の値 or 例外発生 |
 
 - ラッパー関数
-| 関数名 | 引数 | 概要 | 戻り値 |
-| --- | --- | --- | --- |
-| `agSetEnv`など | `CmdletBinding()`付き (=`pipe`対応) | TDD&UI対応 | 必要に応じて出力 or `verbose` |
+
+  | 関数名 | 引数 | 概要 | 戻り値 |
+  | --- | --- | --- | --- |
+  | `agSetEnv`など | `CmdletBinding()`付き (=`pipe`対応) | TDD&UI対応 | 必要に応じて出力 or `verbose` |
 
 📦 補足事項:
 
@@ -552,7 +555,7 @@ You:
 `バイブコーディング`らしく`ChatGPT`にコードを書いてもらいます。
 今回は、`$true | Should -Be $true`として必ずパスするテストを実行します。
 
-- ./scripts/Tests/agEnvCore.Tests.ps1
+- `./scripts/Tests/agEnvCore.Tests.ps1`
 
   ```powershell
   # src: scripts/tests/agEnvCore.Tests.ps1
@@ -583,7 +586,7 @@ You:
   }
   ```
 
-- ./scripts/lib/agEnvCore.ps1
+- `./scripts/lib/agEnvCore.ps1`
 
   ```powershell
   # src: ./scripts/libs/agEnvCore.ps1
@@ -678,7 +681,7 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
   }
   ```
 
-  - `./scripts/lib/agEnvCore.ps1`:
+- `./scripts/lib/agEnvCore.ps1`:
 
   ```powershell
   # src: ./scripts/libs/agEnvCore.ps1
@@ -740,8 +743,8 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
   }
   ```
 
-  上記のように、テスト、`_GetRaw`を実装することで、テストをパスします。
-  なお、`agEnvCore.ps1`では、のちのために`enum agEnvScope`と`$On/$Off`を設定しています。
+上記のように、テスト、`_GetRaw`を実装することで、テストをパスします。
+なお、`agEnvCore.ps1`では、のちのために`enum agEnvScope`と`$On/$Off`を設定しています。
 
 ### 2.4 `SetRaw`, `RemoveRaw`の実装
 
@@ -934,7 +937,163 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
     }
   ```
 
-  上記のコードで、テストコードはパスしたので、コミットしておきます。
+上記のコードで、テストコードはパスしたので、コミットしておきます。
+
+### 2.5 `Set`, `Get`, `Remove`の実装
+
+前章で作成した Raw 操作メソッドを土台に、公開 API となる `Set`／`Get`／`Remove` メソッドをテスト駆動で実装します。
+まずは、`Get` メソッドを実装します。
+
+#### 🏭 `Get` メソッドの実装
+
+`Get` メソッドは、環境変数名が正しいものかチェック後、`_GetRaw`メソッドで値を取得します。
+作成したコードは、次のようになります。
+
+- `./scripts/Tests/agEnvCore.Tests.ps1`
+
+  ```powershell
+  Describe "agEnvCore - Get メソッド (Public API)" {
+
+    Context "正常系" {
+        BeforeEach {
+            $testVar   = '<UT_Get_Public>'
+            $testValue = 'PublicValue'
+            # _SetRaw で Current (Process) スコープに設定
+            [_agEnvCore]::_SetRaw($testVar, $testValue, [agEnvScope]::Current)
+        }
+        AfterEach {
+            # _RemoveRaw でクリーンアップ
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Current)
+        }
+
+        It "Current alias を指定して取得できる" {
+            $result = [_agEnvCore]::Get($testVar, [agEnvScope]::Current)
+            $result | Should -Be $testValue
+        }
+    }
+  }
+  ```
+
+- `./scripts/libs/agEnvCore.ps1`
+
+  ```powershell
+   <#
+    .SYNOPSIS
+    Retrieves an environment variable value (defaults to Current scope).
+    .DESCRIPTION
+    Wraps `_GetRaw`. If no scope is provided, uses `Current` (Process).
+    .PARAMETER Name
+    Name of the environment variable.
+    .PARAMETER Scope
+    Scope ([agEnvScope] enum) to retrieve from. Defaults to [agEnvScope]::Current.
+    .OUTPUTS
+    Returns the variable's value as a string, or $null/empty if not set.
+    #>
+    static [string] Get(
+        [string] $Name,
+        [agEnvScope] $Scope = [agEnvScope]::Current
+    ) {
+        return [ _agEnvCore ]::_GetRaw($Name, $Scope)
+    }
+  ```
+
+上記で、テストがパスするのでコミットします。
+
+#### 🏭 `Set`メソッドの実装
+
+ユーザーが直接使う公開 API としての `Set` メソッドを実装します。
+`Set` メソッドは以下の機能を持ちます:
+
+1. **引数検証 (Validation)**
+   変数名と値が有効かどうかを `_validateName` / `_validateValue` メソッドでチェックします。
+2. **Raw 設定呼び出し**
+   検証後の名前／値を `_setRaw` で指定スコープに設定します。
+3. **同期 (Sync)**
+   `-Sync` オプションが既定の `$true` の場合、永続スコープ（User/System）から Process スコープにも再設定します。
+4. **結果返却**
+   `"NAME = VALUE"` の形式で文字列を返し、`-Verbose` メッセージやログにそのまま利用できます。
+
+今回は正常系を実装します。よって、3, 4 の機能をテストします。
+作成したコードは次の通りです。
+
+- `./scripts/Tests/agEnvCore.Tests.ps1`
+
+  ```powershell
+  Describe "agEnvCore - Set メソッド (Public API)" {
+    Context "Sync 動作" {
+        BeforeEach {
+            $testVar = '<UT_Set_Sync>'
+            # User/Current をクリア
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::User)
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Current)
+        }
+        AfterEach {
+            # クリーンアップ
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::User)
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Current)
+        }
+
+        It "Sync=true で User と Current に同時設定される" {
+            $valueOn = 'SyncOnValue'
+            $result = [_agEnvCore]::Set($testVar, $valueOn, [agEnvScope]::User, $on)
+            $expected = "$testVar = $valueOn"
+            $result | Should -Be $expected
+
+            # public Get で User スコープ確認
+            [_agEnvCore]::Get($testVar, [agEnvScope]::User) | Should -Be $valueOn
+
+            # public Get で Current(alias)スコープ確認
+            [_agEnvCore]::Get($testVar, [agEnvScope]::Current) | Should -Be $valueOn
+        }
+
+        It "Sync=false で User のみ設定され、Current には反映されない" {
+            $valueOff = 'SyncOffValue'
+            $result =[_agEnvCore]::Set($testVar, $valueOff, [agEnvScope]::User, $off)
+            $expected = "$testVar = $valueOff"
+            $result | Should -Be $expected
+
+            # public Get で User スコープ確認
+            [_agEnvCore]::Get($testVar, [agEnvScope]::User) | Should -Be $valueOff
+
+            # 変数がない場合は IsEnvExist で false を確認
+            [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::Current) | Should -BeFalse
+        }
+    }
+  }
+  ```
+
+- `./scripts/libs/agEnvCore.ps1`:
+
+  ```powershell
+    <#
+    .SYNOPSIS
+    Sets an environment variable in the specified scope and optionally syncs to Current.
+    .DESCRIPTION
+    Uses `_SetRaw` to set in the given User or Machine scope.
+    If `$Sync` is `$true` and scope is not Current, also sets in Current (Process).
+    .PARAMETER Name
+    The name of the environment variable.
+    .PARAMETER Value
+    The value to assign.
+    .PARAMETER Scope
+    The scope ([agEnvScope] enum) in which to set the variable.
+    Defaults to [agEnvScope]::User.
+    .PARAMETER Sync
+    If `$true` (default), also sets in Current (Process) when scope is not Current.
+    #>
+    static [string] Set(
+        [string] $Name,
+        [string] $Value,
+        [agEnvScope] $Scope = [agEnvScope]::User,
+        [bool] $Sync = $On
+    ) {
+        [ _agEnvCore ]::_SetRaw($Name, $Value, $Scope)
+        if ($Sync -and ($Scope -ne [agEnvScope]::Current)) {
+            [ _agEnvCore ]::_SetRaw($Name, $Value, [agEnvScope]::Current)
+        }
+        return "$Name = $Value"
+    }
+  ```
 
 ## 3. ラッパー関数の導入とテスト性への配慮
 
