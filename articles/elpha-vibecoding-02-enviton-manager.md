@@ -1001,8 +1001,7 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 
 #### 🏭 `Set`メソッドの実装
 
-ユーザーが直接使う公開 API としての `Set` メソッドを実装します。
-`Set` メソッドは以下の機能を持ちます:
+`Set` メソッドを実装します。`Set` メソッドは以下の機能を持ちます:
 
 1. **引数検証 (Validation)**
    変数名と値が有効かどうかを `_validateName` / `_validateValue` メソッドでチェックします。
@@ -1094,6 +1093,94 @@ Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
         return "$Name = $Value"
     }
   ```
+
+#### 🏭 `Remove`メソッドの実装
+
+`Remove`メソッドを実装します。`Remove` メソッドは以下の機能を持ちます:
+
+1. **引数検証 (Validation)**
+   変数名が有効かどうかを `_validateName`
+2. **Raw 設定呼び出し**
+   検証後の名前／値を `_removeRaw` で指定スコープに設定します。
+3. **同期 (Sync)**
+   `-Sync` オプションが既定の `$true` の場合、永続スコープ（User/System）から Process スコープにも再設定します。
+4. **結果返却**
+   `"NAME"` の形式で文字列を返し、`-Verbose` メッセージやログにそのまま利用できます。
+
+今回は正常系を実装します。よって、3, 4 の機能をテストします。
+作成したコードは次の通りです。
+
+- `./scripts/Tests/agEnvCore.Tests.ps1`
+
+  ```powershell
+  Describe "agEnvCore - Remove メソッド (Public API)" {
+
+    Context "Sync 動作" {
+        BeforeEach {
+            $testVar   = '<UT_Remove_Sync>'
+            $testValue = 'ToBeRemoved'
+            # User と Current 両方に設定
+            [_agEnvCore]::_SetRaw($testVar, $testValue, [agEnvScope]::User)
+            [_agEnvCore]::_SetRaw($testVar, $testValue, [agEnvScope]::Current)
+        }
+        AfterEach {
+            # 両スコープをクリーンアップ
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::User)
+            [_agEnvCore]::_RemoveRaw($testVar, [agEnvScope]::Current)
+        }
+
+        It "Sync=true で User と Current が同時に削除され、削除した名前を返す" {
+            $ret = [_agEnvCore]::Remove($testVar, [agEnvScope]::User, $true)
+            $ret | Should -Be $testVar
+
+            [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::User)    | Should -BeFalse
+            [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::Current) | Should -BeFalse
+        }
+
+        It "Sync=false で User のみ削除され、Current は残り、削除した名前を返す" {
+            $ret = [_agEnvCore]::Remove($testVar, [agEnvScope]::User, $false)
+            $ret | Should -Be $testVar
+
+            [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::User)    | Should -BeFalse
+            [_agEnvCore]::IsEnvExist($testVar, [agEnvScope]::Current) | Should -BeTrue
+        }
+    }
+  }
+  ```
+
+  - `./scripts/libs/agEnvCore.ps1`
+
+  ```powershell
+  <#
+    .SYNOPSIS
+    Removes an environment variable in the specified scope and optionally syncs to Current.
+    .DESCRIPTION
+    Uses `_RemoveRaw` to remove in the given User or Machine scope.
+    If `$Sync` is `$true` and scope is not Current, also removes in Current (Process).
+    .PARAMETER Name
+    The name of the environment variable to remove.
+    .PARAMETER Scope
+    The scope ([agEnvScope] enum) in which to remove the variable.
+    Defaults to [agEnvScope]::User.
+    .PARAMETER Sync
+    If `$true` (default), also removes in Current (Process) when scope is not Current.
+    .OUTPUTS
+    Returns the variable name that was removed.
+    #>
+    static [string] Remove(
+        [string]    $Name,
+        [agEnvScope] $Scope = [agEnvScope]::User,
+        [bool]       $Sync  = $true
+    ) {
+        [ _agEnvCore ]::_RemoveRaw($Name, $Scope)
+        if ($Sync -and $Scope -ne [agEnvScope]::Current) {
+            [ _agEnvCore ]::_RemoveRaw($Name, [agEnvScope]::Current)
+        }
+        return $Name
+    }
+  ```
+
+  上記コードでテストが通ったので、コミットします。
 
 ## 3. ラッパー関数の導入とテスト性への配慮
 
