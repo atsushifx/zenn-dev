@@ -2,7 +2,7 @@
 //
 // @version   1.0.0
 // @date      2025-04-25
-// @author    atsushifx
+// @author    atsushifx <https://github.com/atsushifx>
 // @license   MIT
 //
 // @description<<
@@ -25,10 +25,12 @@
   // Include/Exclude patterns
   "includes": [
     "**/*.ts",
+    "**/*.js",
     "**/*.json",
     "**/*.jsonc",
     "**/*.yml",
     "**/*.yaml",
+    "**/*.md",
     "shared/configs/**/*",
   ],
   "excludes": [

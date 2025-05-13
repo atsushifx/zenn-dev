@@ -29,11 +29,19 @@ pre-commit:
 
     textlint:
       glob: "**/*.md"
-      run: pnpm run lint:text "{staged_files}"
+      run: >
+        textlint
+        --config ./configs/textlintrc.yaml
+        --cache
+        --cache-location .cache/textlint_cache
+        "{staged_files}"
 
     markdownlint:
       glob: "**/*.md"
-      run: pnpm run lint:markdown "{staged_files}"
+      run: >
+        markdownlint-cli2
+        --config ./configs/.markdownlint.yaml
+        "{staged_files}"
 
 # check commit message style
 commit-msg:
