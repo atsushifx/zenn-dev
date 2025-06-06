@@ -403,3 +403,39 @@ monorepo 内のサブリポジトリごとに統一したディレクトリを�
 **小紅**「お、お兄さま……っ。えっと、この記事……少しでも参考になったら、すっごく嬉しいですっ。こ、これからもプロジェクト、がんばってくださいねっ」
 
 **つむぎ**「センパイ〜！　読んでくれてありがとっ♪ ドキュメントって地味だけど、こうして書いてるとめっちゃスッキリするよね。つむぎもちゃんと手伝ったから、えらいでしょ？💮」
+
+## 参考資料
+
+### 公式サイト
+
+- [pnpm](https://pnpm.io/):
+  Node.js 向けの高速、省メモリなパッケージマネージャー
+
+- [Volta](https://volta.sh):
+  Node.js および関連パッケージマネージャーのバージョン管理ツール
+
+- [Lefthook](https://lefthook.dev):
+  Git フックを`yaml`形式のファイルで管理する Git フックマネージャー
+
+- [dprint](https://dprint.dev/):
+  高速なコードフォーマッタ
+
+- [Secretlint](https://github.com/secretlint/secretlint):
+  機密情報の静的解析ツール
+
+- [eget](https://github.com/zyedidia/eget):
+  GItHub 上の CLI ツールをインストールするインストーラ
+
+- [tsup](https://tsup.egoist.dev/):
+  TypeScript バンドラー
+
+### ドキュメント作成支援
+
+- [GitHub Actions](https://github.com/features/actios):
+  CI/CD プラットフォーム
+
+- [Tech Article Reviewer](https://github.com/atsushifx/tech-article-reviewer):
+  技術文書作成／レビュー用の AI プロンプト
+
+- [Easy Setup Tools Action (ESTA)](https://github.com/atsushifx/easy-setup-tools-action):
+  GitHub Actions 用の統合ツールインストーラ
