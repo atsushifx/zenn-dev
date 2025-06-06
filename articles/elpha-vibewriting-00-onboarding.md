@@ -2,7 +2,7 @@
 title: "一人プロジェクトなのに、オンボーディングドキュメントを書いてみた"
 emoji: "👤"
 type: "tech"
-topics: [ "一人プロジェクト", "ソロ開発", "オンボーディング", "monorepo", "海発環境" ]
+topics: [ "一人プロジェクト", "ソロ開発", "オンボーディング", "monorepo", "開発環境" ]
 published: false
 ---
 
@@ -18,6 +18,9 @@ atsushifx です。
 この記事を通して、オンボーディングドキュメントの書き方やプロジェクトの構成が、読者の開発の参考になれば幸いです。
 
 Enjoy!
+
+<!-- vale Google.WordList = NO -->
+<!-- vale Google.Latin = NO -->
 
 ## 📝 用語解説
 
@@ -82,6 +85,40 @@ ESTA を使えば、必要なツールをまとめてインストールできる
 - 初期化手順の複雑さへの対応: 開発ツールの多さによる煩雑さをスクリプトなどで低減する
 - AI 支援の活用: ChatGPT による手順整理と文書生成支援
 
+```mermaid
+flowchart TD
+  Start["プロジェクト開始"]
+
+  Start --> CheckEnv[環境確認]
+  CheckEnv -->|問題なし| CloneRepo["リポジトリクローン"]
+  CloneRepo --> GlobalTools["グローバルツール インストール"]
+  GlobalTools --> InstallDeps[依存パッケージ インストール]
+  InstallDeps --> SetupTools[開発ツール インストール]
+  SetupTools --> Verify["環境動作確認"]
+  Verify --> Develop["開発開始"]
+
+  CheckEnv -->|問題あり| FixEnv[環境修正]
+  FixEnv --> CheckEnv
+```
+
+コマンドの実行例は、次のようになります:
+
+```powershell
+# ESTAのリポジトリをクローン
+git clone https://github.com/atsushifx/easy-setup-tools-action.git
+
+# プロジェクトのルートディレクトリへ移動
+cd easy-setup-tools-action
+
+# 開発ツール一括インストールスクリプトを実行
+./scripts/installDevTools.ps1
+
+# 依存パッケージとローカル開発ツールをインストール
+pnpm install
+```
+
+上記のコマンドを実行して、`ESTA`開発用のツールをインストールします。
+
 #### ✅ 自分のための再現性
 
 プロジェクトを久しぶりに触ったとき、最初に戸惑うのは「どうやって開発環境を立ちあげるんだっけ?」という点です。
@@ -96,7 +133,7 @@ ESTA を使えば、必要なツールをまとめてインストールできる
 
 - Volta, pnpm などのパッケージマネージャー
 - lefthook, commitlint, secretlint などの Git フック/静的解析ツール
-- dprint, cSpell などの整形・スペルチェックツール
+- dprint, cSpell などのコード整形ツール・スペルチェックツール
 
 これらの設定は monorepo 全体で共通化されており、初期構築手順もやや複雑です。
 開発環境構築のためのオンボーディングドキュメントや、ツールをまとめてインストールするスクリプトを整備することで、手戻りなく作業を進めることができます。
@@ -150,8 +187,38 @@ You:
 | 06-08章 | 各種ツールの設定方法                 |
 | 09-12章 | 種別ごとのツールの説明               |
 
+```mermaid
+flowchart LR
+  Start["オンボーディングドキュメント"]
+
+  Start --> Chapter0["00-01章 開発前の要件"]
+  Start --> Chapter2["02章 パッケージマネージャーのインストール"]
+  Start --> Chapter3_5["03-05章 各種ツールのインストール"]
+  Start --> Chapter6_8["06-08章 各種ツールの設定方法"]
+  Start --> Chapter9_12["09-12章 種別ごとのツールの説明"]
+```
+
 このようにすることで、必要な章を参照するだけでセットアップが完了するようにしています。
 また、各章にはチェックリストを載せ、自身の理解度を確かめられるようにしています。
+
+たとえば「グローバル開発ツールのセットアップ」の場合は、次のようになります:
+
+```powershell
+# 一括インストールスクリプトの実行
+./scripts/installDevTools.ps1
+
+# Gitフックの登録
+lefthook install
+```
+
+上記の場合、インストールスクリプトで Lefthook, dprint といった開発ツールをグローバルにインストールします。
+その後、`Lefthook install`で Git フックが Lefthook 経由で実行するように設定します。
+
+結果、下記のコマンドでコミット前に行なわれる検査を手動で確かめることができます。
+
+```powershell
+lefthook run pre-commit
+```
 
 オンボーディングドキュメントを、単なる手順書ではなく「開発者が迷わないための地図」として設計した結果です。
 そして、オンボーディングドキュメントは、固定的な手順書ではありません。
@@ -198,7 +265,7 @@ ChatGPT 上にエルファ・小紅・つむぎという 3人のアシスタン�
 
 ### 3.1 全体構成と思想
 
-このプロジェクトの基本思想は、**「開発に必要なツールを、簡便かつ再現性のある方法で導入できるようにすること」**にあります。
+このプロジェクトの基本思想は、「**開発に必要なツールを、簡便かつ再現性のある方法で導入できるようにすること**」にあります。
 とくに GitHub Actions 上でのセットアップを想定し、実行環境を素早く立ちあげるためのツール導入を主な目的としています。
 
 #### 🎯 目的：ツール導入の自動化と省力化
@@ -228,17 +295,14 @@ ChatGPT 上にエルファ・小紅・つむぎという 3人のアシスタン�
 
 本プロジェクトの主なディレクトリは、次の通りです:
 
-```bash
-/
-|-- .github         # CI やテンプレート定義
-|-- docs            # オンボーディングなどの技術文書
-|-- packages        # サブパッケージ用
-|   `-- @ag-actions
-|   　　　`-- tool-installer/   # ツールインストールCoreパッケージ
-|
-|-- scripts         # インストールスクリプトなどの各種スクリプト
-`-- shared
-    `-- configs     # リポジトリ共通設定
+```mermaid
+graph TD
+  A[ルート] --> B[".github (CI/テンプレート)"]
+  A --> C["docs (技術文書)"]
+  A --> D["packages (サブパッケージ)"]
+  D --> D1["@ag-actions/tool-installer (ツールインストーラCore)"]
+  A --> E["scripts (開発補助スクリプト)"]
+  A --> F["shared/configs (共通設定)"]
 ```
 
 このような構成をとることで、以下のようなメリットがあります:
@@ -273,6 +337,19 @@ Monorepo は便利な反面、ツールの重複や設定の散逸が起こり�
 
 <!-- markdownlint-enable -->
 
+```mermaid
+graph TD
+  A[ルートディレクトリ]
+
+  A --> docs["docs (ドキュメント)"]
+  A --> scripts["scripts (スクリプト)"]
+  A --> packages["packages (サブリポジトリ)"]
+  A --> shared["shared (共有)"]
+
+  shared --> common["common (型、定数など)"]
+  shared --> configs["configs (共通設定ファイル)"]
+```
+
 #### リポジトリ戦略
 
 monorepo 内のサブリポジトリごとに統一したディレクトリを使用しています。これにより、補助スクリプトや開発ツールの設定が共通化できます。
@@ -289,6 +366,22 @@ monorepo 内のサブリポジトリごとに統一したディレクトリを�
 | tests          | コード     | インテグレーションテスト用コードを配置 |                                                      |
 
 <!-- markdownlint-enable -->
+
+```mermaid
+graph TD
+  Root["リポジトリルート"]
+
+  Root --> Cache[".cache\n(キャッシュ)"]
+  Root --> Configs["configs\n(設定ファイル)"]
+  Root --> Code["コード"]
+
+  subgraph Code
+    Modules["modules / libs\n(ビルド結果)"]
+    Shared["shared\n(型・定数共有)"]
+    Src["src\n(ソースコード)"]
+    Tests["tests\n(テストコード)"]
+  end
+```
 
 ### 3.4 設定ファイルの共通化と同期戦略
 
@@ -308,14 +401,24 @@ monorepo 内のサブリポジトリごとに統一したディレクトリを�
 
 #### 🔄 同期の仕組み
 
-1. **_直接継承・参照**
-   くの設定ファイルは、`extends` や `import` を用いて外部のファイルを参照できます。これらを用いて共通設定ファイルを参照し、設定を同期します
+1. **直接継承・参照**
+   多くの設定ファイルは、`extends` や `import` を用いて外部のファイルを参照できます。これらを用いて共通設定ファイルを参照し、設定を同期します
 
 2. **スクリプトによる物理コピー**
    外部ファイルの参照ができない設定ファイル (`secretlint.config.yaml`など) はスクリプトにより共通設定フィルの内容を、各リポジトリに反映します。このため、各リポジトリでの変更は、同期によって上書きされ削除されます
 
 3. **プロジェクトルートに配置**
    `dprint.jsonc`など一部のファイルは、自身の親ディレクトリを参照して設定ファイルを探します。これらのファイルはプロジェクトルートに配置した設定ファイルが共通の設定ファイルとなります
+
+```mermaid
+flowchart LR
+  SC["shared/configs (共通設定ファイル)"]
+  TSConfig["tsconfig.json など (extends/import 可能)"]
+
+  SC -- コピー/同期 --> secretlint
+
+  SC -- 参照 --> TSConfig
+```
 
 #### 📁 スケルトンとカスタムの共存
 
@@ -431,7 +534,7 @@ monorepo 内のサブリポジトリごとに統一したディレクトリを�
 
 ### ドキュメント作成支援
 
-- [GitHub Actions](https://github.com/features/actios):
+- [GitHub Actions](https://github.com/features/actions):
   CI/CD プラットフォーム
 
 - [Tech Article Reviewer](https://github.com/atsushifx/tech-article-reviewer):
