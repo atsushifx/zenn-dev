@@ -1,13 +1,14 @@
 # src: ./configs/gitleaks.toml
-### @(#) : detect secrets
+# @(#) : detect generic API key
 #
 # @version	1.0.0
 # @since	2025-05-05
 # @author	atsushifx <https://github.com/atsushifx>
-# @license	MIT
 #
 # @description<<
+#
 # secrets 検出ルールを追加・調整する場合は [[rules]] セクションを編集してください。
+#
 #<<
 
 title = "Gitleaks config"

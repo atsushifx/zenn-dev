@@ -1,9 +1,29 @@
-# ignore files for git
-
+## @(#) : gitignore for textlint filter (skip-frontmatter)
 #
-# ignore backup files
-$~*
-*~
+# @version	1.0.0
+# @author   atsushifx <https://github.com/atsushifx/>
+# @since    2025-04-11
+#
+# @description<<
+#
+# Git ignore rules for development template
+# Includes OS Specific  files, VSCode, general(logs, patch, ...)
+#
+#<<
+##		General
+#	OS specific files
+.DS_Store
+thumbs.db
+
+#	logs, patches
+*.log*
+*.diff
+*.patch
+
+# 	history, cache
+.history/
+.cache/
+**/*cache
 
 # temporary directory
 /temp/*
@@ -11,6 +31,14 @@ $~*
 
 #  ignore patch
 *.diff
+
+#	backup/swap/temp
+$~*
+~*
+*~
+*tmp
+*swp
+*lock
 
 
 ### VisualStudioCode
