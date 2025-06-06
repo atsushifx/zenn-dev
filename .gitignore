@@ -27,7 +27,6 @@ thumbs.db
 
 # temporary directory
 /temp/*
-!/temp/*md
 /temp/pr.*
 
 #  ignore patch
