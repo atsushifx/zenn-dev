@@ -3,7 +3,7 @@ title: "一人プロジェクトなのに、オンボーディングドキュメ
 emoji: "👤"
 type: "tech"
 topics: [ "一人プロジェクト", "ソロ開発", "オンボーディング", "monorepo", "開発環境" ]
-published: false
+published: true
 ---
 
 ## はじめに
