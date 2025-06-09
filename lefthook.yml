@@ -43,6 +43,17 @@ pre-commit:
         --config ./configs/.markdownlint.yaml
         "{staged_files}"
 
+# create default commit message
+prepare-commit-msg:
+  commands:
+    prepare-by-codegpt:
+      run: >
+        dotenvx run --
+        codegpt
+        commit
+        --no_confirm --preview
+        --file .git/COMMIT_EDITMSG
+
 # check commit message style
 commit-msg:
   parallel: true
