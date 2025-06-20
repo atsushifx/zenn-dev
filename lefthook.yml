@@ -47,12 +47,7 @@ pre-commit:
 prepare-commit-msg:
   commands:
     prepare-by-codegpt:
-      run: >
-        dotenvx run --
-        codegpt
-        commit
-        --no_confirm --preview
-        --file .git/COMMIT_EDITMSG
+      run: bash -c 'scripts/prepare-commit-msg.sh'
 
 # check commit message style
 commit-msg:
