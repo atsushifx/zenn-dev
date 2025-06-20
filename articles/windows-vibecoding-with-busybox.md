@@ -6,31 +6,31 @@ topics: [ "claude", "claudecode", "windows", "busybox", "vibecoding", ]
 published: false
 ---
 
+<!-- vale Google.Slang = NO --> <!-- vale Google.WordList = NO -->
+
 ## TL;DR
 
 次のステップで、Windows の PowerShell コンソール上で `claude code` を動かせるようになります（WSL 不要）。
 
 1. `scoop` で `busybox` をインストール
 2. Claude Code のマニュアルに従って `claude` をインストール
-3. `claude` が内部で呼ぶ `/usr/bin/bash` を `bash` に置き換えるよう指示（エイリアス設定など）
+3. 'claude' が内部で参照する `/usr/bin/bash` を、BusyBox の `bash` (実際には、`ash`) に切り替えるようプロンプトで指示
 
 以上で、WSL を使わなくても、Windows ネイティブの環境で `claude code` による `vibecoding` が可能になります。
-
-Enjoy!
 
 ## はじめに
 
 atsushifx です。
 
-自分も遅まきながら、Cluade Code に手を出しました。
-システム要件には、`WSL経由のWindows`と書いてあって Windows 上のターミナルは使えないと思っていましが、ちょっとの工夫で Windows ターミナル上でも動作させることができました。
+Claude Code に手を出しました。
+システム要件には「WSL 経由の Windows」と書かれており、Windows のターミナルは使えないと思っていました。
+しかし、少しの工夫で Windows ターミナル上でも動作させることができました。
 
-この記事では、上記の工夫を紹介し Windows ネイティブ上で Claude Code を使う方法を紹介します。
+この記事では、これらの工夫を紹介し、Windows ネイティブ環境で Claude Code を使う方法を説明します。
 
-WSL は難しくてちょっとという人でも、Windows ターミナル、PowerShell なら使えるという人もいるはずです。
-そういった人にとって、これが Claude Code を試すための助けになると幸いです。
+WSL が難しいと感じるかたでも、Windows ターミナルや PowerShell が使えるかたには役立つ内容です。
+この記事が、Claude Code を試すきっかけになれば幸いです。
 
-Claude Code を使って、バイブコーディングの世界を体験してみましょう。
 Enjoy!
 
 ### 想定読者
@@ -50,16 +50,16 @@ Enjoy!
   多数の Unix 系コマンドを 1つに統合した軽量バイナリ。Windows 上でも Linux 風のシェル操作を可能にする。
 
 - `scoop`:
-  Windows 向けのコマンドラインパッケージマネージャー。busybox や Node.js などの導入に使用。
+  Windows 向けのコマンドラインパッケージマネージャー。`busybox` や `Node.js` などの導入に使用。
 
 - `bash`:
   Unix/Linux で一般的なシェル。Claude Code が内部で `/usr/bin/bash` を前提にしているため互換対策が必要。
 
 - `ash`:
-  busybox が提供する軽量シェル。bash の代替として動作するが、一部非互換あり。
+  `busybox` が提供する軽量シェル。`bash` の代替として動作するが、一部非互換あり。
 
 - `pnpm`:
-  Node.js 向けのパッケージマネージャー。高速性と効率性に優れる。
+  `Node.js` 向けのパッケージマネージャー。高速性と効率性に優れる。
 
 - `Node.js`:
   JavaScript ランタイム。Claude Code や関連ツールの動作に必要。
@@ -74,15 +74,17 @@ Enjoy!
   プロジェクトの説明・使用方法などを記載する文書ファイル。Claude Code でも初期設定として活用。
 
 - `/usr/bin/bash`:
-  Claude Code が呼び出す想定の bash パス。Windows には存在しないため、エイリアスやパス調整が必要。
+  Claude Code が想定した、フルパスの`bash`。Windows には存在しないため、調整が必要。
 
 ## 1. Claude CodeとBusyBoxの概要
 
 ### 1.1 Claude Codeの概要
 
-Claude Code は、Anthropic 社が開発・提供する AI エージェント型のコーディング支援ツールです。CLI（コマンドラインインターフェース）で動作し、ユーザーが入力した自然言語ベースの命令に従って、プログラムコードを自律的に生成・修正・改善していく点が特徴です。
+Claude Code は、Anthropic 社が開発・提供する AI エージェント型のコーディング支援ツールです。
+`CLI` (コマンドラインインターフェース) で動作し、ユーザーの自然言語による命令に従い、プログラムコードを自律的に生成・修正・改善することが特徴です。
 
-このツールの特徴は「vibe coding」とも呼ばれる開発スタイルに最適化されていることにあります。vibe coding とは、エンジニアが明確な設計書や仕様書ではなく、思いつきや要求レベルの自然言語で指示を与えることで、AI そばが最適なコードを生成・提案してくれるスタイルです。
+このツールは「vibe coding (バイブコーディング)」と呼ばれる開発スタイルに最適化されています。
+バイブコーディングとは、明確な設計書や仕様書ではなく、思いつきや要求レベルの自然言語で指示を与えることで、AI が最適なコードを生成・提案するスタイルです。
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
@@ -97,10 +99,15 @@ Claude Code は実行結果や文脈に応じて「自ら考え、コードを�
 
 ### 1.2 BusyBoxの概要
 
-BusyBox は、「The Swiss Army Knife of Embedded Linux」とも呼ばれる、軽量で多機能な UNIX コマンド群の集合体です。
-1つのバイナリに sh, ls, cat など、UNIX/Linux で一般的に使われるコマンドを多数内包しており、1つのバイナリで POSIX 準拠の操作環境を再現できます。
+BusyBox は、`The Swiss Army Knife of Embedded Linux` とも呼ばれる、軽量で多機能な UNIX コマンド群の集合体です。
+1つのバイナリに、以下のような UNIX/Linux で一般的に使われるコマンドを多数内包しており、POSIX 準拠の操作環境を再現できます。
 
-BusyBox は、Windows 環境向けにも移植されたバージョンが提供されています。これにより、Windows 上でも多くの UNIX コマンドを PowerShell や cmd から利用できるようになります。
+- `sh` シェル
+- `ls` ファイルのリスト出力
+- `cat` ファイルの内容出力
+- その他の多数のコマンド
+
+Windows 環境向けにも移植されたバージョンが提供されていて、Windows 上でも多くの UNIX コマンドを PowerShell や cmd から利用できます。
 
 Claude Code は、内部でシェルスクリプトベースの処理 (特に bash) を実行する設計になっています。そのため、通常の Windows 環境ではそのまま動作しませんが、BusyBox を導入することで、UNIX 互換のシェルおよびコマンド環境を擬似的に提供できます。
 
@@ -132,13 +139,13 @@ Scoop を使った BusyBox の導入は、開発者にとって非常に軽量�
 ### 2.1 Claude Code の内部動作 (bash 呼び出し)
 
 Claude Code は、ユーザーからの自然言語による指示を受け取り、内部でさまざまなツールやスクリプトを呼び出しながら、反復的にコードを生成・評価・修正していく「エージェント型」の設計が特徴です。
-そのプロセスの中核を担っているのが、Unix 系の bash シェルをベースとしたスクリプト実行環境です。
+そのプロセスの中核を担っているのが、GNU bash シェルをベースとしたスクリプト実行環境です。
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 <!-- markdownlint-disable line-length -->
 
-Anthropic の公式ドキュメント ([Bash tool](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/bash-tool)) によると、Claude Code は内部に「bash CLI ツール」としての動作コンテキストを持ち、セッション中に渡されたコマンドやツール定義を維持したまま、継続的に実行します。
-たとえば、一度 export された環境変数や生成された一時ファイルが、以後のステップでも共有されるという仕組みです。
+Anthropic の公式ドキュメント「Bash tool」<https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/bash-tool> によると、Claude Code は内部で「bash CLI ツール」として動作する環境を持ち、セッション中に渡されたコマンドやツール定義を維持しつつ継続的に実行します。
+そのため、Windows ネイティブ環境では bash の呼び出しができず、通常は動作しません。
 
 [Best practices for agentic coding](https://www.anthropic.com/engineering/claude-code-best-practices) の記事にもある通り、Claude Code は Unix 環境を前提としており、以下のようなコマンド群を自然に使います:
 
@@ -158,7 +165,8 @@ Anthropic の公式ドキュメント ([Bash tool](https://docs.anthropic.com/en
 Claude Code が内部で実行する `bash` やその他の UNIX コマンド群は、一般的に POSIX に準拠した動作環境を前提としています。
 Windows 環境には標準でこれらのコマンド群は含まれておらず、たとえば `ls`, `cat` などは Linux と同様には使えません。
 
-しかし、BusyBox はこの問題をきわめて軽量に解決してくれるツールです。BusyBox の特徴は、1つのバイナリのなかに多数の UNIX コマンドを統合している点にあります。
+BusyBox はこの問題に対して軽量かつ実用的な解決手段を提供するツールです。
+BusyBox の特徴は、1つのバイナリのなかに多数の UNIX コマンドを統合している点にあります。
 `busybox.exe` という単一ファイルを実行することで、その引数に応じて `sh`, `ls`, `grep`, `mv` などをすべて模倣できます。
 
 ```powershell
@@ -180,11 +188,12 @@ Scoop 経由で BusyBox をインストールすると、こうしたコマン�
 
 Claude Code が内部で `bash` を呼び出す際、ハードコードされたパス `/usr/bin/bash` を指定している場合があります。
 しかし、Windows 環境はパス構造が違うため、このようなパスは存在しません。
+この問題は、Claude Code のプロンプト内で bash のパスを上書きすることで回避可能です。
 
-これは、次のプロンプトで回避します:
+次のプロンプトで回避します:
 
 ```markdown
-- use 'bash' instead of '/usr/bin/bash' for Windows bash execution
+- use 'bash' instead of '/usr/bin/bash' for Windows compatibility
 ```
 
 このようにして、内部で呼ばれる `bash` の参照先を、Windows 上に存在する `bash` (BusyBox による代用) へと置き換えることが可能です。
@@ -192,25 +201,25 @@ Claude Code が内部で `bash` を呼び出す際、ハードコードされた
 ## 3. Claude CodeをWSLなしでWindowsにセットアップする手順
 
 Claude Code は、Node.js 環境で動作する CLI アプリとして提供されています。
-Node.js と pnpm などのパッケージマネージャーを事前にインストールしておく必要があります。
+Node.js とパッケージマネージャー (ここでは pnpm) を事前にインストールしておく必要があります。
 
 ### 3.1 インストール環境の確認
 
 Node.js およびパッケージマネージャー (今回は pnpm)がインストール済みか確認します。
 それぞれ、バージョンを確認します。
 
-Node:
+Node.js のバージョン確認:
 
 ```powershell
 node -v
-v22.16.0
+# 例: v22.16.0
 ```
 
-pnpm:
+pnpm のバージョン確認:
 
 ```powershell
-> pnpm -v
-10.12.1
+pnpm -v
+# 例: 10.12.1
 ```
 
 それぞれ、バージョン番号が表示されればインストールされています。
@@ -229,11 +238,12 @@ success: installed pnpm@10.12.1 with executables: pnpm, pnpx
 PowerShell で次のコマンドを入力すると、Scoop 経由で BusyBox をインストールできます。
 
 ```powershell
-scoop install busybox -g
+scoop install busybox -g  # グローバルインストール（管理者権限が必要）
 ```
 
-`-g`オプションは、グローバルインストールを意味し、管理者権限でのインストールが必要です。
-インストールで、Scoop パス上に BusyBox の各コマンドのエイリアスが追加されます。
+> `-g`オプションはグローバルインストールを意味し、管理者権限での実行が必要です。
+> インストールで、Scoop パス上に BusyBox の各コマンドのエイリアスが追加されます。
+
 結果、PowerShell や cmd から、`bash`, `grep`などの UNIX 系コマンドが使えるようになります。
 
 例:
@@ -286,7 +296,7 @@ Claude Code を使用するには、最初に claude /login コマンドでロ�
 5. ターミナルに戻り、認証トークンを貼り付けます。
    ![認証トークン貼り付け](/images/articles/vibecoding-01/ss-claude_console_token.png)
 
-6．メッセージが表示されます。
+6．認証に成功すると「login successful.」と表示されます。
 `login successful.`とメッセージが表示されます。
 
 以上で、claude の認証は終了です。
@@ -307,7 +317,11 @@ Claude Code に対して、bash の呼び出しパスを明示的に `bash` (PAT
 ```
 
 この一文を冒頭や設定ブロックに加えることで、Claude Code の実行エージェントが `/usr/bin/bash` の代わりに `bash` を呼び出すようになります。
-これにより、Windows 上の BusyBox に含まれる `bash` (実体は `ash`) が実行され、コマンド全体が正常に動作します。
+これにより、Windows 上の BusyBox に含まれる `bash` が実行され、コマンド全体が正常に動作します。
+
+> BusyBoxで使われているシェルは`bash`ではなく`ash`、組み込み用Linuxなどに使われている軽量シェルです。
+> `ash`が`bash`として呼び出された場合は`bash`互換モードで動作しますが、完全な`bash`互換ではありません。
+> 高度な bashスクリプトは動作しない可能性があります。
 
 #### 🔄 補足: 実行パスの変更は現時点でユーザー指示による制御が中心
 
@@ -319,8 +333,8 @@ claude はプロジェクトで使用する設定を `./CLAUDE.md`に保存し�
 
 ### 4.1 `ESTA`における実行例
 
-[`ESTA` (Easy-Setup-Tools-Action)](https://github.com/atsushifx/esta) は、開発環境の初期セットアップや GitHub Actions の自動化を支援するために構築しているプロジェクトです。
-ここでは、その開発作業の一環として、Claude Code を活用したドキュメントの改善作業の事例を紹介します。
+[`ESTA`](https://github.com/atsushifx/esta)（Easy‑Setup‑Tools‑Action）は、開発環境の初期構築や GitHub Actions の自動化支援を目的としたプロジェクトです。
+このプロジェクトの開発作業において、Claude Code を活用し、ドキュメント整備や設定ファイルの編集などを効率化しています。
 
 #### 🧪 シナリオ：READMEにオンボーディングリンクを追加する
 
@@ -329,9 +343,11 @@ claude はプロジェクトで使用する設定を `./CLAUDE.md`に保存し�
 ---
 
 1. **プロンプトの入力**
-   Claude Code を実行し、次のようなプロンプトを与えます：
+   Claude Code を実行し、次のようなプロンプトを入力します:
 
-   - README.md,README.ja.md にオンボーディングドキュメント`docs/onboarding/README.ja.md`へのリンクを追加し、そのための説明文を挿入して
+   ```markdown
+   README.md,README.ja.md にオンボーディングドキュメント`docs/onboarding/README.ja.md`へのリンクを追加し、そのための説明文を挿入して
+   ```
 
 2. **To Do の設定**
    Claude は内部的に、実行すべきタスクの一覧を自動で抽出・表示します：
@@ -342,14 +358,16 @@ claude はプロジェクトで使用する設定を `./CLAUDE.md`に保存し�
    - ☐ Add onboarding link and description to README.ja.md
 
 3. **変更の提案**
-   Claude は具体的な差分の提案も行ないます。以下は `README.md` に追加された例です：
+   Claude はファイルの変更点として、以下のような `README.md` の差分を提案します:
+   ('+'が付いている行は、claude が追加した行です)
 
-   19
+   ```markdown
    20 + ### 📚 Getting Started
    21 +
    22 + For detailed setup instructions and development guidelines, see our [onboarding documentation](docs/onboarding/README.ja.md).
    23 +
-   24 ### 🚀 Usage
+
+   ```
 
 4. **変更の承認と適用**
    CLI 上で `Yes` を選択することで、提案された内容をそのままファイルに適用できます。
@@ -358,13 +376,14 @@ claude はプロジェクトで使用する設定を `./CLAUDE.md`に保存し�
    同様の手順で `README.ja.md` に対する編集提案も受け入れて反映させます。
 
 6. **セッションの終了**
-   作業が完了すると Claude から「完了しました」とメッセージが出るため、`quit` を入力して終了します。
+   作業が完了すると Claude から「完了しました」とメッセージが出ます
+   `quit` まはた `/exit` を入力して終了します。
 
 ---
 
 このように、Claude Code を使うことで「実装」だけでなく「ドキュメント整備」も自然言語ベースで効率よく進めることができます。構造化された ToDo の生成、差分の提案、ファイルの直接編集まで一貫して行なえるため、プロジェクト初期のセットアップや反復的な作業にも非常に有効です。
 
-## おわりに（既定）
+## おわりに
 
 この記事では、Windows ネイティブ環境、つまり WSL を使わない環境で Claude Code を使う方法を紹介しました。
 また、`ESTA`プロジェクトで、実際に Claude Code を使ってみた例も紹介しました。
@@ -379,19 +398,3 @@ Claude Code による「vibe coding」は、単なる補完を超えた「開発
 ぜひ、あなた自身の Windows ターミナル環境で Claude Code を体験し、その力を開発に活かしてみてください。
 
 それでは、Happy Hacking!
-
-## 参考資料
-
-### Webサイト
-
-- GitHub anthropics / claude-code: <https://github.com/anthropics/claude-code>:
-  claude code の GitHub リポジトリ
-
-- BusyBox for Windows: <https://frippery.org/busybox/>:
-  Windows で Linux/POSIT 系コマンドが使えるようになるツール
-
-- Scoop: <https://scoop.sh/>
-  Scoop パッケージマネージャー公式サイト
-
-- Claude Code チュートリアル <https://docs.anthropic.com/ja/docs/claude-code/tutorials>:
-  Claude Code のチュートリアル
