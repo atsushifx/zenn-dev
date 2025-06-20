@@ -49,6 +49,7 @@ prepare-commit-msg:
     prepare-by-codegpt:
       run: bash -c 'scripts/prepare-commit-msg.sh'
 
+
 # check commit message style
 commit-msg:
   parallel: true

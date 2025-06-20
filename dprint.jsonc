@@ -24,12 +24,14 @@
   "includes": [
     "**/*.js",
     "**/*.ts",
+    "**/*.js",
     "**/*.json",
     "**/*.jsonc",
     "**/*.yml",
     "**/*.yaml",
     // Documents
     "**/*.md",
+    "shared/configs/**/*",
   ],
   "excludes": [
     "**/node_modules/**",
