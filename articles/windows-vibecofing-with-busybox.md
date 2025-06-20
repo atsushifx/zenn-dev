@@ -41,6 +41,41 @@ Enjoy!
 - scoop や PowerShell による Windows 向けの CLI 環境構築に慣れているかた
 - WSL の使用が制限されている環境 (例：企業 PC) でも Claude Code を活用したいかた
 
+## 技術用語
+
+- `Claude Code`:
+  Anthropic 社が提供する対話型 AI による自然言語からのコード生成 CLI。REPL モードやインタラクティブ編集機能を備える。
+
+- `BusyBox`:
+  多数の Unix 系コマンドを 1つに統合した軽量バイナリ。Windows 上でも Linux 風のシェル操作を可能にする。
+
+- `scoop`:
+  Windows 向けのコマンドラインパッケージマネージャー。busybox や Node.js などの導入に使用。
+
+- `bash`:
+  Unix/Linux で一般的なシェル。Claude Code が内部で `/usr/bin/bash` を前提にしているため互換対策が必要。
+
+- `ash`:
+  busybox が提供する軽量シェル。bash の代替として動作するが、一部非互換あり。
+
+- `pnpm`:
+  Node.js 向けのパッケージマネージャー。高速性と効率性に優れる。
+
+- `Node.js`:
+  JavaScript ランタイム。Claude Code や関連ツールの動作に必要。
+
+- `vibecoding`:
+  Claude Code で提唱される、人間の「感覚」や「意図」を自然言語から即座にコードへ変換する開発スタイル。
+
+- `PowerShell`:
+  Windows 標準のコマンドラインシェル。今回の導入環境のベース。
+
+- `README.md`:
+  プロジェクトの説明・使用方法などを記載する文書ファイル。Claude Code でも初期設定として活用。
+
+- `/usr/bin/bash`:
+  Claude Code が呼び出す想定の bash パス。Windows には存在しないため、エイリアスやパス調整が必要。
+
 ## 1. Claude CodeとBusyBoxの概要
 
 ### 1.1 Claude Codeの概要
