@@ -366,4 +366,32 @@ claude はプロジェクトで使用する設定を `./CLAUDE.md`に保存し�
 
 ## おわりに（既定）
 
-- 本記事で実現できたことのまとめ
+この記事では、Windows ネイティブ環境、つまり WSL を使わない環境で Claude Code を使う方法を紹介しました。
+また、`ESTA`プロジェクトで、実際に Claude Code を使ってみた例も紹介しました。
+
+Claude Code の公式サイトでも、動作環境には WSL が前提とされていました。
+`bash`などの UNIX/Linux 系ツールを使うことが前提であるため、Windows では互換性の問題があったためです。
+しかし、BusyBox のような軽量な POSIX 互換ツールと Scoop の組み合わせにより、最小限の工夫でこうした障壁を越えることができます。
+
+Claude Code による「vibe coding」は、単なる補完を超えた「開発スタイルそのものの変革」をもたらす可能性を秘めています。
+日常的なプロトタイピングや、ドキュメント整備、反復的な開発タスクにおいても、高速かつ直感的なフィードバックループを実現できるでしょう。
+
+ぜひ、あなた自身の Windows ターミナル環境で Claude Code を体験し、その力を開発に活かしてみてください。
+
+それでは、Happy Hacking!
+
+## 参考資料
+
+### Webサイト
+
+- GitHub anthropics / claude-code: <https://github.com/anthropics/claude-code>:
+  claude code の GitHub リポジトリ
+
+- BusyBox for Windows: <https://frippery.org/busybox/>:
+  Windows で Linux/POSIT 系コマンドが使えるようになるツール
+
+- Scoop: <https://scoop.sh/>
+  Scoop パッケージマネージャー公式サイト
+
+- Claude Code チュートリアル <https://docs.anthropic.com/ja/docs/claude-code/tutorials>:
+  Claude Code のチュートリアル
