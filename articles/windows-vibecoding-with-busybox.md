@@ -3,7 +3,7 @@ title: "Claude CodeをWSLなしのWindows環境で実行する方法"
 emoji: "🛠️"
 type: "tech"
 topics: [ "claude", "claudecode", "windows", "busybox", "vibecoding", ]
-published: false
+published: true
 ---
 
 <!-- vale Google.Slang = NO --> <!-- vale Google.WordList = NO -->
