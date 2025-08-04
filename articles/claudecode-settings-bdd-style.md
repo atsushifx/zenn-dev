@@ -3,7 +3,7 @@ title: "Claude Codeにatsushifx式BDDを設定する"
 emoji: "🧪"
 type: "tech"
 topics: ["claudecode", "Claude", "BDD", "TDD"]
-published: false
+published: true
 ---
 
 ## tl;dr
