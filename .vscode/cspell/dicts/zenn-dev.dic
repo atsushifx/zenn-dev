@@ -32,6 +32,8 @@ releaseinfo
 resolv
 scannow
 SCRIPTROOT
+sdd
+SDD
 takao
 timesyncd
 trixie
@@ -40,6 +42,7 @@ UEFI
 unhold
 unifont
 unrar
+uvx
 vlgothic
 winver
 wsl
