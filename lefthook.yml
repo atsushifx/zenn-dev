@@ -46,9 +46,8 @@ pre-commit:
 # create default commit message
 prepare-commit-msg:
   commands:
-    prepare-by-codegpt:
-      run: bash -c 'scripts/prepare-commit-msg.sh'
-
+    prepare-message:
+      run: bash -c 'scripts/prepare-commit-msg.sh --git-buffer'
 
 # check commit message style
 commit-msg:
