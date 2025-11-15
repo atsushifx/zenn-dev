@@ -1,5 +1,6 @@
 # project.dic: dictionary for this workspace only
+actionlint
 Anthropic
 cli
+ghalint
 zenn
-
