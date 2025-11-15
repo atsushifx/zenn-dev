@@ -1,18 +1,10 @@
 // src: ./dprint.jsonc
 // @(#) : dprint configuration for project formatting
 //
-// @version   1.0.0
-// @since     2025-05-14
-// @author    atsushifx <https://github.com/atsushifx>
-// @license   MIT
+// Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
 //
-// @description<<
-//
-// Dprint configuration for formatting TypeScript, JSON, YAML, and Markdown files.
-// Uses WASM-based plugins with strict formatting rules.
-// Ensures consistent code and documentation formatting across the project.
-//
-// <<
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
 {
   "$schema": "https://dprint.dev/schemas/v0.json",
   // Global settings
@@ -24,21 +16,16 @@
   "includes": [
     "**/*.js",
     "**/*.ts",
-    "**/*.js",
     "**/*.json",
     "**/*.jsonc",
     "**/*.yml",
     "**/*.yaml",
     // Documents
     "**/*.md",
-    "shared/configs/**/*",
   ],
   "excludes": [
     "**/node_modules/**",
     "**/*lock",
-    "**/lib/**",
-    "**/module/**",
-    "**/dist/**",
     //
     "**lock.*",
     // Documents
@@ -47,9 +34,9 @@
   ],
   // Plugins
   "plugins": [
-    "https://plugins.dprint.dev/typescript-0.95.5.wasm",
-    "https://plugins.dprint.dev/json-0.20.0.wasm",
-    "https://plugins.dprint.dev/markdown-0.18.0.wasm",
+    "https://plugins.dprint.dev/typescript-0.95.12.wasm",
+    "https://plugins.dprint.dev/json-0.21.0.wasm",
+    "https://plugins.dprint.dev/markdown-0.20.0.wasm",
     "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm",
   ],
   // Language-specific settings

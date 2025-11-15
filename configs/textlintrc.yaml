@@ -1,18 +1,10 @@
 # src: ./configs/textlintrc.yaml
-## @(#) : yaml type textlint config
+# @(#) : textlint configuration for Japanese text linting
 #
-# @version	1.0.0
-# @author   atsushifx <https://github.com/atsushifx>
-# @since    2025-04-17
-# @license  MIT
+# Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
 #
-# @description<<
-#
-# This configuration file sets up textlint for Japanese technical writing.
-# It includes rules for sentence length, kanji usage, spacing, and more,
-# ensuring consistent and error-free documentation.
-#
-#<<
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
 
 plugins: {}
 filters:
@@ -22,33 +14,31 @@ filters:
       - .textlint/allowlist.yml
 rules:
   preset-ja-technical-writing:
-    sentence-length: 100
+    sentence-length:
+      max: 100
     max-kanji-continuous-len:
       max: 8
       allow: []
-    no-mix-dearu-desumasu: true
+    no-mix-dearu-desumasu: {
+      "preferInHeader": "である",
+      "preferInBody": "ですます",
+      "preferInList": "",
+    }
     ja-no-mixed-period:
-      periodMark: "。"
       allowPeriodMarks:
-        - "、"
         - ":"
-        - "】"
-        - "」"
-        - "💞"
-        - "♡"
-        - "♪"
-    no-exclamation-question-mark: false
+        - "✨"
     no-doubled-joshi:
       strict: false
+  "@textlint-ja/preset-ai-writing": true
   preset-ja-spacing:
     ja-space-between-half-and-full-width:
       space:
         - alphabets
         - numbers
-  "ja-hiraku": true
+  ja-hiraku: true
   common-misspellings: true
   ja-no-orthographic-variants: true
-  "@textlint-ja/textlint-rule-no-synonyms": true
   no-mixed-zenkaku-and-hankaku-alphabet: true
   "@proofdict/proofdict":
     dictURL: "https://atsushifx.github.io/proof-dictionary/"
