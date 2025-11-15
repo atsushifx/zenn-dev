@@ -12,7 +12,7 @@
 #
 #<<
 
-name: ci-lint
+name: "CI Lint Articles"
 
 # PR及び手動でAction実行
 on:
@@ -25,12 +25,17 @@ on:
 # 実行するAction
 jobs:
   lint-on-github:
-    name: lint on github
+    name: lint articles on GitHub
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          persist-credentials: false
 
       - name: Fetch main repository
         run: |
@@ -52,18 +57,18 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
         with:
           node-version: 20
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
         with:
           version: 10
 
       - name: Restore cache
         id: cache-restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           key: ${{ runner.os }}-cache
           path: |
@@ -74,8 +79,8 @@ jobs:
       - name: Install linters
         if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
         run: |
-          chmod +x ./scripts/ag-install-linter.sh
-          ./scripts/ag-install-linter.sh "--save-prod --reporter silent "
+          chmod +x ./scripts/install-doc-tools.sh
+          ./scripts/install-doc-tools.sh
           pnpm list
 
       - name: Lint text
@@ -94,7 +99,7 @@ jobs:
 
       - name: Always save cache
         id: cache-save
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
           path: |
