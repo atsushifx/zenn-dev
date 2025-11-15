@@ -86,17 +86,25 @@ GIT_COMMIT_MSG=".git/COMMIT_EDITMSG"
 FLAG_OUTPUT_TO_STDOUT=true
 
 ##
+# @description AI model name for commit message generation
+# @default gpt-5
+AI_MODEL="gpt-5"
+
+##
 # @description Parse command-line options
 # @arg $@ string Command-line arguments to parse
 # @option --git-buffer Output to Git commit buffer (.git/COMMIT_EDITMSG)
 # @option --to-buffer Short form for --git-buffer
+# @option --model MODEL Specify AI model name (default: gpt-5)
 # @option --help|-h Display usage information
 # @example
 #   parse_options "$@"
+#   parse_options --model claude-sonnet-4-5 --to-buffer
 # @exitcode 0 If parsing succeeds
-# @exitcode 1 If unknown option provided
+# @exitcode 1 If unknown option provided or --model without argument
 # @see FLAG_OUTPUT_TO_STDOUT
 # @see GIT_COMMIT_MSG
+# @see AI_MODEL
 parse_options() {
   while [[ $# -gt 0 ]]; do
     case $1 in
@@ -104,9 +112,19 @@ parse_options() {
         FLAG_OUTPUT_TO_STDOUT=false
         shift
         ;;
+      --model)
+        if [[ -z "${2:-}" ]]; then
+          echo "Error: --model requires a model name argument" >&2
+          exit 1
+        fi
+        AI_MODEL="$2"
+        shift 2
+        ;;
       --help|-h)
-        echo "Usage: $0 [--git-buffer|--to-buffer] [commit_msg_file]"
+        echo "Usage: $0 [--git-buffer|--to-buffer] [--model MODEL] [commit_msg_file]"
         echo "  --git-buffer, --to-buffer : Output to Git commit buffer"
+        echo "  --model MODEL             : Specify AI model (default: gpt-5)"
+        echo "                              Supported: gpt-*, o1-*, claude-*, haiku, sonnet, opus"
         echo "  default                    : Output to stdout"
         exit 0
         ;;
@@ -157,6 +175,47 @@ make_context_block() {
   echo "----- END DIFF -----"
 }
 
+
+##
+# @description Get CLI command for specified AI model
+# @arg $1 string AI model name (default: gpt-5)
+#   Supported models:
+#   - OpenAI: gpt-*, o1-* → codex exec
+#   - Anthropic: claude-*, haiku, sonnet, opus → claude -p
+#   - OpenCode: provider/model (e.g., github-copilot/grok-code-fast-1) → opencode run
+# @example
+#   cmd=$(get_model_command "gpt-5")
+#   cmd=$(get_model_command "claude-sonnet-4-5")
+#   cmd=$(get_model_command "github-copilot/grok-code-fast-1")
+# @stdout CLI command string for the specified model
+# @exitcode 0 If model is supported
+# @exitcode 1 If model is unsupported
+get_model_command() {
+  local model="${1:-gpt-5}"
+  local cmd=""
+
+  case "$model" in
+    # === OpenAI 系モデル ===
+    gpt-* | o1-* )
+      cmd="codex exec --model ${model}"
+      ;;
+
+    # === Anthropic (Claude) 系モデル ===
+    claude-* | haiku | sonnet | opus)
+      cmd="claude -p --model ${model}"
+      ;;
+
+    # === 未対応モデル ===
+    *)
+      echo "❌ Unsupported model: ${model}" >&2
+      return 1
+      ;;
+  esac
+
+  echo "$cmd"
+}
+
+
 ##
 # @description Generate commit message using Codex CLI
 # @arg $1 string Optional test message (for testing purposes)
@@ -176,12 +235,16 @@ generate_commit_message() {
     return 0
   fi
 
+  # get AI generator command
+  local cmd
+  cmd=$(get_model_command "${AI_MODEL}") || return 1
+
   local full_output
   full_output=$({
-    cat .claude/agents/commit-message-generator.md
+    cat "${REPO_ROOT}/.claude\agents\commit-message-generator.md"
     echo
     make_context_block
-  } | codex exec --model gpt-5
+  } | eval "$cmd"
   )
 
   # Extract content between === commit header === and === commit footer ===
@@ -197,7 +260,6 @@ generate_commit_message() {
   echo "$after_diff" | \
     sed -n '/^=== commit header ===/,/^=== commit footer ===/p' | \
     sed '1d;$d'
-
 }
 
 ##
