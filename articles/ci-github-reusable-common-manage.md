@@ -1562,11 +1562,51 @@ private リポジトリを参照する場合は、**認証方式の厳格**、**
 
 ## 4. よくあるエラーとその対処
 
+この章では、Reusable Workflows を使ううえでよくあるエラーと、それに帯する対処法についてまとめます。
+
 ### 4.1 設定エラー
 
-#### 1 “workflow was not found”
+#### (1) “workflow was not found”
 
-#### 2 ref の指定ミス (branch / tag / SHA)
+結論:
+`uses`: のパス／ref が誤っている。
+
+主な原因:
+
+- `Github/workflows/`下の相対パス誤り
+- private リポジトリで SHA が解決できない
+- タグ／ブランチが存在しない ref を指定
+
+検証条件:
+
+- `.github/.github/workflows/<file>.yml` と二重`.github` になっていない
+- GitHub 上で対象タグを確認 (`git tag -lP ではなく **GitHub Portal**で確認)
+- 参照対象が public / private どちらかをチェック
+
+推奨対策:
+
+- タグ固定 (`r1.0.0`) を使用
+- パスは必ず `.github/workflows/` を含める
+
+例:
+
+```yaml
+uses: org/.github/.github/workflows/ci-common-lint-ghalint.yml@r1.0.0
+```
+
+#### (2) ref の指定ミス (branch / tag / SHA)
+
+結論:
+private リポジトリを参照する場合、SHA 固定では失敗することがある。
+
+リスク:
+
+- 意図せぬ最新バージョン取得で CI が不安定化
+
+推奨:
+
+- **タグ固定**のみ使用
+- ブランチは PoC（検証時）に限定
 
 ### 4.2 権限エラー
 
