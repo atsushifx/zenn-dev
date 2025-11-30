@@ -42,4 +42,4 @@ jobs:
     name: Gitleaks Secret Scan
     permissions:
       contents: read
-    uses: atsushifx/.github/.github/workflows/ci-common-scan-gitleaks.yml@r1.0.0
+    uses: atsushifx/.github/.github/workflows/ci-common-scan-gitleaks.yml@r1.0.2
