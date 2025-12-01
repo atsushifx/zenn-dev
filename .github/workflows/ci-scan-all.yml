@@ -30,7 +30,7 @@ jobs:
     name: Actionlint
     permissions:
       contents: read
-    uses: atsushifx/.github/.github/workflows/ci-common-lint-actionlint.yml@r1.0.0
+    uses: atsushifx/.github/.github/workflows/ci-common-lint-actionlint.yml@r1.0.2
 
   ghalint:
     name: Ghalint
