@@ -36,7 +36,7 @@ jobs:
     name: Ghalint
     permissions:
       contents: read
-    uses: atsushifx/.github/.github/workflows/ci-common-lint-ghalint.yml@r1.0.0
+    uses: atsushifx/.github/.github/workflows/ci-common-lint-ghalint.yml@r1.0.2
 
   scan-gitleaks:
     name: Gitleaks Secret Scan
