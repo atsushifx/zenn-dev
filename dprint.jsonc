@@ -26,6 +26,9 @@
   "excludes": [
     "**/node_modules/**",
     "**/*lock",
+    "**/lib/**",
+    "**/module/**",
+    "**/dist/**",
     //
     "**lock.*",
     // Documents

@@ -1,13 +1,15 @@
-// src: shared/configs/commitlint.config.base.ts
-// @(#) : commitlint base configuration
+// src: configs/commitlint.config.js
+// @(#) : commitlint 基本設定
 //
-// Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
+// Copyright (c) 2025 atsushifx <http://github.com/atsushifx>
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+// type check for typescript
+
 // commit lint common configs
-const config = {
+const baseConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [2, 'always', [
@@ -35,4 +37,4 @@ const config = {
 };
 
 // export
-export default config;
+export default baseConfig;
