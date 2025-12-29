@@ -1,12 +1,11 @@
 {
   "name": "zenn-dev",
   "version": "1.0.1",
-  "main": "index.js",
   "description": "zenn.dev articles repo",
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
   "license": "MIT",
-  "type": "module",
   "scripts": {
+    "prepare": "bash ./scripts/prepare.sh",
     "lint:text": "textlint --config ./configs/textlintrc.yaml --cache --cache-location .cache/textlintcache ",
     "lint:text:fix": "pnpm run lint:text --fix ",
     "lint:markdown": "markdownlint-cli2 --config ./configs/.markdownlint.yaml ",
@@ -17,6 +16,6 @@
     "url": "https://github.com/atsushifx/zenn-dev.git"
   },
   "devDependencies": {
-    "zenn-cli": "^0.2.10"
+    "zenn-cli": "^0.2.11"
   }
 }

@@ -1,17 +1,11 @@
-// @(#) : cspell settings for ths workspa
-/**
- *
- * @version	1.0.0
- * @author  atsushifx <https://github.com/atsushifx/>
- * @since   2025-02-27
- * @license	MIT
- *
- * @description<<
- *
- * this files is cspell (Code Specll Checkr) settings for this workspace.
- *
- *<<
- */
+// src: .vscode/cspell.json
+// @(#) : cspell config for user-centric settings
+//
+//
+// Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json",
   "version": "0.2",
@@ -19,11 +13,12 @@
     "${env:XDG_CONFIG_HOME}/vscode/cspell.config.json"
   ],
   "language": "en",
-  "caseSensitive": true,
+  "caseSensitive": false,
+  "allowCompoundWords": true,
   "dictionaryDefinitions": [
     {
       "name": "zenn-dic",
-      "description": "dictionary for zenn.dev",
+      "description": "Zenn: user dictionary for writing techblog",
       "path": "./cspell/dicts/zenn-dev.dic",
       "addWords": true,
       "scope": "workspace"
@@ -45,6 +40,8 @@
     "vim",
     // user defined dictionaries
     "user-dic",
+    "textlint-dic",
     "zenn-dic"
-  ]
+  ],
+  "useGitignore": true
 }
