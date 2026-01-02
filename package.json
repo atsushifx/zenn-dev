@@ -1,11 +1,9 @@
 {
   "name": "zenn-dev",
   "version": "1.0.1",
-  "main": "index.js",
   "description": "zenn.dev articles repo",
   "author": "Furukawa, Atsushi <atsushifx@gmail.com>",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "lint:text": "textlint --config ./configs/textlintrc.yaml --cache --cache-location .cache/textlintcache ",
     "lint:text:fix": "pnpm run lint:text --fix ",
