@@ -270,6 +270,12 @@ get_model_command() {
       AI_COMMAND=("claude" "-p" "--model" "${model}")
       ;;
 
+    # Copilot models (copilot/model format)
+    copilot/*)
+      local copilot_model="${model#copilot/}"
+      AI_COMMAND=("copilot" "--model" "${copilot_model}")
+      ;;
+
     # OpenCode models (provider/model format)
     */*)
       AI_COMMAND=("opencode" "run" "--model" "${model}")
