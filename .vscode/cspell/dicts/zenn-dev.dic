@@ -1,7 +1,8 @@
 # project.dic: dictionary for this workspace only
 actionlint
-Anthropic
+anthropic
 cli
+deckrd
 ghalint
-reviewdog
+idd
 zenn
