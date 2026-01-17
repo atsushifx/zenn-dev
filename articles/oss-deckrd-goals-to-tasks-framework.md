@@ -3,7 +3,7 @@ title: "deckrd: 「やりたい」を実装可能なタスクに変えるドキ�
 emoji: "🧭"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["deckrd", "SDD", "仕様書駆動開発"]
-published: false
+published: true
 ---
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
