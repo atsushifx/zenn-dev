@@ -1,8 +1,11 @@
 # project.dic: dictionary for this workspace only
 actionlint
 anthropic
+ATOK
 cli
 deckrd
+devenv
 ghalint
 idd
+nviminfo
 zenn
