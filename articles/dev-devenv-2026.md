@@ -11,7 +11,8 @@ published: false
 ## はじめに
 
 atsushifx です。
-2026年時点の開発環境を紹介する記事が、近頃いくつか公開されています。
+2026年時点の開発環境を紹介する記事が、年初からいくつか公開されています。
+2026年時点の開発環境を紹介する記事が、年初からいくつか公開されています。
 本記事では、その流れにあわせて、現在使用している開発環境を紹介します。
 
 はじめに、他の開発者による開発環境の記事を紹介します。
@@ -80,7 +81,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
 
 ### 3. エディタ
 
-エディタは、`Visual Studio Code`, `Wz Editor 5`, `Nvim`の 3種類を適宜、使い分けています。
+エディタは、`Visual Studio Code (VS Code)`, `Wz Editor 5`, `Neovim`の 3種類を適宜、使い分けています。
 
 - `Visual Studio Code`
   メインで使っています。主な用途は、プログラミング時のコーディング、設定ファイルの編集、記事の執筆です。
@@ -96,7 +97,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
   `Wz Editor`の利点の 1つは、`Ctrl + B`による選択モードの On/Off と検索の組み合わせです。
   Wz では検索パターンが指定されていると、通常のページアップ／ページダウンが 1 ページアップではなく検索パターンが存在する行へのジャンプに変わります。
   選択モードと組み合わせることで、柔軟かつ高速にブロックしてのコピー・ペーストを実行できます。
-  もう 1つがヒストリカルバッファです。Wz は、コピー・ペースト用のバッファが履歴を持っていて、行1 をカット、行2 をカットと 2回カットした場合は、行2 のペースト、その次は行1 のペーストと履歴の順番でペーストします。これが、地味に便利で、簡単に行の入れ替えができます。
+  もう 1つがヒストリカルバッファです。Wz は、コピー・ペースト用のバッファが履歴を持っていて、行 1 をカット、行 2 をカットと 2回カットした場合は、行 2 のペースト、その次は行 1 のペーストと履歴の順番でペーストします。これが、地味に便利で、簡単に行の入れ替えができます。
   上記の機能が便利なために、現代のモダンなエディタに移行できないのが痛し痒しと言ったところです。
 
 - `Neovim`
@@ -115,7 +116,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
   後の設定ではデフォルトのままで、特に変更していません。
 
 - `Wz Filer (非公式ビルド)`
-  骨董品、その 2。`Wz Editor`のマクロ機能で作成された 2画面のファイラーです。
+  骨董品、その 2。`Wz Editor`のマクロ機能で作成された 2 画面のファイラーです。
   2000年制作と古いので、ファイルやディレクトリに絵文字が含まれているとアクセスやリネームができないという問題を抱えています。
   英数字および日本語には対応しているため、日常的な運用では大きな支障はありません。
   特徴としては、
@@ -133,7 +134,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
 
   3. ソースウィンドウへのコピー:
      地味に便利な機能が、この"ソースウィンドウにあわせる"機能です。
-     `Wz Filer`は 2画面ファイラーなので、2つのファイル一覧ウィンドウに別々のディレクトリを表示できます。
+     `Wz Filer`は 2 画面ファイラーなので、2つのファイル一覧ウィンドウに別々のディレクトリを表示できます。
      この機能は、2つの画面のディレクトリを同期します。
      同期した後に、相手側のディレクトリを子ディレクトリに移動すると、「ホームにあった設定ファイルを、`config`下に移動する」といった操作が簡単にできます。
 
@@ -147,7 +148,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
   日常的な開発作業を高速化するため、PowerShell にはかなりのカスタマイズを施しています。
 
   1. 履歴と補完
-     `PSReadLine` の Option を以下のように設定しています。
+     `PSReadLine` のオプションを以下のように設定しています。
 
      ```powershell
      Set-PSReadLineOption -PredictionSource HistoryAndPlugin
@@ -170,7 +171,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
        `CompletionPredictor`は、補完に予測機能を追加します。例えば、一覧にカレントディレクトリのドットファイル一覧を表示させたりします。
 
      - Carapace:
-       Carapace は PowerShell だけでなく、bash などの各種シェル環境に対応した補完エンジンです。UNIX 型ツールでのタブ補完で役立ちます。
+       Carapace は PowerShell だけでなく、bash などの各種シェル環境に対応した補完エンジンです。UNIX 系ツールでのタブ補完で役立ちます。
 
      - completion.d:
 
@@ -193,7 +194,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
 
      - `Execute-History`
        グローバル履歴を表示し、選択したコマンドを実行します。
-       `Ctrl+p`で実行できます。
+       `Ctrl + p`で実行できます。
 
   4. キーバインドの変更:
      PowerShell では、`Set-PSReadLineKeyHandler`でキーバインドを変更できます。
@@ -203,7 +204,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
 - `BusyBox`
   `BusyBox`をパッケージマネージャーの`Scoop` 経由でインストールしています。
   BusyBox は、Windows 上で UNIX 系ツール群を補完するための中核的なツールです。
-  実際、これのおかげで Windows 上で bash シェルスクリプトが動いています。
+  実際、これのおかげで Windows 上で bash シェルスクリプトがほぼ正しく動いています。
   Windows と Linux とで同じシェルスクリプトを動かすための鍵となるプログラムです。
 
 ### 6. パッケージマネージャー
@@ -212,7 +213,7 @@ OS は `Windows 11 Pro`、Launcher は `Open-Shell` + `Flow Launcher` を組み�
 
 - `WinGet`
   Microsoft 公式パッケージマネージャー。Windows Terminal などの Microsoft 公式アプリはもちろんですが、数多くの OSS 系ツールも提供されています。
-  特徴は、Option でインタラクティブなインストールが選べること、インストール先ディレクトリを指定できることです。
+  特徴は、オプションでインタラクティブなインストールが選べること、インストール先ディレクトリを指定できることです。
   また、`winget import`コマンドで指定したパッケージを一括インストールできるので、環境の再構築時に重宝します。
   ただし、`winget import` 実行時は、インストール先がデフォルトのディレクトリに固定されます。
   インストール先を指定したい場合は、手動でインストールするか、スクリプトを組む必要があります。
@@ -304,3 +305,13 @@ Windows という限られた環境での例となりますが、参考になれ
 2026年は、新たなツールを導入して、開発環境をもっと便利にしていきたいです。
 
 それでは、Happy Hacking!
+
+## 参考資料
+
+### Webサイト
+
+- [PowerShell機能追加スクリプト](https://gist.github.com/atsushifx/6f67dd0428710f2a4bcfab0cdb904ee4)
+  PowerShell で紹介した、自作機能追加スクリプトのソースコード
+
+- [dotfiles - Windows](https://github.com/atsushifx/dotfiles/tree/main-windows/windows)
+  自分用`dotfiles`の Windows 用設定ディレクトリ
