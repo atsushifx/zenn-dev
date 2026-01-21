@@ -77,11 +77,9 @@ jobs:
             .cache/*
 
       - name: Install linters
-        if: ${{ steps.cache-restore.outputs.cache-hit != 'true' }}
         run: |
           chmod +x ./scripts/install-doc-tools.sh
           ./scripts/install-doc-tools.sh
-          pnpm list
 
       - name: Lint text
         if: ${{ steps.changed-md.outputs.files != '' }}
