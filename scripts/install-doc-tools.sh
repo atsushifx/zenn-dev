@@ -21,15 +21,19 @@
 #   **Configuration:**
 #   - Copies .textlintrc.yaml, .markdownlint.yaml, .textlint/, and .vscode/ from templates
 #
+# @param --global (optional) Install packages globally instead of locally
 # @param TEMPLATE_DIR Template directory path (default: "./templates")
 # @param DESTINATION_DIR Destination root directory (default: ".")
 #
 # @example
 #   ./install-doc-tools.sh
-#   # Installs all writing tools with default template directory
+#   # Installs tools locally with default template directory
 #
-#   ./install-doc-tools.sh ./custom-templates .
-#   # Installs from custom template location
+#   ./install-doc-tools.sh --global
+#   # Installs tools globally
+#
+#   ./install-doc-tools.sh --global ./custom-templates .
+#   # Installs globally from custom template location
 #
 # @exitcode 0 Success
 # @exitcode 1 Error during installation
@@ -43,6 +47,21 @@ set -euo pipefail
 # ============================================================================
 # Parameters
 # ============================================================================
+
+OPT_GLOBAL_INSTALL=false
+
+# Parse options
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --global)
+      OPT_GLOBAL_INSTALL=true
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
 
 TEMPLATE_DIR="${1:-.\/templates}"
 DESTINATION_DIR="${2:-.}"
@@ -171,7 +190,8 @@ copy_linter_configs() {
 ##
 # @description Install packages via pnpm
 # @details
-#   Installs all provided packages globally using pnpm
+#   Installs all provided packages using pnpm.
+#   Uses global installation if OPT_GLOBAL_INSTALL flag is set, otherwise local installation.
 #
 # @param ... Package names to install
 #
@@ -191,7 +211,12 @@ install_pnpm_packages() {
         return 0
     fi
 
-    local cmd="pnpm add --global ${packages[*]}"
+    local cmd
+    if [[ "$OPT_GLOBAL_INSTALL" == "true" ]]; then
+        cmd="pnpm add --global ${packages[*]}"
+    else
+        cmd="pnpm add ${packages[*]}"
+    fi
     echo "📦 Installing via pnpm: $cmd"
     eval "$cmd"
     echo "✅ pnpm packages installed."
