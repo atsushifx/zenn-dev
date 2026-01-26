@@ -23,25 +23,25 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: 'weekly'
-      time: '04:00'
+      interval: "weekly"
+      time: "04:00"
       timezone: Asia/Tokyo
     open-pull-requests-limit: 10
     commit-message:
-      prefix: 'Common'
-      include: 'scope'
+      prefix: "Common"
+      include: "scope"
     labels:
-      - 'dependencies'
+      - "dependencies"
 
   - package-ecosystem: "npm" # pnpm included
     directory: "/"
     schedule:
       interval: "daily"
-      time: '04:00'
+      time: "04:00"
       timezone: Asia/Tokyo
     open-pull-requests-limit: 10
     commit-message:
-      prefix: 'Common'
-      include: 'scope'
+      prefix: "Common"
+      include: "scope"
     labels:
-      - 'dependencies'
+      - "dependencies"
