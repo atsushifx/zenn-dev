@@ -5,6 +5,7 @@ ATOK
 cli
 deckrd
 devenv
+gha
 ghalint
 idd
 nviminfo
