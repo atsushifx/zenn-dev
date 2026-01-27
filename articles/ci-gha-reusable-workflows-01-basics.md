@@ -323,14 +323,17 @@ Reusable Workflows は、**「何でも共通化するための道具」では�
 
 ## おわりに
 
-以上、この記事では、GitHub Actions で Reusable Workflows を、CI/CD の基盤という位置づけで整理しました。
-Reusable Workflows は、単に workflow を再利用する仕組みではなく、**権限・前提環境・品質判断といったCi/CDの責務を委譲できる**仕組みです。
+以上、この記事では、GitHub Actions における Reusable Workflows を、CI/CD の基盤という位置づけで整理しました。
 
-Reusable Workflow が機密情報などのリポジトリを横断して共通の責務を引き受けることで、各リポジトリはプロジェクト固有の間新事に集中できます。
-プロジェクト間共通の責務は Reusable Workflows、プロジェクトごとの責務はプロジェクト固有の workflow とすることで、CI/CD は予測可能で一貫したものになります。
+Reusable workflows は、単に workflow を再利用する仕組みではなく、**権限・前提環境・品質判断といった CI/CD の責務を委譲できる**仕組みです。
 
-このように、Reusable Workflows を活用することで、ソフトウェア開発の速度や品質が向上し、生産性が上がります。
-よろしければ、自身の CI/CD 環境に Reusable Workflows を取り入れ、生産性の向上を感じてください。
+Reusable workflows が、機密情報を含む処理などリポジトリを横断して共通の責務を引き受けることで、各リポジトリはプロジェクト固有の関心事に集中できます。
+
+プロジェクト間で共通の責務は Reusable Workflows に集約し、プロジェクトごとの責務はプロジェクト固有の workflow に委ねることで、
+CI/CD は予測可能で一貫したものになります。
+
+このように、Reusable Workflows を活用することで、ソフトウェア開発の速度や品質が向上し、生産性を高めることができます。
+よろしければ、自身の CI/CD 環境に Reusable Workflows を取り入れ、その効果を体感してみてください。
 
 それでは、Happy Hacking!
 
