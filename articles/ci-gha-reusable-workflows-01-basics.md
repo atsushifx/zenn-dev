@@ -145,8 +145,9 @@ Workflow Templates は、次の用途に適しています。
 
 ### 2.3 Reusable Workflows
 
-Reusable Workflows は、GitHub Workflow の workflow,job を再利用する仕組みです。
-重要なのは、workflow の一連の処理を提供するだけでなく、権限や`secrets`といっ workflow に関するものをまとめて提供する点です。
+Reusable workflows は、GitHub Actions における workflow や job を再利用する仕組みです。
+重要なのは、workflow の一連の処理を提供するだけでなく、権限や`secrets`といった workflow に関するものをまとめて提供する点です。
+このため、実行環境・権限・品質基準といった判断は、reusable workflow 側が引き受けます。
 
 Reusable Workflows の主な特徴は次のとおり:
 
@@ -159,8 +160,7 @@ Reusable Workflows の主な特徴は次のとおり:
 - バージョン固定が可能
   `@ref` (tag / SHA) 指定により、意図しない変更を防げる
 
-Reusable Workflows では workflow そのものをまとめるため、実行環境、権限、品質基準は reusable workflow 側が判断します。
-これは単なる再利用ではなく、**CI/CDの責務の委譲**となります。
+Reusable workflows の使用は、単なる再利用ではなく **CI/CD の責務の委譲** となります。
 
 CI/CD 基盤の共通化を考えた場合、Reusable Workflows では次のような点を実現できます。
 
@@ -168,9 +168,9 @@ CI/CD 基盤の共通化を考えた場合、Reusable Workflows では次のよ�
 - 品質基準をコードとして集中管理できる
 - 更新・修正を「配布」ではなく「参照切り替え」で済ませられる
 
-### 2.4 再利用における比較表
+### 2.4 再利用の仕組み比較
 
-ここまで見てきたように、 3つの仕組みは「再利用」の対象と責務の切り出し方本質的に異なります。
+ここまで見てきたように、 3つの仕組みは「再利用」の対象と責務の切り出し方が本質的に異なります。
 それぞれの特徴の向き／不向きをまとめると次の表となります。
 
 | 観点                 | Reusable Workflows | Composite Actions  | Workflow Templates |
@@ -180,7 +180,7 @@ CI/CD 基盤の共通化を考えた場合、Reusable Workflows では次のよ�
 | job 構造の隠蔽       | 可能               | 不可               | 不可               |
 | runner 指定の集約    | 可能               | 不可               | 初期のみ           |
 | 権限 (`permissions`) | 基盤側で統制可能   | 呼び出し側依存     | 呼び出し側依存     |
-| secrets の責務分離   | 可能               | 不可               | 不可               |
+| `secrets` の責務分離 | 可能               | 不可               | 不可               |
 | 更新の反映           | 即時（参照先更新） | 即時（参照先更新） | 手動               |
 | CI/CD 基盤への適性   | ◎                  | ×                  | ×                  |
 
