@@ -29,6 +29,30 @@ CI/CD では、最低限として次のような検査が欠かせません。
 > 本記事では、見出しや分類ラベルでは Title Case（Reusable Workflows）を用い、
 > 機能として言及する場合は GitHub Docs に倣い Reusable workflows と表記します。
 
+## 用語集
+
+この記事で扱う主要な技術用語を解説します。
+この解説を頭に入れておくことで、記事本文の理解に役立ちます。
+
+- `Reusable Workflows`:
+  GitHub Actions において、workflow や job 単位の処理を、権限や実行環境を含めて再利用できる仕組み。
+
+- `Composite Actions`:
+  複数の step を 1 つの action として再利用するための仕組み。job や workflow は再利用対象外。
+
+- `Workflow Templates`:
+  新規 workflow 作成時に用いるテンプレート。生成後は各リポジトリで独立して管理される。
+
+- `Caller Workflow`:
+  Reusable Workflows を呼び出す側の workflow。
+
+- `permissions`:
+  GitHub Actions におけるトークン権限設定。Reusable Workflows では基盤側で権限を定義・統制でき、最小権限設計を一貫して適用できる。
+
+- `secrets: inherit`:
+  呼び出し元 workflow の `secrets` を reusable workflow 側に引き継ぐ指定方法。
+  利用には呼び出し元と参照先の権限設計を理解したうえで、意図しない権限昇格を避けるための明示的な判断が必要となる。
+
 ## 1. Reusable Workflows とは何か
 
 この章では、GitHub Actions における Reusable workflows を、他の再利用手法と何が異なるのかという観点から整理します。
@@ -52,7 +76,8 @@ Reusable workflows には、次の特徴があります。
 ### 1.2 何が「workflow」レベルで再利用されるのか
 
 Reusable workflows で再利用されるのは、**workflow全体、あるいは job という実行境界**です。
-ここでいう **workflow** は GitHub Actions における一連の処理を指し、**job**は、その中で定義される個々の実行単位を指します。
+GitHub Actions でいう **workflow** は 1つのファイルで示される一連の処理を指します。
+**job**は、workflow 内で定義される個々の実行単位を指します。
 
 これには、次が含まれます。
 
@@ -88,19 +113,22 @@ Composite actions は、workflow 内の複数の step を 1つの action とし�
 Reusable workflows と違い、再利用できる単位は**stepに限定**されています。
 job や workflow 全体は再利用できません。
 
-以下に Composite Actions の特徴と制約を挙げます。
+以下に Composite Actions の特徴を挙げます。
 
-- 特徴:
-  - 再利用単位は step (job や workflow ではない)
-    `uses:` により action として呼び出せる
-  - job 構成・runner・権限は呼び出し側が保持
-    `runs-on` や `permissions` は composite action 側では定義できない
-  - ローカル処理の共通化に向いている
-    lint 実行、フォーマット、ビルド補助などの定型処理をまとめやすい
-- 制約:
-  - job の分割や依存関係を隠蔽できない
-  - 権限設計を action 側に閉じ込められない
-  - CI/CD 全体の合否判断や品質基準を統一できない
+- 再利用単位は step (job や workflow ではない)
+  `uses:` により action として呼び出せる
+
+- job 構成・runner・権限は呼び出し側が保持
+  `runs-on` や `permissions` は composite action 側では定義できない
+
+- ローカル処理の共通化に向いている
+  lint 実行、フォーマット、ビルド補助などの定型処理をまとめやすい
+
+逆に制約は、次の通りです。
+
+- job の分割や依存関係を隠蔽できない
+- 権限設計を action 側に閉じ込められない
+- CI/CD 全体の合否判断や品質基準を統一できない
 
 Composite actions が向いているのは、次のような処理です。
 
@@ -225,7 +253,7 @@ Reusable Workflows が担うべきなのは、次のような基盤固有の責�
 - 合否の意味づけ
   どの失敗を致命的とし、どこまでを許容するかという基準の統一
 
-これらの責務は、プロジェクトごとに差異を持たせる合理性がほとんどありません。
+これらの責務は、実行結果やセキュリティ要件が共通であるため、プロジェクトごとに差異を持たせる合理性はほとんどありません。
 一方で、設定ミスや判断の揺れが直接リスクにつながるため、各リポジトリに任せるのは不適切です。
 
 Reusable Workflows では、これらの責務を呼び出し側からは **「触れられない前提」**として提供できます。
@@ -343,3 +371,6 @@ CI/CD は予測可能で一貫したものになります。
 
 - ワークフローを再利用する: <https://docs.github.com/ja/actions/how-tos/reuse-automations/reuse-workflows>
   GitHub 公式による Reusable Workflows の説明
+
+- ワークフロー構成の再利用: <https://docs.github.com/ja/actions/reference/workflows-and-actions/reusing-workflow-configurations>
+  既存の workflow を reusable workflow として使用する方法
