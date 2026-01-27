@@ -6,13 +6,15 @@ topics: ["GitHub Workflow", "GitHub Actions", "CI/CD", "Reusable Workflows"]
 published: false
 ---
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 ## はじめに
 
 atsushifx です。
-GitHub 上の複数のリポジトリを使用してソフトウェア開発をしています。
+この記事では、GitHub 上の複数リポジトリで CI/CD 基盤を共通化し、**品質を安定して確保するための考え方**を説明します。
 
-複数プロジェクトを並行して開発するなかで重要になるのが CI/CD による品質確保です。
-そのため、[GitHub Actions](https://docs.github.com/ja/actions) を CI/CD の基盤として活用しています。
+複数のリポジトリを並行して運用する場合、CI/CD による一貫した品質確保が重要になります。
+そのため、リポジトリを横断して同一の検査フローを適用できる [GitHub Actions](https://docs.github.com/ja/actions) を CI/CD の基盤として活用します。
 
 CI/CD では、最低限として次のような検査が欠かせません。
 
@@ -20,20 +22,26 @@ CI/CD では、最低限として次のような検査が欠かせません。
 - GitHub Actions の設定自体が正しいかどうかのチェック
 
 これらを各プロジェクトごとに個別管理すると、設定のばらつきや更新漏れが起きやすくなります。
-この連載では **Reusable Workflows を使って CI/CD 基盤を共通化する考え方**を、段階的に整理していきます。
-また、この記事では概要と位置づけを扱い、具体的な設計・実装は後続回で解説します。
+この連載では **Reusable workflows を使って CI/CD 基盤を共通化する考え方**を、段階的に整理していきます。
+この記事では、Reusable workflows の概要と位置づけを扱います。具体的な設計や実装については後の回で説明します。
+
+> Note:
+> 本記事では、見出しや分類ラベルでは Title Case（Reusable Workflows）を用い、
+> 機能として言及する場合は GitHub Docs に倣い Reusable workflows と表記します。
 
 ## 1. Reusable Workflows とは何か
 
-この章では、GitHub Actions で使用できる機能 Reusable Workflows について説明します。
+この章では、GitHub Actions における Reusable workflows を、他の再利用手法と何が異なるのかという観点から整理します。
+とくに、「どの実行単位が、どこまで再利用されるのか」に注目します。
 
 ### 1.1 Reusable Workflows による workflow の再利用
 
-Reusable Workflows は GitHub Actions で使用している workflow を再利用するための仕組みです。
+Reusable workflows は GitHub Actions で使用している workflow を再利用するための仕組みです。
 再利用したい workflow を reusable workflow として設定することで、他の workflow から呼び出せるようにします。
 
-従来の再利用手法と違い、Reusable Workflows は**実行単位 (Job 構成・runner・権限設定)**を 1つの単位として外部から呼び出せます。
-Reusable Workflows には、次の特徴が有ります。
+従来の再利用手法 (Composite Actions など) と異なり、Reusable workflows では**workflowそのもの**をまとめて外部から呼び出せます。
+このため、Reusable workflows には、job 構成・runner・権限設定が含まれます。
+Reusable workflows には、次の特徴があります。
 
 - CI/CD に必要な検査フローを 1カ所で定義し、複数リポジトリから参照
 - 権限 (`permissions`)や `secrets` の扱いを基盤側で一元管理
@@ -43,7 +51,9 @@ Reusable Workflows には、次の特徴が有ります。
 
 ### 1.2 何が「workflow」レベルで再利用されるのか
 
-Reusable Workflows で再利用されるのは、**workflow / job という実行境界そのもの**です。
+Reusable workflows で再利用されるのは、**workflow全体、あるいは job という実行境界**です。
+ここでいう **workflow** は GitHub Actions における一連の処理を指し、**job**は、その中で定義される個々の実行単位を指します。
+
 これには、次が含まれます。
 
 - job 構成
@@ -61,38 +71,28 @@ Reusable Workflows で再利用されるのは、**workflow / job という実�
 - 失敗時の意味づけ
   fail-fast、continue-on-error、基盤としての合否判断基準
 
-「リポジトリをチェックアウトし、lint や機密情報のスキャンなどの処理をし、結果を返す」という一連の処理が、Reusable Workflows では可能です。
+「リポジトリをチェックアウトし、lint や機密情報のスキャンを実行し、結果を返す」という一連の処理が、Reusable workflows では 1つの処理として参照できます。
+上記の一連の処理が、**workflow あるいは job 単位の設計判断としてまとめられ、再利用**されます。
 
 これらは YAML 上では独立した記述に見えますが、**CI/CD 基盤としては一体の設計判断**です。
-呼び出し側では、この設計判断を参照して共有します。
+呼び出し側の workflow (caller workflow)では、この判断結果を参照するだけですみます。
 
-> 重要なのは、これらは単純な「lint の実行」や「scan ツールの呼び出し」ではなく、
-> **権限、環境、品質基準を決定する*+
-> という、CI/CD の責務そのものということです。
-
-すなわち、呼び出しワークフロー側の責務は次のように単純なものになります。
-
-- プロジェクト固有の条件 (トリガー、入力値) の設定
-- セキュリティや品質判断は基盤側に委譲
-- 更新は参照先を切り替えるだけで反映
-
-Reusable Workflows は **再利用可能なCI/CDの責務**を提供する仕組みであり、構造として CI/CD 基盤の共通化に向いています。
-
-## 2. GitHub Actions における再利用の選択肢
+## 2. GitHub Actions における再利用の仕組み
 
 GitHub Actions には、設定や処理を再利用するための仕組みが複数用意されています。
-この章では、代表的な 3つの選択肢を紹介し、それぞれの設計思想と適用範囲を名確認します。
+この章では、代表的な 3つの仕組みを紹介し、それぞれの設計思想と適用範囲を確認します。
 
 ### 2.1 Composite Actions
 
-Composite Actions は、workflow 内の複数の step を 1つの action としてまとめる仕組みです。
-これにより、「ツールのインストール」「ビルドの実行」のような定型的な処理をまとめて外部化できます。
+Composite actions は、workflow 内の複数の step を 1つの action としてまとめる仕組みです。
+Reusable workflows と違い、再利用できる単位は**stepに限定**されています。
+job や workflow 全体は再利用できません。
 
 以下に Composite Actions の特徴と制約を挙げます。
 
 - 特徴:
-  - 再利用単位は step
-    `uses:` action が呼び出せる。job や workflow ではない
+  - 再利用単位は step (job や workflow ではない)
+    `uses:` により action として呼び出せる
   - job 構成・runner・権限は呼び出し側が保持
     `runs-on` や `permissions` は composite action 側では定義できない
   - ローカル処理の共通化に向いている
@@ -102,7 +102,7 @@ Composite Actions は、workflow 内の複数の step を 1つの action とし�
   - 権限設計を action 側に閉じ込められない
   - CI/CD 全体の合否判断や品質基準を統一できない
 
-Composite Actions ガムいているのは、次のような処理です。
+Composite actions が向いているのは、次のような処理です。
 
 - 同一 Job 内で繰り返される処理の削減
 - workflow の可読性向上
@@ -113,14 +113,16 @@ Composite Actions ガムいているのは、次のような処理です。
 
 ### 2.2 Workflow Templates
 
-Workflow Templates はあらかじめテンプレートとして用意された workflow 定義をもとに新しい workflow を作成する仕組みです。
-新しくプロジェクトを作成する際に、推奨された構成の workflow を即座に配置できるのが特徴です。
+Workflow templates はあらかじめテンプレートとして用意された workflow 定義をもとに新しい workflow を作成する仕組みです。
+Reusable workflows や Composite actions と違い、各リポジトリに独立した workflow として記述されるのが特徴です。
+通常、新しいプロジェクトで GitHub Actions を初期設定する際に、テンプレートによって体系的な処理を即座に配置する目的で利用されます。
 
 Workflow Templates の主な特徴と限界は次の通りです。
 
 - 特徴:
   - 再利用単位は workflow (コピー)
-    テンプレートから生成された workflow は、各リポジトリに独立して存在
+    テンプレートから生成された workflow は、各リポジトリにコピーされ、独立して存在する
+    以降の判断や更新は、それぞれのリポジトリに委ねられる
   - 初期統一に強い
     命名規則、基本構造、推奨ジョブ構成を揃えやすい
   - 導入コストが低い
