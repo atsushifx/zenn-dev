@@ -374,3 +374,30 @@ CI/CD は予測可能で一貫したものになります。
 
 - ワークフロー構成の再利用: <https://docs.github.com/ja/actions/reference/workflows-and-actions/reusing-workflow-configurations>
   既存の workflow を reusable workflow として使用する方法
+
+## Appendix
+
+### 付録A: Reusable Workflows を基盤として使う際のアンチパターン
+
+1. DRY 目的で導入
+   - 症状: 入力が肥大、if 条件だらけ
+   - 対処:「判断」は呼び出し側で行い、処理のみを Composite actions に委譲する
+
+2. プロジェクト差分を吸収しすぎる
+   - 症状: Reusable Workflows が読めない
+   - 対処: 差分は Caller Workflow へ返す
+
+3. バージョン固定をしない
+   - 症状: 予期せぬ破壊的変更
+   - 対処: @tag or @sha を必須化
+
+### 付録B: 採用判断チェックリスト
+
+- [ ] 権限設計を各リポジトリに任せたくない
+- [ ] 合否基準を一箇所で決めたい
+- [ ] 更新を「配布」ではなく「参照」で済ませたい
+- [ ] プロジェクト差分は入力で表現できる
+
+<!-- textlint-disable -->
+
+3つ以上 YES → Reusable Workflows を検討すべき
