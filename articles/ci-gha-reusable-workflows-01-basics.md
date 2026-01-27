@@ -26,8 +26,8 @@ CI/CD では、最低限として次のような検査が欠かせません。
 この記事では、Reusable workflows の概要と位置づけを扱います。具体的な設計や実装については後の回で説明します。
 
 > Note:
-> 本記事では、見出しや分類ラベルでは Title Case（Reusable Workflows）を用い、
-> 機能として言及する場合は GitHub Docs に倣い Reusable workflows と表記します。
+> 本記事では、見出しでは **Reusable Workflows**、
+> 機能として言及する場合は **Reusable workflows** と表記します (GitHub Docs に準拠)。
 
 ## 用語集
 
@@ -109,22 +109,17 @@ GitHub Actions には、設定や処理を再利用するための仕組みが�
 
 ### 2.1 Composite Actions
 
-Composite actions は、workflow 内の複数の step を 1つの action としてまとめる仕組みです。
-Reusable workflows と違い、再利用できる単位は**stepに限定**されています。
-job や workflow 全体は再利用できません。
+Composite actions は、workflow 内の複数の step を 1つの action としてまとめ、**同一 job 内で繰り返される処理を再利用するための仕組み**です。
+この仕組みでは、再利用の対象は step に限定されます。
+そのため、job 構成や runner、権限設定といった workflow 全体の設計判断は、呼び出し側が引き続き担います。
 
-以下に Composite Actions の特徴を挙げます。
+主な特徴は、次のとおりです。
 
-- 再利用単位は step (job や workflow ではない)
-  `uses:` により action として呼び出せる
-
+- 再利用単位は step
 - job 構成・runner・権限は呼び出し側が保持
-  `runs-on` や `permissions` は composite action 側では定義できない
-
 - ローカル処理の共通化に向いている
-  lint 実行、フォーマット、ビルド補助などの定型処理をまとめやすい
 
-逆に制約は、次の通りです。
+一方、制約は、次のとおりです。
 
 - job の分割や依存関係を隠蔽できない
 - 権限設計を action 側に閉じ込められない
@@ -132,7 +127,7 @@ job や workflow 全体は再利用できません。
 
 Composite actions が向いているのは、次のような処理です。
 
-- 同一 Job 内で繰り返される処理の削減
+- 同一 job 内で繰り返される処理の削減
 - workflow の可読性向上
 - 小さな処理単位の再利用
 
@@ -145,7 +140,7 @@ Workflow templates はあらかじめテンプレートとして用意された 
 Reusable workflows や Composite actions と違い、各リポジトリに独立した workflow として記述されるのが特徴です。
 通常、新しいプロジェクトで GitHub Actions を初期設定する際に、テンプレートによって体系的な処理を即座に配置する目的で利用されます。
 
-Workflow Templates の主な特徴と限界は次の通りです。
+Workflow Templates の主な特徴と限界は次のとおりです。
 
 - 特徴:
   - 再利用単位は workflow (コピー)
@@ -297,7 +292,7 @@ Reusable Workflows が最も力を発揮するのは、**CI/CD における「�
   コードの品質チェック、ファイル名の命名規則のような定型的で包括的な処理を部品化し、それぞれのリポジトリに提供できる
 
 - 権限と `secrets` の設計集約
-  `permissions の最小権限設計や secrets の受け渡しルールを、 呼び出し側から切り離して管理できる
+  `permissions` の最小権限設計や `secrets` の受け渡しルールを、 呼び出し側から切り離して管理できる
 
 - 合否基準の統一
   fail-fast の有無、失敗の重要度の判断を CI/CD 基盤として一貫して適用できる
@@ -355,12 +350,13 @@ Reusable Workflows は、**「何でも共通化するための道具」では�
 
 Reusable workflows は、単に workflow を再利用する仕組みではなく、**権限・前提環境・品質判断といった CI/CD の責務を委譲できる**仕組みです。
 
-Reusable workflows が、機密情報を含む処理などリポジトリを横断して共通の責務を引き受けることで、各リポジトリはプロジェクト固有の関心事に集中できます。
+この仕組みが、機密情報を含む処理などリポジトリを横断して共通の責務を引き受けることで、各リポジトリはプロジェクト固有の関心事に集中できます。
 
 プロジェクト間で共通の責務は Reusable Workflows に集約し、プロジェクトごとの責務はプロジェクト固有の workflow に委ねることで、
 CI/CD は予測可能で一貫したものになります。
 
-このように、Reusable Workflows を活用することで、ソフトウェア開発の速度や品質が向上し、生産性を高めることができます。
+このように、Reusable Workflows を活用することで、ソフトウェア開発の速度や品質を向上させることができます。
+その結果、CI/CD 全体の一貫性が高まり、開発の生産性向上につながります。
 よろしければ、自身の CI/CD 環境に Reusable Workflows を取り入れ、その効果を体感してみてください。
 
 それでは、Happy Hacking!
