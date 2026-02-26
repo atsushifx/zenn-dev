@@ -23,6 +23,6 @@
     "test:sh:gha": "pnpm run test:sh .github/actions/validate-environment/scripts/__tests__ && pnpm run test:sh .github/actions/__tests__"
   },
   "devDependencies": {
-    "zenn-cli": "^0.4.1"
+    "zenn-cli": "^0.4.5"
   }
 }

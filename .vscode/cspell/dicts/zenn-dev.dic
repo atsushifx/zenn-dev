@@ -2,11 +2,19 @@
 actionlint
 anthropic
 ATOK
+<<<<<<< HEAD
 cicd
+||||||| parent of db9f16a (deps(zenn): bump zenn-cli and update related configs)
+=======
+>>>>>>> db9f16a (deps(zenn): bump zenn-cli and update related configs)
 cli
 deckrd
 devenv
+<<<<<<< HEAD
 gha
+||||||| parent of db9f16a (deps(zenn): bump zenn-cli and update related configs)
+=======
+>>>>>>> db9f16a (deps(zenn): bump zenn-cli and update related configs)
 ghalint
 idd
 nviminfo
