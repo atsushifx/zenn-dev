@@ -3,7 +3,7 @@ title: "CI/CDの失敗を入口で止める設計 ― GateパターンとGitHub 
 emoji: "🛡️"
 type: "tech"
 topics: ["githubactions", "ci", "devops", "security", "github"]
-published: false
+published: true
 ---
 
 <!-- markdownlint-disable no-emphasis-as-heading -->
