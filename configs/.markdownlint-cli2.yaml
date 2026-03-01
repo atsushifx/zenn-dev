@@ -7,8 +7,6 @@
 # https://opensource.org/licenses/MIT
 
 ## Files
-globs:
-  - "**/*.md"
 
 ## Ignores
 # ignore gitignore
