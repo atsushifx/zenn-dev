@@ -37,7 +37,7 @@ pre-commit:
     markdownlint:
       glob: "**/*.md"
       run: >
-        markdownlint-cli2
+        markdownlint
         --config ./configs/.markdownlint-cli2.yaml
         "{staged_files}"
       skip:
