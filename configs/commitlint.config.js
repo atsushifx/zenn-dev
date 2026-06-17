@@ -34,6 +34,7 @@ export default {
       'ci', // CI/CD related change
 
       // === Custom additions ===
+      'publish', // (custom) For publish articles
       'config', // (custom) For configuration changes
       'release', // (custom) For releases
       'merge', // (custom) For merge commits, especially when conflict resolution involved
