@@ -15,13 +15,11 @@
   "language": "en",
   "caseSensitive": false,
   "allowCompoundWords": true,
-  "caseSensitive": false,
-  "allowCompoundWords": true,
   "dictionaryDefinitions": [
     {
       "name": "zenn-dic",
       "description": "Zenn: user dictionary for writing techblog",
-      "path": "./cspell/dicts/zenn-dev.dic",
+      "path": "./cspell/dicts/zenn.dic",
       "addWords": true,
       "scope": "workspace"
     }

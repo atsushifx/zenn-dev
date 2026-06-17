@@ -1,3 +1,12 @@
 {
-  "textlint.configPath": "./configs/textlintrc.yaml"
+  "textlint.configPath": "./configs/textlintrc.yaml",
+  "json.schemaDownload.trustedDomains": {
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/streetsidesoftware/cspell/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://raw.githubusercontent.com/denoland/": true,
+    "https://dprint.dev/schemas/": true,
+    "https://static.ampcode.com/": true
+  }
 }
