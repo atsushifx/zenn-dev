@@ -1,0 +1,8 @@
+{
+  "project": "workflows",
+  "project_type": "actions",
+  "language": "typescript",
+  "ai_model": "sonnet",
+  "created_at": "2026-06-22T05:22:56Z",
+  "updated_at": "2026-06-22T05:22:56Z"
+}
