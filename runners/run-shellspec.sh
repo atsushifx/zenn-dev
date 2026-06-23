@@ -65,7 +65,7 @@ is_spec_glob() {
 
 #
 # @description Expand a glob path pattern to matching spec file paths
-# @arg $1 string Glob path pattern (e.g. runners/libs/tests/unit/*.spec.sh)
+# @arg $1 string Glob path pattern (e.g. runners/libs/__tests__/unit/*.spec.sh)
 # @stdout List of matching spec file paths
 # @exitcode 0 always (warns if no match)
 #
@@ -102,9 +102,9 @@ get_spec_files() {
   shift
   local type_filter
   if [[ "$test_type" == "all" ]]; then
-    type_filter="tests"
+    type_filter="__tests__"
   else
-    type_filter="tests/${test_type}"
+    type_filter="__tests__/${test_type}"
   fi
   get_filelist "$SPEC_SEARCH_ROOT" "*.spec.sh" "$type_filter" "$@"
 }
@@ -197,7 +197,7 @@ run_shellspec() {
 #   main unit                         # Run unit tests (auto-resolved)
 #   main integration                  # Run integration tests (auto-resolved)
 #   main all                          # Run all tests
-#   main runners/libs/tests/unit/*.spec.sh  # Run spec glob
+#   main runners/libs/__tests__/unit/*.spec.sh  # Run spec glob
 #   main test.spec.sh --focus         # Run with options
 #
 main() {
