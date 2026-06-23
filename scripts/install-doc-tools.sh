@@ -53,13 +53,13 @@ OPT_GLOBAL_INSTALL=false
 # Parse options
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --global)
-      OPT_GLOBAL_INSTALL=true
-      shift
-      ;;
-    *)
-      break
-      ;;
+  --global)
+    OPT_GLOBAL_INSTALL=true
+    shift
+    ;;
+  *)
+    break
+    ;;
   esac
 done
 
@@ -79,32 +79,32 @@ DESTINATION_DIR="${2:-.}"
 # - Markdown linting
 # - Spell checking tools
 declare -a LINTER_PACKAGES=(
-    # Core textlint engine and utilities
-    "textlint"
-    "textlint-filter-rule-allowlist"
-    "textlint-filter-rule-comments"
+  # Core textlint engine and utilities
+  "textlint"
+  "textlint-filter-rule-allowlist"
+  "textlint-filter-rule-comments"
 
-    # Japanese technical writing rules
-    "textlint-rule-preset-ja-technical-writing"
-    "textlint-rule-preset-ja-spacing"
-    "@textlint-ja/textlint-rule-preset-ai-writing"
-    "textlint-rule-ja-no-orthographic-variants"
-    "@textlint-ja/textlint-rule-no-synonyms"
-    "sudachi-synonyms-dictionary"
-    "@textlint-ja/textlint-rule-morpheme-match"
-    "textlint-rule-ja-hiraku"
-    "textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet"
+  # Japanese technical writing rules
+  "textlint-rule-preset-ja-technical-writing"
+  "textlint-rule-preset-ja-spacing"
+  "@textlint-ja/textlint-rule-preset-ai-writing"
+  "textlint-rule-ja-no-orthographic-variants"
+  "@textlint-ja/textlint-rule-no-synonyms"
+  "sudachi-synonyms-dictionary"
+  "@textlint-ja/textlint-rule-morpheme-match"
+  "textlint-rule-ja-hiraku"
+  "textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet"
 
-    # Common misspelling and proofreading
-    "textlint-rule-common-misspellings"
-    "@proofdict/textlint-rule-proofdict"
-    "textlint-rule-prh"
+  # Common misspelling and proofreading
+  "textlint-rule-common-misspellings"
+  "@proofdict/textlint-rule-proofdict"
+  "textlint-rule-prh"
 
-    # Markdown linting
-    "markdownlint-cli2"
+  # Markdown linting
+  "markdownlint-cli2"
 
-    # Spell checking
-    "cspell"
+  # Spell checking
+  "cspell"
 )
 
 # Configuration files to copy from template
@@ -114,15 +114,15 @@ declare -a LINTER_PACKAGES=(
 # - .markdownlint.yaml: markdown linting rules
 # - .vscode/: VSCode extensions and settings
 declare -a CONFIG_FILES_TO_COPY=(
-    # textlint settings and rules
-    ".textlintrc.yaml"
-    ".textlint"
+  # textlint settings and rules
+  ".textlintrc.yaml"
+  ".textlint"
 
-    # markdownlint
-    ".markdownlint.yaml"
+  # markdownlint
+  ".markdownlint.yaml"
 
-    # VSCode settings and extensions (special case: copies to root .vscode)
-    ".vscode"
+  # VSCode settings and extensions (special case: copies to root .vscode)
+  ".vscode"
 )
 
 # ============================================================================
@@ -145,46 +145,46 @@ declare -a CONFIG_FILES_TO_COPY=(
 #
 # @return 0 Success
 copy_linter_configs() {
-    local item="$1"
-    local template_dir="$2"
-    local destination_dir="$3"
+  local item="$1"
+  local template_dir="$2"
+  local destination_dir="$3"
 
-    # Create configs directory if needed
-    local config_path="${destination_dir}/configs"
-    if [[ ! -d "$config_path" ]]; then
-        mkdir -p "$config_path"
-        echo "[Created] Configs directory: $config_path"
-    fi
+  # Create configs directory if needed
+  local config_path="${destination_dir}/configs"
+  if [[ ! -d "$config_path" ]]; then
+    mkdir -p "$config_path"
+    echo "[Created] Configs directory: $config_path"
+  fi
 
-    local src="${template_dir}/${item}"
+  local src="${template_dir}/${item}"
 
-    # Special handling for .vscode: copy to root instead of configs/
-    local dst_base
-    if [[ "$item" == ".vscode" ]]; then
-        dst_base="$destination_dir"
+  # Special handling for .vscode: copy to root instead of configs/
+  local dst_base
+  if [[ "$item" == ".vscode" ]]; then
+    dst_base="$destination_dir"
+  else
+    dst_base="$config_path"
+  fi
+
+  local dst="${dst_base}/${item}"
+
+  if [[ -e "$src" ]]; then
+    if [[ ! -e "$dst" ]]; then
+      if [[ -d "$src" ]]; then
+        echo "[Copy] Copying directory: $item -> $dst"
+        cp -r "$src" "$dst"
+        echo "[OK] Directory copied: $item"
+      else
+        echo "[Copy] Copying file: $item -> $dst"
+        cp "$src" "$dst"
+        echo "[OK] File copied: $item"
+      fi
     else
-        dst_base="$config_path"
+      echo "[Skip] Skipped (exists): $item"
     fi
-
-    local dst="${dst_base}/${item}"
-
-    if [[ -e "$src" ]]; then
-        if [[ ! -e "$dst" ]]; then
-            if [[ -d "$src" ]]; then
-                echo "[Copy] Copying directory: $item -> $dst"
-                cp -r "$src" "$dst"
-                echo "[OK] Directory copied: $item"
-            else
-                echo "[Copy] Copying file: $item -> $dst"
-                cp "$src" "$dst"
-                echo "[OK] File copied: $item"
-            fi
-        else
-            echo "[Skip] Skipped (exists): $item"
-        fi
-    else
-        echo "[Error] Not found in templates: $item" >&2
-    fi
+  else
+    echo "[Error] Not found in templates: $item" >&2
+  fi
 }
 
 ##
@@ -197,29 +197,29 @@ copy_linter_configs() {
 #
 # @return 0 Success
 install_pnpm_packages() {
-    local -a packages=()
+  local -a packages=()
 
-    # Filter out empty strings and comments
-    for pkg in "$@"; do
-        if [[ -n "$pkg" && ! "$pkg" =~ ^#.*$ ]]; then
-            packages+=("$pkg")
-        fi
-    done
-
-    if [[ ${#packages[@]} -eq 0 ]]; then
-        echo "⚠️  No valid packages to install."
-        return 0
+  # Filter out empty strings and comments
+  for pkg in "$@"; do
+    if [[ -n "$pkg" && ! "$pkg" =~ ^#.*$ ]]; then
+      packages+=("$pkg")
     fi
+  done
 
-    local cmd
-    if [[ "$OPT_GLOBAL_INSTALL" == "true" ]]; then
-        cmd="pnpm add --global ${packages[*]}"
-    else
-        cmd="pnpm add ${packages[*]}"
-    fi
-    echo "📦 Installing via pnpm: $cmd"
-    eval "$cmd"
-    echo "✅ pnpm packages installed."
+  if [[ ${#packages[@]} -eq 0 ]]; then
+    echo "⚠️  No valid packages to install."
+    return 0
+  fi
+
+  local cmd
+  if [[ "$OPT_GLOBAL_INSTALL" == "true" ]]; then
+    cmd="pnpm add --global ${packages[*]}"
+  else
+    cmd="pnpm add ${packages[*]}"
+  fi
+  echo "📦 Installing via pnpm: $cmd"
+  eval "$cmd"
+  echo "✅ pnpm packages installed."
 }
 
 ##
@@ -232,23 +232,23 @@ install_pnpm_packages() {
 #   4. Report completion
 #
 function install_writing_environment() {
-    echo "[Installing] writer tooling..."
+  echo "[Installing] writer tooling..."
 
-    # Install all writing tools via pnpm
-    echo "Installing linter packages..."
-    install_pnpm_packages "${LINTER_PACKAGES[@]}"
+  # Install all writing tools via pnpm
+  echo "Installing linter packages..."
+  install_pnpm_packages "${LINTER_PACKAGES[@]}"
 
-    # Copy configuration files if template exists
-    if [[ -d "$TEMPLATE_DIR" ]]; then
-        echo "Copying configuration files..."
-        for config_file in "${CONFIG_FILES_TO_COPY[@]}"; do
-            copy_linter_configs "$config_file" "$TEMPLATE_DIR" "$DESTINATION_DIR"
-        done
-    else
-        echo "⚠️  Template directory not found: $TEMPLATE_DIR. Skipping config copy." >&2
-    fi
+  # Copy configuration files if template exists
+  if [[ -d "$TEMPLATE_DIR" ]]; then
+    echo "Copying configuration files..."
+    for config_file in "${CONFIG_FILES_TO_COPY[@]}"; do
+      copy_linter_configs "$config_file" "$TEMPLATE_DIR" "$DESTINATION_DIR"
+    done
+  else
+    echo "⚠️  Template directory not found: $TEMPLATE_DIR. Skipping config copy." >&2
+  fi
 
-    echo "[OK] Writer environment setup completed."
+  echo "[OK] Writer environment setup completed."
 }
 
 # ============================================================================
