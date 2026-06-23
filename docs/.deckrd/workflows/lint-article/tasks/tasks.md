@@ -9,16 +9,62 @@ source: specifications.md
 <!-- textlint-disable
   ja-technical-writing/sentence-length
   -->
-<!-- markdownlint-disable no-duplicate-heading -->
+<!-- markdownlint-disable no-duplicate-heading line-length -->
 
 ## Task Summary
 
-| Test Target            | Scenarios | Cases | Status      |
-| ---------------------- | --------- | ----- | ----------- |
-| T-01: トリガー条件     | 3         | 4     | in progress |
-| T-02: SHA 解決         | 3         | 4     | in progress |
-| T-03: 変更ファイル取得 | 2         | 5     | in progress |
-| T-04: lint 実行        | 4         | 8     | in progress |
+| Test Target                   | Scenarios | Cases | Status      |
+| ----------------------------- | --------- | ----- | ----------- |
+| T-00: YAML 構造・セキュリティ | 2         | 8     | done        |
+| T-01: トリガー条件            | 3         | 4     | done        |
+| T-02: SHA 解決                | 3         | 4     | done        |
+| T-03: 変更ファイル取得        | 4         | 7     | done        |
+| T-04: lint 実行               | 4         | 8     | done        |
+
+---
+
+## T-00: YAML 構造・セキュリティ (DD-05 / REQ-C-004 / R-003)
+
+### [正常] Normal Cases
+
+#### T-00-01: ワークフロー全体の YAML 構造
+
+- [x] **T-00-01-01**: 6 ステップが定義された順序で配置されている
+  - Target: `ci-lint-articles.yaml` のステップリスト
+  - Scenario: Given ワークフローが定義されている、When ステップ定義を確認する
+  - Expected: Then checkout → validate-env → resolve-sha → changed-files → setup-repo → lint の順に 6 ステップが配置されていなければならない (MUST)
+
+- [x] **T-00-01-02**: checkout に `persist-credentials: false` が設定されている
+  - Target: `ci-lint-articles.yaml` の `checkout` ステップ
+  - Scenario: Given checkout ステップが定義されている
+  - Expected: Then `with.persist-credentials: false` が設定されていなければならない (MUST)
+
+- [x] **T-00-01-03**: skip 伝播の `if` 条件が changed-files / setup-repo / lint の 3 ステップに付与されている
+  - Target: `ci-lint-articles.yaml` の changed-files / setup-repo / lint 各ステップ
+  - Scenario: Given resolve-sha ステップが `skip=true` を出力した
+  - Expected: Then 3 ステップそれぞれに `if: steps.resolve-sha.outputs.skip != 'true'` が定義されていなければならない (MUST)
+
+#### T-00-02: 全 Action の commit SHA ピン留め (DD-05)
+
+- [x] **T-00-02-01**: `actions/checkout` が commit SHA で固定されている
+  - Target: `ci-lint-articles.yaml` の checkout ステップ
+  - Expected: Then `uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3` が定義されていなければならない (MUST)
+
+- [x] **T-00-02-02**: `ca-validate-environment` が commit SHA で固定されている
+  - Target: `ci-lint-articles.yaml` の validate-env ステップ
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-validate-environment@f4e8d971ee9093901df0255154e643fd1f2ee10d` が定義されていなければならない (MUST)
+
+- [x] **T-00-02-03**: `ca-get-changed-files` が commit SHA で固定されている
+  - Target: `ci-lint-articles.yaml` の changed-files ステップ
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@f4e8d971ee9093901df0255154e643fd1f2ee10d` が定義されていなければならない (MUST)
+
+- [x] **T-00-02-04**: `ca-setup-repo` が commit SHA で固定されている
+  - Target: `ci-lint-articles.yaml` の setup-repo ステップ
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-setup-repo@f4e8d971ee9093901df0255154e643fd1f2ee10d` が定義されていなければならない (MUST)
+
+- [x] **T-00-02-05**: `agla-doc-tools` の `ref` が commit SHA で固定されている
+  - Target: `ci-lint-articles.yaml` の setup-repo ステップ `with.ref`
+  - Expected: Then `ref: bec772fc1d22fbf43fd57ef3a71f7972b83b3e24 # v0.1.1` が定義されていなければならない (MUST)
 
 ---
 
@@ -28,26 +74,26 @@ source: specifications.md
 
 #### T-01-01: push トリガー起動
 
-- [ ] **T-01-01-01**: main ブランチへの *.md push で lint ジョブが起動する
+- [x] **T-01-01-01**: main ブランチへの *.md push で lint ジョブが起動する
   - Target: `ci-lint-articles.yaml` の `on.push` 定義
   - Scenario: Given main ブランチに `*.md` を含む push がある、When GitHub Actions の push イベントが発火する
   - Expected: Then YAML に `on.push.branches: [main]` かつ `on.push.paths: ['**/*.md']` が定義されていなければならない (MUST)
 
-- [ ] **T-01-01-02**: main ブランチへの非 Markdown push で lint ジョブが起動しない
+- [x] **T-01-01-02**: main ブランチへの非 Markdown push で lint ジョブが起動しない
   - Target: `ci-lint-articles.yaml` の `on.push.paths` フィルター
   - Scenario: Given main ブランチに `*.md` を含まない push がある、When GitHub Actions の push イベントが発火する
   - Expected: Then `on.push.paths: ['**/*.md']` フィルターが定義されており、非 Markdown push ではジョブが起動しないこと (MUST)
 
 #### T-01-02: pull_request トリガー起動
 
-- [ ] **T-01-02-01**: main 向け PR に *.md 変更があれば lint ジョブが起動する
+- [x] **T-01-02-01**: main 向け PR に *.md 変更があれば lint ジョブが起動する
   - Target: `ci-lint-articles.yaml` の `on.pull_request` 定義
   - Scenario: Given main ブランチへの pull_request に `*.md` 変更が含まれる、When pull_request イベントが発火する
   - Expected: Then YAML に `on.pull_request.branches: [main]` かつ `on.pull_request.paths: ['**/*.md']` が定義されていなければならない (MUST)
 
 #### T-01-03: workflow_dispatch トリガー起動
 
-- [ ] **T-01-03-01**: workflow_dispatch で lint ジョブが起動する
+- [x] **T-01-03-01**: workflow_dispatch で lint ジョブが起動する
   - Target: `ci-lint-articles.yaml` の `on.workflow_dispatch` 定義
   - Scenario: Given 任意のブランチから手動実行する、When `workflow_dispatch` イベントが発火する
   - Expected: Then YAML に `on.workflow_dispatch:` が定義されていなければならない (MUST)
@@ -60,7 +106,7 @@ source: specifications.md
 
 #### T-02-01: workflow_dispatch で親コミットあり
 
-- [ ] **T-02-01-01**: workflow_dispatch で HEAD^1 が取得でき GITHUB_ENV に書き込まれる
+- [x] **T-02-01-01**: workflow_dispatch で HEAD^1 が取得でき GITHUB_ENV に書き込まれる
   - Target: `resolve-sha` ステップのシェルスクリプト
   - Scenario: Given `workflow_dispatch` イベント、かつ `git rev-list --parents -n 1 HEAD` が 2 フィールド以上を返す (親あり)
   - Expected: Then `BEFORE_SHA=<HEAD^1>`, `AFTER_SHA=<HEAD>` が `GITHUB_ENV` に書き込まれ、
@@ -70,7 +116,7 @@ source: specifications.md
 
 #### T-02-02: push / pull_request では空文字 SHA を設定
 
-- [ ] **T-02-02-01**: push / PR 時は BEFORE_SHA / AFTER_SHA が空文字で GITHUB_ENV に書き込まれる
+- [x] **T-02-02-01**: push / PR 時は BEFORE_SHA / AFTER_SHA が空文字で GITHUB_ENV に書き込まれる
   - Target: `resolve-sha` ステップのシェルスクリプト
   - Scenario: Given `push` または `pull_request` イベント
   - Expected: Then `BEFORE_SHA=""`, `AFTER_SHA=""` が `GITHUB_ENV` に書き込まれ、`skip=false` が `GITHUB_OUTPUT` に書き込まれなければならない (MUST)
@@ -79,7 +125,7 @@ source: specifications.md
 
 #### T-02-03: workflow_dispatch で git コマンド失敗
 
-- [ ] **T-02-03-01**: git rev-list がその他エラーで失敗した場合、ジョブが失敗する
+- [x] **T-02-03-01**: git rev-list がその他エラーで失敗した場合、ジョブが失敗する
   - Target: `resolve-sha` ステップのシェルスクリプト
   - Scenario: Given `workflow_dispatch` イベント、かつ `git rev-list` が非ゼロ終了する
   - Expected: Then ジョブが exit non-zero で失敗する
@@ -88,7 +134,7 @@ source: specifications.md
 
 #### T-02-04: workflow_dispatch で初回コミット (親なし)
 
-- [ ] **T-02-04-01**: 初回コミット (parent 数 == 0) の場合、warning を出力して後続ステップをスキップする
+- [x] **T-02-04-01**: 初回コミット (parent 数 == 0) の場合、warning を出力して後続ステップをスキップする
   - Target: `resolve-sha` ステップのシェルスクリプト
   - Scenario: Given `workflow_dispatch` イベント、かつ `git rev-list --parents -n 1 HEAD` が 1 フィールド (親なし) を返す
   - Expected: Then `skip=true` が `GITHUB_OUTPUT` に書き込まれ、warning ログが出力され、exit 0 となる。
@@ -102,7 +148,7 @@ source: specifications.md
 
 #### T-03-01: 環境検証ステップの配置順序
 
-- [ ] **T-03-01-01**: `ca-validate-environment` が `checkout` の直後・他ステップより前に配置されている
+- [x] **T-03-01-01**: `ca-validate-environment` が `checkout` の直後・他ステップより前に配置されている
   - Target: `ci-lint-articles.yaml` のステップ順序
   - Scenario: Given ワークフローが起動する、When ステップ定義を確認する
   - Expected: Then `validate-env` ステップが YAML のステップリスト上で `checkout` の直後 (2 番目) に定義されていなければならない (MUST) 。
@@ -110,13 +156,13 @@ source: specifications.md
 
 #### T-03-02: ca-get-changed-files で変更 *.md を取得
 
-- [ ] **T-03-02-01**: changed-files ステップが BEFORE_SHA / AFTER_SHA を渡して実行される
+- [x] **T-03-02-01**: changed-files ステップが BEFORE_SHA / AFTER_SHA を渡して実行される
   - Target: `changed-files` ステップの with パラメータ
   - Scenario: Given `resolve-sha` が完了し `GITHUB_ENV` に SHA が設定済み、When `changed-files` ステップが実行される
   - Expected: Then `ca-get-changed-files` に `pattern: '**/*.md'`、`before-sha: ${{ env.BEFORE_SHA }}`、
     `after-sha: ${{ env.AFTER_SHA }}` が渡されなければならない (MUST)
 
-- [ ] **T-03-02-02**: skip=true の場合、changed-files ステップが実行されない
+- [x] **T-03-02-02**: skip=true の場合、changed-files ステップが実行されない
   - Target: `changed-files` ステップの `if:` 条件
   - Scenario: Given `resolve-sha` が `skip=true` を出力した、When `changed-files` ステップが評価される
   - Expected: Then `if: steps.resolve-sha.outputs.skip != 'true'` 条件が YAML の `changed-files` ステップに定義されており、
@@ -124,17 +170,29 @@ source: specifications.md
 
 #### T-03-02-03: ca-get-changed-files が失敗した場合、ジョブが失敗する
 
-- [ ] **T-03-02-03**: `ca-get-changed-files` が非ゼロで終了した場合、ジョブが即時失敗する
+- [x] **T-03-02-03**: `ca-get-changed-files` が非ゼロで終了した場合、ジョブが即時失敗する
   - Target: `changed-files` ステップ（composite action の失敗伝播）
   - Scenario: Given `ca-get-changed-files` が内部エラー等で非ゼロ終了する
   - Expected: Then GitHub Actions のデフォルト動作（`continue-on-error: false`）によりジョブが即時失敗する。
     `continue-on-error: true` が設定されていないこと (MUST)
 
+#### T-03-04: ca-setup-repo の設定
+
+- [x] **T-03-04-01**: ca-setup-repo ステップが正しいパラメータで定義されている
+  - Target: `ci-lint-articles.yaml` の `setup-repo` ステップ
+  - Scenario: Given ワークフローが定義されている、When setup-repo ステップ定義を確認する
+  - Expected: Then `repo: aglabo/agla-doc-tools`、`path: .tools/agla-doc-tools`、`ref: bec772fc1d22fbf43fd57ef3a71f7972b83b3e24` が定義されていなければならない (MUST)
+
+- [x] **T-03-04-02**: skip=true の場合、setup-repo ステップが実行されない
+  - Target: `ci-lint-articles.yaml` の `setup-repo` ステップの `if:` 条件
+  - Scenario: Given `resolve-sha` が `skip=true` を出力した
+  - Expected: Then `if: steps.resolve-sha.outputs.skip != 'true'` が定義されており、`skip=true` 時にステップが実行されないこと (MUST)
+
 ### [エッジケース] Edge Cases
 
 #### T-03-03: before-sha オールゼロ (初回 push)
 
-- [ ] **T-03-03-01**: before-sha がオールゼロの場合、ca-get-changed-files が空ツリーとの差分にフォールバックする
+- [x] **T-03-03-01**: before-sha がオールゼロの場合、ca-get-changed-files が空ツリーとの差分にフォールバックする
   - Target: `ca-get-changed-files` の動作 (自作 composite action の契約)
   - Scenario: Given push イベント、かつ before-sha がオールゼロ (新規リポジトリへの最初の push)
   - Expected: Then `ca-get-changed-files` が自動的に空ツリー SHA にフォールバックし、リポジトリ全 `*.md` ファイルが `outputs.files` に含まれる
@@ -147,7 +205,7 @@ source: specifications.md
 
 #### T-04-00: ファイルリスト変換
 
-- [ ] **T-04-00-01**: 改行区切りの outputs.files をスペース区切りに変換して lint ツールに一括渡しする
+- [x] **T-04-00-01**: 改行区切りの outputs.files をスペース区切りに変換して lint ツールに一括渡しする
   - Target: `lint` ステップのシェルスクリプト（変換ロジック）
   - Scenario: Given `CHANGED_FILES` に改行区切りのファイルパスリストが格納されている
   - Expected: Then `printf '%s\n' "$CHANGED_FILES" | tr '\n' ' '` 等で変換し、
@@ -156,13 +214,13 @@ source: specifications.md
 
 #### T-04-01: 変更ファイルが存在する場合の lint 実行
 
-- [ ] **T-04-01-01**: 存在するファイルに textlint が一括実行される
+- [x] **T-04-01-01**: 存在するファイルに textlint が一括実行される
   - Target: `lint` ステップのシェルスクリプト (R-005d)
   - Scenario: Given `outputs.count` が 1 以上で、対象ファイルがファイルシステム上に存在する
   - Expected: Then T-04-00-01 で構築したスペース区切りファイルリストを引数として `textlint --config configs/textlintrc.yaml $FILES` が
     シェルスクリプト内に定義されていなければならない (MUST)
 
-- [ ] **T-04-01-02**: textlint 成功後に markdownlint が一括実行される
+- [x] **T-04-01-02**: textlint 成功後に markdownlint が一括実行される
   - Target: `lint` ステップのシェルスクリプト (R-005e)
   - Scenario: Given textlint が exit 0 で完了した
   - Expected: Then T-04-00-01 で構築したスペース区切りファイルリストを引数として
@@ -172,13 +230,13 @@ source: specifications.md
 
 #### T-04-02: lint エラーで即時失敗 (fail-fast)
 
-- [ ] **T-04-02-01**: textlint が非ゼロで終了した場合、markdownlint を実行せずジョブが失敗する
+- [x] **T-04-02-01**: textlint が非ゼロで終了した場合、markdownlint を実行せずジョブが失敗する
   - Target: `lint` ステップのシェルスクリプト (R-005f)
   - Scenario: Given `textlint --config configs/textlintrc.yaml "$file"` が非ゼロで終了する
   - Expected: Then `bash -eo pipefail` で textlint が非ゼロ終了した時点でシェルスクリプトが停止し、`markdownlint` の呼び出し行に到達しないこと (MUST) 。
     ジョブが exit non-zero で終了しなければならない (MUST)
 
-- [ ] **T-04-02-02**: CHANGED_COUNT が非数値の場合、ジョブが失敗する
+- [x] **T-04-02-02**: CHANGED_COUNT が非数値の場合、ジョブが失敗する
   - Target: `lint` ステップの CHANGED_COUNT 数値検証
   - Scenario: Given `steps.changed-files.outputs.count` が空または数値以外の文字列
   - Expected: Then `[[ "$CHANGED_COUNT" =~ ^[0-9]+$ ]]` の検証が失敗し、ジョブが exit non-zero で終了する
@@ -187,17 +245,17 @@ source: specifications.md
 
 #### T-04-03: スキップシナリオ
 
-- [ ] **T-04-03-01**: outputs.count が 0 の場合、lint をスキップして warning を出力し exit 0 になる
+- [x] **T-04-03-01**: outputs.count が 0 の場合、lint をスキップして warning を出力し exit 0 になる
   - Target: `lint` ステップのシェルスクリプト (R-005a)
   - Scenario: Given `CHANGED_COUNT` が `"0"`
   - Expected: Then warning メッセージがログに出力され、lint を実行せず exit 0 で完了する
 
-- [ ] **T-04-03-02**: 削除済みファイルを "deleted -> skip" でスキップする
+- [x] **T-04-03-02**: 削除済みファイルを "deleted -> skip" でスキップする
   - Target: `lint` ステップのシェルスクリプト (R-005c)
   - Scenario: Given `outputs.files` に含まれるファイルがファイルシステム上に存在しない (削除済み)
   - Expected: Then `"deleted -> skip"` がログに出力され、そのファイルへの lint は実行されず次のファイルに進む (exit 0)
 
-- [ ] **T-04-03-03**: 全ファイルが削除済みの場合でも exit 0 になる
+- [x] **T-04-03-03**: 全ファイルが削除済みの場合でも exit 0 になる
   - Target: `lint` ステップのシェルスクリプト (R-005b / R-005c)
   - Scenario: Given `CHANGED_COUNT` が 1 以上、かつ `outputs.files` に含まれる全ファイルがファイルシステム上に存在しない
   - Expected: Then 全ファイルが `"deleted -> skip"` でスキップされ、lint を一切実行せず exit 0 で完了する
@@ -208,6 +266,14 @@ source: specifications.md
 
 | Task ID    | Spec Rule      | Requirement |
 | ---------- | -------------- | ----------- |
+| T-00-01-01 | R-003, DD-01   | REQ-NF-001  |
+| T-00-01-02 | DD-05          | REQ-C-004   |
+| T-00-01-03 | R-002b (skip)  | REQ-F-007   |
+| T-00-02-01 | DD-05          | REQ-C-004   |
+| T-00-02-02 | DD-05          | REQ-C-004   |
+| T-00-02-03 | DD-05          | REQ-C-004   |
+| T-00-02-04 | DD-05          | REQ-C-004   |
+| T-00-02-05 | DD-05          | REQ-C-004   |
 | T-01-01-01 | R-001a         | REQ-F-001   |
 | T-01-01-02 | R-001d         | REQ-C-003   |
 | T-01-02-01 | R-001b         | REQ-F-002   |
@@ -221,6 +287,8 @@ source: specifications.md
 | T-03-02-02 | R-002b (skip)  | REQ-F-007   |
 | T-03-02-03 | R-004a         | REQ-F-004   |
 | T-03-03-01 | R-004c         | REQ-F-004   |
+| T-03-04-01 | R-004a, R-004b | REQ-F-005   |
+| T-03-04-02 | R-002b (skip)  | REQ-F-007   |
 | T-04-00-01 | R-005b         | REQ-F-006   |
 | T-04-01-01 | R-004b, R-005d | REQ-F-006   |
 | T-04-01-02 | R-004b, R-005e | REQ-F-006   |
