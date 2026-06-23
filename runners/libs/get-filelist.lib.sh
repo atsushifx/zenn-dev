@@ -77,8 +77,9 @@ get_filelist() {
   done
 
   # Enumerate files; normalize separators and prepend ./
+  # fd --hidden to include dot-directories (e.g. .github/)
   local __result
-  __result=$(cd "$__root" && rg --files -g "$__pattern" 2>/dev/null | sed 's|\\|/|g; s|^[^./]|./&|' || true)
+  __result=$(cd "$__root" && fd --hidden -g "$__pattern" 2>/dev/null | sed 's|\\|/|g; s|^[^./]|./&|' || true)
 
   # Apply each filter (AND: narrow results; short-circuit on empty)
   local __pat
