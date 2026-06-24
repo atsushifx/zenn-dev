@@ -9,6 +9,10 @@
 
 set -euo pipefail
 
+# ─── Change to repository root ─────────────────────────────────────────────────
+
+cd "${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}"
+
 # ─── Validate inputs ───────────────────────────────────────────────────────────
 
 if ! printf '%s' "${CHANGED_COUNT:-}" | grep -qE '^[0-9]+$'; then
@@ -48,7 +52,19 @@ fi
 # ─── Run linters ──────────────────────────────────────────────────────────────
 
 # shellcheck disable=SC2086
-textlint --config configs/textlintrc.yaml ${_files}
+if textlint --config configs/textlintrc.yaml ${_files}; then
+  echo "textlint: passed"
+else
+  _rc=$?
+  echo "textlint: failed (exit=${_rc})" >&2
+  exit "${_rc}"
+fi
 
 # shellcheck disable=SC2086
-markdownlint --config configs/.markdownlint-cli2.yaml ${_files}
+if markdownlint --config configs/.markdownlint-cli2.yaml ${_files}; then
+  echo "markdownlint: passed"
+else
+  _rc=$?
+  echo "markdownlint: failed (exit=${_rc})" >&2
+  exit "${_rc}"
+fi
