@@ -40,12 +40,12 @@ created: "2026-06-23"
 
 使用する composite actions の commit SHA:
 
-| Action                    | Repository           | SHA                                        | Comment     |
-| ------------------------- | -------------------- | ------------------------------------------ | ----------- |
-| `actions/checkout`        | `actions/checkout`   | `df4cb1c069e1874edd31b4311f1884172cec0e10` | `# v6.0.3`  |
-| `ca-validate-environment` | `aglabo/ci-platform` | `f4e8d971ee9093901df0255154e643fd1f2ee10d` | `# v0.3.1+` |
-| `ca-get-changed-files`    | `aglabo/ci-platform` | `f4e8d971ee9093901df0255154e643fd1f2ee10d` | `# v0.3.1+` |
-| `ca-setup-repo`           | `aglabo/ci-platform` | `f4e8d971ee9093901df0255154e643fd1f2ee10d` | `# v0.3.1+` |
+| Action                    | Repository           | SHA                                        | Comment    |
+| ------------------------- | -------------------- | ------------------------------------------ | ---------- |
+| `actions/checkout`        | `actions/checkout`   | `df4cb1c069e1874edd31b4311f1884172cec0e10` | `# v6.0.3` |
+| `ca-validate-environment` | `aglabo/ci-platform` | `8d63776a598f98913915e57b74e63ba5d06d5a47` | `# main`   |
+| `ca-get-changed-files`    | `aglabo/ci-platform` | `8d63776a598f98913915e57b74e63ba5d06d5a47` | `# main`   |
+| `ca-setup-repo`           | `aglabo/ci-platform` | `8d63776a598f98913915e57b74e63ba5d06d5a47` | `# main`   |
 
 `ca-setup-repo` の `ref` (agla-doc-tools のチェックアウト SHA):
 
