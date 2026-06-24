@@ -13,13 +13,13 @@ source: specifications.md
 
 ## Task Summary
 
-| Test Target                   | Scenarios | Cases | Status      |
-| ----------------------------- | --------- | ----- | ----------- |
-| T-00: YAML 構造・セキュリティ | 2         | 8     | done        |
-| T-01: トリガー条件            | 3         | 4     | done        |
-| T-02: SHA 解決                | 3         | 4     | done        |
-| T-03: 変更ファイル取得        | 4         | 7     | done        |
-| T-04: lint 実行               | 4         | 8     | done        |
+| Test Target                   | Scenarios | Cases | Status |
+| ----------------------------- | --------- | ----- | ------ |
+| T-00: YAML 構造・セキュリティ | 2         | 8     | done   |
+| T-01: トリガー条件            | 3         | 4     | done   |
+| T-02: SHA 解決                | 3         | 4     | done   |
+| T-03: 変更ファイル取得        | 4         | 7     | done   |
+| T-04: lint 実行               | 4         | 8     | done   |
 
 ---
 
@@ -52,15 +52,15 @@ source: specifications.md
 
 - [x] **T-00-02-02**: `ca-validate-environment` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の validate-env ステップ
-  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-validate-environment@f4e8d971ee9093901df0255154e643fd1f2ee10d` が定義されていなければならない (MUST)
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-validate-environment@8d63776a598f98913915e57b74e63ba5d06d5a47` が定義されていなければならない (MUST)
 
 - [x] **T-00-02-03**: `ca-get-changed-files` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の changed-files ステップ
-  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@f4e8d971ee9093901df0255154e643fd1f2ee10d` が定義されていなければならない (MUST)
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@8d63776a598f98913915e57b74e63ba5d06d5a47` が定義されていなければならない (MUST)
 
 - [x] **T-00-02-04**: `ca-setup-repo` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の setup-repo ステップ
-  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-setup-repo@f4e8d971ee9093901df0255154e643fd1f2ee10d` が定義されていなければならない (MUST)
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-setup-repo@8d63776a598f98913915e57b74e63ba5d06d5a47` が定義されていなければならない (MUST)
 
 - [x] **T-00-02-05**: `agla-doc-tools` の `ref` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の setup-repo ステップ `with.ref`
