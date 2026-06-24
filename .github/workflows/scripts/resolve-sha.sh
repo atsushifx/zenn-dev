@@ -10,12 +10,12 @@
 set -euo pipefail
 
 if [ "${EVENT_NAME:-}" = "workflow_dispatch" ]; then
-  _parents=$(git rev-list --parents -n 1 HEAD)
+  _parents=$(git rev-list --parents -n 5 HEAD)
   _field_count=$(echo "$_parents" | wc -w)
 
   if [ "$_field_count" -ge 2 ]; then
-    _after_sha=$(echo "$_parents" | awk '{print $1}')
-    _before_sha=$(echo "$_parents" | awk '{print $2}')
+    _after_sha=$(echo "$_parents"  | head -n 1 | cut -d' ' -f1)
+    _before_sha=$(echo "$_parents" | tail -n 1 | cut -d' ' -f1)
     echo "BEFORE_SHA=${_before_sha}" >>"${GITHUB_ENV}"
     echo "AFTER_SHA=${_after_sha}" >>"${GITHUB_ENV}"
     echo "skip=false" >>"${GITHUB_OUTPUT}"
