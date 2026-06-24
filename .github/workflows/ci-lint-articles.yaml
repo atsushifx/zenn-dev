@@ -1,15 +1,19 @@
-# src: .github/workflows/ci-lint.yaml
+# src: .github/workflows/ci-lint-articles.yaml
 # @(#) : lint document use textlint, markdownlint
 #
 # Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-## @(#) : ci-lint / lint new articles
+## @(#) : ci-lint-articles / lint new articles
 
 name: "CI Lint Articles"
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
   pull_request:
     branches: [main]
     paths:
@@ -25,82 +29,41 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout repository
+      - id: checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
+          fetch-depth: 0
           persist-credentials: false
-          fetch-depth: 1
 
-      - name: Debug workspace
-        run: |
-          pwd
-          ls -la
-          ls -la scripts || true
-
-      - name: Fetch main repository
-        run: |
-          git fetch origin main
-
-      - name: Get changed Markdown files
-        id: changed-md
-        run: |
-          head_sha="$(git rev-parse HEAD)"
-          base_sha="$(git rev-parse origin/main)"
-
-          files=$(git diff --diff-filter=AM --name-only "${base_sha}" "${head_sha}" -- '**/*.md')
-          printf "changed:\n%s\n" "$files"
-
-          {
-            echo "files<<EOF"
-            echo "$files"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Setup node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      - id: validate-env
+        uses: aglabo/ci-platform/.github/actions/ca-validate-environment@f4e8d971ee9093901df0255154e643fd1f2ee10d # v0.3.1+
         with:
-          node-version: 22
+          actions-type: read
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-        with:
-          version: 10
-
-      - name: Restore cache
-        id: cache-restore
-        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
-        with:
-          key: ${{ runner.os }}-cache
-          path: |
-            node_modules
-            ~/.pnpm-store
-            .cache/*
-
-      - name: Install linters
-        run: |
-          chmod +x ./scripts/install-doc-tools.sh
-          ./scripts/install-doc-tools.sh
-
-      - name: Lint text
-        if: ${{ steps.changed-md.outputs.files != '' }}
+      - id: resolve-sha
         env:
-          changed_files: "${{ steps.changed-md.outputs.files }}"
-        run: |
-          pnpm run lint:text "${changed_files}"
+          EVENT_NAME: ${{ github.event_name }}
+        run: bash .github/workflows/scripts/resolve-sha.sh
 
-      - name: Lint markdown
-        if: ${{ steps.changed-md.outputs.files != '' }}
-        env:
-          changed_files: "${{ steps.changed-md.outputs.files }}"
-        run: |
-          pnpm run lint:markdown "${changed_files}"
-
-      - name: Always save cache
-        id: cache-save
-        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      - id: changed-files
+        if: steps.resolve-sha.outputs.skip != 'true'
+        uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@f4e8d971ee9093901df0255154e643fd1f2ee10d # v0.3.1+
         with:
-          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
-          path: |
-            node_modules
-            ~/.pnpm-store
-            .cache/*
+          pattern: "**/*.md"
+          before-sha: ${{ env.BEFORE_SHA }}
+          after-sha: ${{ env.AFTER_SHA }}
+
+      - id: setup-repo
+        if: steps.resolve-sha.outputs.skip != 'true'
+        uses: aglabo/ci-platform/.github/actions/ca-setup-repo@f4e8d971ee9093901df0255154e643fd1f2ee10d # v0.3.1+
+        with:
+          repo: aglabo/agla-doc-tools
+          path: ./.tools/agla-doc-tools
+          ref: bec772fc1d22fbf43fd57ef3a71f7972b83b3e24 # v0.1.1
+
+      - id: lint
+        if: steps.resolve-sha.outputs.skip != 'true'
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
+          CHANGED_COUNT: ${{ steps.changed-files.outputs.count }}
+        run: bash .github/workflows/scripts/lint.sh
