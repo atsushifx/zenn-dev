@@ -1,5 +1,5 @@
 #shellcheck shell=sh
-# .github/workflows/scripts/__tests__/unit/lint_sh.spec.sh
+# .github/workflows/scripts/__tests__/unit/lint.unit.spec.sh
 # @(#) : ShellSpec unit tests for .github/workflows/scripts/lint.sh
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
@@ -108,6 +108,7 @@ ${TMP_FILE_B}"
         It 'T-04-00-01: textlint is called once with both files'
           When run script "$_SCRIPT"
           The status should eq 0
+          The output should include "textlint: passed"
           The contents of file "$STUB_DIR/calls.log" should include "textlint"
           The contents of file "$STUB_DIR/calls.log" should include "$TMP_FILE_A"
           The contents of file "$STUB_DIR/calls.log" should include "$TMP_FILE_B"
@@ -118,12 +119,14 @@ ${TMP_FILE_B}"
         It 'T-04-01-01: textlint is called with --config configs/textlintrc.yaml'
           When run script "$_SCRIPT"
           The status should eq 0
+          The output should include "textlint: passed"
           The contents of file "$STUB_DIR/calls.log" should include "--config configs/textlintrc.yaml"
         End
 
         It 'T-04-01-02: markdownlint is called with --config configs/.markdownlint-cli2.yaml'
           When run script "$_SCRIPT"
           The status should eq 0
+          The output should include "textlint: passed"
           The contents of file "$STUB_DIR/calls.log" should include "--config configs/.markdownlint-cli2.yaml"
         End
       End
@@ -242,11 +245,13 @@ ${TMP_FILE}"
         It 'T-04-02-01: exits with non-zero status when textlint fails'
           When run script "$_SCRIPT"
           The status should not eq 0
+          The stderr should include "textlint: failed"
         End
 
         It 'T-04-02-01: markdownlint is not called when textlint fails'
           When run script "$_SCRIPT"
           The status should not eq 0
+          The stderr should include "textlint: failed"
           The file "$STUB_DIR/ml.log" should not be exist
         End
       End
