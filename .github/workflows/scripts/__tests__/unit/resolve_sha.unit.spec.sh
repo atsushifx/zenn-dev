@@ -1,5 +1,5 @@
 #shellcheck shell=sh
-# .github/workflows/scripts/__tests__/unit/resolve_sha.spec.sh
+# .github/workflows/scripts/__tests__/unit/resolve_sha.unit.spec.sh
 # @(#) : ShellSpec unit tests for .github/workflows/scripts/resolve-sha.sh
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
