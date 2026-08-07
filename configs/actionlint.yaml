@@ -17,4 +17,3 @@ self-hosted-runner:
 
   # TODO(security):
   # Replace null with explicit allow-list once variables are stabilized.
-  config-variables: null
