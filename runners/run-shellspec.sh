@@ -19,7 +19,7 @@ SHELLSPEC="${SHELLSPEC:-${PROJECT_ROOT}/.tools/shellspec/shellspec}"
 
 readonly TEST_TYPES=("all" "unit" "functional" "integration" "system" "e2e")
 
-# Spec root directory, relative to PROJECT_ROOT. Must match --default-path in .shellspec
+# Spec directory filter, matched as a substring against spec file paths
 readonly SPEC_ROOT_DIR="scripts/__tests__"
 
 SKIP_INTEGRATION_TESTS="${SKIP_INTEGRATION_TESTS:-1}"
@@ -156,10 +156,11 @@ resolve_spec_files() {
 
   local test_type="$1"
   shift
-  # 統合ﾃeｽXﾄgのｹﾞQｰ[ﾄgを開く種別｡Bintegration は指定されれば毎回実行する｡B
-  # system は integration ｹﾞQｰ[ﾄgも通す必要があるため従来どおり開く｡B
-  # all は「すべて」の要求であり､A閉じたままだと integration/system 単独指定の
-  # 和集合より弱いｽXｲCｰ[ﾄgになってしまうため同様に開く｡B
+  # Test types that open the integration test gate.
+  # "integration" always runs the integration tests when requested.
+  # "system" needs the integration gate open as well.
+  # "all" means everything, so keeping the gate closed would make it a weaker
+  # suite than running "integration" and "system" separately.
   case "$test_type" in
   integration | system | all) SKIP_INTEGRATION_TESTS=0 ;;
   esac
@@ -197,10 +198,33 @@ run_shellspec() {
   (cd "$PROJECT_ROOT" && export SKIP_INTEGRATION_TESTS && bash "$SHELLSPEC" "${normalized_args[@]}")
 }
 
+usage() {
+  cat <<'USAGE'
+Usage: run-shellspec.sh <test-type|spec-file|spec-glob> [--integration] [shellspec-options]
+
+Test types:
+  all           Run every spec
+  unit          Run unit specs
+  functional    Run functional specs
+  integration   Run integration specs
+  system        Run system specs
+  e2e           Run e2e specs
+
+Options:
+  --integration Run integration tests that are skipped by default
+
+Examples:
+  run-shellspec.sh all
+  run-shellspec.sh unit
+  run-shellspec.sh path/to/foo.spec.sh
+  run-shellspec.sh 'path/to/__tests__/unit/*.spec.sh'
+USAGE
+}
+
 main() {
   if [[ $# -eq 0 ]]; then
-    run_shellspec
-    exit $?
+    usage >&2
+    exit 1
   fi
 
   parse_options "$@" >/dev/null
