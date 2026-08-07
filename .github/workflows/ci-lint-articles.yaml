@@ -19,6 +19,19 @@ on:
     paths:
       - "**/*.md"
   workflow_dispatch:
+    inputs:
+      fetch-depth:
+        description: "checkout fetch-depth (0 = full history)"
+        type: string
+        required: false
+        default: "0"
+  workflow_call:
+    inputs:
+      fetch-depth:
+        description: "checkout fetch-depth (0 = full history)"
+        type: string
+        required: false
+        default: "0"
 
 jobs:
   lint-on-github:
@@ -28,15 +41,20 @@ jobs:
     permissions:
       contents: read
 
+    env:
+      # inputs is unset on push/pull_request, so the trigger-level default does not apply there.
+      # The `|| '0'` fallback keeps those events on a full clone, which ca-get-changed-files requires.
+      FETCH_DEPTH: ${{ inputs.fetch-depth || '0' }}
+
     steps:
       - id: checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 30
+          fetch-depth: ${{ env.FETCH_DEPTH }}
           persist-credentials: false
 
       - id: validate-env
-        uses: aglabo/ci-platform/.github/actions/ca-validate-environment@8d63776a598f98913915e57b74e63ba5d06d5a47 # main
+        uses: aglabo/ci-platform/.github/actions/ca-validate-environment@d49d96532dbf95a356a5756864fa45e33a0fa033 # v0.3.4
         with:
           actions-type: read
 
@@ -47,19 +65,23 @@ jobs:
 
       - id: changed-files
         if: steps.resolve-sha.outputs.skip != 'true'
-        uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@8d63776a598f98913915e57b74e63ba5d06d5a47 # main
+        uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@d49d96532dbf95a356a5756864fa45e33a0fa033 # v0.3.4
         with:
           pattern: "**/*.md"
-          before-sha: ${{ env.BEFORE_SHA }}
-          after-sha: ${{ env.AFTER_SHA }}
+          before-sha: ${{ steps.resolve-sha.outputs.before_sha }}
+          after-sha: ${{ steps.resolve-sha.outputs.after_sha }}
 
       - id: setup-repo
         if: steps.resolve-sha.outputs.skip != 'true'
-        uses: aglabo/ci-platform/.github/actions/ca-setup-repo@8d63776a598f98913915e57b74e63ba5d06d5a47 # main
+        uses: aglabo/ci-platform/.github/actions/ca-setup-repo@d49d96532dbf95a356a5756864fa45e33a0fa033 # v0.3.4
         with:
           repo: aglabo/agla-doc-tools
           path: ./.tools/agla-doc-tools
-          ref: bec772fc1d22fbf43fd57ef3a71f7972b83b3e24 # v0.1.1
+          ref: 65055a58be00ace993489273fe2a037d1ec1468d # v0.2.0
+          node-version: "24"
+          # Must match packageManager in package.json exactly; pnpm/action-setup
+          # errors out when the two differ.
+          pnpm-version: "11.20.0"
 
       - id: lint
         if: steps.resolve-sha.outputs.skip != 'true'
