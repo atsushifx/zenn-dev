@@ -51,6 +51,9 @@ releases/*
 ## Development tools (installed locally)
 .tools/
 
+## beads
+.beads/*
+
 ## Worktrees
 # worktree base dir
 .worktrees/
@@ -98,4 +101,5 @@ tmp/
 !.vscode/cspell*
 
 ## Node
+.pnpm-store/
 node_modules/
