@@ -23,8 +23,10 @@ Describe 'resolve-sha.sh'
       STUB_DIR=$(mktemp -d)
       export STUB_DIR
 
-      # Stub git to return 2 fields (HEAD SHA + parent SHA)
-      printf '#!/bin/sh\necho "abc123def456 parentsha123"\n' > "$STUB_DIR/git"
+      # Stub git to return multiple lines of "<commit> <parent>" pairs.
+      # Only the first line describes HEAD; later lines are older ancestors and
+      # must never be used for BEFORE_SHA/AFTER_SHA.
+      printf '#!/bin/sh\necho "abc123def456 parentsha123"\necho "parentsha123 grandparent789"\necho "grandparent789 greatgrand000"\n' > "$STUB_DIR/git"
       chmod +x "$STUB_DIR/git"
 
       export PATH="$STUB_DIR:$PATH"
