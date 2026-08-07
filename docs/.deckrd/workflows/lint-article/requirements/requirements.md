@@ -2,7 +2,7 @@
 title: "Requirements: ci-lint-articles Composite Action Migration"
 module: "workflows/lint-article"
 status: Draft
-version: 1.0.6
+version: 1.0.7
 created: "2026-06-22"
 ---
 
@@ -29,7 +29,7 @@ created: "2026-06-22"
 - `push: branches: [main], paths: ['**/*.md']` トリガーの追加
 - `workflow_dispatch` トリガーの追加 (before-sha = `github.sha^1`、after-sha = `github.sha` で変更ファイルを取得)
 - `ca-get-changed-files` の拡張 (SHA 指定済みの場合はそれを優先使用する動作を追加)
-- `ca-validate-environment` / `ca-get-changed-files` / `ca-setup-repo` の採用
+- `ca-validate-environment`/`ca-get-changed-files`/`ca-setup-repo` の採用
 - `pnpm run lint:text` と `pnpm run lint:markdown` による lint 実行
 
 **Out of Scope**:
@@ -44,10 +44,10 @@ created: "2026-06-22"
 - Target Environment: GitHub Actions (ubuntu-latest)
 - Related Components: `aglabo/ci-platform` (composite actions 提供元) 、`configs/textlintrc.yaml`、`configs/.markdownlint.yaml`
 - Assumptions:
-  - `aglabo/ci-platform` の composite actions は安定しており、`ca-get-changed-files` は push / pull_request どちらのトリガーでも動作する
+  - `aglabo/ci-platform` の composite actions は安定しており、`ca-get-changed-files` は push/pull_request どちらのトリガーでも動作する。ただし SHA 未指定での自動解決はこの 2 イベント **のみ** が対象であり、他イベントでは caller が SHA を明示的に渡す必要がある
   - `ca-get-changed-files` は push イベントでは `github.event.before` (before-sha) と `github.sha` (after-sha) を、pull_request イベントでは PR の base SHA (before-sha) と head SHA (after-sha) を使って変更ファイルリストを出力する
   - `ca-get-changed-files` は before-sha がオールゼロ (初回 push・新規ブランチ作成時) の場合、自動的に空ツリー SHA にフォールバックしてリポジトリ全ファイルとの差分を返す。caller 側での特別処理は不要
-  - `ca-setup-repo` は Node.js / pnpm のセットアップと `pnpm install` まで行うため、別途インストールステップは不要
+  - `ca-setup-repo` は Node.js/pnpm のセットアップと `pnpm install` まで行うため、別途インストールステップは不要
 
 ### System Context Diagram
 
@@ -144,14 +144,16 @@ THEN the system SHALL ca-get-changed-files を呼び出して変更された *.m
 
 SHA 解決ルール (ca-get-changed-files の動作):
 
-- before-sha / after-sha が指定済みの場合はそれを優先使用する
-- 未指定の場合はイベント種別から自動取得する
+- before-sha/after-sha が指定済みの場合はそれを優先使用する
+- **両方とも** 未指定 (空文字) の場合のみイベント種別から自動取得する。片方だけ空だとエラーになる
   - push イベント: before-sha = `github.event.before`、after-sha = `github.sha`
   - pull_request イベント: before-sha = PR base SHA、after-sha = PR head SHA
+  - 上記 2 イベント以外で空文字を渡すと `Unsupported event` でジョブが失敗する
 
 caller 側の責務:
 
-- workflow_dispatch 時は caller が before-sha = `github.sha^1`、after-sha = `github.sha` を渡す
+- `push` / `pull_request` 以外のすべてのイベント (workflow_dispatch、および `workflow_call` 経由の schedule / release 等) では、caller が before-sha = 親コミット、after-sha = `HEAD` を自前で解決して渡す
+- 親コミットが取得できない場合、`git rev-parse --is-shallow-repository` で真の初回コミット (skip) と shallow clone (失敗) を切り分ける
 
 **Rationale**: 変更されたファイルのみを lint することで実行時間を短縮し、無関係なファイルへの誤検知を防ぐため。
 
@@ -215,20 +217,29 @@ THEN the system SHALL lint ステップをスキップし、warning メッセー
 - EARS Type: event-driven
 
 ```text
-GIVEN workflow_dispatch イベントが発生する
+GIVEN workflow_dispatch イベント、または workflow_call 経由の
+  push / pull_request 以外のイベント (schedule, release 等) が発生する
   WHEN lint ジョブが起動する
-THEN the system SHALL before-sha に github.sha^1 を、after-sha に github.sha を設定して
+THEN the system SHALL before-sha に HEAD の親コミットを、after-sha に HEAD を設定して
   ca-get-changed-files に渡し、変更された *.md ファイルをリストアップして lint を実行する。
+
+GIVEN 親コミットが取得できない
+  WHEN shallow clone である (git rev-parse --is-shallow-repository が true)
+THEN the system SHALL エラーログを出力してジョブを失敗させる (exit non-zero)。
+  ELSE 真の初回コミットとして warning ログを出力し lint をスキップして exit 0 する。
 ```
 
 **Rationale**: 手動実行時も最新コミットで変更されたファイルを、lint の対象にするため。
 
 **Acceptance Criteria**:
 
-| AC ID  | Scenario                                                             |
-| ------ | -------------------------------------------------------------------- |
-| AC-011 | workflow_dispatch 実行時に lint が起動する                           |
-| AC-012 | workflow_dispatch 時は github.sha^1 と github.sha の差分が対象になる |
+| AC ID  | Scenario                                                                                     |
+| ------ | -------------------------------------------------------------------------------------------- |
+| AC-011 | workflow_dispatch 実行時に lint が起動する                                                   |
+| AC-012 | workflow_dispatch 時は HEAD の親と HEAD の差分が対象になる                                   |
+| AC-013 | workflow_call 経由の schedule 等でも自前で SHA を解決し lint が実行される (空文字を渡さない) |
+| AC-014 | shallow clone で親が取得できない場合、skip せずジョブが失敗する                              |
+| AC-015 | push / pull_request では before_sha / after_sha が両方とも空文字で出力される                 |
 
 ## 5. Non-Functional Requirements
 
@@ -244,7 +255,13 @@ ci-platform の composite actions は外部リポジトリ (`aglabo/ci-platform`
 
 ### REQ-C-001: fetch-depth 制約
 
-`ca-get-changed-files` は git の履歴全体を必要とするため、`actions/checkout` の `fetch-depth` は `0` に設定しなければならない。
+`actions/checkout` の `fetch-depth` はデフォルト値を `0` (全履歴) としなければならない (MUST) 。`workflow_dispatch` および `workflow_call` の入力パラメータによる上書きを許容する。
+
+この入力パラメータを受け取るため、`workflow_call` トリガーを定義する。`workflow_call` は `fetch-depth` パラメータの受け渡しのみを目的とし、他の再利用用途は想定しない。
+
+`ca-get-changed-files` は任意の 2 つの SHA 間の diff を計算するため、原則として git の履歴全体を必要とする。`fetch-depth` を短縮した場合、比較対象の SHA がローカルに存在せず `ca-get-changed-files` が失敗するリスクがある。短縮値の指定は、対象コミット範囲が浅いことを呼び出し側が把握している場合に限る。
+
+なお `workflow_dispatch` では SHA 解決が HEAD の第一親を参照するため、実用上の下限を `2` とする。この下限に対するバリデーションは実装しない (呼び出し側の責務とする) 。
 
 ### REQ-C-002: push トリガー対象ブランチ
 
@@ -252,7 +269,7 @@ push トリガーは `main` ブランチのみを対象とする。feature ブ�
 
 ### REQ-C-003: paths フィルター
 
-push / pull_request トリガーともに `paths: ['**/*.md']` フィルターを設定し、Markdown 以外の変更では lint ジョブを起動しない。
+push/pull_request トリガーともに `paths: ['**/*.md']` フィルターを設定し、Markdown 以外の変更では lint ジョブを起動しない。
 
 ### REQ-C-004: 使用するすべての Action の SHA 固定
 
@@ -347,3 +364,4 @@ Scenario: lint エラーでワークフローが失敗する
 | 2026-06-22 | 1.0.4   | REQ-C-004 をすべての Action の SHA 固定に拡張 (DR-07 追加)                                                        |
 | 2026-06-22 | 1.0.5   | REQ-F-006 に削除済みファイルの caller 側スキップ処理を追加 (AC-014 追加)                                          |
 | 2026-06-22 | 1.0.6   | Assumptions に初回 push 時の空ツリー SHA フォールバック動作を明記 (ca-get-changed-files が自動処理)               |
+| 2026-08-07 | 1.0.7   | REQ-C-001 を fetch-depth 固定からデフォルト `0` + 入力パラメータによる上書き許容に緩和                            |
