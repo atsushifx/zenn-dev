@@ -7,9 +7,9 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-set -euo pipefail
+# shellcheck source=runners/libs/init-vars.lib.sh
 
-# shellcheck disable=SC1091
+set -euo pipefail
 . "$(dirname "${BASH_SOURCE[0]}")/libs/init-vars.lib.sh"
 
 main() {
@@ -48,3 +48,4 @@ main() {
 if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
   main "$@"
 fi
+
