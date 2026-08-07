@@ -36,6 +36,7 @@ rules:
         - alphabets
         - numbers
     ja-no-space-around-parentheses: false
+    ja-no-space-around-slash: false
     ja-space-around-code:
       before: true
       after: true
