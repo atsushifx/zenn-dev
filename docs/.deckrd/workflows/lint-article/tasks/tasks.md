@@ -39,8 +39,8 @@ source: specifications.md
   - Scenario: Given checkout ステップが定義されている
   - Expected: Then `with.persist-credentials: false` が設定されていなければならない (MUST)
 
-- [x] **T-00-01-03**: skip 伝播の `if` 条件が changed-files / setup-repo / lint の 3 ステップに付与されている
-  - Target: `ci-lint-articles.yaml` の changed-files / setup-repo / lint 各ステップ
+- [x] **T-00-01-03**: skip 伝播の `if` 条件が changed-files/setup-repo/lint の 3 ステップに付与されている
+  - Target: `ci-lint-articles.yaml` の changed-files/setup-repo/lint 各ステップ
   - Scenario: Given resolve-sha ステップが `skip=true` を出力した
   - Expected: Then 3 ステップそれぞれに `if: steps.resolve-sha.outputs.skip != 'true'` が定義されていなければならない (MUST)
 
@@ -52,19 +52,19 @@ source: specifications.md
 
 - [x] **T-00-02-02**: `ca-validate-environment` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の validate-env ステップ
-  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-validate-environment@8d63776a598f98913915e57b74e63ba5d06d5a47` が定義されていなければならない (MUST)
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-validate-environment@9cc4b15bf10854ecc0fc2ea0a419d96566ea8bde` が定義されていなければならない (MUST)
 
 - [x] **T-00-02-03**: `ca-get-changed-files` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の changed-files ステップ
-  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@8d63776a598f98913915e57b74e63ba5d06d5a47` が定義されていなければならない (MUST)
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-get-changed-files@9cc4b15bf10854ecc0fc2ea0a419d96566ea8bde` が定義されていなければならない (MUST)
 
 - [x] **T-00-02-04**: `ca-setup-repo` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の setup-repo ステップ
-  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-setup-repo@8d63776a598f98913915e57b74e63ba5d06d5a47` が定義されていなければならない (MUST)
+  - Expected: Then `uses: aglabo/ci-platform/.github/actions/ca-setup-repo@9cc4b15bf10854ecc0fc2ea0a419d96566ea8bde` が定義されていなければならない (MUST)
 
 - [x] **T-00-02-05**: `agla-doc-tools` の `ref` が commit SHA で固定されている
   - Target: `ci-lint-articles.yaml` の setup-repo ステップ `with.ref`
-  - Expected: Then `ref: bec772fc1d22fbf43fd57ef3a71f7972b83b3e24 # v0.1.1` が定義されていなければならない (MUST)
+  - Expected: Then `ref: 65055a58be00ace993489273fe2a037d1ec1468d # v0.2.0` が定義されていなければならない (MUST)
 
 ---
 
@@ -106,20 +106,30 @@ source: specifications.md
 
 #### T-02-01: workflow_dispatch で親コミットあり
 
-- [x] **T-02-01-01**: workflow_dispatch で HEAD^1 が取得でき GITHUB_ENV に書き込まれる
+- [x] **T-02-01-01**: workflow_dispatch で HEAD の親が取得でき GITHUB_OUTPUT に書き込まれる
   - Target: `resolve-sha` ステップのシェルスクリプト
   - Scenario: Given `workflow_dispatch` イベント、かつ `git rev-list --parents -n 1 HEAD` が 2 フィールド以上を返す (親あり)
-  - Expected: Then `BEFORE_SHA=<HEAD^1>`, `AFTER_SHA=<HEAD>` が `GITHUB_ENV` に書き込まれ、
+  - Expected: Then `before_sha=<親>`, `after_sha=<HEAD>` が `GITHUB_OUTPUT` に書き込まれ、
     `skip=false` が `GITHUB_OUTPUT` に書き込まれなければならない (MUST) 。
-    また `changed-files` ステップの `with.before-sha: ${{ env.BEFORE_SHA }}` / `with.after-sha: ${{ env.AFTER_SHA }}` が
+    また `changed-files` ステップの
+    `with.before-sha: ${{ steps.resolve-sha.outputs.before_sha }}`/`with.after-sha: ${{ steps.resolve-sha.outputs.after_sha }}` が
     YAML に定義されていなければならない (MUST)
 
 #### T-02-02: push / pull_request では空文字 SHA を設定
 
-- [x] **T-02-02-01**: push / PR 時は BEFORE_SHA / AFTER_SHA が空文字で GITHUB_ENV に書き込まれる
+- [x] **T-02-02-01**: push/PR 時は before_sha/after_sha が空文字で GITHUB_OUTPUT に書き込まれる
   - Target: `resolve-sha` ステップのシェルスクリプト
   - Scenario: Given `push` または `pull_request` イベント
-  - Expected: Then `BEFORE_SHA=""`, `AFTER_SHA=""` が `GITHUB_ENV` に書き込まれ、`skip=false` が `GITHUB_OUTPUT` に書き込まれなければならない (MUST)
+  - Expected: Then `before_sha=`, `after_sha=` が **両方とも空文字で** `GITHUB_OUTPUT` に書き込まれ、`skip=false` が `GITHUB_OUTPUT` に書き込まれなければならない (MUST) 。
+    片方だけ空だと上流が `before-sha and after-sha must both be specified or both be empty` で失敗するため、行完全一致で検証すること
+
+#### T-02-05: workflow_call 由来の非 push/PR イベント
+
+- [x] **T-02-05-01**: schedule 等の非 push/PR イベントでも自前で SHA を解決する
+  - Target: `resolve-sha` ステップのシェルスクリプト
+  - Scenario: Given `schedule` など `push`/`pull_request`/`workflow_dispatch` 以外のイベント、かつ親コミットが存在する
+  - Expected: Then `before_sha=<親>`, `after_sha=<HEAD>` が実 SHA で `GITHUB_OUTPUT` に書き込まれなければならない (MUST) 。
+    空文字を渡すと上流 `ca-get-changed-files` が `Unsupported event` で失敗するため
 
 ### [異常] Error Cases
 
@@ -136,9 +146,21 @@ source: specifications.md
 
 - [x] **T-02-04-01**: 初回コミット (parent 数 == 0) の場合、warning を出力して後続ステップをスキップする
   - Target: `resolve-sha` ステップのシェルスクリプト
-  - Scenario: Given `workflow_dispatch` イベント、かつ `git rev-list --parents -n 1 HEAD` が 1 フィールド (親なし) を返す
+  - Scenario: Given 非 push/PR イベント、`git rev-list --parents -n 1 HEAD` が 1 フィールド (親なし) を返し、
+    かつ `git rev-parse --is-shallow-repository` が `false` (真の初回コミット) を返す
   - Expected: Then `skip=true` が `GITHUB_OUTPUT` に書き込まれ、warning ログが出力され、exit 0 となる。
-    後続の `changed-files` / `setup-repo` / `lint` ステップは `if: steps.resolve-sha.outputs.skip != 'true'` により実行されない
+    後続の `changed-files`/`setup-repo`/`lint` ステップは `if: steps.resolve-sha.outputs.skip != 'true'` により実行されない
+
+#### T-02-06: shallow clone で親が未 fetch
+
+- [x] **T-02-06-01**: shallow clone を初回コミットと誤認せず、ジョブを失敗させる
+  - Target: `resolve-sha` ステップのシェルスクリプト
+  - Scenario: Given 非 push/PR イベント、`git rev-list --parents -n 1 HEAD` が 1 フィールド (親なし) を返し、
+    かつ `git rev-parse --is-shallow-repository` が `true` を返す
+  - Expected: Then error ログを出力し、exit non-zero でジョブを失敗させなければならない (MUST) 。
+    `skip=true` を書き込んではならない (MUST NOT) 。
+    `workflow_call` の caller は `fetch-depth: "1"` を渡せるため shallow は現実に起こりうる。
+    これを skip すると lint が実行されないまま成功扱いになる (fail-first 原則)
 
 ---
 
@@ -152,15 +174,16 @@ source: specifications.md
   - Target: `ci-lint-articles.yaml` のステップ順序
   - Scenario: Given ワークフローが起動する、When ステップ定義を確認する
   - Expected: Then `validate-env` ステップが YAML のステップリスト上で `checkout` の直後 (2 番目) に定義されていなければならない (MUST) 。
-    `resolve-sha` より前に配置されていること。また `checkout` の `fetch-depth: 0` が定義されていなければならない (MUST)
+    `resolve-sha` より前に配置されていること。また `checkout` の `fetch-depth` がジョブレベルの `env.FETCH_DEPTH` を参照し、
+    未指定時に `0` へ解決されなければならない (MUST)
 
 #### T-03-02: ca-get-changed-files で変更 *.md を取得
 
-- [x] **T-03-02-01**: changed-files ステップが BEFORE_SHA / AFTER_SHA を渡して実行される
+- [x] **T-03-02-01**: changed-files ステップが BEFORE_SHA/AFTER_SHA を渡して実行される
   - Target: `changed-files` ステップの with パラメータ
-  - Scenario: Given `resolve-sha` が完了し `GITHUB_ENV` に SHA が設定済み、When `changed-files` ステップが実行される
-  - Expected: Then `ca-get-changed-files` に `pattern: '**/*.md'`、`before-sha: ${{ env.BEFORE_SHA }}`、
-    `after-sha: ${{ env.AFTER_SHA }}` が渡されなければならない (MUST)
+  - Scenario: Given `resolve-sha` が完了し `GITHUB_OUTPUT` に SHA が設定済み、When `changed-files` ステップが実行される
+  - Expected: Then `ca-get-changed-files` に `pattern: '**/*.md'`、`before-sha: ${{ steps.resolve-sha.outputs.before_sha }}`、
+    `after-sha: ${{ steps.resolve-sha.outputs.after_sha }}` が渡されなければならない (MUST)
 
 - [x] **T-03-02-02**: skip=true の場合、changed-files ステップが実行されない
   - Target: `changed-files` ステップの `if:` 条件
@@ -181,7 +204,9 @@ source: specifications.md
 - [x] **T-03-04-01**: ca-setup-repo ステップが正しいパラメータで定義されている
   - Target: `ci-lint-articles.yaml` の `setup-repo` ステップ
   - Scenario: Given ワークフローが定義されている、When setup-repo ステップ定義を確認する
-  - Expected: Then `repo: aglabo/agla-doc-tools`、`path: .tools/agla-doc-tools`、`ref: bec772fc1d22fbf43fd57ef3a71f7972b83b3e24` が定義されていなければならない (MUST)
+  - Expected: Then `repo: aglabo/agla-doc-tools`、`path: .tools/agla-doc-tools`、`ref: 65055a58be00ace993489273fe2a037d1ec1468d` が定義されていなければならない (MUST) 。
+    また `agla-doc-tools` v0.2.0 の `engines` (`node >=24`、`pnpm >=11`) を満たすため、
+    `node-version: "24"` と `pnpm-version: "11"` が定義されていなければならない (MUST)
 
 - [x] **T-03-04-02**: skip=true の場合、setup-repo ステップが実行されない
   - Target: `ci-lint-articles.yaml` の `setup-repo` ステップの `if:` 条件
@@ -256,7 +281,7 @@ source: specifications.md
   - Expected: Then `"deleted -> skip"` がログに出力され、そのファイルへの lint は実行されず次のファイルに進む (exit 0)
 
 - [x] **T-04-03-03**: 全ファイルが削除済みの場合でも exit 0 になる
-  - Target: `lint` ステップのシェルスクリプト (R-005b / R-005c)
+  - Target: `lint` ステップのシェルスクリプト (R-005b/R-005c)
   - Scenario: Given `CHANGED_COUNT` が 1 以上、かつ `outputs.files` に含まれる全ファイルがファイルシステム上に存在しない
   - Expected: Then 全ファイルが `"deleted -> skip"` でスキップされ、lint を一切実行せず exit 0 で完了する
 
