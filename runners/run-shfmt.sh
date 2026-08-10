@@ -10,6 +10,8 @@
 # shellcheck source=runners/libs/init-vars.lib.sh
 
 set -euo pipefail
+
+# shellcheck source=runners/libs/init-vars.lib.sh
 . "$(dirname "${BASH_SOURCE[0]}")/libs/init-vars.lib.sh"
 
 main() {
