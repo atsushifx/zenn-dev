@@ -6,7 +6,7 @@ topics: ["chatlog-exporter", "claudecode", "Obsidian", "Deno", "AIエージェ�
 published: false
 ---
 
-<!-- cspell:words dics atuin -->
+<!-- cspell:words dics aplys -->
 <!-- textlint-disable
   ja-technical-writing/sentence-length,
   ja-technical-writing/no-exclamation-question-mark,
@@ -197,7 +197,7 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 **skills**:
 `skills` は、エージェントスキルをインストール・管理するための CLI です。`npx skills` または `pnpx skills` で実行できます。
 
-詳しいインストール方法は、[§3 インストール](#3-chatlog-exporter-のインストール) で解説します。
+詳しいインストール方法は、[§3 `chatlog-exporter` のセットアップ](#3-chatlog-exporter-のセットアップ) で解説します。
 
 ### 2.3 対応エージェント
 
@@ -233,29 +233,34 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 
 上記の場合は、「パターン認識を使って、Claude Code の 2026年6月分から不要なログを削除する」という意味となります。
 
-## 3. `chatlog-exporter` のインストール
+## 3. `chatlog-exporter` のセットアップ
 
 `chatlog-exporter` は、`gh skill`、`npx skills` で簡単にインストールできます。
-この章では、各コマンドによるインストール方法、および、`/setup-chatlogs` による初期設定を解説します。
+この章では、各コマンドによるインストール方法、および `/setup-chatlogs` による初期設定を解説します。
 
 ### 3.1 `gh skill` によるインストール
 
-`chatlog-exporter` は、GitHub CLI の `gh skill` でインストールできます。
-インストールする場合は、`gh skill install` を使用します。
+`chatlog-exporter` は、GitHub CLI の `gh skill install` でインストールできます。
 
 ```bash
 gh skill install aglabo/chatlog-exporter --all --agent claude-code --scope project
 ```
 
-- `aglabo/chatlog-exporter` は、エージェントスキルが存在するリポジトリを示します。
-  本来は、`https://github.com/aglabo/chatlog-exporter` ですが、先頭の `https://github.com/` は省略できます。
-- `--all` は、リポジトリ内のすべてのスキルを対象にするオプションです。この場合、全スキルをインストールするという意味になります。
-- `--agent claude-code` はスキルを使用するエージェントを指定します。使用できるエージェントは `gh skills` のヘルプを参照してください。
+- `aglabo/chatlog-exporter`:
+  エージェントスキルが存在するリポジトリを示します。本来は、`https://github.com/aglabo/chatlog-exporter` ですが、先頭の `https://github.com/` は省略できます。
+
+- `--all`:
+  リポジトリ内で検出されたすべてのスキルをインストールします。
+
+- `--agent claude-code`:
+  スキルを使用するエージェントを指定します。使用できるエージェントは `gh skill install --help` で確認できます。
   :::message alert
-  Claude Code 以外のエージェントでも動作するはずですが、動作確認をしていないため保証外とします。
+  `gh skill` は Claude Code 以外のエージェントにも対応していますが、`chatlog-exporter` は Claude Code 以外での動作確認をしていません。
+  本記事では、Claude Code のみを動作確認済みの環境とします。
   :::
-- `--scope project` は、スキルをプロジェクトスキルとしてインストールすることを示します。
-  この場合、`chatlog-exporter` はインストールしたディレクトリ以外では実行できません。
+
+- `--scope project`:
+  スキルを、現在の Git リポジトリ内で利用するプロジェクトスキルとしてインストールします。
 
 なお `gh skills` は `gh skill` のエイリアスのため、どちらの表記でも動作します。
 
@@ -268,45 +273,233 @@ gh skill install aglabo/chatlog-exporter --all --agent claude-code --scope proje
 予告なく仕様が変わる可能性もあるため、利用時は最新のマニュアルを確認してください。
 :::
 
-### 3.2 `npx skills` によるインストール
+### 3.2 `npx skills` / `pnpx skills` によるインストール
 
-`GitHub CLI` を導入していない場合は、`npx skills` でも同じスキルを導入できます。
+GitHub CLI を使用しない場合は、Agent Skills のインストール用 CLI である `skills` を使って `chatlog-exporter` をインストールできます。
+`skills` の実行には、`npm` を使用します。
 
 ```bash
-npx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code
+npx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 ```
 
-`--skill '*'` は、すべてのスキルを対象にする指定です。
-`npx skills` の `--all` は `--skill '*' --agent '*' -y` のショートハンドであり、`--agent` の指定を打ち消します。
-インストール先を `Claude Code` に限定する場合は、`--all` ではなく `--skill '*'` を使います。
+- `aglabo/chatlog-exporter`:
+  エージェントスキルが存在するリポジトリを指定します。GitHub 上のリポジトリの場合、先頭の `https://github.com/` を省略できます。
 
-### 3.3 `/setup-chatlogs` による初期セットアップ
+- `--skill '*'`:
+  リポジトリ内の全てのスキルをインストールします。
 
-スキルの導入後、プロジェクトで 1 度だけ `/setup-chatlogs` を実行します。
+- `--agent claude-code`:
+  Claude Code 向けにスキルをインストールします。
+
+- `-y`:
+  インストール時の確認プロンプトをスキップします。
+
+:::message alert
+`npx skills` の `--all` は、`--skill '*' --agent '*' -y` のショートハンドです。そのため、`--agent claude-code` と組み合わせても、インストール先を Claude Code のみに限定できません。
+
+Claude Code のみにインストールする場合は、`--all` ではなく `--skill '*' --agent claude-code` を指定してください。
+:::
+
+パッケージマネージャーとして `pnpm` を使用している場合は、`npx skills` の代わりに `pnpx skills` を使用します。
+
+```bash
+pnpx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
+```
+
+各オプションは `npx skills` と同じため、説明は省略します。
+
+### 3.3 `/setup-chatlogs` による初期設定
+
+`chatlog-exporter` の各スキルを実行するには、設定ファイル、辞書ファイル、共有ライブラリの初期配置が必要です。
+`/setup-chatlogs` は、これらのファイルを各スキルが参照するディレクトリへ展開します。
 
 ```bash
 /setup-chatlogs
 ```
 
-この初期設定は省略できません。
-設定ファイル・分類辞書・共有ライブラリが揃っていないと、他のスキルが動かないためです。
+:::message alert
+`/setup-chatlogs` は、実行時のカレントディレクトリを基準に、設定ファイルなどの配置先を決定します。
+だし、共有ライブラリ `_cle-libs/` は、インストールされた各スキルと同じ `skills` ディレクトリ直下に配置されます。
+:::
 
-| 展開先                      | 内容                                        | 基準                 |
-| --------------------------- | ------------------------------------------- | -------------------- |
-| `.config/chatlog-exporter/` | `config.yaml`、分類辞書 `dics/`、`prompts/` | カレントディレクトリ |
-| `deno.json`                 | `chatlog-exporter` 用の `Deno` 設定         | カレントディレクトリ |
-| `_cle-libs/`                | 各スキルが共有する型・定数・ライブラリ      | スキルの隣           |
+初期設定で展開される主なファイルとディレクトリは、次の通りです。
 
-*表3-1: /setup-chatlogs が展開する 3 エントリと配置の基準*
+| 展開先                      | 内容                                        | 配置基準                                                       |
+| --------------------------- | ------------------------------------------- | -------------------------------------------------------------- |
+| `.config/chatlog-exporter/` | `config.yaml`、分類辞書 `dics/`、`prompts/` | カレントディレクトリ                                           |
+| `deno.json`                 | `chatlog-exporter` 用の Deno 設定           | カレントディレクトリ                                           |
+| `_cle-libs/`                | 各スキルが共有する型・定数・ライブラリ      | インストールされたディレクトリと同じ `skills` ディレクトリ直下 |
 
-`_cle-libs/` だけは配置の基準が違います。
-各スキルが `../../_cle-libs/` として参照するため、カレントディレクトリではなくスキルをインストールした場所へ展開されます。
+*表3-1: `/setup-chatlogs` が展開するファイルとディレクトリ*
 
-`.config/chatlog-exporter/` と `deno.json` はカレントディレクトリを基準に展開されます。
-リポジトリルート以外のサブディレクトリで実行してもエラーにはならず、そのサブディレクトリを基準に展開されます。
-実行前に作業ディレクトリを確認しておくと安全です。
+`.config/chatlog-exporter/` には、ログの出力先や AI エージェントのモデルなどを指定する設定ファイル `config.yaml`、およびチャットログの分類・整理に使用する辞書ファイルやプロンプトを配置します。
+`config.yaml` や辞書ファイルについては、[§1.4 カスタマイズできる項目](#14-カスタマイズできる項目) で説明した設定ファイルです。
 
-## 4. スキルによる基本ワークフロー
+`deno.json` は、`/export-chatlogs` などのスキルから TypeScript のスクリプトを実行するために使用します。
+
+`_cle-libs/` には `chatlog-exporter` の各スキルが共通で使用する型・定数・ライブラリを配置します。
+各スキルが `../../_cle-libs/` という相対パスで参照するため、スキルをインストールしたディレクトリを基準にして配置します。
+
+`/setup-chatlogs` による初期設定が完了したあとは、通常、`/setup-chatlogs` を再実行する必要はありません。
+展開済みのファイルやディレクトリを更新する場合は、`--force` を使用して既存の展開先を上書きします。
+
+```bash
+/setup-chatlogs --force
+```
+
+### 3.4 辞書のカスタマイズ
+
+`/setup-chatlogs` で展開されるファイルでは、`.config/chatlog-exporter/dics` に辞書ファイルが配置されています。
+プロジェクトにあわせて辞書をカスタマイズすることで、チャットログを用途に適した形で整理・分類できます。
+
+#### 辞書の種類
+
+辞書には、次の種類があります。
+
+| 辞書           | 辞書ファイル     | 概要                                                               | カスタマイズ |
+| -------------- | ---------------- | ------------------------------------------------------------------ | ------------ |
+| 種別           | `types.dic`      | 記事の大分類を定義                                                 | 通常は不要   |
+| カテゴリー     | `category.dic`   | 記事の領域を特徴付けるカテゴリーを定義                             | 通常は不要   |
+| プロジェクト   | `projects.dic`   | 記事が属するプロジェクトを定義。明示されていない場合は記事から推定 | **推奨**     |
+| トピックス     | `topics.dic`     | `domain` と `aspect` の2層で、記事の領域と観点を定義               | 通常は不要   |
+| ネームスペース | `namespaces.dic` | `ai`、`lang` など、タグを分類する観点を定義                        | 通常は不要   |
+| タグ           | `tags.dic`       | `<namespace>/<tag>` 形式で記事の関心領域や文脈を定義               | **推奨**     |
+
+*表3-2: 辞書の種類*
+
+`chatlog-exporter` は各記事を解析し、上記の辞書をもとに分類します。
+特に `projects.dic`、`tags.dic` を開発環境やプロジェクトにあわせてカスタマイズすることで、用途に応じた知識 DB を構築できます。
+
+- `projects.dic`:
+  記事が属するプロジェクトを選択します。
+  `projects.dic` には、`dev-tooling`, `ai-tools` などの用途別の分類先を定義します。
+  また、`aplys`、`deckrd`、`ci-platform`、`chatlog-exporter` など、個別プロジェクトも分類先として定義します。
+
+  個別プロジェクトを分類先として辞書に追加することで、プロジェクトごとに記事を絞り込んで参照できます。
+
+  プロジェクトが設定されていない場合、記事の内容からどのプロジェクトに該当するかを推定します。どのプロジェクトにも該当しなければ、`misc` となります。
+  `misc` が割り当てられた記事を確認し、記事に応じた分類先を辞書に追加することで、分類精度を改善できます。
+
+- `tags.dic`:
+  タグは `<namespace>` と `<tag>` から作成され、記事の関心領域を示します。
+  例えば、`os/wsl` は WSL に関連する項目、`dev/design-decision` はソフトウェア開発における設計判断を示します。
+  この 2つのタグが付いた記事は、WSL 用ツールの設計判断に関する記事だと判断できます。
+
+  タグの中には、`tool/deckrd` や `tool/ci-platform` のように、拙作のプロジェクト用のタグもあります。
+  不要なタグを取り除き、自分のプロジェクト用のタグを追加することで、分類精度を向上できます。
+
+#### 辞書の基本構造
+
+辞書は複数のエントリーで構成され、各エントリーはおおむね下記の YAML 形式で記述されます。辞書によっては、追加のフィールドを持つ場合があります。
+
+```YAML
+<key>:
+  def: <AIが分類判断に使う定義>
+  desc: <人間向けの説明>
+  rules:
+    when:
+      - <このENTRYを選ぶ条件>
+    while:
+      - <条件を判断するときの文脈・状態>
+    not:
+      - <このENTRYから除外する条件>
+    where:
+      - <他ENTRYとの境界や適用範囲>
+```
+
+既存エントリーの定義やルールを修正するか、新しいキーワードのエントリーを追加することで辞書をカスタマイズできます。
+
+### 3.5 プロンプトのカスタマイズ
+
+通常は、§3.4 で説明した辞書のカスタマイズだけで、チャットログの分類方法を調整できます。
+
+一方、`type` や `category` の判定方法そのものを変更する場合や、`topics`、`tags` の候補から値を選択する規則を変更する場合は、`.config/chatlog-exporter/prompts/` に配置されたプロンプトを変更します。
+
+#### プロンプトの呼び出し形式
+
+`chatlog-exporter` のプロンプトは、AI エージェントへそのまま渡す固定文章ではありません。
+プロンプト内には `${type_dics}` や `${body}` のような変数が記述されており、実行時に辞書やチャットログの内容を埋め込んで AI エージェントへ渡します。
+
+例えば、`type` と `category` を判定する `type-category.yaml` では、次のデータをプロンプトへ埋め込みます。
+
+| 変数                | 内容                                          |
+| ------------------- | --------------------------------------------- |
+| `${type_dics}`      | `types.dic` から生成した `type` の定義        |
+| `${category_dics}`  | `category.dic` から生成した `category` の定義 |
+| `${category_rules}` | `category-rules.yaml` に定義された判定ルール  |
+| `${entries}`        | 判定対象となるチャットログ                    |
+
+*表3-3: `type-category.yaml` へ埋め込まれる主な変数*
+
+`type-category.yaml` は、これらのデータから `type` と `category` を同時に判定し、次の形式で結果を返すよう AI エージェントへ指示します。
+
+```text
+type: <type_key>
+category: <category_key>
+```
+
+この構造により、分類候補となるキーワードは辞書、候補から選択する方法はプロンプトという形で役割を分けています。
+そのため、新しいカテゴリーを追加するだけなら `category.dic` を変更し、カテゴリーを選ぶ基準そのものを変更するときはプロンプトを変更します。
+
+#### YAML プロンプトの構成
+
+`.config/chatlog-exporter/prompts/` には、用途ごとに複数の YAML ファイルが配置されています。
+
+プロンプトは基本的に `system` と `user` の 2 つのフィールドで構成されます。
+
+```yaml
+system: |
+  <AI エージェントの役割や出力形式>
+
+user: |
+  <処理内容や判定ルール>
+
+  ${variable}
+```
+
+`system` では AI エージェントの役割や出力形式など、処理全体に適用する条件を指定します。
+
+`user` では実際に行なわせる処理と、辞書やチャットログから生成されたデータを指定します。
+
+例えば、`frontmatter` を生成する `meta.yaml` では、判定済みの `type` と `category`、`topics.dic` と `tags.dic` から生成した候補、チャットログ本文を受け取ります。
+
+```text
+type/category
+       │
+       ├── topics.dic
+       ├── tags.dic
+       │
+       ▼
+    meta.yaml
+       │
+       ├── title
+       ├── topics
+       └── tags
+```
+
+`meta.yaml` は、§3.4 で説明した `topics` の構造に従い、`topics` として `domain` と `aspect` を生成する規則を定義しています。
+`domain` は記事の領域として `category` と一致させ、`aspect` は `topics.dic` から最大 2個を選択します。
+
+このように、辞書が「選択できる値とその意味」を持つのに対し、プロンプトは「その値をどのように選択し、どの形式で返すか」を定義します。
+
+#### プロンプトのカスタマイズ方法
+
+プロンプトを変更すると、同じ辞書を使用していても AI エージェントの判定方法を変更できます。
+
+例えば、次のような変更が対象になります。
+
+- `type`、`category` の判定順序や判定基準の変更
+- `topics` に設定する `aspect` の個数や組み合わせ規則の変更
+- `tags` の選択条件の変更
+- AI エージェントから受け取る出力形式の変更
+
+ただし、プロンプトと実行側の処理は独立しているわけではありません。
+例えば、後続処理では `type-category.yaml` の出力から `type:` と `category:` で始まる行を解析するため、プロンプトの出力形式もこの形式に対応させる必要があります。
+
+そのため、単純に分類候補を追加・削除する目的でプロンプトを変更する必要はありません。
+まず `dics/` の辞書で分類体系を調整し、辞書だけでは表現できない判定規則や出力構造を変更する場合に `prompts/` をカスタマイズするのが基本です。
+
+## 4. スキルによる基本ワークフロー`
 
 ### 4.1 ワークフローの全体像
 
@@ -643,6 +836,3 @@ AI が `title` / `type` / `category` / `topics` / `tags` を生成し、タグ�
 
 - [Obsidian](https://obsidian.md/)
   Markdown ベースのナレッジベースツール
-
-- [atuin](https://atuin.sh/)
-  シェルのコマンド履歴を検索可能なデータベースへ移すツール
