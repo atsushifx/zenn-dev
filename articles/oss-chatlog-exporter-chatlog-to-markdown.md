@@ -130,52 +130,132 @@ AI エージェントのチャットログは、各スキルを続けて実行�
 `config.yaml` では、AI エージェントのモデルなど、システムの設定項目を指定します。
 一部の設定は、スキルのオプションでも切り替えられます (後述)。
 
-## 2. 前提環境
+## 2. 動作環境
 
-### 2.1 必要なコマンド (`claude` / `deno`)
+### 2.1 実行の前提条件
 
-`chatlog-exporter` の利用には、次のツールが必要です。
+`chatlog-exporter` を実行するためには、次のツールが必要です。
 
-| ツール                       | 用途                                 |
-| ---------------------------- | ------------------------------------ |
-| `GitHub CLI` または `npm`    | スキルのインストール (導入時のみ)    |
-| `Deno`                       | 各スキルの `TypeScript` 実行環境     |
-| `claude` (`Claude Code` CLI) | AI 処理を行なうスキルが使用          |
-| `bash`                       | 初期設定用 (Windows では `Git Bash`) |
+| ツール                 | 用途                                                  | 必須となる場面                         |
+| ---------------------- | ----------------------------------------------------- | -------------------------------------- |
+| Claude Code (`claude`) | スキル実行プラットフォーム / ログ判定、メタデータ生成 | `chatlog-exporter` 実行時              |
+| `bash`                 | `/setup-chatlogs` の初期設定処理                      | `/setup-chatlogs` による初期設定時     |
+| `deno`                 | スキルを構成する TypeScript の実行                    | `/setup-chatlogs` 以外のスキルの実行時 |
 
-*表2-1: chatlog-exporter が必要とするツール*
+Claude Code には、`chatlog-exporter` を実行するためのプラットフォームとしての役割があります。
+`chatlog-exporter` の各スキルは、`claude` を起動した後の TUI 画面でスキルコマンドを入力することで利用できます。
 
-`Deno` と `claude` は、スキルの実行時に毎回必要です。
-一方、`GitHub CLI` と `npm` はインストール時にのみ使います。
+AI を使うスキルでは `claude` コマンドを呼び出し、ログの判定やメタデータの生成に使用します。
+例えば、`/filter-chatlogs` スキルではログの内容から要／不要を判定し、`/set-frontmatter` スキルではログの内容に応じたメタデータを生成します。
 
-Windows で作業する場合、`bash` は `Git Bash` を利用します。
-初期設定が `bash` スクリプトとして実装されているため、`PowerShell` や `cmd.exe` だけの環境では最初の一歩が通りません。
+`bash` と `deno` は、各スキルから呼び出すスクリプトの実行に使用します。
+`/setup-chatlogs` の初期設定処理はシェルスクリプトで実装されており、`bash` で動作します。
+`/setup-chatlogs` 以外のスキルで使用するスクリプトは、TypeScript で実装されており、実行には、`deno` が必要です。
 
-### 2.2 対応エージェント (claude / codex / chatgpt)
+いずれのツールもコマンドラインから呼び出されるため、コマンド名だけで起動できる必要があります。
 
-`chatlog-exporter` が対応するエージェントは、claude (デフォルト)、codex、chatgpt の 3 種類です。
-どのエージェントのログを対象にするかは、各スキルの第 1 引数で指定します。
+#### Windows 環境での `bash` 設定
+
+Windows 環境の場合、標準では `bash` がインストールされていません。
+そのため、`Git for Windows` に含まれる `Git Bash` の `bash` コマンドを使用します。
+
+次の手順で、`bash` をコマンドラインから起動できるようにします。
+
+1. `Git for Windows` のインストール:
+   `winget`, `scoop` などのパッケージマネージャー、あるいは公式のインストーラーで `Git for Windows` をインストールします。
+
+2. `bash` を環境変数 `Path` に追加:
+   Windows のコマンドラインで `bash` を起動できるようにするため、`bash` をインストールしたディレクトリを環境変数 `Path` に追加します。
+   例えば、`C:/app/develop/scm/git` に `Git for Windows` をインストールした場合は、
+
+   ```text
+   C:/app/develop/scm/git/bin
+   ```
+
+   を環境変数 `Path` に追加します。
+
+### 2.2 インストール用ツールと実行コマンド
+
+`chatlog-exporter` はエージェントスキルとして提供されており、GitHub CLI の `gh skill` サブコマンド、または `skills` パッケージを使ってインストールできます。
+
+| ツール            | 実行コマンド  | 備考                     |
+| ----------------- | ------------- | ------------------------ |
+| GitHub CLI (`gh`) | `gh skill`    |                          |
+| `npm` (`npx`)     | `npx skills`  |                          |
+| `pnpm` (`pnpx`)   | `pnpx skills` | `skills` は `npm` と同一 |
+
+*表2-2: インストール用ツールと実行コマンド*
+
+**gh skill**:
+`gh skill` は GitHub CLI の組み込みコマンドで、エージェントスキルに対応した GitHub CLI で使用できます。
+
+:::message alert
+注意:
+GitHub CLI のエージェントスキル機能は現在 Preview として提供されています。
+:::
+
+**skills**:
+`skills` は、エージェントスキルをインストール・管理するための CLI です。`npx skills` または `pnpx skills` で実行できます。
+
+詳しいインストール方法は、[§3 インストール](#3-chatlog-exporter-のインストール) で解説します。
+
+### 2.3 対応エージェント
+
+現在、`chatlog-exporter` は、次の表で示す各 AI エージェントのチャット履歴に対応しています。
+
+| AIエージェント | エージェント名 | 備考                            |
+| -------------- | -------------- | ------------------------------- |
+| Claude Code    | `claude`       |                                 |
+| Codex CLI      | `codex`        |                                 |
+| ChatGPT        | `chatgpt`      | Webからエクスポートする必要あり |
+
+チャットログを出力するときは、次のように `<エージェント名> <対象年月>` を指定します。
 
 ```bash
 /export-chatlogs claude 2026-06
 ```
 
-第 1 引数がエージェント名、第 2 引数が対象年月です。
-この引数の組み合わせは、5 つのスキルに共通します。
-ただし `/filter-chatlogs` だけは、先頭にサブコマンドを追加で取ります。
+上記の場合、「Claude Code の 2026年6月分のチャット履歴を出力」という意味になります。
+このように `<エージェント名> <対象年月>` を指定することで、処理の対象となるチャットログを選択できます。
+
+`/filter-chatlogs` の場合、第1引数にフィルターの種類を指定し、それに続けてチャットログを指定します。
+フィルターには、次の種類があります。
+
+- `filter`: AI の内容判定フィルター
+- `noise-filter`: パターン認識による高速フィルター
+- `strip`: チャットログ内のシステム出力を取り除くフィルター
+
+`strip`、`noise-filter` などの機械的フィルターを先に実行することで、AI による `filter` の対象となるチャットログを減らし、不要な AI 呼び出しを削減できます。
+
+```bash
+/filter-chatlogs noise-filter claude 2026-06
+```
+
+上記の場合は、「パターン認識を使って、Claude Code の 2026年6月分から不要なログを削除する」という意味となります。
 
 ## 3. `chatlog-exporter` のインストール
 
+`chatlog-exporter` は、`gh skill`、`npx skills` で簡単にインストールできます。
+この章では、各コマンドによるインストール方法、および、`/setup-chatlogs` による初期設定を解説します。
+
 ### 3.1 `gh skill` によるインストール
 
-`GitHub CLI` を使う場合は、`gh skill install` でスキルを導入します。
+`chatlog-exporter` は、GitHub CLI の `gh skill` でインストールできます。
+インストールする場合は、`gh skill install` を使用します。
 
 ```bash
-gh skill install aglabo/chatlog-exporter --all --agent claude-code
+gh skill install aglabo/chatlog-exporter --all --agent claude-code --scope project
 ```
 
-`--all` は、リポジトリに含まれるすべてのスキルを対象にするオプションです。
-`--agent claude-code` で、インストール先を `Claude Code` に限定しています。
+- `aglabo/chatlog-exporter` は、エージェントスキルが存在するリポジトリを示します。
+  本来は、`https://github.com/aglabo/chatlog-exporter` ですが、先頭の `https://github.com/` は省略できます。
+- `--all` は、リポジトリ内のすべてのスキルを対象にするオプションです。この場合、全スキルをインストールするという意味になります。
+- `--agent claude-code` はスキルを使用するエージェントを指定します。使用できるエージェントは `gh skills` のヘルプを参照してください。
+  :::message alert
+  Claude Code 以外のエージェントでも動作するはずですが、動作確認をしていないため保証外とします。
+  :::
+- `--scope project` は、スキルをプロジェクトスキルとしてインストールすることを示します。
+  この場合、`chatlog-exporter` はインストールしたディレクトリ以外では実行できません。
 
 なお `gh skills` は `gh skill` のエイリアスのため、どちらの表記でも動作します。
 
