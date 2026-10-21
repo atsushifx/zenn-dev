@@ -31,17 +31,18 @@ atsushifx です。
 `chatlog-exporter` は、`Claude Code` などのセッション履歴を Markdown 化し、分類・整形する複数のスキルをまとめたユーティリティです。
 各機能はエージェントスキルとして提供され、処理後のログは各種メタデータを持つ Markdown として出力されます。
 
-書き出したログは、Obsidian などに取り込むことで、過去の知識 DB として活用できます。
+書き出したログは、Obsidian などに取り込むことで、過去の知識を検索・参照できるデータベースとして活用できます。
 ログはプロジェクト別に分類され、検索や絞り込みのために `category`、`topics`、`tags` などのメタデータが付加されています。
 
 この記事では、チャット履歴の抽出から、知識として活用できる Markdown へ整形するまでの手順を解説します。
+詳細は、Chatlog Exporter の [Webサイト](https://aglabo.github.io/chatlog-exporter/) を参照してください。
 
 ## 1. `chatlog-exporter` とは
 
 ### 1.1 チャットログが活用できない問題
 
 AI エージェントとのチャットには、試行錯誤の経緯や、採用しなかった案とその理由が含まれます。
-しかし、チャットログを過去の知識として活用するのは難しいです。
+しかし、過去のチャットログから必要な情報を探し出し、再利用するには課題があります。
 
 - 1 つのログに複数の話題が混在
 - プロジェクトをまたいだログの混在
@@ -59,7 +60,8 @@ AI エージェントとのチャットには、試行錯誤の経緯や、採�
 ### 1.2 スキルによるパイプライン処理
 
 `chatlog-exporter` の特徴は、処理を 5 つのスキルに分割している点です。
-各スキルは、特定のディレクトリ上の Markdown を入力として受け取り、処理結果を特定のディレクトリに出力します。
+`/export-chatlogs` は、JSONL ファイルなどのチャットログ履歴から指定した出力先に Markdown を書き出します。
+それ以外のスキルでは、指定した入力ディレクトリから Markdown ファイルを読み込み、処理結果を指定先の出力先に Markdown として出力します。
 
 | スキル                | 役割                                   |
 | --------------------- | -------------------------------------- |
@@ -74,7 +76,8 @@ AI エージェントとのチャットには、試行錯誤の経緯や、採�
 これらのスキルは、前のスキルの出力を次のスキルの入力として処理するようになっています。
 AI エージェントのチャットログは、各スキルを続けて実行することでパイプライン処理され、知識として活用できる Markdown となります。
 
-処理が独立したスキルに分かれているため、途中まで実行して結果を確認したり、目的に応じて一部のスキルだけを使ったりできます。
+各処理は独立したスキルとして実行できるため、途中まで実行して結果を確認できます。
+必要な入力データがあれば、目的に応じて一部のスキルだけを実行できます。
 
 ただし、汎用のログ整形ツールではありません。
 対象は `Claude Code`・`Codex`・`ChatGPT` の 3 つのセッション履歴に限られます。`chatlog-exporter` では、それぞれ `claude`、`codex`、`chatgpt` というエージェント名で指定します。
@@ -84,7 +87,7 @@ AI エージェントのチャットログは、各スキルを続けて実行�
 
 ### 1.3 出力される frontmatter 付き Markdown
 
-`frontmatter` は Markdown の先頭に付加される `---` で囲まれた `YAML` 形式のメタデータです。
+frontmatter は Markdown ファイルの先頭に記述する `---` で囲まれた `YAML` 形式のメタデータです。
 `chatlog-exporter` は、`title`・`date` などの基本データ、`session_id`・`slug` などのシステム作成データ、`category`・`topics` などの分類用メタデータを付加します。
 
 `frontmatter` の主要なエントリーは、次の通りです。
@@ -105,7 +108,7 @@ AI エージェントのチャットログは、各スキルを続けて実行�
 
 ### 1.4 カスタマイズできる項目
 
-`chatlog-exporter` は `/setup-chatlogs` スキルでカレントディレクトリ下に設定ファイルやランタイムを展開します。
+`chatlog-exporter` は `/setup-chatlogs` スキルで、設定ファイルや共有ライブラリなどを所定のディレクトリに展開します。
 設定ファイルは、`.config/chatlog-exporter` 下に展開されます。
 展開された設定ファイルを修正することで、`chatlog-exporter` の動作を変えられます。
 
@@ -122,7 +125,7 @@ AI エージェントのチャットログは、各スキルを続けて実行�
 #### 辞書の修正
 
 `dics/` 下の辞書では、`type`、`category`、`topics`、`tags` に設定する項目を定義します。
-辞書に参加中のプロジェクト用のトピックやタグを追加することで、自分の環境に合ったログを出力できます。
+参加しているプロジェクトに対応するトピックやタグを辞書に追加することで、自分の環境に合ったログを出力できます。
 `type` と `category` は、通常、変更する必要はありません。
 
 #### システム設定項目
@@ -142,8 +145,9 @@ AI エージェントのチャットログは、各スキルを続けて実行�
 | `bash`                 | `/setup-chatlogs` の初期設定処理                      | `/setup-chatlogs` による初期設定時     |
 | `deno`                 | スキルを構成する TypeScript の実行                    | `/setup-chatlogs` 以外のスキルの実行時 |
 
-Claude Code には、`chatlog-exporter` を実行するためのプラットフォームとしての役割があります。
-`chatlog-exporter` の各スキルは、`claude` を起動した後の TUI 画面でスキルコマンドを入力することで利用できます。
+*表2-1: 実行に必要なツールと用途*
+
+Claude Code は、`chatlog-exporter` のスキルを実行するプラットフォームであり、AI によるログ判定やメタデータ生成にも使用します。
 
 AI を使うスキルでは `claude` コマンドを呼び出し、ログの判定やメタデータの生成に使用します。
 例えば、`/filter-chatlogs` スキルではログの内容から要／不要を判定し、`/set-frontmatter` スキルではログの内容に応じたメタデータを生成します。
@@ -152,12 +156,11 @@ AI を使うスキルでは `claude` コマンドを呼び出し、ログの判�
 `/setup-chatlogs` の初期設定処理はシェルスクリプトで実装されており、`bash` で動作します。
 `/setup-chatlogs` 以外のスキルで使用するスクリプトは、TypeScript で実装されており、実行には、`deno` が必要です。
 
-いずれのツールもコマンドラインから呼び出されるため、コマンド名だけで起動できる必要があります。
+`bash` および `deno` は、コマンドラインから呼び出せる必要があります。
 
 #### Windows 環境での `bash` 設定
 
-Windows 環境の場合、標準では `bash` がインストールされていません。
-そのため、`Git for Windows` に含まれる `Git Bash` の `bash` コマンドを使用します。
+Windows には標準で bash が含まれないため、Git for Windows に同梱される Git Bash を使用します。
 
 次の手順で、`bash` をコマンドラインから起動できるようにします。
 
@@ -178,16 +181,16 @@ Windows 環境の場合、標準では `bash` がインストールされてい�
 
 `chatlog-exporter` はエージェントスキルとして提供されており、GitHub CLI の `gh skill` サブコマンド、または `skills` パッケージを使ってインストールできます。
 
-| ツール            | 実行コマンド  | 備考                     |
-| ----------------- | ------------- | ------------------------ |
-| GitHub CLI (`gh`) | `gh skill`    |                          |
-| `npm` (`npx`)     | `npx skills`  |                          |
-| `pnpm` (`pnpx`)   | `pnpx skills` | `skills` は `npm` と同一 |
+| ツール            | 実行コマンド  | 備考                           |
+| ----------------- | ------------- | ------------------------------ |
+| GitHub CLI (`gh`) | `gh skill`    |                                |
+| `npm` (`npx`)     | `npx skills`  |                                |
+| `pnpm` (`pnpx`)   | `pnpx skills` | `npx skills` と同じ CLI を実行 |
 
 *表2-2: インストール用ツールと実行コマンド*
 
 **gh skill**:
-`gh skill` は GitHub CLI の組み込みコマンドで、エージェントスキルに対応した GitHub CLI で使用できます。
+`gh skill` は、GitHub CLI v2.90.0 以降に組み込まれたエージェントスキル管理用コマンドです。
 
 :::message alert
 注意:
@@ -201,13 +204,15 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 
 ### 2.3 対応エージェント
 
-現在、`chatlog-exporter` は、次の表で示す各 AI エージェントのチャット履歴に対応しています。
+現在、chatlog-exporter は、次の 3種類の AI エージェントが生成するチャット履歴の取り込みに対応しています。
 
 | AIエージェント | エージェント名 | 備考                            |
 | -------------- | -------------- | ------------------------------- |
 | Claude Code    | `claude`       |                                 |
 | Codex CLI      | `codex`        |                                 |
 | ChatGPT        | `chatgpt`      | Webからエクスポートする必要あり |
+
+*表2-3: 対応エージェントとエージェント名*
 
 チャットログを出力するときは、次のように `<エージェント名> <対象年月>` を指定します。
 
@@ -218,7 +223,7 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 上記の場合、「Claude Code の 2026年6月分のチャット履歴を出力」という意味になります。
 このように `<エージェント名> <対象年月>` を指定することで、処理の対象となるチャットログを選択できます。
 
-`/filter-chatlogs` の場合、第1引数にフィルターの種類を指定し、それに続けてチャットログを指定します。
+`/filter-chatlogs` では、第1引数にフィルターの種類を指定し、その後にエージェント名と対象年月を指定します。
 フィルターには、次の種類があります。
 
 - `filter`: AI の内容判定フィルター
@@ -247,7 +252,7 @@ gh skill install aglabo/chatlog-exporter --all --agent claude-code --scope proje
 ```
 
 - `aglabo/chatlog-exporter`:
-  エージェントスキルが存在するリポジトリを示します。本来は、`https://github.com/aglabo/chatlog-exporter` ですが、先頭の `https://github.com/` は省略できます。
+  インストール元の GitHub リポジトリを指定します。OWNER/REPO 形式で指定するため、<https://github.com/> は不要です。
 
 - `--all`:
   リポジトリ内で検出されたすべてのスキルをインストールします。
@@ -265,7 +270,7 @@ gh skill install aglabo/chatlog-exporter --all --agent claude-code --scope proje
 なお `gh skills` は `gh skill` のエイリアスのため、どちらの表記でも動作します。
 
 :::message alert
-`GitHub CLI` のエージェントスキル対応はプレビュー段階です。
+GitHub CLI のエージェントスキル機能は Preview 段階のため、仕様が予告なく変更されることもあります。
 公式マニュアルには、次のとおり明記されています。
 
 > Working with agent skills in the GitHub CLI is in preview and subject to change without notice.
@@ -276,17 +281,17 @@ gh skill install aglabo/chatlog-exporter --all --agent claude-code --scope proje
 ### 3.2 `npx skills` / `pnpx skills` によるインストール
 
 GitHub CLI を使用しない場合は、Agent Skills のインストール用 CLI である `skills` を使って `chatlog-exporter` をインストールできます。
-`skills` の実行には、`npm` を使用します。
+skills CLI は、`npm` の `npx` または `pnpm` の `pnpx` を使用して実行します。
 
 ```bash
 npx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 ```
 
 - `aglabo/chatlog-exporter`:
-  エージェントスキルが存在するリポジトリを指定します。GitHub 上のリポジトリの場合、先頭の `https://github.com/` を省略できます。
+  インストール元の GitHub リポジトリを指定します。OWNER/REPO 形式と GitHub の URL 形式のどちらも使用できます。
 
 - `--skill '*'`:
-  リポジトリ内の全てのスキルをインストールします。
+  リポジトリ内のすべてのスキルをインストールします。
 
 - `--agent claude-code`:
   Claude Code 向けにスキルをインストールします。
@@ -319,7 +324,7 @@ pnpx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 
 :::message alert
 `/setup-chatlogs` は、実行時のカレントディレクトリを基準に、設定ファイルなどの配置先を決定します。
-だし、共有ライブラリ `_cle-libs/` は、インストールされた各スキルと同じ `skills` ディレクトリ直下に配置されます。
+ただし、共有ライブラリ `_cle-libs/` は、インストールされた各スキルと同じ `skills` ディレクトリ直下に配置されます。
 :::
 
 初期設定で展開される主なファイルとディレクトリは、次の通りです。
@@ -341,7 +346,8 @@ pnpx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 各スキルが `../../_cle-libs/` という相対パスで参照するため、スキルをインストールしたディレクトリを基準にして配置します。
 
 `/setup-chatlogs` による初期設定が完了したあとは、通常、`/setup-chatlogs` を再実行する必要はありません。
-展開済みのファイルやディレクトリを更新する場合は、`--force` を使用して既存の展開先を上書きします。
+展開済みのファイルやディレクトリを更新する場合は、`--force` を指定します。既存の設定ファイルも上書き対象となるため、
+カスタマイズ済みのファイルは事前にバックアップしてください。
 
 ```bash
 /setup-chatlogs --force
@@ -356,34 +362,34 @@ pnpx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 
 辞書には、次の種類があります。
 
-| 辞書           | 辞書ファイル     | 概要                                                               | カスタマイズ |
-| -------------- | ---------------- | ------------------------------------------------------------------ | ------------ |
-| 種別           | `types.dic`      | 記事の大分類を定義                                                 | 通常は不要   |
-| カテゴリー     | `category.dic`   | 記事の領域を特徴付けるカテゴリーを定義                             | 通常は不要   |
-| プロジェクト   | `projects.dic`   | 記事が属するプロジェクトを定義。明示されていない場合は記事から推定 | **推奨**     |
-| トピックス     | `topics.dic`     | `domain` と `aspect` の2層で、記事の領域と観点を定義               | 通常は不要   |
-| ネームスペース | `namespaces.dic` | `ai`、`lang` など、タグを分類する観点を定義                        | 通常は不要   |
-| タグ           | `tags.dic`       | `<namespace>/<tag>` 形式で記事の関心領域や文脈を定義               | **推奨**     |
+| 辞書           | 辞書ファイル     | 概要                                                                             | カスタマイズ |
+| -------------- | ---------------- | -------------------------------------------------------------------------------- | ------------ |
+| 種別           | `types.dic`      | チャットログの大分類を定義                                                       | 通常は不要   |
+| カテゴリー     | `category.dic`   | チャットログの領域を特徴付けるカテゴリーを定義                                   | 通常は不要   |
+| プロジェクト   | `projects.dic`   | チャットログが属するプロジェクトを定義。明示されていない場合はログの内容から推定 | **推奨**     |
+| トピックス     | `topics.dic`     | `domain` と `aspect` の2層で、ログの領域と観点を定義                             | 通常は不要   |
+| ネームスペース | `namespaces.dic` | `ai`、`lang` など、タグを分類する観点を定義                                      | 通常は不要   |
+| タグ           | `tags.dic`       | `<namespace>/<tag>` 形式で、ログの関心領域や文脈を定義                           | **推奨**     |
 
 *表3-2: 辞書の種類*
 
-`chatlog-exporter` は各記事を解析し、上記の辞書をもとに分類します。
+`chatlog-exporter` は各チャットログを解析し、上記の辞書をもとに分類します。
 特に `projects.dic`、`tags.dic` を開発環境やプロジェクトにあわせてカスタマイズすることで、用途に応じた知識 DB を構築できます。
 
 - `projects.dic`:
-  記事が属するプロジェクトを選択します。
+  ログが属するプロジェクトを選択します。
   `projects.dic` には、`dev-tooling`, `ai-tools` などの用途別の分類先を定義します。
   また、`aplys`、`deckrd`、`ci-platform`、`chatlog-exporter` など、個別プロジェクトも分類先として定義します。
 
-  個別プロジェクトを分類先として辞書に追加することで、プロジェクトごとに記事を絞り込んで参照できます。
+  個別プロジェクトを分類先として辞書に追加することで、プロジェクトごとにチャットログを絞り込んで参照できます。
 
-  プロジェクトが設定されていない場合、記事の内容からどのプロジェクトに該当するかを推定します。どのプロジェクトにも該当しなければ、`misc` となります。
-  `misc` が割り当てられた記事を確認し、記事に応じた分類先を辞書に追加することで、分類精度を改善できます。
+  プロジェクトが設定されていない場合、ログの内容からどのプロジェクトに該当するかを推定します。どのプロジェクトにも該当しなければ、`misc` となります。
+  `misc` に分類されたログを確認し、該当するプロジェクトを `projects.dic` に追加することで、分類精度を改善できます。
 
 - `tags.dic`:
-  タグは `<namespace>` と `<tag>` から作成され、記事の関心領域を示します。
+  タグは `<namespace>` と `<tag>` から作成され、チャットログの関心領域を示します。
   例えば、`os/wsl` は WSL に関連する項目、`dev/design-decision` はソフトウェア開発における設計判断を示します。
-  この 2つのタグが付いた記事は、WSL 用ツールの設計判断に関する記事だと判断できます。
+  この 2つのタグが付いた記事は、WSL 用ツールの設計判断に関するチャットログだと判断できます。
 
   タグの中には、`tool/deckrd` や `tool/ci-platform` のように、拙作のプロジェクト用のタグもあります。
   不要なタグを取り除き、自分のプロジェクト用のタグを追加することで、分類精度を向上できます。
@@ -464,21 +470,18 @@ user: |
 例えば、`frontmatter` を生成する `meta.yaml` では、判定済みの `type` と `category`、`topics.dic` と `tags.dic` から生成した候補、チャットログ本文を受け取ります。
 
 ```text
-type/category
-       │
-       ├── topics.dic
-       ├── tags.dic
-       │
-       ▼
-    meta.yaml
-       │
-       ├── title
-       ├── topics
-       └── tags
+type/category ─┐
+topics.dic ────┼──▶ meta.yaml
+tags.dic ──────┘        │
+                        ├── title
+                        ├── topics
+                        └── tags
 ```
 
+*図3-1: `meta.yaml` への入力と生成される frontmatter 項目*
+
 `meta.yaml` は、§3.4 で説明した `topics` の構造に従い、`topics` として `domain` と `aspect` を生成する規則を定義しています。
-`domain` は記事の領域として `category` と一致させ、`aspect` は `topics.dic` から最大 2個を選択します。
+domain はチャットログの領域として category と一致させ、aspect は topics.dic から最大 2 個を選択します。
 
 このように、辞書が「選択できる値とその意味」を持つのに対し、プロンプトは「その値をどのように選択し、どの形式で返すか」を定義します。
 
@@ -511,9 +514,9 @@ type/category
 ```mermaid
 flowchart TD
     A["1. /export-chatlogs<br/>セッション履歴を Markdown 化"] --> B["2. /filter-chatlogs<br/>不要ログの削除"]
-    B --> C["3. /classify-chatlogs<br/>プロジェクト別に分類"]
-    C --> D["4. /normalize-chatlogs<br/>トピック単位に分割"]
-    D --> E["5. /filter-chatlogs<br/>分割後の不要トピックを削除"]
+    B --> C["3. /normalize-chatlogs<br/>トピック単位に分割"]
+    C --> D["4. /filter-chatlogs<br/>分割後の不要トピックを削除"]
+    D --> E["5. /classify-chatlogs<br/>プロジェクト別に分類"]
     E --> F["6. /set-frontmatter<br/>メタデータを付与"]
     F --> G["frontmatter 付き Markdown"]
 ```
@@ -521,15 +524,16 @@ flowchart TD
 *図4-1: export から set-frontmatter までの 6 手順*
 
 各段階では、処理対象となる Markdown の粒度が変わります。
-セッション履歴をそのまま扱う段階から、プロジェクト別の分類、トピック単位への分割を経て、検索や絞り込みに利用できる frontmatter 付き Markdown へ変換されます。
+セッション単位のログをトピック単位へ分割したあと、プロジェクト単位に分類します。
+その後、検索や絞り込みに利用できる frontmatter 付き Markdown へ変換します。
 
 | 手順 | スキル                | 対象・出力先                                                        |
 | ---- | --------------------- | ------------------------------------------------------------------- |
 | 1    | `/export-chatlogs`    | `chatlogs/originalLogs/<agent>/<yyyy>/<yyyy-mm>/`                   |
 | 2    | `/filter-chatlogs`    | 手順 1 の出力先 (その場で削除)                                      |
-| 3    | `/classify-chatlogs`  | `chatlogs/originalLogs/<agent>/<yyyy>/<yyyy-mm>/<プロジェクト名>/`  |
-| 4    | `/normalize-chatlogs` | `chatlogs/normalizeLogs/<agent>/<yyyy>/<yyyy-mm>/<プロジェクト名>/` |
-| 5    | `/filter-chatlogs`    | 手順 4 の出力先 (その場で削除)                                      |
+| 3    | `/normalize-chatlogs` | `chatlogs/normalizeLogs/<agent>/<yyyy>/<yyyy-mm>/`                  |
+| 4    | `/filter-chatlogs`    | 手順 3 の出力先 (その場で削除)                                      |
+| 5    | `/classify-chatlogs`  | `chatlogs/normalizeLogs/<agent>/<yyyy>/<yyyy-mm>/<プロジェクト名>/` |
 | 6    | `/set-frontmatter`    | `chatlogs/outputLogs/<agent>/<yyyy>/<yyyy-mm>/<プロジェクト名>/`    |
 
 *表4-1: 各手順の対象ディレクトリと出力先*
@@ -538,7 +542,7 @@ flowchart TD
 これは、処理の進行にあわせて Markdown の粒度と役割が変わるためです。
 
 `originalLogs` では、1 セッションを 1 ファイルとして保持します。
-不要なセッションを削除してプロジェクト別に分類したあとも、この段階ではセッション単位のログとして扱います。
+不要なセッションを削除したあとも、ファイルをセッション単位のログとして保持します。
 
 `normalizeLogs` では、セッション内で混在していた話題を分割し、1 トピックを 1 ファイルとして扱います。
 分割後に `/filter-chatlogs` を再度実行することで、再利用価値の低いトピックを取り除きます。
@@ -546,14 +550,14 @@ flowchart TD
 `outputLogs` には、分類用の frontmatter を付与した完成済みの Markdown を格納します。
 
 このように処理段階ごとにディレクトリを分けることで、フィルターを通過したセッション単位のログを `originalLogs` に残したまま、後続処理を行なえます。
-途中の処理結果を確認したり、後続処理をやり直したりする場合も、保持されている各段階のデータから再開できます。
+各段階の処理結果を確認できるほか、入力データが残っている段階から後続処理を再実行できます。
 
 ### 4.2 スキル共通の引数とオプション
 
 各スキルは、基本的に次の形式で実行します。
 
 ```bash
-skill <agent> <yyyy-mm> {<option>}
+/<skill-name> <agent> <yyyy-mm> [<options>]
 ```
 
 `<agent>` は、ログを出力するエージェントを選択します。
@@ -565,32 +569,32 @@ skill <agent> <yyyy-mm> {<option>}
 `<option>` はスキルの動作を変更します。
 以下のオプションが使用できます (スキルによって、使用できるオプションは変わります)。
 
-なお、表中のデフォルトは `/setup-chatlogs` が展開する `config.yaml` の値です。
-`config.yaml` が無い場合は組み込み既定が使われ、`--model` は `sonnet`、`--chunk-size` は 10、`--timeout-ms` は 120,000 になります。
+以下の表では、`/setup-chatlogs` が展開する `config.yaml` のデフォルト値を示します。設定ファイルが存在しない場合は
+組み込み既定値が使用されるため、一部のオプションでは値が異なります。
 
 <!-- markdownlint-disable line-length -->
 
 共通オプション:
 
-| オプション     | パラメータ   | デフォルト                             | 動作                                                          |
-| -------------- | ------------ | -------------------------------------- | ------------------------------------------------------------- |
-| `--config`     | `configFile` | `.config/chatlog-exporter/config.yaml` | Chatlog Exporterが使用する設定ファイルを読み込みます          |
-| `--dry-run`    | --           | false                                  | 処理対象のファイルを確認する。挙動はスキルごとに異なる (後述) |
-| `--input-dir`  | `<dir>`      | --                                     | ログを読み込むディレクトリを指定します                        |
-| `--output-dir` | `<dir>`      | --                                     | 各スキルが出力するログの出力先を指定します                    |
-| `--model`      | `<model>`    | `haiku`                                | AIエージェントが使用するモデル名を指定します                  |
+| オプション     | パラメータ   | デフォルト                             | 動作                                                             |
+| -------------- | ------------ | -------------------------------------- | ---------------------------------------------------------------- |
+| `--config`     | `configFile` | `.config/chatlog-exporter/config.yaml` | Chatlog Exporterが使用する設定ファイルを読み込む                 |
+| `--dry-run`    | --           | false                                  | 処理対象のファイルを確認する。対応状況、挙動はスキルごとに異なる |
+| `--input-dir`  | `<dir>`      | --                                     | ログを読み込むディレクトリを指定する                             |
+| `--output-dir` | `<dir>`      | --                                     | 各スキルが出力するログの出力先を指定する                         |
+| `--model`      | `<model>`    | `sonnet`                               | AIエージェントが使用するモデル名を指定する                       |
 
-*表4-2: 全スキルに共通のオプション*
+*表 4-2: 複数のスキルで使用する共通オプション*
 
 :::message
-`--dry-run` のとうなフラグを示すオプションでは、`--no-dry-run` のように先頭に `no` を付けることでフラグをオフにできます。
+`--dry-run` のようなフラグオプションでは、`--no-dry-run` のように先頭に `no` を付けることでフラグをオフにできます。
 :::
 
 `export-chatlogs` 固有オプション:
 
-| オプション     | パラメータ | デフォルト | 動作                                                   |
-| -------------- | ---------- | ---------- | ------------------------------------------------------ |
-| `--export-dir` | `<dir>`    | --         | `export-chatlogs` で、ログのエクスポート先を指定します |
+| オプション     | パラメータ | デフォルト | 動作                                                 |
+| -------------- | ---------- | ---------- | ---------------------------------------------------- |
+| `--export-dir` | `<dir>`    | --         | `export-chatlogs` で、ログのエクスポート先を指定する |
 
 *表4-3: /export-chatlogs 固有のオプション*
 
@@ -645,7 +649,7 @@ skill <agent> <yyyy-mm> {<option>}
 年月ごとにディレクトリが分かれるため、月単位で処理を回す運用になります。
 
 :::message alert
-`/export-chatlogs` の `--dry-run` は未実装です。
+`/export-chatlogs` では `--dry-run` を実装していません。
 オプションとして解析されるだけで無視され、ファイルは通常どおり生成されます。
 
 再実行すると、同じ会話が別名で二重に出力される場合があります。
@@ -654,8 +658,8 @@ skill <agent> <yyyy-mm> {<option>}
 
 #### ChatGPT のセッションログの取り込み
 
-`ChatGPT` は Web 上にログが記録されているため、ローカルに履歴ファイルがありません。
-そのため、`chatgpt` を指定する場合は `--input-dir` によるエクスポート済みディレクトリの指定が必須です。
+ChatGPT の会話履歴は通常、Web 上に保存されており、ローカルの履歴ファイルとしては保存されていません。
+取り込むには Web 上の [ChatGPT](https://chatgpt.com/) からデータをエクスポートします。
 
 1. データのエクスポート
    `ChatGPT` の `データをエクスポートする` 機能を使い、セッションログをローカルにダウンロードします。
@@ -671,6 +675,11 @@ skill <agent> <yyyy-mm> {<option>}
    ```bash
    /export-chatlogs chatgpt 2026-06 --input-dir "./chatlogs/chatgpt/chatgpt-20260804"
    ```
+
+   :::message
+   2026-06 は取り込む会話の対象年月、入力ディレクトリ `chatgpt-20260804` はエクスポートデータを保存した年月日です。
+   通常、対象年月とエクスポートの年月日は一致しません。
+   :::
 
 ディレクトリを位置引数として渡すことはできません。
 `chatgpt 2026-06 ./path` の形式では、3 つ目が `--output-dir` として解釈されて破棄されます。
@@ -689,9 +698,9 @@ skill <agent> <yyyy-mm> {<option>}
 サブコマンド `noise-filter` は、パターンマッチでログを削除します。
 具体的には、次のようなログが該当します。
 
-- AI が使用したプロンプトと、その回答
-- Git 操作ログのみのセッションログ
-- スキル呼び出し
+- AI への単純な指示と応答だけで構成されたログ
+- Git 操作の記録のみで構成されたログ
+- スキルの呼び出し記録のみで構成されたログ
 
 以下のコマンドを実行すると、上記のログを削除します。
 
@@ -706,7 +715,7 @@ skill <agent> <yyyy-mm> {<option>}
 サブコマンド `filter` を指定すると、AI エージェントがログの内容を判定します。
 判定軸は、技術的な内容の有無ではありません。
 判断の理由が残っているかどうかを見ます。
-決定とその根拠、却下された案とその理由、ハマりどころと解法は残り、実行ステータスだけのログや些末な Q&A は削除されます。
+決定とその根拠、却下された案とその理由、問題と解決方法が記録されたログを残し、実行ステータスだけのログや些末な Q&A は削除対象として判定します。
 
 ```bash
 /filter-chatlogs filter claude 2026-06
@@ -722,7 +731,7 @@ AI 判定では、トークン消費を抑えるため複数のログをまと�
 このため、AI が要否を判定できない場合があります。
 
 `--single-file` オプションを指定すると、ログを 1 つずつ判定します。
-まとめ読みによる取り違えが減るぶん、判定の精度が上がります。
+複数ログの混同を防ぐことで、判定精度の向上が期待できます。
 
 ```bash
 /filter-chatlogs filter claude 2026-06 --single-file
@@ -734,42 +743,23 @@ KEEP / DISCARD の判定そのものが行なわれず (`judged=0`)、確認で�
 削除判定の妥当性を事前に検証する用途には使えません。
 :::
 
-### 4.5 手順3: `/classify-chatlogs` によるプロジェクト別の分類
+### 4.5 手順3: `/normalize-chatlogs` によるトピック単位への分割
 
-ログを、プロジェクト別のサブディレクトリへ振り分けます。
-プロジェクト名は通常、GitHub などに登録しているリポジトリ名です。
-
-```bash
-/classify-chatlogs claude 2026-06
-```
-
-ログにプロジェクトが登録済みの場合はその値を使い、それ以外は `.config/chatlog-exporter/dics/projects.dic` の辞書をもとに AI が推定します。
-判定できなかった場合、プロジェクト名は `misc` になります。
-
-出力先は `chatlogs/originalLogs/claude/2026/2026-06/<プロジェクト名>/` です。
-`originalLogs` の中で、プロジェクト名の階層が 1 段深くなります。
-このとき、frontmatter に `project` フィールドが付きます。
-
-推定がうまく当たらない場合は、`projects.dic` を編集して自分のプロジェクトを追加できます。
-
-### 4.6 手順4: `/normalize-chatlogs` によるトピック単位への分割
-
-1 つのログを、AI がトピック別の複数セグメントへ分割します (内容によっては 1 つのみ)。
+AI が 1 つのログをトピック単位に分割し、各セグメントを個別の Markdown ファイルとして出力します。
+話題が 1 つの場合は、分割せずに 1 ファイルとして出力します。
 
 ```bash
 /normalize-chatlogs claude 2026-06
 ```
 
-出力先は `chatlogs/normalizeLogs/claude/2026/2026-06/<プロジェクト名>/` に変わります。
+出力先は `chatlogs/normalizeLogs/claude/2026/2026-06/` に変わります。
 1 ファイル 1 トピックになるため、後から参照するときの粒度が揃います。
 
-このスキルは引数を省略できません。
-エージェント名と期間、またはパスを指定します。
+`/normalize-chatlogs` では処理対象の指定が必須です。エージェント名と対象年月の組み合わせ、または対象ディレクトリのパスを指定します。
 
-### 4.7 手順5: 分割後のログに対する 2 回目のフィルター
+### 4.6 手順4 分割後のトピックに対するフィルター (2回目)
 
-トピック別に分割したログには、短すぎるログや内容のないログが混じります。
-そこで、`/filter-chatlogs` をもう一度実行します。
+トピック単位に分割したログには、再利用価値の低い内容も含まれます。そこで、/filter-chatlogs を再実行し、セッション全体ではなく分割後のトピック単位で不要なログを削除します。
 
 ```bash
 /filter-chatlogs noise-filter "chatlogs/normalizeLogs/claude/2026/2026-06"
@@ -779,6 +769,24 @@ KEEP / DISCARD の判定そのものが行なわれず (`judged=0`)、確認で�
 ここでは、エージェント名と年月ではなくパスを直接指定します。
 `claude 2026-06` の形式は `chatlogs/originalLogs/claude/2026/2026-06/` を指すため、分割後のログには届きません。
 
+### 4.7 手順5: `/classify-chatlogs` によるプロジェクト別の分類
+
+ログを、プロジェクト別のサブディレクトリへ振り分けます。
+プロジェクト名には、GitHub などのリポジトリ名や、projects.dic に定義した分類先を使用します。
+
+```bash
+/classify-chatlogs claude 2026-06
+```
+
+ログにプロジェクトが登録済みの場合はその値を使い、それ以外は `.config/chatlog-exporter/dics/projects.dic` の辞書をもとに AI が推定します。
+判定できなかった場合、プロジェクト名は `misc` になります。
+
+出力先は `chatlogs/normalizeLogs/claude/2026/2026-06/<プロジェクト名>/` です。
+`normalizeLogs` の中で、プロジェクト名の階層が 1 段深くなります。
+このとき、frontmatter に `project` フィールドが付きます。
+
+推定がうまく当たらない場合は、`projects.dic` を編集して自分のプロジェクトを追加できます。
+
 ### 4.8 手順6: `/set-frontmatter` によるメタデータの付与
 
 最後に、種別やカテゴリーといった分類用の frontmatter を付与します。
@@ -787,14 +795,14 @@ KEEP / DISCARD の判定そのものが行なわれず (`judged=0`)、確認で�
 /set-frontmatter claude 2026-06
 ```
 
-出力先は `chatlogs/outputLogs/claude/2026/2026-06/<プロジェクト名>/` です。
-AI が `title` / `type` / `category` / `topics` / `tags` を生成し、タグは `#<namespace>/<tag>` の形式で付きます。
+`/set-frontmatter` は、プロジェクト別に分類されたトピック単位のログを読み込み、`frontmatter` を付与して outputLogs に出力します。
+AI が `title` / `type` / `category` / `topics` / `tags` を生成します。`tags` には `#<namespace>/<tag>` の形式の値を設定し、Obsidian ではタグとして利用できます。
 
 この段階で、検索可能なメタデータを備えた Markdown ファイルが完成します。
 
 一方で、このスキルは 6 手順のなかで最も AI の呼び出し回数が多くなります。
 種別判定・カテゴリー判定・トピック判定に加え、生成したメタ情報のレビューでも AI を呼ぶためです。
-短時間で処理を終えたい場合は、`--no-review` でレビューフェーズを省略できます。
+`--no-review` を指定するとレビューフェーズを省略します。結果として、AI の呼び出し回数を抑えられます。
 
 ## 5. Obsidian による知識ベース化
 
@@ -805,19 +813,19 @@ AI が `title` / `type` / `category` / `topics` / `tags` を生成し、タグ�
 
 取り込み方は、主に次の 2 通りです。
 
-- Vault の中に出力ディレクトリを作り、そこを出力先とする
+- Vault 内のディレクトリを `chatlog-exporter` の出力先に指定する
 - 既存の出力ディレクトリを Vault へコピー、または同期する
 
 ### 5.2 frontmatter を使った検索・分類
 
-`Obsidian` は frontmatter のフィールドを検索条件として扱えます。
-`project` フィールドが入っていれば、プロジェクト単位でのログの絞り込みが可能です。
+Obsidian では、frontmatter に定義されたプロパティを検索条件として指定できます。
+例えば、`project` プロパティを検索する場合、`[project:Logrs]` のように指定します。プロパティ値を完全一致で検索するには、`[project:"Logrs"]` と指定します。
+この場合、指定した `Logrs` のプロジェクトのマークダウン文書を抽出できます。
 
 付与されたタグも `#<namespace>/<tag>` の形式のため、`Obsidian` のタグ機能でそのまま階層的に辿れます。
 
-`chatlog-exporter` 側に `Obsidian` 専用の機能があるわけではありません。
-標準的な Markdown と frontmatter を出力する結果として、`Obsidian` と組み合わせられます。
-逆に言えば、Vault のリンク構造やテンプレートに合わせた出力は、自分で用意することになります。
+chatlog-exporter は Obsidian 専用の機能を持たず、標準的な Markdown と frontmatter を出力します。
+Obsidian Vault 独自のリンク構造やテンプレートに合わせた調整は、利用者が行わなければなりません。
 
 こうして、流れて消えるだけだったチャットログが、検索できる知識ベースへと変わります。
 
