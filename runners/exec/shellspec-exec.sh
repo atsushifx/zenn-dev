@@ -150,12 +150,12 @@ parse_options() {
 #
 # @description Resolve spec files from arguments (handles test types, globs, single files).
 #              Must be called in the caller's own shell: the result is a global, never
-#              stdout, because the `system` type also has to set SKIP_INTEGRATION_TESTS
+#              stdout, because the `integration`, `system` and `all` types also set SKIP_INTEGRATION_TESTS
 #              and a subshell would discard that assignment
 # @arg $@ Command line arguments (test type, spec file, or glob pattern)
 # @stderr Error and warning messages
 # @sideeffect Sets RESOLVED_SPEC_FILES to the resolved spec file paths (empty on no match)
-# @sideeffect Sets SKIP_INTEGRATION_TESTS=0 for the `system` test type
+# @sideeffect Sets SKIP_INTEGRATION_TESTS=0 for the `integration`, `system` and `all` test types
 # @exitcode 0 on success, 1 on error
 #
 resolve_spec_files() {
@@ -168,16 +168,17 @@ resolve_spec_files() {
 
   local first_arg="$1"
 
-  # A single .spec.sh file is returned as-is
-  if is_spec_file "$first_arg"; then
-    RESOLVED_SPEC_FILES=("$first_arg")
-    return 0
-  fi
-
-  # Glob paths (globs containing *.spec.sh) are expanded by expand_spec_glob
+  # Glob paths (globs containing *.spec.sh) are expanded by expand_spec_glob.
+  # Checked before single files: a glob such as `*.spec.sh` also ends in .spec.sh
   if is_spec_glob "$first_arg"; then
     mapfile -t RESOLVED_SPEC_FILES < <(expand_spec_glob "$first_arg")
     _drop_empty_resolved
+    return 0
+  fi
+
+  # A single .spec.sh file is returned as-is
+  if is_spec_file "$first_arg"; then
+    RESOLVED_SPEC_FILES=("$first_arg")
     return 0
   fi
 
@@ -190,7 +191,11 @@ resolve_spec_files() {
   # Test type -> expand with get_spec_files
   local test_type="$1"
   shift
-  [[ "$test_type" == "system" ]] && SKIP_INTEGRATION_TESTS=0
+  # "integration" and "system" need the integration gate open;
+  # "all" opens it too, so the full suite includes them
+  case "$test_type" in
+  integration | system | all) SKIP_INTEGRATION_TESTS=0 ;;
+  esac
   mapfile -t RESOLVED_SPEC_FILES < <(get_spec_files "$test_type" "$@")
   _drop_empty_resolved
   if [[ ${#RESOLVED_SPEC_FILES[@]} -eq 0 ]]; then
@@ -262,7 +267,7 @@ main() {
   # options-only invocation): run the whole suite
   [[ ${#targets[@]} -eq 0 ]] && targets=("$DEFAULT_TEST_TYPE")
 
-  # Likewise called directly: the `system` type sets SKIP_INTEGRATION_TESTS
+  # Likewise called directly: the `integration`, `system` and `all` types set SKIP_INTEGRATION_TESTS
   resolve_spec_files "${targets[@]}" || exit 1
 
   [[ ${#RESOLVED_SPEC_FILES[@]} -eq 0 ]] && exit 0
