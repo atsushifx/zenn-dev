@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # src: ./runners/run-shfmt.sh
-# @(#) : shfmt runner (shell formatter  )
+# @(#) : shfmt runner
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-# shellcheck source=runners/libs/init-vars.lib.sh
+# shellcheck disable=SC1091
 
 set -euo pipefail
 
-# shellcheck source=runners/libs/init-vars.lib.sh
+# Initialize directory variables
 . "$(dirname "${BASH_SOURCE[0]}")/libs/init-vars.lib.sh"
 
 main() {
