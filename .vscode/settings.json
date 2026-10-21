@@ -1,5 +1,4 @@
 {
-  "textlint.configPath": "./configs/textlintrc.yaml",
   "json.schemaDownload.trustedDomains": {
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://raw.githubusercontent.com/devcontainers/spec/": true,
