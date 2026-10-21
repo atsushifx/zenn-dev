@@ -1,21 +1,28 @@
 {
   "name": "zenn-dev",
   "version": "1.0.3",
+  "private": true,
   "description": "zenn.dev articles repo",
-  "author": "atsushifx <https://github.com/atsushifx>",
-  "license": "MIT",
+  "keywords": [
+    "zenn",
+    "articles",
+    "blog",
+    "writing"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/atsushifx/zenn-dev.git"
   },
+  "license": "MIT",
+  "author": "atsushifx",
   "type": "module",
-  "packageManager": "pnpm@11.20.0",
   "scripts": {
     "prepare": "bash ./scripts/setup-dev-env.sh",
     "scan:secrets": "concurrently \"betterleaks protect --config ./configs/betterleaks.toml\" \"secretlint --secretlintrc ./configs/secretlint.config.yaml .\"",
-    "check:sh": "bash runners/run-shfmt.sh --list .",
-    "check:dprint": "dprint check",
+    "check:dprint": "dprint check --list-different",
+    "check:dprint:diff": "dprint check",
     "format:dprint": "dprint fmt",
+    "check:sh": "bash runners/run-shfmt.sh --list .",
     "format:sh": "bash runners/run-shfmt.sh --format .",
     "lint:sh": "bash runners/run-shellcheck.sh ",
     "test:sh": "bash runners/run-shellspec.sh ",
@@ -24,10 +31,16 @@
     "lint:gha:actions": "pnpm exec actionlint --config-file ./configs/actionlint.yaml",
     "lint:gha:workflows": "concurrently \"pnpm exec ghalint run --config ./configs/ghalint.yaml\" \"pnpm exec ghalint act --config ./configs/ghalint.yaml\"",
     "lint:spells": "cspell --config .vscode/cspell.json --cache --cache-location .cache/cspell/cSpellCache ",
-    "lint:markdown": "markdownlint --config ./configs/.markdownlint-cli2.yaml ",
-    "lint:text": "textlint --config ./configs/textlintrc.yaml "
+    "lint:text": "bash runners/run-textlint.sh ",
+    "lint:markdown": "bash runners/run-markdownlint.sh "
   },
   "devDependencies": {
-    "zenn-cli": "^0.5.2"
-  }
+    "@commitlint/config-conventional": "^21.2.4",
+    "zenn-cli": "^0.5.7"
+  },
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "pnpm": ">=12"
+  },
+  "@(#)": "zenn-dev: zenn.dev articles repository"
 }
