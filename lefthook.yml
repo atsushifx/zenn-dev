@@ -26,20 +26,14 @@ pre-commit:
     textlint:
       glob: "**/*.md"
       run: >
-        textlint
-        --config ./configs/textlintrc.yaml
-        --cache
-        --cache-location .cache/textlint_cache
-        "{staged_files}"
+        bash ./runners/run-textlint.sh {staged_files}
       skip:
         - empty
 
     markdownlint:
       glob: "**/*.md"
       run: >
-        markdownlint
-        --config ./configs/.markdownlint-cli2.yaml
-        "{staged_files}"
+        bash ./runners/run-markdownlint.sh {staged_files}
       skip:
         - empty
 
@@ -53,4 +47,4 @@ commit-msg:
   parallel: true
   commands:
     commitlint:
-      run: commitlint --config ./configs/commitlint.config.js --edit
+      run: commitlint --config ./configs/commitlint.config.mjs --edit
