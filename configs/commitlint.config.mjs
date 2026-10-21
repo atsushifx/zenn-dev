@@ -7,7 +7,7 @@
 // https://opensource.org/licenses/MIT
 
 // commit lint common configs
-export default {
+const BaseConfig = {
   extends: ['@commitlint/config-conventional'],
   parserPreset: {
     parserOpts: {
@@ -34,7 +34,6 @@ export default {
       'ci', // CI/CD related change
 
       // === Custom additions ===
-      'publish', // (custom) For publish articles
       'config', // (custom) For configuration changes
       'release', // (custom) For releases
       'merge', // (custom) For merge commits, especially when conflict resolution involved
@@ -46,3 +45,5 @@ export default {
     'header-max-length': [2, 'always', 76],
   },
 };
+
+export default BaseConfig;
