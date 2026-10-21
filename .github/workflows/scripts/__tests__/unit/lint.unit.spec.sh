@@ -116,18 +116,18 @@ ${TMP_FILE_B}"
       End
 
       Describe 'Then: Task T-04-01 - lint execution on existing files'
-        It 'T-04-01-01: textlint is called with --config configs/textlintrc.yaml'
+        It 'T-04-01-01: textlint is called with --config .tools/agla-doc-tools/configs/textlintrc.yaml'
           When run script "$_SCRIPT"
           The status should eq 0
           The output should include "textlint: passed"
-          The contents of file "$STUB_DIR/calls.log" should include "--config configs/textlintrc.yaml"
+          The contents of file "$STUB_DIR/calls.log" should include "--config .tools/agla-doc-tools/configs/textlintrc.yaml"
         End
 
-        It 'T-04-01-02: markdownlint is called with --config configs/.markdownlint-cli2.yaml'
+        It 'T-04-01-02: markdownlint is called with --config .tools/agla-doc-tools/configs/.markdownlint-cli2.yaml'
           When run script "$_SCRIPT"
           The status should eq 0
           The output should include "textlint: passed"
-          The contents of file "$STUB_DIR/calls.log" should include "--config configs/.markdownlint-cli2.yaml"
+          The contents of file "$STUB_DIR/calls.log" should include "--config .tools/agla-doc-tools/configs/.markdownlint-cli2.yaml"
         End
       End
     End

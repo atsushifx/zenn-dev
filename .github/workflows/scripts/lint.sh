@@ -51,8 +51,11 @@ fi
 
 # ─── Run linters ──────────────────────────────────────────────────────────────
 
+# Shared lint configs from agla-doc-tools (set up by ca-setup-repo)
+_config_dir=".tools/agla-doc-tools/configs"
+
 # shellcheck disable=SC2086
-if textlint --config configs/textlintrc.yaml ${_files}; then
+if textlint --config "${_config_dir}/textlintrc.yaml" ${_files}; then
   echo "textlint: passed"
 else
   _rc=$?
@@ -61,7 +64,7 @@ else
 fi
 
 # shellcheck disable=SC2086
-if markdownlint --config configs/.markdownlint-cli2.yaml ${_files}; then
+if markdownlint --config "${_config_dir}/.markdownlint-cli2.yaml" ${_files}; then
   echo "markdownlint: passed"
 else
   _rc=$?
