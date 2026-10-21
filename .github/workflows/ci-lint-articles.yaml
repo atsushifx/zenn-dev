@@ -81,7 +81,7 @@ jobs:
           node-version: "24"
           # Must match packageManager in package.json exactly; pnpm/action-setup
           # errors out when the two differ.
-          pnpm-version: "11.20.0"
+          pnpm-version: "12.14.0"
 
       - id: lint
         if: steps.resolve-sha.outputs.skip != 'true'
