@@ -3,7 +3,7 @@ title: "chatlog-exporter: AI エージェントのチャットログを Markdown
 emoji: "🔧"
 type: "tech"
 topics: ["chatlogexporter", "claudecode", "Obsidian", "Deno", "AIエージェント"]
-published: false
+published: true
 ---
 
 <!-- cspell:words dics aplys -->
