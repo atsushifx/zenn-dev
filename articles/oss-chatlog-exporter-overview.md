@@ -61,14 +61,14 @@ AI エージェントとのチャットには、試行錯誤の経緯や、採�
 
 `chatlog-exporter` の特徴は、処理を 5 つのスキルに分割している点です。
 `/export-chatlogs` は、JSONL ファイルなどのチャットログ履歴から指定した出力先に Markdown を書き出します。
-それ以外のスキルでは、指定した入力ディレクトリから Markdown ファイルを読み込み、処理結果を指定した出力ディレクトリに Markdown として書き出します。
+それ以外のスキルでは、指定した入力ディレクトリから Markdown ファイルを読み込み、ログの削除・分類・分割・メタデータ付与をします。処理結果の出力方法はスキルごとに異なります。
 
 | スキル                | 役割                                   |
 | --------------------- | -------------------------------------- |
 | `/export-chatlogs`    | セッション履歴を Markdown として出力   |
 | `/filter-chatlogs`    | 再利用価値の低いログを削除             |
-| `/classify-chatlogs`  | プロジェクト別のディレクトリへ振り分け |
 | `/normalize-chatlogs` | トピック別のセグメントへ分割           |
+| `/classify-chatlogs`  | プロジェクト別のディレクトリへ振り分け |
 | `/set-frontmatter`    | 分類用の frontmatter を付与            |
 
 *表1-1: chatlog-exporter が提供する 5 つのスキルと役割*
@@ -110,7 +110,7 @@ frontmatter は Markdown ファイルの先頭に記述する `---` で囲まれ
 
 `chatlog-exporter` は `/setup-chatlogs` スキルで、設定ファイルや共有ライブラリなどを所定のディレクトリに展開します。
 設定ファイルは、`.config/chatlog-exporter` 下に展開されます。
-これらの設定ファイルを編集することで、chatlog-exporter の動作を変更できます。
+これらの設定ファイルを編集することで、`chatlog-exporter` の動作を変更できます。
 
 | 設定ファイル  | 概要           | 修正項目                                                                                 |
 | ------------- | -------------- | ---------------------------------------------------------------------------------------- |
@@ -201,7 +201,7 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 
 ### 2.3 対応エージェント
 
-現在、chatlog-exporter は、次の 3種類の AI エージェントが生成するチャット履歴の取り込みに対応しています。
+現在、`chatlog-exporter` は、次の 3 種類の AI エージェントが生成するチャット履歴の取り込みに対応しています。
 
 | AIエージェント | エージェント名 | 備考                            |
 | -------------- | -------------- | ------------------------------- |
@@ -218,7 +218,7 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 ```
 
 上記の場合、「Claude Code の 2026年6月分のチャット履歴を出力」という意味になります。
-このように <エージェント名> <対象年月> を指定することで、各スキルが処理するチャットログを選択できます。実際の入力先はスキルごとに異なります。
+このように `<エージェント名> <対象年月>` を指定することで、各スキルが処理するチャットログを選択できます。実際の入力先はスキルごとに異なります。
 
 `/filter-chatlogs` では、第1引数にフィルターの種類を指定し、その後にエージェント名と対象年月を指定します。
 フィルターには、次の種類があります。
@@ -227,13 +227,15 @@ GitHub CLI のエージェントスキル機能は現在 Preview として提供
 - `noise-filter`: パターン認識による高速フィルター
 - `strip`: チャットログ内のシステム出力を取り除くフィルター
 
-`strip` と `noise-filter` を先に実行することで、AI による filter の対象となるチャットログを減らします。その結果、AI 呼び出し回数を削減できます。
+`strip` で不要な定型部分を取り除き、`noise-filter` で不要なログを削除することで、AI による `filter` の処理負荷を軽減できます。
 
 ```bash
+/filter-chatlogs strip claude 2026-06
+
 /filter-chatlogs noise-filter claude 2026-06
 ```
 
-上記の場合は、「パターン認識を使って、Claude Code の 2026年6月分から不要なログを削除する」という意味となります。
+この例では、`strip` で定型部分を除去したあと、`noise-filter` で不要なログを削除します。
 
 ## 3. `chatlog-exporter` のセットアップ
 
@@ -334,8 +336,13 @@ pnpx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 各スキルが `../../_cle-libs/` という相対パスで参照するため、スキルをインストールしたディレクトリを基準にして配置します。
 
 `/setup-chatlogs` による初期設定が完了したあとは、通常、`/setup-chatlogs` を再実行する必要はありません。
-展開済みのファイルやディレクトリを更新する場合は、`--force` を指定します。既存の設定ファイルも上書き対象となるため、
-カスタマイズ済みのファイルは事前にバックアップしてください。
+
+:::message alert
+
+展開済みのファイルやディレクトリを更新する場合は、`--force` を指定します。
+既存の設定ファイルも上書き対象となるため、カスタマイズ済みのファイルは事前にバックアップしてください。
+
+:::
 
 ```bash
 /setup-chatlogs --force
@@ -412,7 +419,7 @@ pnpx skills add aglabo/chatlog-exporter --skill '*' --agent claude-code -y
 #### プロンプトの呼び出し形式
 
 `chatlog-exporter` のプロンプトは、AI エージェントへそのまま渡す固定文章ではありません。
-プロンプト内には ${type_dics}、${entries}、${body} などの変数が記述されています。これらには、プロンプトの用途に応じて辞書やチャットログの内容が埋め込まれ、AI エージェントへ渡されます。
+プロンプト内には `${type_dics}`、`${entries}`、`${body}` などの変数が記述されています。これらには、プロンプトの用途に応じて辞書やチャットログの内容が埋め込まれ、AI エージェントへ渡されます。
 
 例えば、`type` と `category` を判定する `type-category.yaml` では、次のデータをプロンプトへ埋め込みます。
 
@@ -556,11 +563,11 @@ flowchart TD
 `<yyyy-mm>` は、ログを出力する年月を指定します。
 `2026-06` と指定した場合は、2026 年 6 月のログを出力します。
 
-`<option>` はスキルの動作を変更します。
+`<options>` はスキルの動作を変更します。
 以下のオプションが使用できます (スキルによって、使用できるオプションは変わります)。
 
-以下の表では、`/setup-chatlogs` が展開する `config.yaml` のデフォルト値を示します。設定ファイルが存在しない場合は
-組み込み既定値が使用されるため、一部のオプションでは値が異なります。
+以下の表では、`/setup-chatlogs` が展開する `config.yaml` のデフォルト値を示します。
+設定ファイルが存在しない場合は組み込み既定値が使用されるため、一部のオプションでは値が異なります。
 
 <!-- markdownlint-disable line-length -->
 
@@ -748,7 +755,7 @@ AI が 1 つのログをトピック単位に分割し、各セグメントを�
 
 ### 4.6 手順4: 分割後のトピックに対するフィルター (2回目)
 
-トピック単位に分割したログには、再利用価値の低い内容も含まれます。そこで、/filter-chatlogs を再実行し、セッション全体ではなく分割後のトピック単位で不要なログを削除します。
+トピック単位に分割したログには、再利用価値の低い内容も含まれます。そこで、`/filter-chatlogs` を再実行し、セッション全体ではなく分割後のトピック単位で不要なログを削除します。
 
 ```bash
 /filter-chatlogs noise-filter "chatlogs/normalizeLogs/claude/2026/2026-06"
@@ -793,9 +800,60 @@ AI が `title` / `type` / `category` / `topics` / `tags` を生成します。`t
 種別判定・カテゴリー判定・トピック判定に加え、生成したメタ情報のレビューでも AI を呼ぶためです。
 `--no-review` を指定するとレビューフェーズを省略します。結果として、AI の呼び出し回数を抑えられます。
 
-## 5. Obsidian による知識ベース化
+## 5. 出力Markdownサンプル
 
-### 5.1 出力ディレクトリの Vault への取り込み
+### 5.1 フロントマターサンプル
+
+§4 までの手順を実行すると、frontmatter 付きの Markdown ファイルが生成されます。以下は、その frontmatter の例です。
+
+```Markdown
+---
+title: "Creative naming discussion for DSL based on SF literature and concepts"
+date: "2026-09-19"
+type: "discussion"
+category: "creative"
+session_id: "6aae04a1-b678-83ee-add5-9a82832fa2a6"
+project: "Logrs"
+topics:
+  - "creative"
+  - "discussion"
+tags:
+  - "#dev/design-decision"
+  - "#dev/cli-design"
+  - "#concept/toolchain"
+  - "#doc/spec"
+---
+```
+
+上記のように、`type`、`category` などのプロパティが AI によって付加されます。
+これらを検索することで、過去ログを知識データベースとして活用できます。
+
+### 5.2 本文サンプル (抜粋)
+
+出力された Markdown の本文は、次のような構成になります。
+
+```markdown
+## Summary
+
+Discusses naming ideas derived from specific authors like Dick, Zelazny, and Forward.
+
+## Excerpt
+
+たとえば `Abyss`、`Nautilus`、`Leviathan`、`Kraken`、`Tethys`、`Europa` のような語彙です。ただし `Kraken` や `Nautilus` は既存ソフトウェアとの衝突が激しいので避けた方がよいでしょう。
+
+そこで「実在する深海生物・海洋用語」まで広げると、
+
+**Nudra / Aster / Pelag / Velella / Salpa / Nerita / Argos / Bathys**
+```
+
+ここでは、プロジェクトのコードネームについてディスカッションしています。
+
+`## Summary` では、AI が文章全体の要約を付加しています。
+チャットログ本文は、`## Excerpt` 以下となります。
+
+## 6. Obsidian による知識ベース化
+
+### 6.1 出力ディレクトリの Vault への取り込み
 
 `chatlogs/outputLogs/` 以下に出力されるのは、frontmatter 付きの通常の Markdown ファイルです。
 そのため、`Obsidian` の Vault 配下に配置すれば、そのままノートとして認識されます。
@@ -805,11 +863,15 @@ AI が `title` / `type` / `category` / `topics` / `tags` を生成します。`t
 - Vault 内のディレクトリを `chatlog-exporter` の出力先に指定する
 - 既存の出力ディレクトリを Vault へコピー、または同期する
 
-### 5.2 frontmatter を使った検索・分類
+### 6.2 frontmatter を使った検索・分類
 
 Obsidian では、frontmatter に定義されたプロパティを検索条件として指定できます。
-例えば、`project` プロパティを検索する場合、`[project:Logrs]` のように指定します。プロパティ値を完全一致で検索するには、`[project:"Logrs"]` と指定します。
-この場合、指定した `Logrs` のプロジェクトのマークダウン文書を抽出できます。
+例えば、`project` プロパティを検索する場合、`[project:Logrs]` のように指定します。プロパティ値を完全フレーズで検索するには、`[project:"Logrs"]` と指定します。
+この場合、下記のように `Logrs` のプロジェクトのマークダウン文書を抽出できます。
+
+![Logrs の検索結果](/images/articles/oss-chatlog-exporter/overview/ss-cle-overview-01.png)
+
+*図6-1: Logrs の検索結果*
 
 付与されたタグも `#<namespace>/<tag>` の形式のため、`Obsidian` のタグ機能でそのまま階層的に辿れます。
 
