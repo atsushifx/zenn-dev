@@ -34,6 +34,12 @@ PARSED_ARGS=()
 # Spec file paths produced by resolve_spec_files()
 RESOLVED_SPEC_FILES=()
 
+# Glob arguments that matched no spec file, collected by resolve_spec_files()
+UNMATCHED_SPEC_GLOBS=()
+
+# Argument resolve_spec_files() rejected (set when it returns 2)
+UNKNOWN_SPEC_ARG=''
+
 # Test mode: set SKIP_INTEGRATION_TESTS=1 by default (development mode)
 # Override with INTEGRATION_TEST=1 env var or --integration flag to run real-machine tests
 SKIP_INTEGRATION_TESTS="${SKIP_INTEGRATION_TESTS:-1}"
@@ -80,9 +86,9 @@ is_spec_glob() {
 
 #
 # @description Expand a glob path pattern to matching spec file paths
-# @arg $1 string Glob path pattern (e.g. runners/libs/tests/unit/*.spec.sh)
-# @stdout List of matching spec file paths
-# @exitcode 0 always (warns if no match)
+# @arg $1 string Glob path pattern (e.g. runners/libs/__tests__/unit/*.spec.sh)
+# @stdout List of matching spec file paths; nothing when no file matches
+# @exitcode 0 always
 #
 expand_spec_glob() {
   local pattern="$1"
@@ -95,13 +101,8 @@ expand_spec_glob() {
     cd "$SPEC_SEARCH_ROOT" && compgen -G "$norm_pattern" 2>/dev/null || true
   )
 
-  if [[ ${#matches[@]} -eq 0 ]]; then
-    echo "Warning: No spec files found matching glob '${pattern}'" >&2
-    return 0
-  fi
-
   local f
-  for f in "${matches[@]}"; do
+  for f in ${matches[@]+"${matches[@]}"}; do
     normalize_path "$f"
   done
 }
@@ -148,70 +149,84 @@ parse_options() {
 }
 
 #
-# @description Resolve spec files from arguments (handles test types, globs, single files).
+# @description Resolve spec files from arguments (handles test types, globs, spec files).
 #              Must be called in the caller's own shell: the result is a global, never
-#              stdout, because the `integration`, `system` and `all` types also set SKIP_INTEGRATION_TESTS
+#              stdout, because the `system` type also has to set SKIP_INTEGRATION_TESTS
 #              and a subshell would discard that assignment
-# @arg $@ Command line arguments (test type, spec file, or glob pattern)
-# @stderr Error and warning messages
+#              Writes nothing to stderr; the caller reports errors and warnings
+# @arg $@ Command line arguments (a test type with optional filters, or one or more
+#         spec files / glob patterns)
 # @sideeffect Sets RESOLVED_SPEC_FILES to the resolved spec file paths (empty on no match)
-# @sideeffect Sets SKIP_INTEGRATION_TESTS=0 for the `integration`, `system` and `all` test types
-# @exitcode 0 on success, 1 on error
+# @sideeffect Sets UNMATCHED_SPEC_GLOBS to the glob arguments that matched nothing
+# @sideeffect Sets UNKNOWN_SPEC_ARG to the rejected argument (exit code 2)
+# @sideeffect Sets SKIP_INTEGRATION_TESTS=0 for the `system` test type
+# @exitcode 0 on success (RESOLVED_SPEC_FILES may be empty)
+# @exitcode 1 no arguments given
+# @exitcode 2 an argument is neither a test type, a spec file nor a glob
 #
 resolve_spec_files() {
   RESOLVED_SPEC_FILES=()
+  UNMATCHED_SPEC_GLOBS=()
+  UNKNOWN_SPEC_ARG=''
 
-  [[ $# -eq 0 ]] && {
-    printf 'Error: No arguments given.\n' >&2
-    return 1
-  }
+  [[ $# -eq 0 ]] && return 1
 
-  local first_arg="$1"
-
-  # Glob paths (globs containing *.spec.sh) are expanded by expand_spec_glob.
-  # Checked before single files: a glob such as `*.spec.sh` also ends in .spec.sh
-  if is_spec_glob "$first_arg"; then
-    mapfile -t RESOLVED_SPEC_FILES < <(expand_spec_glob "$first_arg")
-    _drop_empty_resolved
-    return 0
-  fi
-
-  # A single .spec.sh file is returned as-is
-  if is_spec_file "$first_arg"; then
-    RESOLVED_SPEC_FILES=("$first_arg")
-    return 0
-  fi
-
-  # Not a test type -> error (stderr)
-  if ! is_test_type "$first_arg"; then
-    printf "Error: Unknown argument '%s'. Expected a test type, spec file, or glob pattern.\n" "$first_arg" >&2
-    return 1
+  # Spec files and globs -> every argument is a target, resolved in order
+  if ! is_test_type "$1"; then
+    _resolve_spec_paths "$@"
+    return
   fi
 
   # Test type -> expand with get_spec_files
   local test_type="$1"
   shift
-  # "integration" and "system" need the integration gate open;
-  # "all" opens it too, so the full suite includes them
-  case "$test_type" in
-  integration | system | all) SKIP_INTEGRATION_TESTS=0 ;;
-  esac
+  [[ "$test_type" == "system" ]] && SKIP_INTEGRATION_TESTS=0
   mapfile -t RESOLVED_SPEC_FILES < <(get_spec_files "$test_type" "$@")
-  _drop_empty_resolved
-  if [[ ${#RESOLVED_SPEC_FILES[@]} -eq 0 ]]; then
-    echo "Warning: No spec files found for test type '${test_type}'" >&2
-  fi
+  _drop_empty_mapfile RESOLVED_SPEC_FILES
   return 0
 }
 
 #
-# @description Normalize RESOLVED_SPEC_FILES: a producer emitting a bare newline
-#              leaves mapfile with a single empty element, which is not a spec file
-# @sideeffect Empties RESOLVED_SPEC_FILES when it holds one empty element
+# @description Resolve spec file and glob arguments into RESOLVED_SPEC_FILES
+# @arg $@ Spec file paths or glob patterns
+# @sideeffect Appends to RESOLVED_SPEC_FILES, which the caller clears first (empty on error)
+# @sideeffect Appends globs that matched nothing to UNMATCHED_SPEC_GLOBS
+# @sideeffect Sets UNKNOWN_SPEC_ARG to the rejected argument (exit code 2)
+# @exitcode 0 on success, 2 on an argument that is neither a spec file nor a glob
 #
-_drop_empty_resolved() {
-  if [[ ${#RESOLVED_SPEC_FILES[@]} -eq 1 && -z "${RESOLVED_SPEC_FILES[0]}" ]]; then
-    RESOLVED_SPEC_FILES=()
+_resolve_spec_paths() {
+  local arg
+  local -a matches
+  for arg in "$@"; do
+    # A glob also ends in .spec.sh, so test for it before the plain spec file
+    if is_spec_glob "$arg"; then
+      mapfile -t matches < <(expand_spec_glob "$arg")
+      _drop_empty_mapfile matches
+      if [[ ${#matches[@]} -eq 0 ]]; then
+        UNMATCHED_SPEC_GLOBS+=("$arg")
+        continue
+      fi
+      RESOLVED_SPEC_FILES+=("${matches[@]}")
+    elif is_spec_file "$arg"; then
+      RESOLVED_SPEC_FILES+=("$arg")
+    else
+      UNKNOWN_SPEC_ARG="$arg"
+      RESOLVED_SPEC_FILES=()
+      return 2
+    fi
+  done
+}
+
+#
+# @description Normalize a mapfile result: a producer emitting a bare newline
+#              leaves mapfile with a single empty element, which is not a spec file
+# @arg $1 Name of the array to normalize
+# @sideeffect Empties the named array when it holds one empty element
+#
+_drop_empty_mapfile() {
+  local -n ref_array=$1
+  if [[ ${#ref_array[@]} -eq 1 && -z "${ref_array[0]}" ]]; then
+    ref_array=()
   fi
 }
 
@@ -236,13 +251,16 @@ run_shellspec() {
 #
 # @description Main entry point for running ShellSpec tests
 # @arg $@ Command line arguments (test type, paths and options)
-# @exitcode Exit code from ShellSpec
+# @stderr Errors for invalid arguments; warnings when no spec file is found
+# @exitcode 1 on an invalid argument
+# @exitcode Exit code from ShellSpec otherwise (0 when no spec file is found)
 #
 # @example
 #   main unit                         # Run unit tests (auto-resolved)
 #   main integration                  # Run integration tests (auto-resolved)
 #   main all                          # Run all tests
-#   main runners/libs/tests/unit/*.spec.sh  # Run spec glob
+#   main "runners/libs/__tests__/unit/*.spec.sh"  # Run spec glob
+#   main a.unit.spec.sh b.unit.spec.sh  # Run several spec files
 #   main test.spec.sh --repair        # Run with ShellSpec options
 #
 main() {
@@ -267,10 +285,32 @@ main() {
   # options-only invocation): run the whole suite
   [[ ${#targets[@]} -eq 0 ]] && targets=("$DEFAULT_TEST_TYPE")
 
-  # Likewise called directly: the `integration`, `system` and `all` types set SKIP_INTEGRATION_TESTS
-  resolve_spec_files "${targets[@]}" || exit 1
+  # Likewise called directly: the `system` type sets SKIP_INTEGRATION_TESTS
+  local status=0
+  resolve_spec_files "${targets[@]}" || status=$?
+  case "$status" in
+  0) ;;
+  1)
+    printf 'Error: No arguments given.\n' >&2
+    exit 1
+    ;;
+  *)
+    printf "Error: Unknown argument '%s'. Expected a test type, spec file, or glob pattern.\n" "$UNKNOWN_SPEC_ARG" >&2
+    exit 1
+    ;;
+  esac
 
-  [[ ${#RESOLVED_SPEC_FILES[@]} -eq 0 ]] && exit 0
+  local glob
+  for glob in ${UNMATCHED_SPEC_GLOBS[@]+"${UNMATCHED_SPEC_GLOBS[@]}"}; do
+    printf "Warning: No spec files found matching glob '%s'\n" "$glob" >&2
+  done
+
+  if [[ ${#RESOLVED_SPEC_FILES[@]} -eq 0 ]]; then
+    if is_test_type "${targets[0]}"; then
+      printf "Warning: No spec files found for test type '%s'\n" "${targets[0]}" >&2
+    fi
+    exit 0
+  fi
 
   run_shellspec "${RESOLVED_SPEC_FILES[@]}" ${options[@]+"${options[@]}"}
 }
